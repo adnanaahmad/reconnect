@@ -1,0 +1,72 @@
+<div class="heading d-flex justify-content-between">
+  <h3>Good afternoon, Tim</h3>
+</div>
+<div class="welcome">
+  <p>Here's what's happening to your re-connect account today</p>
+</div>
+<div class="row">
+  <div class="col-7 first-column" style="">
+     <div class="d-flex card-div">
+        <div class="card">
+            <p>Monthly Income</p>
+            <p>${{ dashboard.preApprovalDetails.income }}</p>
+        </div>
+        <div class="card">
+             <p>Monthly Liabilities</p>
+             <p>${{dashboard.preApprovalDetails.monthlyLiabilities}}</p>
+        </div>
+        <div class="card">
+            <p>Assets</p>
+            <p>${{dashboard.preApprovalDetails.assets}}</p>
+        </div>
+     </div>
+     <p class="team-heading">Home Buying Team</p>
+     <p class="team-text">But while teams face new hurdles, their success still hinges on a core set of</p>
+     <p class="team-text bottom">fundamentals for group collaboration</p>
+     <div class="d-flex team">
+        <app-team-person [details]="dashboard.realEstateAgent"></app-team-person>
+        <app-team-person [details]="dashboard.lender"></app-team-person>
+        <app-team-person [details]="dashboard.attorney"></app-team-person>
+        <app-team-person [details]="dashboard.homeInspector"></app-team-person>
+        <app-team-person [details]="dashboard.insuranceAgent"></app-team-person>
+
+     </div>
+     <div class="buying">
+        <p>Home Buying Process</p>
+     </div>
+      <div class="d-flex">
+         <div class="status" >
+             <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.application}">
+             <p class="text-center">Application</p>
+         </div>
+         <div class="status" >
+             <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.preApproved}">
+             <p class="text-center text-nowrap">Pre-Approved</p>
+         </div>
+         <div class="status" >
+             <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.acceptedOffer}">
+             <p class="text-center text-nowrap">Accepted Offer</p>
+         </div>
+         <div class="status" >
+             <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.underwriting}">
+             <p class="text-center">Underwriting</p>
+         </div>
+         <div class="status" >
+             <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.approvedWithConditions}">
+             <p class="text-center text-nowrap">Approved with</p><p class="text-center"> conditions</p>
+         </div>
+         <div class="status" >
+             <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.clearedToClose}">
+             <p class="text-center text-nowrap">Cleared to</p><p class="text-center"> close</p>
+         </div>
+        <div class="status" >
+          <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.closed}">
+          <p class="text-center"> Closed</p>
+        </div>
+       </div>
+  </div>
+  <div class="col-5 second-column" style="">
+    <p class="subject">Subject Property</p>
+    <app-subject-property [subjectProperty]="dashboard.subjectProperty"></app-subject-property>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+.display-img{
+  height: 7.5vw;
+  width: 7.5vw;
+  object-fit: cover;
+  border-radius: .5vw;
+}
+.name{
+  font-weight: 500;
+  color: var(--darkGray);
+  font-size: .95vw;
+  margin: 0 0 0.4vw 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+
+.number{
+  font-size: .6vw;
+  color: var(--darkGray);
+  font-weight: 300;
+  margin:0 0 0.3vw 0;
+}
+.number p{
+  margin: 0;
+}
+.question{
+  font-size: .6vw;
+  color: var(--darkGray);
+  font-weight: 300;
+  margin: 0 0 0.4vw 0;
+
+}
+.user-info{
+  padding-left: 1vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.number img{
+  width: .7vw;
+  height: .7vw;
+  margin-right: .5vw;
+}
+.question img{
+  width: .9vw;
+  height: .85vw;
+  margin-right: .5vw;
+}
+.question p{
+  margin: 0 0 0 0;
+}
+.div-2 img{
+  width: 1.7vw;
+  height: 1.7vw;
+  background: var(--extraLightGray);
+  padding: .45vw;
+  border-radius: .3vw;
+  margin-right: .3vw;
+}
+.div-2 a{
+  display: contents;
+}
+.div-2{
+  margin-bottom: .4vw;
+}
+.refer{
+  color: var(--darkGray);
+  font-size: .7vw;
+  margin-bottom: 0;
+  font-weight: 300;
+}

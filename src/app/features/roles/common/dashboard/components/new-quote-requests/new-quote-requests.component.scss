@@ -1,0 +1,42 @@
+.quote-heading p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+  font-size: .9vw;
+}
+.quote-heading{
+  margin-bottom: 1.5vw;
+}
+
+.qr{
+  font-weight: 600;
+}
+
+
+
+
+.date-cards{
+  background: white;
+  padding: .7vw 1vw .7vw 1vw;
+  border-radius: .5vw;
+  margin-right: .5vw;
+  width: 8.7215vw;
+  // height: 5.6876vw
+}
+.date-cards:last-child {
+  margin-right: 0;
+}
+.date-cards p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+}
+.date-number{
+  font-size: 1.8vw;
+  font-weight: 600;
+}
+.date-type{
+  font-size: .73vw;
+  font-weight: 400;
+}
+.date-space{
+  margin-bottom: 2vw;
+}

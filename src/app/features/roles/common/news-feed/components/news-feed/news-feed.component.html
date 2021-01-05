@@ -1,0 +1,75 @@
+<div class="heading d-flex justify-content-between">
+    <h3>Your Network News Feed</h3>
+</div>
+
+
+<div class="row d-flex">
+  <div class="col-9 feed-column">
+    <div class="card-1">
+      <div class = "row">
+
+         <div class="col-10 input-box" style="">
+            <img style="" class="img-fluid profile-icon" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80">
+            <input type="text" class="form-control form-control-lg align-self-center" id="inputPassword" placeholder="Write something">
+
+         </div>
+         <div class="col-2 d-flex align-self-center create-post-buttons justify-content-between" style="">
+              <img class="plus-icon img-fluid" src="/assets/calendar-icons/plus.svg"><input type="file"
+                                                                               #fileInput
+                                                                               (change)="fileUpload(fileInput)"
+                                                                               />
+            <button type="button" style="border: none" class="btn btn-success post-button"><p>Post</p></button>
+
+         </div>
+      </div>
+    </div>
+    <div class="card-2" *ngFor="let i of newsFeed.posts; let j = index">
+        <div class="row">
+          <div class="col-md">
+              <div *ngIf = "i.type == 'video'" class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" [src]="safeUrl(i.media)"></iframe>
+              </div>
+               <img  *ngIf = "i.type == 'image'" class="img-fluid post-image" [src]="i.media" >
+          </div>
+          <div class="d-flex align-items-start flex-column col-md">
+
+            <div class="div-3">
+                <div class="">
+                    <div> <p class="post-username" style="">{{ i.title }} </p>
+                    </div>
+                </div>
+            </div>
+            <div attr.id={{i}} class="post-parent">
+              <p class="post-text">typically consisting of alphabetics and numeric characters. typically consistingtypically consisting of alphabetics and numeric characters. typically consistingtypically consisting of alphabetics and numeric characters. typically consistingtypically consisting of alphabetics and numeric characters. typically consistingtypically consisting of alphabetics and numeric characters. typically consistingtypically consisting of alphabetics and numeric characters. </p>
+              <p *ngIf="hideReadMore(i)" (click)="toggle($event)" class="read-more">Read more</p>
+              <p (click)="toggle($event)" class="read-less">Read less</p>
+            </div>
+            <div class="mt-auto d-flex div-1">
+              <div class="" style=""><img class="img-fluid post-profile-icon" [src]="i.userImage">
+
+              </div>
+              <div class="align-self-end">
+                <p class="post-username">{{ i.userName }}</p>
+                <p class="post-date" style="">Published on {{ i.date | date}}</p>
+              </div>
+              <div class="ml-auto align-self-end" style="">
+                <img class="img-fluid share-icon" src="/assets/news-feed-icons/share.svg">
+                <img (click)="deletePost(j)" class="img-fluid delete-icon" src="/assets/news-feed-icons/delete.svg">
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="col-3 news-column">
+    <h3 class="top-news" style="">Top News</h3>
+    <div *ngFor="let i of newsFeed.topNews" class="mb-3 d-flex flex-row card-3">
+       <img class="news-img" [src]="i.media">
+       <div class="d-flex align-items-start flex-column news-title" style="">
+        <h6 class="mb-2 news-text mb-auto" style="">{{ i.title }} </h6>
+        <p   class="">{{i.time}} mins ago</p>
+       </div>
+    </div>
+
+  </div>
+</div>

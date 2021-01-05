@@ -1,0 +1,34 @@
+
+<div class="row date-space">
+  <div class="col-9">
+    <div class="d-flex justify-content-between borrowers-heading">
+       <p class="bh" style="">Borrowers Important Dates Snap Shot</p>
+       <app-date-picker (dateRange)="borrower($event)" [section]="'borrower'"></app-date-picker>
+
+    </div>
+    <div class="d-flex date-row">
+
+      <div (click)="toggleCard($event);" *ngFor="let date of datesSnapShot" class="date-cards" style="">
+        <div class="date-cards-sub">
+          <p class="date-number" style="">{{date.number}}</p>
+          <p class="date-type" style="">{{date.name}}</p>
+        </div>
+        <div class="buyer-div align-self-end">
+          <div class="triangle"></div>
+          <p class="heading">{{date.name}}</p>
+          <div class="d-flex tile" *ngFor="let buyer of date.buyers">
+            <img class="image" [src]="buyer.image">
+            <div class="row">
+              <div class="col-10 d-flex align-items-start flex-column">
+                <p class="name">{{buyer.name}}</p>
+                <p class="address">{{buyer.address}}</p>
+                <p class="mt-auto date">{{ date.name === 'Deals Closing'? 'Offer accepted:' :
+                  date.name === 'Mortgage Commitments'? 'Commitment:' : 'Locks Expiring:'}} {{buyer.date | date}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
+   </div>
+</div>

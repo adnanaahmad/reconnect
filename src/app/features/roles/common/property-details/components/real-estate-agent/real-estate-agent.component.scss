@@ -1,0 +1,113 @@
+.card-2{
+  background: white;
+  margin-bottom: 2vw;
+  border-radius: .5vw;
+  padding: 1.5vw 1.2vw 1.5vw 1.2vw;
+}
+.display-img{
+  height: 10vw;
+  width: 10vw;
+  object-fit: cover;
+  margin-right: 3vw;
+  border-radius: .5vw;
+}
+.div-1 p{
+  margin-bottom: 0;
+}
+.info{
+}
+.name{
+  color: var(--darkGray);
+  font-size: 1.2vw;
+  font-weight: 500;
+}
+.name-div{
+  margin-top: .3vw;
+  margin-bottom: 0;
+  cursor: default;
+}
+.rating{
+  font-size: 1.1vw;
+  color: var(--darkGray);
+}
+.rating p:first-child{
+  font-weight: 500;
+  //margin-right: .5vw;
+}
+.rating p:last-child{
+  font-weight: 200;
+  margin-left: .4vw;
+}
+.rating img{
+  height: 1.2vw;
+  width: 1.2vw;
+  margin-right: .5vw;
+}
+.phone{
+  color: var(--darkGray);
+  font-size: .8vw;
+  font-weight: 200;
+  margin-bottom: .5vw;
+}
+.message{
+  color: var(--darkGray);
+  font-size: .8vw;
+  font-weight: 200;
+}
+.phone img{
+  height: 1.1vw;
+  width: 1.1vw;
+  margin-right: .8vw;
+}
+.message img{
+  height: 1.3vw;
+  width: 1.4vw;
+  margin-right: .8vw;
+}
+.div-2 p{
+  margin-bottom: 0.2vw;
+  font-size: 1.2vw;
+  color: var(--darkGray);
+  font-weight: 500;
+}
+.book-btn{
+  padding: .4vw 1.2vw .4vw 1.2vw;
+  border-radius: .3vw;
+}
+.book-btn p{
+  font-size: .76vw;
+  margin-bottom: 0;
+  color: white;
+  font-weight: 300;
+}
+.book-btn img{
+  height: 1vw;
+  width: 1vw;
+  margin-right: .35vw;
+}
+.social-media img{
+  width: 2.2vw;
+  height: 2.2vw;
+  background: var(--extraLightGray);
+  padding: .6vw;
+  border-radius: .3vw;
+  //margin-right: .5vw;
+}
+.social-media a{
+  margin-right: .5vw;
+}
+.social-media a:last-child{
+  margin-right: 0;
+}
+
+
+.details-heading{
+  margin-bottom: 1.5vw;
+  color: var(--darkGray);
+  font-size: 1.2vw;
+  font-weight: 500;
+}
+
+p{
+  font-family: 'Poppins';
+}

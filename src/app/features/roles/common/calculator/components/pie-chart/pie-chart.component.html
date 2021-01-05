@@ -1,0 +1,16 @@
+<div class="card-4">
+  <ngx-charts-advanced-pie-chart class="pie-chart"
+                                 (window:resize)="onResize2($event)"
+                                 [view]="view2"
+                                 [scheme]="colorScheme2"
+                                 [results]="single"
+                                 [gradient]="gradient">
+  </ngx-charts-advanced-pie-chart>
+  <div class="total-text"><p>Total of</p> <p>all Payment</p></div>
+  <div class="d-flex legend"><div class="yellow square"></div><p class="text-nowrap align-self-center">Down Payment & 1 time Expenses</p><p class="ml-auto align-self-center">$1300</p></div>
+  <div class="d-flex legend"><div class="green square"></div><p class="text-nowrap align-self-center">Principal</p><p class="ml-auto align-self-center">$1300</p></div>
+  <div class="d-flex legend"><div class="red square"></div><p class="text-nowrap align-self-center">Extra Payments</p><p class="ml-auto align-self-center">$1300</p></div>
+  <div class="d-flex legend"><div class="gray square"></div><p class="text-nowrap align-self-center">Interest</p><p class="ml-auto align-self-center">$1300</p></div>
+  <div class="d-flex legend"><div class="purple square"></div><p class="text-nowrap align-self-center">Taxes, MIP, Insurance & fees</p><p class="ml-auto align-self-center">$1300</p></div>
+  <div class="legend total-payment d-flex"><p>Total of all Payment</p><p class="ml-auto">$45000</p></div>
+</div>

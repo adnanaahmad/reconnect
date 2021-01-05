@@ -1,0 +1,69 @@
+.date-cards{
+  background: white;
+  padding: .7vw 1vw .7vw 1vw;
+  border-radius: .5vw;
+  margin-right: .5vw;
+  width: 8.7215vw;
+  // height: 5.6876vw
+}
+.date-cards:last-child {
+  margin-right: 0;
+}
+.date-cards p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+}
+.date-number{
+  font-size: 1.8vw;
+  font-weight: 600;
+}
+.date-type{
+  font-size: .73vw;
+  font-weight: 400;
+}
+.date-space{
+  //margin-bottom: 2vw;
+}
+
+
+
+.commission-heading p{
+  color: var(--darkGray);
+  margin-bottom: 0;
+}
+.commission-heading p:first-child{
+  font-weight: 600;
+  font-size: .9vw;
+}
+.commission{
+  margin-bottom: 1vw;
+}
+.commission-heading{
+  margin-bottom: 2vw;
+}
+
+.al-text{
+  text-align: center;
+  color: var(--green);
+  font-size: .95vw;
+}
+.al-number{
+  text-align: center;
+  color: var(--darkGray);
+  font-size: 1.8vw;
+  font-weight: 500;
+}
+.al-space{
+  margin-bottom: 2vw;
+}
+.personal-vol{
+ // width: 17.3vw;
+  //margin-top: 2.5vw;
+  height: 7.5vw;
+  background: white;
+  border-radius: .5vw;
+  padding: 1.5vw 1.5vw 1.5vw 1.5vw;
+}
+.personal-vol p{
+  margin-bottom: 0;
+}

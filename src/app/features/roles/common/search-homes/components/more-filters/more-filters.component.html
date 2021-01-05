@@ -1,0 +1,288 @@
+ <div [formGroup]="searchHome.moreFilters">
+    <div class="triangle"></div>
+    <div class="child-1 d-flex justify-content-between">
+       <p class="filter-heading">Filters your search</p>
+       <div class="d-flex">
+          <button (click)="clearAll()" class="btn btn-default clear-btn">Clear All</button>
+          <button (click)="applyFilter()" class="btn btn-success apply-btn">Apply Filters</button>
+       </div>
+    </div>
+    <div class="child-2">
+        <div class="row margin-b2">
+            <div class="col-4" formGroupName="price">
+              <div class="col-width">
+               <p class="heading-sub">Price</p>
+               <div class="filter-select row">
+                  <div class="col-6">
+                    <select formControlName="from" class="form-control">
+                      <option value="" [disabled]="true">Min</option>
+                      <option>Large select</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <select formControlName="to" class="form-control">
+                      <option value="" [disabled]="true">Max</option>
+                      <option>Large select</option>
+                    </select>
+                  </div>
+                </div>
+               </div>
+            </div>
+            <div class="col-4" formGroupName="beds">
+              <div class="col-width">
+                <p class="heading-sub b-label">Beds</p>
+                 <div class="filter-select margin-b row">
+                    <div class="col-6 bed-filter">
+                      <p class="bed-label text-nowrap">Select bedroom range</p>
+                      <select formControlName="from" class="form-control">
+                        <option value="" [disabled]="true">From</option>
+                        <option>Large select</option>
+                      </select>
+                    </div>
+                    <div class="col-6 align-self-end">
+                      <select formControlName="to" class="form-control">
+                        <option value="" [disabled]="true">To</option>
+                        <option>Large select</option>
+                      </select>
+                    </div>
+                 </div>
+                 <p class="bed-label margin-b">or</p>
+                 <div class="d-flex">
+                    <label class="container">
+                      <input formControlName="onePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.onePlus">
+                      <img class="checkmark" src="/assets/loan-details/tick.svg">
+                      <p class="label-txt">1+</p>
+                    </label>
+                    <label class="container">
+                      <input formControlName="twoPlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.twoPlus">
+                      <img class="checkmark" src="/assets/loan-details/tick.svg">
+                      <p class="label-txt">2+</p>
+                    </label>
+                    <label class="container">
+                      <input formControlName="threePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.threePlus">
+                      <img class="checkmark" src="/assets/loan-details/tick.svg">
+                      <p class="label-txt">3+</p>
+                    </label>
+                    <label class="container">
+                      <input formControlName="fourPlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.fourPlus">
+                      <img class="checkmark" src="/assets/loan-details/tick.svg">
+                      <p class="label-txt">4+</p>
+                    </label>
+                    <label class="container">
+                      <input formControlName="fivePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.fivePlus">
+                      <img class="checkmark" src="/assets/loan-details/tick.svg">
+                      <p class="label-txt">5+</p>
+                    </label>
+                 </div>
+               </div>
+            </div>
+            <div class="col-4" formGroupName="baths">
+              <div class="col-width">
+                <p class="heading-sub b-label">Baths</p>
+                 <div class="filter-select margin-b row">
+                    <div class="col-6 bed-filter">
+                      <p class="bed-label text-nowrap">Select bathroom range</p>
+                      <select formControlName="from" class="form-control">
+                        <option value="" [disabled]="true">From</option>
+                        <option>Large select</option>
+                      </select>
+                    </div>
+                    <div class="col-6 align-self-end">
+                      <select formControlName="to" class="form-control">
+                        <option value="" [disabled]="true">To</option>
+                        <option>Large select</option>
+                      </select>
+                    </div>
+                 </div>
+                <p class="bed-label margin-b">or</p>
+                <div class="d-flex">
+                   <label class="container">
+                     <input formControlName="onePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.onePlus">
+                     <img class="checkmark" src="/assets/loan-details/tick.svg">
+                     <p class="label-txt">1+</p>
+                   </label>
+                   <label class="container">
+                     <input formControlName="twoPlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.twoPlus">
+                     <img class="checkmark" src="/assets/loan-details/tick.svg">
+                     <p class="label-txt">2+</p>
+                   </label>
+                   <label class="container">
+                     <input formControlName="threePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.threePlus">
+                     <img class="checkmark" src="/assets/loan-details/tick.svg">
+                     <p class="label-txt">3+</p>
+                   </label>
+                   <label class="container">
+                     <input formControlName="fourPlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.fourPlus">
+                     <img class="checkmark" src="/assets/loan-details/tick.svg">
+                     <p class="label-txt">4+</p>
+                   </label>
+                   <label class="container">
+                     <input formControlName="fivePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.fivePlus">
+                     <img class="checkmark" src="/assets/loan-details/tick.svg">
+                     <p class="label-txt">5+</p>
+                   </label>
+                </div>
+               </div>
+            </div>
+
+        </div>
+        <div class="row">
+           <div class="col-4" formGroupName="propertyType">
+             <div class="col-width">
+              <p class="heading-sub">Property Type</p>
+                <div class="row">
+                    <div class="col-6 space">
+                        <label class="container">
+                          <input formControlName="singleFamily" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.singleFamily">
+                          <img class="checkmark" src="/assets/loan-details/tick.svg">
+                          <p class="label-txt text-nowrap">Single Family</p>
+                        </label>
+                        <label class="container">
+                          <input formControlName="multiFamily" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.multiFamily">
+                          <img class="checkmark" src="/assets/loan-details/tick.svg">
+                          <p class="label-txt text-nowrap">Multi Family</p>
+                        </label>
+                        <label class="container">
+                          <input formControlName="farm" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.farm">
+                          <img class="checkmark" src="/assets/loan-details/tick.svg">
+                          <p class="label-txt">Farm</p>
+                        </label>
+                        <label class="container">
+                          <input formControlName="mobile" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.mobile">
+                          <img class="checkmark" src="/assets/loan-details/tick.svg">
+                          <p class="label-txt">Mobile</p>
+                        </label>
+                    </div>
+                    <div class="col-6  space">
+                        <label class="container">
+                          <input formControlName="land" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.land">
+                          <img class="checkmark" src="/assets/loan-details/tick.svg">
+                          <p class="label-txt">Land</p>
+                        </label>
+                        <label class="container">
+                          <input formControlName="condo" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.condo">
+                          <img class="checkmark" src="/assets/loan-details/tick.svg">
+                          <p class="label-txt">Condo</p>
+                        </label>
+
+                        <label class="container">
+                          <input formControlName="any" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.any">
+                          <img class="checkmark" src="/assets/loan-details/tick.svg">
+                          <p class="label-txt">Any</p>
+                        </label>
+                    </div>
+                </div>
+              </div>
+           </div>
+           <div class="col-4" formGroupName="listingStatus">
+            <div class="col-width">
+              <p class="heading-sub">Listing Status</p>
+                  <div class="listing-1">
+                      <div class="row">
+                          <div class="col-6 space">
+                              <label class="container">
+                                <input formControlName="any" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.any">
+                                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                <p class="label-txt">Any</p>
+                              </label>
+                              <label class="container">
+                                <input formControlName="newConstruction" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.newConstruction">
+                                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                <p class="label-txt text-nowrap">New Construction</p>
+                              </label>
+                              <label class="container">
+                                <input formControlName="fiftyFivePlusCommunity" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.fiftyFivePlusCommunity">
+                                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                <p class="label-txt text-nowrap">55+ Community</p>
+                              </label>
+                          </div>
+                          <div class="col-6  space">
+                              <label class="container">
+                                <input formControlName="existingHomes" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.existingHomes">
+                                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                <p class="label-txt">Existing Homes</p>
+                              </label>
+                              <label class="container">
+                                <input formControlName="foreclosures" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.foreclosures">
+                                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                <p class="label-txt">Foreclosures</p>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="listing-2">
+                      <div class="row">
+                          <div class="col-6 space">
+                              <label class="container">
+                                <input formControlName="hidePendingContingent" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.hidePendingContingent">
+                                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                <p class="label-txt text-nowrap">Hide Pending / Contingent</p>
+                              </label>
+                              <label class="container">
+                                <input formControlName="hideForeclosures" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.hideForeclosures">
+                                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                <p class="label-txt text-nowrap">Hide Foreclosures</p>
+                              </label>
+                              <label class="container">
+                                <input formControlName="priceReduced" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.priceReduced">
+                                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                <p class="label-txt">Price Reduced</p>
+                              </label>
+                          </div>
+                          <div class="col-6  space align-self-end">
+                              <label class="container">
+                                <input formControlName="openHouse" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.openHouse">
+                                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                <p class="label-txt">Open House</p>
+                              </label>
+                          </div>
+                      </div>
+
+                  </div>
+                </div>
+           </div>
+           <div class="col-4" formGroupName="moreFilters">
+            <div class="col-width">
+              <p class="heading-sub">More Filters</p>
+
+              <div class="d-flex search-add">
+                 <input [formControl]="searchHome.keyword" type="email" id="search-filter" class="form-control" placeholder="Add your keyword">
+                 <img class="add-btn" src="/assets/calendar-icons/plus.svg" (click)="addKeyword()">
+              </div>
+              <div class="grid">
+                  <div class="chip d-flex" *ngFor="let i of searchHome.moreFilters.value.moreFilters.keywords">
+                    <p class="text-nowrap">{{i}}</p>
+                    <p (click)="deleteKeyword(i)">x</p>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-6 space">
+                      <label class="container">
+                        <input formControlName="basement" type="checkbox" [checked]="searchHome.moreFilters.value.moreFilters.basement">
+                        <img class="checkmark" src="/assets/loan-details/tick.svg">
+                        <p class="label-txt">Basement</p>
+                      </label>
+                      <label class="container">
+                        <input formControlName="swimmingPool" type="checkbox"  [checked]="searchHome.moreFilters.value.moreFilters.swimmingPool">
+                        <img class="checkmark" src="/assets/loan-details/tick.svg">
+                        <p class="label-txt">Swimming Pool</p>
+                      </label>
+                  </div>
+                  <div class="col-6  space">
+                      <label class="container">
+                        <input formControlName="attic" type="checkbox"  [checked]="searchHome.moreFilters.value.moreFilters.attic">
+                        <img class="checkmark" src="/assets/loan-details/tick.svg">
+                        <p class="label-txt">Attic</p>
+                      </label>
+                      <label class="container">
+                        <input formControlName="waterFront" type="checkbox"  [checked]="searchHome.moreFilters.value.moreFilters.waterFront">
+                        <img class="checkmark" src="/assets/loan-details/tick.svg">
+                        <p class="label-txt">Water Front</p>
+                      </label>
+                  </div>
+              </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>

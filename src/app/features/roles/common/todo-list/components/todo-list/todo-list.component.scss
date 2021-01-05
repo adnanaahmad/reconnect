@@ -1,0 +1,185 @@
+.heading {
+  margin-bottom: 2vw;
+}
+.heading h3{
+  font-size: var(--heading);
+  color: var(--darkGray);
+  font-family: 'Poppins';
+}
+p{
+  font-family: 'Poppins';
+}
+.first-row p{
+  font-weight: 300;
+  font-size: .85vw;
+  margin-left: 1vw;
+  margin-bottom: 0;
+  color: var(--darkGray);
+}
+.first-row img{
+  margin-left: .8vw;
+}
+.first-row{
+  margin-bottom: 1vw;
+}
+.calendar{
+  height: 1.3vw;
+  width: 1.3vw;
+}
+.card-1{
+  background: white;
+  padding: 1.5vw;
+  border-radius: .5vw;
+  margin-bottom: 1vw;
+}
+.active-card{
+  background: var(--lightPink);
+}
+.container {
+  position: relative;
+  padding-left: 3.5vw;
+  cursor: pointer;
+  padding-right: 0;
+  margin: 1.5vw 0 0 0;
+  //max-width: 3vw;
+}
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.7vw;
+  width: 1.75vw;
+  background-color: white;
+  padding: .4vw;
+  border-radius: .35vw;
+  border: 1px solid var(--lighGray);
+}
+
+/* On mouse-over, add a grey background color */
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: var(--green);
+  border: none;
+}
+.container input:checked ~ .card-1 {
+  background-color: var(--lightPink);
+}
+
+
+.todo{
+  color: var(--darkGray);
+  font-size: .78vw;
+  font-weight: 300;
+  width: 100%;
+}
+.title{
+  margin-bottom: .5vw;
+}
+.description{
+  margin-bottom: .5vw;
+}
+.button1{
+  background: var(--green);
+  padding: .4vw 1.9vw .4vw 1.9vw;
+  font-size: .75vw;
+  border-radius: .3vw;
+  margin-bottom: .5vw;
+  color: white;
+  font-weight: 300;
+  cursor: pointer;
+}
+.button2{
+  margin-bottom: 0;
+  background: var(--extraLightGray);
+  padding: .4vw 1.9vw .4vw 1.9vw;
+  text-align: center;
+  font-size: .75vw;
+  border-radius: .3vw;
+  color: var(--lighGray);
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.card-2 {
+  background: white;
+  border-radius: .5vw;
+  padding: 1vw 1.5vw 1vw 1.5vw;
+  margin-bottom: 1vw;
+}
+
+.filter-heading{
+  margin-bottom: 1vw;
+  color: var(--darkGray);
+  font-size: .95vw;
+}
+.filter p{
+  margin-bottom: 0;
+  font-size: .75vw;
+  color: var(--darkGray);
+  font-weight: 300;
+}
+.filter img{
+  height: 1.5vw;
+  width: 1.5vw;
+  background: var(--extraLightGray);
+  padding: .41vw;
+  border-radius: .4vw;
+  margin-right: .8vw;
+}
+.active-filter img{
+  background: var(--lighGray);
+}
+.done{
+  background: var(--green);
+  border-radius: .4vw;
+  margin-right: .8vw;
+  height: fit-content;
+}
+.done img{
+  height: 1.5vw;
+  width: 1.5vw;
+  padding: .41vw;
+  filter: grayscale(1) invert(1) brightness(2);
+}
+.star img{
+  padding: .32vw;
+}
+.bin img{
+  padding-bottom: .3vw;
+}
+.flag img{
+  padding: .32vw;
+}
+.card-2 div.filter{
+  margin-bottom: .8vw;
+}
+.card-2 div.filter:last-child{
+  margin-bottom: 0;
+}
+.card-3{
+  background: white;
+  border-radius: .5vw;
+  font-size: .75vw;
+  font-weight: 300;
+  padding: 1vw 1.5vw 1vw 1.5vw;
+}
+.card-3 p{
+  margin-bottom: .8vw;
+  color: var(--darkGray);
+}
+.card-3 p:last-child{
+  margin-bottom: 0;
+}
+
+
+// filter: grayscale(1) invert(1) brightness(2);

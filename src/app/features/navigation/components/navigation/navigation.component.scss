@@ -1,0 +1,141 @@
+p{
+  font-family: 'Poppins';
+}
+.container-fluid{
+  height: 100vh;
+}
+.col-sm-2{
+  background:white;
+}
+.nav-content{
+  background: var(--lightBlue);
+  border-radius: .8em;
+
+}
+.header{
+  padding: 3em 2em 0 2em;
+  background: var(--lighBlue);
+}
+.list-class{
+  list-style: none;
+  padding: 0;
+  margin-top: 3vw;
+}
+.list-class li{
+  padding-left: 1vw;
+  margin: 2.3vw 0 2.3vw 0;
+  cursor: pointer;
+  font-size: 90%;
+  color: var(--lighGray);
+}
+.list-class i{
+  font-size: medium;
+}
+//.list-class li.active-link:focus-within{
+//  border-left: 3px solid var(--green);
+//  outline: none;
+//  color:var(--darkGray);
+//}
+//.list-class li.active-link:focus-within img{
+//  filter: invert(27%) sepia(51%) saturate(0%) hue-rotate(346deg) brightness(50%) contrast(97%);
+//}
+.list-class li:focus{
+  outline: none;
+}
+.active {
+  border-left: 3px solid var(--green);
+  outline: none;
+  color:var(--darkGray);
+}
+.active p{
+  color:var(--darkGray);
+}
+.active img{
+  filter: invert(27%) sepia(51%) saturate(0%) hue-rotate(346deg) brightness(50%) contrast(97%);
+}
+.reconnect-icon{
+  width: 70%;
+  padding:0 0 0 0.5em
+}
+.reconnect-icon img{
+  border: none;
+}
+.profile-icon{
+  cursor: pointer;
+}
+.profile-icon:focus{
+  outline: none;
+}
+.profile-icon img{
+  height: 3em;
+  width: 3em;
+  border-radius: .7em;
+  font-size: small
+}
+.profile-icon span{
+  font-size: small;
+}
+.px-2{
+  color: var(--darkGray);
+}
+.fa.fa-angle-down{
+  padding-top: 1em;
+}
+.mr-auto.p-2.h3{
+  color: var(--darkGray)
+}
+.p-2.angle-down-icon{
+  padding: 0 !important;
+}
+.router-outlet-class{
+  padding: 2.5vw 2.5vw 0 2.5vw;
+  //position: relative;
+}
+.border-class{
+  background: white;
+  padding: 3.5vw 1.8vw 0em 1.8vw
+}
+.menu-item-text{
+  padding-top: .3vw;
+  padding-left: .5vw;
+}
+.menu-item-text p{
+  margin: 0;
+  font-size: .75vw;
+}
+.image-class{
+  height: 1.3vw;
+  width: 1.3vw;
+  //margin-right: 0 !important;
+  //padding-left: 0;
+}
+.image-class-div{
+  padding-right: 0;
+}
+.menu-icons{
+  padding-right: 1vw;
+  padding-left: 1vw;
+}
+
+
+@media only screen and (max-width: 768px) {
+  //.col-10.menu-item-text{
+  //  display: none;
+  //}
+  //.border-class{
+  //  padding-left: 0;
+  //}
+  //.menu-icons{
+  //  padding-left: 2px;
+  //}
+}
+@media only screen and (max-width: 1440px) {
+  //.menu-icons{
+  //  padding-left: 0;
+  //}
+  .list-class li{
+    margin: 1.8vw 0 1.8vw 0;
+  }
+}
+
+/////////////

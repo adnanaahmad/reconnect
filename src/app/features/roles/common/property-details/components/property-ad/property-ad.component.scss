@@ -1,0 +1,145 @@
+
+.card-1{
+  background: white;
+  border-radius: .5vw;
+  padding: 2vw 0 2vw 2.5vw;
+  margin-bottom: 2vw;
+}
+.card-1st-half{
+  padding: 0 2.5vw 2vw 0;
+}
+
+.listed-by p:first-child{
+  color: var(--darkGray);
+  font-size: .7vw;
+  margin-bottom: 0;
+  font-weight: 300;
+}
+.listed-by p:last-child{
+  color: var(--green);
+  font-size: .75vw;
+  margin-bottom: 0;
+  margin-left: .3vw;
+}
+.listed-by{
+  margin-bottom: 1vw;
+}
+.main-img{
+  height: 22vw;
+  width: 100%;
+  object-fit: cover;
+  border-radius: .5vw;
+  margin-bottom: 1.5vw;
+}
+.list-img{
+  height: 5.1vw;
+  width: 8.05vw;
+  object-fit: cover;
+  border-radius: .4vw;
+  cursor: pointer;
+}
+.list-div img{
+  margin-right: 1.55vw;
+}
+.list-div img:last-child{
+  margin-right: 0;
+}
+.list-div{
+  max-width: 100%;
+  overflow-x: scroll;
+  margin-bottom: 1.5vw;
+}
+.price{
+  margin-bottom: .3vw;
+  font-weight: 600;
+  font-size: 1.8vw;
+  color: var(--darkGray);
+}
+.address{
+  margin-bottom: 2vw;
+  font-weight: 300;
+  font-size: 1vw;
+  color: var(--darkGray);
+}
+.activity p:first-child{
+  color: var(--darkGray);
+  font-size: .8vw;
+  margin-bottom: 0;
+  margin-right: .2vw;
+  font-weight: 300;
+}
+.activity p:last-child{
+  color: var(--green);
+  font-size: .8vw;
+  margin-bottom: 0;
+}
+.activity-pr{
+  padding-right: 1.5vw;
+  border-right: 1px solid var(--lighGray);
+}
+.activity-pl{
+  padding-left: 1.5vw;
+}
+.card-2nd-half{
+  padding: 2vw 2vw 0 0;
+  border-top: 1px solid var(--mediumLightGray);
+}
+.facts{
+  margin-bottom: 1vw;
+  font-size: 1.2vw;
+  color: var(--darkGray);
+  font-weight: 500;
+}
+.qf{
+  background: var(--extraLightGray);
+  border-radius: .5vw;
+  padding: 1.5vw 2vw 1.5vw 2vw;
+}
+.mb-custom p{
+  font-size: .8vw;
+  margin-bottom: .8vw;
+  color: var(--darkGray);
+}
+.mb-custom p:last-child{
+  margin-bottom: 0;
+}
+.font-weight1{
+
+}
+.font-weight2{
+  font-weight: 300;
+}
+.info-img{
+  background: var(--extraLightGray);
+  padding: .8vw;
+  border-radius: .5vw;
+  width: 100%;
+  //width: 5.4vw;
+  //  margin-bottom: 1vw;
+  // margin-right: 1vw;
+  //flex: 1;
+}
+.info-img img{
+  height: 3vw;
+  width: 3vw;
+  margin-bottom: .3vw;
+}
+.info-img p{
+  margin-bottom: 0;
+  font-size: .7vw;
+  font-weight: 300;
+  color: var(--darkGray);
+}
+
+.bed{
+  //width: 3.7vw !important;
+  margin-top: .3vw;
+  height: 2.2vw !important;
+  margin-bottom: .8vw !important;
+}
+.info-number p:first-child{
+  margin-right: .2vw;
+}
+p{
+  font-family: 'Poppins';
+}

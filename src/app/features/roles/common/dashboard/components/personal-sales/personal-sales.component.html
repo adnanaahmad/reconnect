@@ -1,0 +1,52 @@
+<div class="row date-space">
+  <div class="col-9">
+      <div class="d-flex justify-content-between personal-sales-heading">
+          <p style="">{{salesType}} Sales</p>
+          <app-date-picker (dateRange)="personal($event)" [section]="'personal'"></app-date-picker>
+      </div>
+      <div class="personal-sales d-flex">
+          <div class="ps-left">
+            <div class="d-flex">
+              <div *ngFor="let i of [1,2]" class="date-cards ps-cards ps-cards-space" style="">
+                  <p class="date-number" style="">5</p>
+                  <p class="date-type" style="">Mortgage</p>
+              </div>
+            </div>
+            <div class="d-flex">
+                <div *ngFor="let i of [1,2]" class="date-cards ps-cards" style="">
+                    <p class="date-number" style="">5</p>
+                    <p class="date-type" style="">Mortgage Commitments</p>
+               </div>
+            </div>
+          </div>
+          <div style="width: 100%;">
+              <ngx-charts-pie-chart #PieChartComponent
+                (window:resize)="onResize($event)"
+                [view]="view"
+                [scheme]="colorScheme"
+                [results]="single"
+                [gradient]="gradient"
+                [legend]="showLegend"
+                [legendPosition]="legendPosition"
+                [labels]="showLabels"
+                [doughnut]="isDoughnut"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                [legendTitle]="123"
+                >
+              </ngx-charts-pie-chart>
+          </div>
+      </div>
+  </div>
+
+  <div class="col-3 align-self-end">
+    <div class="average-loan">
+       <p class="al-text">Average Loan Amount</p>
+       <p class="al-number">$123,567</p>
+       <p class="al-text">Closed Vs Pre-Approved Deals</p>
+       <p class="al-number">24%</p>
+    </div>
+  </div>
+
+</div>

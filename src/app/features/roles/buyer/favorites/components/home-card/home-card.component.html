@@ -1,0 +1,17 @@
+<div class="card-1">
+    <div class="status"><p>{{home.status}}</p></div>
+    <div class="card-icons d-flex"><img *ngIf="!home.favorite" src="/assets/search-home/like.svg"><img *ngIf="home.favorite" src="/assets/search-home/heart.svg"><img src="/assets/search-home/shuffle.svg"><img src="/assets/search-home/video.svg"></div>
+    <img class="home-img" [src]="home.image">
+    <div class="card-info">
+       <div class="d-flex justify-content-between price-area">
+          <p class="price">${{home.price}}</p>
+          <p class="area align-self-end">{{home.area}} Sq Ft</p>
+       </div>
+       <div class="description-div"><p class="description">{{ home.description }}</p></div>
+       <div class="d-flex">
+          <div class="bath d-flex"><img class="" src="/assets/search-home/bathroom.png"><p class="align-self-end">{{home.bathroom}}</p></div>
+          <div class="bed d-flex"><img class="" src="/assets/search-home/bedroom.png"><p class="align-self-end">{{home.bedroom}}</p></div>
+          <div class="garage d-flex"><img class="" src="/assets/search-home/garage.png"><p class="align-self-end">{{home.garage}}</p></div>
+       </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<div class="parent" [formGroup]="finance">
+<div formGroupName="fha" >
+ <div class="loan-type"><p>FHA</p></div>
+    <div class="loan-form">
+      <div class="loan-detail row-space" formGroupName="loanDetails">
+          <div class="loan-heading"><p>Loan Details</p></div>
+          <div class="row loan-label">
+             <div class="col-4 form-group">
+                <label for="inputEmail4"><p>Down Payment</p></label>
+                <input formControlName="downPayment" type="" class="form-control" id="" placeholder="">
+             </div>
+             <div class="col-4 form-group">
+               <label for="inputEmail4"><p>Loan Term</p></label>
+               <input formControlName="loanTerm" type="" class="form-control" id="" placeholder="">
+             </div>
+             <div class="col-4 form-group">
+               <label for="inputEmail4"><p>Loan Rate</p></label>
+               <input formControlName="loanRate" type="" class="form-control" id="" placeholder="">
+             </div>
+          </div>
+       </div>
+        <div class="ratios row-space" formGroupName="ratios">
+          <div class="loan-heading"><p>Ratios</p></div>
+          <div class="row loan-label">
+             <div class="col-4 form-group">
+                <label for="inputEmail4"><p>Housing Ratio</p></label>
+                <input formControlName="housingRatio" type="" class="form-control" id="" placeholder="">
+             </div>
+             <div class="col-4 form-group">
+               <label for="inputEmail4"><p>Debt Ratio</p></label>
+               <input formControlName="debtRatio" type="" class="form-control" id="" placeholder="">
+             </div>
+          </div>
+        </div>
+        <div class="mortgage-under row-space" formGroupName="mortgageInsuranceUnder">
+            <div class="loan-heading"><p>Mortgage Insurance Loan Amounts Under $625,000</p></div>
+            <div class="row d-flex loan-label">
+               <div class="col-4 form-group">
+                  <label for="inputEmail4"><p>Funding Fee</p></label>
+                  <input formControlName="fundingFee" type="" class="form-control" id="" placeholder="">
+               </div>
+               <div class="col-4 form-group">
+                 <label for="inputEmail4"><p>Monthly MI (Under 5%)</p></label>
+                 <input formControlName="monthlyMiUnder" type="" class="form-control" id="" placeholder="">
+               </div>
+              <div class="col-4 form-group">
+                <label for="inputEmail4"><p>Monthly MI (Over 5%)</p></label>
+                <input formControlName="monthlyMiOver" type="" class="form-control" id="" placeholder="">
+              </div>
+            </div>
+        </div>
+        <div class="mortgage-over row-space" formGroupName="mortgageInsuranceAbove">
+           <div class="loan-heading"><p>Mortgage Insurance Loan Amounts Above $625,000</p></div>
+           <div class="row d-flex loan-label">
+              <div class="col-4 form-group">
+                 <label for="inputEmail4"><p>Funding Fee</p></label>
+                 <input formControlName="fundingFee" type="" class="form-control" id="" placeholder="">
+              </div>
+              <div class="col-4 form-group">
+                <label for="inputEmail4"><p>Monthly MI (Under 5%)</p></label>
+                <input formControlName="monthlyMiUnder" type="" class="form-control" id="" placeholder="">
+              </div>
+              <div class="col-4 form-group">
+                <label for="inputEmail4"><p>Monthly MI (Over 5%)</p></label>
+                <input formControlName="monthlyMiOver" type="" class="form-control" id="" placeholder="">
+              </div>
+           </div>
+        </div>
+        <div class="add-reserve row-space" formGroupName="additionalReserves">
+            <div class="loan-heading"><p>Additional Reserves Needed</p></div>
+            <div class="row d-flex loan-label">
+               <div class="col-4 form-group">
+                  <label for="inputEmail4"><p>Reserves</p></label>
+                  <input formControlName="reserves" type="" class="form-control" id="" placeholder="">
+               </div>
+            </div>
+        </div>
+  </div>
+</div>
+</div>

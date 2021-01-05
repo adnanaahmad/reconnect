@@ -1,0 +1,61 @@
+<div class="heading d-flex justify-content-between">
+  <h3>Professional Directory</h3>
+</div>
+<div>
+
+  <div class="row card-1" style="">
+    <div class="col-7 d-flex justify-content-between column-1" style="">
+      <div *ngFor="let button of directory.buttons" class="button align-self-center" [ngClass]="{'active': directory.selectedButton == button}" (click)="listClick(button)">
+          <p>{{ button }}</p>
+      </div>
+    </div>
+    <div class="col-5 column-2 align-self-center" style="">
+      <div class="search-flex align-self-center"> <input type="email" class="form-control form-control-lg" placeholder="Search Contacts"> </div>
+     <div class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="img-fluid search-icon"> </div>
+      <div class="envelope-div d-flex align-self-center">
+            <img src="/assets/chat/envelope.svg" class="img-fluid envelope">
+            <p>Invite Contact</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="row" style="">
+      <div class="col-4 col-xl-3" *ngFor="let user of directory.professionalDirectory">
+          <div class="card-3">
+                 <div class="child-1">
+                      <div  class="d-flex div-1">
+                          <div>
+                              <img [src] = "user.image" class="display-img">
+                          </div>
+                          <div class="user-info">
+                              <p ngbTooltip="{{ user.name }}"  class="name">{{ user.name }}</p>
+                              <p  class="role">{{ user.role }}</p>
+                              <div class="number d-flex">
+                                  <img src="/assets/directory-icons/call.svg" class="img-fluid">
+                                  <p>{{ user.number }}</p>
+
+                              </div>
+                              <div class="question d-flex">
+                                <img src="/assets/directory-icons/envelope.svg" class="img-fluid">
+                                <p>Ask a question</p>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="d-flex justify-content-between div-2">
+
+                           <a *ngIf="user.socialMedia.facebook" target="_blank" [href] = "user.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                           <a *ngIf="user.socialMedia.instagram" target="_blank" [href] = "user.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                           <a *ngIf="user.socialMedia.linkedin" target="_blank" [href] = "user.socialMedia.linkedin"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                           <a *ngIf="user.socialMedia.twitter" target="_blank" [href] = "user.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+                           <a *ngIf="user.socialMedia.world" target="_blank" [href] = "user.socialMedia.world"> <img src="/assets/directory-icons/world.svg" class="img-fluid world"> </a>
+                      </div>
+                 </div>
+                 <div class="child-2">
+                      <p>View Profile</p>
+                 </div>
+
+            </div>
+      </div>
+  </div>
+
+</div>

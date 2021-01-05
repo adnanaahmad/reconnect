@@ -1,0 +1,51 @@
+.loan-checkbox p{
+  margin-bottom: 0;
+  font-size: .75vw;
+  color: var(--darkGray);
+  transform: translateY(12%);
+  font-weight: 400;
+  //letter-spacing: .01vw;
+  //width: 0vw;
+}
+.loan-checkbox{
+  padding: 2.5vw;
+  background: white;
+  border-radius: .5vw;
+  margin-bottom: 2vw;
+}
+.container {
+  position: relative;
+  padding-left: 2vw;
+  cursor: pointer;
+  padding-right: 0;
+  margin: 0;
+  max-width: 8.5vw;
+}
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.4vw;
+  width: 1.4vw;
+  background-color: white;
+  padding: .25vw;
+  border-radius: .3vw;
+  border: 2px solid var(--lighGray);
+}
+
+/* On mouse-over, add a grey background color */
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: var(--green);
+  border: none;
+}

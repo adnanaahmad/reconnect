@@ -1,0 +1,284 @@
+<div class="heading d-flex justify-content-between">
+  <h3>Calculator</h3>
+</div>
+
+<div class="row">
+  <div class="col-4 d-flex justify-content-between column-1" style="">
+    <div *ngFor="let button of buttons" class="button align-self-center" [ngClass]="{'active': selectedButton == button}" (click)="listClick(button)">
+        <p>{{ button }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-8" style="">
+    <div class="card-1">
+      <p class="sub-heading mb-custom">FHA Mortgage Details</p>
+      <div class="row margin-row">
+         <div class="col-3">
+           <div class="col-p1">
+             <div class="mb1-custom">
+                <p class="label">Home value</p>
+                <div class="input-group">
+                  <input type="number" class="form-control f1"  placeholder="">
+                  <div class="input-group-append">
+                    <div class="input-group-text add-on">$</div>
+                  </div>
+                </div>
+             </div>
+             <div class="">
+                <p class="label">Interest Rate</p>
+                <div class="input-group">
+                  <input type="number" class="form-control f1"  placeholder="">
+                  <div class="input-group-append">
+                    <div class="input-group-text add-on p1">%</div>
+                  </div>
+                </div>
+             </div>
+           </div>
+         </div>
+         <div class="col-3">
+            <div class="col-p2">
+               <div class="mb1-custom">
+                  <p class="label">Down Payment</p>
+                  <div class="input-group">
+                    <input type="number" class="form-control f1 f2"  placeholder="">
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on">%</div>
+                    </div>
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on add-on2">$</div>
+                    </div>
+                  </div>
+               </div>
+               <div class="">
+                  <p class="label">Amortization Period</p>
+                  <div class="input-group">
+                    <input type="number" class="form-control f1 f2"  placeholder="">
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on ao-padding">yr</div>
+                    </div>
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on add-on2 ao-padding">mo</div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-3">
+            <div class="col-p2">
+               <div class="mb1-custom">
+                  <p class="label">Base Mortgage Amount (A)</p>
+                  <div class="input-group">
+                    <input type="number" class="form-control f1"  placeholder="">
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on">$</div>
+                    </div>
+                  </div>
+               </div>
+               <div class="">
+                  <p class="label">Amortization Period</p>
+                  <div class="d-flex">
+                      <div class="add-on add-on2 ao-padding1">Monthly</div>
+                      <div class="add-on ao-padding1">Weekly</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-3">
+          <div class="col-p3">
+             <div class="mb1-custom">
+                <p class="label">Final Mortgage Amount (A+B)</p>
+                <div class="input-group">
+                  <input type="number" class="form-control f1"  placeholder="">
+                  <div class="input-group-append">
+                    <div class="input-group-text add-on">$</div>
+                  </div>
+                </div>
+             </div>
+              <div class="">
+                 <p class="label">Start Date</p>
+                 <div class="input-group">
+                   <input type="date" class="form-control f1 f3"  placeholder="" disabled>
+                   <div class="input-group-append">
+                     <div class="input-group-text add-on ao-calendar"><img class="calendar" src="/assets/dashboard/Calendar.svg"></div>
+                   </div>
+                 </div>
+              </div>
+         </div>
+       </div>
+      </div>
+
+      <p class="sub-heading mb-custom">FHA Mortgage Insurance</p>
+      <div class="row margin-row">
+         <div class="col-3">
+           <div class="col-p1">
+             <div class="">
+                <p class="label">Upfront MIP(B)</p>
+                <div class="input-group">
+                  <input type="number" class="form-control f1"  placeholder="">
+                  <div class="input-group-append">
+                    <div class="input-group-text add-on p1">%</div>
+                  </div>
+                </div>
+             </div>
+           </div>
+         </div>
+         <div class="col-3">
+            <div class="col-p2">
+             <div class="">
+                <p class="label">Annual MIP</p>
+                <div class="input-group">
+                  <input type="number" class="form-control f1"  placeholder="">
+                  <div class="input-group-append">
+                    <div class="input-group-text add-on p1">%</div>
+                  </div>
+                </div>
+             </div>
+            </div>
+         </div>
+         <div class="col-3">
+            <div class="col-p2">
+               <div class="">
+                  <p class="label">Final Mortgage Amount (A+B)</p>
+                  <div class="input-group">
+                    <input type="number" class="form-control f1"  placeholder="">
+                  </div>
+               </div>
+
+            </div>
+         </div>
+         <div class="col-3">
+         </div>
+      </div>
+
+      <p class="sub-heading mb-custom">Home Owner Expenses</p>
+      <div class="row margin-row">
+         <div class="col-3">
+           <div class="col-p1">
+             <div class="">
+                <p class="label">Down Payment</p>
+                <div class="input-group">
+                  <input type="number" class="form-control f1 f2"  placeholder="">
+                  <div class="input-group-append">
+                    <div class="input-group-text add-on">%</div>
+                  </div>
+                  <div class="input-group-append">
+                    <div class="input-group-text add-on add-on2">$</div>
+                  </div>
+                </div>
+             </div>
+           </div>
+         </div>
+         <div class="col-3">
+            <div class="col-p2">
+               <div class="">
+                  <p class="label">Down Payment</p>
+                  <div class="input-group">
+                    <input type="number" class="form-control f1 f2"  placeholder="">
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on">%</div>
+                    </div>
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on add-on2">$</div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-3">
+            <div class="col-p2">
+               <div class="">
+                  <p class="label">Down Payment</p>
+                  <div class="input-group">
+                    <input type="number" class="form-control f1 f2"  placeholder="">
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on">%</div>
+                    </div>
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on add-on2">$</div>
+                    </div>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+         <div class="col-3">
+             <div class="col-p3">
+               <div class="">
+                  <p class="label">Annual MIP</p>
+                  <div class="input-group">
+                    <input type="number" class="form-control f1"  placeholder="">
+                    <div class="input-group-append">
+                      <div class="input-group-text add-on">$</div>
+                    </div>
+                  </div>
+               </div>
+             </div>
+         </div>
+      </div>
+      <p class="sub-heading mb-custom">Add Extra Payment</p>
+      <p class="sub-heading mb-payment">Total Monthly Payment</p>
+      <div class="d-flex justify-content-between payment-div">
+        <div class="payment m-l">
+          <p>Monthly Principal & Inetrest</p>
+          <p>Monthly Extra Payment</p>
+          <p>Property Taxes</p>
+          <p>Homeowner's Insurance</p>
+          <p>MIP</p>
+          <p>HOA Fees</p>
+        </div>
+        <div class="payment m-r">
+          <p>$10,400</p>
+          <p>$10,400</p>
+          <p>$10,400</p>
+          <p>$10,400</p>
+          <p>$10,400</p>
+          <p>$10,400</p>
+        </div>
+      </div>
+      <div class="total">
+        <div class="d-flex justify-content-between">
+           <div class="payment t-p m-l"><p>Total Monthly Payment</p></div>
+           <div class="payment t-p m-r"><p>$290,000</p></div>
+        </div>
+      </div>
+    </div>
+    <app-bar-chart></app-bar-chart>
+    <div class="card-3">
+      <table class="table">
+        <thead>
+          <tr class="row-head">
+            <th scope="col">Year</th>
+            <th scope="col">Principal (A)</th>
+            <th scope="col">Interest (B)</th>
+            <th scope="col">Taxes , MIP (C)</th>
+            <th scope="col">Total</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Loan Paid</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-value" *ngFor="let i of [1,2,3,4,4,5,6,7,8,9]">
+            <td>2001</td>
+            <td>$10,408</td>
+            <td>$10,408</td>
+            <td>$10,408</td>
+            <td>$10,408</td>
+            <td>$10,408</td>
+            <td>1.67%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-4" style="padding-left: 2.5vw">
+      <app-pie-chart></app-pie-chart>
+      <div class="card-5">
+        <p class="text-center mortgage">FHA Mortgage Payment Schedule</p>
+        <p class="text-center m-date">(21 Nov 2018 - 21 Nov 2048)</p>
+      </div>
+  </div>
+
+</div>

@@ -1,0 +1,130 @@
+<form [formGroup]="userProfile.profileForm" (ngSubmit)="onSubmit()">
+  <div class="d-flex justify-content-between save-button">
+    <h3>Edit Profile</h3>
+    <button  type="submit" class="btn btn-success"><p>Save</p></button>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+        <div class="card-1">
+            <img src="https://qph.fs.quoracdn.net/main-qimg-6d72b77c81c9841bd98fc806d702e859" alt="..." class="img-fluid profile-image">
+            <div class="form-group name">
+              <label>Full Name</label>
+              <input formControlName = "name" type="text" class="form-control form-control" id="formGroupExampleInput" placeholder="Example input">
+            </div>
+            <div class="form-group bio">
+              <label for="formGroupExampleInput2">Bio</label>
+              <textarea formControlName = "bio" class="form-control" rows="5">
+              </textarea>
+            </div>
+           <div class="row">
+              <div class="col">
+                  <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
+              </div>
+              <div class="col">
+                  <i class="fa fa-instagram fa-lg" aria-hidden="true"></i>
+              </div>
+              <div class="col">
+                  <i class="fa fa-linkedin fa-lg" aria-hidden="true"></i>
+              </div>
+              <div class="col">
+                  <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
+              </div>
+           </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+       <div class="card-2 mb-4">
+          <h4 class="">Personal Information:</h4>
+          <div class="row">
+            <div class="card-2-margin-bottom col-md">
+              <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label">Phone:</label>
+                <div class="col-9">
+                  <input formControlName = "phone" type="email" class="form-control form-control" id="inputEmail3" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label">Gender:</label>
+                <div class="col-9 d-flex align-self-center">
+                  <div class="form-check form-check-inline">
+                    <input formControlName = "gender" class="form-check-input" type="radio" value="Male" checked>
+                    <label class="form-check-label" for="gridRadios1">
+                      Male
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input formControlName = "gender" class="form-check-input" type="radio" value="Female">
+                    <label class="form-check-label" for="gridRadios2">
+                      Female
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row website">
+                <label class="col-3 col-form-label col-form-label">Website:</label>
+                <div class="col-9">
+                  <input formControlName = "website" type="email" class="form-control form-control" id="inputEmail3" placeholder="Email">
+                </div>
+              </div>
+            </div>
+            <div class="card-2-margin-bottom col-md">
+              <div formGroupName = "birthday" class="row">
+                <label class="col-3 col-form-label col-form-label">Birthday:</label>
+                <div class="col-9 fields-class d-flex justify-content-between">
+                  <div class="">
+                    <select formControlName = "month" id="inputState" class="form-control">
+                      <option selected>February</option>
+                      <option selected>August</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="">
+                    <select formControlName = "day" id="inputState" class="form-control">
+                      <option selected>02</option>
+                      <option selected>03</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="">
+                    <select formControlName = "year" id="inputState" class="form-control">
+                      <option selected>1994</option>
+                      <option selected>1992</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-3 col-form-label col-form-label">Email:</label>
+                <div class="col-9">
+                  <input formControlName = "email" type="email" class="form-control form-control" id="inputEmail3" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group row location">
+                <label class="col-3 col-form-label col-form-label">Location:</label>
+                <div class="col-9">
+                  <select formControlName = "location" id="inputState" class="form-control">
+                    <option selected>LA</option>
+                    <option>Vegas</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="card-3">
+        <h4 class="">Address:</h4>
+        <div formArrayName="address">
+          <div *ngFor="let a of address.controls; let i = index">
+               <textarea [formControlName]="i"  class="form-control textarea" rows="5">
+                </textarea>
+          </div>
+        </div>
+        <div (click) = "addAddress()">
+            <p>+ Add a new address line</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

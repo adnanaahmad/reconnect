@@ -1,0 +1,156 @@
+.heading h3{
+  font-size: var(--heading);
+  color: var(--darkGray);
+}
+.heading{
+  margin-bottom: 1vw;
+}
+.user-finance{
+  margin-bottom: 2vw;
+}
+.user-finance div.form-group{
+  margin-bottom: 0;
+}
+.user-finance div.form-group input{
+  font-size: .9vw;
+  height: 2.6vw;
+  border: none;
+  border-radius: .5vw;
+}
+.user-finance div.form-group{
+  flex: .4;
+  margin-right: .7vw;
+}
+.user-finance p{
+  margin-bottom: 0;
+}
+.user-finance button{
+  border: none;
+  padding: .5vw 1.5vw;
+  border-radius: .5vw;
+}
+.user-finance button p{
+  font-size: .8vw;
+}
+
+.lc--heading p{
+  color: var(--darkGray);
+  font-size: .9vw;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.lc--heading{
+  margin-bottom: 1.5vw;
+}
+//.loan-checkbox p{
+//  margin-bottom: 0;
+//  font-size: .75vw;
+//  color: var(--darkGray);
+//  transform: translateY(12%);
+//  font-weight: 400;
+//  //letter-spacing: .01vw;
+//  //width: 0vw;
+//}
+//.loan-checkbox{
+//  padding: 2.5vw;
+//  background: white;
+//  border-radius: .5vw;
+//  margin-bottom: 2vw;
+//}
+//.container {
+//  position: relative;
+//  padding-left: 2vw;
+//  cursor: pointer;
+//  padding-right: 0;
+//  margin: 0;
+//  max-width: 8.5vw;
+//}
+///* Hide the browser's default checkbox */
+//.container input {
+//  position: absolute;
+//  opacity: 0;
+//  cursor: pointer;
+//  height: 0;
+//  width: 0;
+//}
+//
+///* Create a custom checkbox */
+//.checkmark {
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  height: 1.4vw;
+//  width: 1.4vw;
+//  background-color: white;
+//  padding: .25vw;
+//  border-radius: .3vw;
+//  border: 2px solid var(--lighGray);
+//}
+//
+///* On mouse-over, add a grey background color */
+///* When the checkbox is checked, add a blue background */
+//.container input:checked ~ .checkmark {
+//  background-color: var(--green);
+//  border: none;
+//}
+.col-6{
+  margin-bottom: 2vw;
+}
+.parent{
+  // padding: 0 1.5vw;
+  background: white;
+  border-radius: .5vw;
+  height: 100%;
+}
+.parent label{
+  margin-bottom: 0;
+}
+.parent p{
+  margin-bottom: 0;
+}
+.loan-type{
+  padding: 1.5vw 1.5vw;
+  border-bottom: 1px solid var(--mediumLightGray);
+}
+.loan-type p{
+  color: var(--darkGray);
+  font-weight: 600;
+  font-size: .9vw;
+ // margin-bottom: 0;
+}
+.loan-form{
+  padding: 1.5vw 1.5vw;
+}
+.loan-heading{
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 500;
+  margin-bottom: .6vw;
+}
+.loan-label div.form-group{
+  //margin-right: 1vw;
+  //width: 11vw;
+  margin-bottom: 0;
+}
+.loan-label div.form-group input{
+  font-size: .9vw;
+  height: 2vw;
+}
+.form-group:last-child{
+  margin-right: 0;
+  //padding-right: 2vw;
+}
+.loan-label p{
+  font-size: .8vw;
+  color: var(--lighGray);
+  margin-bottom: .2vw;
+}
+::placeholder {
+  font-size: .8vw;
+  color: var(--lighGray);
+  //font-weight: 300;
+}
+
+.row-space{
+  margin-bottom: 1vw;
+}

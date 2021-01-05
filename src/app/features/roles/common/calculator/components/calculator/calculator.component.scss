@@ -1,0 +1,230 @@
+p{
+  font-family: 'Poppins';
+}
+h3{
+  font-family: 'Poppins';
+}
+.heading{
+  margin-bottom: 1vw;
+}
+.heading h3{
+  font-size: var(--heading);
+  color: var(--darkGray);
+}
+.button{
+  padding: .3vw 1.8vw .3vw 1.8vw;
+  border-radius: .5vw;
+  height: fit-content;
+  cursor: pointer;
+}
+.button p{
+  margin: 0;
+  color: var(--darkGray);
+  font-size: .9vw;
+  font-weight: 300;
+}
+.active p{
+  color: white;
+}
+.active{
+  background: var(--green);
+
+}
+.column-1{
+  margin-bottom: 1.5vw;
+}
+
+.card-1{
+  background: white;
+  padding: 1.5vw 2vw;
+  margin-bottom: 2vw;
+  border-radius: .5vw;
+}
+.sub-heading{
+  color: var(--darkGray);
+  font-size: .9vw;
+  margin-bottom: 0;
+ // font-weight: 500;
+}
+.mb-custom{
+  margin-bottom: 1vw;
+}
+.label{
+  margin-bottom: 0.3vw;
+  color: var(--darkGray);
+  font-size: .6vw;
+  font-weight: 300;
+}
+.f1{
+  height: 1.3vw;
+  border: 1px solid var(--extraLightGray);
+  font-size: .6vw;
+  border-radius: .2vw;
+}
+.f2{
+  margin-right: .3vw;
+}
+.f3{
+  background: white;
+}
+::placeholder{
+  font-size: .6vw;
+  color: var(--lighGray);
+}
+.mb1-custom{
+  margin-bottom: 1vw;
+}
+.input-group-text{
+  font-family: 'Poppins';
+  border-radius: .2vw;
+}
+.add-on{
+  height: 1.3vw;
+  min-height: 100%;
+  border: 1px solid var(--extraLightGray);
+  font-size: .6vw;
+  color: var(--darkGray);
+  padding: .375vw .5vw;
+  background: var(--extraLightGray);
+  font-weight: 300;
+  font-family: 'Poppins';
+}
+.add-on2{
+  background: white;
+}
+.ao-padding{
+  padding: .375vw .33vw;
+}
+.ao-padding1{
+  padding:.2vw 0;
+  width: 100%;
+  text-align: center;
+}
+.ao-calendar{
+  padding: .375vw .3vw;
+}
+.p1{
+  padding: .375vw .44vw;
+}
+.calendar{
+  height: .8vw;
+  width: .8vw;
+}
+.col-p1{
+  padding-right: 1vw;
+}
+.col-p2{
+  padding: 0 .5vw;
+}
+.col-p3{
+  padding-left: 1vw;
+}
+.margin-row{
+  margin-bottom: 2vw;
+}
+.mb-payment{
+  margin-bottom: .3vw;
+}
+.payment p{
+  color: var(--darkGray);
+  font-size: .8vw;
+  font-weight: 300;
+  margin-bottom: .3vw;
+}
+.payment p:last-child{
+  margin-bottom: 0;
+}
+.m-l{
+  margin-left: 1.5vw;
+}
+.m-r{
+  margin-right: 1.5vw;
+}
+.payment-div{
+  margin-bottom: 1vw;
+}
+.total{
+  border-top: 1px solid var(--lighGray);
+  padding-top: 1vw;
+}
+.t-p p{
+  font-weight: 400;
+}
+
+
+////////////////////////////////////////////// card-2
+
+
+
+////////////////////////////////////////////// card-3
+
+.card-3{
+  background: white;
+  //padding: 1.5vw;
+  margin-bottom: 2vw;
+  border-radius: .5vw;
+
+}
+.row-value td{
+  color: var(--darkGray);
+  font-size: .8vw;
+  font-family: 'Poppins';
+  font-weight: 300;
+  text-align: center;
+  border-top: 1px solid var(--lighGray);
+}
+.row-head th{
+  color: var(--darkGray);
+  font-size: .9vw;
+  font-family: 'Poppins';
+  font-weight: 400;
+  text-align: center;
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+ // padding: 1vw 1vw 1vw 1.5vw;
+  //text-wrap: normal;
+}
+.row-head{
+  background: var(--extraLightGray);
+  border-radius: .5vw;
+  padding: 2vw;
+}
+.row-value:first-child td{
+  border: none;
+}
+.row-head th{
+  border: none;
+}
+.row-head th:first-child{
+  border-top-left-radius: .5vw;
+  border-bottom-left-radius: .5vw;
+}
+.row-head th:last-child{
+  border-top-right-radius: .5vw;
+  border-bottom-right-radius: .5vw;
+}
+
+
+///////////////////////////////////////////////// card-4
+
+
+
+///////////////////////////////////////////// card-5
+
+.card-5{
+  background: white;
+  border-radius: .5vw;
+  padding: 4vw 2vw;
+}
+.mortgage{
+  font-size:1vw;
+  color: var(--darkGray);
+  margin-bottom: .3vw;
+  font-weight: 300;
+}
+.m-date{
+  font-size:1vw;
+  color: var(--green);
+  margin-bottom: 0;
+  font-weight: 300;
+}

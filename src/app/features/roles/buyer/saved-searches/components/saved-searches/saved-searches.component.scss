@@ -1,0 +1,85 @@
+p{
+  font-family: 'Poppins';
+  color: var(--darkGray);
+  font-size: .8vw;
+  font-weight: 300;
+}
+
+.heading h3{
+  font-family: 'Poppins';
+  color: var(--darkGray);
+  font-size: var(--heading);
+}
+.heading{
+  margin-bottom: 1.5vw;
+}
+.sub-heading{
+  margin-bottom: 1vw;
+}
+.card-1{
+  background: white;
+  padding: 1.5vw 1.8vw;
+  border-radius: .5vw;
+  margin-bottom: 2vw;
+}
+.details p{
+  margin-bottom: .5vw;
+}
+.details p:last-child{
+  margin-bottom: 0;
+}
+.details{
+  width: 100%;
+}
+.price{
+  font-weight: 500;
+  font-size: .85vw;
+}
+
+.form-control{
+  font-size: .7vw;
+  color: var(--lighGray);
+  font-family: 'Poppins';
+  padding: 0 1.2vw 0 .5vw;
+  width: 6.5vw;
+  height: 2vw;
+  border-radius: .4vw;
+  margin-left: 1vw;
+}
+
+.delete{
+  background: var(--red);
+  height: 2vw;
+  width: 2vw;
+  padding: .42vw;
+  border-radius: .4vw;
+}
+.edit{
+  background: var(--extraLightGray);
+  height: 2vw;
+  width: 2vw;
+  padding: .5vw;
+  border-radius: .4vw;
+  margin-left: .4vw;
+}
+
+p#comma::after{
+  content: ", ";
+  white-space: pre;
+}
+p#comma:last-child::after{
+  content: " ";
+}
+.space p::after{
+  content: " ";
+  white-space: pre;
+}
+.space p:last-child::after{
+  content: "";
+}
+.label{
+  color: var(--lighGray);
+}
+.click{
+  cursor: pointer;
+}

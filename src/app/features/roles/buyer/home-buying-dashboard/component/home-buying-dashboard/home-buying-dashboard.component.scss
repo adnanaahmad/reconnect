@@ -1,0 +1,119 @@
+p{
+  font-family: 'Poppins';
+}
+.heading h3{
+  font-size: var(--heading);
+  color: var(--darkGray);
+  font-family: 'Poppins';
+}
+.heading{
+}
+.welcome p{
+  color: var(--darkGray);
+  margin-bottom: 0;
+  font-size: .8vw;
+  font-weight: 300;
+}
+
+.first-column{
+  padding-top: 2.4vw;
+}
+.first-column p{
+  //margin-bottom: 0;
+  color: var(--darkGray);
+}
+.card p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+}
+.card p:first-child{
+  font-size: .65vw;
+  margin-bottom: 1vw;
+}
+.card p:last-child{
+  font-size: 1.2vw;
+  font-weight: 600;
+}
+.card{
+  flex: 1;
+  margin-right: 1vw;
+  padding: 1.5vw 1.5vw 1.5vw 1.5vw;
+  border-radius: .5vw;
+  border: none;
+}
+.card:last-child{
+  margin-right: 0;
+}
+.card-div{
+  margin-bottom: 2.4vw;
+}
+.team-heading{
+  font-weight: 600;
+  font-size: .9vw;
+  margin-bottom: 1vw;
+}
+.team-text{
+  font-size: .8vw;
+  font-weight: 300;
+  margin-bottom: 0vw;
+}
+.bottom{
+  margin-bottom: 1.5vw;
+}
+.team{
+  margin-bottom: 3vw;
+}
+app-team-person{
+  margin-right: 1vw;
+}
+.buying p{
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: .9vw;
+}
+.buying{
+  margin-bottom: 1.5vw;
+}
+.tick{
+  height: 1.8vw;
+  width: 1.8vw;
+  background: var(--green);
+  padding: .4vw;
+  border-radius: 2vw;
+  display: flex;
+}
+.status p{
+  color: var(--darkGray);
+  margin-bottom: 0;
+  font-weight: 300;
+  font-size: .6vw;
+}
+.status{
+  background: var(--lightBlueOne);
+  padding: .7vw .7vw .3vw .7vw;
+  border-radius: .5vw;
+  flex: .7;
+  margin-right: .8vw;
+  //white-space: nowrap;
+}
+.status:last-child{
+  margin-right: 0;
+}
+.status img{
+  margin: auto auto .8vw auto;
+}
+.tick-disable{
+  background: var(--darkBlueOne);
+}
+.second-column{
+  padding-left: 3vw;
+}
+.subject{
+  font-weight: 600;
+  font-size: .9vw;
+  color: var(--darkGray);
+  margin-bottom: 1vw;
+}
+.modal{
+  border-radius: 1vw;
+}

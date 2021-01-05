@@ -1,0 +1,51 @@
+.transaction{
+  background: transparent;
+  margin-bottom: 3.5vw;
+}
+.heading{
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 600;
+  margin-bottom: 2vw;
+}
+label{
+  margin-bottom: 0;
+}
+.tick{
+  height: 1.8vw;
+  width: 1.8vw;
+  background: var(--darkBlueOne);
+  padding: .4vw;
+  border-radius: 2vw;
+  cursor: pointer;
+}
+.tick-active{
+  background: var(--green);
+}
+.status p{
+  color: var(--darkGray);
+  margin-bottom: 0;
+  font-weight: 300;
+  font-size: .7vw;
+}
+.status{
+  background: var(--lightBlueOne);
+  padding: .7vw .7vw .3vw .7vw;
+  border-radius: .5vw;
+  flex: .7;
+  margin-right: .8vw;
+  //white-space: nowrap;
+}
+.status input{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;;
+}
+.status:last-child{
+  margin-right: 0;
+}
+.status img{
+  margin-bottom: .8vw;
+}

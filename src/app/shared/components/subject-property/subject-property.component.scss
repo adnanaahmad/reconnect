@@ -1,0 +1,35 @@
+.property-card{
+  background: white;
+  border-radius: .5vw;
+}
+.img-div{
+  position: relative;
+}
+.img-div button{
+  border: none;
+  position: absolute;
+  left: 35%;
+  bottom: 5%;
+  font-size: .75vw;
+  padding: .4vw 1.4vw;
+  border-radius: .3vw;
+  font-weight: 300;
+}
+.property-img{
+  width: 100%;
+  height: 17vw;
+  object-fit: cover;
+  border-radius: .5vw;
+}
+.detail-heading{
+  color: var(--darkGray);
+  font-weight: 300;
+  font-size: .8vw;
+  margin-bottom: 1vw;
+}
+.property-info{
+  padding: 1.5vw;
+}
+p{
+  font-family: 'Poppins';
+}

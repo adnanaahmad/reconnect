@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28.04" height="28.04" viewBox="0 0 28.04 28.04">
+  <g id="Calendar" transform="translate(-764 207)">
+    <circle id="Ellipse_3" data-name="Ellipse 3" cx="1" cy="1" r="1" transform="translate(780 -197)" fill="#424d63"/>
+    <circle id="Ellipse_4" data-name="Ellipse 4" cx="1" cy="1" r="1" transform="translate(780 -192)" fill="#424d63"/>
+    <circle id="Ellipse_5" data-name="Ellipse 5" cx="1" cy="1" r="1" transform="translate(785 -197)" fill="#424d63"/>
+    <path id="Path_3" data-name="Path 3" d="M26.944,13.691a1.1,1.1,0,0,0,1.1-1.1V6.572a4.386,4.386,0,0,0-4.381-4.381H22.235V1.1a1.1,1.1,0,0,0-2.191,0v1.1H15.06V1.1a1.1,1.1,0,0,0-2.191,0v1.1H7.941V1.1a1.1,1.1,0,1,0-2.191,0v1.1H4.381A4.386,4.386,0,0,0,0,6.572V23.659A4.386,4.386,0,0,0,4.381,28.04h13.8a1.1,1.1,0,0,0,.11-.006c.036,0,.072.006.108.006a1.1,1.1,0,0,0,.789-.336l8.543-8.872a1.1,1.1,0,0,0-.789-1.855H21.687a4.386,4.386,0,0,0-4.381,4.381v4.491H4.381a2.193,2.193,0,0,1-2.191-2.191V6.572A2.193,2.193,0,0,1,4.381,4.381H5.75v1.1a1.1,1.1,0,0,0,2.191,0v-1.1H12.87v1.1a1.1,1.1,0,0,0,2.191,0v-1.1h4.984v1.1a1.1,1.1,0,0,0,2.191,0v-1.1h1.424a2.193,2.193,0,0,1,2.191,2.191V12.6A1.1,1.1,0,0,0,26.944,13.691ZM19.5,21.358a2.193,2.193,0,0,1,2.191-2.191h2.682L19.5,24.228Z" transform="translate(764 -207)" fill="#424d63"/>
+    <circle id="Ellipse_6" data-name="Ellipse 6" cx="1" cy="1" r="1" transform="translate(770 -197)" fill="#424d63"/>
+    <circle id="Ellipse_7" data-name="Ellipse 7" cx="1" cy="1" r="1" transform="translate(775 -192)" fill="#424d63"/>
+    <circle id="Ellipse_8" data-name="Ellipse 8" cx="1" cy="1" r="1" transform="translate(770 -187)" fill="#424d63"/>
+    <circle id="Ellipse_9" data-name="Ellipse 9" cx="1" cy="1" r="1" transform="translate(770 -192)" fill="#424d63"/>
+    <circle id="Ellipse_10" data-name="Ellipse 10" cx="1" cy="1" r="1" transform="translate(775 -187)" fill="#424d63"/>
+    <circle id="Ellipse_11" data-name="Ellipse 11" cx="1" cy="1" r="1" transform="translate(775 -197)" fill="#424d63"/>
+  </g>
+</svg>

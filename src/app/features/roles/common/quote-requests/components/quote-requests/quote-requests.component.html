@@ -1,0 +1,31 @@
+<div class="heading d-flex justify-content-between">
+  <h3>Quote Requests</h3>
+</div>
+
+
+<div class="row">
+  <div class="col-4 d-flex justify-content-between column-1" style="">
+    <div *ngFor="let button of quoteRequests.buttons" class="button align-self-center" [ngClass]="{'active': quoteRequests.selectedButton == button}" (click)="listClick(button)">
+        <p>{{ button }}</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="card-1 d-flex" *ngFor="let request of quoteRequests.quoteRequests">
+  <div class="div-1">
+    <img class="profile-img" [src]="request.buyer.image">
+     <p class="name">{{request.buyer.name}} </p>
+     <div class="d-flex div-2">
+
+          <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+          <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+          <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+     </div>
+     <div class="respond-btn"><p class="text-nowrap">Respond To Quote Request</p></div>
+  </div>
+
+    <img class="subject-img" [src]="request.subjectProperty.image">
+
+  <app-subject-property-details class="subject-property" [subjectProperty]="request.subjectProperty"></app-subject-property-details>
+</div>

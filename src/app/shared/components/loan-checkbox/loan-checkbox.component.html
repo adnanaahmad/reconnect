@@ -1,0 +1,28 @@
+<div [formGroup]="loanDetails.finance">
+  <div class="d-flex loan-checkbox" formGroupName="toggle">
+    <label class="container"><p>FHA</p>
+      <input type="checkbox"  formControlName="fha" [checked]="loanDetails.finance.value.toggle.fha">
+      <img class="checkmark" src="/assets/loan-details/tick.svg">
+    </label>
+    <label class="container"><p>Conventional</p>
+      <input type="checkbox"  formControlName="conventional" [checked]="loanDetails.finance.value.toggle.conventional">
+      <img class="checkmark" src="/assets/loan-details/tick.svg">
+    </label>
+    <label class="container"><p>Home Possible</p>
+      <input type="checkbox"  formControlName="homePossible" [checked]="loanDetails.finance.value.toggle.homePossible">
+      <img class="checkmark" src="/assets/loan-details/tick.svg">
+    </label>
+    <label class="container"><p>Home Ready</p>
+      <input type="checkbox"  formControlName="homeReady" [checked]="loanDetails.finance.value.toggle.homeReady">
+      <img class="checkmark" src="/assets/loan-details/tick.svg">
+    </label>
+    <label class="container"><p>VA</p>
+      <input type="checkbox" formControlName="va" [checked]="loanDetails.finance.value.toggle.va">
+      <img class="checkmark" src="/assets/loan-details/tick.svg">
+    </label>
+    <label class="container"><p>USDA</p>
+        <input type="checkbox"  formControlName="usda" [checked]="loanDetails.finance.value.toggle.usda">
+      <img class="checkmark" src="/assets/loan-details/tick.svg">
+      </label>
+  </div>
+</div>

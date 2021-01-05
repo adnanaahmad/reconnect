@@ -1,0 +1,55 @@
+
+.property-info p{
+  //margin-bottom: 0;
+}
+.detail-heading{
+  color: var(--darkGray);
+  font-weight: 300;
+  font-size: .8vw;
+  margin-bottom: 1vw;
+}
+.info-img{
+  background: var(--lightBlueTwo);
+  padding: .6vw;
+  border-radius: .5vw;
+  width: 5.4vw;
+  margin-bottom: 1vw;
+  // margin-right: 1vw;
+  //flex: 1;
+}
+.info-img img{
+  height: 2.2vw;
+  width: 2.2vw;
+  margin-bottom: .3vw;
+}
+.bed{
+  width: 2.7vw !important;
+  height: 1.8vw !important;
+  margin-bottom: .6vw !important;
+}
+.info-img p{
+  margin-bottom: 0;
+  font-size: .65vw;
+  font-weight: 300;
+  color: var(--darkGray);
+}
+.info-number p:first-child{
+  margin-right: .2vw;
+}
+.details p{
+  margin-bottom: .6vw;
+  font-size: .8vw;
+  color: var(--darkGray);
+}
+.details p:last-child{
+  margin-bottom: 0vw;
+}
+.detail-left{
+  flex: .76;
+}
+.detail-right{
+  font-weight: 300;
+}
+p{
+  font-family: 'Poppins';
+}

@@ -1,0 +1,105 @@
+.card-4{
+  border-radius: .5vw;
+  background: white;
+  margin-bottom: 2vw;
+}
+.ls-heading{
+  margin-bottom: 0;
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 500;
+  padding: 1vw;
+}
+.lsh-div{
+  border-bottom: 1px solid var(--mediumLightGray);
+}
+.ls-detail{
+  padding: 1vw;
+}
+.lsd-first-row p{
+  font-size: .6vw;
+  color: var(--lighGray);
+  margin-bottom: 0;
+}
+.lsd-first-row{
+  margin-bottom: 1vw;
+}
+.mr-custom{
+  margin-right: 1.5vw;
+}
+.form-input p{
+  margin-bottom: 0.2vw;
+  color: var(--lighGray);
+  font-size: .6vw;
+}
+
+.form-input input{
+  padding: 0 0 0 .3vw;
+  font-size: .7vw;
+  color: var(--darkGray);
+  font-family: 'Poppins';
+  height: 1.4vw;
+  border: 1px solid var(--lighGray);
+  border-radius: .2vw;
+}
+.mb2-custom{
+  margin-bottom: 1.1vw;
+}
+.form-input{
+  position: relative;
+}
+.letter{
+  background: var(--green);
+  border-bottom-right-radius: .5vw;
+  border-bottom-left-radius: .5vw;
+  padding: .7vw;
+}
+.letter p{
+  color: white;
+  margin-bottom: 0;
+  font-size: .75vw;
+  font-weight: 300;
+}
+
+p{
+  font-family: 'Poppins';
+}
+.view img{
+  height: .5vw;
+  width: .5vw;
+  margin-left: .2vw;
+}
+.view p{
+  color: white;
+  margin-bottom: 0;
+  font-size: .4vw;
+}
+.view{
+  background: var(--green);
+  width: fit-content;
+  position: absolute;
+  left: 80%;
+  top:43.8%;
+  //height: 1.4vw;
+  padding: .2vw .3vw .15vw .3vw;
+  border-top-right-radius: .2vw;
+  border-bottom-right-radius: .2vw;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1440px) {
+  .view{
+    top:42%;
+    left: 81%;
+    padding-bottom: .2vw;
+  }
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .view{
+    top:44%;
+    left: 78%;
+    padding:.15vw .3vw .1vw .3vw;
+  }
+}

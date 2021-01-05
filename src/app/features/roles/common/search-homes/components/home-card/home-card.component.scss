@@ -1,0 +1,114 @@
+.card-1{
+  //background: white;
+  position: relative;
+  margin-bottom: 1.5vw;
+}
+.card-icons{
+  position: absolute;
+  left: 69%;
+  top: 4%;
+}
+.card-icons img{
+  margin-right: .5vw;
+  height: 1.2vw;
+  width: 1.2vw;
+}
+.card-icons img:last-child{
+  margin-right: 0;
+}
+.home-img{
+  height: 10vw;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: .5vw;
+  border-top-right-radius: .5vw;
+}
+.card-info{
+  background: white;
+  border-bottom-left-radius: .5vw;
+  border-bottom-right-radius: .5vw;
+  padding: .8vw;
+}
+.card-info p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+}
+.price{
+  font-weight: 600;
+  font-size: .9vw;
+}
+.area{
+  font-size: .75vw;
+}
+.price-area{
+  margin-bottom: .5vw;
+}
+.description{
+  font-size: .6vw;
+  font-weight: 300;
+}
+.description-div{
+  margin-bottom: .5vw;
+}
+.bath{
+  background: var(--extraLightGray);
+  padding: .5vw;
+  font-size: .7vw;
+  border-radius: .3vw;
+  font-weight: 500;
+  margin-right: 1vw;
+}
+.bed{
+  background: var(--extraLightGray);
+  padding: .5vw;
+  font-size: .7vw;
+  border-radius: .3vw;
+  font-weight: 500;
+  margin-right: 1vw;
+}
+.garage{
+  background: var(--extraLightGray);
+  padding: .5vw;
+  font-size: .7vw;
+  border-radius: .3vw;
+  font-weight: 500;
+}
+.bath img{
+  height: 1.2vw;
+  width: 1.2vw;
+  margin-right: .5vw;
+}
+.bed img{
+  height: 1vw;
+  width: 1.5vw;
+  margin-right: .5vw;
+
+}
+.garage img{
+  height: 1.2vw;
+  width: 1.2vw;
+  margin-right: .5vw;
+
+}
+.home-margin{
+  margin-bottom: 1.5vw;
+}
+.status p{
+  margin-bottom: 0;
+  color: white;
+  font-size: .6vw;
+  width: fit-content;
+}
+.status{
+  position: absolute;
+  background: black;
+  padding: .15vw .8vw .15vw .8vw;
+  width: fit-content;
+  opacity: .5;
+  border-radius: .3vw;
+  left: 4%;
+  top: 4%;
+}
+p{
+  font-family: 'Poppins';
+}

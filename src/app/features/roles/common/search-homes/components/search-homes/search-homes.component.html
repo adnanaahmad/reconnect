@@ -1,0 +1,153 @@
+<form style="position: relative" [formGroup]="searchHome.moreFilters">
+<div class="heading row">
+  <div class="col-2" style="background: transparent">
+        <h3 class="text-nowrap">Search Homes</h3>
+  </div>
+  <div class="col-3 align-self-end" style="background: transparent">
+    <p class="heading-color text-center">Approved Loan Programs</p>
+  </div>
+  <div class="col-5 align-self-end d-flex justify-content-center" style="background: transparent">
+    <div class="loan-program d-flex" style="">
+        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.fha,'loan-gray':!searchHome.approvedLoanProgram.fha}">FHA</p>
+        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.va,'loan-gray':!searchHome.approvedLoanProgram.va}">VA</p>
+        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.usda,'loan-gray':!searchHome.approvedLoanProgram.usda }">USDA</p>
+        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.conventional,'loan-gray':!searchHome.approvedLoanProgram.conventional }">Coventional</p>
+        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.homeReady,'loan-gray':!searchHome.approvedLoanProgram.homeReady }" class="text-nowrap">Home Ready</p>
+        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.homePossible,'loan-gray':!searchHome.approvedLoanProgram.homePossible }" class="text-nowrap">Home Possible</p>
+     </div>
+  </div>
+
+</div>
+
+<div class="d-flex filter" style="background: transparent">
+        <div class="align-self-center search-input"><input type="email" id="search" class="form-control form-control-lg" placeholder=""></div>
+        <div class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
+        <div class="dropdown">
+          <button class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Payment <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button">Action</button>
+            <button class="dropdown-item" type="button">Another action</button>
+            <button class="dropdown-item" type="button">Something else here</button>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button (click)="hideMoreFilter()" class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Property Type <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
+          </button>
+          <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="propertyType">
+            <ng-container *ngFor="let i of searchHome.moreFilters.value.propertyType| keyvalue: originalOrder">
+              <label class="container" *ngIf="constant.searchFilters[i.key]">
+                  <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType[i.key]">
+                  <img class="checkmark" src="/assets/loan-details/tick.svg">
+                  <p class="label-txt">{{constant.searchFilters[i.key]}}</p>
+              </label>
+            </ng-container>
+            <div class="d-flex justify-content-end">
+                <div (click)="cancel($event)" class="cancel-btn" >Cancel</div>
+                <div (click)="applyFilter()" class="apply-btn" >Apply</div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button (click)="hideMoreFilter()" class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Beds <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
+          </button>
+          <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="beds">
+            <ng-container *ngFor="let i of searchHome.moreFilters.value.beds| keyvalue: originalOrder">
+              <label class="container" *ngIf="constant.searchFilters[i.key]">
+                  <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.beds[i.key]">
+                  <img class="checkmark" src="/assets/loan-details/tick.svg">
+                  <p class="label-txt">{{constant.searchFilters[i.key]}}</p>
+              </label>
+            </ng-container>
+            <div class="d-flex justify-content-end">
+                <div (click)="cancel($event)" class="cancel-btn" >Cancel</div>
+                <div (click)="applyFilter()" class="apply-btn" >Apply</div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button (click)="hideMoreFilter()" class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Baths <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
+          </button>
+          <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="baths">
+            <ng-container *ngFor="let i of searchHome.moreFilters.value.baths| keyvalue: originalOrder">
+              <label class="container" *ngIf="constant.searchFilters[i.key]">
+                  <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.baths[i.key]">
+                  <img class="checkmark" src="/assets/loan-details/tick.svg">
+                  <p class="label-txt">{{constant.searchFilters[i.key]}}</p>
+              </label>
+            </ng-container>
+            <div class="d-flex justify-content-end">
+                <div (click)="cancel($event)" class="cancel-btn" >Cancel</div>
+                <div (click)="applyFilter()" class="apply-btn" >Apply</div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button (click)="hideMoreFilter()" class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Open Houses <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
+          </button>
+          <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="listingStatus">
+            <ng-container *ngFor="let i of searchHome.moreFilters.value.listingStatus| keyvalue: originalOrder">
+              <label class="container" *ngIf="constant.searchFilters[i.key]">
+                  <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus[i.key]">
+                  <img class="checkmark" src="/assets/loan-details/tick.svg">
+                  <p class="label-txt text-nowrap">{{constant.searchFilters[i.key]}}</p>
+              </label>
+            </ng-container>
+            <div class="d-flex justify-content-end">
+                <div (click)="cancel($event)" class="cancel-btn" >Cancel</div>
+                <div (click)="applyFilter()" class="apply-btn" >Apply</div>
+            </div>
+          </div>
+        </div>
+        <div class="select-div align-self-center filter-menu d-flex justify-content-center" (click)="store.updateToggleMoreFilter(toggleMoreFilter())">
+          <div class="d-flex">
+           <p class="text-nowrap">More Filters</p>
+           <img class="down-arrow align-self-center da-margin" src="/assets/search-home/down-arrow.svg">
+          </div>
+        </div>
+        <div class="save-search d-flex" (click)="saveSearch()">
+            <img src="/assets/search-home/save.svg">
+            <p class="text-nowrap">Save Search</p>
+        </div>
+</div>
+<form [formGroup]="searchHome.moreFilters">
+<div class="more-filter" *ngIf="store.toggleMoreFilter | async">
+    <app-more-filters [searchHome]="searchHome"></app-more-filters>
+</div>
+</form>
+<div style="position: relative">
+  <div *ngIf="store.toggleMoreFilter | async" id="opacity" class=""></div>
+
+
+  <div class="d-flex justify-content-between second-row">
+     <p class="second-row-txt text-nowrap align-self-center">Location name Real Estate & Homes for Sale </p>
+     <div class="d-flex second-row-txt1">
+        <p class="no-home align-self-center text-nowrap">751 Homes</p>
+        <p class="sort-by align-self-center text-nowrap">Sort By:</p>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>All</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+     </div>
+  </div>
+
+
+  <div class="home">
+    <div class="row">
+        <div class="col-3 home-margin" *ngFor="let home of searchHome.homes">
+            <app-home-card [home]="home"></app-home-card>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+</form>

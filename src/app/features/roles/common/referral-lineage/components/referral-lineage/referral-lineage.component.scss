@@ -1,0 +1,102 @@
+.heading{
+  margin-bottom: 2vw;
+}
+.heading h3{
+  font-size: var(--heading);
+  color: var(--darkGray);
+}
+.card-1{
+  width: 73.1vw;
+  overflow-x: auto;
+  overflow-y: auto;
+  //height: 70vw;
+}
+::ng-deep div [class^='ng-tns-c107'].p-organizationchart-node-content{
+  padding: .5vw;
+  border-radius: .5vw;
+  border: none;
+  width: 11.5vw;
+  //position: static;
+}
+
+::ng-deep .p-node-toggler{
+  display: none;
+}
+::ng-deep td[class^='p-organizationchart-line'][class^='p-organizationchart-line'].ng-star-inserted{
+  border-color: var(--lighGray);
+}
+::ng-deep td[class^='ng-tns-c107'] div.p-organizationchart-line-down{
+  background: var(--lighGray);
+}
+.image{
+  height: 3.3vw;
+  width: 3.3vw;
+  object-fit: cover;
+  border-radius: .5vw;
+  margin-right: .5vw;
+}
+
+.role{
+  margin-bottom: 0;
+  color: var(--lighGray);
+  font-size: .75vw;
+  text-align: start;
+  font-weight: 300;
+}
+.name{
+  margin-bottom: 0.3vw;
+  color: var(--darkGray);
+  font-size: .74vw;
+  text-align: start;
+}
+.phone-icon{
+  height: .59vw;
+  width: .59vw;
+}
+
+.chat-icon{
+  height: .75vw;
+  width: .75vw;
+}
+.menu-icon{
+  height: .59vw;
+  width: .59vw;
+  margin-left: .3vw;
+}
+.email-icon{
+  height: .75vw;
+  width: .75vw;
+}
+.zoom{
+  //zoom: 60%;
+}
+.rectangle1{
+  height: .45vw;
+  width: .55vw;
+  background: var(--green);
+  position: absolute;
+  left: 50%;
+  top:-.45vw;
+  border-radius: .1vw;
+  margin-left: -.25vw;
+}
+.rectangle2{
+  height: .45vw;
+  width: .55vw;
+  background: var(--lighGray);
+  position: absolute;
+  left: 50%;
+  bottom:-.45vw;
+  border-radius: .1vw;
+  margin-left: -.25vw;
+}
+
+
+::ng-deep .p-organizationchart-line-right{
+ // background: #F34949;
+
+}
+//ng-tns-c107-1 ng-star-inserted
+//::ng-deep .p-organizationchart-line-top{
+//  border-color: yellow !important;
+//}

@@ -1,0 +1,42 @@
+      <div class="card-5">
+          <div class="c5-half d-flex justify-content-between">
+            <div class="column1">
+              <p class="rvb-heading text-nowrap">Cost of Rent Over</p>
+              <select class="form-control form-control-sm select">
+                <option>Small select</option>
+              </select>
+              <div class="d-flex justify-content-between">
+                  <p class="rvb-txt">Rent</p>
+                  <p class="rvb-txt">${{rentVsBuying.costOfRent.amount | number}}</p>
+              </div>
+            </div>
+            <div class="column2">
+               <p class="rvb-heading text-nowrap">Cost of Buying Over</p>
+               <select class="form-control form-control-sm select">
+                 <option>Small select</option>
+               </select>
+               <div class="cbo" *ngFor="let i of rentVsBuying.costOfBuying.breakdown">
+                   <div class="d-flex justify-content-between">
+                      <p class="rvb-sub-heading sh-mb">{{i.name}}</p>
+                      <p class="rvb-txt red-dollar">${{i.amount | number}}</p>
+                   </div>
+                   <div class="d-flex justify-content-between" *ngFor="let j of i.details">
+                       <p class="rvb-txt">{{j.name}}</p>
+                       <p class="rvb-txt">${{j.amount | number}}</p>
+                   </div>
+               </div>
+            </div>
+          </div>
+          <div class="c5-o-half">
+              <div class="d-flex justify-content-between total">
+                  <div class="d-flex justify-content-between">
+                    <p class="rvb-sub-heading">Total</p>
+                    <p class="rvb-sub-heading">${{rentVsBuying.costOfRent.total | number}}</p>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                     <p class="rvb-sub-heading">Total</p>
+                     <p class="rvb-sub-heading">${{rentVsBuying.costOfBuying.total | number}}</p>
+                  </div>
+              </div>
+          </div>
+      </div>

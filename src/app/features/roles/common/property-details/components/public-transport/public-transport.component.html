@@ -1,0 +1,32 @@
+      <div class="card-6">
+
+      <div class="d-flex">
+          <div class="score"><p class="t-score"><span>Transit</span><span>Score</span></p></div>
+          <div class="score"><p class="w-score"><span>Walk</span><span>Score</span></p></div>
+          <div>
+          <ngx-charts-advanced-pie-chart
+            (window:resize)="onResize($event)"
+            [view]="publicTransport.view"
+            [scheme]="publicTransport.colorScheme"
+            [results]="publicTransport.transitScore"
+            [gradient]="false"
+            >
+          </ngx-charts-advanced-pie-chart></div>
+          <div>
+          <ngx-charts-advanced-pie-chart class="second-pie"
+            (window:resize)="onResize($event)"
+            [view]="publicTransport.view"
+            [scheme]="publicTransport.colorScheme"
+            [results]="publicTransport.walkScore"
+            [gradient]="false"
+            >
+          </ngx-charts-advanced-pie-chart></div>
+      </div>
+          <div class="d-flex percent justify-content-around">
+              <p>{{publicTransport.transitScore[0].value}}%</p>
+              <p>{{publicTransport.walkScore[0].value}}%</p>
+          </div>
+          <p class="transport-details">This area is very walkable. Most errands can be accomplished on foot. Transit is also available,
+             with a few nearby public transport options.
+          </p>
+      </div>

@@ -1,0 +1,72 @@
+
+<form [formGroup]="loanScenario">
+      <div class="card-4">
+        <div class="lsh-div">
+          <p class="text-nowrap ls-heading">Loan Scenario {{scenarioNumber}}</p>
+        </div>
+        <div class="ls-detail">
+            <div class="d-flex justify-content-between lsd-first-row">
+              <p class="text-nowrap">Ratios Housing</p>
+              <p>Debts</p>
+              <p class="text-nowrap">Qualify No</p>
+            </div>
+            <div class="d-flex mb2-custom justify-content-between">
+              <div class="form-input">
+                 <p class="text-nowrap">Purchase Price</p>
+                 <input formControlName="purchasePrice" class="form-control form-control-sm" type="text" placeholder="">
+
+              </div>
+              <div class="form-input">
+                  <p class="text-nowrap">Loan Amount</p>
+                  <input formControlName="loanAmount" class="form-control form-control-sm" type="text" placeholder="">
+              </div>
+
+            </div>
+
+            <div class="d-flex mb2-custom justify-content-between">
+              <div class="form-input">
+                 <p class="text-nowrap">Finance Amount</p>
+                 <input formControlName="financeAmount" class="form-control form-control-sm" type="text" placeholder="">
+
+              </div>
+              <div class="form-input">
+                  <p class="text-nowrap">Down Payment</p>
+                  <input formControlName="downPayment" class="form-control form-control-sm" type="text" placeholder="">
+              </div>
+
+            </div>
+
+
+            <div class="d-flex mb2-custom justify-content-between">
+              <div class="form-input">
+                 <p class="text-nowrap">Loan Rate</p>
+                 <input formControlName="loanRate" class="form-control form-control-sm" type="text" placeholder="">
+
+              </div>
+              <div class="form-input">
+                  <p class="text-nowrap">Loan Term</p>
+                  <input formControlName="loanTerm" class="form-control form-control-sm" type="text" placeholder="">
+              </div>
+
+            </div>
+            <div class="d-flex mb2-custom justify-content-between">
+              <div class="form-input">
+                 <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto" src="/assets/property-details/eye.svg"><p>View</p></div>
+                 <p class="text-nowrap">Monthly Payment</p>
+                 <input formControlName="monthlyPayment" class="form-control form-control-sm" type="text" placeholder="">
+
+              </div>
+              <div class="form-input">
+                  <p class="text-nowrap">Funds Needed</p>
+                   <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto" src="/assets/property-details/eye.svg"><p>View</p></div>
+                  <input formControlName="fundsNeeded" class="form-control form-control-sm" type="text" placeholder="">
+              </div>
+
+            </div>
+        </div>
+        <div class="letter">
+            <p class="text-nowrap text-center">Pre-Approval Letter</p>
+        </div>
+      </div>
+
+</form>

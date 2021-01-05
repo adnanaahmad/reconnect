@@ -1,0 +1,114 @@
+p{
+  font-family: 'Poppins';
+}
+h3{
+  font-family: 'Poppins';
+}
+.heading{
+  margin-bottom: 1vw;
+}
+.heading h3{
+  font-size: var(--heading);
+  color: var(--darkGray);
+}
+.button{
+  padding: .3vw 1.8vw .3vw 1.8vw;
+  border-radius: .5vw;
+  height: fit-content;
+  cursor: pointer;
+}
+.button p{
+  margin: 0;
+  color: var(--darkGray);
+  font-size: .9vw;
+  font-weight: 300;
+}
+.active p{
+  color: white;
+}
+.active{
+  background: var(--green);
+
+}
+.column-1{
+  margin-bottom: 1.5vw;
+}
+///////////////////////////////////////////////
+.card-1 {
+  background: white;
+  border-radius: .5vw;
+  padding: 1.8vw;
+  margin-bottom: 1.5vw;
+}
+.div-1{
+  //height: 17.3vw;;
+  margin-right: 2vw;
+}
+.profile-img{
+  width: 13.5vw;
+  height: 10vw;
+  border-radius: .5vw;
+  object-fit: cover;
+  margin-bottom: .5vw;
+}
+.respond-btn{
+  cursor: pointer;
+  width: 100%;
+  font-size: .75vw;
+  font-weight: 300;
+  border-radius: .4vw;
+  background: var(--green);
+  color: white;
+  padding: .4vw 1.5vw .4vw 1.5vw;
+}
+.respond-btn p{
+  margin-bottom: 0;
+}
+.name{
+  font-weight: 500;
+  font-size: 1.1vw;
+  color: var(--darkGray);
+  margin-bottom: .5vw;
+}
+.div-2 img{
+  width: 1.8vw;
+  height: 1.8vw;
+  background: var(--extraLightGray);
+  padding: .5vw;
+  border-radius: .3vw;
+}
+
+.facebook{
+  margin-right: .7vw;
+}
+.instagram{
+  margin-right: .7vw;
+}
+.div-2{
+  margin-bottom: 1vw;
+}
+
+
+.subject-img{
+  width: 28vw;
+  height: 17.2vw;
+  object-fit: cover;
+  border-radius: .5vw;
+  margin-right: 2vw;
+}
+.subject-property{
+  width: 100%;
+}
+
+//:host ::ng-deep .detail-left p{
+//  margin-bottom: .7vw !important;
+//}
+//:host ::ng-deep .detail-left p:last-child{
+//  margin-bottom: 0 !important;
+//}
+//:host ::ng-deep .detail-right p{
+//  margin-bottom: .7vw !important;
+//}
+//:host ::ng-deep .detail-right p:last-child{
+//  margin-bottom: 0 !important;
+//}

@@ -1,0 +1,139 @@
+.card-6{
+  border-radius: .5vw;
+  background: white;
+  margin-bottom: 2vw;
+  position: relative;
+}
+.transport-details{
+  font-size: .7vw;
+  color: var(--darkGray);
+  font-weight: 300;
+  margin-bottom: 0;
+  padding: 1.5vw;
+}
+
+:host ::ng-deep .advanced-pie-legend-wrapper{
+  display: none;
+}
+
+:host ::ng-deep .card-6 ngx-charts-advanced-pie-chart div:first-child{
+  width: 0 !important;
+  height: 7vw !important;
+}
+:host ::ng-deep [class$='-1']{
+  transform: translate(7vw, 2vw);
+}
+:host ::ng-deep [class$='-0']{
+  transform: translate(2.5vw, 2vw);
+}
+
+:host ::ng-deep [class^='ngx-charts ng-tns-c']{
+  width: 1vw;
+  height: 1vw;
+}
+:host ::ng-deep .advanced-pie.chart{
+  height: 0 !important;
+}
+.score p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+  font-size: .7vw;
+  font-weight: 500;
+}
+.score p span{
+  display: block;
+}
+.t-score{
+  position: absolute;
+  left: 20%;
+  top: 22%;
+}
+.w-score{
+  position: absolute;
+  left: 67%;
+  top: 22%;
+}
+.percent p{
+  margin-bottom: 0;
+  font-size: 1.1vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-top: .5vw;
+}
+
+.percent p:first-child{
+  margin-left: .5vw;
+}
+
+
+
+
+
+
+@media only screen and (max-width: 2560px) {
+  :host ::ng-deep [class$='-1']{
+    transform: translate(7.3vw, 2vw);
+  }
+  :host ::ng-deep [class$='-0']{
+    transform: translate(2.6vw, 2vw);
+  }
+}
+
+@media only screen and (max-width: 1867px) {
+  :host ::ng-deep [class$='-1']{
+    transform: translate(7vw, 2vw);
+  }
+  :host ::ng-deep [class$='-0']{
+    transform: translate(2.5vw, 2vw);
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  :host ::ng-deep [class$='-1']{
+    transform: translate(7.1vw, 2.2vw);
+  }
+  :host ::ng-deep [class$='-0']{
+    transform: translate(2.5vw, 2.2vw);
+  }
+  .t-score{
+    left: 20.5%;
+  }
+  .w-score{
+    left: 68.5%;
+  }
+  .percent p:first-child{
+    margin-left: 1vw;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    :host ::ng-deep [class$='-1']{
+      transform: translate(6.3vw, 2vw) scale(1.2);
+    }
+    :host ::ng-deep [class$='-0']{
+      transform: translate(2.3vw, 2vw) scale(1.2);
+    }
+    .t-score{
+      left: 20%;
+    }
+    .w-score{
+      left: 68%;
+    }
+    .percent p:last-child{
+      margin-right: .5vw;
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  :host ::ng-deep [class$='-1'] {
+    transform: translate(5.8vw, 2vw) scale(1.2);
+  }
+  :host ::ng-deep [class$='-0'] {
+    transform: translate(2.1vw, 2vw) scale(1.2);
+  }
+}
+
+
+p{
+  font-family: 'Poppins';
+}
+

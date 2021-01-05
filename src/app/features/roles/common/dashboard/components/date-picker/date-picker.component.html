@@ -1,0 +1,41 @@
+
+
+<div class="d-flex date">
+    <div class="">
+       <input style="display: none" name="datepicker"
+              class=""
+              ngbDatepicker
+              #datepicker="ngbDatepicker"
+              [autoClose]="'outside'"
+              (dateSelect)="onDateSelection($event)"
+              [displayMonths]="1"
+              [dayTemplate]="t"
+              outsideDays="hidden"
+              [startDate]="fromDate!"
+              [footerTemplate]="footerTemplate"
+              [placement]="'bottom'"
+              [positionTarget]="buttonEl"
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+              tabindex="-1">
+       <ng-template #t let-date let-focused="focused">
+         <span class="custom-day"
+               [class.focused]="focused"
+               [class.range]="isRange(date)"
+               [class.faded]="isHovered(date) || isInside(date)"
+               (mouseenter)="hoveredDate = date"
+               (mouseleave)="hoveredDate = null">
+           {{ date.day }}
+         </span>
+       </ng-template>
+       <ng-template #footerTemplate>
+         <button class="btn btn-sm close-button float-left" (click)="datepicker.toggle()"><p>Close</p></button>
+         <button class="btn btn-sm save-button float-right" (click)="save(); datepicker.toggle()" [disabled]="!toDate" ><p>Save</p></button>
+       </ng-template>
+    </div>
+    <img #buttonEl class="align-self-center calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="datepicker.toggle()">
+     <div style="margin-right: 1vw; width: 5vw; white-space: nowrap;  hyphens: none;"><p>{{formatter.format(fromDate) | date:'d MMM yyyy'}}</p></div>
+     <div style="margin-right: 1vw"><p>-</p></div>
+    <div style="width: 5vw" *ngIf="!formatter.format(toDate)"><p>{{'yy-mm-dd'}}</p></div>
+     <div *ngIf="formatter.format(toDate)" style="width: 5vw; white-space: nowrap;  hyphens: none;"><p>{{formatter.format(toDate) | date:'d MMM yyyy'}}</p></div>
+</div>

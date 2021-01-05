@@ -1,0 +1,251 @@
+
+::ng-deep .fc-next-button.fc-button.fc-button-primary{
+  background: white;
+  color: var(--darkGray);
+  border:none;
+}
+::ng-deep .fc-prev-button.fc-button.fc-button-primary{
+  background: white;
+  color: var(--darkGray);
+  border: none;
+}
+::ng-deep .fc-next-button.fc-button.fc-button-primary:focus{
+  background: white !important;
+  color: var(--darkGray) !important;
+  box-shadow: none;
+}
+::ng-deep .fc-next-button.fc-button.fc-button-primary:enabled:hover{
+  background: white;
+  color: var(--darkGray);
+}
+::ng-deep .fc-prev-button.fc-button.fc-button-primary:focus{
+  background: white !important;
+  color: var(--darkGray) !important;
+  box-shadow: none;
+}
+::ng-deep .fc-prev-button.fc-button.fc-button-primary:enabled:hover{
+  background: white;
+  color: var(--darkGray);
+}
+::ng-deep .fc-today-button.fc-button.fc-button-primary{
+  background-color: #E7EDF8 !important;
+  border: none;
+  color: var(--lighGray) !important;
+  font-size: .8vw;
+  padding-left: 1.7vw;
+  padding-right: 1.7vw;
+  margin-right: 30vw;
+  margin-left: 1vw !important;
+}
+::ng-deep .fc-col-header-cell-cushion{
+  color: var(--lighGray)!important;
+}
+::ng-deep .fc-daygrid-day-number{
+  color:var(--darkGray) !important;
+}
+::ng-deep .fc-toolbar-title{
+  font-size: 1.5vw !important;
+  color: var(--darkGray);
+  margin-left: 1.9vw !important;
+}
+::ng-deep .draggable-element{
+  color: var(--darkGray);
+  cursor: pointer;
+  display: inline-flex;
+  background: transparent;
+  width: 100%;
+  margin-bottom: 1.2vw;
+}
+::ng-deep .color-icons{
+  padding: .5vw;
+  border-radius: .5em ;
+  height: 2vw;
+  width: 2vw;
+}
+//::ng-deep .color-icons img{
+//  height: 45%;
+//}
+::ng-deep full-calendar{
+  height: 41vw;
+}
+::ng-deep button.fc-today-button.fc-button.fc-button-primary{
+  margin-left: 0;
+}
+::ng-deep span.fc-icon.fc-icon-chevron-left{
+  font-size: 1.3vw !important;
+}
+::ng-deep span.fc-icon.fc-icon-chevron-right{
+  font-size: 1.3vw !important;
+}
+::ng-deep .calendar-card{
+  padding-top: 2vw;
+  border-bottom-right-radius: .5vw;
+  border-top-right-radius: .5vw;
+}
+::ng-deep h2.fc-toolbar-title{
+  width: 12vw;
+ // background: #F34949;
+}
+.heading{
+  margin-bottom: 2vw;
+}
+.heading h3{
+  color: var(--darkGray);
+  font-size: 1.5vw;
+}
+h6{
+  color: var(--darkGray);
+}
+.column-1{
+  padding-right: 0;
+}
+.column-2{
+  padding-left: 0;
+}
+.create-button-text p{
+  margin-bottom: 0;
+  color: var(--lighGray);
+  font-weight: 300;
+  font-size: .9vw;
+  //white-space: nowrap;
+}
+.create-button{
+  border: 1px solid var(--lighGray);
+  padding: .3vw;
+  border-radius: .5vw;
+  cursor: pointer;
+}
+.create-button p{
+  font-size: .8vw;
+}
+.plus-icon{
+  background: var(--green );
+  width: 2.2vw;
+  height: 2.2vw;
+  padding:.5vw;
+  border-radius: .4vw;
+  margin-right: .7vw;
+}
+.draggable-element-text{
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient:vertical;
+  margin-bottom: 0;
+  font-weight: 300;
+  margin-left: 1vw;
+  font-size: .8vw;
+}
+.card-1{
+  background: white;
+  padding: 2vw;
+  height: 100%;
+  border-bottom-left-radius: .5vw;
+  border-top-left-radius: .5vw;
+}
+.external-events{
+  height: 28vw;
+  overflow: scroll;
+}
+::ng-deep .calendar-card{
+  background: white;
+  height: 100%;
+}
+::ng-deep .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+  margin-bottom: 1.5vw !important;
+}
+::ng-deep .fc-daygrid-day-number{
+  font-size: .8vw;
+}
+::ng-deep .fc-col-header-cell-cushion{
+  font-size: .9vw;
+}
+
+@media only screen and (max-width: 1440px) {
+  ::ng-deep .fc-today-button.fc-button.fc-button-primary{
+    margin-right: 28vw;
+  }
+  //.create-button-text p{
+  //  font-size: .7vw;
+  //}
+  //.draggable-element-text{
+  //  font-size: small;
+  //}
+}
+@media only screen and (max-width: 1024px) {
+  //::ng-deep .fc-today-button.fc-button.fc-button-primary{
+  //  margin-right: 17vw;
+  //}
+  .event-card{
+    padding-right: 10px;
+  }
+  //.create-button-text p{
+  //  font-size: .8vw;
+ // }
+}
+@media only screen and (max-width: 768px) {
+  //create-button-text p{
+  //  font-size: .9em !important;
+  //}
+  .column-1{
+    padding-right: 15px;
+  }
+  .column-2{
+    padding-left: 15px;
+  }
+  //.draggable-element-text{
+  //  font-size: .9em;
+  //}
+  .event-card{
+    padding-right: 32px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  //.create-button-text p{
+  //  font-size: x-small !important;
+  //}
+  //.draggable-element-text{
+  //  font-size: xx-small;
+  //}
+  ::ng-deep .fc-toolbar-title{
+    font-size: 1.1em !important;
+  }
+  ::ng-deep .fc-today-button.fc-button.fc-button-primary{
+    padding: 0em;
+  }
+  ::ng-deep .fc-next-button.fc-button.fc-button-primary{
+    padding: 0;
+  }
+  ::ng-deep .fc-prev-button.fc-button.fc-button-primary{
+    padding: 0;
+  }
+  ::ng-deep .fc-daygrid-day-number{
+    font-size: xx-small;
+  }
+  ::ng-deep .fc-col-header-cell-cushion{
+    font-size: x-small;
+  }
+}
+@media only screen and (max-width: 375px) {
+
+}
+
+@media only screen and (max-width: 320px) {
+  ::ng-deep .fc-toolbar-title{
+    padding: 0;
+    margin: 0;
+  }
+  ::ng-deep.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+    display: grid;
+  }
+  ::ng-deep .fc-col-header-cell-cushion{
+    font-size: .3em;
+  }
+  ::ng-deep .fc-prev-button.fc-button.fc-button-primary{
+    margin-left: 3em;
+  }
+}
+h6{
+  font-size: 1vw;
+}

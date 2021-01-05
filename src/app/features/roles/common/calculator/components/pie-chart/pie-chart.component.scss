@@ -1,0 +1,104 @@
+
+.card-4{
+  background: white;
+  border-radius: .5vw;
+  padding: 1vw 1.5vw 2vw 1.5vw;
+  position: relative;
+  margin-bottom: 2vw;
+}
+:host ::ng-deep .advanced-pie-legend-wrapper{
+  display: none;
+}
+:host ::ng-deep [class^='pie chart ng-tns-c']{
+  transform: translate(9.4vw,7vw);
+}
+:host ::ng-deep [class^='ngx-charts ng-tns-c'] {
+  width: 1vw;
+  height: 1vw;
+}
+:host ::ng-deep .card-4 ngx-charts-advanced-pie-chart div:first-child{
+  width: 0 !important;
+  height: 15vw !important;
+}
+
+.total-text p{
+  margin-bottom: 0;
+  font-size: .7vw;
+  font-weight: 300;
+  text-align: center;
+}
+.total-text{
+  position: absolute;
+  top: 23%;
+  left: 40%;
+}
+
+
+//@media only screen and (max-width: 2560px) {
+//  :host ::ng-deep .pie.chart.ng-tns-c109-2{
+//    transform: translate(9.5vw,5vw);
+//  }
+//}
+//
+//@media only screen and (max-width: 1440px) {
+//  :host ::ng-deep .pie.chart.ng-tns-c109-2{
+//    transform: translate(9.5vw,5vw);
+//  }
+//}
+
+@media only screen and (max-width: 1024px) {
+  //:host ::ng-deep .pie.chart.ng-tns-c109-2{
+  //  transform: translate(9.5vw,4.5vw);
+  //}
+  .total-text{
+    top: 24%;
+    left: 41%;
+  }
+}
+
+@media only screen and (max-width: 786px) {
+  :host ::ng-deep [class^='pie chart ng-tns-c']{
+    transform: translate(9.7vw,6.5vw) scale(1.2);
+  }
+  .total-text{
+    top: 20%;
+    left: 40%;
+  }
+}
+
+.square {
+  height: 1.3vw;
+  width: 1.3vw;
+  border-radius: .2vw;
+  margin-right: .4vw;
+}
+.legend p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+  font-size: .65vw;
+  font-weight: 300;
+}
+.legend{
+  margin-bottom: .5vw;
+}
+.yellow{
+  background: var(--legendYellow);
+}
+.red{
+  background: var(--legendRed);
+}
+.green{
+  background: var(--green);
+}
+.purple{
+  background: var(--legendPurple);
+}
+.gray{
+  background: var(--lighGray);
+}
+.total-payment{
+  padding-top: 1vw;
+  margin-top: 1vw;
+  border-top: 1px solid var(--mediumLightGray);
+}
+

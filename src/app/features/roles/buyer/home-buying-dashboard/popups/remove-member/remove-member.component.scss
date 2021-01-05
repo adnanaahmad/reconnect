@@ -1,0 +1,51 @@
+.parent{
+  padding: 2vw;
+}
+.cross{
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  font-weight: 300;
+  color: var(--darkGray);
+  cursor: default;
+}
+.heading{
+  margin-bottom: 2vw;
+  font-size: .85vw;
+  font-weight: 400;
+  color: var(--darkGray);
+}
+.member-img{
+  height: 3vw;
+  width: 3vw;
+  object-fit: cover;
+  border-radius: .5vw;
+  margin-right: .8vw;
+}
+.name{
+  margin-bottom: .1vw;
+  font-weight: 500;
+  font-size: .64vw;
+  color: var(--darkGray);
+}
+.role{
+  margin-bottom: 0;
+  font-weight: 300;
+  font-size: .65vw;
+  color: var(--darkGray);
+}
+.member{
+  margin-bottom: 1vw;
+}
+.txt{
+  color: var(--darkGray);
+  font-size: .7vw;
+  font-weight: 300;
+  margin-bottom: 1.5vw;
+}
+.button{
+  font-size: .75vw;
+  font-weight: 300;
+  padding: .3vw 1.5vw .3vw 1.5vw;
+  border-radius: .3vw;
+}

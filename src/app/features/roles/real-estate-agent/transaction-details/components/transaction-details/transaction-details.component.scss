@@ -1,0 +1,114 @@
+.heading-text p{
+  color: var(--green);
+  margin-bottom: 0;
+  font-size: 1vw;
+}
+.arrow{
+  width: 1vw;
+  height: 1vw;
+  margin-right: .5vw;
+}
+.heading{
+  margin-bottom: 2vw;
+}
+.first-column{
+  padding-top: .35vw;
+}
+.child-1{
+  margin-bottom: 3vw;
+}
+.lineage-button{
+  padding: .2vw .8vw .2vw .8vw;
+  font-size: .55vw;
+  border-radius: .3vw;
+}
+.heading-sub{
+  margin-bottom: 0;
+  font-size: 0.9vw;
+  color: var(--darkGray);
+  font-weight: 600;
+}
+.assign-lead{
+  color: var(--green);
+  font-size: .8vw;
+  margin-bottom: 0.5vw;
+}
+.lead-info img{
+  height: 2.4vw;
+  width: 2.4vw;
+  object-fit: cover;
+  border-radius: .3vw;
+  margin-right: .7vw;
+}
+.lead-info p{
+  margin-bottom: 0;
+  font-size: .85vw;
+  font-weight: 300;
+  color: var(--darkGray);
+}
+.lead-info{
+  margin-bottom: .5vw;
+}
+.split-text{
+  font-size: .75vw;
+  color: var(--darkGray);
+  margin-bottom: 0;
+  margin-right: 2vw;
+}
+.percent p{
+    margin-bottom: 0;
+    font-size: .55vw;
+}
+.percent p:first-child{
+  background: var(--lighGray);
+  padding: .25vw .75vw .25vw .75vw;
+  border-top-left-radius: .3vw;
+  border-bottom-left-radius: .3vw;
+}
+.percent p:last-child{
+  background: var(--green);
+  padding: .25vw .75vw .25vw .75vw;
+  color: white;
+  border-top-right-radius: .3vw;
+  border-bottom-right-radius: .3vw;
+}
+.mls{
+  font-size: .77vw;
+  padding: .4vw 1.2vw .4vw 1.2vw;
+  border-radius: .5vw;
+}
+.subject{
+  margin-bottom: .7vw;
+}
+.bottom{
+  margin-bottom: 2vw;
+}
+.transaction{
+  margin-bottom: 3vw;
+}
+.second-column{
+  padding-left: 3vw;
+}
+.details{
+  background: white;
+  padding: 1.5vw;
+  border-radius: .5vw;
+}
+.div-1 p{
+  font-size: .8vw;
+  color: var(--darkGray);
+  margin-bottom: .5vw;
+  //font-weight: 500;
+}
+.div-1{
+  margin-right: 1vw;
+}
+.div-2 p{
+  font-size: .8vw;
+  color: var(--darkGray);
+  margin-bottom: .5vw;
+  font-weight: 300;
+}
+.details-1{
+  padding-left: 3vw;
+}

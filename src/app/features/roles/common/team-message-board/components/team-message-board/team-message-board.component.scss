@@ -1,0 +1,325 @@
+.first-column{
+  padding-right: 0;
+//  background: lightblue;
+}
+.second-column{
+//  background: peachpuff;
+}
+.heading{
+  margin-bottom: 2vw;
+}
+.heading h3{
+  color: var(--darkGray);
+  font-size: 1.5vw;
+}
+.card-1{
+  background: white;
+  padding: 1.1vw;
+  //width: 100%;
+  border-radius: .6vw;
+}
+.user-display{
+  width: 3.9vw;
+  height: 3.9vw;
+  object-fit: cover;
+  border-radius: .5vw;
+}
+.card-1 i{
+  float: right;
+}
+.card-1 p{
+  margin: 0;
+}
+.card-2{
+  background: white;
+  padding: 1.1vw;
+  border-radius: .6vw;
+  //height: 34.5vw;
+  //overflow: scroll;
+}
+.recent-chat-scroll{
+  height: 27.5vw;
+  overflow: scroll;
+}
+.card-3{
+  background: white;
+  padding: 2vw 2vw 2vw 2vw;
+  border-radius: .6vw;
+  height: 100%;
+}
+.friends{
+  border: 1px solid var(--extraLightGray);
+  padding: .5vw;
+  border-radius: .5vw;
+  margin-top: 1vw;
+  cursor: pointer;
+}
+.active{
+  background: var(--extraLightGray);
+}
+.friend-image{
+  height: 3.4vw;
+  width: 3.8vw;
+  object-fit: cover;
+  border-radius: .5vw;
+}
+.friend-name{
+  margin: 0;
+  font-size: .7vw;
+  font-weight: bold;
+  color: var(--darkGray);
+  margin-right: .5vw;
+}
+.friend-role{
+  margin: 0;
+  font-size: .6vw;
+  font-weight: 300;
+  color: var(--darkGray);
+}
+.friend-text{
+  width: 70%;
+}
+.friend-image-div{
+  //width: 30%;
+  margin-right: .9vw;
+}
+.recent-chat p{
+  font-size: .8vw;
+  //margin-bottom: 0.9vw;
+  color: var(--darkGray);
+  font-weight: 200;
+}
+.create-chat-group{
+  font-size: .9vw;
+  margin: 0;
+  margin-bottom: .9vw;
+  color: var(--darkGray);
+}
+.user-detail{
+  color: var(--darkGray);
+  width: 60%;
+}
+.user-name{
+  color: var(--darkGray);
+  font-weight: bold;
+  font-size: .9vw;
+}
+.user-role{
+  color: var(--darkGray);
+  font-weight: 200;
+  font-size: .9vw;
+}
+.user-status{
+  font-size: .7vw;
+  color: var(--green);
+  margin-right: .5vw !important;
+}
+.user-display-div{
+  margin-right: .8vw;
+}
+.current-friend-image{
+  height: 3vw;
+  width: 3vw;
+  object-fit: cover;
+  border-radius: .5vw;
+}
+.current-friend-image-div{
+  padding: 0;
+  margin-right: 1vw;
+}
+.current-friend-name{
+  margin: 0;
+  font-size: .9vw;
+  font-weight: bold;
+  color: var(--darkGray);
+}
+.current-friend-status{
+  margin: 0;
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 200;
+  margin-right: .5vw;
+}
+.current-friend-text{
+  //width: 78%;
+}
+.delete-icon{
+  background-color: var(--red);
+  padding: .5vw;
+  width: 1.7vw;
+  border-radius: .45vw;
+  cursor: pointer;
+}
+.search-icon{
+  background-color: var(--green);
+  padding: .5vw;
+  margin-right: .7vw;
+  width: 2vw;
+  border-radius: .5vw;
+}
+.current-friend{
+  border-bottom: 1px solid var(--extraLightGray);
+  padding-bottom: 1vw;
+}
+.chat-box{
+  background-color: white;
+  padding-top: 2vw;
+  overflow: scroll;
+  height: 30.5vw;
+}
+.receive{
+  background-color: var(--mediumLightGray);
+  padding: 1vw;
+  color: var(--darkGray);
+  font-size: .7vw;
+  border-radius: .5vw;
+
+}
+.send{
+  background-color: var(--extraLightGray);
+  padding: 1vw;
+  color: var(--darkGray);
+  font-size: .7vw;
+  border-radius: .5vw;
+}
+.input-box{
+  width: -webkit-fill-available;
+  margin-right: .4vw;
+}
+.input-box textarea{
+}
+.send-button button{
+  border: none;
+  padding-left: 1.8vw;
+  padding-right: 1.8vw;
+  border-radius: .5vw;
+}
+.send-button p{
+  margin:0;
+  font-size: .9vw;
+  font-weight: 200;
+}
+.emoji{
+  border-radius: .5vw;
+  background-color: var(--extraLightGray);
+  padding: .6vw;
+  margin-right: .7vw;
+  width: 2vw;
+  cursor: pointer;
+}
+.attachment{
+  border-radius: .5vw;
+  background-color: var(--extraLightGray);
+  padding: .6vw;
+  margin-right: .7vw;
+  width: 2vw;
+}
+.send-msg{
+  margin-top: 1vw;
+}
+
+.add-group{
+  background-color: var(--green);
+  padding: .45vw;
+  width: 1.8vw;
+  height: 1.8vw;
+  border-radius: .5vw;
+}
+.envelope{
+  background-color: var(--green);
+  padding: .45vw;
+  width: 1.8vw;
+  border-radius: .4vw;
+  height: 1.8vw;
+}
+.notification{
+  width: 1.8vw;
+  height: 1.8vw;
+  padding: .4vw;
+}
+textarea{
+  font-size: .8vw;
+  border-radius: .5vw;
+}
+.circle {
+  background: var(--green);
+  border-radius: 50%;
+  width: .55vw;
+  height: .5vw;
+  display: block;
+}
+.circle-2 {
+  background: var(--green);
+  border-radius: 50%;
+  width: .6vw;
+  height: .6vw;
+  display: block;
+  margin-top: .2vw;
+}
+.btn-success.disabled, .btn-success:disabled{
+  background: var(--green);
+}
+::ng-deep .emoji-mart-preview{
+  display: none;
+}
+
+::ng-deep .emoji-mart{
+  width: 16vw !important;
+  z-index: 2;
+}
+::ng-deep .emoji-mart-scroll {
+ height: 14vw;
+}
+
+::ng-deep .emoji-mart-category-label span{
+  font-size:.65vw;
+}
+::ng-deep .emoji-mart-anchors svg, .emoji-mart-anchors img{
+  height: 1.7vw;
+  width: .7vw;
+}
+::ng-deep .emoji-mart-category .emoji-mart-emoji span {
+  width: 1vw !important;
+  height: 1vw !important;
+}
+::ng-deep .emoji-mart-search input{
+  font-size: .7vw;
+}
+::ng-deep .emoji-mart-search-icon {
+  display: none;
+}
+
+::ng-deep .emoji-mart-anchor {
+  padding: .5vw .5vw;
+}
+
+::ng-deep .emoji-mart-search {
+  margin-top: .6vw;
+  padding: 0 0.6vw;
+}
+
+@media only screen and (max-width: 1440px) {
+  ::ng-deep section.emoji-mart{
+    right: 3.1vw !important;
+    bottom: 4.9vw !important;
+  }
+}
+
+@media only screen and (max-width: 1328px) {
+  ::ng-deep section.emoji-mart{
+    right: 3.4vw !important;
+    bottom: 5vw !important;
+  }
+}
+@media only screen and (max-width: 1245px) {
+  ::ng-deep section.emoji-mart{
+    right: 3.4vw !important;
+    bottom: 5.5vw !important;
+  }
+}
+@media only screen and (max-width: 1245px) {
+  ::ng-deep section.emoji-mart{
+    right: 3.4vw !important;
+    bottom: 5.9vw !important;
+  }
+}

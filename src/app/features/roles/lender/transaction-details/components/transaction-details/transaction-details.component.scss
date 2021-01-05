@@ -1,0 +1,111 @@
+.heading-text p{
+  margin-bottom: 0;
+  color: var(--green);
+  font-size: 1vw;
+}
+.arrow{
+  width: 1vw;
+  height: 1vw;
+  margin-right: .5vw;
+}
+.heading{
+  margin-bottom: 1vw;
+  cursor: default;
+}
+.first-row{
+  margin-bottom: 2vw;
+}
+.first-row div.col-7{
+  padding-top: .35vw;
+}
+.child-1{
+  //padding: 1.4vw 1.5vw 1vw 1.5vw;
+  margin-bottom: 3.5vw;
+}
+
+.div-1{
+  //margin-bottom: 1vw;
+}
+
+.save-button{
+  color: white;
+  background: var(--lighGray);
+  font-size: .7vw;
+  padding: .5vw 1.5vw .5vw 1.5vw;
+  border: none;
+  margin-bottom: .8vw;
+  border-radius: .5vw;
+}
+.save-button:active{
+  background: var(--darkGray);
+}
+.lineage-button{
+  border: none;
+  font-size: .7vw;
+  padding: .5vw 1.5vw .5vw 1.5vw;
+  border-radius: .5vw;
+}
+
+.heading{
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 600;
+  margin-bottom: 2vw;
+}
+
+.second-row div.col-6{
+  margin-bottom: 2vw;
+}
+.bottom{
+  margin-bottom: 1vw;
+}
+
+.user-finance{
+  background: white;
+  padding: 2vw;
+  border-radius: .5vw;
+  margin-bottom: 2vw;
+}
+.user-finance div.form-group{
+  margin-bottom: 0;
+}
+.user-finance div.form-group input{
+  border-radius: .5vw;
+  font-size: .9vw;
+  height: 2.2vw;
+  width: 11vw;
+}
+.user-finance p{
+  margin-bottom: 0;
+  margin-right: 1vw;
+  color: var(--lighGray);
+  font-size: .8vw;
+}
+
+.b-details{
+ // background: lightgrey;
+ // padding: 2vw;
+}
+.details p{
+  margin-bottom: 0;
+  font-size: .8vw;
+}
+.b-space{
+  margin-bottom: 2vw;
+}
+.details{
+  padding: 2.5vw;
+  background: white;
+  border-radius: .5vw;
+}
+.b-text p:first-child{
+  color: var(--lighGray);
+  //margin-right: .5vw;
+}
+.b-text p:last-child{
+  color: var(--darkGray);
+}
+
+.second-column{
+  padding-left: 3vw;
+}

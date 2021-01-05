@@ -1,0 +1,36 @@
+<div [formGroup]="transaction.finance">
+<div class="transaction" formGroupName="transactionProcess">
+    <div class="d-flex">
+       <div class="status" >
+           <input formControlName="application" type="checkbox" id="checkbox1">
+           <label for="checkbox1"><img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-active': transaction.finance.getRawValue().transactionProcess.application}"></label>
+           <p>Application</p>
+       </div>
+       <div class="status" >
+           <input formControlName="preApproved" type="checkbox" id="checkbox2">
+           <label for="checkbox2"><img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-active': transaction.finance.getRawValue().transactionProcess.preApproved}"></label>
+           <p class="text-nowrap">Pre-Approved</p>
+       </div>
+       <div class="status">
+           <input formControlName="acceptedOffer" type="checkbox" id="checkbox3">
+           <label for="checkbox3"><img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-active': transaction.finance.getRawValue().transactionProcess.acceptedOffer}"></label>
+           <p class="text-nowrap">Accepted Offer</p>
+       </div>
+       <div class="status" >
+           <input formControlName="underwriting" type="checkbox" id="checkbox4">
+           <label for="checkbox4"><img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-active': transaction.finance.getRawValue().transactionProcess.underwriting}"> </label>
+           <p>Underwriting</p>
+       </div>
+       <div class="status" >
+           <input formControlName="approvedWithConditions" type="checkbox" id="checkbox5">
+           <label for="checkbox5"><img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-active': transaction.finance.getRawValue().transactionProcess.approvedWithConditions}"></label>
+           <p class="text-nowrap">Approved with</p><p> conditions</p>
+       </div>
+       <div class="status" >
+           <input formControlName="clearedToClose" type="checkbox" id="checkbox6">
+           <label for="checkbox6"><img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-active': transaction.finance.getRawValue().transactionProcess.clearedToClose}"></label>
+           <p class="text-nowrap">Cleared to</p><p> close</p>
+       </div>
+     </div>
+ </div>
+</div>

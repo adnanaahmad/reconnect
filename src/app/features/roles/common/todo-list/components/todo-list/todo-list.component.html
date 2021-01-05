@@ -1,0 +1,69 @@
+<div class="heading">
+  <h3>To do list</h3>
+</div>
+
+<div>
+  <div class="row" >
+    <div class="col-9">
+       <div class="d-flex justify-content-end first-row">
+           <p class="">Today<p>
+           <img class="calendar" src="/assets/dashboard/Calendar.svg">
+           <p>22 June 2019</p>
+        </div>
+
+        <div class="card-1 d-flex" [ngClass]="{'active-card': todo.tags.done}" *ngFor="let todo of todoList">
+          <div class="d-flex align-items-start">
+            <label class="container">
+              <input [(ngModel)]="todo.tags.done" type="checkbox"  [checked]="todo.tags.done">
+              <img class="checkmark" src="/assets/loan-details/tick.svg">
+            </label>
+          </div>
+          <div class="todo">
+            <p class="title">{{todo.title}}</p>
+            <div class="row" >
+              <div class="col-10">
+               <p class="description">{{todo.description}}</p>
+              </div>
+            </div>
+            <div class="d-flex">
+                <div *ngIf="todo.tags.all" class="filter" [ngClass]="{'active-filter': todo.tags.done}"><img src="/assets/todo/all.svg"></div>
+                <div *ngIf="todo.tags.priority" class="filter flag" [ngClass]="{'active-filter': todo.tags.done}"><img src="/assets/todo/flag.svg"></div>
+                <div *ngIf="todo.tags.starred" class="filter star" [ngClass]="{'active-filter': todo.tags.done}"><img src="/assets/todo/favorites.svg"></div>
+                <div *ngIf="todo.tags.deleted" class="filter bin" [ngClass]="{'active-filter': todo.tags.done}"><img src="/assets/todo/trash.svg"></div>
+                <div *ngIf="todo.tags.done" class="done d-flex align-items-start"><img src="/assets/todo/checked.svg"></div>
+
+            </div>
+          </div>
+          <div class="ml-auto">
+                <p class="button1 text-center">Edit</p>
+                <p class="button2" >Delete</p>
+          </div>
+        </div>
+
+    </div>
+
+    <div class="col-3">
+        <div class="">
+            <p class="filter-heading">Filters</p>
+            <div class="card-2">
+                <div class="d-flex filter"><img src="/assets/todo/all.svg"><p class="align-self-center">All</p></div>
+                <div class="d-flex filter flag"><img src="/assets/todo/flag.svg"><p class="align-self-center">Priority</p></div>
+                <div class="d-flex filter star"><img src="/assets/todo/favorites.svg"><p class="align-self-center">Starred</p></div>
+                <div class="d-flex filter"><img src="/assets/todo/checked.svg"><p class="align-self-center">Done</p></div>
+                <div class="d-flex filter bin"><img src="/assets/todo/trash.svg"><p class="align-self-center">Deleted</p></div>
+            </div>
+        </div>
+        <div class="">
+              <p class="filter-heading">Tags</p>
+              <div class="card-3">
+                  <p>All</p>
+                  <p>Priority</p>
+                  <p>Starred</p>
+                  <p>Done</p>
+                  <p>Deleted</p>
+              </div>
+        </div>
+
+    </div>
+  </div>
+</div>

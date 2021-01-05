@@ -1,0 +1,17 @@
+
+<div class="parent">
+  <p (click)="modal.dismiss('cancel')" class="cross">X</p>
+  <p class="heading">Remove Member</p>
+  <div class="d-flex member">
+    <img class="member-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkqkWLzMbf_6cUuaxj9rAaJ61f3ntPBoto9g&usqp=CAU">
+    <div class="align-self-center">
+        <p class="name">Rafael Nadal</p>
+        <p class="role">Real Estate Agent</p>
+    </div>
+  </div>
+  <p class="txt">This member will be removed from your team, are sure?</p>
+  <div class="d-flex justify-content-between">
+    <button  (click)="modal.close('ok')" class="btn btn-success button">Continue</button>
+    <button  (click)="modal.dismiss('cancel')" class="btn btn-danger button">Cancel</button>
+  </div>
+</div>

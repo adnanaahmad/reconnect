@@ -1,0 +1,58 @@
+.parent{
+  // padding: 0 1.5vw;
+  background: white;
+  border-radius: .5vw;
+  height: 100%;
+}
+.parent label{
+  margin-bottom: 0;
+}
+.parent p{
+  margin-bottom: 0;
+}
+.loan-type{
+  padding: 1.5vw 1.5vw;
+  border-bottom: 1px solid var(--mediumLightGray);
+}
+.loan-type p{
+  color: var(--darkGray);
+  font-weight: 600;
+  font-size: .9vw;
+  // margin-bottom: 0;
+}
+.loan-form{
+  padding: 1.5vw 1.5vw;
+}
+.loan-heading{
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 500;
+  margin-bottom: .6vw;
+}
+.loan-label div.form-group{
+  //margin-right: 1vw;
+  //width: 11vw;
+  margin-bottom: 0;
+}
+.loan-label div.form-group input{
+  font-size: .9vw;
+  height: 2vw;
+}
+.form-group:last-child{
+  margin-right: 0;
+  //padding-right: 2vw;
+}
+.loan-label p{
+  font-size: .8vw;
+  color: var(--lighGray);
+  margin-bottom: .2vw;
+}
+::placeholder {
+  font-size: .8vw;
+  color: var(--lighGray);
+  //font-weight: 300;
+}
+
+.row-space{
+  margin-bottom: 1vw;
+}

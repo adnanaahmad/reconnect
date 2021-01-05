@@ -1,0 +1,90 @@
+
+<div class="heading d-flex justify-content-between">
+
+  <div class="heading-text d-flex ">
+      <img class="arrow align-self-center" src="/assets/transaction-details/arrow.png">
+      <p>Back</p>
+  </div>
+</div>
+<form [formGroup]="transactionDetails.finance" (ngSubmit)="onSubmit()">
+
+<div class="row first-row">
+  <div class="col-7">
+       <div class="child-1 d-flex justify-content-between" style="">
+
+            <app-buyer-info [transactionDetails]="transactionDetails"></app-buyer-info>
+            <div class="div-3 d-flex flex-column" style="">
+                <button class="btn btn-default save-button">Save all</button>
+                <button class="btn btn-success lineage-button">View Lineage</button>
+            </div>
+       </div>
+       <p class="heading">Transaction Process</p>
+       <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
+       <div class="b-details">
+          <p class="heading">Borrower details</p>
+          <div class="details">
+          <div class="row ">
+              <div class="col-6">
+                  <div class="row b-space b-text"><p class="col-4 text-nowrap">First Name:</p><p class="col-8">{{ transactionDetails.borrowerDetails.firstName }}</p></div>
+                  <div class="row b-space b-text"><p class="col-4">Phone:</p><p class="col-8">{{transactionDetails.borrowerDetails.phone}}</p></div>
+                  <div class="row b-text"><p class="col-4">Birthday:</p><p class="col-8">{{transactionDetails.borrowerDetails.birthday | date}}</p></div>
+              </div>
+              <div class="col-6">
+                  <div class="row b-space b-text"><p class="col-4 text-nowrap">Last Name:</p><p class="col-8">{{transactionDetails.borrowerDetails.lastName}}</p></div>
+                  <div class="row b-space b-text"><p class="col-4">Email:</p><p class="col-8">{{transactionDetails.borrowerDetails.email}}</p></div>
+                  <div class="row b-text"><p class="col-4 text-nowrap">Rent Amount:</p><p class="col-8">${{transactionDetails.borrowerDetails.rentAmount}}</p></div>
+              </div>
+          </div>
+        </div>
+       </div>
+  </div>
+  <div class="col-5 second-column">
+      <p class="heading bottom">Subject Property</p>
+      <app-subject-property [subjectProperty]="transactionDetails.subjectProperty"></app-subject-property>
+  </div>
+</div>
+
+<p class="heading"> Pre-Approval Details</p>
+<div class="d-flex user-finance justify-content-between" formGroupName="myFinance">
+  <div class="form-group d-flex">
+     <p class="align-self-center">Income:</p>
+    <input formControlName="income" type="" class="form-control" id="" placeholder="">
+  </div>
+  <div class="form-group d-flex">
+    <p class="align-self-center">Debt:</p>
+    <input formControlName="monthlyDebt" type="" class="form-control" id="" placeholder="">
+  </div>
+  <div class="form-group d-flex">
+    <p class="text-nowrap align-self-center">Funds / Assets:</p>
+    <input formControlName="funds" type="" class="form-control" id="" placeholder="">
+  </div>
+  <div class="form-group d-flex">
+    <p class="text-nowrap align-self-center">Seller Credit:</p>
+    <input formControlName="sellerCredit" type="" class="form-control" id="" placeholder="">
+  </div>
+</div>
+
+<p class="heading">Select Approved Loan Types</p>
+<app-loan-checkbox [loanDetails]="transactionDetails"></app-loan-checkbox>
+<div class="row second-row">
+    <div *ngIf="transactionDetails.finance.value.toggle.fha" class="col-6" style="">
+        <app-fha [finance]="transactionDetails.finance"></app-fha>
+    </div>
+
+    <div *ngIf="transactionDetails.finance.value.toggle.conventional" class="col-6" style="">
+        <app-conventional [finance]="transactionDetails.finance"></app-conventional>
+    </div>
+    <div *ngIf="transactionDetails.finance.value.toggle.homePossible" class="col-6" style="">
+        <app-home-possible [finance]="transactionDetails.finance"></app-home-possible>
+    </div>
+    <div *ngIf="transactionDetails.finance.value.toggle.homeReady" class="col-6" style="">
+        <app-home-ready [finance]="transactionDetails.finance"></app-home-ready>
+    </div>
+    <div *ngIf="transactionDetails.finance.value.toggle.va" class="col-6" style="">
+        <app-va [finance]="transactionDetails.finance"></app-va>
+    </div>
+     <div *ngIf="transactionDetails.finance.value.toggle.usda" class="col-6" style="">
+        <app-usda [finance]="transactionDetails.finance"></app-usda>
+    </div>
+</div>
+</form>

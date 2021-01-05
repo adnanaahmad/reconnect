@@ -1,0 +1,94 @@
+.team-card{
+  background: white;
+  border-radius: .5vw;
+  width: 7.75vw;
+  min-width: .5vw;
+  position: relative;
+  margin-bottom: 3vw;
+}
+.team-card:last-child{
+  margin-right: 0;
+}
+.team-card p{
+  margin-bottom: 0;
+}
+.team-img img{
+  height: 7.75vw;
+  width: 100%;
+  min-width: .5vw;
+  object-fit: cover;
+  border-top-right-radius: .5vw;
+  border-top-left-radius: .5vw;
+  transition: all 0.4s;
+}
+.name{
+  font-size: .65vw;
+  font-weight: 600;
+}
+.role{
+  font-size: .65vw;
+  font-weight: 200;
+}
+.team-info{
+  width: 100%;
+  position: absolute;
+  background: white;
+  padding: .5vw .5vw;
+  bottom: -2.9vw;
+  border-bottom-right-radius: .5vw;
+  border-bottom-left-radius: .5vw;
+}
+.hide{
+  display: none;
+}
+.call{
+  border-radius: 0;
+  width: .65vw;
+  height: .6vw;
+  filter: brightness(2);
+}
+.chat{
+  border-radius: 0;
+  width: 1vw;
+  height: .75vw;
+  filter: brightness(2);
+}
+.email{
+  border-radius: 0;
+  width: .8vw;
+  height: .7vw;
+  filter: brightness(2);
+}
+.team-card:hover{
+  cursor: pointer;
+}
+.team-card:hover .hide{
+  display: block;
+}
+.team-card:hover .team-info{
+  background: var(--green);
+}
+.team-card:hover .team-info p{
+  color: white;
+}
+.team-card:hover .info{
+  margin-bottom: .7vw;
+  transition: .4s;
+}
+.team-card:hover .team-img img{
+  transform: scale(1.1);
+  transition: .4s;
+}
+.info{
+  transition: .4s;
+}
+.team-img{
+  position: relative;
+  overflow: hidden;
+  border-top-left-radius: .5vw;
+  border-top-right-radius: .5vw;
+  transition: .4s;
+}
+p{
+  font-family: 'Poppins';
+}

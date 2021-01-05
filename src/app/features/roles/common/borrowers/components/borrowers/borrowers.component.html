@@ -1,0 +1,101 @@
+<div class="heading d-flex justify-content-between">
+  <h3>Borrowers</h3>
+</div>
+<div class="card-1">
+  <div class="row">
+    <div class="col-6 d-flex justify-content-between" style="background: transparent">
+        <div class="buttons align-self-center" *ngFor="let button of borrowers.buttons" [ngClass]="{'active': borrowers.selectedButton == button}" (click)="listClick(button)">
+            <p><nobr>{{ button }}</nobr></p>
+        </div>
+    </div>
+    <div class="col-6 d-flex flex-row-reverse" style="background: transparent">
+        <div class="align-self-center add-button"><p>Add new Borrower</p></div>
+        <div class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
+        <div class="align-self-center search-input"><input type="email" id="search" class="form-control form-control-lg" placeholder="Search Contacts"></div>
+    </div>
+
+  </div>
+
+</div>
+<div class="card-2 d-flex justify-content-end" style="background: transparent">
+    <div class="align-self-center sort-by"><p>Sort by:</p></div>
+    <select class="form-control" id="exampleFormControlSelect1">
+          <option>Closing Date</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+</div>
+<div class="card-3 d-flex" style="background: transparent" *ngFor="let borrower of borrowers.borrower">
+       <div class="card-4 " style="background: white">
+            <div class="div-1 d-flex">
+              <img [src]="borrower.photo" class="display-img">
+              <div class="info">
+                 <div class="name-div" [ngbTooltip]="borrower.fullName"> <p class="name">{{ borrower.fullName }}</p> </div>
+                  <div class="phone d-flex">
+                    <img class="align-self-center" src="/assets/directory-icons/call.svg">
+                    <p>{{ borrower.phoneNumber }}</p>
+                  </div>
+                  <div class="message d-flex">
+                      <img class="align-self-center" src="/assets/directory-icons/envelope.svg">
+                      <p>Ask a Question</p>
+                  </div>
+
+              </div>
+           </div>
+
+          <div class="div-2">
+              <p class="text-center">View Transaction Details</p>
+
+          </div>
+       </div>
+
+
+       <div class="card-5" style="background: white">
+            <div class="top d-flex">
+               <div class="d-flex address" style="background: transparent">
+                  <img src="/assets/borrower/pin.svg" class="pin">
+                  <p [ngbTooltip]="borrower.targetPropertyAddress" >{{ borrower.targetPropertyAddress }}</p>
+               </div>
+                <div class="date1" style="background: transparent">
+                    <div class="d-flex justify-content-end txt-div">
+                      <p class="txt">Closing Date:</p><p class="txt-date">{{ borrower.closingDate | date :  "dd-MM-y"}}</p>
+                    </div>
+                    <div class="d-flex">
+                        <p class="txt">Commitment Date:</p><p class="txt-date">{{ borrower.commitmentDate | date :  "dd-MM-y" }}</p>
+                    </div>
+                </div>
+                <div class="date-2" style="background-color: transparent;">
+                    <div class="d-flex txt-div"><p class="txt">Home Inspection Date:</p><p class="txt-date">{{ borrower.homeInspectionDate | date :  "dd-MM-y" }}</p></div>
+                    <div class="d-flex"><p class="txt">Purchase & Sales Date:</p><p class="txt-date">{{ borrower.purchaseSalesDate | date :  "dd-MM-y"}}</p></div>
+                </div>
+           </div>
+           <div class="bottom d-flex">
+              <div class="status" >
+                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.application === false}">
+                  <p>Application</p>
+              </div>
+              <div class="status" >
+                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.preApproved === false}">
+                  <p class="text-nowrap">Pre-Approved</p>
+              </div>
+              <div class="status" >
+                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.acceptedOffer === false}">
+                  <p class="text-nowrap">Accepted Offer</p>
+              </div>
+              <div class="status" >
+                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.underwriting === false}">
+                  <p>Underwriting</p>
+              </div>
+              <div class="status" >
+                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.approvedWithConditions === false}">
+                  <p class="text-nowrap">Approved with</p><p> conditions</p>
+              </div>
+              <div class="status" >
+                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.clearedToClose === false}">
+                  <p class="text-nowrap">Cleared to</p><p> close</p>
+              </div>
+           </div>
+       </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="heading row">
+  <div class="heading-text d-flex col-1">
+    <img class="arrow align-self-center" src="/assets/transaction-details/arrow.png">
+    <p>Back</p>
+  </div>
+    <div class="col-3 align-self-end heading-txt align-self-center" style="background: transparent">
+      <p class="heading-color text-center">Approved Loan Programs</p>
+    </div>
+    <div class="col-5 align-self-end d-flex align-self-center">
+      <div class="loan-program d-flex heading-txt">
+          <p >FHA</p>
+          <p >VA</p>
+          <p >USDA</p>
+          <p >Coventional</p>
+          <p  class="text-nowrap">Home Ready</p>
+          <p  class="text-nowrap">Home Possible</p>
+       </div>
+   </div>
+</div>
+
+  <div class="d-flex">
+    <div class="column-1">
+      <app-property-ad [propertyAd]="propertyDetails.propertyAd"></app-property-ad>
+      <app-real-estate-agent [realEstateAgent]="propertyDetails.realEstateAgent"></app-real-estate-agent>
+      <p class="details-heading pd-heading">Property Details</p>
+      <app-features [propertyDetails]="propertyDetails.propertyDetails"></app-features>
+    </div>
+    <div class="column-2">
+
+      <p class="text-nowrap pa-heading">Pre-Approval Scenarios</p>
+      <app-scenario [scenarioNumber]="1" [loanScenario]="propertyDetails.loanScenarioOne" ></app-scenario>
+      <app-scenario [scenarioNumber]="2"  [loanScenario]="propertyDetails.loanScenarioTwo"></app-scenario>
+      <p class="pa-heading">Virtual Tour</p>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(propertyDetails.virtualTour)" allowfullscreen></iframe>
+      </div>
+      <div class="d-flex justify-content-between">
+        <p class="pa-heading text-nowrap">Rent Vs Buying</p>
+        <button class="btn btn-success cal">Calculations</button>
+      </div>
+      <app-rent-vs-buying [rentVsBuying]="propertyDetails.rentVsBuying"></app-rent-vs-buying>
+      <p class="pa-heading text-nowrap">Public Transport</p>
+      <app-public-transport [publicTransport]="propertyDetails.publicTransport"></app-public-transport>
+    </div>
+  </div>

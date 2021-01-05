@@ -1,0 +1,201 @@
+.dropdown-item{
+  font-size: .8vw;
+  color: var(--darkGray);
+}
+.dropdown-item:active{
+  background: var(--green);
+  color: white;
+  outline: none;
+}
+.da-margin{
+  margin-left: .5vw;
+}
+.child-1{
+  padding: 1.5vw;
+  border-bottom: 1px solid var(--lighGray);
+}
+.clear-btn{
+  background: var(--extraLightGray);
+  font-size: .7vw;
+  color: var(--lighGray);
+  font-family: 'Poppins';
+  margin-right: 2vw;
+  padding: .4vw 1.5vw .4vw 1.5vw;
+  height: min-content;
+  border-radius: .3vw;
+}
+.apply-btn{
+  font-size: .7vw;
+  font-family: 'Poppins';
+  padding: .4vw 1.5vw .4vw 1.5vw;
+  height: min-content;
+  border-radius: .3vw;
+  font-weight: 300;
+}
+.filter-heading{
+  margin-bottom: 0;
+  color: var(--darkGray);
+  font-size:  1.1vw;
+  font-weight: 400;
+}
+.child-2{
+  padding: 2vw 3vw 2vw 3vw;
+}
+
+.heading-sub{
+  margin-bottom: 1.4vw;
+  font-size: .9vw;
+  color: var(--darkGray);
+}
+.filter-select select{
+  width: 8vw;
+  font-size: .7vw;
+  font-family: 'Poppins';
+  //font-weight: 300;
+  color: var(--lighGray);
+  border-radius: .3vw;
+  height: 1.8vw;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid var(--lighGray);
+}
+.price-select{
+  //margin-bottom: 3vw;
+}
+.container {
+  position: relative;
+  padding-left: 1.5vw;
+  cursor: pointer;
+  padding-right: 0;
+  margin: 0;
+  max-width: 8.5vw;
+  font-size: .75vw;
+  color: var(--lighGray);
+  font-family: 'Poppins';
+}
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.container p{
+  margin-bottom: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1vw;
+  width: 1vw;
+  background-color: white;
+  padding: .15vw;
+  border-radius: .2vw;
+  border: 1px solid var(--lighGray);
+}
+
+/* On mouse-over, add a grey background color */
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: var(--green);
+  border: none;
+}
+.container input:checked ~ .label-txt{
+  color: var(--green)
+}
+
+.space label.container{
+  margin-bottom: 1vw;
+}
+.space label.container:last-child{
+  margin-bottom: 0;
+}
+.bed-filter label{
+  margin-bottom: 0;
+}
+.bed-label{
+  margin-bottom: 0.1vw;
+  font-size: .6vw;
+  color: var(--lighGray);
+}
+.b-label{
+  margin-bottom: 0.5vw
+}
+.margin-b{
+  margin-bottom: 1vw;
+}
+.margin-b2{
+  margin-bottom: 3vw;
+}
+
+.listing-1{
+  padding-bottom: 2vw;
+  border-bottom: 1px solid var(--lighGray);
+  border-width: thin;
+}
+.listing-2{
+  padding-top: 2vw;
+}
+
+#search-filter{
+  height: 2.2vw;
+  border: 1px solid var(--lighGray);
+  font-size: .8vw;
+  color: var(--darkGray);
+  border-radius: .3vw;
+  margin-right: .5vw;
+  font-family: 'Poppins';
+}
+.add-btn{
+  background: var(--green);
+  width: 2.2vw;
+  height: 2.2vw;
+  border-radius:.35vw;
+  padding: .5vw;
+}
+.search-add{
+  margin-bottom: 1.5vw;
+}
+.chip p{
+  font-size: .65vw;
+  color: var(--darkGray);
+  margin-bottom: 0;
+}
+.chip p:first-child{
+  margin-right: .8vw;
+}
+.chip {
+  padding: .3vw .5vw .3vw .5vw;
+  background: var(--extraLightGray);
+  border-radius: .4vw;
+
+}
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5vw;
+}
+.grid div.chip{
+  margin-right: .5vw;
+  margin-bottom: .5vw;
+}
+.triangle{
+  width: 0;
+  height: 0;
+  border-left: 2vw solid transparent;
+  border-right:2vw solid transparent;
+  border-bottom: 2vw solid white;
+  position: absolute;
+  left: 80%;
+  top:-2.2%;
+}
+::placeholder{
+  font-family: 'Poppins';
+  font-size: .7vw;
+  color: var(--lighGray);
+}

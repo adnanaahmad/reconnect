@@ -1,0 +1,41 @@
+@import '~@ctrl/ngx-emoji-mart/picker';
+
+:root {
+  --green: #53E773;
+  --lightBlue: #F2F5FB;
+  --lighGray: #B3B7C0;
+  --darkGray: #424D63;
+  --extraLightGray: #E7EDF8;
+  --mediumLightGray: #DBE1EC;
+  --red: #F34949;
+  --heading: 1.4vw;
+  --lightBlueOne: #DDE5F580;
+  --lightBlueTwo:#DDE5F582;
+  --darkBlueOne: #A9B5C9;
+  --lightPink: rgb(225, 217, 255, .7);
+  --legendYellow: #E7C453;
+  --legendRed: #E75353;
+  --legendPurple: #7F53E7;
+  --piePurple:#9D7BEC;
+  --pieYellow:#FCCE38;
+  --pieBlue:#69CFFC;
+}/* You can add global styles to this file, and also import other style files */
+.btn-success{
+  background-color: var(--green);
+  border: none;
+}
+.btn-success:hover{
+  background-color: var(--green);
+}
+.btn-danger{
+  background: var(--red);
+}
+.btn-danger:hover{
+  background: var(--red);
+}
+//p {
+//  font-family: 'Poppins';
+//}
+//h3 {
+//  font-family: 'Poppins';
+//}

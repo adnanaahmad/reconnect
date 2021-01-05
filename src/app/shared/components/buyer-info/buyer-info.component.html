@@ -1,0 +1,23 @@
+<div  class="d-flex div-1">
+  <div>
+    <img [src] = "transactionDetails.user.image" class="display-img">
+  </div>
+  <div class="user-info">
+    <p ngbTooltip=""  class="name">{{ transactionDetails.user.name }}</p>
+    <div class="number d-flex">
+        <img src="/assets/directory-icons/call.svg" class="align-self-center">
+        <p class="">{{ transactionDetails.user.phone }}</p>
+
+    </div>
+    <div class="question d-flex">
+      <img src="/assets/directory-icons/envelope.svg" class="align-self-center">
+      <p class="align-self-center">abc@gmail.com</p>
+    </div>
+    <div class="d-flex div-2">
+         <a *ngIf="true" target="_blank" [href] = "transactionDetails.user.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class=""></a>
+         <a *ngIf="true" target="_blank" [href] = "transactionDetails.user.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class=""> </a>
+         <a *ngIf="true" target="_blank" [href] = "transactionDetails.user.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class=""> </a>
+    </div>
+    <p class="refer align-self-end">Referred By: {{ transactionDetails.user.referredBy }}</p>
+  </div>
+</div>

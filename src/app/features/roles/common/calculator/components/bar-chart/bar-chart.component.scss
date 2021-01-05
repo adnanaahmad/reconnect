@@ -1,0 +1,27 @@
+.card-2{
+  background: white;
+  padding: 1.5vw;
+  height: max-content;
+  margin-bottom: 2vw;
+  border-radius: .5vw;
+}
+:host ::ng-deep ul.legend-labels.horizontal-legend{
+  background: white;
+  display: flex;
+  justify-content: center;
+}
+:host ::ng-deep [class^='legend-label-text']{
+  color: var(--darkGray);
+  font-size: .8vw !important;
+  font-family: 'Poppins';
+}
+:host ::ng-deep text{
+  fill:  var(--lighGray);
+  font-size: .65vw !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  :host ::ng-deep [class^='ngx-charts ng-tns-c109-']{
+    transform:translateX(-1.3vw);
+  }
+}

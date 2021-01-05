@@ -1,0 +1,12 @@
+      <div class="card-3">
+        <p class="card-heading">{{propertyDetails.title}}</p>
+        <div class="row">
+          <div class="col-6 col-mb" *ngFor="let feature of propertyDetails.feature">
+              <p class="feature">{{feature.name}}</p>
+              <div class="d-flex detail" *ngFor="let detail of feature.details">
+                  <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">
+                  <p>{{detail}}</p>
+              </div>
+          </div>
+        </div>
+      </div>

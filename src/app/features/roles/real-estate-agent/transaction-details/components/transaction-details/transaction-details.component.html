@@ -1,0 +1,75 @@
+<div class="heading d-flex justify-content-between">
+  <div  class="d-flex heading-text">
+      <img class="arrow align-self-center" src="/assets/transaction-details/arrow.png">
+      <p>Back</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-7 first-column">
+       <div class="child-1 d-flex justify-content-between" style="">
+            <app-buyer-info [transactionDetails]="transactionDetails"></app-buyer-info>
+            <div class="align-self-end"><button class="btn btn-success lineage-button">View Lineage</button></div>
+            <div class="lead align-self-end">
+                 <p class="assign-lead">Assign lead</p>
+                 <div class="lead-info d-flex">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcssCmrKykaX2QK3Y-J6_IfIvq9nvGZ0YwHQ&usqp=CAU">
+                    <p class="align-self-center">James Kation</p>
+                 </div>
+                 <div class="d-flex">
+                     <p class="split-text align-self-center">Split:</p>
+                     <div class="d-flex percent">
+                          <p>50%</p>
+                          <p>50%</p>
+                     </div>
+                 </div>
+            </div>
+       </div>
+       <div class="transaction">
+          <p class="heading-sub bottom">Transaction Process</p>
+          <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
+       </div>
+       <div class="">
+          <p class="heading-sub bottom">Transaction Details</p>
+          <div class="details">
+               <div class="row">
+                  <div class="col-6 d-flex">
+                      <div class="div-1">
+                          <p class="text-nowrap">Purchase Price:</p>
+                          <p class="text-nowrap">Closing Date:</p>
+                          <p class="text-nowrap">Commitment Date:</p>
+                          <p class="text-nowrap">Commission Amount:</p>
+                          <p class="text-nowrap">Listing Agent:</p>
+                      </div>
+                      <div class="div-2">
+                          <p>${{transactionDetails.transactionDetails.purchasePrice}}</p>
+                          <p>{{transactionDetails.transactionDetails.closingDate | date: 'MM/dd/yyyy'}}</p>
+                          <p>{{transactionDetails.transactionDetails.commitmentDate | date: 'MM/dd/yyyy'}}</p>
+                          <p>{{transactionDetails.transactionDetails.commissionAmount}}</p>
+                          <p class="text-nowrap">{{transactionDetails.transactionDetails.listingAgent}}</p>
+                      </div>
+                  </div>
+                  <div class="col-6 d-flex details-1 justify-content-between">
+                    <div class="div-1">
+                          <p>Seller Credit:</p>
+                          <p>House Inspection Date:</p>
+                          <p>Purchase & Sales Date</p>
+                    </div>
+                    <div class="div-2">
+                          <p>{{transactionDetails.transactionDetails.sellerCredit}}</p>
+                          <p>{{transactionDetails.transactionDetails.homeInspectionDate | date: 'MM/dd/yyyy'}}</p>
+                          <p>{{transactionDetails.transactionDetails.purchaseSalesDate | date: 'MM/dd/yyyy'}}</p>
+                    </div>
+                  </div>
+               </div>
+          </div>
+       </div>
+  </div>
+  <div class="col-5 second-column">
+      <div class="d-flex justify-content-between subject">
+         <p class="heading-sub align-self-center">Subject Property</p>
+         <button class="btn btn-success mls">Add Property MLS#</button>
+      </div>
+      <app-subject-property [subjectProperty]="transactionDetails.subjectProperty"></app-subject-property>
+  </div>
+</div>

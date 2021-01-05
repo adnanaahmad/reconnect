@@ -1,0 +1,96 @@
+.card-1{
+  background-color: white;
+  padding: 2vw;
+  border-radius: 0.7em;
+}
+.card-1 h3{
+  color: var(--darkGray);
+  font-size: 1.6vw;
+}
+.card-1 h4{
+  font-weight: 300;
+  font-size: 1.35vw;
+  margin-bottom: .8vw;
+}
+.card-1 p{
+  color: var(--lighGray);
+  font-weight: 300;
+  font-size: .9vw;
+  margin-bottom: 2vw;
+}
+.card-2{
+  background-color: white;
+  padding: 2vw;
+  border-radius: 0.7em;
+  margin-bottom: 2vw;
+}
+.card-3{
+  background-color: white;
+  padding: 2vw;
+  border-radius: 0.7em;
+
+}
+.profile-image{
+  border-color: transparent;
+  border-radius: 1em ;
+  width: 10vw;
+  height: 10vw;
+  margin-bottom: 1vw;
+  object-fit: cover;
+}
+.card-2 p{
+  font-size: .9vw;
+  margin: 0;
+}
+.card-2 h4{
+  font-size: 1.34vw;
+  margin-bottom: 1.7vw;
+}
+.card-3 h4{
+  font-size: 1.34vw;
+  margin-bottom: 1.5vw;
+}
+.edit-button{
+  margin-bottom: 2vw;
+}
+.card-3 p{
+  margin: 0;
+}
+.edit-button button {
+  border: none;
+  border-radius: .5em;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+}
+.edit-button p{
+  margin: 0;
+  font-size: .8vw;
+}
+.edit-button h3{
+  color: var(--darkGray);
+  font-size: 1.5vw;
+}
+.card-2-margin-bottom.col div.row:nth-child(-n + 2){
+  margin-bottom:1.8vw;
+}
+.address{
+  margin-bottom: 1vw !important;
+}
+i{
+  color: var(--darkGray);
+}
+h4{
+  color: var(--darkGray);
+}
+
+.col-3 p{
+  color: var(--darkGray)
+}
+.col-9 p{
+  color: var(--lighGray);
+}
+.card-3 p{
+  color: var(--darkGray);
+  font-size: .9vw;
+}
+
