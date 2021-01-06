@@ -84,5 +84,15 @@ export class CalendarComponent implements OnInit {
     const keys = Object.keys(obj);
     return obj[keys[ keys.length * Math.random() << 0]];
   }
-
+  addNewEvent(): void{
+    const modalRef = this.modalService.open(CreateEventComponent);
+    modalRef.result.then((result) => {
+      if (result !== 'Close click') {
+        console.log(result);
+        //this.calendar.eventCategories.push(result);
+      }
+    }, error => {
+      //console.log(error);
+    });
+  }
 }

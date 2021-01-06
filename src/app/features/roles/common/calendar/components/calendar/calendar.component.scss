@@ -119,9 +119,27 @@ h6{
   padding: .3vw;
   border-radius: .5vw;
   cursor: default;
+  margin-bottom: 1.5vw;
 }
 .create-button p{
   font-size: .8vw;
+}
+.add-event{
+  background: var(--green);
+  border-radius: .5vw;
+  //padding: .5vw;
+  padding: .25vw 0;
+  margin-bottom: 1vw;
+  cursor: pointer;
+}
+.add-event p{
+  margin-bottom: 0;
+  color: white;
+  font-size: .8vw;
+  font-weight: 500;
+}
+.add-event img{
+  margin-right: 0;
 }
 .plus-icon{
   background: var(--green );
