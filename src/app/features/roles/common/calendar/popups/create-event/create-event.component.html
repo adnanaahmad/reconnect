@@ -4,28 +4,38 @@
      <p class="title">Event title</p>
      <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
      <div class="d-flex justify-content-between mb-custom">
-        <div>
+        <div class="mr-custom">
           <p class="title">Date</p>
-          <input formControlName="date" type="text" class="form-control f1"  placeholder="">
+          <input formControlName="date" type="text" class="form-control f1 width-custom"  placeholder="">
         </div>
        <div>
          <p class="title">Starts at</p>
-         <input formControlName="time" type="text" class="form-control f1"  placeholder="">
+         <input formControlName="time" type="text" class="form-control f1 width-custom"  placeholder="">
        </div>
      </div>
      <p class="title">Add a note</p>
      <textarea formControlName="note" class="form-control f2 mb-custom" id="exampleFormControlTextarea1" rows="3"></textarea>
      <div class="d-flex justify-content-between mb-custom">
        <div>
-         <p class="title">Event Category</p>
-         <select class="form-control f1">
+         <div>
+           <label class="container">
+             <input type="checkbox"  [checked]="true">
+             <img class="checkmark" src="/assets/loan-details/tick.svg">
+             <p class="title">Event Category</p>
+           </label>
+         </div>
+         <select class="form-control f1 width-custom">
            <option>Default select</option>
          </select>
        </div>
        <p class="title align-self-center">or</p>
        <div>
-         <p class="title">Add Custom Category</p>
-         <input formControlName="customCategory" type="text" class="form-control f1"  placeholder="">
+         <label class="container">
+           <input type="checkbox"  [checked]="true">
+           <img class="checkmark" src="/assets/loan-details/tick.svg">
+           <p class="title text-nowrap">Add Custom Category</p>
+         </label>
+         <input formControlName="customCategory" type="text" class="form-control f1 width-custom"  placeholder="">
        </div>
      </div>
      <p class="title">Add a team member</p>

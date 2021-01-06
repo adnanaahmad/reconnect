@@ -20,7 +20,7 @@ export class CalendarComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private constant: ConstantService, private configuration: NgbModalConfig) {
     configuration.centered = true;
-    //configuration.size = '900';
+    configuration.container = 'app-calendar';
   }
 
   ngOnInit(): void {

@@ -5,7 +5,7 @@ p{
   padding: 2.5vw;
 }
 .heading{
-  font-size: .8vw;
+  font-size: .85vw;
   font-weight: 500;
   color: var(--darkGray);
   margin-bottom: 2vw;
@@ -38,7 +38,7 @@ p{
   height: 2.5vw;
   width: 2.5vw;
   object-fit: cover;
-  margin-right: .5vw;
+  margin-right: 1vw;
 }
 .team img:last-child{
   margin-right: 0;
@@ -50,6 +50,48 @@ p{
   font-size: .7vw;
   margin-bottom: 0;
   height: fit-content;
-  padding: .5vw 1vw .5vw 1vw;
+  padding: .5vw 1.5vw .5vw 1.5vw;
   cursor: pointer;
+}
+.width-custom{
+  width: 15vw;
+}
+.mr-custom{
+  margin-right: 2.5vw;
+}
+.container {
+  position: relative;
+  padding-left: 2vw;
+  cursor: pointer;
+  padding-right: 0;
+  margin: 0;
+  max-width: 8.5vw;
+}
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1vw;
+  width: 1vw;
+  background-color: white;
+  padding: .25vw;
+  border-radius: .3vw;
+  border: 1px solid var(--lighGray);
+}
+
+/* On mouse-over, add a grey background color */
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: var(--green);
+  border: none;
 }

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-create-event',
@@ -18,12 +19,10 @@ export class CreateEventComponent implements OnInit {
     customCategory: ['', Validators.required],
   });
 
-  constructor(public activeModal: NgbActiveModal,
-              private fb: FormBuilder,
-              private constant: ConstantService) {
-  }
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private helper: HelperService) {}
 
   ngOnInit(): void {
+    this.helper.setModalPosition();
   }
 
   onSubmit(): void {
