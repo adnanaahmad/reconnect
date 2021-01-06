@@ -12,24 +12,21 @@ export class CreateEventComponent implements OnInit {
   @Input('name') name;
   eventForm = this.fb.group({
     title: ['', Validators.required],
-    color: [''],
-    colorIcon: ['']
+    date: ['', Validators.required],
+    time: ['', Validators.required],
+    note: ['', Validators.required],
+    customCategory: ['', Validators.required],
   });
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private constant: ConstantService) { }
+
+  constructor(public activeModal: NgbActiveModal,
+              private fb: FormBuilder,
+              private constant: ConstantService) {
+  }
 
   ngOnInit(): void {
   }
-  Onsubmit(){
 
-      const randomColor = this.randomColor(this.constant.eventColorDetails);
-      this.eventForm.patchValue({
-        color: randomColor.color,
-        colorIcon: randomColor.colorIcon
-      });
-      this.activeModal.close(this.eventForm.value);
-  }
-   randomColor(obj) {
-    const keys = Object.keys(obj);
-    return obj[keys[ keys.length * Math.random() << 0]];
-  };
+  onSubmit(): void {
+    this.activeModal.close({status: 'yes', data: this.eventForm.value});
+    }
 }

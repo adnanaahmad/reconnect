@@ -393,22 +393,21 @@ export class ConstantService {
 
   ];
 
-
   eventColorDetails = {
     purple: {
-      colorIcon: '/assets/calendar-icons/purple.svg', color: '#E1D9FF'
+      colorIcon: '/assets/calendar-icons/purple.svg', color: '#E1D9FF', textColor: '#8261FF'
     },
     orange: {
-      colorIcon: '/assets/calendar-icons/orange.svg', color: '#FFDDC2'
+      colorIcon: '/assets/calendar-icons/orange.svg', color: '#FFDDC2', textColor: '#F1954D'
     },
     yellow: {
-      colorIcon: '/assets/calendar-icons/yellow.svg', color: '#FFFBC7'
+      colorIcon: '/assets/calendar-icons/yellow.svg', color: '#FFFBC7', textColor: '#D5C932'
     },
     green: {
-      colorIcon: '/assets/calendar-icons/green.svg', color: '#D3FFC8'
+      colorIcon: '/assets/calendar-icons/green.svg', color: '#D3FFC8', textColor: '#66C94D'
     },
     blue: {
-      colorIcon: '/assets/calendar-icons/blue.svg', color: '#CBFFF9'
+      colorIcon: '/assets/calendar-icons/blue.svg', color: '#CBFFF9', textColor: '#37DFCC'
     }
   };
   searchFilters = {

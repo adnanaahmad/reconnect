@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {CalendarOptions, EventClickArg, EventApi, FullCalendarComponent} from '@fullcalendar/angular';
 import {Draggable} from '@fullcalendar/interaction';
 import { CreateEventComponent} from '../../popups/create-event/create-event.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModel} from '../../models/calendar.model';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {FormControl} from '@angular/forms';
@@ -18,7 +18,10 @@ export class CalendarComponent implements OnInit {
   newEventCategory = new FormControl(null);
   @ViewChild('cal') calendarComponent: FullCalendarComponent;
 
-  constructor(private modalService: NgbModal, private constant: ConstantService) { }
+  constructor(private modalService: NgbModal, private constant: ConstantService, private configuration: NgbModalConfig) {
+    configuration.centered = true;
+    //configuration.size = '900';
+  }
 
   ngOnInit(): void {
     this.calendar.eventCategories = [];
@@ -87,9 +90,25 @@ export class CalendarComponent implements OnInit {
   addNewEvent(): void{
     const modalRef = this.modalService.open(CreateEventComponent);
     modalRef.result.then((result) => {
-      if (result !== 'Close click') {
-        console.log(result);
-        //this.calendar.eventCategories.push(result);
+      if (result.status === 'yes') {
+        //console.log(result.data);
+        const randomColor = this.randomColor(this.constant.eventColorDetails);
+        this.calendar.eventCategories.push(
+          {
+          title: result.data.customCategory,
+          color: randomColor.color,
+          colorIcon: randomColor.colorIcon
+          });
+        this.calendarComponent.getApi().addEvent({
+          title: result.data.title,
+          date: result.data.date,
+          time: result.data.time,
+          note: result.data.note,
+          category: result.data.customCategory,
+          id: '12',
+          color: randomColor.color,
+          textColor: randomColor.textColor,
+        });
       }
     }, error => {
       //console.log(error);
