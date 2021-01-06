@@ -11,9 +11,8 @@ export class ScenarioComponent implements OnInit {
   @Input() loanScenario;
   @Input() scenarioNumber;
   constructor(private modalService: NgbModal, configuration: NgbModalConfig) {
-    configuration.size = 'lg';
     configuration.centered = true;
-    //configuration.container =  'app-property-details';
+    configuration.container =  'app-property-details';
   }
 
   ngOnInit(): void {

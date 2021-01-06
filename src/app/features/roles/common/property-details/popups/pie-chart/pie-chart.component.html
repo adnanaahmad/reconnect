@@ -1,6 +1,6 @@
 <div class="card-1">
-  <div class="row">
-    <div class="col-6">
+  <div class="d-flex">
+    <div class="">
       <ngx-charts-pie-chart #PieChartComponent
                             (window:resize)="onResize($event)"
                             [view]="view"
@@ -14,7 +14,7 @@
                             [legendTitle]="123">
       </ngx-charts-pie-chart>
     </div>
-    <div class="col-6">
+    <div class="ml-custom">
       <div class="d-flex legend"><div class="yellow square"></div><p class="text-nowrap align-self-center">Down Payment & 1 time Expenses</p><p class="ml-auto align-self-center">$1300</p></div>
       <div class="d-flex legend"><div class="green square"></div><p class="text-nowrap align-self-center">Principal</p><p class="ml-auto align-self-center">$1300</p></div>
       <div class="d-flex legend"><div class="red square"></div><p class="text-nowrap align-self-center">Extra Payments</p><p class="ml-auto align-self-center">$1300</p></div>

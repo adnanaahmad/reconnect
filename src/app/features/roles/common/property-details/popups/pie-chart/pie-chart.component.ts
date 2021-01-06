@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -19,12 +20,13 @@ export class PieChartComponent implements OnInit {
   colorScheme = {
     domain: ['#FCCE38', '#53E773', '#F34949', '#69CFFC', '#9D7BEC']
   };
-  constructor() {}
+  constructor(private helper: HelperService) {}
   onResize(event) {
     //console.log(event.target.innerWidth);
     this.view = [event.target.innerWidth / 5, event.target.innerWidth / 8.5 ];
   }
   ngOnInit(): void {
+    this.helper.setModalPosition();
     this.single = [
       {
         name: 'Down Payment',
