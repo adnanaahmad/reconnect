@@ -4,6 +4,8 @@ import {Draggable} from '@fullcalendar/interaction';
 import { CreateEventComponent} from '../../popups/create-event/create-event.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModel} from '../../models/calendar.model';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-calendar',
@@ -13,8 +15,9 @@ import { CalendarModel} from '../../models/calendar.model';
 })
 export class CalendarComponent implements OnInit {
   calendar: CalendarModel = {} as CalendarModel;
+  newEventCategory = new FormControl(null);
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private constant: ConstantService) { }
 
   ngOnInit(): void {
     this.calendar.eventCategories = [];
@@ -101,17 +104,14 @@ export class CalendarComponent implements OnInit {
     this.calendar.currentEvents = events;
   }
 
-  createNewEvent(): void{
-    const modalRef = this.modalService.open(CreateEventComponent);
-    modalRef.result.then((result) => {
-      if (result !== 'Close click') {
-        console.log(result);
-        this.calendar.eventCategories.push(result);
-      }
-    }, error => {
-        //console.log(error);
-    });
-
+  createNewEventCategory(): void{
+    const randomColor = this.randomColor(this.constant.eventColorDetails);
+    this.calendar.eventCategories.push({title: this.newEventCategory.value, color: randomColor.color, colorIcon: randomColor.colorIcon});
+    this.newEventCategory.setValue('');
+  }
+  randomColor(obj) {
+    const keys = Object.keys(obj);
+    return obj[keys[ keys.length * Math.random() << 0]];
   }
 
 }

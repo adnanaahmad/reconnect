@@ -18,6 +18,7 @@
        </ul>
     </div>
     <div class="col-10 nav-content">
+      <div class="d-flex test-role"> <p (click)="role('buyer')">Buyer</p><p (click)="role('lender')">lender</p><p (click)="role('realEstate')">RealEstate</p><p (click)="role('attorney')">attorney</p><p (click)="role('homeInspector')">Home Inspector</p></div>
         <div class="router-outlet-class">
           <app-header *ngIf="showHeader"></app-header>
           <router-outlet></router-outlet>

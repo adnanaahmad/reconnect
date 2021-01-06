@@ -4,15 +4,15 @@
 <div class="row" >
    <div class=" col-3 column-1" >
       <div class="card-1">
-         <div class="d-flex flex-row mb-4 create-button" (click)="createNewEvent()">
-                <img class="plus-icon" src="/assets/calendar-icons/plus.svg">
+         <div class="d-flex flex-row mb-4 create-button">
+                <img (click)="createNewEventCategory()" class="plus-icon" src="/assets/calendar-icons/plus.svg">
                <div class="align-self-center create-button-text">
-                   <p class="">Create new event category</p>
+                 <input [formControl]="newEventCategory" type="text" class="form-control f1"  placeholder="Create New Event Category">
                 </div>
          </div>
-         <h6 class="mb-4">Event categories</h6>
+         <p class="ec-heading">Event Categories</p>
          <div id='external-events' class="external-events">
-            <div *ngFor="let i of calendar.eventCategories" class='fc-event draggable-element'>
+            <div *ngFor="let i of calendar.eventCategories" class="draggable-element">
                <div>
                   <img [style.background]="i.color" [src]="i.colorIcon" class="color-icons">
                </div>

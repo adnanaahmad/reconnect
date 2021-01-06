@@ -36,4 +36,25 @@ export class NavigationComponent implements OnInit, OnDestroy {
   listClick(value): void{
     this.navigation.selectedButton = value;
   }
+  role(data): void {
+      console.log(data);
+      switch (data) {
+        case 'buyer':
+          this.navigation.menuItems = this.navigationService.getBuyerMenuItems();
+          break;
+        case 'lender':
+          this.navigation.menuItems = this.navigationService.getLenderMenuItems();
+          break;
+        case 'realEstate':
+          this.navigation.menuItems = this.navigationService.getRealEstateAgentMenuItems();
+          break;
+        case 'attorney':
+          this.navigation.menuItems = this.navigationService.getAttorneyMenuItems();
+          break;
+        case 'homeInspector':
+          this.navigation.menuItems = this.navigationService.getHomeInspectorMenuItems();
+          break;
+        default:
+    }
+  }
 }

@@ -39,6 +39,8 @@
 }
 ::ng-deep .fc-col-header-cell-cushion{
   color: var(--lighGray)!important;
+  font-weight: 400;
+  font-size: .8vw !important;
 }
 ::ng-deep .fc-daygrid-day-number{
   color:var(--darkGray) !important;
@@ -48,15 +50,15 @@
   color: var(--darkGray);
   margin-left: 1.9vw !important;
 }
-::ng-deep .draggable-element{
+.draggable-element{
   color: var(--darkGray);
-  cursor: pointer;
+  cursor: default;
   display: inline-flex;
   background: transparent;
   width: 100%;
   margin-bottom: 1.2vw;
 }
-::ng-deep .color-icons{
+.color-icons{
   padding: .5vw;
   border-radius: .5em ;
   height: 2vw;
@@ -86,6 +88,9 @@
   width: 12vw;
  // background: #F34949;
 }
+:host ::ng-deep .fc-daygrid-day-top{
+  justify-content: center;
+}
 .heading{
   margin-bottom: 2vw;
 }
@@ -113,7 +118,7 @@ h6{
   border: 1px solid var(--lighGray);
   padding: .3vw;
   border-radius: .5vw;
-  cursor: pointer;
+  cursor: default;
 }
 .create-button p{
   font-size: .8vw;
@@ -125,6 +130,7 @@ h6{
   padding:.5vw;
   border-radius: .4vw;
   margin-right: .7vw;
+  cursor: pointer;
 }
 .draggable-element-text{
   overflow : hidden;
@@ -246,6 +252,30 @@ h6{
     margin-left: 3em;
   }
 }
-h6{
-  font-size: 1vw;
+.ec-heading{
+  font-size: .9vw;
+  font-weight: 500;
+  margin-bottom: 2vw;
+  color: var(--darkGray);
+}
+::placeholder{
+  font-size: .7vw;
+  color: var(--lighGray);
+  font-family: 'Poppins';
+}
+.f1{
+  font-weight: 300;
+  font-size: .8vw;
+  color: var(--darkGray);
+  padding: 0;
+  width: 120%;
+  height: 2vw;
+  border: none;
+  font-family: 'Poppins';
+}
+.f1:focus{
+  box-shadow: none;
+}
+p{
+  font-family: 'Poppins';
 }
