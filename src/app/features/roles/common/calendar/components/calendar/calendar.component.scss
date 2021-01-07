@@ -301,3 +301,10 @@ p{
 ngb-modal-backdrop{
   position: absolute;
 }
+.plus-btn{
+  background: transparent;
+  border: none;
+}
+.plus-btn:focus{
+  outline: none;
+}

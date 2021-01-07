@@ -83,15 +83,15 @@ export class CreateEventComponent implements OnInit {
   }
   chooseEventOrCustomCategory(): void{
     this.eventForm.get('eventCategory').get('status').valueChanges.subscribe(result => {
-      this.disableCheckBox(result, 'customEventCategory');
+      this.uncheck(result, 'customEventCategory');
       this.toggleInput(result, 'customEventCategory', 'eventCategory');
     });
     this.eventForm.get('customEventCategory').get('status').valueChanges.subscribe(result => {
-      this.disableCheckBox(result, 'eventCategory');
+      this.uncheck(result, 'eventCategory');
       this.toggleInput(result, 'eventCategory', 'customEventCategory');
     });
   }
-  disableCheckBox(result, key): void{
+  uncheck(result, key): void{
     if (result){
       this.eventForm.patchValue({
         [key]: {

@@ -9,10 +9,12 @@
           <p class="align-self-center">Add New Event</p>
         </div>
          <div class="d-flex flex-row create-button">
-                <img (click)="createNewEventCategory()" class="plus-icon" src="/assets/calendar-icons/plus.svg">
-               <div class="align-self-center create-button-text">
-                 <input [formControl]="newEventCategory" type="text" class="form-control f1"  placeholder="Create New Event Category">
-                </div>
+           <button (click)="createNewEventCategory()" [disabled]="!newEventCategory.value" class="plus-btn">
+             <img class="plus-icon" src="/assets/calendar-icons/plus.svg">
+           </button>
+           <div class="align-self-center create-button-text">
+             <input [formControl]="newEventCategory" type="text" class="form-control f1"  placeholder="Create New Event Category">
+            </div>
          </div>
          <p class="ec-heading">Event Categories</p>
          <div id='external-events' class="external-events">

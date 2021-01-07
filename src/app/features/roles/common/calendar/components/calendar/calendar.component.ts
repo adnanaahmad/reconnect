@@ -19,7 +19,10 @@ export class CalendarComponent implements OnInit {
   newEventCategory = new FormControl(null);
   @ViewChild('cal') calendarComponent: FullCalendarComponent;
 
-  constructor(private modalService: NgbModal, private constant: ConstantService, private configuration: NgbModalConfig, private dateFormat: NgbDateNativeAdapter) {
+  constructor(private modalService: NgbModal,
+              private constant: ConstantService,
+              private configuration: NgbModalConfig,
+              private dateFormat: NgbDateNativeAdapter) {
     configuration.centered = true;
     configuration.container = 'app-calendar';
   }
@@ -74,7 +77,7 @@ export class CalendarComponent implements OnInit {
   createNewEventCategory(): void{
     const randomColor = this.randomColor(this.constant.eventColorDetails);
     this.calendar.eventCategories.push({title: this.newEventCategory.value, color: randomColor.color, colorIcon: randomColor.colorIcon});
-    this.newEventCategory.setValue('');
+    this.newEventCategory.reset();
   }
   randomColor(obj) {
     const keys = Object.keys(obj);
