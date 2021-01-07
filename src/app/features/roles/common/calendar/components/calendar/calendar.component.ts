@@ -7,6 +7,7 @@ import { CalendarModel} from '../../models/calendar.model';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {FormControl} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {ViewEventComponent} from '../../popups/view-event/view-event.component';
 
 @Component({
   selector: 'app-calendar',
@@ -48,6 +49,7 @@ export class CalendarComponent implements OnInit {
       dayMaxEvents: true,
       eventClick: this.handleEventClick.bind(this),
       eventsSet: this.handleEvents.bind(this),
+      events: [{title: 'oye', date: '2021-01-05'}],
       eventReceive: (info) => {
         console.log('event receive', info);
       },
@@ -63,10 +65,18 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEventClick(clickInfo: EventClickArg): void {
-    console.log(clickInfo)
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
+    console.log(clickInfo);
+    const modalRef = this.modalService.open(ViewEventComponent);
+    modalRef.result.then((result) => {
+      if (result.status === 'yes') {
+        console.log(result.data);
+      }
+    }, error => {
+      //console.log(error);
+    });
+    // if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    //   clickInfo.event.remove();
+    // }
   }
 
   handleEvents(events: EventApi[]): void {

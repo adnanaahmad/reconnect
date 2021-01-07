@@ -10,6 +10,7 @@ import { NgbDateNativeAdapter, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CreateEventComponent } from './popups/create-event/create-event.component';
 import {SharedModule} from '../../../../shared/shared.module';
 import {CoreModule} from '../../../../core/core.module';
+import { ViewEventComponent } from './popups/view-event/view-event.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -19,7 +20,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, CreateEventComponent],
+  declarations: [CalendarComponent, CreateEventComponent, ViewEventComponent],
   imports: [
     CommonModule,
     CalendarRoutingModule,

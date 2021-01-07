@@ -1,0 +1,74 @@
+p{
+  font-family: 'Poppins';
+}
+.card-1{
+  padding: 3vw 3.5vw 2.5vw 2.5vw;
+}
+.heading{
+  color: var(--green);
+  font-size:0.85vw;
+  margin-bottom: 0;
+  margin-right: 25vw;
+}
+.first-row{
+  margin-bottom: 1vw;
+}
+.close-btn{
+  position: absolute;
+  left: 94%;
+  top: 6%;
+  height: .7vw;
+  width: .7vw;
+  cursor: pointer;
+}
+.edit{
+  margin-bottom: 0;
+  background: var(--darkBlueOne);
+  color: white;
+  padding: .4vw 1.5vw .4vw 1.5vw;
+  border-radius: .3vw;
+  font-size: .75vw;
+  border: none;
+  cursor: pointer;
+}
+.edit:focus{
+  outline: none;
+}
+.title{
+  font-size: 1.2vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-bottom: 1vw;
+}
+.note{
+  font-size: .8vw;
+  color: var(--darkGray);
+  margin-bottom: 1.5vw;
+  font-weight: 300;
+}
+.join{
+  color: var(--lighGray);
+  font-size: .7vw;
+  margin-bottom: .7vw;
+}
+.team{
+  border-radius: .5vw;
+  height: 2.8vw;
+  width: 2.8vw;
+  object-fit: cover;
+  padding: .1vw;
+  margin-right: .7vw;
+}
+.team:last-child{
+  margin-right: 0;
+}
+.date{
+  color: var(--green);
+  margin-bottom: 0;
+  font-size: .9vw;
+  font-weight: 500;
+  margin-right: 1vw;
+}
+.date:last-child{
+  margin-right: 0;
+}
