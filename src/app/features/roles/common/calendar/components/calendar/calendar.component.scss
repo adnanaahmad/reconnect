@@ -36,6 +36,10 @@
   padding-right: 1.7vw;
   margin-right: 30vw;
   margin-left: 1vw !important;
+  font-family: 'Poppins';
+  opacity: 1 !important;
+  border-radius: .4vw;
+  font-weight: 300;
 }
 ::ng-deep .fc-col-header-cell-cushion{
   color: var(--lighGray)!important;
@@ -49,6 +53,8 @@
   font-size: 1.5vw !important;
   color: var(--darkGray);
   margin-left: 1.9vw !important;
+  width: 12vw;
+  font-family: 'Poppins';
 }
 .draggable-element{
   color: var(--darkGray);
@@ -83,10 +89,6 @@
   padding-top: 2vw;
   border-bottom-right-radius: .5vw;
   border-top-right-radius: .5vw;
-}
-::ng-deep h2.fc-toolbar-title{
-  width: 12vw;
- // background: #F34949;
 }
 :host ::ng-deep .fc-daygrid-day-top{
   justify-content: center;
@@ -181,11 +183,18 @@ h6{
 }
 ::ng-deep .fc-daygrid-day-number{
   font-size: .8vw;
+  //padding: .3vw !important;
 }
 ::ng-deep .fc-col-header-cell-cushion{
   font-size: .9vw;
 }
 
+:host ::ng-deep .fc-highlight{
+  background: white !important;
+}
+:host ::ng-deep .fc-day-today{
+  background: white !important;
+}
 @media only screen and (max-width: 1440px) {
   ::ng-deep .fc-today-button.fc-button.fc-button-primary{
     margin-right: 28vw;
@@ -304,6 +313,8 @@ ngb-modal-backdrop{
 .plus-btn{
   background: transparent;
   border: none;
+  padding: 0;
+  line-height: revert;
 }
 .plus-btn:focus{
   outline: none;

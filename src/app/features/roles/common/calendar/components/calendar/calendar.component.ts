@@ -69,7 +69,11 @@ export class CalendarComponent implements OnInit {
     const modalRef = this.modalService.open(ViewEventComponent);
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
-        console.log(result.data);
+        //console.log(result.data);
+        const modal = this.modalService.open(CreateEventComponent);
+        modal.result.then((res) => {
+          console.log(res.data);
+        });
       }
     }, error => {
       //console.log(error);

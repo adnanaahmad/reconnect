@@ -17,4 +17,7 @@ export class ViewEventComponent implements OnInit {
   close(): void{
     this.activeModal.close({status: 'no'});
   }
+  edit(): void{
+    this.activeModal.close({status: 'yes'});
+  }
 }
