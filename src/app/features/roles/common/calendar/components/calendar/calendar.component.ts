@@ -2,10 +2,11 @@ import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {CalendarOptions, EventClickArg, EventApi, FullCalendarComponent} from '@fullcalendar/angular';
 import {Draggable} from '@fullcalendar/interaction';
 import { CreateEventComponent} from '../../popups/create-event/create-event.component';
-import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalConfig, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModel} from '../../models/calendar.model';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {FormControl} from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-calendar',
@@ -18,7 +19,7 @@ export class CalendarComponent implements OnInit {
   newEventCategory = new FormControl(null);
   @ViewChild('cal') calendarComponent: FullCalendarComponent;
 
-  constructor(private modalService: NgbModal, private constant: ConstantService, private configuration: NgbModalConfig) {
+  constructor(private modalService: NgbModal, private constant: ConstantService, private configuration: NgbModalConfig, private dateFormat: NgbDateNativeAdapter) {
     configuration.centered = true;
     configuration.container = 'app-calendar';
   }
@@ -74,14 +75,6 @@ export class CalendarComponent implements OnInit {
     const randomColor = this.randomColor(this.constant.eventColorDetails);
     this.calendar.eventCategories.push({title: this.newEventCategory.value, color: randomColor.color, colorIcon: randomColor.colorIcon});
     this.newEventCategory.setValue('');
-    // this.calendarComponent.getApi().addEvent({
-    //   title: 'oye',
-    //   date: '2021-01-02',
-    //   description: 'here it is',
-    //      color: eventColor,
-    //      textColor: eventTextColor,
-    //      id: '12'
-    // });
   }
   randomColor(obj) {
     const keys = Object.keys(obj);
@@ -91,27 +84,30 @@ export class CalendarComponent implements OnInit {
     const modalRef = this.modalService.open(CreateEventComponent);
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
-        //console.log(result.data);
+        console.log(result.data);
         const randomColor = this.randomColor(this.constant.eventColorDetails);
         this.calendar.eventCategories.push(
           {
-          title: result.data.customCategory,
+          title: result.data.customEventCategory.value ? result.data.customEventCategory.value : result.data.eventCategory.value,
           color: randomColor.color,
           colorIcon: randomColor.colorIcon
           });
-        this.calendarComponent.getApi().addEvent({
-          title: result.data.title,
-          date: result.data.date,
-          time: result.data.time,
-          note: result.data.note,
-          category: result.data.customCategory,
-          id: '12',
-          color: randomColor.color,
-          textColor: randomColor.textColor,
-        });
+        this.createCalendarEvent(result, randomColor);
       }
     }, error => {
       //console.log(error);
+    });
+  }
+  createCalendarEvent(result, randomColor): void{
+    this.calendarComponent.getApi().addEvent({
+      title: result.data.title,
+      date: new DatePipe('en-US').transform(this.dateFormat.toModel(result.data.date), 'yyyy-MM-dd'),
+      time: result.data.time,
+      note: result.data.note,
+      category: result.data.customEventCategory.value ? result.data.customEventCategory.value : result.data.eventCategory.value,
+      id: '12',
+      color: randomColor.color,
+      textColor: randomColor.textColor,
     });
   }
 }

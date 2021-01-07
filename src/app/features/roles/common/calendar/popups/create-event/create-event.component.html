@@ -1,53 +1,63 @@
- <form [formGroup] = 'eventForm'>
-   <div class="card-1">
-     <p class="heading">Create Event</p>
-     <p class="title">Event title</p>
-     <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
-     <div class="d-flex justify-content-between mb-custom">
-        <div class="mr-custom">
-          <p class="title">Date</p>
-          <input formControlName="date" type="text" class="form-control f1 width-custom"  placeholder="">
-        </div>
-       <div>
-         <p class="title">Starts at</p>
-         <input formControlName="time" type="text" class="form-control f1 width-custom"  placeholder="">
-       </div>
-     </div>
-     <p class="title">Add a note</p>
-     <textarea formControlName="note" class="form-control f2 mb-custom" id="exampleFormControlTextarea1" rows="3"></textarea>
-     <div class="d-flex justify-content-between mb-custom">
-       <div>
+<div class="form-div">
+  <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+  <form [formGroup] = 'eventForm'>
+     <div class="card-1">
+       <p class="heading">Create Event</p>
+       <p class="title">Event title</p>
+       <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
+       <div class="d-flex justify-content-between mb-custom">
+          <div class="mr-custom">
+            <p class="title">Date</p>
+            <div class="date-div">
+              <img class="calendar-icon" src="/assets/menu-icons/calendar.svg" (click)="d.toggle()">
+              <input class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
+                     name="dp" formControlName="date"  ngbDatepicker #d="ngbDatepicker">
+            </div>
+          </div>
          <div>
-           <label class="container">
-             <input type="checkbox"  [checked]="true">
-             <img class="checkmark" src="/assets/loan-details/tick.svg">
-             <p class="title">Event Category</p>
-           </label>
+           <p class="title">Starts at</p>
+           <input formControlName="time" type="text" class="form-control f1 width-custom"  placeholder="">
          </div>
-         <select class="form-control f1 width-custom">
-           <option>Default select</option>
-         </select>
        </div>
-       <p class="title align-self-center">or</p>
-       <div>
-         <label class="container">
-           <input type="checkbox"  [checked]="true">
-           <img class="checkmark" src="/assets/loan-details/tick.svg">
-           <p class="title text-nowrap">Add Custom Category</p>
-         </label>
-         <input formControlName="customCategory" type="text" class="form-control f1 width-custom"  placeholder="">
+       <p class="title">Add a note</p>
+       <textarea formControlName="note" class="form-control f2 mb-custom" id="exampleFormControlTextarea1" rows="3"></textarea>
+       <div class="d-flex justify-content-between mb-custom">
+         <div formGroupName="eventCategory">
+           <div>
+             <label class="container">
+               <input formControlName="status" id="myCheck" type="checkbox">
+               <img class="checkmark" src="/assets/loan-details/tick.svg">
+               <p class="title">Event Category</p>
+             </label>
+           </div>
+           <select formControlName="value" class="form-control f1 width-custom">
+             <option [ngValue]="null" [disabled]="true">Choose</option>
+             <option>2</option>
+             <option>3</option>
+             <option>4</option>
+             <option>5</option>
+           </select>
+         </div>
+         <p class="title align-self-end or">or</p>
+         <div formGroupName="customEventCategory">
+           <label class="container">
+             <input formControlName="status" type="checkbox">
+             <img class="checkmark" src="/assets/loan-details/tick.svg">
+             <p class="title text-nowrap">Add Custom Category</p>
+           </label>
+           <input formControlName="value" type="text" class="form-control f1 width-custom"  placeholder="">
+         </div>
+       </div>
+       <p class="title">Add a team member</p>
+       <div class="d-flex justify-content-between">
+         <div class="d-flex">
+           <div (click)="toggleTeamMember(i,member.value)" [attr.id]="i" class="d-flex team-member" *ngFor="let member of teamData | keyvalue; let i = index">
+             <img class="active" src="/assets/calendar-icons/tick.svg">
+             <img class="team" [src]="member.value.image">
+           </div>
+         </div>
+         <button  [disabled]="eventForm.invalid" class="launch align-self-end" (click)="onSubmit()">Launch Event</button>
        </div>
      </div>
-     <p class="title">Add a team member</p>
-     <div class="d-flex justify-content-between">
-       <div class="d-flex team">
-         <img src="https://learnenglish.britishcouncil.org/sites/podcasts/files/styles/article/public/RS6715_492969113-hig.jpg?itok=WmAYQrL1">
-         <img src="https://learnenglish.britishcouncil.org/sites/podcasts/files/styles/article/public/RS6715_492969113-hig.jpg?itok=WmAYQrL1">
-         <img src="https://learnenglish.britishcouncil.org/sites/podcasts/files/styles/article/public/RS6715_492969113-hig.jpg?itok=WmAYQrL1">
-         <img src="https://learnenglish.britishcouncil.org/sites/podcasts/files/styles/article/public/RS6715_492969113-hig.jpg?itok=WmAYQrL1">
-         <img src="https://learnenglish.britishcouncil.org/sites/podcasts/files/styles/article/public/RS6715_492969113-hig.jpg?itok=WmAYQrL1">
-       </div>
-       <p class="launch align-self-end" (click)="onSubmit()">Launch Event</p>
-     </div>
-   </div>
-</form>
+  </form>
+</div>

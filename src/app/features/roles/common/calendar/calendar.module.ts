@@ -6,7 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { CalendarRoutingModule } from './calendar-routing.module';
 import {CalendarComponent} from './components/calendar/calendar.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateNativeAdapter, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CreateEventComponent } from './popups/create-event/create-event.component';
 import {SharedModule} from '../../../../shared/shared.module';
 import {CoreModule} from '../../../../core/core.module';
@@ -27,6 +27,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgbModule,
     CoreModule,
     SharedModule
-  ]
+  ],
+  providers: [NgbDateNativeAdapter]
 })
 export class CalendarModule { }
