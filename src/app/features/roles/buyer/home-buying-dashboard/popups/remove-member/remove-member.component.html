@@ -1,17 +1,17 @@
 
 <div class="parent">
-  <p (click)="modal.dismiss('cancel')" class="cross">X</p>
+  <img class="close-btn" (click)="modal.dismiss()" src="/assets/calendar-icons/close.svg">
   <p class="heading">Remove Member</p>
   <div class="d-flex member">
-    <img class="member-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkqkWLzMbf_6cUuaxj9rAaJ61f3ntPBoto9g&usqp=CAU">
+    <img class="member-img" [src]="member.image">
     <div class="align-self-center">
-        <p class="name">Rafael Nadal</p>
-        <p class="role">Real Estate Agent</p>
+        <p class="name">{{member.name}}</p>
+        <p class="role">{{member.role}}</p>
     </div>
   </div>
-  <p class="txt">This member will be removed from your team, are sure?</p>
+  <p class="txt">This member will be removed from your team, Are you sure?</p>
   <div class="d-flex justify-content-between">
-    <button  (click)="modal.close('ok')" class="btn btn-success button">Continue</button>
-    <button  (click)="modal.dismiss('cancel')" class="btn btn-danger button">Cancel</button>
+    <button  (click)="remove()" class="continue button">Continue</button>
+    <button  (click)="modal.dismiss()" class="cancel button">Cancel</button>
   </div>
 </div>

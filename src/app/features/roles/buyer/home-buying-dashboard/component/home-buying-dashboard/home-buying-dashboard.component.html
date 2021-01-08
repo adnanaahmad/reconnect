@@ -24,11 +24,11 @@
      <p class="team-text">But while teams face new hurdles, their success still hinges on a core set of</p>
      <p class="team-text bottom">fundamentals for group collaboration</p>
      <div class="d-flex team">
-        <app-team-person [details]="dashboard.realEstateAgent"></app-team-person>
-        <app-team-person [details]="dashboard.lender"></app-team-person>
-        <app-team-person [details]="dashboard.attorney"></app-team-person>
-        <app-team-person [details]="dashboard.homeInspector"></app-team-person>
-        <app-team-person [details]="dashboard.insuranceAgent"></app-team-person>
+        <app-team-person (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[0]" [role]="'Real Estate Agent'"></app-team-person>
+        <app-team-person (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[1]" [role]="'Lender'"></app-team-person>
+        <app-team-person (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[2]" [role]="'Attorney'"></app-team-person>
+        <app-team-person (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[3]" [role]="'Insurance Agent'"></app-team-person>
+        <app-team-person (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[4]" [role]="'Home Inspector'"></app-team-person>
 
      </div>
      <div class="buying">

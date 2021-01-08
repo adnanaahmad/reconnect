@@ -1,13 +1,14 @@
 .parent{
-  padding: 2vw;
+  padding: 2vw 2vw 1vw 2vw;
 }
-.cross{
+.close-btn{
   position: absolute;
-  right: 5%;
-  top: 5%;
-  font-weight: 300;
-  color: var(--darkGray);
-  cursor: default;
+  right: 7%;
+  top: 8%;
+  height: .7vw;
+  width: .7vw;
+  cursor: pointer;
+
 }
 .heading{
   margin-bottom: 2vw;
@@ -31,7 +32,7 @@
 .role{
   margin-bottom: 0;
   font-weight: 300;
-  font-size: .65vw;
+  font-size: .6vw;
   color: var(--darkGray);
 }
 .member{
@@ -39,7 +40,7 @@
 }
 .txt{
   color: var(--darkGray);
-  font-size: .7vw;
+  font-size: .6vw;
   font-weight: 300;
   margin-bottom: 1.5vw;
 }
@@ -48,4 +49,20 @@
   font-weight: 300;
   padding: .3vw 1.5vw .3vw 1.5vw;
   border-radius: .3vw;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins';
+  color: white;
+}
+.button:focus{
+  outline: none;
+}
+.continue{
+  background: var(--green);
+}
+.cancel{
+  background: var(--red);
+}
+p{
+  font-family: 'Poppins';
 }

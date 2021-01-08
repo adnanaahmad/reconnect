@@ -6,6 +6,31 @@
   position: relative;
   margin-bottom: 3vw;
 }
+.empty{
+  background: var(--extraLightGray);
+  border-radius: .5vw;
+  width: 7.75vw;
+  min-width: .5vw;
+  position: relative;
+  margin-bottom: 3vw;
+  padding-top: 3vw;
+  padding-bottom: .5vw;
+}
+.plus-btn{
+  width: 4vw;
+  height: 4vw;
+  display: flex;
+  margin: 0 auto;
+}
+.empty-txt{
+  padding-top: 1.4vw;
+}
+.empty-txt p{
+  font-weight: 300;
+  margin-bottom: 0;
+  font-size: .6vw;
+  color: var(--darkGray);
+}
 .team-card:last-child{
   margin-right: 0;
 }
@@ -79,6 +104,11 @@
   transform: scale(1.1);
   transition: .4s;
 }
+.team-card:hover .minus{
+  //display: block;
+  transition: .5s;
+  opacity: 1;
+}
 .info{
   transition: .4s;
 }
@@ -91,4 +121,15 @@
 }
 p{
   font-family: 'Poppins';
+}
+.minus{
+  //display: none;
+  position: absolute;
+  width: 1vw;
+  height: 1vw;
+  z-index: 2;
+  left: 83%;
+  top: 4%;
+  opacity: 0;
+  transition: .4s;
 }

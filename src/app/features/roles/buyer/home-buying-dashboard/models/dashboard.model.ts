@@ -1,10 +1,6 @@
 export interface BuyerDashboardModel {
   preApprovalDetails: PreApprovalDetailsModel;
-  realEstateAgent: TeamModel;
-  lender: TeamModel;
-  attorney: TeamModel;
-  homeInspector: TeamModel;
-  insuranceAgent: TeamModel;
+  team: Array<TeamModel>;
   homeBuyingProcess: HomeBuyingProcessModel;
   subjectProperty: SubjectPropertyModel;
 }
