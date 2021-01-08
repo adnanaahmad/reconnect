@@ -12,7 +12,9 @@
       <img *ngFor="let member of view._def.extendedProps.team" class="team" [src]="member.image">
     </div>
     <div class="d-flex align-self-end">
+      <img class="img" src="/assets/calendar-icons/calendar.svg">
       <p class="date">{{view._instance.range.start | date: 'MMM dd,yyyy'}}</p>
+      <img class="img" src="/assets/calendar-icons/alarm-clock.svg">
       <p class="date">{{view._def.extendedProps.time}}</p>
     </div>
   </div>

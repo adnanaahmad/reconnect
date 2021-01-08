@@ -11,6 +11,7 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
 })
 export class CreateEventComponent implements OnInit, AfterViewInit {
   @Input() edit;
+  @Input() eventCategories;
   @ViewChildren('member') teamMembers: QueryList<ElementRef>;
   teamData: any;
   selectedTeam: any[] = [];
@@ -36,6 +37,7 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
               private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    //console.log(this.eventCategories);
     this.helper.setModalPosition();
     this.chooseEventOrCustomCategory();
     this.teamData = [
@@ -85,16 +87,15 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
 
   editForm(): void{
     if (this.edit){
+      this.eventForm.reset();
       this.eventForm.patchValue({
         title: this.edit._def.title,
         date: this.dateFormat.fromModel(this.edit._instance.range.start),
         time: this.edit._def.extendedProps.time,
         note: this.edit._def.extendedProps.note,
-        eventCategory: this.fb.group({
-          status: true,
-          value: this.edit._def.extendedProps.category,
-        })
       });
+      this.eventForm.get('eventCategory').get('status').setValue(true);
+      this.eventForm.get('eventCategory').get('value').setValue(this.edit._def.extendedProps.category);
       this.selectedTeam = this.edit._def.extendedProps.team;
       this.ref.detectChanges();
       this.teamMembers.forEach((element) => {

@@ -1,6 +1,6 @@
 <div class="form-div">
   <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
-  <form [formGroup] = 'eventForm'>
+  <form [formGroup] = "eventForm" (ngSubmit)="onSubmit()">
      <div class="card-1">
        <p class="heading">{{edit ? 'Edit' : 'Create'}} Event</p>
        <p class="title">Event title</p>
@@ -32,10 +32,7 @@
            </div>
            <select formControlName="value" class="form-control f1 width-custom">
              <option [ngValue]="null" [disabled]="true">Choose</option>
-             <option>2</option>
-             <option>3</option>
-             <option>4</option>
-             <option>5</option>
+             <option *ngFor="let i of eventCategories">{{i.title}}</option>
            </select>
          </div>
          <p class="title align-self-end or">or</p>
@@ -56,7 +53,7 @@
              <img class="team" [src]="member.image">
            </div>
          </div>
-         <button  [disabled]="eventForm.invalid" class="launch align-self-end" (click)="onSubmit()">Launch Event</button>
+         <button type="submit"  [disabled]="eventForm.invalid" class="launch align-self-end">Launch Event</button>
        </div>
      </div>
   </form>
