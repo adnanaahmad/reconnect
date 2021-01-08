@@ -1,19 +1,19 @@
 <div class="card-1">
   <div class="first-row d-flex justify-content-between">
-    <p class="heading text-nowrap align-self-center">New Listing</p>
+    <p class="heading text-nowrap align-self-center">{{view._def.extendedProps.category}}</p>
     <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
     <button (click)="edit()" class="edit">Edit</button>
   </div>
-  <p class="title">Launching New Property</p>
-  <p class="note">Free Nationwide Talk and Text service. TextNow is the only app that offers free nationwide cellular service supported by ads. Just buy a SIM Activation Kit to get</p>
+  <p class="title">{{view._def.title}}</p>
+  <p class="note">{{view._def.extendedProps.note}}</p>
   <p class="join">Joining</p>
   <div class="d-flex justify-content-between">
     <div class="d-flex">
-      <img *ngFor="let member of [1,2,3]" class="team" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkqkWLzMbf_6cUuaxj9rAaJ61f3ntPBoto9g&usqp=CAU">
+      <img *ngFor="let member of view._def.extendedProps.team" class="team" [src]="member.image">
     </div>
     <div class="d-flex align-self-end">
-      <p class="date">Jan 25,2021</p>
-      <p class="date">10:00AM</p>
+      <p class="date">{{view._instance.range.start | date: 'MMM dd,yyyy'}}</p>
+      <p class="date">{{view._def.extendedProps.time}}</p>
     </div>
   </div>
 </div>

@@ -26,6 +26,7 @@ export class CalendarComponent implements OnInit {
               private dateFormat: NgbDateNativeAdapter) {
     configuration.centered = true;
     configuration.container = 'app-calendar';
+    configuration.animation = false;
   }
 
   ngOnInit(): void {
@@ -65,14 +66,19 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEventClick(clickInfo: EventClickArg): void {
-    console.log(clickInfo);
+    //console.log(clickInfo);
     const modalRef = this.modalService.open(ViewEventComponent);
+    modalRef.componentInstance.view = clickInfo.event;
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
         //console.log(result.data);
+        this.configuration.animation = false;
         const modal = this.modalService.open(CreateEventComponent);
+        modal.componentInstance.edit = clickInfo.event;
         modal.result.then((res) => {
           console.log(res.data);
+        }, error => {
+          //console.log(error);
         });
       }
     }, error => {
@@ -122,6 +128,7 @@ export class CalendarComponent implements OnInit {
       time: result.data.time,
       note: result.data.note,
       category: result.data.customEventCategory.value ? result.data.customEventCategory.value : result.data.eventCategory.value,
+      team: result.data.team,
       id: '12',
       color: randomColor.color,
       textColor: randomColor.textColor,

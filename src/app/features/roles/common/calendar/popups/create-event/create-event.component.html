@@ -2,7 +2,7 @@
   <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
   <form [formGroup] = 'eventForm'>
      <div class="card-1">
-       <p class="heading">Create Event</p>
+       <p class="heading">{{edit ? 'Edit' : 'Create'}} Event</p>
        <p class="title">Event title</p>
        <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
        <div class="d-flex justify-content-between mb-custom">
@@ -51,9 +51,9 @@
        <p class="title">Add a team member</p>
        <div class="d-flex justify-content-between">
          <div class="d-flex">
-           <div (click)="toggleTeamMember(i,member.value)" [attr.id]="i" class="d-flex team-member" *ngFor="let member of teamData | keyvalue; let i = index">
+           <div #member (click)="toggleTeamMember(i,member)" [attr.id]="i" class="d-flex team-member" *ngFor="let member of teamData; let i = index">
              <img class="active" src="/assets/calendar-icons/tick.svg">
-             <img class="team" [src]="member.value.image">
+             <img class="team" [src]="member.image">
            </div>
          </div>
          <button  [disabled]="eventForm.invalid" class="launch align-self-end" (click)="onSubmit()">Launch Event</button>
