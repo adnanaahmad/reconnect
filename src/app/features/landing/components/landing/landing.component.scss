@@ -1,0 +1,148 @@
+p{
+  font-family: 'Poppins';
+}
+.parent{
+  padding: 0 2vw;
+}
+.parent-card{
+  background: var(--lightBlue);
+  //background: transparent linear-gradient(180deg, #F2F5FB 0%, #F2F5FB00 100%) 0% 0% no-repeat padding-box;
+  height:100vh;
+  position: relative;
+}
+.card-1{
+  position: absolute;
+  padding: 3vw 7vw 0 7vw;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.reconnect{
+  color: var(--darkGray);
+  font-size: 1.4vw;
+  font-weight: 500;
+  margin-right: auto;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+.green-char{
+  color: var(--green)
+}
+.menu-div{
+  margin-right: 10.4vw;
+}
+.menu-div p{
+  margin-right: 3vw;
+  margin-bottom: 0;
+  font-size: 1vw;
+  color: var(--lighGray);
+  font-weight: 300;
+}
+.menu-div p:last-child{
+  margin-right: 0;
+}
+.register{
+  border: none;
+  background: var(--green);
+  border-radius: .4vw;
+  color: white;
+  padding: .3vw 1.1vw .3vw 1.1vw;
+  font-family: 'Poppins';
+  font-size: 1vw;
+  font-weight: 500;
+  cursor: pointer;
+}
+.register:focus{
+  outline: none;
+}
+.login{
+  border: none;
+  background: transparent;
+  //border-radius: .5vw;
+  color: var(--darkGray);
+  padding: .3vw 1.5vw .3vw 1.5vw;
+  font-family: 'Poppins';
+  font-size: 1vw;
+  cursor: pointer;
+  //font-weight: 500;
+}
+.login:focus{
+  outline: none;
+}
+.opaque{
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}
+.modal-parent{
+  padding: 0 5vw;
+  margin-top: 5vw;
+}
+.modal-div{
+  background: white;
+  padding: 2vw;
+  border-radius: .5vw;
+}
+.modal-div img{
+  width: 33vw;
+  height: 30vw;
+  object-fit: cover;
+  border-radius: .5vw;
+}
+.page{
+  padding: 1vw 3vw 1vw 3vw;
+}
+
+.house{
+  width: 49vw;
+  height: 41vw;
+  object-fit: cover;
+  border-radius: 1vw;
+}
+.div-2{
+  margin-top: 2.5vw;
+}
+.pg-1-txt{
+  margin-top: 3vw;
+}
+.hb{
+  color: var(--green);
+  font-size: 2.2vw;
+  font-weight: 600;
+  margin-bottom: 0.5vw;
+}
+.wnb{
+  color: var(--darkGray);
+  font-size: 3.5vw;
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: 4vw;
+}
+.tmw{
+  font-size: 1.2vw;
+  color: var(--darkGray);
+  margin-bottom: 0.3vw;
+  font-weight: 300;
+}
+.mb-custom{
+  margin-bottom: 2vw;
+}
+.mb-custom1{
+  margin-bottom: 5vw;
+}
+.tabs p{
+  background: var(--extraLightGray);
+  margin-bottom: 0;
+  font-size: .9vw;
+  color: var(--darkGray);
+  padding: 1vw 2.5vw;
+  font-weight: 500;
+}
+.tabs p:first-child{
+  border-top-left-radius: .5vw;
+  background: var(--green);
+  color: white;
+}
+.tabs p:last-child{
+  border-top-right-radius: .5vw;
+}

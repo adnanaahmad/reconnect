@@ -26,7 +26,7 @@ export class CalendarComponent implements OnInit {
               private dateFormat: NgbDateNativeAdapter) {
     configuration.centered = true;
     configuration.container = 'app-calendar';
-    configuration.animation = false;
+    configuration.animation = true;
   }
 
   ngOnInit(): void {

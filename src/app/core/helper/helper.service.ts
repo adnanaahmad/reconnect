@@ -15,6 +15,10 @@ export class HelperService {
     modal[index].style.borderRadius = '.7vw';
     modal[index].parentElement.style.left = '8vw';
     modal[index].parentElement.style.justifyContent = 'center';
+    modal[index].parentElement.style.transition = ' -webkit-transform none';
+    modal[index].parentElement.style.transition = 'none';
+    modal[index].parentElement.style['-webkit-transform'] = 'translate(0,0)';
+    modal[index].parentElement.style.transform = 'transform: translate(0,0)';
     modal[index].parentElement.parentElement.style.overflowY = 'hidden';
     const backdrop = modal[index].parentElement.parentElement.previousSibling as HTMLElement;
     backdrop.style.position = 'absolute';

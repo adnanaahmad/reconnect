@@ -1,0 +1,44 @@
+<div class="parent">
+    <div class="parent-card">
+        <img #card  src="/assets/landing/opaque.png" class="opaque">
+        <div class="card-1">
+            <div class="d-flex">
+                <p #reconnect (click)="landing()" class="reconnect align-self-end">Re-C<span class="green-char">o</span>nnect</p>
+                <div class="d-flex menu-div align-self-end">
+                    <p>Home</p>
+                    <p>Buy a home</p>
+                    <p>Sell a home</p>
+                    <p>About</p>
+                </div>
+                <div class="align-self-end">
+                    <button #login (click)="logIn()" class="login">Login</button>
+                    <button (click)="register()" class="register">Register</button>
+                </div>
+            </div>
+            <div class="modal-parent" *ngIf="modal">
+                <div class="modal-div d-flex">
+                    <img src="/assets/landing/home.png" >
+                    <div class="page">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!modal" class="d-flex justify-content-between div-2">
+                <div class="pg-1-txt">
+                    <p class="hb">Home Buying</p>
+                    <p class="wnb">Will Never Be</p>
+                    <p class="wnb mb-custom">The Same</p>
+                    <p class="tmw">The modern way to sell your home. You can use</p>
+                    <p class="tmw mb-custom1">Reconnect to market your property with ease.</p>
+                    <div class="d-flex tabs">
+                        <p>Buy</p>
+                        <p>Rent</p>
+                        <p>Sold</p>
+                    </div>
+                </div>
+                <img class="house" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHw%3D&w=1000&q=80">
+            </div>
+        </div>
+    </div>
+</div>
+
