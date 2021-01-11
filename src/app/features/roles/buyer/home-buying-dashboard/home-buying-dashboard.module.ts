@@ -6,9 +6,10 @@ import {HomeBuyingDashboardComponent} from './component/home-buying-dashboard/ho
 import { RemoveMemberComponent } from './popups/remove-member/remove-member.component';
 import { TeamPersonComponent } from './component/team-person/team-person.component';
 import {SharedModule} from '../../../../shared/shared.module';
+import { AddMemberComponent } from './popups/add-member/add-member.component';
 
 @NgModule({
-  declarations: [HomeBuyingDashboardComponent, RemoveMemberComponent, TeamPersonComponent],
+  declarations: [HomeBuyingDashboardComponent, RemoveMemberComponent, TeamPersonComponent, AddMemberComponent],
   imports: [
     CommonModule,
     HomeBuyingDashboardRoutingModule,

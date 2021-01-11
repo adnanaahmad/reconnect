@@ -80,10 +80,22 @@ export class HomeBuyingDashboardComponent implements OnInit {
         mls: 726168,
       }
     };
+    this.dashboard.team[0] = undefined;
   }
   removeMember(member): void{
       //console.log(member);
       const index =  this.dashboard.team.findIndex(x => x === member);
       this.dashboard.team[index] = undefined;
+  }
+  addMember(member): void{
+    const index = {
+      'Real Estate Agent': 0,
+      Lender: 1,
+      Attorney: 2,
+      'Home Inspector': 3,
+      'Insurance Agent': 4
+    };
+    console.log(member);
+    this.dashboard.team[index[member.role]] = member;
   }
 }

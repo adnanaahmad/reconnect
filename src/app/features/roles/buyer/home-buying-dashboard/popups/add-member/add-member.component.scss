@@ -1,0 +1,127 @@
+p{
+  font-family: 'Poppins';
+}
+.card-1{
+  padding: 2.5vw;
+}
+.close-icon{
+  position: absolute;
+  left: 93%;
+  height:.6vw;
+  width: .6vw;
+  top: 5%;
+  cursor: pointer;
+}
+.role{
+  //margin-bottom:.5vw;
+  font-size: .8vw;
+  font-weight: 500;
+  margin-bottom: 0;
+  color: var(--darkGray);
+}
+.card-sub{
+  padding: .5vw;
+  border: 1px solid var(--extraLightGray);
+  border-radius: .2vw;
+}
+.display-img{
+  width: 4vw;
+  height:4vw;
+  object-fit: cover;
+  border-radius: .5vw;
+  margin-right: 1vw;
+}
+.member-info{
+  display: flex;
+  flex-direction: column;
+}
+.div-1{
+  margin-right: 1vw;
+}
+.name, .question p, .number p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+}
+.name{
+  font-size:.6vw;
+  font-weight: 500;
+  //margin-bottom: auto;
+  margin-right: .3vw;
+}
+.question img{
+  height: .6vw;
+  width: .6vw;
+  margin-right: .3vw;
+}
+.number img{
+  height: .6vw;
+  width: .6vw;
+  margin-right: .3vw;
+}
+.question p, .number p{
+  font-size:.5vw;
+  font-weight: 200;
+}
+.number{
+  margin-bottom: .5vw;
+}
+.div-2{
+  margin-top: auto;
+}
+.div-2 img{
+  width: 1vw;
+  height: 1vw;
+  background: var(--extraLightGray);
+  padding: .25vw;
+  border-radius: .2vw;
+}
+
+.div-2 a:focus{
+  outline: none;
+}
+.div-2 a{
+  margin-right: .3vw;
+}
+.div-2 a:last-child{
+  margin-right: 0;
+}
+.card-1 > div{
+  margin-bottom: 1vw;
+}
+.card-1 > div:last-child{
+  margin-bottom: 0vw;
+}
+.card-1 > div:first-child{
+  margin-bottom: 0.5vw;
+}
+.rating img{
+  width: .5vw;
+  height: .5vw;
+  margin-right: .3vw;
+}
+.review{
+  color: var(--darkGray);
+  font-size:.6vw;
+  margin-bottom: 0;
+  font-weight: 200;
+}
+.rating{
+  margin-bottom: auto;
+}
+.plus-icon{
+  padding: .3vw;
+  background: var(--green);
+  height: 1.2vw;
+  width: 1.2vw;
+  border-radius:.3vw;
+  cursor: pointer;
+//  margin-right: auto;
+}
+.search-icon{
+  padding: .35vw;
+  background: var(--extraLightGray);
+  height: 1.6vw;
+  width: 1.6vw;
+  border-radius:.3vw;
+  cursor: pointer;
+}

@@ -1,6 +1,6 @@
 <div>
   <div *ngIf="member == undefined" class="empty">
-    <img class="plus-btn" src="/assets/dashboard/plus.svg">
+    <img (click)="addTeamMember()" class="plus-btn" src="/assets/dashboard/plus.svg">
     <div class="empty-txt">
       <p class="text-center">Add</p>
       <p class="text-center">{{role}}</p>
