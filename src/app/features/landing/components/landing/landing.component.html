@@ -12,7 +12,7 @@
                 </div>
                 <div class="align-self-end">
                     <button #login (click)="logIn()" class="login">Login</button>
-                    <button (click)="register()" class="register">Register</button>
+                    <button #signup (click)="register()" class="register">Register</button>
                 </div>
             </div>
             <div class="modal-parent" *ngIf="modal">

@@ -1,0 +1,244 @@
+p{
+  font-family: 'Poppins';
+}
+.heading{
+  font-size: 1.8vw;
+  font-weight: 600;
+  color: var(--darkGray);
+  margin-bottom: 0;
+}
+.form-custom{
+  border-radius: .6vw;
+  height: 2.5vw;
+  border: 1px solid var(--lighGray);
+  padding-left: 1vw;
+  cursor: pointer;
+  font-family: 'Poppins';
+  font-size: .8vw;
+}
+.select-p{
+  font-size: .8vw;
+  color: var(--darkGray);
+  margin-bottom: 0;
+  font-weight: 300;
+}
+.mt-custom{
+  margin-top: 10vw;
+}
+.second-screen{
+  margin-top: 4.5vw;
+}
+.label{
+  color: var(--lighGray);
+  font-size: .7vw;
+  margin-bottom: 0.4vw;
+  margin-left: .5vw;
+}
+.mb-custom{
+  margin-bottom: 2vw;
+}
+.mb-custom1{
+  margin-bottom: .5vw;
+}
+.people-container{
+  border: 1px solid var(--lighGray);
+  padding: 1vw;
+  border-radius: .5vw;
+}
+.img{
+  height: 1.5vw;
+  width: 1.5vw;
+  object-fit: cover;
+  border-radius: .3vw;
+  margin-right: .5vw;
+}
+.name{
+  color: var(--darkGray);
+  font-size: .7vw;
+  margin-bottom: 0;
+  margin-right: .5vw;
+}
+.role{
+  color: white;
+  font-size: .6vw;
+  margin-bottom: 0;
+  background: var(--lighGray);
+  padding: .1vw .7vw .1vw .7vw;
+  border-radius: .4vw;
+  height: fit-content;
+}
+.people-container > div{
+  margin-bottom: 1vw;
+  cursor: pointer;
+}
+.people-container > div:last-child{
+  margin-bottom: 0;
+}
+.sub-heading{
+  font-size: .9vw;
+  font-weight: 300;
+  margin-bottom: 0;
+  color: var(--darkGray);
+}
+.third-screen{
+  margin-top: 3.5vw;
+}
+.choose{
+  font-size: .9vw;
+  margin-bottom: .4vw;
+  color: var(--lighGray);
+}
+.arrow{
+  transform: scaleX(-1);
+  filter: grayscale(100%) brightness(.3);
+  height: 1vw;
+  width: 1vw;
+  margin-left: auto;
+  align-self: center;
+}
+.buying-div{
+  background: var(--lighGray);
+  height: fit-content;
+  padding: .8vw;
+  border-radius: .5vw;
+  margin-right: 1vw;
+}
+.buying{
+  filter: brightness(0) invert(1);
+  width: 2vw;
+  height: 2vw;
+}
+.buying-layer, .selling-layer{
+  background: var(--extraLightGray);
+  padding: 1vw;
+  border-radius: .5vw;
+  cursor: pointer;
+}
+.buying-layer{
+  margin-bottom: 1vw;
+}
+.buying-txt{
+  color: var(--darkGray);
+  font-size: 1.2vw;
+  margin-bottom: 0;
+  font-weight: 500;
+  align-self: center;
+}
+
+.buying-layer:focus{
+  border: 2px solid var(--green);
+  outline: none;
+}
+.buying-layer:focus .buying-div{
+  background: var(--green);
+}
+.buying-layer:focus .arrow{
+  filter: none;
+}
+
+.selling-layer:focus{
+  border: 2px solid var(--green);
+  outline: none;
+}
+.selling-layer:focus .buying-div{
+  background: var(--green);
+}
+.selling-layer:focus .arrow{
+  filter: none;
+}
+
+
+///////////////////////////////
+.fourth-screen{
+  margin-top: 2vw;
+  height: 100%;
+}
+
+.input-flex{
+  flex-grow: 1;
+}
+.input-flex:first-child{
+  margin-right: 1vw;
+}
+.name-row{
+  margin-bottom: 1.5vw;
+}
+.remember{
+  font-size: .8vw;
+  font-weight: 300;
+  color: var(--darkGray);
+  margin-bottom: 0;
+  align-self: center;
+  margin-right: .5vw;
+}
+.container {
+  position: relative;
+  padding-left: 2vw;
+  cursor: pointer;
+  padding-right: 0;
+  margin: 0;
+  max-width: 8.5vw;
+}
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1vw;
+  width: 1vw;
+  background-color: white;
+  padding: .25vw;
+  border-radius: .3vw;
+  border: 1px solid var(--lighGray);
+}
+
+/* On mouse-over, add a grey background color */
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: var(--green);
+  border: none;
+}
+
+.signup{
+  background: var(--green);
+  border: none;
+  font-family: 'Poppins';
+  font-size: .8vw;
+  border-radius: .5vw;
+  padding: .6vw 2.3vw .6vw 2.3vw;
+  color: white;
+  cursor: pointer;
+}
+.signup:focus{
+  outline: none;
+}
+.mb-custom2{
+  //margin-bottom: 1vw;
+}
+.last-row{
+  margin-bottom: auto;
+}
+
+.page-four{
+  height: 100%;
+}
+.arrow-login{
+  transform: scaleX(-1);
+  height: .7vw;
+  width: .7vw;
+  align-self: center;
+}
+.login-green{
+  color: var(--green);
+  font-weight: 500;
+  cursor: pointer;
+}

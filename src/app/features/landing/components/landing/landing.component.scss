@@ -49,7 +49,6 @@ p{
   padding: .3vw 1.1vw .3vw 1.1vw;
   font-family: 'Poppins';
   font-size: 1vw;
-  font-weight: 500;
   cursor: pointer;
 }
 .register:focus{
@@ -62,6 +61,7 @@ p{
   color: var(--darkGray);
   padding: .3vw 1.5vw .3vw 1.5vw;
   font-family: 'Poppins';
+  border-radius: .4vw;
   font-size: 1vw;
   cursor: pointer;
   //font-weight: 500;
