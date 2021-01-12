@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,39 +11,43 @@ export class LandingComponent implements OnInit, AfterViewInit {
   @ViewChild('reconnect') reconnectButton: ElementRef;
   @ViewChild('login') loginButton: ElementRef;
   modal: boolean;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.modal = false;
-    this.router.events.subscribe(result => {
-        this.changeBackground();
-    });
+    this.showModal();
   }
   ngAfterViewInit(): void{
     this.changeBackground();
+    this.router.events.subscribe(result => {
+      this.changeBackground();
+    });
   }
 
   logIn(): void{
-    this.router.navigateByUrl('/user/login');
+    this.router.navigateByUrl('/login');
   }
   register(): void{
-    this.router.navigateByUrl('/user/register');
+    this.router.navigateByUrl('/register');
   }
   landing(): void{
     this.router.navigateByUrl('/');
   }
   changeBackground(): void{
     if (this.router.url === '/'){
+      this.modal = false;
       this.cardComponent.nativeElement.style.opacity = '0';
       this.reconnectButton.nativeElement.style.color = 'var(--darkGray)';
       this.loginButton.nativeElement.style.color = 'var(--darkGray)';
-      this.modal = false;
     } else {
+      this.modal = true;
       this.cardComponent.nativeElement.style.opacity = '1';
       this.cardComponent.nativeElement.style.transition = '.4s';
       this.reconnectButton.nativeElement.style.color = 'white';
       this.loginButton.nativeElement.style.color = 'white';
-      this.modal = true;
     }
+    //this.cdr.detectChanges();
+  }
+  showModal(): void{
+    this.modal = this.router.url !== '/';
   }
 }

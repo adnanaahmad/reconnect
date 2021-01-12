@@ -17,7 +17,7 @@ export class TeamPersonComponent implements OnInit {
   constructor(private modalService: NgbModal, configuration: NgbModalConfig) {
     configuration.centered = true;
     configuration.container = 'app-home-buying-dashboard';
-    configuration.animation = false;
+    configuration.animation = true;
   }
 
   ngOnInit(): void {

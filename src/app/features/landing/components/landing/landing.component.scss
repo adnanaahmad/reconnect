@@ -85,12 +85,13 @@ p{
 }
 .modal-div img{
   width: 33vw;
-  height: 30vw;
+  height: 31.5vw;
   object-fit: cover;
   border-radius: .5vw;
 }
 .page{
   padding: 1vw 3vw 1vw 3vw;
+  width: 100%;
 }
 
 .house{
@@ -145,4 +146,38 @@ p{
 }
 .tabs p:last-child{
   border-top-right-radius: .5vw;
+}
+.filter-div{
+  box-shadow: 0px 20px 40px #00000008;
+  padding: 1.5vw 1.5vw 1.5vw 2.5vw;
+  background: white;
+  position: absolute;
+  border-top-right-radius: .5vw;
+  border-bottom-left-radius: .5vw;
+  border-bottom-right-radius: .5vw;
+}
+.filter{
+  margin-right: 6vw;
+}
+.filter p{
+  margin-bottom: 0;
+}
+.filter p:first-child{
+  font-size: 1vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-bottom: .3vw;
+}
+.filter p:last-child{
+  font-size: .8vw;
+  font-weight: 300;
+  color: var(--lighGray);
+}
+.search{
+  background: var(--green);
+  transform: scaleX(-1);
+  padding: 1vw;
+  height: 3.5vw;
+  width: 3.5vw;
+  border-radius: .5vw;
 }
