@@ -1,125 +1,117 @@
-<div *ngIf="screen['one']" class="d-flex flex-column parent">
-    <p class="heading">Become a Partner</p>
-    <div class="mt-custom">
-        <p class="choose">Choose a role</p>
-        <div class="select-div">
-            <select class="form-control form-custom" id="">
-                <option>Agent</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-            <img src="/assets/landing/drop.svg" class="drop">
-        </div>
-    </div>
-    <button (click)="screen['one']=false;screen['two']=true;" class="continue mt-auto align-self-end">Continue</button>
-</div>
-
-<div *ngIf="screen['two']" class="d-flex flex-column parent">
-    <div class="d-flex">
+<form [formGroup]="registrationForm" class="parent" (ngSubmit)="onSubmit()">
+    <div *ngIf="screen['one']" class="d-flex flex-column parent" formGroupName="personal">
         <p class="heading">Become a Partner</p>
-        <div class="d-flex back" (click)="screen['one']=true;screen['two']=false;">
-            <img src="/assets/transaction-details/arrow.png" class="arrow">
-            <p>Back</p>
-        </div>
-    </div>
-    <p class="sub-heading name-row">First, tell us about your company</p>
-    <div class="d-flex name-row">
-        <div class="input-flex">
-            <p class="label">Company Name</p>
-            <input class="form-control form-custom" placeholder="">
-        </div>
-        <div class="input-flex" >
-            <p class="label">License</p>
-            <input class="form-control form-custom" placeholder="">
-        </div>
-    </div>
-    <div class="d-flex name-row">
-        <div class="select-flex">
-            <p class="label">Phone Number</p>
-            <input class="form-control form-custom" placeholder="">
-        </div>
-        <div class="select-flex">
-            <p class="label">City</p>
+        <div class="mt-custom">
+            <p class="choose">Choose a role</p>
             <div class="select-div">
-                <select class="form-control form-custom" id="">
-                    <option>Agent</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                <select formControlName="role" class="form-control form-custom" id="">
+                    <option *ngFor="let i of role">{{i}}</option>
                 </select>
-                <img src="/assets/landing/drop.svg" class="drop1">
+                <img src="/assets/landing/drop.svg" class="drop">
             </div>
         </div>
+        <button [disabled]="!registrationForm.get('personal.role').valid" (click)="screen['one']=false;screen['two']=true;" class="continue mt-auto align-self-end">Continue</button>
     </div>
-    <div class="name-row">
-        <p class="label">Street</p>
-        <input class="form-control form-custom" placeholder="">
-    </div>
-    <div class="d-flex">
-        <div class="select-flex">
-            <p class="label">State</p>
-            <div class="select-div">
-                <select class="form-control form-custom" id="">
-                    <option>Agent</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-                <img src="/assets/landing/drop.svg" class="drop1">
+
+    <div *ngIf="screen['two']" class="d-flex flex-column parent" formGroupName="company">
+        <div class="d-flex">
+            <p class="heading">Become a Partner</p>
+            <div class="d-flex back" (click)="screen['one']=true;screen['two']=false;">
+                <img src="/assets/transaction-details/arrow.png" class="arrow">
+                <p>Back</p>
             </div>
         </div>
-        <div class="select-flex">
-            <p class="label">Zip Code</p>
-            <input class="form-control form-custom" placeholder="">
+        <p class="sub-heading name-row">First, tell us about your company</p>
+        <div class="d-flex name-row">
+            <div class="input-flex">
+                <p class="label">Company Name</p>
+                <input formControlName="companyName" class="form-control form-custom" placeholder="">
+            </div>
+            <div class="input-flex" >
+                <p class="label">License</p>
+                <input formControlName="license" class="form-control form-custom" placeholder="">
+            </div>
         </div>
+        <div class="d-flex name-row">
+            <div class="select-flex">
+                <p class="label">Phone Number</p>
+                <input formControlName="phoneNumber" class="form-control form-custom" placeholder="">
+            </div>
+            <div class="select-flex">
+                <p class="label">City</p>
+                <div class="select-div">
+                    <select formControlName="city" class="form-control form-custom" id="">
+                        <option *ngFor="let i of cities">{{i.city_name}}</option>
+                    </select>
+                    <img src="/assets/landing/drop.svg" class="drop1">
+                </div>
+            </div>
+        </div>
+        <div class="name-row">
+            <p class="label">Street</p>
+            <input formControlName="street" class="form-control form-custom" placeholder="">
+        </div>
+        <div class="d-flex">
+            <div class="select-flex">
+                <p class="label">State</p>
+                <div class="select-div">
+                    <select formControlName="state" (change) = "changeState(registrationForm.value.company.state)" class="form-control form-custom" id="">
+                        <option *ngFor="let i of states">{{i.state_name}}</option>
+                    </select>
+                    <img src="/assets/landing/drop.svg" class="drop1">
+                </div>
+            </div>
+            <div class="select-flex">
+                <p class="label">Zip Code</p>
+                <input formControlName="zipCode" class="form-control form-custom" placeholder="">
+            </div>
+        </div>
+
+        <button [disabled]="!registrationForm.get('company').valid" (click)="screen['two']=false;screen['three']=true;" class="continue mt-auto align-self-end">Continue</button>
     </div>
 
-    <button (click)="screen['two']=false;screen['three']=true;" class="continue mt-auto align-self-end">Continue</button>
-</div>
-
-<div *ngIf="screen['three']" class="d-flex flex-column parent">
-    <div class="d-flex">
-        <p class="heading">Become a Partner</p>
-        <div class="d-flex back" (click)="screen['two']=true;screen['three']=false;">
-            <img src="/assets/transaction-details/arrow.png" class="arrow">
-            <p>Back</p>
+    <div *ngIf="screen['three']" class="d-flex flex-column parent">
+        <div class="d-flex">
+            <p class="heading">Become a Partner</p>
+            <div class="d-flex back" (click)="screen['two']=true;screen['three']=false;">
+                <img src="/assets/transaction-details/arrow.png" class="arrow">
+                <p>Back</p>
+            </div>
         </div>
-    </div>
-    <p class="sub-heading name-row">Now, tell us about you.</p>
-    <div class="d-flex name-row">
-        <div class="input-flex">
-            <p class="label">First Name</p>
-            <input class="form-control form-custom" placeholder="">
+        <p class="sub-heading name-row">Now, tell us about you.</p>
+        <div formGroupName="personal">
+            <div class="d-flex name-row">
+                <div class="input-flex">
+                    <p class="label">First Name</p>
+                    <input formControlName="firstName" class="form-control form-custom" placeholder="">
+                </div>
+                <div class="input-flex" >
+                    <p class="label">Last Name</p>
+                    <input formControlName="lastName" class="form-control form-custom" placeholder="">
+                </div>
+            </div>
+            <div class="d-flex name-row">
+                <div class="input-flex">
+                    <p class="label">NMLS#</p>
+                    <input formControlName="nmls" class="form-control form-custom" placeholder="">
+                </div>
+                <div class="input-flex" >
+                    <p class="label">Phone Number</p>
+                    <input formControlName="phoneNumber" class="form-control form-custom" placeholder="">
+                </div>
+            </div>
+            <div class="name-row" >
+                <p class="label">Email</p>
+                <input formControlName="email" class="form-control form-custom" placeholder="">
+            </div>
         </div>
-        <div class="input-flex" >
-            <p class="label">Last Name</p>
-            <input class="form-control form-custom" placeholder="">
+        <div class="mt-custom2">
+            <label class="container">
+                <input formControlName="agreed" id="myCheck" type="checkbox">
+                <img class="checkmark" src="/assets/loan-details/tick.svg">
+                <p class="remember text-nowrap">I have agreed to the terms and conditions</p>
+            </label>
         </div>
+        <button type="submit" [disabled]="(!registrationForm.get('personal').valid) || !registrationForm.get('agreed').value" class="continue mt-auto align-self-end">Sign up</button>
     </div>
-    <div class="d-flex name-row">
-        <div class="input-flex">
-            <p class="label">NMLS#</p>
-            <input class="form-control form-custom" placeholder="">
-        </div>
-        <div class="input-flex" >
-            <p class="label">Phone Number</p>
-            <input class="form-control form-custom" placeholder="">
-        </div>
-    </div>
-    <div class="name-row" >
-        <p class="label">Email</p>
-        <input class="form-control form-custom" placeholder="">
-    </div>
-    <div class="">
-        <label class="container">
-            <input id="myCheck" type="checkbox">
-            <img class="checkmark" src="/assets/loan-details/tick.svg">
-            <p class="remember text-nowrap">I have agreed to the terms and conditions</p>
-        </label>
-    </div>
-    <button class="continue mt-auto align-self-start">Sign up</button>
-</div>
+</form>
