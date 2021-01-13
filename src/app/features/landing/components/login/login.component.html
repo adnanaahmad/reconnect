@@ -1,17 +1,19 @@
-<p class="heading">Login</p>
-<p class="sub-heading">Enter your credentials to login</p>
+<form [formGroup]="login.form" (ngSubmit)="onSubmit()">
+    <p class="heading">Login</p>
+    <p class="sub-heading">Enter your credentials to login</p>
 
-<p class="label">Email</p>
-<input class="form-control form-custom mb-custom" type="text" placeholder="email">
-<p class="label">Password</p>
-<input type="password" class="form-control form-custom mb-custom1" type="text" placeholder="***********">
+    <p class="label">Email</p>
+    <input [class.is-invalid] = "login.form.get('email').invalid && login.form.get('email').touched" type="email" formControlName="email" class="form-control form-custom mb-custom" type="text" placeholder="email">
+    <p class="label">Password</p>
+    <input formControlName="password" type="password" class="form-control form-custom mb-custom1" type="text" placeholder="***********">
 
-<div>
-    <label class="container">
-        <input id="myCheck" type="checkbox">
-        <img class="checkmark" src="/assets/loan-details/tick.svg">
-        <p class="remember">Remember me</p>
-    </label>
-</div>
+    <div>
+        <label class="container">
+            <input id="myCheck" type="checkbox">
+            <img class="checkmark" src="/assets/loan-details/tick.svg">
+            <p class="remember">Remember me</p>
+        </label>
+    </div>
 
-<button class="login">Login</button>
+    <button type="submit" [disabled]="!login.form.valid" class="login">Login</button>
+</form>
