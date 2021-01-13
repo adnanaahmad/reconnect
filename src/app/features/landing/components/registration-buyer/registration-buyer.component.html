@@ -1,87 +1,81 @@
-<p *ngIf="screen['one'] || screen['two']"  class="heading">How did you hear about us?</p>
-<div (click)="screen['one']=false;screen['two']=true" *ngIf="screen['one']" class="form-custom d-flex mt-custom">
-    <p class="select-p align-self-center">Select an option</p>
-</div>
-<div *ngIf="screen['two']" class="second-screen">
-    <p class="label">Select an option</p>
-    <select class="form-control form-custom mb-custom" id="exampleFormControlSelect1">
-        <option>Professional or Friend Reference</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-    </select>
-    <p class="label">Type in referral name</p>
-    <input class="form-control form-custom mb-custom1" placeholder="">
-    <div class="people-container">
-        <div (click)="screen['three']=true;screen['two']=false;" class="d-flex" *ngFor="let person of professional">
-            <img [src]="person.image" class="img">
-            <p class="name align-self-center">{{person.name}}</p>
-            <p class="role align-self-center">{{person.role}}</p>
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-parent">
+    <div *ngIf="screen['one']" class="second-screen d-flex flex-column">
+        <p class="heading">How did you hear about us?</p>
+        <div class="mt-auto mb-auto d-flex flex-column">
+            <p class="label">Select an option</p>
+            <select formControlName="aboutUs" (change)="showReferral()" class="form-control form-custom mb-custom" id="">
+                <option [ngValue]="null" [disabled]="true" >Select</option>
+                <option *ngFor="let i of aboutUs">{{i}}</option>
+            </select>
+            <div *ngIf="referral" class="referral">
+                <p class="label">Type in referral name</p>
+                <input formControlName="referralName" class="form-control form-custom mb-custom1" placeholder="">
+                <div class="people-container">
+                    <div (click)="registrationForm.get('referralName').setValue(person.name);
+                            registrationForm.get('referral').setValue(person);"
+                            class="d-flex" *ngFor="let person of professional">
+                        <img [src]="person.image" class="img">
+                        <p class="name align-self-center">{{person.name}}</p>
+                        <p class="role align-self-center">{{person.role}}</p>
+                    </div>
+                </div>
+            </div>
+            <button (click)="screen['two']=true;screen['one']=false;" [disabled]="referral === true ? !registrationForm.get('referralName').valid : !registrationForm.get('aboutUs').valid" class="signup next">Next</button>
         </div>
     </div>
-</div>
-<div class="d-flex flex-column page-four">
-    <div *ngIf="screen['three'] || screen['four']">
-        <p class="heading">Sign up</p>
-        <p class="sub-heading">Sign up to use our services</p>
-    </div>
-    <div *ngIf="screen['three']" class="third-screen">
-        <p class="choose">Choose what you want to do</p>
-        <div class="d-flex buying-layer" tabindex="1">
+
+    <div *ngIf="screen['two']" class="third-screen d-flex flex-column align-items-start">
+        <div class="first-row3">
+            <p class="heading">Sign up</p>
+            <p class="sub-heading">Sign up to use our services</p>
+        </div>
+        <div class="d-flex buying-layer mt-auto mb-auto" tabindex="1">
             <div class="buying-div"><img src="/assets/menu-icons/buyer.svg" class="buying"></div>
             <p class="buying-txt">Buying</p>
-            <img (click)="screen['three']=false;screen['four']=true;" src="/assets/transaction-details/arrow.png" class="arrow">
-        </div>
-        <div class="d-flex selling-layer" tabindex="1">
-            <div class="buying-div"><img src="/assets/menu-icons/seller.svg" class="buying"></div>
-            <p class="buying-txt">Selling</p>
-            <img (click)="screen['three']=false;screen['four']=true;" src="/assets/transaction-details/arrow.png" class="arrow">
+            <img (click)="screen['two']=false;screen['three']=true;" src="/assets/transaction-details/arrow.png" class="arrow">
         </div>
     </div>
-    <div *ngIf="screen['four']" class="fourth-screen d-flex flex-column">
+    <div *ngIf="screen['three']" class="fourth-screen d-flex flex-column">
+        <div class="first-row4">
+            <p class="heading">Sign up</p>
+            <p class="sub-heading">Sign up to use our services</p>
+        </div>
         <div class="mb-auto">
             <div class="d-flex name-row">
                 <div class="input-flex">
                     <p class="label">First Name</p>
-                    <input class="form-control form-custom" placeholder="">
+                    <input formControlName="firstName" class="form-control form-custom" placeholder="">
                 </div>
                 <div class="input-flex" >
                     <p class="label">Last Name</p>
-                    <input class="form-control form-custom" placeholder="">
+                    <input formControlName="lastName" class="form-control form-custom" placeholder="">
                 </div>
             </div>
             <div class="name-row">
                 <p class="label">Email ID</p>
-                <input class="form-control form-custom" placeholder="">
+                <input formControlName="email" class="form-control form-custom" placeholder="">
             </div>
             <div class="d-flex name-row">
                 <div class="input-flex">
                     <p class="label">Password</p>
-                    <input class="form-control form-custom" placeholder="">
+                    <input formControlName="password" class="form-control form-custom" placeholder="">
                 </div>
                 <div class="input-flex" >
                     <p class="label">Confirm Password</p>
-                    <input class="form-control form-custom" placeholder="">
+                    <input formControlName="confirmPassword" class="form-control form-custom" placeholder="">
                 </div>
             </div>
 
-            <div class="">
+            <div class="mt-custom3">
                 <label class="container">
-                    <input id="myCheck" type="checkbox">
+                    <input formControlName="agreed" id="myCheck" type="checkbox">
                     <img class="checkmark" src="/assets/loan-details/tick.svg">
                     <p class="remember text-nowrap">I have agreed to the terms and conditions</p>
                 </label>
             </div>
         </div>
         <div class="d-flex">
-            <button class="signup">Sign Up</button>
-            <div class="d-flex ml-auto">
-                <p class="remember">Already a member?
-                    <span (click)="router.navigateByUrl('/login')"  class="login-green">Login</span>
-                </p>
-                <img src="/assets/transaction-details/arrow.png" class="arrow-login">
-            </div>
+            <button type="submit" [disabled]="!registrationForm.valid || !registrationForm.get('agreed')" class="signup">Sign Up</button>
         </div>
     </div>
-</div>
+</form>

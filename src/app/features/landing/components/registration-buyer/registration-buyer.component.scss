@@ -1,6 +1,9 @@
 p{
   font-family: 'Poppins';
 }
+.form-parent{
+  height: 100%;
+}
 .heading{
   font-size: 1.8vw;
   font-weight: 600;
@@ -26,13 +29,20 @@ p{
   margin-top: 10vw;
 }
 .second-screen{
-  margin-top: 4.5vw;
+  //margin-top: 4.5vw;
+  height: 100%;
 }
 .label{
   color: var(--lighGray);
   font-size: .7vw;
   margin-bottom: 0.4vw;
   margin-left: .5vw;
+}
+.referral{
+  margin-bottom: 1vw;
+}
+.next{
+  flex-grow: 1;
 }
 .mb-custom{
   margin-bottom: 2vw;
@@ -81,7 +91,12 @@ p{
   color: var(--darkGray);
 }
 .third-screen{
-  margin-top: 3.5vw;
+  //margin-top: 3.5vw;
+  width: 100%;
+  height: 100%;
+}
+.first-row3{
+ //margin-bottom: 3.5vw;
 }
 .choose{
   font-size: .9vw;
@@ -113,6 +128,8 @@ p{
   padding: 1vw;
   border-radius: .5vw;
   cursor: pointer;
+  align-self: center;
+  width: 100%;
 }
 .buying-layer{
   margin-bottom: 1vw;
@@ -150,8 +167,11 @@ p{
 
 ///////////////////////////////
 .fourth-screen{
-  margin-top: 2vw;
+  //margin-top: 2vw;
   height: 100%;
+}
+.first-row4{
+  margin-bottom: 2vw;
 }
 
 .input-flex{
@@ -217,6 +237,7 @@ p{
   padding: .6vw 2.3vw .6vw 2.3vw;
   color: white;
   cursor: pointer;
+  flex-grow: 1;
 }
 .signup:focus{
   outline: none;
@@ -229,7 +250,7 @@ p{
 }
 
 .page-four{
-  height: 100%;
+  //height: 100%;
 }
 .arrow-login{
   transform: scaleX(-1);
@@ -241,4 +262,12 @@ p{
   color: var(--green);
   font-weight: 500;
   cursor: pointer;
+}
+.mt-custom3{
+  margin-top: 2vw;
+}
+select::-ms-expand {	display: none; }
+select{
+  -webkit-appearance: none;
+  appearance: none;
 }
