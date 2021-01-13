@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
+import {RegistrationBuyerModel} from '../../models/registration-buyer.model';
 
 @Component({
   selector: 'app-registration-buyer',
@@ -8,18 +9,13 @@ import {FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./registration-buyer.component.scss']
 })
 export class RegistrationBuyerComponent implements OnInit {
-
-  screen = {one: true, two: false, three: false};
-  professional: any;
-  aboutUs: any;
-  aboutUsModel: any;
-  referral: any;
-  registrationForm: any;
+  registration: RegistrationBuyerModel = {} as RegistrationBuyerModel;
   constructor(private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.referral = false;
-    this.aboutUs = [
+    this.registration.screen = {one: true, two: false, three: false};
+    this.registration.referral = false;
+    this.registration.aboutUs = [
         'Professional or Friend Reference',
         'Facebook Advertisement',
         'Twitter',
@@ -27,7 +23,7 @@ export class RegistrationBuyerComponent implements OnInit {
         'Website',
         'Other'
     ];
-    this.registrationForm = this.fb.group({
+    this.registration.form = this.fb.group({
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       email: [null, Validators.required],
@@ -38,28 +34,28 @@ export class RegistrationBuyerComponent implements OnInit {
       referralName: [{value: null, disabled: true}, Validators.required],
       referral: [{value: null, disabled: true}, Validators.required],
     });
-    this.registrationForm.valueChanges.subscribe(res => {
-      console.log(res);
-    });
+    // this.registration.form.valueChanges.subscribe(res => {
+    //   console.log(res);
+    // });
   }
   showReferral(): void{
     // api call
-    this.referral = this.registrationForm.get('aboutUs').value === 'Professional or Friend Reference';
-    if (this.referral){
-      this.registrationForm.get('referralName').enable();
-      this.registrationForm.get('referral').enable();
+    this.registration.referral = this.registration.form.get('aboutUs').value === 'Professional or Friend Reference';
+    if (this.registration.referral){
+      this.registration.form.get('referralName').enable();
+      this.registration.form.get('referral').enable();
 
-      this.professional = [
+      this.registration.professional = [
         {image: 'https://img-cdn.tid.al/o/4858a4b2723b7d0c7d05584ff57701f7b0c54ce3.jpg', name: 'Daniel Kevin', role: 'Real Estate Agent', number: '+923 24 4 1276'},
         {image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHPzYd8Zq8A3IXMaeSeTyfaSTce2CLi0NZ-Q&usqp=CAU', name: 'Tom Holland', role: 'Attorney', number: '+923 24 4 1276'},
         {image: 'https://alicepropertymanagement.com/images/temp-profile.jpg', name: 'Sean Paul', role: 'Lender', number: '+923 24 4 1276'},
       ];
     } else{
-      this.registrationForm.get('referralName').disable();
-      this.registrationForm.get('referral').disable();
+      this.registration.form.get('referralName').disable();
+      this.registration.form.get('referral').disable();
     }
   }
   onSubmit(): void{
-    console.log(this.registrationForm.value);
+    console.log(this.registration.form.value);
   }
 }

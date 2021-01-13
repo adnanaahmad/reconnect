@@ -1,30 +1,30 @@
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="form-parent">
-    <div *ngIf="screen['one']" class="second-screen d-flex flex-column">
+<form [formGroup]="registration.form" (ngSubmit)="onSubmit()" class="form-parent">
+    <div *ngIf="registration.screen['one']" class="second-screen d-flex flex-column">
         <p class="heading">How did you hear about us?</p>
         <div class="mt-auto mb-auto d-flex flex-column">
             <p class="label">Select an option</p>
             <select formControlName="aboutUs" (change)="showReferral()" class="form-control form-custom mb-custom" id="">
                 <option [ngValue]="null" [disabled]="true" >Select</option>
-                <option *ngFor="let i of aboutUs">{{i}}</option>
+                <option *ngFor="let i of registration.aboutUs">{{i}}</option>
             </select>
-            <div *ngIf="referral" class="referral">
+            <div *ngIf="registration.referral" class="referral">
                 <p class="label">Type in referral name</p>
                 <input formControlName="referralName" class="form-control form-custom mb-custom1" placeholder="">
                 <div class="people-container">
-                    <div (click)="registrationForm.get('referralName').setValue(person.name);
-                            registrationForm.get('referral').setValue(person);"
-                            class="d-flex" *ngFor="let person of professional">
+                    <div (click)="registration.form.get('referralName').setValue(person.name);
+                            registration.form.get('referral').setValue(person);"
+                            class="d-flex" *ngFor="let person of registration.professional">
                         <img [src]="person.image" class="img">
                         <p class="name align-self-center">{{person.name}}</p>
                         <p class="role align-self-center">{{person.role}}</p>
                     </div>
                 </div>
             </div>
-            <button (click)="screen['two']=true;screen['one']=false;" [disabled]="referral === true ? !registrationForm.get('referralName').valid : !registrationForm.get('aboutUs').valid" class="signup next">Next</button>
+            <button (click)="registration.screen['two']=true;registration.screen['one']=false;" [disabled]="registration.referral === true ? !registration.form.get('referralName').valid : !registration.form.get('aboutUs').valid" class="signup next">Next</button>
         </div>
     </div>
 
-    <div *ngIf="screen['two']" class="third-screen d-flex flex-column align-items-start">
+    <div *ngIf="registration.screen['two']" class="third-screen d-flex flex-column align-items-start">
         <div class="first-row3">
             <p class="heading">Sign up</p>
             <p class="sub-heading">Sign up to use our services</p>
@@ -32,10 +32,10 @@
         <div class="d-flex buying-layer mt-auto mb-auto" tabindex="1">
             <div class="buying-div"><img src="/assets/menu-icons/buyer.svg" class="buying"></div>
             <p class="buying-txt">Buying</p>
-            <img (click)="screen['two']=false;screen['three']=true;" src="/assets/transaction-details/arrow.png" class="arrow">
+            <img (click)="registration.screen['two']=false;registration.screen['three']=true;" src="/assets/transaction-details/arrow.png" class="arrow">
         </div>
     </div>
-    <div *ngIf="screen['three']" class="fourth-screen d-flex flex-column">
+    <div *ngIf="registration.screen['three']" class="fourth-screen d-flex flex-column">
         <div class="first-row4">
             <p class="heading">Sign up</p>
             <p class="sub-heading">Sign up to use our services</p>
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="d-flex">
-            <button type="submit" [disabled]="!registrationForm.valid || !registrationForm.get('agreed')" class="signup">Sign Up</button>
+            <button type="submit" [disabled]="!registration.form.valid || !registration.form.get('agreed').value" class="signup">Sign Up</button>
         </div>
     </div>
 </form>
