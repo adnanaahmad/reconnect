@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { LandingRoutingModule } from './landing-routing.module';
 import {LandingComponent} from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
+import { RegistrationBuyerComponent } from './components/registration-buyer/registration-buyer.component';
+import {RegistrationPartnerComponent} from './components/registration-partner/registration-partner.component';
 
 
 @NgModule({
-  declarations: [LandingComponent, LoginComponent, RegistrationComponent],
+  declarations: [LandingComponent, LoginComponent, RegistrationPartnerComponent, RegistrationBuyerComponent],
   imports: [
     CommonModule,
     LandingRoutingModule
