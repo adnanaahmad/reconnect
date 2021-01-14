@@ -12,10 +12,20 @@ export class LandingComponent implements OnInit, AfterViewInit {
   @ViewChild('login') loginButton: ElementRef;
   @ViewChild('signup') registerButton: ElementRef;
   modal: boolean;
+  houses: Array<string>;
+  team: Array<string>;
   constructor(private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.showModal();
+    this.houses = ['https://images.adsttc.com/media/images/5be9/fd5c/08a5/e5a5/8c00/008f/large_jpg/CARLES_FAUS_ARQUITECTURA_-_CARMEN_HOUSE_(2).jpg?1542061390',
+    'https://nimvo.com/wp-content/uploads/2018/04/Modern-House.jpg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnm8ECMJaAQu_rUUfaYZy-FQnl4XQbgsyLcA&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTahA0LYlzFA-K_B3pu8ruheyd1STRBMXTxbg&usqp=CAU'];
+    this.team = ['https://bambiniphoto.sg/wp-content/uploads/Professional-Headshots-1.jpg',
+    'https://www.marketingdonut.co.uk/sites/default/files/what-should-you-include-professional-profile142825543.jpg',
+    'https://agencia-fotografia.com/wp-content/uploads/2019/08/Linkedin-photo-session.jpg',
+    'https://lh3.googleusercontent.com/proxy/ec_Df4z9R571DwDdKk2Yi3vqDiDFm7HDS5Kq_DD856mOJX8916nlCE4j2r062r0I4RqfIQ9Cq0LhrsITfHMuZxXcBUtZI-gwQir93skLmAni3WoouA'];
   }
   ngAfterViewInit(): void{
     this.changeBackground();

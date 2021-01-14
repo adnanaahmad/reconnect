@@ -37,29 +37,181 @@
                     </div>
                     <div class="d-flex filter-div">
                         <div class="filter align-self-center">
+                            <img src="/assets/landing/drop.svg" class="drop">
                             <p>Location</p>
                             <p>New York</p>
                         </div>
                         <div class="filter align-self-center">
+                            <img src="/assets/landing/drop.svg" class="drop">
                             <p>Property Type</p>
                             <p>Villa</p>
                         </div>
                         <div class="filter align-self-center">
+                            <img src="/assets/landing/drop.svg" class="drop">
                             <p>Max Price</p>
                             <p>$5000</p>
                         </div>
                         <img src="/assets/chat/search.svg" class="search">
                     </div>
                 </div>
-                <img class="house" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHw%3D&w=1000&q=80">
+                <img class="house" src="/assets/landing/landing.svg">
             </div>
         </div>
     </div>
     <div *ngIf="!modal" class="card-2">
-        <div>
-            <p>Why Choose</p>
-            <p>Reconnect</p>
+        <div class="d-flex">
+            <div class="col-txt">
+                <p class="col-txt-1 text-nowrap">Why Choose</p>
+                <p class="col-txt-2 text-nowrap">Re-connect</p>
+            </div>
+            <div class="card-2-col">
+                <img class="card-2-img" src="/assets/landing/best.svg">
+                <p class="card-2-heading">Best Properties</p>
+                <p class="card-2-txt">
+                    Residences can be classified by and how they are connected to neighbouring residences and land. Different types of housing tenure can be used for the same physical type. For example, connected residences might be owned by a single entity and leased out, or owned separately with an agreement covering the relationship between units and common areas and concerns
+                </p>
+            </div>
+            <div class="card-2-col">
+                <img class="card-2-img" src="/assets/landing/moneyback.svg">
+                <p class="card-2-heading">Moneyback Guarantee</p>
+                <p class="card-2-txt">
+                    Residences can be classified by and how they are connected to neighbouring residences and land. Different types of housing tenure can be used for the same physical type. For example, connected residences might be owned by a single entity and leased out, or owned separately with an agreement covering the relationship between units and common areas and concerns
+                </p>
+            </div>
+            <div class="card-2-col">
+                <img class="card-2-img" src="/assets/landing/tech.svg">
+                <p class="card-2-heading">Technology Driven</p>
+                <p class="card-2-txt">
+                    Residences can be classified by and how they are connected to neighbouring residences and land. Different types of housing tenure can be used for the same physical type. For example, connected residences might be owned by a single entity and leased out, or owned separately with an agreement covering the relationship between units and common areas and concerns
+                </p>
+            </div>
         </div>
+    </div>
+    <div class="card-3" *ngIf="!modal" >
+        <div class="card-3-row-1">
+            <p class="col-txt-1">Featured Properties</p>
+            <p>View all</p>
+        </div>
+        <div class="d-flex">
+            <div class="home-card" *ngFor="let i of houses">
+                <img class="home-img" [src]="i">
+                <div class="home-info d-flex flex-column">
+                    <div class="d-flex justify-content-between">
+                        <p class="price">$250,000</p>
+                        <p class="area">2,200 Sq Ft</p>
+                    </div>
+                    <p class="address">G9 Boulevard St, Worchester, MA0165 </p>
+                    <div class="d-flex house-feature-parent">
+                        <div class="house-feature d-flex">
+                            <img src="assets/landing/bath.svg">
+                            <p class="text-nowrap">3 baths</p>
+                        </div>
+                        <div class="house-feature d-flex">
+                            <img src="assets/landing/bed.svg">
+                            <p class="text-nowrap">3 beds</p>
+                        </div>
+                        <div class="house-feature d-flex">
+                            <img src="assets/landing/garage.svg">
+                            <p class="text-nowrap">1 garage</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-4" *ngIf="!modal" >
+        <p class="col-txt-1 text-center mb-custom-c4">What Our Customers Are Saying</p>
+        <div class="d-flex">
+            <div class="review-card d-flex flex-column" *ngFor="let i of [1,2,3]" >
+                <div class="d-flex justify-content-between rating">
+                    <p class="review-title align-self-center">Joseph Seed</p>
+                    <img class="stars align-self-center" src="/assets/landing/stars.svg">
+                </div>
+                <p class="review-loc">San Jose</p>
+                <p class="review-txt">Residences can be classified by and how they are connected to neighbouring residences and land. Different types of housing tenure can be used for the same physical type. For example, connected residences might be owned by</p>
+                <img class="quote" src="/assets/landing/quote.svg">
+            </div>
+        </div>
+    </div>
+    <div class="card-5" *ngIf="!modal" >
+        <div class="d-flex sub-card-5">
+            <img src="/assets/landing/hut.svg">
+            <div class="card-5-info">
+                <p class="col-txt-1">Ready to list your home</p>
+                <p class="p-email">Put your email address and get listed</p>
+                <div class="email-btn">
+                    <input type="email" formControlName="email" class="form-control form-custom" type="text" placeholder="Email address">
+                    <button class="get-listed">Get Listed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-6">
+        <div class="d-flex justify-content-between">
+            <p class="col-txt-1">Meet Our Home Buying Team</p>
+            <p class="see-all">See all</p>
+        </div>
+        <p class="card-6-txt">But while team faces new hurdles, their success still hinges on a core set of </p>
+        <p class="card-6-txt">fundamentals for group collaboration</p>
+        <div class="d-flex home-card-div">
+            <div class="home-card" *ngFor="let i of team">
+                <img class="home-img" [src]="i">
+                <div class="team-card d-flex flex-column">
+                    <p class="name-c6">Rafael Nadal</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="role-c6 text-nowrap">Real Estate Agent</p>
+                        <div class="d-flex justify-content-between div-2-c6 align-self-end">
+                            <a [href] = ""><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                            <a [href] = ""><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+                            <a [href] = ""> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-7 d-flex">
+        <div class="col-c7">
+            <p class="reconnect-c7">Re-c<span class="green-char">o</span>nnect</p>
+            <p class="reconnect-c7-txt">The modern way to sell your home. You can use reconnect to market your property with ease</p>
+            <div class="d-flex social-media div-2-c6 align-self-end">
+                <a class="facebook-a" [href] = ""><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook-c7"></a>
+                <a [href] = ""><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+                <a [href] = ""> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+            </div>
+        </div>
+        <div class="col-c7">
+            <p class="heading-c7">Site Map</p>
+            <p class="col-c7-txt">Home</p>
+            <p class="col-c7-txt">About</p>
+            <p class="col-c7-txt">Buy a home</p>
+            <p class="col-c7-txt">Sell a home</p>
+            <p class="col-c7-txt">Become a Partner</p>
+        </div>
+        <div class="col-c7">
+            <p class="heading-c7">Terms</p>
+            <p class="col-c7-txt">Terms of use</p>
+            <p class="col-c7-txt">Privacy Notice</p>
+            <p class="col-c7-txt">DMCA</p>
+            <p class="col-c7-txt">Support</p>
+        </div>
+        <div class="col-c7">
+            <p class="heading-c7">About</p>
+            <p class="col-c7-txt">About us</p>
+            <p class="col-c7-txt">Announcements</p>
+            <p class="col-c7-txt">Features</p>
+            <p class="col-c7-txt">Latest News</p>
+            <p class="col-c7-txt">Blog</p>
+        </div>
+        <div class="col-c7">
+            <p class="heading-c7">Contact us</p>
+            <p class="col-c7-txt">G9 Boulevard St, Worchester, MA 0165</p>
+            <p class="col-c7-txt">+12 900 4381 223</p>
+            <p class="col-c7-txt">info@re-connect.co</p>
+        </div>
+    </div>
+    <div class="card-8">
+        <p class="c8-txt">Copyright 2020, Reconnect, LLC. All right reserved. Patent Pending</p>
     </div>
 </div>
 

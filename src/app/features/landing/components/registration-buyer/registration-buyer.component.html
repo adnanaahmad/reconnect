@@ -3,11 +3,11 @@
         <p class="heading">How did you hear about us?</p>
         <div class="mt-auto mb-auto d-flex flex-column">
             <p class="label">Select an option</p>
-            <select formControlName="aboutUs" (change)="showReferral()" class="form-control form-custom mb-custom" id="">
+            <select formControlName="aboutUs" (change)="showReferral()" class="form-control form-custom" id="">
                 <option [ngValue]="null" [disabled]="true" >Select</option>
                 <option *ngFor="let i of registration.aboutUs">{{i}}</option>
             </select>
-            <div *ngIf="registration.referral" class="referral">
+            <div *ngIf="registration.referral" class="referral mt1-custom">
                 <p class="label">Type in referral name</p>
                 <input formControlName="referralName" class="form-control form-custom mb-custom1" placeholder="">
                 <div class="people-container">

@@ -5,8 +5,8 @@ p{
   padding: 0 2vw;
 }
 .parent-card{
-  background: var(--lightBlue);
-  //background: transparent linear-gradient(180deg, #F2F5FB 0%, #F2F5FB00 100%) 0% 0% no-repeat padding-box;
+  //background: var(--lightBlue);
+  background: transparent linear-gradient(180deg, #F2F5FB 0%, #F2F5FB00 100%) 0% 0% no-repeat padding-box;
   height:100vh;
   position: relative;
 }
@@ -158,6 +158,14 @@ p{
 }
 .filter{
   margin-right: 6vw;
+  position: relative;
+}
+.drop{
+  height: .6vw;
+  width: .6vw;
+  position: absolute;
+  left: 120%;
+  top: 20%;
 }
 .filter p{
   margin-bottom: 0;
@@ -180,4 +188,379 @@ p{
   height: 3.5vw;
   width: 3.5vw;
   border-radius: .5vw;
+}
+
+////////////////////////////// card-2
+
+.card-2{
+  padding: 6vw 7vw 6vw 7vw;
+  background: white;
+}
+.col-txt{
+  margin-top: 4.5vw;
+  margin-right: 6vw;
+}
+.col-txt-1, .col-txt-2{
+  margin-bottom: 0;
+  font-size: 2.2vw;
+  font-weight: 600;
+}
+.col-txt-1{
+  color: var(--darkGray);
+}
+.col-txt-2{
+  color: var(--green);
+}
+.card-2-col{
+  margin-right: 6vw;
+}
+.card-2-col:last-child{
+  margin-right: 0;
+}
+.card-2-heading{
+  font-size: 1.2vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-bottom:.5vw;
+}
+.card-2-img{
+  height: 5vw;
+  width: 5vw;
+  margin-bottom: 1.5vw;
+}
+.card-2-txt{
+  color: var(--lighGray);
+  margin-bottom: 0;
+  font-size: .9vw;
+  font-weight: 300;
+}
+
+
+///////////////////////////////// card-3
+
+.card-3{
+  padding: 7vw 7vw 8vw 7vw;
+  background: var(--lightBlue);
+}
+.card-3-row-1{
+  margin-bottom: 4vw;
+  display: flex;
+}
+.card-3-row-1 p:last-child{
+  margin-left: auto;
+  font-size: 1vw;
+  font-weight: 500;
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
+  align-self: end;
+  margin-bottom: 0;
+}
+.home-card{
+  margin-right: 1.3vw;
+}
+.home-card:last-child{
+  margin-right: 0;
+}
+.home-img{
+  height: 17vw;
+  width: 20vw;
+  object-fit: cover;
+  border-top-right-radius: .5vw;
+  border-top-left-radius: .5vw;
+}
+.home-info{
+  background: white;
+  padding: 1vw;
+  border-bottom-right-radius: .5vw;
+  border-bottom-left-radius: .5vw;
+}
+.price{
+  color: var(--green);
+  font-weight: 500;
+  font-size: 1vw;
+  margin-bottom: 1vw;
+}
+.address{
+  color: var(--darkGray);
+  font-weight: 300;
+  font-size: .8vw;
+  margin-bottom: 1.5vw;
+  width: 13vw;
+}
+.area{
+  color: var(--darkGray);
+  font-weight: 500;
+  font-size: .8vw;
+  margin-bottom: 0;
+  align-self: center;
+}
+.house-feature img{
+  height: 1.5vw;
+  width: 1.5vw;
+  margin-right: .6vw;
+}
+.house-feature p{
+  color: var(--darkGray);
+  font-weight: 300;
+  font-size: .7vw;
+  margin-bottom: 0;
+  align-self: center;
+}
+.house-feature-parent{
+  justify-content: space-between;
+}
+//////////////////////////////////////////// card-4
+.card-4{
+  padding: 7vw 7vw 6vw 7vw;
+  background: white;
+}
+.mb-custom-c4{
+  margin-bottom: 4vw;
+}
+.review-card{
+  background: var(--lightBlue);
+  padding: 2vw 2vw 1vw 2vw;
+  border-radius: .5vw;
+  margin-right: 2vw;
+  position: relative;
+  width: 30vw;
+  height: 20vw;
+}
+.review-card:last-child{
+  margin-right: 0;
+}
+.review-title{
+  font-size: 1.2vw;
+  color: var(--darkGray);
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.review-loc{
+  margin-bottom: 2vw;
+  font-size: 1vw;
+  color: var(--lighGray);
+  font-weight: 300;
+}
+.review-txt{
+  margin-bottom: 0;
+  font-size: .9vw;
+  font-weight: 300;
+  color: var(--lighGray);
+  line-height: 1.6vw;
+  margin-right: 2.5vw;
+  position: absolute;
+  top: 40%;
+  //z-index: 10;
+  //letter-spacing: .03vw;
+  width: 20vw;
+}
+.stars{
+  height: 1vw;
+  width: 8vw;
+}
+.rating{
+  margin-bottom: .5vw;
+}
+.quote{
+  height: 6vw;
+  width: 6vw;
+  margin-left: auto;
+  margin-top: auto;
+}
+
+//////////////////////////// card-5
+.card-5{
+  padding: 8vw 12vw 9vw 12vw;
+  background: white;
+ // position: relative;
+}
+.sub-card-5{
+  background-image: linear-gradient(to right, #82FF9D , #57FF7B);
+  border: none;
+  height: 18vw;
+  width: 100%;
+  position: relative;
+  border-radius: 1vw;
+  //position: ;
+}
+.sub-card-5 img{
+  height: 32vw;
+  width: 30vw;
+  position: absolute;
+  top: -53%;
+}
+.card-5-info{
+  margin: auto;
+  margin-left: 30vw;
+}
+.form-custom{
+  border-radius: .4vw;
+  height: 2.9vw;
+  border: none;
+  font-family: 'Poppins';
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 300;
+}
+::placeholder{
+  font-size: .85vw;
+  color: var(--lighGray);
+  font-family: 'Poppins';
+}
+.p-email{
+  color: white;
+  margin-bottom: 2vw;
+  font-size: .85vw;
+  font-weight: 300;
+}
+.card-5-info p:first-child{
+  margin-bottom: 1vw;
+}
+
+.email-btn{
+  position: relative;
+}
+.get-listed{
+  padding: .6vw 1.5vw .6vw 1.5vw;
+  font-family: 'Poppins';
+  font-size: .8vw;
+  color: white;
+  background: var(--darkBlue);
+  border: none;
+  border-radius: .4vw;
+  position: absolute;
+  top: 10%;
+  left: 73%;
+}
+.get-listed:focus{
+  outline: none;
+}
+/////////////////////////////////////// card-6
+
+.card-6{
+  padding: 7vw 7vw 8vw 7vw;
+  background: var(--lightBlue);
+}
+.card-6 > p:first-child{
+  margin-bottom: 1vw;
+}
+.card-6-txt{
+  margin-bottom: 0;
+  color: var(--darkGray);
+  font-size: 1vw;
+  font-weight: 300;
+}
+.home-card-div{
+  margin-top: 3vw;
+}
+.div-2-c6 img{
+  width: 1.8vw;
+  height: 1.8vw;
+  background: var(--lightBlue);
+  padding: .5vw;
+  border-radius: .2vw;
+}
+
+.div-2-c6 a:focus{
+  outline: none;
+}
+.div-2-c6 a{
+  margin-right: .8vw;
+}
+.div-2-c6 a:last-child{
+  margin-right: 0;
+}
+.role-c6{
+  margin-bottom: 0;
+  color: var(--lighGray);
+  font-size: .9vw;
+  font-weight: 300;
+}
+.name-c6{
+  margin-bottom: 1vw;
+  color: var(--darkGray);
+  font-size: 1.1vw;
+  font-weight: 500;
+}
+.team-card{
+  background: white;
+  padding: 1vw 1.5vw;
+  border-bottom-left-radius: .5vw;
+  border-bottom-right-radius: .5vw;
+}
+.see-all{
+  margin-left: auto;
+  font-size: 1vw;
+  font-weight: 500;
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
+  align-self: end;
+  margin-bottom: 0;
+}
+/////////////////////////////////// card-7
+.card-7{
+  padding: 6vw 7vw 10vw 7vw;
+  background: white;
+}
+.col-c7{
+  flex-grow: 1;
+}
+.reconnect-c7{
+  margin-bottom: 1.5vw;
+  font-size: 1.5vw;
+  font-weight: 500;
+  color: var(--darkGray)
+}
+.heading-c7{
+  margin-bottom: 1.5vw;
+  font-size: 1.2vw;
+  font-weight: 500;
+  color: var(--darkGray)
+}
+.reconnect-c7-txt{
+  margin-bottom: 2vw;
+  font-size: .9vw;
+  font-weight: 300;
+  color: var(--lighGray);
+  line-height: 1.6vw;
+  width: 17vw;
+}
+.social-media img{
+  height: 2.5vw;
+  width: 2.5vw;
+  padding: .7vw;
+}
+.facebook-a{
+  background: var(--green);
+  border-radius: .3vw;
+}
+.facebook-c7{
+  background: transparent !important;
+  filter: brightness(0) invert(1);
+}
+.social-media a{
+  margin-right: 2vw;
+}
+.col-c7-txt{
+  font-size: 1vw;
+  color: var(--lighGray);
+  margin-bottom: 1vw;
+  width: 15vw;
+}
+.col-c7-txt:last-child{
+  margin-bottom: 0;
+}
+//////////////////////////////////////// card-8
+.card-8{
+  background: var(--green);
+  border-top-left-radius: .5vw;
+  border-top-right-radius: .5vw;
+  padding: 1.2vw 0;
+}
+.c8-txt{
+  text-align: center;
+  color: white;
+  font-size: .75vw;
+  margin-bottom: 0;
+  font-weight: 300;
 }

@@ -34,8 +34,13 @@
         </div>
         <div class="d-flex name-row">
             <div class="select-flex">
-                <p class="label">Phone Number</p>
-                <input formControlName="phoneNumber" class="form-control form-custom" placeholder="">
+                <p class="label">State</p>
+                <div class="select-div">
+                    <select formControlName="state" (change) = "changeState(register.form.value.company.state)" class="form-control form-custom">
+                        <option *ngFor="let i of register.states">{{i.state_name}}</option>
+                    </select>
+                    <img src="/assets/landing/drop.svg" class="drop1">
+                </div>
             </div>
             <div class="select-flex">
                 <p class="label">City</p>
@@ -53,13 +58,8 @@
         </div>
         <div class="d-flex">
             <div class="select-flex">
-                <p class="label">State</p>
-                <div class="select-div">
-                    <select formControlName="state" (change) = "changeState(register.form.value.company.state)" class="form-control form-custom">
-                        <option *ngFor="let i of register.states">{{i.state_name}}</option>
-                    </select>
-                    <img src="/assets/landing/drop.svg" class="drop1">
-                </div>
+                <p class="label">Phone Number</p>
+                <input formControlName="phoneNumber" class="form-control form-custom" placeholder="">
             </div>
             <div class="select-flex">
                 <p class="label">Zip Code</p>

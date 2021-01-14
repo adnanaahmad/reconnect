@@ -17,8 +17,8 @@ export class RegistrationPartnerComponent implements OnInit {
     this.register.role = ['Agent', 'Attorney', 'Real Estate', 'Lender', 'Home Inspector', 'Insurance Agent'];
     this.location.authToken().subscribe(res => {
       this.register.token = res.auth_token;
-      this.location.getStates(this.register.token).subscribe(res1 => {
-        this.register.states = res1;
+      this.location.getStates(this.register.token).subscribe(response => {
+        this.register.states = response;
       });
     });
     this.register.form = this.fb.group({
