@@ -2,7 +2,8 @@ import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/c
 import {DomSanitizer} from '@angular/platform-browser';
 import {NewsFeedModel} from '../../models/news-feed.model';
 import {DeleteConfirmationPopupComponent} from '../../../../../../shared/components/delete-confirmation-popup/delete-confirmation-popup.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {AddNewsFeedComponent} from '../../popups/add-news-feed/add-news-feed.component';
 
 @Component({
   selector: 'app-news-feed',
@@ -11,7 +12,11 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewsFeedComponent implements OnInit {
   newsFeed: NewsFeedModel = {} as NewsFeedModel;
-  constructor(private sanitizer: DomSanitizer, private modalService: NgbModal) { }
+  constructor(private sanitizer: DomSanitizer, private modalService: NgbModal, private config: NgbModalConfig) {
+    config.animation = true;
+    config.container = 'app-news-feed';
+    config.centered = true;
+  }
 
   ngOnInit(): void {
     this.newsFeed.topNews = [
@@ -35,7 +40,7 @@ export class NewsFeedComponent implements OnInit {
   safeUrl(data) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(data);
   }
-  deletePost(index) {
+  deletePost(index): void {
     const modalRef = this.modalService.open(DeleteConfirmationPopupComponent);
     modalRef.result.then((result) => {
       if (result === 'Yes') {
@@ -45,5 +50,15 @@ export class NewsFeedComponent implements OnInit {
     }, error => {
       //console.log(error);
     });
+  }
+  addNewsFeed(): void {
+      const modalRef = this.modalService.open(AddNewsFeedComponent);
+      modalRef.result.then((result) => {
+          if (result === 'Yes') {
+              console.log(result);
+          }
+      }, error => {
+          //console.log(error);
+      });
   }
 }

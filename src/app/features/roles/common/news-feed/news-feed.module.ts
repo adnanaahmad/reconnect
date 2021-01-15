@@ -7,10 +7,11 @@ import { VariantOneComponent } from './components/variant-one/variant-one.compon
 import { VariantTwoComponent } from './components/variant-two/variant-two.component';
 import { VariantThreeComponent } from './components/variant-three/variant-three.component';
 import { VariantFourComponent } from './components/variant-four/variant-four.component';
+import { AddNewsFeedComponent } from './popups/add-news-feed/add-news-feed.component';
 
 
 @NgModule({
-  declarations: [NewsFeedComponent, VariantOneComponent, VariantTwoComponent, VariantThreeComponent, VariantFourComponent],
+  declarations: [NewsFeedComponent, VariantOneComponent, VariantTwoComponent, VariantThreeComponent, VariantFourComponent, AddNewsFeedComponent],
   imports: [
     CommonModule,
     NewsFeedRoutingModule,
