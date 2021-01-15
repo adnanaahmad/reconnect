@@ -1,0 +1,82 @@
+
+.card-2{
+  background: white;
+  padding: 2.5vw 2.5vw;
+  margin-bottom: 2.5vw;
+  border-radius: .6vw;
+  position: relative;
+}
+div.card-2 div.row div.col-md{
+  padding-left: 1.2vw;
+  padding-right: 1.2vw;
+}
+.post-profile-icon{
+  width: 3vw;
+  height: 3vw;
+  border-radius: .5vw;
+  object-fit: cover;
+  margin-right: .8vw;
+}
+.post-date{
+  margin-top: .3vw;
+  margin-bottom: 0;
+  color: var(--darkGray);
+  font-weight: 300;
+  font-size: .75vw;
+}
+.post-username{
+  font-size: .85vw;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.post-title{
+  font-size: .85vw;
+  font-weight: 500;
+  margin-bottom: 0;
+  position: absolute;
+  top:14%;
+  left: 6%;
+  color: white;
+}
+.gradient{
+  height: 4vw;
+  width: 91%;
+  background-image: linear-gradient(180deg, black , transparent);
+  position: absolute;
+  opacity: .7;
+}
+.div-1{
+  padding-top: 1vw;
+  border-top: 1px solid var(--extraLightGray);
+  width: 100%;
+}
+
+.post-image{
+  object-fit: cover;
+  width: 100% ;
+  //height: 100%;
+  height: 14vw;
+  border-radius: .5vw;
+  margin-bottom: 1vw;
+}
+.share-icon{
+  padding: .4vw;
+  border-radius: .5vw;
+  background: var(--green);
+  height: 1.8vw;
+  width: 1.8vw;
+  margin-right: 1vw;
+}
+.delete-icon{
+  width: 1.8vw;
+  height: 1.8vw;
+  padding: .4vw;
+  border-radius: .5vw;
+  background:var(--red);
+  float: right;
+  cursor: pointer;
+}
+
+p{
+  font-family: 'Poppins';
+}

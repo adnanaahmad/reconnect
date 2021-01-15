@@ -1,0 +1,38 @@
+<div class="card-2">
+    <div class="row">
+        <div class="col-md">
+            <div class="media-col">
+                <img *ngIf = "post.mediaArray[0].type == 'image'" id="media" class="post-image" [src]="post.mediaArray[0].media" >
+                <img (click)="nextMedia(post.mediaArray, $event)" class="right-arrow" src="/assets/news-feed-icons/arrow.svg">
+                <img (click)="previousMedia(post.mediaArray, $event)" class="left-arrow" src="/assets/news-feed-icons/arrow.svg">
+            </div>
+        </div>
+        <div class="d-flex align-items-start flex-column col-md">
+
+            <div class="div-3">
+                <div class="">
+                    <div> <p class="post-username" style="">{{ post.title }} </p>
+                    </div>
+                </div>
+            </div>
+            <div #postContent class="post-parent">
+                <p class="post-text">{{post.description}} </p>
+                <p (click)="toggle($event)" class="read-more">Read more</p>
+                <p (click)="toggle($event)" class="read-less">Read less</p>
+            </div>
+            <div class="mt-auto d-flex div-1">
+                <div class="" style=""><img class="img-fluid post-profile-icon" [src]="post.userImage">
+
+                </div>
+                <div class="align-self-end">
+                    <p class="post-username">{{ post.userName }}</p>
+                    <p class="post-date" style="">Published on {{ post.date | date}}</p>
+                </div>
+                <div class="ml-auto align-self-end d-flex" style="">
+                    <img class="share-icon" src="/assets/news-feed-icons/share.svg">
+                    <img class="delete-icon" src="/assets/news-feed-icons/delete.svg">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

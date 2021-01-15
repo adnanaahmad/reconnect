@@ -1,0 +1,20 @@
+<div class="card-2">
+    <div class="gradient">
+
+    </div>
+    <p class="post-title">{{post.title}}</p>
+    <img class="post-image" [src]="post.mediaArray[0].media">
+    <div class="mt-auto d-flex div-1">
+        <div class="" style=""><img class="img-fluid post-profile-icon" [src]="post.userImage">
+
+        </div>
+        <div class="align-self-end">
+            <p class="post-username">{{ post.userName }}</p>
+            <p class="post-date" style="">Published on {{ post.date | date}}</p>
+        </div>
+        <div class="ml-auto align-self-end d-flex" style="">
+            <img class="share-icon" src="/assets/news-feed-icons/share.svg">
+            <img class="delete-icon" src="/assets/news-feed-icons/delete.svg">
+        </div>
+    </div>
+</div>
