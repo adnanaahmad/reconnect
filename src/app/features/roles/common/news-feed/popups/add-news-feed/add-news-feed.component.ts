@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HelperService} from '../../../../../../core/helper/helper.service';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-news-feed',
@@ -8,12 +9,12 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
 })
 export class AddNewsFeedComponent implements OnInit {
 
-  constructor(private helper: HelperService) { }
+  constructor(private helper: HelperService, private modal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.helper.setModalPosition();
   }
   close(): void{
-
+    this.modal.dismiss();
   }
 }

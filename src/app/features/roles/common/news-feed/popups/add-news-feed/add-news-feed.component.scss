@@ -19,7 +19,7 @@ p{
 }
 .close-btn{
   position: absolute;
-  left: 95%;
+  left: 96%;
   top: 3%;
   height: .7vw;
   width: .7vw;
@@ -78,7 +78,7 @@ p{
   font-size: .7vw;
   margin-bottom: 0;
   height: fit-content;
-  padding: .5vw 1.5vw .5vw 1.5vw;
+  padding: .5vw 1.9vw .5vw 1.9vw;
   cursor: pointer;
   border: none;
   font-family: 'Poppins';
@@ -95,4 +95,16 @@ p{
 
 .date-div{
   position: relative;
+}
+.attachment{
+  width: 5.7vw;
+  height: 4vw;
+  padding: 1.3vw;
+  background: var(--extraLightGray);
+  border-radius: .5vw;
+  //margin-right: .5vw;
+  cursor: pointer;
+}
+.attachment:last-child{
+  //margin-right: 0;
 }
