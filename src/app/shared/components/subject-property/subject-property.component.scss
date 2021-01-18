@@ -14,6 +14,12 @@
   padding: .4vw 1.4vw;
   border-radius: .3vw;
   font-weight: 300;
+  background: var(--green);
+  color: white;
+  cursor: pointer;
+}
+.img-div button:focus{
+  outline: none;
 }
 .property-img{
   width: 100%;

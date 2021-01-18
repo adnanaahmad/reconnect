@@ -1,7 +1,18 @@
 <div class="card-1">
-    <div class="status"><p>{{home.status}}</p></div>
-    <div class="card-icons d-flex"><img (click)="favoriteHome()" *ngIf="!home.favorite" src="/assets/search-home/like.svg"><img (click)="favoriteHome()" *ngIf="home.favorite" src="/assets/search-home/heart.svg"><img src="/assets/search-home/shuffle.svg"><img src="/assets/search-home/video.svg"></div>
-    <img class="home-img" [src]="home.image">
+    <div class="img-div">
+        <div class="status"><p>{{home.status}}</p></div>
+        <div class="card-icons d-flex">
+            <img (click)="favoriteHome()" *ngIf="!home.favorite" src="/assets/search-home/like.svg">
+            <img (click)="favoriteHome()" *ngIf="home.favorite" src="/assets/search-home/heart.svg">
+            <img class="thumb" src="/assets/search-home/thumb.svg">
+            <img class="dollar" src="/assets/search-home/dollar.svg">
+        </div>
+        <div class="pre-approved-div d-flex justify-content-end">
+            <p *ngIf="true" class="pre-approved text-nowrap">Pre-Approved</p>
+            <p *ngIf="false" class="not-approved text-nowrap">No Approved</p>
+        </div>
+        <img class="home-img" [src]="home.image">
+    </div>
     <div class="card-info">
        <div class="d-flex justify-content-between price-area">
           <p class="price">${{home.price}}</p>

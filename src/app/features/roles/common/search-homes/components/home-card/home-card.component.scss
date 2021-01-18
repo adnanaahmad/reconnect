@@ -3,18 +3,64 @@
   position: relative;
   margin-bottom: 1.5vw;
 }
+.status p{
+  margin-bottom: 0;
+  color: white;
+  font-size: .6vw;
+  width: fit-content;
+}
+.status{
+  position: absolute;
+  background: black;
+  padding: .15vw .8vw .15vw .8vw;
+  width: fit-content;
+  opacity: .5;
+  border-radius: .3vw;
+  left: 4%;
+  top: 7%;
+}
 .card-icons{
   position: absolute;
   left: 69%;
-  top: 4%;
+  top: 7%;
 }
 .card-icons img{
   margin-right: .5vw;
   height: 1.2vw;
   width: 1.2vw;
 }
+.thumb{
+  background: var(--green);
+  padding: .3vw;
+  border-radius: .3vw;
+}
+.dollar{
+  background: var(--red);
+  padding: .3vw;
+  border-radius: .3vw;
+}
+.pre-approved, .not-approved{
+  border-radius: .3vw;
+  padding: .3vw 1vw;
+  color: white;
+  font-size: .55vw;
+  font-weight: 300;
+  position: absolute;
+  top: 79%;
+}
+.pre-approved{
+  background: var(--green);
+}
+.not-approved{
+  background: var(--red);
+}
+.pre-approved-div{
+}
 .card-icons img:last-child{
   margin-right: 0;
+}
+.img-div{
+  position: relative;
 }
 .home-img{
   height: 10vw;
@@ -92,22 +138,6 @@
 }
 .home-margin{
   margin-bottom: 1.5vw;
-}
-.status p{
-  margin-bottom: 0;
-  color: white;
-  font-size: .6vw;
-  width: fit-content;
-}
-.status{
-  position: absolute;
-  background: black;
-  padding: .15vw .8vw .15vw .8vw;
-  width: fit-content;
-  opacity: .5;
-  border-radius: .3vw;
-  left: 4%;
-  top: 4%;
 }
 p{
   font-family: 'Poppins';

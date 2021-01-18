@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-subject-property',
@@ -7,9 +8,11 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class SubjectPropertyComponent implements OnInit {
   @Input() subjectProperty;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-
+  viewSubjectProperty(): void{
+    this.router.navigateByUrl('/home/propertyDetails');
+  }
 }
