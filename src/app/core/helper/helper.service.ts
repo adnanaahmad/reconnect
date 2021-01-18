@@ -26,4 +26,20 @@ export class HelperService {
     backdrop.style.borderTopRightRadius = '.5vw';
     backdrop.style.borderTopLeftRadius = '.5vw';
   }
+
+  toggleTeamMember(i, member, selectedTeam): void{
+    const tick = document.getElementById(i).children[0];
+    const border = document.getElementById(i).children[1];
+    //console.log(member);
+    if (getComputedStyle(tick).display === 'block') {
+      (tick as HTMLImageElement).style.display = 'none';
+      (border as HTMLImageElement).style.border = 'none';
+      const index = selectedTeam.findIndex((x) => x === member);
+      selectedTeam.splice(index, 1);
+    } else {
+      (tick as HTMLImageElement).style.display = 'block';
+      (border as HTMLImageElement).style.border = '1px solid var(--green)';
+      selectedTeam.push(member);
+    }
+  }
 }

@@ -9,8 +9,14 @@
                     <img *ngFor="let i of propertyAd.album" (click)="changeImage(i)" class="list-img" [src]="i">
                 </div>
               </div>
-              <p class="price">${{propertyAd.price | number}}</p>
-              <p class="address">{{propertyAd.address}}</p>
+            <div class="d-flex justify-content-between">
+                <p class="price">${{propertyAd.price | number}}</p>
+                <button (click)="shareProperty()" class="share d-flex">
+                    <img src="/assets/news-feed-icons/share.svg">
+                    Share
+                </button>
+            </div>
+            <p class="address">{{propertyAd.address}}</p>
 
             <div class="d-flex">
                 <div class="d-flex activity activity-pr">

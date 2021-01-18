@@ -143,3 +143,22 @@
 p{
   font-family: 'Poppins';
 }
+.share{
+  background: var(--green);
+  padding: .5vw 1.5vw;
+  border-radius: .3vw;
+  color: white;
+  font-size: .75vw;
+  font-family: 'Poppins';
+  height: fit-content;
+  border: none;
+  cursor: pointer;
+}
+.share:focus{
+  outline: none;
+}
+.share img{
+  height: 1vw;
+  width: 1vw;
+  margin-right: .3vw;
+}

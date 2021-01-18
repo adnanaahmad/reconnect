@@ -1,0 +1,106 @@
+.card-1{
+  padding: 2vw;
+}
+p{
+  font-family: 'Poppins';
+}
+.form-div{
+  position: relative;
+}
+.card-1{
+  padding: 2.5vw;
+}
+.heading{
+  font-size: .85vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-bottom: 0;
+  margin-right: 30vw;
+}
+.close-btn{
+  position: absolute;
+  left: 95%;
+  top: 4%;
+  height: .7vw;
+  width: .7vw;
+  cursor: pointer;
+}
+.title{
+  font-size: .7vw;
+  color: var(--lighGray);
+  margin-bottom: 0.5vw;
+  font-weight: 300;
+}
+.mb-custom{
+  margin-bottom: 1.5vw;
+}
+
+
+.f2{
+  font-size: .8vw;
+  color: var(--darkGray);
+  border-radius: .5vw;
+  border: 1px solid var(--lighGray);
+}
+.team{
+  border-radius: .3vw;
+  height: 2.8vw;
+  width: 2.8vw;
+  object-fit: cover;
+  padding: .1vw;
+  filter: brightness(90%);
+  cursor: pointer;
+}
+.team-member{
+  margin-right: 1vw;
+}
+.active{
+  display: none;
+  border-radius: .3vw;
+  padding: .6vw;
+  height: 2.5vw;
+  width: 2.5vw;
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+}
+.team img:last-child{
+  margin-right: 0;
+}
+.launch{
+  color: white;
+  background: var(--green);
+  border-radius: .3vw;
+  font-size: .7vw;
+  margin-bottom: 0;
+  height: fit-content;
+  padding: .5vw 1.9vw .5vw 1.9vw;
+  cursor: pointer;
+  border: none;
+  font-family: 'Poppins';
+}
+.launch:focus{
+  outline: none;
+}
+.width-custom{
+  width: 15vw;
+}
+.mr-custom{
+  margin-right: 2.5vw;
+}
+
+.date-div{
+  position: relative;
+}
+.link-div{
+  background: var(--extraLightGray);
+  padding: 1vw;
+  border-radius: .5vw;
+}
+.link-div p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+  font-size: .8vw;
+  word-break: break-all;
+  font-weight: 300;
+}

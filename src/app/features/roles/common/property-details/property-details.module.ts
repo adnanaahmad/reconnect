@@ -11,10 +11,11 @@ import { RentVsBuyingComponent } from './components/rent-vs-buying/rent-vs-buyin
 import { PublicTransportComponent } from './components/public-transport/public-transport.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { PieChartComponent } from './popups/pie-chart/pie-chart.component';
+import { SharePropertyComponent } from './popups/share-property/share-property.component';
 
 
 @NgModule({
-  declarations: [PropertyDetailsComponent, PropertyAdComponent, RealEstateAgentComponent, ScenarioComponent, RentVsBuyingComponent, PublicTransportComponent, FeaturesComponent, PieChartComponent],
+  declarations: [PropertyDetailsComponent, PropertyAdComponent, RealEstateAgentComponent, ScenarioComponent, RentVsBuyingComponent, PublicTransportComponent, FeaturesComponent, PieChartComponent, SharePropertyComponent],
   imports: [
     CommonModule,
     PropertyDetailsRoutingModule,

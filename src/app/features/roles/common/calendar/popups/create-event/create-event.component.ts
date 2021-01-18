@@ -139,18 +139,6 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
     this.eventForm.get(input).get('value').enable();
   }
   toggleTeamMember(i, member): void{
-    const tick = document.getElementById(i).children[0];
-    const border = document.getElementById(i).children[1];
-    //console.log(member);
-    if (getComputedStyle(tick).display === 'block') {
-      (tick as HTMLImageElement).style.display = 'none';
-      (border as HTMLImageElement).style.border = 'none';
-      const index = this.selectedTeam.findIndex((x) => x === member);
-      this.selectedTeam.splice(index, 1);
-    } else {
-      (tick as HTMLImageElement).style.display = 'block';
-      (border as HTMLImageElement).style.border = '1px solid var(--green)';
-      this.selectedTeam.push(member);
-    }
+    this.helper.toggleTeamMember(i, member, this.selectedTeam);
   }
 }
