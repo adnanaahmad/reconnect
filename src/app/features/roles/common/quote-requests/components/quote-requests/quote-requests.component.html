@@ -11,21 +11,52 @@
   </div>
 </div>
 
+<div *ngIf="quoteRequests.selectedButton === 'Pending'">
+    <div class="card-1 d-flex" *ngFor="let request of quoteRequests.quoteRequests">
+        <div class="div-1">
+            <img class="profile-img" [src]="request.buyer.image">
+            <p class="name">{{request.buyer.name}} </p>
+            <div class="d-flex div-2">
 
-<div class="card-1 d-flex" *ngFor="let request of quoteRequests.quoteRequests">
-  <div class="div-1">
-    <img class="profile-img" [src]="request.buyer.image">
-     <p class="name">{{request.buyer.name}} </p>
-     <div class="d-flex div-2">
+                <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button class="respond-btn accept"><p class="">Accept</p></button>
+                <button class="respond-btn reject"><p class="">Reject</p></button>
+            </div>
+        </div>
+        <img class="subject-img" [src]="request.subjectProperty.image">
 
-          <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
-          <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
-          <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
-     </div>
-     <div class="respond-btn"><p class="text-nowrap">Respond To Quote Request</p></div>
-  </div>
+        <app-subject-property-details class="subject-property" [subjectProperty]="request.subjectProperty"></app-subject-property-details>
+    </div>
+</div>
+<div *ngIf="quoteRequests.selectedButton === 'Accepted'">
+    <div class="card-1 d-flex" *ngFor="let request of acceptedQuote">
+        <div class="div-1">
+            <img class="profile-img" [src]="request.buyer.image">
+            <p class="name">{{request.buyer.name}} </p>
+            <div class="d-flex div-2">
 
-    <img class="subject-img" [src]="request.subjectProperty.image">
+                <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a *ngIf="true" target="_blank" [href] = "request.buyer.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+            </div>
+            <div class="d-flex justify-content-between date-div">
+                <p *ngIf="request.homeInspectionDate" class="date align-self-end">{{dateView(request.homeInspectionDate)}}</p>
+                <p *ngIf="!request.homeInspectionDate" class="date align-self-end">Choose date</p>
+                <input [(ngModel)]="request.homeInspectionDate" class="form-control f1" placeholder=""
+                       name="dp"  ngbDatepicker #d="ngbDatepicker">
+                <div class="calendar-div d-flex align-self-center" (click)="d.toggle()">
+                    <img src="/assets/dashboard/Calendar.svg" class="calendar">
+                </div>
 
-  <app-subject-property-details class="subject-property" [subjectProperty]="request.subjectProperty"></app-subject-property-details>
+            </div>
+        </div>
+
+        <img class="subject-img" [src]="request.subjectProperty.image">
+
+        <app-subject-property-details class="subject-property" [subjectProperty]="request.subjectProperty"></app-subject-property-details>
+    </div>
 </div>
