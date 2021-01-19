@@ -13,7 +13,7 @@ export class RegistrationPartnerComponent implements OnInit {
   constructor(private location: LocationService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.register.screen = {one: true, two: false, three: false};
+    this.register.screen = {one: true, two: false, three: false, four: false};
     this.register.role = ['Agent', 'Attorney', 'Real Estate', 'Lender', 'Home Inspector', 'Insurance Agent'];
     this.location.authToken().subscribe(res => {
       this.register.token = res.auth_token;

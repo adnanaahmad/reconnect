@@ -112,6 +112,15 @@
                 <p class="remember text-nowrap">I have agreed to the terms and conditions</p>
             </label>
         </div>
-        <button type="submit" [disabled]="(!register.form.get('personal').valid) || !register.form.get('agreed').value" class="continue mt-auto align-self-end">Sign up</button>
+        <button (click)="register.screen['three']=false;register.screen['four']=true;" type="submit" [disabled]="(!register.form.get('personal').valid) || !register.form.get('agreed').value" class="continue mt-auto align-self-end">
+            Sign up
+        </button>
+    </div>
+    <div *ngIf="register.screen['four']" class="d-flex flex-column parent">
+        <div class="mt-auto mb-auto">
+            <p class="heading text-center">Thanks for signing up!</p>
+            <p class="sub-heading text-center">We are revising your information and will contact</p>
+            <p class="sub-heading text-center">you very soon</p>
+        </div>
     </div>
 </form>
