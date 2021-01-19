@@ -1,0 +1,7 @@
+<div class="d-flex first-row">
+    <button *ngFor="let button of buttons" [ngClass]="{'active': button === selectedButton}" (click)="switchTabs(button)" class="buttons">
+        {{button}}
+    </button>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,24 @@
+
+.first-row{
+  margin-bottom: 1vw;
+}
+.buttons{
+  border: none;
+  color: white;
+  font-family: Poppins;
+  background: var(--lighGray);
+  font-size: .9vw;
+  padding: .5vw 1.5vw;
+  border-radius: .5vw;
+  font-weight: 300;
+  cursor: pointer;
+}
+.buttons:focus{
+  outline: none;
+}
+.buttons:first-child{
+  margin-right: 1vw;
+}
+.active{
+  background: var(--green);
+}

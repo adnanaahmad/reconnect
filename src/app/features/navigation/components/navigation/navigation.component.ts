@@ -20,11 +20,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.navigation.menuItems = this.navigationService.getBuyerMenuItems();
     const index = this.navigation.menuItems.findIndex(x => x.route === this.router.url);
     this.navigation.selectedButton = this.navigation.menuItems[index];
-    this.showHeader = this.router.url !== '/home/profile' && this.router.url !== '/home/profile/editProfile';
-    this.subscription = this.router.events.subscribe((val) => {
-      this.navigation.selectedButton = this.navigation.menuItems[this.navigation.menuItems.findIndex(x => x.route === this.router.url)];
-      this.showHeader = this.router.url !== '/home/profile' && this.router.url !== '/home/profile/editProfile';
-    });
+    this.showProfileButton();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -56,5 +52,12 @@ export class NavigationComponent implements OnInit, OnDestroy {
           break;
         default:
     }
+  }
+  showProfileButton(): void{
+    this.showHeader = !this.router.url.includes('profile');
+    this.subscription = this.router.events.subscribe((val) => {
+      this.navigation.selectedButton = this.navigation.menuItems[this.navigation.menuItems.findIndex(x => x.route === this.router.url)];
+      this.showHeader = !this.router.url.includes('profile');
+    });
   }
 }
