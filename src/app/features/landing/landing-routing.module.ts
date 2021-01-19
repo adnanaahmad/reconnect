@@ -4,6 +4,7 @@ import {LandingComponent} from './components/landing/landing.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegistrationBuyerComponent} from './components/registration-buyer/registration-buyer.component';
 import {RegistrationPartnerComponent} from './components/registration-partner/registration-partner.component';
+import {SetPasswordComponent} from './components/set-password/set-password.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,11 @@ const routes: Routes = [
             {
                 path: 'registerPartner',
                 component: RegistrationPartnerComponent
-            }
+            },
+            {
+                path: 'setPassword',
+                component: SetPasswordComponent
+            },
       ],
     }
 ];

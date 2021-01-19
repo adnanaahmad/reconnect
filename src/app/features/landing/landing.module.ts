@@ -8,10 +8,11 @@ import { RegistrationBuyerComponent } from './components/registration-buyer/regi
 import {RegistrationPartnerComponent} from './components/registration-partner/registration-partner.component';
 import {SharedModule} from '../../shared/shared.module';
 import {LocationService} from './services/location/location.service';
+import { SetPasswordComponent } from './components/set-password/set-password.component';
 
 
 @NgModule({
-  declarations: [LandingComponent, LoginComponent, RegistrationPartnerComponent, RegistrationBuyerComponent],
+  declarations: [LandingComponent, LoginComponent, RegistrationPartnerComponent, RegistrationBuyerComponent, SetPasswordComponent],
   imports: [
       CommonModule,
       LandingRoutingModule,
