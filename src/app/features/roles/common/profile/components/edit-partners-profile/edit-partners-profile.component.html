@@ -1,6 +1,6 @@
 <div class="d-flex first-row">
-    <button *ngFor="let button of buttons" [ngClass]="{'active': button === selectedButton}" (click)="switchTabs(button)" class="buttons">
-        {{button}}
+    <button *ngFor="let button of buttons | keyvalue:helper.originalOrder" [ngClass]="{'active': button.value === selectedButton}" (click)="switchTabs(button.value)" class="buttons">
+        {{button.value}}
     </button>
 </div>
 

@@ -26,7 +26,7 @@
                               </p>
                           </div>
                           <div style="flex-wrap: wrap"  class="d-flex" *ngIf="child.key != 'price'">
-                            <ng-container *ngFor="let i  of child.value | keyvalue:originalOrder">
+                            <ng-container *ngFor="let i  of child.value | keyvalue:helper.originalOrder">
                                 <p id="comma" *ngIf="constant.searchFilters[i.key] && i.value" class="text-nowrap">{{constant.searchFilters[i.key]}}</p>
                             </ng-container>
                           </div>

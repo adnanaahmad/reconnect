@@ -4,6 +4,7 @@ import {SavedSearchesModel} from '../../models/saved-searches.model';
 import {Router} from '@angular/router';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {KeyValue} from '@angular/common';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 
 @Component({
@@ -13,7 +14,10 @@ import {KeyValue} from '@angular/common';
 })
 export class SavedSearchesComponent implements OnInit {
   savedSearch: SavedSearchesModel = {} as SavedSearchesModel;
-  constructor(public constant: ConstantService, private router: Router, private store: StoreService) { }
+  constructor(public constant: ConstantService,
+              private router: Router,
+              private store: StoreService,
+              public helper: HelperService) { }
 
   ngOnInit(): void {
 
@@ -134,7 +138,7 @@ export class SavedSearchesComponent implements OnInit {
   deleteSearch(): void{
     console.log('delete');
   }
-  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
-    return 0;
-  };
+  // originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
+  //   return 0;
+  // };
 }

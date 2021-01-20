@@ -5,6 +5,7 @@ import {StoreService} from 'src/app/core/store/store.service';
 import {Subscription} from 'rxjs';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {KeyValue} from '@angular/common';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-search-homes',
@@ -17,7 +18,10 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
   */
   searchHome: SearchHomesModel = {} as SearchHomesModel;
   subscription: Subscription;
-  constructor(private fb: FormBuilder, public store: StoreService, public constant: ConstantService) { }
+  constructor(private fb: FormBuilder,
+              public store: StoreService,
+              public constant: ConstantService,
+              public  helper: HelperService) { }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -213,9 +217,6 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
   saveSearch(): void {
     console.log(this.searchHome.moreFilters.value);
   }
-  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
-    return 0;
-  };
   cancel(event): void {
     event.target.parentElement.parentElement.classList.toggle('show');
   }
@@ -225,8 +226,4 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
   applyFilter(): void{
     this.store.updateSavedSearch(this.searchHome.moreFilters.value);
   }
-  // @HostListener('document:click', ['$event'])
-  // hidePopup(event): void {
-  //   this.helper.hidePopup(this, 'searchHome', event, 'div.more-filter', 'div.filter-menu');
-  // }
 }

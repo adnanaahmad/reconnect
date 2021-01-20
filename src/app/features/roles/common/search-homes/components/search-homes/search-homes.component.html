@@ -37,7 +37,7 @@
             Property Type <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
           </button>
           <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="propertyType">
-            <ng-container *ngFor="let i of searchHome.moreFilters.value.propertyType| keyvalue: originalOrder">
+            <ng-container *ngFor="let i of searchHome.moreFilters.value.propertyType| keyvalue: helper.originalOrder">
               <label class="container" *ngIf="constant.searchFilters[i.key]">
                   <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType[i.key]">
                   <img class="checkmark" src="/assets/loan-details/tick.svg">
@@ -55,7 +55,7 @@
             Beds <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
           </button>
           <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="beds">
-            <ng-container *ngFor="let i of searchHome.moreFilters.value.beds| keyvalue: originalOrder">
+            <ng-container *ngFor="let i of searchHome.moreFilters.value.beds| keyvalue: helper.originalOrder">
               <label class="container" *ngIf="constant.searchFilters[i.key]">
                   <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.beds[i.key]">
                   <img class="checkmark" src="/assets/loan-details/tick.svg">
@@ -73,7 +73,7 @@
             Baths <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
           </button>
           <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="baths">
-            <ng-container *ngFor="let i of searchHome.moreFilters.value.baths| keyvalue: originalOrder">
+            <ng-container *ngFor="let i of searchHome.moreFilters.value.baths| keyvalue: helper.originalOrder">
               <label class="container" *ngIf="constant.searchFilters[i.key]">
                   <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.baths[i.key]">
                   <img class="checkmark" src="/assets/loan-details/tick.svg">
@@ -91,7 +91,7 @@
             Open Houses <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
           </button>
           <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="listingStatus">
-            <ng-container *ngFor="let i of searchHome.moreFilters.value.listingStatus| keyvalue: originalOrder">
+            <ng-container *ngFor="let i of searchHome.moreFilters.value.listingStatus| keyvalue: helper.originalOrder">
               <label class="container" *ngIf="constant.searchFilters[i.key]">
                   <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus[i.key]">
                   <img class="checkmark" src="/assets/loan-details/tick.svg">

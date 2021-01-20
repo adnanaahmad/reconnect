@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {KeyValue} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,8 @@ export class HelperService {
       (border as HTMLImageElement).style.border = '1px solid var(--green)';
       selectedTeam.push(member);
     }
+  }
+  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
+    return 0;
   }
 }

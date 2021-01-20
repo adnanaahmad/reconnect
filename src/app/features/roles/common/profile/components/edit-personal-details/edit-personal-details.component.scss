@@ -1,6 +1,9 @@
 p{
   font-family: 'Poppins';
 }
+.parent-pg{
+  position: relative;
+}
 .card-1, .card-2, .card-3{
   background: white;
   border-radius: .5vw;
@@ -109,4 +112,21 @@ select{
   //flex-basis: 0;
   //flex-grow: 1;
   margin-right: 5vw;
+}
+.save-btn{
+  border: none;
+  border-radius: .5vw;
+  padding: .5vw 1.5vw;
+  background: var(--green);
+  color: white;
+  font-family: 'Poppins';
+  font-size: .8vw;
+  height: fit-content;
+  position: absolute;
+  margin-right: auto;
+  top: -8%;
+  cursor: pointer;
+}
+.save-btn:focus{
+  outline: 0;
 }
