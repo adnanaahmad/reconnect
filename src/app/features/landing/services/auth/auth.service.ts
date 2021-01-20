@@ -13,7 +13,10 @@ export class AuthService {
     this.apiRoutes = this.constant.apiRoutes;
     this.method = this.constant.apiMethod;
   }
-  signup(data): Observable<any> {
+  signUp(data): Observable<any> {
     return this.helper.requestCall(this.method.post, this.apiRoutes.signup, data);
+  }
+  signIn(data): Observable<any> {
+    return this.helper.requestCall(this.method.post, this.apiRoutes.signin, data);
   }
 }

@@ -26,7 +26,7 @@ export class ConstantService {
   };
 
    apiRoutes = {
-     login: `${environment.apiUrl}/login`,
+     signin: `${environment.apiUrl}/user/signin`,
      signup: `${environment.apiUrl}/user/signup`,
   };
 

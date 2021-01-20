@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {LoginModel} from '../../models/login.model';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import {LoginModel} from '../../models/login.model';
 })
 export class LoginComponent implements OnInit {
   login: LoginModel = {} as LoginModel;
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private loginService: AuthService) { }
 
   ngOnInit(): void {
     this.login.form = this.fb.group({
@@ -19,5 +20,10 @@ export class LoginComponent implements OnInit {
   }
   onSubmit(): void{
     console.log(this.login.form.value);
+    this.loginService.signIn(this.login.form.value).subscribe( x => {
+      console.log(x);
+    }, error => {
+      //console.log(error);
+    });
   }
 }

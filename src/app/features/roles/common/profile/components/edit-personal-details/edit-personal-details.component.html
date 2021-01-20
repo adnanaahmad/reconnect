@@ -1,82 +1,99 @@
-
-<div class="d-flex parent-pg justify-content-end">
-    <button class="save-btn">Save</button>
-    <div class="card-1">
-        <div class="profile-div mb-custom">
-            <img src="/assets/profile/profile.svg" class="profile">
-            <button class="upload">Upload</button>
+<form [formGroup]="personalDetails" (ngSubmit)="onSubmit()">
+    <div class="d-flex parent-pg justify-content-end">
+        <button type="submit" class="save-btn">Save</button>
+        <div class="card-1">
+            <div class="profile-div mb-custom">
+                <img src="/assets/profile/profile.svg" class="profile">
+                <button class="upload">Upload</button>
+            </div>
+            <!--        <p class="title">Full Name</p>-->
+            <!--        <input  type="text" class="form-control f1 mb-custom"  placeholder="">-->
+            <p class="title">First Name</p>
+            <input formControlName="firstName" type="text" class="form-control f1 mb-custom"  placeholder="">
+            <p class="title">Last Name</p>
+            <input formControlName="lastName"  type="text" class="form-control f1 mb-custom"  placeholder="">
+            <div class="d-flex justify-content-between div-2 mb-custom">
+                <a (click)="switchSocialMediaLink('facebook')"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a (click)="switchSocialMediaLink('instagram')"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a (click)="switchSocialMediaLink('linkedIn')"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                <a (click)="switchSocialMediaLink('twitter')"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+            </div>
+            <div formGroupName="socialMedia">
+                <div *ngIf="socialMediaLinks['facebook']">
+                    <p class="title">Facebook Link</p>
+                    <textarea formControlName="facebook" type="text" class="form-control f2"  rows="3"></textarea>
+                </div>
+                <div *ngIf="socialMediaLinks['instagram']" >
+                    <p class="title">Instagram Link</p>
+                    <textarea formControlName="instagram" type="text" class="form-control f2"  rows="3"></textarea>
+                </div>
+                <div  *ngIf="socialMediaLinks['linkedIn']">
+                    <p class="title">LinkedIn Link</p>
+                    <textarea formControlName="linkedIn" type="text" class="form-control f2"  rows="3"></textarea>
+                </div>
+                <div *ngIf="socialMediaLinks['twitter']">
+                    <p class="title">Twitter Link</p>
+                    <textarea formControlName="twitter" type="text" class="form-control f2"  rows="3"></textarea>
+                </div>
+            </div>
         </div>
-        <p class="title">Full Name</p>
-        <input  type="text" class="form-control f1 mb-custom"  placeholder="">
-        <p class="title">First Name</p>
-        <input  type="text" class="form-control f1 mb-custom"  placeholder="">
-        <p class="title">Last Name</p>
-        <input  type="text" class="form-control f1 mb-custom"  placeholder="">
-        <div class="d-flex justify-content-between div-2 mb-custom">
-            <a><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
-            <a> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
-            <a> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
-            <a><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+        <div class="d-flex flex-column column-2">
+            <div class="card-2 d-flex">
+                <div class="c2-col1">
+                    <p class="label">Phone Number</p>
+                    <input formControlName="phoneNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <p class="label">Role</p>
+                    <input formControlName="role" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <p class="label">Title</p>
+                    <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <p class="label">Real Estate Lic #</p>
+                    <input formControlName="realEstateLicense" type="text" class="form-control f1"  placeholder="">
+                </div>
+                <div class="c2-col2">
+                    <p class="label">Birthday</p>
+                    <div class="d-flex justify-content-between mb-custom" formGroupName="birthday">
+                        <div class="selected">
+                            <select formControlName="month" class="form-control f1">
+                                <option selected>February</option>
+                                <option selected>August</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="selected">
+                            <select formControlName="day" class="form-control f1">
+                                <option selected>02</option>
+                                <option selected>03</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="selected">
+                            <select formControlName="year" class="form-control f1">
+                                <option selected>1994</option>
+                                <option selected>1992</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="label">Email</p>
+                    <input formControlName="email" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <p class="label">License #</p>
+                    <input formControlName="license" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <p class="label">Broker Lic #</p>
+                    <input formControlName="brokerLicense" type="text" class="form-control f1"  placeholder="">
+                </div>
+            </div>
+            <div class="card-3">
+                <div class="d-flex">
+                    <div class="bio">
+                        <p class="label">Bio</p>
+                        <textarea formControlName="bio" type="text" class="form-control f2"  rows="7"></textarea>
+                    </div>
+                    <div class="video">
+                        <p class="label">Video Link</p>
+                        <input formControlName="videoUrl" type="text" class="form-control f1"  placeholder="">
+                    </div>
+                </div>
+            </div>
         </div>
-        <p class="title">Facebook Link</p>
-        <textarea type="text" class="form-control f2"  rows="3"></textarea>
     </div>
-    <div class="d-flex flex-column column-2">
-        <div class="card-2 d-flex">
-            <div class="c2-col1">
-                <p class="label">Phone Number</p>
-                <input  type="text" class="form-control f1 mb-custom"  placeholder="">
-                <p class="label">Role</p>
-                <input type="text" class="form-control f1 mb-custom"  placeholder="">
-                <p class="label">Title</p>
-                <input type="text" class="form-control f1 mb-custom"  placeholder="">
-                <p class="label">Real Estate Lic #</p>
-                <input type="text" class="form-control f1"  placeholder="">
-            </div>
-            <div class="c2-col2">
-                <p class="label">Birthday</p>
-                <div class="d-flex justify-content-between mb-custom">
-                    <div class="selected">
-                        <select class="form-control f1">
-                            <option selected>February</option>
-                            <option selected>August</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="selected">
-                        <select class="form-control f1">
-                            <option selected>02</option>
-                            <option selected>03</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                    <div class="selected">
-                        <select class="form-control f1">
-                            <option selected>1994</option>
-                            <option selected>1992</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-                </div>
-                <p class="label">Email</p>
-                <input type="text" class="form-control f1 mb-custom"  placeholder="">
-                <p class="label">License #</p>
-                <input type="text" class="form-control f1 mb-custom"  placeholder="">
-                <p class="label">Broker Lic #</p>
-                <input type="text" class="form-control f1"  placeholder="">
-            </div>
-        </div>
-        <div class="card-3">
-            <div class="d-flex">
-                <div class="bio">
-                    <p class="label">Bio</p>
-                    <textarea type="text" class="form-control f2"  rows="7"></textarea>
-                </div>
-                <div class="video">
-                    <p class="label">Video Link</p>
-                    <input type="text" class="form-control f1"  placeholder="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</form>

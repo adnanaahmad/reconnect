@@ -68,7 +68,7 @@ export class RegistrationBuyerComponent implements OnInit {
     delete this.registration.form.value.confirmPassword;
     const data = Object.assign(this.registration.form.value, {role: 'buyer'});
     //console.log();
-    this.auth.signup(data).subscribe(x => {
+    this.auth.signUp(data).subscribe(x => {
       console.log(x);
     });
   }
