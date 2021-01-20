@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {FormBuilder, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {RegistrationBuyerModel} from '../../models/registration-buyer.model';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-registration-buyer',
@@ -10,7 +11,7 @@ import {RegistrationBuyerModel} from '../../models/registration-buyer.model';
 })
 export class RegistrationBuyerComponent implements OnInit {
   registration: RegistrationBuyerModel = {} as RegistrationBuyerModel;
-  constructor(private router: Router, private fb: FormBuilder) { }
+  constructor(private router: Router, private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.registration.screen = {one: true, two: false, three: false};
@@ -33,10 +34,15 @@ export class RegistrationBuyerComponent implements OnInit {
       agreed: [null, Validators.required],
       referralName: [{value: null, disabled: true}, Validators.required],
       referral: [{value: null, disabled: true}, Validators.required],
-    });
+    }, {validator: this.passwordConfirming});
     // this.registration.form.valueChanges.subscribe(res => {
     //   console.log(res);
     // });
+  }
+  passwordConfirming(c: AbstractControl): { invalid: boolean } {
+    if (c.get('password').value !== c.get('confirmPassword').value) {
+      return {invalid: true};
+    }
   }
   showReferral(): void{
     // api call
@@ -56,6 +62,14 @@ export class RegistrationBuyerComponent implements OnInit {
     }
   }
   onSubmit(): void{
-    console.log(this.registration.form.value);
+    // code needs to be changed
+    delete this.registration.form.value.aboutUs;
+    delete this.registration.form.value.agreed;
+    delete this.registration.form.value.confirmPassword;
+    const data = Object.assign(this.registration.form.value, {role: 'buyer'});
+    //console.log();
+    this.auth.signup(data).subscribe(x => {
+      console.log(x);
+    });
   }
 }

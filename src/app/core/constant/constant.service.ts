@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ConstantService {
 
   constructor() { }
-
-   apiRoutes = {
-    login: `${environment.apiUrl}/login`,
-  };
 
   static role = {
       BUYER: 'buyer',
@@ -20,6 +18,17 @@ export class ConstantService {
       INSURANCE: 'insurance',
       CONTRACTOR: 'contractor'
     };
+   apiMethod = {
+    get: 'get',
+    post: 'post',
+    put: 'put',
+    delete: 'delete'
+  };
+
+   apiRoutes = {
+     login: `${environment.apiUrl}/login`,
+     signup: `${environment.apiUrl}/user/signup`,
+  };
 
     const; buyer = [{
       name: 'Home Buying Dashboard',

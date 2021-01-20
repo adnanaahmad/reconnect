@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import {KeyValue} from '@angular/common';
+import {ConstantService} from '../constant/constant.service';
+import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
 
-  constructor() { }
+  constructor(private constants: ConstantService, private http: HttpClient) { }
 
   setModalPosition(): void {
     const modal = document.getElementsByClassName('modal-content') as HTMLCollectionOf<HTMLElement>;
@@ -46,4 +50,46 @@ export class HelperService {
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
     return 0;
   }
+
+  requestCall(method, api, data?: any): Observable<any> {
+    let response;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+    switch (method) {
+      case this.constants.apiMethod.post:
+        response = this.http.post(api, data, httpOptions);
+        break;
+      case this.constants.apiMethod.get:
+        response = this.http.get(api);
+        break;
+      case this.constants.apiMethod.put:
+        response = this.http.put(api, data);
+        break;
+      case this.constants.apiMethod.delete:
+        response = this.http.delete(api);
+        break;
+      default:
+        break;
+    }
+    return response;
+  }
+  // handleError(error: HttpErrorResponse, self) {
+  //   //self.logoutError(error.status);
+  //   if (error.error instanceof ErrorEvent) {
+  //     // A client-side or network error occurred. Handle it accordingly.
+  //     // console.error('An error occurred:', error.error.message);
+  //   } else {
+  //     // The backend returned an unsuccessful response code.
+  //     // The response body may contain clues as to what went wrong,
+  //     // console.error(
+  //     //   `Backend returned code ${error.status}, ` +
+  //     //   `body was: ${error.message}`);
+  //   }
+  //   // return an observable with a user-facing error message
+  //   // let msg = error.error.email ? error.error.email[0] : 'Something bad happened, Please try again later.';
+  //   return throwError({error: error.message, status: error.status});
+  // }
 }

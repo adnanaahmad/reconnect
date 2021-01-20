@@ -63,6 +63,8 @@
                 <div class="input-flex" >
                     <p class="label">Confirm Password</p>
                     <input formControlName="confirmPassword" class="form-control form-custom" placeholder="">
+<!--                    <div style='color:#ff7355' *ngIf="registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null">-->
+<!--                        Password does not match</div>-->
                 </div>
             </div>
 
