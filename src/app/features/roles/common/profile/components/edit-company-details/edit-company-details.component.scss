@@ -20,20 +20,30 @@ p{
 .card-2{
   margin-bottom: 2vw;
 }
+.card-1 p{
+  color: var(--darkGray);
+  font-size: .9vw;
+  margin-bottom: 0;
+  text-align: center;
+}
 .profile-div{
   background: var(--extraLightGray);
   width: fit-content;
-  padding: 2.5vw 3.3vw 4vw 3.3vw;
+  //padding: 2.5vw 3.3vw 4vw 3.3vw;
+  padding: 6vw 0;
   border-radius: .5vw;
   position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .profile{
-  width: 4vw;
-  height: 3.2vw;
+  width: 6vw;
+  height: 5.2vw;
 }
 .upload{
   background: var(--darkBlueOne);
-  padding: .5vw 2.5vw;
+  padding: .5vw 5.5vw;
   font-family: 'Poppins';
   font-weight: 300;
   font-size: .85vw;
@@ -41,8 +51,8 @@ p{
   border: none;
   border-radius: .3vw;
   position: absolute;
-  top:70%;
-  left: 12%;
+  top:80%;
+  left: 7.5%;
 }
 .upload:focus{
   outline: none;
@@ -111,10 +121,9 @@ select{
   font-family: 'Poppins';
   font-size: .8vw;
   height: fit-content;
-  position: absolute;
-  margin-right: auto;
-  top: -9.8%;
   cursor: pointer;
+  position: absolute;
+  top: -3.2vw;
 }
 .save-btn:focus{
   outline: 0;
