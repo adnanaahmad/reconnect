@@ -28,7 +28,7 @@ export class RegistrationBuyerComponent implements OnInit {
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      password: [null, Validators.required],
+      password: [null, [Validators.required, Validators.minLength(6)]],
       confirmPassword: [null, Validators.required],
       aboutUs: [null, Validators.required],
       agreed: [null, Validators.required],
@@ -62,7 +62,7 @@ export class RegistrationBuyerComponent implements OnInit {
     }
   }
   onSubmit(): void{
-    // code needs to be changed
+    // code needs to be changed/ improved
     delete this.registration.form.value.aboutUs;
     delete this.registration.form.value.agreed;
     delete this.registration.form.value.confirmPassword;

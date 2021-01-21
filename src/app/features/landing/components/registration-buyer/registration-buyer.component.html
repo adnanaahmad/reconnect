@@ -43,12 +43,12 @@
         <div class="mb-auto">
             <div class="d-flex name-row">
                 <div class="input-flex">
-                    <p class="label">First Name</p>
-                    <input formControlName="firstName" class="form-control form-custom" placeholder="">
+                    <p [ngClass]="{'danger':registration.form.get('firstName').invalid && registration.form.get('firstName').touched}" class="label">First Name</p>
+                    <input [class.is-invalid]="registration.form.get('firstName').invalid && registration.form.get('firstName').touched"  formControlName="firstName" class="form-control form-custom" placeholder="">
                 </div>
                 <div class="input-flex" >
-                    <p class="label">Last Name</p>
-                    <input formControlName="lastName" class="form-control form-custom" placeholder="">
+                    <p [ngClass]="{'danger':registration.form.get('lastName').invalid && registration.form.get('lastName').touched}" class="label">Last Name</p>
+                    <input [class.is-invalid]="registration.form.get('lastName').invalid && registration.form.get('lastName').touched" formControlName="lastName" class="form-control form-custom" placeholder="">
                 </div>
             </div>
             <div class="name-row">
@@ -57,14 +57,12 @@
             </div>
             <div class="d-flex name-row">
                 <div class="input-flex">
-                    <p class="label">Password</p>
-                    <input formControlName="password" class="form-control form-custom" placeholder="">
+                    <p [ngClass]="{'danger':registration.form.get('password').invalid && registration.form.get('password').touched}" class="label">Password</p>
+                    <input [class.is-invalid]="registration.form.get('password').invalid && registration.form.get('password').touched" formControlName="password" class="form-control form-custom" placeholder="">
                 </div>
                 <div class="input-flex" >
                     <p class="label" [ngClass]="{'danger': registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null}">Confirm Password</p>
                     <input [class.is-invalid]="registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null" formControlName="confirmPassword" class="form-control form-custom" placeholder="">
-<!--                    <div style='color:#ff7355' *ngIf="registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null">-->
-<!--                        Password does not match</div>-->
                 </div>
             </div>
 
