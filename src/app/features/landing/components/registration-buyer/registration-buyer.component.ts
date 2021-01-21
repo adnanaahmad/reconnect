@@ -25,8 +25,8 @@ export class RegistrationBuyerComponent implements OnInit {
         'Other'
     ];
     this.registration.form = this.fb.group({
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
+      firstName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
+      lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [null, [Validators.required, Validators.minLength(6)]],
       confirmPassword: [null, Validators.required],
