@@ -8,10 +8,12 @@ import {SharedModule} from '../../../../shared/shared.module';
 import { EditPartnersProfileComponent } from './components/edit-partners-profile/edit-partners-profile.component';
 import { EditPersonalDetailsComponent } from './components/edit-personal-details/edit-personal-details.component';
 import { EditCompanyDetailsComponent } from './components/edit-company-details/edit-company-details.component';
+import { ViewBuyerProfileComponent } from './components/view-buyer-profile/view-buyer-profile.component';
+import { ViewPartnersProfileComponent } from './components/view-partners-profile/view-partners-profile.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, EditProfileComponent, EditPartnersProfileComponent, EditPersonalDetailsComponent, EditCompanyDetailsComponent],
+  declarations: [ProfileComponent, EditProfileComponent, EditPartnersProfileComponent, EditPersonalDetailsComponent, EditCompanyDetailsComponent, ViewBuyerProfileComponent, ViewPartnersProfileComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

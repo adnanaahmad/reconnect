@@ -1,0 +1,88 @@
+<div class="d-flex">
+    <div class="column-1">
+
+        <div class="card-1">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6zes53m4a_2VLTcmTn_bHk8NO5SkuWfcQbg&usqp=CAU" alt="..." class="img-fluid profile-image">
+            <p class="name">{{userProfile.name}}</p>
+            <p class="role">{{userProfile.role}}</p>
+            <p class="bio">{{userProfile.bio}}</p>
+            <div class="d-flex justify-content-between div-2">
+                <a><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                <a><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+            </div>
+        </div>
+    </div>
+    <div class="column-2">
+        <div class="card-2">
+            <h4 class="">Personal Information:</h4>
+            <div class="row">
+                <div class="card-2-margin-bottom col">
+                    <div class="row">
+                        <div class="col-3">
+                            <p>Phone: </p>
+                        </div>
+                        <div class="col-9">
+                            <p>{{userProfile.phone}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <p>Gender: </p>
+                        </div>
+                        <div class="col-9">
+                            <p>{{userProfile.gender}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <p>Website: </p>
+                        </div>
+                        <div class="col-9">
+                            <p>{{userProfile.website}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-2-margin-bottom col">
+                    <div class="row">
+                        <div class="col-3">
+                            <p>Birthday: </p>
+                        </div>
+                        <div class="col-9">
+                            <p>{{userProfile.birthday | date}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <p>Email:</p>
+                        </div>
+                        <div class="col-9">
+                            <p>{{userProfile.email}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <p>Location: </p>
+                        </div>
+                        <div class="col-9">
+                            <p>{{userProfile.location}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-3">
+            <div class="row">
+                <div class="col">
+                    <h4 class="">Address:</h4>
+                    <p class="address">{{userProfile.address}}</p>
+                    <p class="phone">{{userProfile.phone}}</p>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
