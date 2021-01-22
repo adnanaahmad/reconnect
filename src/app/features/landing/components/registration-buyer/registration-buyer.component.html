@@ -3,24 +3,31 @@
         <p class="heading">How did you hear about us?</p>
         <div class="mt-auto mb-auto d-flex flex-column">
             <p class="label">Select an option</p>
-            <select formControlName="aboutUs" (change)="showReferral()" class="form-control form-custom" id="">
+            <select #select (change)="showReferral(select.value)" class="form-control form-custom" id="">
                 <option [ngValue]="null" [disabled]="true" >Select</option>
-                <option *ngFor="let i of registration.aboutUs">{{i}}</option>
+                <option *ngFor="let i of registration.aboutUs | keyvalue: helper.originalOrder">{{i.key}}</option>
             </select>
+            <div *ngIf="registration.other" class="referral mt1-custom" formGroupName="referral">
+                <input formControlName="referralDetails" class="form-control form-custom" placeholder="">
+            </div>
             <div *ngIf="registration.referral" class="referral mt1-custom">
                 <p class="label">Type in referral name</p>
-                <input formControlName="referralName" class="form-control form-custom mb-custom1" placeholder="">
-                <div class="people-container">
-                    <div (click)="registration.form.get('referralName').setValue(person.name);
-                            registration.form.get('referral').setValue(person);"
+                <input #searchBox (input)="search(searchBox.value)" class="form-control form-custom mb-custom1" placeholder="">
+                <div class="people-container" *ngIf="registration.professional ? registration.professional.length : false">
+                    <div (click)="searchBox.value = (person.firstName +' '+person.lastName);
+                            registration.form.get(['referral', 'details']).setValue(person['_id']);"
                             class="d-flex" *ngFor="let person of registration.professional">
-                        <img [src]="person.image" class="img">
-                        <p class="name align-self-center">{{person.name}}</p>
+                        <img *ngIf="person.image" [src]="person.image" class="img">
+                        <img *ngIf="!person.image" src="/assets/profile/profile.svg" class="img profile">
+                        <p class="name align-self-center">{{person.firstName}} {{person.lastName}}</p>
                         <p class="role align-self-center">{{person.role}}</p>
                     </div>
                 </div>
             </div>
-            <button (click)="registration.screen['two']=true;registration.screen['one']=false;" [disabled]="registration.referral === true ? !registration.form.get('referralName').valid : !registration.form.get('aboutUs').valid" class="signup next">Next</button>
+            <button (click)="registration.screen['two']=true;registration.screen['one']=false;"
+                    [disabled]="registration.referral || registration.other ? !registration.form.get(['referral', 'details']).valid : !registration.form.get(['referral', 'type']).valid" class="signup next">
+                Next
+            </button>
         </div>
     </div>
 
@@ -72,14 +79,14 @@
 
             <div class="mt-custom3">
                 <label class="container">
-                    <input formControlName="agreed" id="myCheck" type="checkbox">
+                    <input [formControl]="registration.agreed" id="myCheck" type="checkbox">
                     <img class="checkmark" src="/assets/loan-details/tick.svg">
                     <p class="remember text-nowrap">I have agreed to the terms and conditions</p>
                 </label>
             </div>
         </div>
         <div class="d-flex">
-            <button type="submit" [disabled]="!registration.form.valid || !registration.form.get('agreed').value" class="signup">Sign Up</button>
+            <button type="submit" [disabled]="!registration.form.valid || !registration.agreed.value" class="signup">Sign Up</button>
         </div>
     </div>
 </form>

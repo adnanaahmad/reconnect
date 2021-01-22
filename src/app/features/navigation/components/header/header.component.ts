@@ -16,6 +16,9 @@ export class HeaderComponent implements OnInit {
     this.store.toggleNotification.subscribe(result => {
       this.notification.toggle = result;
     });
+    this.store.user.subscribe(res => {
+      console.log(res);
+    });
   }
   notificationToggle(): boolean{
     this.notification.toggle = !this.notification.toggle;

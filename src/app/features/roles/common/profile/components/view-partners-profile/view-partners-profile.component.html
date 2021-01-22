@@ -3,18 +3,18 @@
 
         <div class="card-1">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6zes53m4a_2VLTcmTn_bHk8NO5SkuWfcQbg&usqp=CAU" alt="..." class="img-fluid profile-image">
-            <p class="name">{{userProfile.name}}</p>
-            <p class="role">{{userProfile.role}}</p>
-            <p class="bio">{{userProfile.bio}}</p>
+            <p class="name">{{userProfile.personal.firstName}} {{userProfile.personal.lastName}}</p>
+            <p class="role">{{userProfile.personal.role}}</p>
+            <p class="bio">{{userProfile.personal.bio}}</p>
             <div class="d-flex justify-content-between div-2">
-                <a><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
-                <a> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
-                <a> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
-                <a><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+                <a target="_blank" [href]="userProfile.personal.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a target="_blank" [href]="userProfile.personal.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a target="_blank" [href]="userProfile.personal.socialMedia.linkedIn"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                <a target="_blank" [href]="userProfile.personal.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
             </div>
             <p class="bio-video">Bio Video:</p>
             <div class=" video embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+                <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(userProfile.personal.video)" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -30,9 +30,9 @@
                             <p class="text-nowrap">Real Estate Lic #: </p>
                         </div>
                         <div class="value">
-                            <p>{{userProfile.phone}}</p>
-                            <p>{{userProfile.gender}}</p>
-                            <p>{{userProfile.website}}</p>
+                            <p>{{userProfile.personal.phone}}</p>
+                            <p>{{userProfile.personal.email}}</p>
+                            <p>{{userProfile.personal.realEstateLic}}</p>
                         </div>
                     </div>
                 </div>
@@ -44,9 +44,9 @@
                             <p class="text-nowrap">Broker Lic #: </p>
                         </div>
                         <div class="value">
-                            <p>{{userProfile.birthday | date}}</p>
-                            <p>{{userProfile.email}}</p>
-                            <p>{{userProfile.location}}</p>
+                            <p>{{userProfile.personal.birthday | date}}</p>
+                            <p>{{userProfile.personal.license}}</p>
+                            <p>{{userProfile.personal.brokerLic}}</p>
                         </div>
                     </div>
                 </div>
@@ -56,19 +56,19 @@
         <div class="card-3">
             <h4 class="">Company Information:</h4>
             <div class="d-flex company">
-                <img class="logo" src="https://99designs-blog.imgix.net/blog/wp-content/uploads/2018/01/attachment_64698719-1-e1515600775291.png?auto=format&q=60&fit=max&w=930">
-                <p class="company-name">RealTech</p>
+                <img class="logo" [src]="userProfile.company.image">
+                <p class="company-name">{{userProfile.company.name}}</p>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="d-flex">
                         <div class="label">
-                            <p>Office Phone #: </p>
+                            <p class="text-nowrap">Office Phone #: </p>
                             <p>Address: </p>
                         </div>
                         <div class="value">
-                            <p>{{userProfile.phone}}</p>
-                            <p>{{userProfile.gender}}</p>
+                            <p>{{userProfile.company.officePhone}}</p>
+                            <p>{{userProfile.company.address}}</p>
                         </div>
                     </div>
                 </div>
@@ -79,8 +79,8 @@
                             <p class="text-nowrap">License #:</p>
                         </div>
                         <div class="value">
-                            <p>{{userProfile.birthday | date}}</p>
-                            <p>{{userProfile.email}}</p>
+                            <p>{{userProfile.company.faxPhone}}</p>
+                            <p>{{userProfile.company.license}}</p>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-partners-profile',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ViewPartnersProfileComponent implements OnInit {
   @Input() userProfile;
-  constructor() { }
+  constructor(public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
   }

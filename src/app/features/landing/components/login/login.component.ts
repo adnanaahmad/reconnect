@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {LoginModel} from '../../models/login.model';
 import {AuthService} from '../../services/auth/auth.service';
+import {Router} from '@angular/router';
+import {ConstantService} from '../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,10 @@ import {AuthService} from '../../services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
   login: LoginModel = {} as LoginModel;
-  constructor(private fb: FormBuilder, private loginService: AuthService) { }
+  constructor(private fb: FormBuilder,
+              private loginService: AuthService,
+              private router: Router,
+              private constant: ConstantService) { }
 
   ngOnInit(): void {
     this.login.form = this.fb.group({
@@ -20,10 +25,21 @@ export class LoginComponent implements OnInit {
   }
   onSubmit(): void{
     console.log(this.login.form.value);
-    this.loginService.signIn(this.login.form.value).subscribe( x => {
-      console.log(x);
+    this.loginService.signIn(this.login.form.value).subscribe( res => {
+      console.log(res);
+      if (res.result.user.accountStatus === 'approved'){
+        localStorage.setItem('token', res.result.authToken);
+        localStorage.setItem('user', JSON.stringify(res.result.user));
+        if (res.result.user.role === this.constant.role.BUYER){
+          this.router.navigateByUrl('/home/homeBuyingDashboard');
+        }
+      }
     }, error => {
-      //console.log(error);
+      if (error.error.result){
+        console.log(error.error.result.details[Object.keys(error.error.result.details)[0]].MESSAGE);
+      } else {
+        console.log(error.statusText);
+      }
     });
   }
 }

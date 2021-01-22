@@ -8,14 +8,14 @@ export class ConstantService {
 
   constructor() { }
 
-  static role = {
+   role = {
       BUYER: 'buyer',
       SELLER: 'seller',
       LENDER: 'lender',
-      REAL_Eroute: 'real-eroute',
+      REAL_ESTATE: 'realEstate',
       ATTORNEY: 'attorney',
-      HOME_INSPECTOR: 'home-inspector',
-      INSURANCE: 'insurance',
+      HOME_INSPECTOR: 'homeInspector',
+      INSURANCE: 'insuranceAgent',
       CONTRACTOR: 'contractor'
     };
    apiMethod = {
@@ -28,6 +28,7 @@ export class ConstantService {
    apiRoutes = {
      signin: `${environment.apiUrl}/user/signin`,
      signup: `${environment.apiUrl}/user/signup`,
+     searchReference: `${environment.apiUrl}/user/search-name`,
   };
 
     const; buyer = [{
@@ -450,5 +451,13 @@ export class ConstantService {
     swimmingPool: 'Swimming Pool',
     attic: 'Attic',
     waterFront: 'Water Front',
+  };
+  aboutUs = {
+    'Professional or Friend Reference': 'user',
+    'Facebook Advertisement': 'facebook',
+    Twitter: 'twitter',
+    'Youtube Videos(Channel)': 'youtube',
+    Website: 'website',
+    Other: 'other'
   };
 }

@@ -12,6 +12,10 @@ export class StoreService {
   toggleMoreFilter = this.toggleMoreFilterModal.asObservable();
   private toggleNotificationModal = new BehaviorSubject<any>(false);
   toggleNotification = this.toggleNotificationModal.asObservable();
+  private tokenSubject = new BehaviorSubject<any>(localStorage.getItem('token'));
+  token = this.tokenSubject.asObservable();
+  private userSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('user')));
+  user = this.userSubject.asObservable();
   constructor() { }
 
   updateSavedSearch(data: any): void {

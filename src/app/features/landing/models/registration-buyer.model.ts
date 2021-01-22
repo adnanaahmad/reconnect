@@ -1,11 +1,13 @@
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
 export interface RegistrationBuyerModel{
     screen: ScreenModel;
     professional: Array<any>;
-    aboutUs: Array<string>;
+    aboutUs: {};
     referral: boolean;
+    other: boolean;
     form: FormGroup;
+    agreed: FormControl;
 }
 interface ScreenModel{
     one: boolean;
