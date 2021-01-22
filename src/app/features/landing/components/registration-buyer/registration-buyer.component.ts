@@ -75,15 +75,9 @@ export class RegistrationBuyerComponent implements OnInit {
         this.registration.form.get(['referral', 'details']).disable();
   }
   onSubmit(): void{
-    // const data = Object.keys(this.registration.form.value)
-    //     .filter(key => ['firstName', 'lastName', 'email', 'password', 'role', 'referral'].includes(key))
-    //     .reduce((obj, key) => {
-    //       obj[key] = this.registration.form.value[key];
-    //       return obj;
-    //     }, {});
-    console.log(this.registration.form.value);
+    //console.log(this.registration.form.value);
     this.auth.signUp(this.registration.form.value).subscribe(res => {
-      console.log(res);
+      //console.log(res);
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));

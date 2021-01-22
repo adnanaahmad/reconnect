@@ -31,6 +31,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
   listClick(value): void{
     this.navigation.selectedButton = value;
+    if (value.name === 'Logout'){
+      localStorage.clear();
+    }
   }
   role(data): void {
       console.log(data);

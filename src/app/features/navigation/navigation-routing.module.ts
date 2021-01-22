@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {NavigationComponent} from './components/navigation/navigation.component';
+import {AuthGuard} from '../../core/authGuard/auth.guard';
 
 
 const routes: Routes = [{
   path: '',
   component: NavigationComponent,
+  canActivate: [AuthGuard],
   children: [
     {
       path: 'calendar',

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {ConstantService} from './constant/constant.service';
 import {StoreService} from './store/store.service';
 import {HelperService} from './helper/helper.service';
+import {AuthGuard} from './authGuard/auth.guard';
 
 
 
@@ -11,6 +12,6 @@ import {HelperService} from './helper/helper.service';
   imports: [
     CommonModule
   ],
-  providers: [ ConstantService, StoreService, HelperService ]
+  providers: [ ConstantService, StoreService, HelperService, AuthGuard ]
 })
 export class CoreModule { }

@@ -4,6 +4,7 @@ import {LoginModel} from '../../models/login.model';
 import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {ConstantService} from '../../../../core/constant/constant.service';
+import {StoreService} from '../../../../core/store/store.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private loginService: AuthService,
               private router: Router,
-              private constant: ConstantService) { }
+              private constant: ConstantService,
+              private  store: StoreService) { }
 
   ngOnInit(): void {
     this.login.form = this.fb.group({
