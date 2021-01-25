@@ -158,3 +158,11 @@ select{
   border: none;
 }
 
+.danger{
+  color: var(--red);
+}
+.danger-select:focus{
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+}
+

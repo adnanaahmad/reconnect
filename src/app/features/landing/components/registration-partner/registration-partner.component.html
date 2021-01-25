@@ -2,10 +2,11 @@
     <div *ngIf="register.screen['one']" class="d-flex flex-column parent" formGroupName="personal">
         <p class="heading">Become a Partner</p>
         <div class="mt-custom">
-            <p class="choose">Choose a role</p>
+            <p [ngClass]="{'danger': register.form.get(['personal', 'role']).invalid && register.form.get(['personal', 'role']).touched}" class="choose">Choose a role</p>
             <div class="select-div">
-                <select formControlName="role" class="form-control form-custom">
-                    <option *ngFor="let i of register.role">{{i}}</option>
+                <select [formControl]="register.roleFormControl" #role (change)="register.form.get(['personal', 'role']).setValue(register.role[role.value])" [ngClass]="{'danger-select': register.form.get(['personal', 'role']).invalid && register.form.get(['personal', 'role']).touched}"  class="form-control form-custom">
+                    <option [ngValue]="null" [disabled]="true" >Select Role</option>
+                    <option *ngFor="let i of register.role| keyvalue:helper.originalOrder">{{i.key}}</option>
                 </select>
                 <img src="/assets/landing/drop.svg" class="drop">
             </div>
@@ -24,28 +25,30 @@
         <p class="sub-heading name-row">First, tell us about your company</p>
         <div class="d-flex name-row">
             <div class="input-flex">
-                <p class="label">Company Name</p>
-                <input formControlName="companyName" class="form-control form-custom" placeholder="">
+                <p [ngClass]="{'danger':register.form.get(['company', 'name']).invalid && register.form.get(['company', 'name']).touched}" class="label">Company Name</p>
+                <input [class.is-invalid]="register.form.get(['company', 'name']).invalid && register.form.get(['company', 'name']).touched" formControlName="name" class="form-control form-custom" placeholder="">
             </div>
             <div class="input-flex" >
-                <p class="label">License</p>
-                <input formControlName="license" class="form-control form-custom" placeholder="">
+                <p [ngClass]="{'danger':register.form.get(['company', 'licenseNumber']).invalid && register.form.get(['company', 'licenseNumber']).touched}" class="label">License</p>
+                <input [class.is-invalid]="register.form.get(['company', 'licenseNumber']).invalid && register.form.get(['company', 'licenseNumber']).touched" type="number" formControlName="licenseNumber" class="form-control form-custom" placeholder="">
             </div>
         </div>
         <div class="d-flex name-row">
             <div class="select-flex">
-                <p class="label">State</p>
+                <p [ngClass]="{'danger': register.form.get(['company', 'state']).invalid && register.form.get(['company', 'state']).touched}" class="label">State</p>
                 <div class="select-div">
-                    <select formControlName="state" (change) = "changeState(register.form.value.company.state)" class="form-control form-custom">
+                    <select [ngClass]="{'danger-select': register.form.get(['company', 'state']).invalid && register.form.get(['company', 'state']).touched}" formControlName="state" (change) = "changeState(register.form.value.company.state)" class="form-control form-custom">
+                        <option [ngValue]="null" [disabled]="true" >Select State</option>
                         <option *ngFor="let i of register.states">{{i.state_name}}</option>
                     </select>
                     <img src="/assets/landing/drop.svg" class="drop1">
                 </div>
             </div>
             <div class="select-flex">
-                <p class="label">City</p>
+                <p [ngClass]="{'danger': register.form.get(['company', 'city']).invalid && register.form.get(['company', 'city']).touched}" class="label">City</p>
                 <div class="select-div">
-                    <select formControlName="city" class="form-control form-custom" id="">
+                    <select [ngClass]="{'danger-select': register.form.get(['company', 'city']).invalid && register.form.get(['company', 'city']).touched}" formControlName="city" class="form-control form-custom" id="">
+                        <option [ngValue]="null" [disabled]="true" >Select City</option>
                         <option *ngFor="let i of register.cities">{{i.city_name}}</option>
                     </select>
                     <img src="/assets/landing/drop.svg" class="drop1">
@@ -53,17 +56,17 @@
             </div>
         </div>
         <div class="name-row">
-            <p class="label">Street</p>
-            <input formControlName="street" class="form-control form-custom" placeholder="">
+            <p [ngClass]="{'danger': register.form.get(['company', 'street']).invalid && register.form.get(['company', 'street']).touched}" class="label">Street</p>
+            <input [class.is-invalid]="register.form.get(['company', 'street']).invalid && register.form.get(['company', 'street']).touched" formControlName="street" class="form-control form-custom" placeholder="">
         </div>
         <div class="d-flex">
             <div class="select-flex">
-                <p class="label">Phone Number</p>
-                <input formControlName="phoneNumber" class="form-control form-custom" placeholder="">
+                <p [ngClass]="{'danger':register.form.get(['company', 'phoneNumber']).invalid && register.form.get(['company', 'phoneNumber']).touched}" class="label">Phone Number</p>
+                <input [class.is-invalid]="register.form.get(['company', 'phoneNumber']).invalid && register.form.get(['company', 'phoneNumber']).touched" formControlName="phoneNumber" class="form-control form-custom" placeholder="ANN-NNN-NNNN">
             </div>
             <div class="select-flex">
-                <p class="label">Zip Code</p>
-                <input formControlName="zipCode" class="form-control form-custom" placeholder="">
+                <p [ngClass]="{'danger': register.form.get(['company', 'zipCode']).invalid && register.form.get(['company', 'zipCode']).touched}" class="label">Zip Code</p>
+                <input [class.is-invalid]="register.form.get(['company', 'zipCode']).invalid && register.form.get(['company', 'zipCode']).touched" type="number" formControlName="zipCode" class="form-control form-custom" placeholder="">
             </div>
         </div>
 
@@ -82,27 +85,27 @@
         <div formGroupName="personal">
             <div class="d-flex name-row">
                 <div class="input-flex">
-                    <p class="label">First Name</p>
-                    <input formControlName="firstName" class="form-control form-custom" placeholder="">
+                    <p [ngClass]="{'danger': register.form.get(['personal', 'firstName']).invalid && register.form.get(['personal', 'firstName']).touched}" class="label">First Name</p>
+                    <input [class.is-invalid]="register.form.get(['personal', 'firstName']).invalid && register.form.get(['personal', 'firstName']).touched" formControlName="firstName" class="form-control form-custom" placeholder="">
                 </div>
                 <div class="input-flex" >
-                    <p class="label">Last Name</p>
-                    <input formControlName="lastName" class="form-control form-custom" placeholder="">
+                    <p [ngClass]="{'danger': register.form.get(['personal', 'lastName']).invalid && register.form.get(['personal', 'lastName']).touched}" class="label">Last Name</p>
+                    <input [class.is-invalid]="register.form.get(['personal', 'lastName']).invalid && register.form.get(['personal', 'lastName']).touched" formControlName="lastName" class="form-control form-custom" placeholder="">
                 </div>
             </div>
             <div class="d-flex name-row">
                 <div class="input-flex">
-                    <p class="label">NMLS#</p>
-                    <input formControlName="nmls" class="form-control form-custom" placeholder="">
+                    <p [ngClass]="{'danger': register.form.get(['personal', 'nmlsNumber']).invalid && register.form.get(['personal', 'nmlsNumber']).touched}" class="label">NMLS#</p>
+                    <input type="number" [class.is-invalid]="register.form.get(['personal', 'nmlsNumber']).invalid && register.form.get(['personal', 'nmlsNumber']).touched" formControlName="nmlsNumber" class="form-control form-custom" placeholder="">
                 </div>
                 <div class="input-flex" >
-                    <p class="label">Phone Number</p>
-                    <input formControlName="phoneNumber" class="form-control form-custom" placeholder="">
+                    <p [ngClass]="{'danger': register.form.get(['personal', 'phoneNumber']).invalid && register.form.get(['personal', 'phoneNumber']).touched}" class="label">Phone Number</p>
+                    <input [class.is-invalid]="register.form.get(['personal', 'phoneNumber']).invalid && register.form.get(['personal', 'phoneNumber']).touched" formControlName="phoneNumber" class="form-control form-custom" placeholder="">
                 </div>
             </div>
             <div class="name-row" >
-                <p class="label">Email</p>
-                <input formControlName="email" class="form-control form-custom" placeholder="">
+                <p [ngClass]="{'danger': register.form.get(['personal', 'email']).invalid && register.form.get(['personal', 'email']).touched}" class="label">Email</p>
+                <input [class.is-invalid]="register.form.get(['personal', 'email']).invalid && register.form.get(['personal', 'email']).touched" formControlName="email" class="form-control form-custom" placeholder="">
             </div>
         </div>
         <div class="mt-custom2">
@@ -112,7 +115,7 @@
                 <p class="remember text-nowrap">I have agreed to the terms and conditions</p>
             </label>
         </div>
-        <button (click)="register.screen['three']=false;register.screen['four']=true;" type="submit" [disabled]="(!register.form.get('personal').valid) || !register.form.get('agreed').value" class="continue mt-auto align-self-end">
+        <button type="submit" [disabled]="(!register.form.get('personal').valid) || !register.form.get('agreed').value" class="continue mt-auto align-self-end">
             Sign up
         </button>
     </div>

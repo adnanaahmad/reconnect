@@ -18,6 +18,13 @@ export class ConstantService {
       INSURANCE: 'insuranceAgent',
       CONTRACTOR: 'contractor'
     };
+  chooseRole = {
+    'Real Estate Agent': 'realEstateAgent',
+    Attorney : 'attorney',
+    Lender: 'lender',
+    'Home Inspector': 'homeInspector',
+    'Insurance Agent': 'insuranceAgent',
+  };
    apiMethod = {
     get: 'get',
     post: 'post',

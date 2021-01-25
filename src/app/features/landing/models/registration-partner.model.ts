@@ -1,12 +1,13 @@
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
 export interface RegistrationPartnerModel{
     screen: ScreenModel;
-    role: Array<string>;
+    role: {};
     token: string;
     states: Array<any>;
     cities: Array<any>;
     form: FormGroup;
+    roleFormControl: FormControl;
 }
 
 interface ScreenModel{
