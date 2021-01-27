@@ -26,6 +26,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.navigation.selectedButton = this.navigation.menuItems[index];
     this.showProfileButton();
     this.setRole();
+    this.store.updateUserData(JSON.parse(localStorage.getItem('user')));
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

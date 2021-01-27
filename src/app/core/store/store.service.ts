@@ -14,6 +14,8 @@ export class StoreService {
   toggleNotification = this.toggleNotificationModal.asObservable();
   private roleSubject = new BehaviorSubject<any>(null);
   role = this.roleSubject.asObservable();
+  private userDataSubject = new BehaviorSubject<any>(null);
+  userData = this.userDataSubject.asObservable();
   constructor() { }
 
   updateSavedSearch(data: any): void {
@@ -33,5 +35,11 @@ export class StoreService {
   }
   getLocationApiToken(): string{
     return localStorage.getItem('locationApiToken');
+  }
+  getUserData(): any{
+    return JSON.parse(localStorage.getItem('user'));
+  }
+  updateUserData(data): void{
+    this.userDataSubject.next(data);
   }
 }

@@ -132,16 +132,24 @@ export class EditProfileComponent implements OnInit {
 
   onSubmit(): void {
     // TODO: Use EventEmitter with form value
+    const user = this.store.getUserData();
     console.log(this.userProfile.profileForm.value);
     if (this.userProfile.fileUpload){
-      this.profile.uploadProfilePicture(this.userProfile.fileUpload).subscribe(x => {
-        console.log(x);
+      this.profile.uploadProfilePicture(this.userProfile.fileUpload).subscribe(res => {
+        console.log(res);
+        user.profilePictureUrl = res.result.profilePictureUrl;
+        localStorage.setItem('user', JSON.stringify(user));
+        this.store.updateUserData(user);
       }, error => {
         console.log(error);
       });
     }
     this.profile.saveProfile(this.userProfile.profileForm.value).subscribe(res => {
       console.log(res);
+      user.firstName = res.result.firstName;
+      user.lastName = res.result.lastName;
+      localStorage.setItem('user', JSON.stringify(user));
+      this.store.updateUserData(user);
       this.router.navigateByUrl('/home/profile');
     }, error => {
       console.log(error);

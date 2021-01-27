@@ -125,3 +125,11 @@ p{
   border-radius: 1vw;
   background: var(--green);
 }
+.profile-emoji{
+  background: var(--extraLightGray);
+  padding: .5vw;
+  object-fit: contain;
+  width: 2.2vw;
+  height: 2.2vw;
+  border-radius: .3vw;
+}

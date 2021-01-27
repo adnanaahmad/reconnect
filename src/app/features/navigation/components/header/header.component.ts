@@ -9,12 +9,18 @@ import {StoreService} from '../../../../core/store/store.service';
 export class HeaderComponent implements OnInit {
   toggle: boolean;
   notification: any = {};
+  image = '';
+  name = '';
   constructor(public store: StoreService) { }
 
   ngOnInit(): void {
     this.notification.toggle = false;
     this.store.toggleNotification.subscribe(result => {
       this.notification.toggle = result;
+    });
+    this.store.userData.subscribe(res => {
+      this.image = res.profilePictureUrl;
+      this.name = res.firstName + ' ' + res.lastName;
     });
   }
   notificationToggle(): boolean{
