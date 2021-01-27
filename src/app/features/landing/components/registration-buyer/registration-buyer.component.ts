@@ -6,6 +6,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {HelperService} from '../../../../core/helper/helper.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
+import {LocationService} from '../../services/location/location.service';
 
 @Component({
   selector: 'app-registration-buyer',
@@ -18,7 +19,8 @@ export class RegistrationBuyerComponent implements OnInit {
               private fb: FormBuilder,
               private auth: AuthService,
               public helper: HelperService,
-              private constant: ConstantService) { }
+              private constant: ConstantService,
+              private location: LocationService) { }
 
   ngOnInit(): void {
     // this.registration.form.valueChanges.subscribe(res => {
@@ -81,7 +83,8 @@ export class RegistrationBuyerComponent implements OnInit {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));
-        this.router.navigateByUrl('/home/profile');
+        this.location.saveLocationApiToken();
+        this.router.navigateByUrl('/home/profile/editDetails');
       }
     }, error => {
       if (error.error.result){

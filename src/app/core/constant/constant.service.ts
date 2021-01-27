@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -36,8 +37,22 @@ export class ConstantService {
      signin: `${environment.apiUrl}/user/signin`,
      signup: `${environment.apiUrl}/user/signup`,
      searchReference: `${environment.apiUrl}/user/search-name`,
+     editBuyer: `${environment.apiUrl}/user/update`,
+     viewBuyer: `${environment.apiUrl}/user/profile`,
+     uploadProfilePicture: `${environment.apiUrl}/user/profile-picture`,
   };
-
+   httpOptions = {
+     json: {
+       headers: new HttpHeaders({
+         'Content-Type':  'application/json',
+       })
+     },
+     image: {
+       headers: new HttpHeaders({
+         'Content-Type':  'multipart/form-data',
+       })
+     }
+   };
     const; buyer = [{
       name: 'Home Buying Dashboard',
       tooltip: 'My Home Buying Platform',

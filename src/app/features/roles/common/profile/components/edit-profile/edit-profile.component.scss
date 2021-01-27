@@ -1,9 +1,14 @@
 .save-button button{
   border: none;
-  border-radius: .5em;
-  padding-left: 1.5vw;
-  padding-right: 1.5vw;
-
+  border-radius: .5vw;
+  padding: .5vw 1.5vw;
+  height: fit-content;
+  background: var(--green);
+  color: white;
+  cursor: pointer;
+}
+.save-button button:focus{
+  outline: none;
 }
 .save-button p{
    font-size: .8vw;
@@ -21,13 +26,13 @@
   padding: 2vw;
   border-radius: 0.7em;
 }
-.card-1 img{
-  width: 10vw;
-  height: 10vw;
-  object-fit: cover;
+.profile-image{
   border-color: transparent;
-  border-radius: 1em ;
-  margin-bottom: 1.3vw;
+  border-radius: .5vw ;
+  width: 10.6vw;
+  height: 9.7vw;
+  margin-bottom: 1vw;
+  object-fit: cover;
 }
 .card-1 label{
   color: var(--lighGray);
@@ -52,8 +57,11 @@
   border-radius: 0.7em;
   color: var(--lighGray);
 }
-.card-2-margin-bottom.col-md div.row:nth-child(-n + 2){
+.card-2-margin-bottom.col-md div.row{
   margin-bottom:1.8vw;
+}
+.card-2-margin-bottom.col-md div.row:last-child{
+  margin-bottom:0;
 }
 .card-3{
   background-color: white;
@@ -99,13 +107,17 @@ p{
   text-decoration: underline;
   cursor: pointer;
 }
-.form-control{
+.f1, .f2{
   font-size: .9vw;
   padding: 0 0 0 .6vw;
-  height: 2vw;
+  font-family: 'Poppins';
+  border: 1px solid var(--lighGray);
+}
+.f1{
+  height: 2.5vw;
 }
 textarea.form-control{
-  height: 6vw;
+  //height: 6vw;
 }
 p {
   font-size: .9vw;
@@ -132,4 +144,130 @@ div.col-9{
 }
 select:nth-child(-n + 2){
   //margin-right: .5vw ;
+}
+p, h4, label{
+  font-family: 'Poppins';
+}
+.mb-custom{
+  margin-bottom: 1.5vw;
+}
+.div-2 img{
+  width: 2.3vw;
+  height: 2.3vw;
+  background: var(--extraLightGray);
+  padding: .6vw;
+  border-radius: .3vw;
+  cursor: pointer;
+}
+//.title, .label{
+//  color: var(--lighGray);
+//  margin-bottom: 0.3vw;
+//  font-weight: 300;
+//  font-size: .75vw;
+//}
+.title, .label{
+  color: var(--lighGray);
+  margin-bottom: 0.3vw;
+  font-weight: 300;
+}
+.title{
+  font-size: .7vw;
+}
+.label{
+  font-size: .9vw;
+}
+.profile-div{
+  background: var(--extraLightGray);
+  width: fit-content;
+  padding: 2.5vw 3.3vw 4vw 3.3vw;
+  border-radius: .5vw;
+  position: relative;
+}
+.profile{
+  width: 4vw;
+  height: 3.2vw;
+}
+.upload, .upload1{
+  background: var(--darkBlueOne);
+  padding: .5vw 2.5vw;
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-size: .85vw !important;
+  color: white !important;
+  border: none;
+  border-radius: .3vw;
+  position: absolute;
+  cursor: pointer;
+}
+.upload {
+  top: 70%;
+  left: 12%;
+}
+.upload1{
+  top: 63.5%;
+  left: 8%;
+}
+.column-1{
+  flex-basis: 20.5vw;
+  height: fit-content;
+  margin-right: 2vw;
+}
+.column-2{
+  flex-grow: 1;
+}
+select::-ms-expand {	display: none; }
+select{
+  -webkit-appearance: none;
+  appearance: none;
+}
+.form-custom{
+  border-radius: .6vw;
+  height: 2.5vw;
+  border: 1px solid var(--lighGray);
+  padding-left: .75vw;
+  cursor: pointer;
+  font-family: 'Poppins';
+  //font-weight: 300;
+  font-size: .8vw;
+}
+#file, #file1{
+  display: none;
+}
+.img-div{
+  position: relative;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  //margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  border-radius: .3vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.1vw;
+  width: 1.1vw;
+  //background-color: #eee;
+  border: 1px solid var(--lighGray);
+}
+label{
+  margin-bottom: 0;
+}
+.container input:checked ~ .checkmark {
+  background-color: var(--green);
+  border: none;
 }

@@ -1,5 +1,5 @@
 .column-1{
-  flex-basis: 20vw;
+  flex-basis: 20.5vw;
   margin-right: 2vw;
 }
 .card-1{
@@ -77,8 +77,11 @@
 .card-3 p{
   margin: 0;
 }
-.card-2-margin-bottom.col div.row:nth-child(-n + 2){
+.card-2-margin-bottom.col div.row  {
   margin-bottom:1.8vw;
+}
+.card-2-margin-bottom.col div.row:last-child {
+  margin-bottom:0;
 }
 .address{
   margin-bottom: 1vw !important;
@@ -89,6 +92,7 @@ i{
 }
 h4{
   color: var(--darkGray);
+  font-family: 'Poppins';
 }
 
 .col-3 p{
@@ -117,4 +121,15 @@ h4{
 }
 p{
   font-family: 'Poppins';
+}
+.profile-div{
+  background: var(--extraLightGray);
+  width: fit-content;
+  padding: 3.25vw 3.3vw 3.25vw 3.3vw;
+  border-radius: .5vw;
+  position: relative;
+}
+.profile{
+  width: 4vw;
+  height: 3.2vw;
 }

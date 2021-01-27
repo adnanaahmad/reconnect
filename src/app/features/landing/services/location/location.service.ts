@@ -7,7 +7,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 })
 export class LocationService {
   constructor(private http: HttpClient) { }
-
   authToken(): Observable<any> {
     const apiURL = 'https://www.universal-tutorial.com/api/getaccesstoken';
     const httpOptions = {
@@ -40,5 +39,12 @@ export class LocationService {
       })
     };
     return this.http.get(apiURL, httpOptions);
+  }
+  saveLocationApiToken(): void{
+    this.authToken().subscribe(res => {
+      localStorage.setItem('locationApiToken', res.auth_token);
+      }, error => {
+        console.log(error);
+    });
   }
 }

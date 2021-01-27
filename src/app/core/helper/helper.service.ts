@@ -51,13 +51,8 @@ export class HelperService {
     return 0;
   }
 
-  requestCall(method, api, data?: any): Observable<any> {
+  requestCall(method, api, data?: any, httpOptions?): Observable<any> {
     let response;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-      })
-    };
     switch (method) {
       case this.constants.apiMethod.post:
         response = this.http.post(api, data, httpOptions);
@@ -76,20 +71,15 @@ export class HelperService {
     }
     return response;
   }
-  // handleError(error: HttpErrorResponse, self) {
-  //   //self.logoutError(error.status);
-  //   if (error.error instanceof ErrorEvent) {
-  //     // A client-side or network error occurred. Handle it accordingly.
-  //     // console.error('An error occurred:', error.error.message);
-  //   } else {
-  //     // The backend returned an unsuccessful response code.
-  //     // The response body may contain clues as to what went wrong,
-  //     // console.error(
-  //     //   `Backend returned code ${error.status}, ` +
-  //     //   `body was: ${error.message}`);
-  //   }
-  //   // return an observable with a user-facing error message
-  //   // let msg = error.error.email ? error.error.email[0] : 'Something bad happened, Please try again later.';
-  //   return throwError({error: error.message, status: error.status});
-  // }
+  handleFileInput(files, user): void {
+    const reader = new FileReader();
+    if (files && files.length) {
+      const file = files.item(0);
+      user.fileUpload = file;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        user.image = reader.result as string;
+      };
+    }
+  }
 }

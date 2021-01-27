@@ -1,8 +1,14 @@
 .edit-button button {
   border: none;
-  border-radius: .5em;
+  border-radius: .5vw;
   padding-left: 1.5vw;
   padding-right: 1.5vw;
+  background: var(--green);
+  cursor: pointer;
+  color: white;
+}
+.edit-button button:focus{
+  outline: none;
 }
 .edit-button p{
   margin: 0;

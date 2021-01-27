@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import {ProfileComponent} from './components/profile/profile.component';
@@ -10,6 +10,7 @@ import { EditPersonalDetailsComponent } from './components/edit-personal-details
 import { EditCompanyDetailsComponent } from './components/edit-company-details/edit-company-details.component';
 import { ViewBuyerProfileComponent } from './components/view-buyer-profile/view-buyer-profile.component';
 import { ViewPartnersProfileComponent } from './components/view-partners-profile/view-partners-profile.component';
+import {LocationService} from '../../../landing/services/location/location.service';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ViewPartnersProfileComponent } from './components/view-partners-profile
     CommonModule,
     ProfileRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [LocationService, DatePipe]
 })
 export class ProfileModule { }

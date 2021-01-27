@@ -1,123 +1,156 @@
 <form [formGroup]="userProfile.profileForm" (ngSubmit)="onSubmit()">
   <div class="d-flex justify-content-between save-button">
     <h3>Edit Profile</h3>
-    <button  type="submit" class="btn btn-success"><p>Save</p></button>
+    <button  type="submit"><p>Save</p></button>
   </div>
-  <div class="row">
-    <div class="col-md-4">
+  <div class="d-flex">
+    <div class="column-1">
         <div class="card-1">
-            <img src="https://qph.fs.quoracdn.net/main-qimg-6d72b77c81c9841bd98fc806d702e859" alt="..." class="img-fluid profile-image">
+            <div *ngIf="userProfile.image" class="img-div">
+                <img [src]="userProfile.image"  class="profile-image">
+                <input type="file"
+                       id="file1"
+                       (change)="handleFileInput($event.target.files)">
+                <label for="file1" class="upload1">Upload</label>
+            </div>
+            <div *ngIf="!userProfile.image" class="profile-div mb-custom">
+                <img src="/assets/profile/profile.svg" class="profile">
+                <div>
+                    <input type="file"
+                           id="file"
+                           (change)="handleFileInput($event.target.files)">
+                    <label for="file" class="upload">Upload</label>
+                </div>
+            </div>
             <div class="form-group name">
-              <label>Full Name</label>
-              <input formControlName = "name" type="text" class="form-control form-control" id="formGroupExampleInput" placeholder="Example input">
+              <p class="title">First Name</p>
+              <input formControlName = "firstName" type="text" class="form-control f1" placeholder="">
+            </div>
+            <div class="form-group name">
+                <p class="title">Last Name</p>
+                <input formControlName = "lastName" type="text" class="form-control f1" placeholder="">
             </div>
             <div class="form-group bio">
-              <label for="formGroupExampleInput2">Bio</label>
-              <textarea formControlName = "bio" class="form-control" rows="5">
+              <p class="title">Bio</p>
+              <textarea formControlName = "bio" class="form-control f2" rows="3">
               </textarea>
             </div>
-           <div class="row">
-              <div class="col">
-                  <i class="fa fa-facebook fa-lg" aria-hidden="true"></i>
-              </div>
-              <div class="col">
-                  <i class="fa fa-instagram fa-lg" aria-hidden="true"></i>
-              </div>
-              <div class="col">
-                  <i class="fa fa-linkedin fa-lg" aria-hidden="true"></i>
-              </div>
-              <div class="col">
-                  <i class="fa fa-twitter fa-lg" aria-hidden="true"></i>
-              </div>
-           </div>
+            <div class="d-flex justify-content-between div-2 mb-custom">
+                <a (click)="switchSocialMediaLink('facebook')"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a (click)="switchSocialMediaLink('instagram')"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a (click)="switchSocialMediaLink('linkedIn')"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                <a (click)="switchSocialMediaLink('twitter')"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+            </div>
+            <div formGroupName="socialMedia">
+                <div *ngIf="socialMediaLinks['facebook']">
+                    <p class="title">Facebook Link</p>
+                    <textarea formControlName="facebook" type="text" class="form-control f2"  rows="3"></textarea>
+                </div>
+                <div *ngIf="socialMediaLinks['instagram']" >
+                    <p class="title">Instagram Link</p>
+                    <textarea formControlName="instagram" type="text" class="form-control f2"  rows="3"></textarea>
+                </div>
+                <div  *ngIf="socialMediaLinks['linkedIn']">
+                    <p class="title">LinkedIn Link</p>
+                    <textarea formControlName="linkedIn" type="text" class="form-control f2"  rows="3"></textarea>
+                </div>
+                <div *ngIf="socialMediaLinks['twitter']">
+                    <p class="title">Twitter Link</p>
+                    <textarea formControlName="twitter" type="text" class="form-control f2"  rows="3"></textarea>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="column-2">
        <div class="card-2 mb-4">
           <h4 class="">Personal Information:</h4>
           <div class="row">
             <div class="card-2-margin-bottom col-md">
               <div class="form-group row">
-                <label class="col-3 col-form-label col-form-label">Phone:</label>
+                <p class="col-3 label col-form-label col-form-label">Phone:</p>
                 <div class="col-9">
-                  <input formControlName = "phone" type="email" class="form-control form-control" id="inputEmail3" placeholder="Email">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-3 col-form-label col-form-label">Gender:</label>
-                <div class="col-9 d-flex align-self-center">
-                  <div class="form-check form-check-inline">
-                    <input formControlName = "gender" class="form-check-input" type="radio" value="Male" checked>
-                    <label class="form-check-label" for="gridRadios1">
-                      Male
-                    </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input formControlName = "gender" class="form-check-input" type="radio" value="Female">
-                    <label class="form-check-label" for="gridRadios2">
-                      Female
-                    </label>
-                  </div>
+                  <input formControlName = "phoneNumber" type="email" class="form-control f1" placeholder="">
                 </div>
               </div>
               <div class="form-group row website">
-                <label class="col-3 col-form-label col-form-label">Website:</label>
+                <p class="col-3 label col-form-label col-form-label">Website:</p>
                 <div class="col-9">
-                  <input formControlName = "website" type="email" class="form-control form-control" id="inputEmail3" placeholder="Email">
+                  <input formControlName = "website" type="text" class="form-control f1" placeholder="">
                 </div>
               </div>
+                <div class="form-group row location">
+                    <p class="col-3 label col-form-label col-form-label">State:</p>
+                    <div class="col-9">
+                        <select formControlName = "state"  class="form-control form-custom" (change) = "changeState(userProfile.profileForm.get('state').value)">
+                            <option [ngValue]="null" [disabled]="true" >Select State</option>
+                            <option [value]="i.state_name" *ngFor="let i of states">{{i.state_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label col-form-label">Gender:</label>
+                    <div class="col-9 d-flex align-self-center">
+                        <div class="form-check form-check-inline">
+                            <label class="container">Male
+                                <input formControlName = "gender" class="form-check-input" type="radio" value="male" type="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="container">Female
+                                <input formControlName = "gender" class="form-check-input" type="radio" value="female" type="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-2-margin-bottom col-md">
               <div formGroupName = "birthday" class="row">
-                <label class="col-3 col-form-label col-form-label">Birthday:</label>
+                <p class="col-3 label col-form-label col-form-label">Birthday:</p>
                 <div class="col-9 fields-class d-flex justify-content-between">
                   <div class="">
-                    <select formControlName = "month" id="inputState" class="form-control">
-                      <option selected>February</option>
-                      <option selected>August</option>
-                      <option>...</option>
+                    <select formControlName = "month"  class="form-control form-custom">
+                        <option *ngFor="let month of months; let i = index" [value]="i+1">{{month}}</option>
                     </select>
                   </div>
                   <div class="">
-                    <select formControlName = "day" id="inputState" class="form-control">
-                      <option selected>02</option>
-                      <option selected>03</option>
-                      <option>...</option>
+                    <select formControlName = "day"  class="form-control form-custom">
+                        <option *ngFor="let day of days" [value]="day">{{day}}</option>
                     </select>
                   </div>
                   <div class="">
-                    <select formControlName = "year" id="inputState" class="form-control">
-                      <option selected>1994</option>
-                      <option selected>1992</option>
-                      <option>...</option>
+                    <select formControlName = "year" class="form-control form-custom">
+                        <option *ngFor="let year of years; let i = index" [value]="year">{{year}}</option>
                     </select>
                   </div>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-3 col-form-label col-form-label">Email:</label>
+                <p class="col-3 label col-form-label col-form-label">Email:</p>
                 <div class="col-9">
-                  <input formControlName = "email" type="email" class="form-control form-control" id="inputEmail3" placeholder="Email">
+                  <input formControlName = "email" type="email" class="form-control f1" placeholder="">
                 </div>
               </div>
-              <div class="form-group row location">
-                <label class="col-3 col-form-label col-form-label">Location:</label>
-                <div class="col-9">
-                  <select formControlName = "location" id="inputState" class="form-control">
-                    <option selected>LA</option>
-                    <option>Vegas</option>
-                  </select>
+                <div class="form-group row location">
+                    <p class="col-3 label col-form-label col-form-label">City:</p>
+                    <div class="col-9">
+                        <select formControlName = "city"  class="form-control form-custom">
+                            <option [ngValue]="null" [disabled]="true" >Select City</option>
+                            <option [value]="i.city_name" *ngFor="let i of cities">{{i.city_name}}</option>
+                        </select>
+                    </div>
                 </div>
-              </div>
+
             </div>
           </div>
       </div>
 
       <div class="card-3">
         <h4 class="">Address:</h4>
-        <div formArrayName="address">
+        <div formArrayName="addresses">
           <div *ngFor="let a of address.controls; let i = index">
-               <textarea [formControlName]="i"  class="form-control textarea" rows="5">
+               <textarea [formControlName]="i"  class="form-control textarea f2" rows="5">
                 </textarea>
           </div>
         </div>

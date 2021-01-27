@@ -5,6 +5,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {StoreService} from '../../../../core/store/store.service';
+import {LocationService} from '../../services/location/location.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
               private loginService: AuthService,
               private router: Router,
               private constant: ConstantService,
-              private  store: StoreService) { }
+              private location: LocationService) { }
 
   ngOnInit(): void {
     this.login.form = this.fb.group({
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));
+        this.location.saveLocationApiToken();
         if (res.result.user.role === this.constant.role.BUYER){
           this.router.navigateByUrl('/home/homeBuyingDashboard');
         }
