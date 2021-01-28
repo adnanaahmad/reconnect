@@ -1,20 +1,25 @@
-<div class="d-flex">
+<div class="d-flex" *ngIf="loader">
     <div class="column-1">
 
         <div class="card-1">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6zes53m4a_2VLTcmTn_bHk8NO5SkuWfcQbg&usqp=CAU" alt="..." class="img-fluid profile-image">
-            <p class="name">{{userProfile.personal.firstName}} {{userProfile.personal.lastName}}</p>
-            <p class="role">{{userProfile.personal.role}}</p>
-            <p class="bio">{{userProfile.personal.bio}}</p>
-            <div class="d-flex justify-content-between div-2">
-                <a target="_blank" [href]="userProfile.personal.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
-                <a target="_blank" [href]="userProfile.personal.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
-                <a target="_blank" [href]="userProfile.personal.socialMedia.linkedIn"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
-                <a target="_blank" [href]="userProfile.personal.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+            <img *ngIf="partnerProfile.profilePictureUrl" [src]="profile.STATIC_FILES_URL+partnerProfile.profilePictureUrl"  class="profile-image">
+            <div *ngIf="!partnerProfile.profilePictureUrl" class="profile-div mb-custom">
+                <img src="/assets/profile/profile.svg" class="profile">
             </div>
-            <p class="bio-video">Bio Video:</p>
-            <div class=" video embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(userProfile.personal.video)" allowfullscreen></iframe>
+            <p class="name">{{partnerProfile.firstName | titlecase}} {{partnerProfile.lastName | titlecase}}</p>
+            <p class="role">{{formatRole(partnerProfile.role) | titlecase}}</p>
+            <p class="bio">{{partnerProfile.bio}}</p>
+            <div class="d-flex justify-content-between div-2" *ngIf="partnerProfile.socialMedia">
+                <a target="_blank" [href]="partnerProfile.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a target="_blank" [href]="partnerProfile.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a target="_blank" [href]="partnerProfile.socialMedia.linkedIn"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                <a target="_blank" [href]="partnerProfile.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+            </div>
+            <div *ngIf="partnerProfile.profileVideoUrl">
+                <p class="bio-video">Bio Video:</p>
+                <div class=" video embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(partnerProfile.profileVideoUrl)" allowfullscreen></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -30,9 +35,9 @@
                             <p class="text-nowrap">Real Estate Lic #: </p>
                         </div>
                         <div class="value">
-                            <p>{{userProfile.personal.phone}}</p>
-                            <p>{{userProfile.personal.email}}</p>
-                            <p>{{userProfile.personal.realEstateLic}}</p>
+                            <p>{{partnerProfile.phoneNumber}}&nbsp;</p>
+                            <p>{{partnerProfile.email}}&nbsp;</p>
+                            <p>{{partnerProfile.realEstateLicenseNumber}}</p>
                         </div>
                     </div>
                 </div>
@@ -44,9 +49,9 @@
                             <p class="text-nowrap">Broker Lic #: </p>
                         </div>
                         <div class="value">
-                            <p>{{userProfile.personal.birthday | date}}</p>
-                            <p>{{userProfile.personal.license}}</p>
-                            <p>{{userProfile.personal.brokerLic}}</p>
+                            <p>{{partnerProfile.birthday | date}}&nbsp;</p>
+                            <p>{{partnerProfile.licenseNumber}}&nbsp;</p>
+                            <p>{{partnerProfile.brokerLicense}}</p>
                         </div>
                     </div>
                 </div>
@@ -56,8 +61,9 @@
         <div class="card-3">
             <h4 class="">Company Information:</h4>
             <div class="d-flex company">
-                <img class="logo" [src]="userProfile.company.image">
-                <p class="company-name">{{userProfile.company.name}}</p>
+                <img *ngIf="partnerProfile.company.companyLogoUrl" class="logo" [src]="profile.STATIC_FILES_URL+partnerProfile.company.companyLogoUrl">
+                <img *ngIf="!partnerProfile.company.companyLogoUrl" src="/assets/profile/profile.svg" class="empty-logo">
+                <p class="company-name">{{partnerProfile.company.name}}</p>
             </div>
             <div class="row">
                 <div class="col">
@@ -67,8 +73,8 @@
                             <p>Address: </p>
                         </div>
                         <div class="value">
-                            <p>{{userProfile.company.officePhone}}</p>
-                            <p>{{userProfile.company.address}}</p>
+                            <p>{{partnerProfile.company.phoneNumber}}&nbsp;</p>
+                            <p>{{partnerProfile.company.street}} {{partnerProfile.company.city}}, {{partnerProfile.company.state}}</p>
                         </div>
                     </div>
                 </div>
@@ -79,8 +85,8 @@
                             <p class="text-nowrap">License #:</p>
                         </div>
                         <div class="value">
-                            <p>{{userProfile.company.faxPhone}}</p>
-                            <p>{{userProfile.company.license}}</p>
+                            <p>{{partnerProfile.company.faxNumber}}&nbsp;</p>
+                            <p>{{partnerProfile.company.licenseNumber}}</p>
                         </div>
                     </div>
                 </div>

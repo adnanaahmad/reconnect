@@ -33,14 +33,15 @@ export class LoginComponent implements OnInit {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));
-        this.location.saveLocationApiToken();
         if (res.result.user.role === this.constant.role.BUYER){
-          this.router.navigateByUrl('/home/homeBuyingDashboard');
+          this.router.navigateByUrl('/home/homeBuyingDashboard').then();
+        } else {
+          this.router.navigateByUrl('/home/dashboard').then();
         }
       }
     }, error => {
-      if (error.error.result){
-        console.log(error.error.result.details[Object.keys(error.error.result.details)[0]].MESSAGE);
+      if (error.error.result && Object.entries(error.error.result).length){
+        console.log(error.error.result.details.MESSAGE);
       } else {
         console.log(error.statusText);
       }

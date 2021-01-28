@@ -144,16 +144,34 @@ p{
 .company{
   margin-bottom: 2vw;
 }
-.logo{
-  border-radius: .3vw;
+.logo, .empty-logo{
   height: 4vw;
   width: 4vw;
-  object-fit: cover;
   margin-right: 1vw;
+  border-radius: .3vw;
+}
+.empty-logo{
+  background: var(--extraLightGray);
+  padding: 1.3vw;
+}
+.logo{
+  object-fit: cover;
 }
 .company-name{
   align-self: center;
   margin-bottom: 0;
   color: var(--darkGray);
   font-size: .95vw;
+}
+.profile-div{
+  background: var(--extraLightGray);
+  width: fit-content;
+  padding: 3.25vw 3.3vw 3.25vw 3.3vw;
+  border-radius: .5vw;
+  position: relative;
+  margin-bottom: 1vw;
+}
+.profile{
+  width: 4vw;
+  height: 3.2vw;
 }

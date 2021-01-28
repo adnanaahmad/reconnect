@@ -10,7 +10,7 @@ export class TokenInterceptorService {
 
   constructor(private store: StoreService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.store.getToken()) {
+    if (this.store.getToken() && !request.url.includes('universal')) {
       request = request.clone({
         setHeaders: {
           authorization: `Token ${this.store.getToken()}`,

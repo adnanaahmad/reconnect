@@ -13,7 +13,7 @@ export class ConstantService {
       BUYER: 'buyer',
       SELLER: 'seller',
       LENDER: 'lender',
-      REAL_ESTATE: 'realEstate',
+      REAL_ESTATE: 'realEstateAgent',
       ATTORNEY: 'attorney',
       HOME_INSPECTOR: 'homeInspector',
       INSURANCE: 'insuranceAgent',
@@ -39,7 +39,7 @@ export class ConstantService {
      searchReference: `${environment.apiUrl}/user/search-name`,
      editBuyer: `${environment.apiUrl}/user/update`,
      viewBuyer: `${environment.apiUrl}/user/profile`,
-     uploadProfilePicture: `${environment.apiUrl}/user/profile-picture`,
+     uploadProfilePicture: `${environment.apiUrl}/user/picture`,
   };
    httpOptions = {
      json: {

@@ -65,8 +65,8 @@
                 <input [class.is-invalid]="register.form.get(['company', 'phoneNumber']).invalid && register.form.get(['company', 'phoneNumber']).touched" formControlName="phoneNumber" class="form-control form-custom" placeholder="ANN-NNN-NNNN">
             </div>
             <div class="select-flex">
-                <p [ngClass]="{'danger': register.form.get(['company', 'zipCode']).invalid && register.form.get(['company', 'zipCode']).touched}" class="label">Zip Code</p>
-                <input [class.is-invalid]="register.form.get(['company', 'zipCode']).invalid && register.form.get(['company', 'zipCode']).touched" type="number" formControlName="zipCode" class="form-control form-custom" placeholder="">
+                <p [ngClass]="{'danger': register.form.get(['company', 'zip']).invalid && register.form.get(['company', 'zip']).touched}" class="label">Zip Code</p>
+                <input [class.is-invalid]="register.form.get(['company', 'zip']).invalid && register.form.get(['company', 'zip']).touched" type="number" formControlName="zip" class="form-control form-custom" placeholder="">
             </div>
         </div>
 

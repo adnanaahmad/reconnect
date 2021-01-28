@@ -5,6 +5,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {StoreService} from '../../../../core/store/store.service';
+import {ConstantService} from '../../../../core/constant/constant.service';
+import {LocationService} from '../../../landing/services/location/location.service';
 
 @Component({
   selector: 'app-navigation',
@@ -18,7 +20,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
   constructor(private navigationService: NavigationService,
               private sanitizer: DomSanitizer,
               private router: Router,
-              private store: StoreService) {}
+              private store: StoreService,
+              private constant: ConstantService,
+              private location: LocationService) {}
 
   ngOnInit(): void {
     this.navigation.menuItems = this.navigationService.getBuyerMenuItems();
@@ -27,6 +31,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.showProfileButton();
     this.setRole();
     this.store.updateUserData(JSON.parse(localStorage.getItem('user')));
+    this.location.saveLocationApiToken();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -35,19 +40,19 @@ export class NavigationComponent implements OnInit, OnDestroy {
     const data = JSON.parse(localStorage.getItem('user')).role;
     this.store.setRole(data);
     switch (data) {
-      case 'buyer':
+      case this.constant.role.BUYER:
         this.navigation.menuItems = this.navigationService.getBuyerMenuItems();
         break;
-      case 'lender':
+      case this.constant.role.LENDER:
         this.navigation.menuItems = this.navigationService.getLenderMenuItems();
         break;
-      case 'realEstate':
+      case this.constant.role.REAL_ESTATE:
         this.navigation.menuItems = this.navigationService.getRealEstateAgentMenuItems();
         break;
-      case 'attorney':
+      case this.constant.role.ATTORNEY:
         this.navigation.menuItems = this.navigationService.getAttorneyMenuItems();
         break;
-      case 'homeInspector':
+      case this.constant.role.HOME_INSPECTOR:
         this.navigation.menuItems = this.navigationService.getHomeInspectorMenuItems();
         break;
       default:

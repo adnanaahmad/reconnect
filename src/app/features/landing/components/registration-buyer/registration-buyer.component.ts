@@ -83,7 +83,6 @@ export class RegistrationBuyerComponent implements OnInit {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));
-        this.location.saveLocationApiToken();
         this.router.navigateByUrl('/home/profile/editDetails');
       }
     }, error => {

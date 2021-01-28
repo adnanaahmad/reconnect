@@ -37,7 +37,7 @@ export class RegistrationPartnerComponent implements OnInit {
         city: [null, Validators.required],
         street: [null, Validators.required],
         state: [null, Validators.required],
-        zipCode: [null, Validators.required],
+        zip: [null, Validators.required],
       }),
       personal: this.fb.group({
         role: [null, Validators.required],

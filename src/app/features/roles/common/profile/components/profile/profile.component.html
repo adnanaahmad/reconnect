@@ -3,4 +3,4 @@
   <button (click)="editProfile()" type="button" class=""><p>Edit</p></button>
 </div>
 <app-view-buyer-profile *ngIf="(store.role | async) === 'buyer'"></app-view-buyer-profile>
-<app-view-partners-profile *ngIf="(store.role | async) !== 'buyer'" [userProfile]="userProfilePro"></app-view-partners-profile>
+<app-view-partners-profile *ngIf="(store.role | async) !== 'buyer'"></app-view-partners-profile>

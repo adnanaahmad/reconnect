@@ -1,10 +1,22 @@
-<form [formGroup]="personalDetails" (ngSubmit)="onSubmit()">
+<form [formGroup]="personalDetails.form" (ngSubmit)="onSubmit()" *ngIf="loader">
     <div class="d-flex parent-pg justify-content-end">
         <button type="submit" class="save-btn">Save</button>
         <div class="card-1">
-            <div class="profile-div mb-custom">
+            <div *ngIf="personalDetails.image" class="img-div">
+                <img [src]="personalDetails.image"  class="profile-image">
+                <input type="file"
+                       id="file1"
+                       (change)="handleFileInput($event.target.files)">
+                <label for="file1" class="upload1">Upload</label>
+            </div>
+            <div *ngIf="!personalDetails.image" class="profile-div mb-custom">
                 <img src="/assets/profile/profile.svg" class="profile">
-                <button class="upload">Upload</button>
+                <div>
+                    <input type="file"
+                           id="file"
+                           (change)="handleFileInput($event.target.files)">
+                    <label for="file" class="upload">Upload</label>
+                </div>
             </div>
             <!--        <p class="title">Full Name</p>-->
             <!--        <input  type="text" class="form-control f1 mb-custom"  placeholder="">-->
@@ -47,37 +59,31 @@
                     <p class="label">Title</p>
                     <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
                     <p class="label">Real Estate Lic #</p>
-                    <input formControlName="realEstateLicense" type="text" class="form-control f1"  placeholder="">
+                    <input formControlName="realEstateLicenseNumber" type="text" class="form-control f1"  placeholder="">
                 </div>
                 <div class="c2-col2">
                     <p class="label">Birthday</p>
                     <div class="d-flex justify-content-between mb-custom" formGroupName="birthday">
                         <div class="selected">
                             <select formControlName="month" class="form-control f1">
-                                <option selected>February</option>
-                                <option selected>August</option>
-                                <option>...</option>
+                                <option *ngFor="let month of months; let i = index" [value]="i+1">{{month}}</option>
                             </select>
                         </div>
                         <div class="selected">
                             <select formControlName="day" class="form-control f1">
-                                <option selected>02</option>
-                                <option selected>03</option>
-                                <option>...</option>
+                                <option *ngFor="let day of days" [value]="day">{{day}}</option>
                             </select>
                         </div>
                         <div class="selected">
                             <select formControlName="year" class="form-control f1">
-                                <option selected>1994</option>
-                                <option selected>1992</option>
-                                <option>...</option>
+                                <option *ngFor="let year of years; let i = index" [value]="year">{{year}}</option>
                             </select>
                         </div>
                     </div>
                     <p class="label">Email</p>
                     <input formControlName="email" type="text" class="form-control f1 mb-custom"  placeholder="">
                     <p class="label">License #</p>
-                    <input formControlName="license" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <input formControlName="licenseNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
                     <p class="label">Broker Lic #</p>
                     <input formControlName="brokerLicense" type="text" class="form-control f1"  placeholder="">
                 </div>
@@ -90,7 +96,7 @@
                     </div>
                     <div class="video">
                         <p class="label">Video Link</p>
-                        <input formControlName="videoUrl" type="text" class="form-control f1"  placeholder="">
+                        <input formControlName="profileVideoUrl" type="text" class="form-control f1"  placeholder="">
                     </div>
                 </div>
             </div>

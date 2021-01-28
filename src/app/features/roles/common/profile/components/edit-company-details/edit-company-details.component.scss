@@ -41,7 +41,13 @@ p{
   width: 6vw;
   height: 5.2vw;
 }
-.upload{
+.profile-image{
+  width: 16.5vw;
+  height: 17.5vw;
+  object-fit: cover;
+  margin-bottom: 1vw;
+}
+.upload, .upload1{
   background: var(--darkBlueOne);
   padding: .5vw 5.5vw;
   font-family: 'Poppins';
@@ -51,10 +57,17 @@ p{
   border: none;
   border-radius: .3vw;
   position: absolute;
+  cursor: pointer;
+}
+.upload{
   top:80%;
   left: 7.5%;
 }
-.upload:focus{
+.upload1{
+  top:80%;
+  left: 7.5%;
+}
+.upload, .upload1:focus{
   outline: none;
 }
 .f1, .f2{
@@ -127,4 +140,10 @@ select{
 }
 .save-btn:focus{
   outline: 0;
+}
+#file, #file1{
+  display: none;
+}
+.img-div{
+  position: relative;
 }

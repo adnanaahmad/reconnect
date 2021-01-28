@@ -15,9 +15,6 @@ import {DatePipe} from '@angular/common';
 export class EditProfileComponent implements OnInit {
   userProfile: UserProfileEditModel = {} as UserProfileEditModel;
   socialMediaLinks = {facebook: true, instagram: false, linkedIn: false, twitter: false};
-  token;
-  states;
-  cities;
 
   constructor(private fb: FormBuilder,
               private location: LocationService,
@@ -33,15 +30,6 @@ export class EditProfileComponent implements OnInit {
     this.initialiseProfileForm();
     this.setProfileData();
   }
-
-  getLocation(): void {
-    this.location.getStates(this.store.getLocationApiToken()).subscribe(response => {
-      this.states = response;
-    }, error => {
-      console.log(error);
-    });
-  }
-
   getMonth(idx): string {
     const objDate = new Date();
     objDate.setDate(1);
@@ -170,19 +158,15 @@ export class EditProfileComponent implements OnInit {
       [val]: true
     });
   }
-
+  getLocation(): void {
+    this.profile.getLocation(this.userProfile);
+  }
   changeState(state): void {
-    this.location.getCities(state, this.store.getLocationApiToken()).subscribe(res => {
-      this.cities = res;
-    });
+    this.profile.changeState(state, this.userProfile);
   }
 
   setCity(state: string): void {
-    this.location.getCities(state, this.store.getLocationApiToken()).subscribe(res1 => {
-      this.cities = res1;
-    }, error => {
-      console.log(error);
-    });
+    this.profile.setCity(state, this.userProfile);
   }
 
   handleFileInput(files: FileList): void {

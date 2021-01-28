@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const serverUrl = 'http://78e8c6cbfdab.ngrok.io';
+const serverUrl = 'http://1bce0d84ecb7.ngrok.io';
 const clientUrl = 'http://localhost:4200/#';
 
 export const environment = {

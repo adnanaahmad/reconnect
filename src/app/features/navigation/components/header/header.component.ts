@@ -1,5 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {StoreService} from '../../../../core/store/store.service';
+import {ProfileService} from '../../../roles/common/profile/services/profile.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
   notification: any = {};
   image = '';
   name = '';
-  constructor(public store: StoreService) { }
+  constructor(public store: StoreService, public profile: ProfileService) { }
 
   ngOnInit(): void {
     this.notification.toggle = false;

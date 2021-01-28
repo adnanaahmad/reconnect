@@ -31,7 +31,7 @@ p{
   width: 4vw;
   height: 3.2vw;
 }
-.upload{
+.upload, .upload1{
   background: var(--darkBlueOne);
   padding: .5vw 2.5vw;
   font-family: 'Poppins';
@@ -41,11 +41,20 @@ p{
   border: none;
   border-radius: .3vw;
   position: absolute;
-  top:70%;
+}
+.upload, .upload1:focus{
+  outline: none;
+}
+.upload {
+  top: 70%;
   left: 12%;
 }
-.upload:focus{
-  outline: none;
+.upload1{
+  top: 63.5%;
+  left: 8%;
+}
+.img-div{
+  position: relative;
 }
 .f1, .f2{
   font-size: .85vw;
@@ -129,4 +138,18 @@ select{
 }
 .save-btn:focus{
   outline: 0;
+}
+#file, #file1{
+  display: none;
+}
+.upload, .upload1{
+  cursor: pointer;
+}
+.profile-image{
+  border-color: transparent;
+  border-radius: .5vw ;
+  width: 10.6vw;
+  height: 9.7vw;
+  margin-bottom: 1vw;
+  object-fit: cover;
 }

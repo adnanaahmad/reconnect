@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ProfileService} from '../../services/profile.service';
+import {HelperService} from '../../../../../../core/helper/helper.service';
+import {DatePipe} from '@angular/common';
+import {PersonalDetailsModel} from '../../models/personal-details.model';
+import {StoreService} from '../../../../../../core/store/store.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-edit-personal-details',
@@ -7,12 +13,25 @@ import {FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./edit-personal-details.component.scss']
 })
 export class EditPersonalDetailsComponent implements OnInit {
-  personalDetails: any;
+  personalDetails: PersonalDetailsModel = {} as PersonalDetailsModel;
   socialMediaLinks = {facebook: true, instagram: false, linkedIn: false, twitter: false};
-  constructor(private fb: FormBuilder) { }
+  loader = false;
+  constructor(private fb: FormBuilder,
+              private profile: ProfileService,
+              private helper: HelperService,
+              private datePipe: DatePipe,
+              private store: StoreService,
+              private router: Router) { }
 
   ngOnInit(): void {
-    this.personalDetails = this.fb.group({
+    this.initialisePersonalForm();
+    this.setPersonalData();
+    // this.personalDetails.valueChanges.subscribe(x => {
+    //   console.log(x);
+    // });
+  }
+  initialisePersonalForm(): void{
+    this.personalDetails.form = this.fb.group({
       firstName:  [null, Validators.required],
       lastName: [null, Validators.required],
       socialMedia: this.fb.group({
@@ -22,8 +41,7 @@ export class EditPersonalDetailsComponent implements OnInit {
         twitter: [null, Validators.required]
       }),
       bio: [null, Validators.required],
-      videoUrl: [null, Validators.required],
-      image: [null, Validators.required],
+      profileVideoUrl: [null, Validators.required],
       phoneNumber: [null, Validators.required],
       role: [null, Validators.required],
       birthday: this.fb.group({
@@ -33,14 +51,50 @@ export class EditPersonalDetailsComponent implements OnInit {
       }),
       email: [null, Validators.required],
       title: [null, Validators.required],
-      license: [null, Validators.required],
-      realEstateLicense: [null, Validators.required],
+      licenseNumber: [null, Validators.required],
+      realEstateLicenseNumber: [null, Validators.required],
       brokerLicense: [null, Validators.required]
     });
-    // this.personalDetails.valueChanges.subscribe(x => {
-    //   console.log(x);
-    // });
   }
+
+  setPersonalData(): void{
+    this.profile.getUserData().subscribe(res => {
+      console.log(res);
+      res = res.result;
+      this.personalDetails.image = res.profilePictureUrl ?
+          this.profile.STATIC_FILES_URL + res.profilePictureUrl : null;
+      this.personalDetails.form.patchValue({
+        firstName: res.firstName,
+        lastName: res.lastName,
+        phoneNumber: res.phoneNumber,
+        email: res.email,
+        profileVideoUrl: res.profileVideoUrl,
+        licenseNumber: res.licenseNumber,
+        realEstateLicenseNumber: res.realEstateLicenseNumber,
+        brokerLicense: res.brokerLicense,
+        title: res.title,
+        role: res.role,
+        bio: res.bio
+      });
+      if (res.birthday){
+        const birthday = this.datePipe.transform(res.birthday, 'yyyy-MM-dd');
+        this.personalDetails.form.get(['birthday', 'year']).setValue(birthday.split('-')[0]);
+        this.personalDetails.form.get(['birthday', 'month']).setValue(Number(birthday.split('-')[1]));
+        this.personalDetails.form.get(['birthday', 'day']).setValue(Number(birthday.split('-')[2]));
+      }
+      if (res.socialMedia){
+        this.personalDetails.form.get(['socialMedia', 'facebook']).setValue(res.socialMedia.facebook);
+        this.personalDetails.form.get(['socialMedia', 'instagram']).setValue(res.socialMedia.instagram);
+        this.personalDetails.form.get(['socialMedia', 'linkedIn']).setValue(res.socialMedia.linkedIn);
+        this.personalDetails.form.get(['socialMedia', 'twitter']).setValue(res.socialMedia.twitter);
+      }
+      this.personalDetails.company = res.company;
+      this.loader = true;
+    }, error => {
+      console.log(error);
+    });
+  }
+
   switchSocialMediaLink(val: string): void{
     const layers = {facebook: false, instagram: false, linkedIn: false, twitter: false};
     this.socialMediaLinks = Object.assign(this.socialMediaLinks, layers, {
@@ -48,6 +102,57 @@ export class EditPersonalDetailsComponent implements OnInit {
     });
   }
   onSubmit(): void{
-    console.log(this.personalDetails.value);
+    const user = this.store.getUserData();
+    if (Object.values(this.personalDetails.form.get('birthday').value).some(element => element === null)){
+      delete this.personalDetails.form.value.birthday;
+    }
+    if (this.personalDetails.fileUpload){
+      this.profile.uploadProfilePicture(this.personalDetails.fileUpload).subscribe(res => {
+        user.profilePictureUrl = res.result.profilePictureUrl;
+        localStorage.setItem('user', JSON.stringify(user));
+        this.store.updateUserData(user);
+      }, error => {
+        console.log(error);
+      });
+    }
+    console.log(this.personalDetails.form.value);
+    this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}}).subscribe(res => {
+      //console.log(res);
+      user.firstName = res.result.firstName;
+      user.lastName = res.result.lastName;
+      localStorage.setItem('user', JSON.stringify(user));
+      this.store.updateUserData(user);
+      this.router.navigateByUrl('/home/profile');
+      console.log(res);
+    }, error => {
+      console.log(error);
+    });
+  }
+  getMonth(idx): string {
+    const objDate = new Date();
+    objDate.setDate(1);
+    objDate.setMonth(idx - 1);
+    return objDate.toLocaleString('en-us', {month: 'long'});
+  }
+
+  public get days(): Array<number> {
+    const dayCount = this.getDaysInMonth(this.personalDetails.form.get(['birthday', 'year']).value,
+        this.personalDetails.form.get(['birthday', 'month']).value);
+    return Array(dayCount).fill(0).map((i, idx) => idx + 1);
+  }
+
+  public get years(): Array<number> {
+    return Array((new Date()).getFullYear() - 1920).fill(0).map((_, i) => 1920 + i);
+  }
+
+  public get months(): Array<string> {
+    return Array(12).fill(0).map((i, idx) => this.getMonth(idx + 1));
+  }
+
+  public getDaysInMonth(year: number, month: number): number {
+    return 32 - new Date(year, month - 1, 32).getDate();
+  }
+  handleFileInput(files): void{
+    this.helper.handleFileInput(files, this.personalDetails);
   }
 }

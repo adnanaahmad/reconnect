@@ -23,7 +23,6 @@ export class LocationService {
     const httpOptions = {
       headers: new HttpHeaders({
         authorization: 'Bearer ' + token,
-
         Accept: 'application/json'
       })
     };
@@ -34,7 +33,6 @@ export class LocationService {
     const httpOptions = {
       headers: new HttpHeaders({
         authorization: 'Bearer ' + token,
-
         Accept: 'application/json'
       })
     };
