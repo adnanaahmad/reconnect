@@ -3,6 +3,7 @@ import { UserProfileModel} from '../../models/user-profile.model';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {ProfileService} from '../../services/profile.service';
 import {Router} from '@angular/router';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,16 +11,11 @@ import {Router} from '@angular/router';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  constructor(public store: StoreService, public router: Router) { }
+  constructor(public store: StoreService, public router: Router, public constant: ConstantService) { }
 
   ngOnInit(): void {}
   editProfile(): void{
-    this.store.role.subscribe(res => {
-      if (res === 'buyer'){
-        this.router.navigateByUrl('/home/profile/editDetails');
-      } else {
+    this.store.role === this.constant.role.BUYER ? this.router.navigateByUrl('/home/profile/editDetails') :
         this.router.navigateByUrl('/home/profile/edit/personalDetails');
-      }
-    });
   }
 }

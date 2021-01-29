@@ -61,8 +61,7 @@ export class EditPersonalDetailsComponent implements OnInit {
     this.profile.getUserData().subscribe(res => {
       console.log(res);
       res = res.result;
-      this.personalDetails.image = res.profilePictureUrl ?
-          this.profile.STATIC_FILES_URL + res.profilePictureUrl : null;
+      this.personalDetails.image = res.profilePictureUrl ? res.profilePictureUrl : null;
       this.personalDetails.form.patchValue({
         firstName: res.firstName,
         lastName: res.lastName,

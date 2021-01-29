@@ -12,8 +12,7 @@ export class StoreService {
   toggleMoreFilter = this.toggleMoreFilterModal.asObservable();
   private toggleNotificationModal = new BehaviorSubject<any>(false);
   toggleNotification = this.toggleNotificationModal.asObservable();
-  private roleSubject = new BehaviorSubject<any>(null);
-  role = this.roleSubject.asObservable();
+  private roleSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('user')).role);
   private userDataSubject = new BehaviorSubject<any>(null);
   userData = this.userDataSubject.asObservable();
   constructor() { }
@@ -27,9 +26,6 @@ export class StoreService {
   updateToggleNotification(data: boolean): void{
     this.toggleNotificationModal.next(data);
   }
-  setRole(data): void{
-    this.roleSubject.next(data);
-  }
   getToken(): string{
     return localStorage.getItem('token');
   }
@@ -41,5 +37,8 @@ export class StoreService {
   }
   updateUserData(data): void{
     this.userDataSubject.next(data);
+  }
+  get role(): string {
+    return this.roleSubject.value;
   }
 }

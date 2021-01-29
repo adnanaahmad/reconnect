@@ -2,7 +2,7 @@
     <div class="column-1">
 
         <div class="card-1">
-            <img *ngIf="partnerProfile.profilePictureUrl" [src]="profile.STATIC_FILES_URL+partnerProfile.profilePictureUrl"  class="profile-image">
+            <img *ngIf="partnerProfile.profilePictureUrl" [src]="partnerProfile.profilePictureUrl"  class="profile-image">
             <div *ngIf="!partnerProfile.profilePictureUrl" class="profile-div mb-custom">
                 <img src="/assets/profile/profile.svg" class="profile">
             </div>
@@ -61,7 +61,7 @@
         <div class="card-3">
             <h4 class="">Company Information:</h4>
             <div class="d-flex company">
-                <img *ngIf="partnerProfile.company.companyLogoUrl" class="logo" [src]="profile.STATIC_FILES_URL+partnerProfile.company.companyLogoUrl">
+                <img *ngIf="partnerProfile.company.companyLogoUrl" class="logo" [src]="partnerProfile.company.companyLogoUrl">
                 <img *ngIf="!partnerProfile.company.companyLogoUrl" src="/assets/profile/profile.svg" class="empty-logo">
                 <p class="company-name">{{partnerProfile.company.name}}</p>
             </div>

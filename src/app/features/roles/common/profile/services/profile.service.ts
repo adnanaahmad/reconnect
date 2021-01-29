@@ -12,7 +12,6 @@ import {StoreService} from '../../../../../core/store/store.service';
 export class ProfileService {
   method: any;
   api: any;
-  STATIC_FILES_URL = 'http://1bce0d84ecb7.ngrok.io/public/';
   constructor(private constant: ConstantService,
               private helper: HelperService,
               private location: LocationService,

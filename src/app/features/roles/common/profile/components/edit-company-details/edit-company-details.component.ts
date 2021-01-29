@@ -56,7 +56,7 @@ export class EditCompanyDetailsComponent implements OnInit {
     this.profile.getUserData().subscribe(res => {
       res = res.result.company;
       this.setCity(res.state);
-      this.companyDetails.image = res.companyLogoUrl ? this.profile.STATIC_FILES_URL + res.companyLogoUrl : null;
+      this.companyDetails.image = res.companyLogoUrl ? res.companyLogoUrl : null;
       this.companyDetails.form.patchValue({
         name: res.name,
         licenseNumber: res.licenseNumber,

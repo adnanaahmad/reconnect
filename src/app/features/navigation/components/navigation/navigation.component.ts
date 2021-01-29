@@ -37,9 +37,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
   setRole(): void{
-    const data = JSON.parse(localStorage.getItem('user')).role;
-    this.store.setRole(data);
-    switch (data) {
+    switch (this.store.role) {
       case this.constant.role.BUYER:
         this.navigation.menuItems = this.navigationService.getBuyerMenuItems();
         break;

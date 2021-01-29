@@ -2,7 +2,7 @@
     <div class="column-1">
 
         <div class="card-1">
-            <img *ngIf="userProfile.profilePictureUrl" [src]="profileService.STATIC_FILES_URL+userProfile.profilePictureUrl"  class="profile-image">
+            <img *ngIf="userProfile.profilePictureUrl" [src]="userProfile.profilePictureUrl"  class="profile-image">
             <div *ngIf="!userProfile.profilePictureUrl" class="profile-div mb-custom">
                 <img src="/assets/profile/profile.svg" class="profile">
             </div>

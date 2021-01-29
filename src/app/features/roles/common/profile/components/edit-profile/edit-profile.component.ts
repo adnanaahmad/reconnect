@@ -85,8 +85,7 @@ export class EditProfileComponent implements OnInit {
     this.profile.getUserData().subscribe(res => {
       console.log(res);
       const birthday = this.datePipe.transform(res.result.birthday, 'yyyy-MM-dd');
-      this.userProfile.image = res.result.profilePictureUrl ?
-          this.profile.STATIC_FILES_URL + res.result.profilePictureUrl : null;
+      this.userProfile.image = res.result.profilePictureUrl ? res.result.profilePictureUrl : null;
       this.setCity(res.result.state);
       this.userProfile.profileForm.patchValue({
         firstName: res.result.firstName,
@@ -122,6 +121,9 @@ export class EditProfileComponent implements OnInit {
     // TODO: Use EventEmitter with form value
     const user = this.store.getUserData();
     console.log(this.userProfile.profileForm.value);
+    if (Object.values(this.userProfile.profileForm.get('birthday').value).some(element => element === null)){
+      delete this.userProfile.profileForm.value.birthday;
+    }
     if (this.userProfile.fileUpload){
       this.profile.uploadProfilePicture(this.userProfile.fileUpload).subscribe(res => {
         console.log(res);
