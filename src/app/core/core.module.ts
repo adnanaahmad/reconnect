@@ -4,6 +4,7 @@ import {ConstantService} from './constant/constant.service';
 import {StoreService} from './store/store.service';
 import {HelperService} from './helper/helper.service';
 import {AuthGuard} from './authGuard/auth.guard';
+import {RoleGuard} from './roleGuard/role.guard';
 
 
 
@@ -12,6 +13,6 @@ import {AuthGuard} from './authGuard/auth.guard';
   imports: [
     CommonModule
   ],
-  providers: [ ConstantService, StoreService, HelperService, AuthGuard ]
+  providers: [ ConstantService, StoreService, HelperService, AuthGuard, RoleGuard ]
 })
 export class CoreModule { }
