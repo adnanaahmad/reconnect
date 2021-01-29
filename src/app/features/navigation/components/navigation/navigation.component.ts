@@ -37,6 +37,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
   setRole(): void{
+    const data = JSON.parse(localStorage.getItem('user')).role;
+    this.store.roleSubject.next(data);
     switch (this.store.role) {
       case this.constant.role.BUYER:
         this.navigation.menuItems = this.navigationService.getBuyerMenuItems();
@@ -65,27 +67,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
       localStorage.clear();
     }
   }
-  // role(data): void {
-  //     console.log(data);
-  //     switch (data) {
-  //       case 'buyer':
-  //         this.navigation.menuItems = this.navigationService.getBuyerMenuItems();
-  //         break;
-  //       case 'lender':
-  //         this.navigation.menuItems = this.navigationService.getLenderMenuItems();
-  //         break;
-  //       case 'realEstate':
-  //         this.navigation.menuItems = this.navigationService.getRealEstateAgentMenuItems();
-  //         break;
-  //       case 'attorney':
-  //         this.navigation.menuItems = this.navigationService.getAttorneyMenuItems();
-  //         break;
-  //       case 'homeInspector':
-  //         this.navigation.menuItems = this.navigationService.getHomeInspectorMenuItems();
-  //         break;
-  //       default:
-  //   }
-  // }
   showProfileButton(): void{
     this.showHeader = !this.router.url.includes('profile');
     this.subscription = this.router.events.subscribe((val) => {

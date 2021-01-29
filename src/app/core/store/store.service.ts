@@ -12,7 +12,7 @@ export class StoreService {
   toggleMoreFilter = this.toggleMoreFilterModal.asObservable();
   private toggleNotificationModal = new BehaviorSubject<any>(false);
   toggleNotification = this.toggleNotificationModal.asObservable();
-  private roleSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('user')).role);
+  public roleSubject = new BehaviorSubject<any>(null);
   private userDataSubject = new BehaviorSubject<any>(null);
   userData = this.userDataSubject.asObservable();
   constructor() { }

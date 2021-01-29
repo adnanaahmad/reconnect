@@ -40,11 +40,12 @@ export class LoginComponent implements OnInit {
         }
       }
     }, error => {
-      if (error.error.result && Object.entries(error.error.result).length){
-        console.log(error.error.result.details.MESSAGE);
-      } else {
-        console.log(error.statusText);
-      }
+      console.log(error);
+      // if (error.error.result && Object.entries(error.error.result).length){
+      //   console.log(error.error.result.details.MESSAGE);
+      // } else {
+      //   console.log(error.statusText);
+      // }
     });
   }
 }

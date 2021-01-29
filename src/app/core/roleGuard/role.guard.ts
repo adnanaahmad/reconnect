@@ -12,6 +12,7 @@ export class RoleGuard implements CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.constant.permission[this.store.role][route.path];
+    const role = JSON.parse(localStorage.getItem('user')).role;
+    return this.constant.permission[role][route.path];
   }
 }
