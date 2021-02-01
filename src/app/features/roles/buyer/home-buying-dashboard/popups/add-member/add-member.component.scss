@@ -3,6 +3,8 @@ p{
 }
 .card-1{
   padding: 2.5vw;
+  //width: 20vw;
+  min-height: 20vw;
 }
 .close-icon{
   position: absolute;
@@ -18,6 +20,7 @@ p{
   font-weight: 500;
   margin-bottom: 0;
   color: var(--darkGray);
+  margin-right: 20vw;
 }
 .card-sub{
   padding: .5vw;
@@ -28,6 +31,14 @@ p{
   width: 4vw;
   height:4vw;
   object-fit: cover;
+  border-radius: .5vw;
+  margin-right: 1vw;
+}
+.dummy-img{
+  width: 4vw;
+  height:4vw;
+  padding: 1.2vw;
+  background: var(--extraLightGray);
   border-radius: .5vw;
   margin-right: 1vw;
 }
@@ -124,4 +135,16 @@ p{
   width: 1.6vw;
   border-radius:.3vw;
   cursor: pointer;
+}
+.f1{
+  height: 1.5vw;
+  font-family: 'Poppins';
+  font-size: .6vw;
+  color: var(--darkGray);
+  margin-right: .5vw;
+  border: 1px solid var(--extraLightGray);
+  width: 7vw;
+}
+.container{
+  display: flex;
 }

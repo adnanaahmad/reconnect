@@ -40,6 +40,8 @@ export class ConstantService {
      editBuyer: `${environment.apiUrl}/user/update`,
      viewBuyer: `${environment.apiUrl}/user/profile`,
      uploadProfilePicture: `${environment.apiUrl}/user/picture`,
+     getProfessionals: `${environment.apiUrl}/user/professionals`,
+     completeRegistration: `${environment.apiUrl}/user/complete-registration`,
   };
    httpOptions = {
      json: {

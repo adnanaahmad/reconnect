@@ -27,5 +27,8 @@ export class AuthService {
   referenceList(data): Observable<any> {
     return  this.helper.requestCall(this.method.get, `${this.apiRoutes.searchReference}?name=${data}`);
   }
+  completeRegistration(data): Observable<any>{
+    return  this.helper.requestCall(this.method.post, this.apiRoutes.completeRegistration, data);
+  }
 
 }

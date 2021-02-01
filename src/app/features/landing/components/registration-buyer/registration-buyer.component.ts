@@ -7,6 +7,7 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {HelperService} from '../../../../core/helper/helper.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {LocationService} from '../../services/location/location.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-registration-buyer',
@@ -20,7 +21,8 @@ export class RegistrationBuyerComponent implements OnInit {
               private auth: AuthService,
               public helper: HelperService,
               private constant: ConstantService,
-              private location: LocationService) { }
+              private location: LocationService,
+              private toaster: ToastrService) { }
 
   ngOnInit(): void {
     // this.registration.form.valueChanges.subscribe(res => {
@@ -77,19 +79,18 @@ export class RegistrationBuyerComponent implements OnInit {
         this.registration.form.get(['referral', 'details']).disable();
   }
   onSubmit(): void{
-    //console.log(this.registration.form.value);
     this.auth.signUp(this.registration.form.value).subscribe(res => {
-      //console.log(res);
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));
-        this.router.navigateByUrl('/home/profile/editDetails');
+        this.router.navigateByUrl('/home/profile').then();
+        this.toaster.success('You have successfully logged in');
       }
     }, error => {
-      if (error.error.result){
-        console.log(error.error.result.details[Object.keys(error.error.result.details)[0]].MESSAGE);
+      if (error.error.result.CODE === 'BAD_REQUEST'){
+        this.toaster.error(error.error.result.details.MESSAGE);
       } else {
-        console.log(error.statusText);
+        this.toaster.error(error.error.result.MESSAGE);
       }
     });
   }
