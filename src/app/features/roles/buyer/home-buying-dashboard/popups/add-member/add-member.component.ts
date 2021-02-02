@@ -41,7 +41,12 @@ export class AddMemberComponent implements OnInit {
     // }
   }
   addMember(member): void{
-    this.modal.close({status: 'yes', data: member});
+    console.log(member);
+    this.dashboard.addTeamMember({userId: member._id}).subscribe(res => {
+        this.modal.close({status: 'yes', data: res.result});
+    }, error => {
+      console.log(error);
+    });
   }
   getProfessionals(): void{
     this.dashboard.getProfessionals(this.constant.chooseRole[this.role]).subscribe(res => {

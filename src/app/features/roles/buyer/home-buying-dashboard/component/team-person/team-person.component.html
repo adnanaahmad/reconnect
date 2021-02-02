@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="member == undefined" class="empty">
+  <div *ngIf="!member" class="empty">
     <img (click)="addTeamMember()" class="plus-btn" src="/assets/dashboard/plus.svg">
     <div class="empty-txt">
       <p class="text-center">Add</p>
@@ -7,15 +7,16 @@
     </div>
   </div>
 
-  <div *ngIf="member !== undefined" class="team-card">
+  <div *ngIf="member" class="team-card">
     <img (click)="removeMember()" class="minus" src="/assets/dashboard/minus.svg">
-    <div class="team-img">
-      <img [src]="member.image">
+    <div *ngIf="member.profilePictureUrl" class="team-img">
+      <img [src]="member.profilePictureUrl">
     </div>
+    <img *ngIf="!member.profilePictureUrl"  src="/assets/profile/profile.svg" class="dummy-img">
    <div style="" class="team-info">
     <div class="info">
-      <p class="name">{{ member.name }}</p>
-      <p class="role"> {{member.role}} </p>
+      <p class="name">{{ member.firstName | titlecase}} {{member.lastName | titlecase}}</p>
+      <p class="role"> {{role}} </p>
     </div>
      <div class="hide">
           <div class="d-flex justify-content-between">

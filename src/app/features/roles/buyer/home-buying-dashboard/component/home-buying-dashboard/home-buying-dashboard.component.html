@@ -23,12 +23,12 @@
      <p class="team-heading">Home Buying Team</p>
      <p class="team-text">But while teams face new hurdles, their success still hinges on a core set of</p>
      <p class="team-text bottom">fundamentals for group collaboration</p>
-     <div class="d-flex team justify-content-between">
-        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[0]" [role]="'Real Estate Agent'"></app-team-person>
-        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[1]" [role]="'Lender'"></app-team-person>
-        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[2]" [role]="'Attorney'"></app-team-person>
-        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[3]" [role]="'Home Inspector'"></app-team-person>
-        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team[4]" [role]="'Insurance Agent'"></app-team-person>
+     <div class="d-flex team justify-content-between" *ngIf="dashboard.team">
+        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team.realEstateAgent" [role]="'Real Estate Agent'"></app-team-person>
+        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team.lender" [role]="'Lender'"></app-team-person>
+        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team.attorney" [role]="'Attorney'"></app-team-person>
+        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team.homeInspector" [role]="'Home Inspector'"></app-team-person>
+        <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)" [member]="dashboard.team.insuranceAgent" [role]="'Insurance Agent'"></app-team-person>
 
      </div>
      <div class="buying">

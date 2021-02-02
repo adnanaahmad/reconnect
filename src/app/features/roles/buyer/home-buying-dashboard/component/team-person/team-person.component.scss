@@ -118,6 +118,16 @@
   border-top-right-radius: .5vw;
   transition: .4s;
 }
+.dummy-img{
+  height: 7.75vw;
+  width: 100%;
+  min-width: .5vw;
+  padding: 2vw;
+  background: var(--extraLightGray);
+  border-top-right-radius: .5vw;
+  border-top-left-radius: .5vw;
+  transition: all 0.4s;
+}
 p{
   font-family: 'Poppins';
 }

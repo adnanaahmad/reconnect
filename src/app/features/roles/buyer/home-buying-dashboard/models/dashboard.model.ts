@@ -1,6 +1,6 @@
 export interface BuyerDashboardModel {
   preApprovalDetails: PreApprovalDetailsModel;
-  team: Array<TeamModel>;
+  team: TeamObjectModel;
   homeBuyingProcess: HomeBuyingProcessModel;
   subjectProperty: SubjectPropertyModel;
 }
@@ -10,12 +10,20 @@ interface PreApprovalDetailsModel {
    assets: number;
  }
 
-interface TeamModel{
-  name: string;
+export interface TeamModel{
+  firstName: string;
+  lastName: string;
   role: string;
-  image: string;
-  phone: string;
+  profilePictureUrl: string;
+  phoneNumber: string;
   email: string;
+}
+interface TeamObjectModel{
+  realEstateAgent: TeamModel;
+  lender: TeamModel;
+  attorney: TeamModel;
+  homeInspector: TeamModel;
+  insuranceAgent: TeamModel;
 }
 interface HomeBuyingProcessModel {
   application: boolean;

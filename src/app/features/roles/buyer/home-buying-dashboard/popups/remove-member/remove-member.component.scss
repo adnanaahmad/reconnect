@@ -16,12 +16,18 @@
   font-weight: 400;
   color: var(--darkGray);
 }
-.member-img{
+.member-img, .dummy-img{
   height: 3vw;
   width: 3vw;
-  object-fit: cover;
   border-radius: .5vw;
   margin-right: .8vw;
+}
+.member-img{
+  object-fit: cover;
+}
+.dummy-img{
+  padding: 1vw;
+  background: var(--extraLightGray);
 }
 .name{
   margin-bottom: .1vw;

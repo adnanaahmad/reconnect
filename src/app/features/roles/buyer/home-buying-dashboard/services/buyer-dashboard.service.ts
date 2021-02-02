@@ -16,4 +16,13 @@ export class BuyerDashboardService {
   getProfessionals(data: string): Observable<any>{
     return this.helper.requestCall(this.methods.get, `${this.api.getProfessionals}?role=${data}`);
   }
+  getTeam(): Observable<any>{
+    return this.helper.requestCall(this.methods.get, this.api.getTeam);
+  }
+  addTeamMember(data): Observable<any>{
+    return  this.helper.requestCall(this.methods.put, this.api.addTeamMember, data);
+  }
+  removeTeamMember(data): Observable<any>{
+    return this.helper.requestCall(this.methods.put, this.api.removeTeamMember, data);
+  }
 }
