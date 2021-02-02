@@ -5,6 +5,7 @@ import {HelperService} from '../../../../../core/helper/helper.service';
 import {HttpHeaders} from '@angular/common/http';
 import {LocationService} from '../../../../landing/services/location/location.service';
 import {StoreService} from '../../../../../core/store/store.service';
+import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -38,20 +39,20 @@ export class ProfileService {
     return this.helper.requestCall(this.method.put, this.api.editBuyer, data);
   }
   changeState(state, user): void {
-    this.location.getCities(state, this.store.getLocationApiToken()).subscribe(res => {
+    this.location.getCities(state, this.store.getLocationApiToken()).pipe(take(1)).subscribe(res => {
       user.cities = res;
     });
   }
 
   setCity(state, user): void {
-    this.location.getCities(state, this.store.getLocationApiToken()).subscribe(res1 => {
+    this.location.getCities(state, this.store.getLocationApiToken()).pipe(take(1)).subscribe(res1 => {
       user.cities = res1;
     }, error => {
       console.log(error);
     });
   }
   getLocation(user): void {
-    this.location.getStates(this.store.getLocationApiToken()).subscribe(response => {
+    this.location.getStates(this.store.getLocationApiToken()).pipe(take(1)).subscribe(response => {
       user.states = response;
     }, error => {
       console.log(error);

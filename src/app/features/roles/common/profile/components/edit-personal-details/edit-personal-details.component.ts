@@ -6,6 +6,7 @@ import {DatePipe} from '@angular/common';
 import {PersonalDetailsModel} from '../../models/personal-details.model';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {Router} from '@angular/router';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-personal-details',
@@ -58,7 +59,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
 
   setPersonalData(): void{
-    this.profile.getUserData().subscribe(res => {
+    this.profile.getUserData().pipe(take(1)).subscribe(res => {
       console.log(res);
       res = res.result;
       this.personalDetails.image = res.profilePictureUrl ? res.profilePictureUrl : null;
@@ -106,7 +107,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       delete this.personalDetails.form.value.birthday;
     }
     if (this.personalDetails.fileUpload){
-      this.profile.uploadProfilePicture(this.personalDetails.fileUpload).subscribe(res => {
+      this.profile.uploadProfilePicture(this.personalDetails.fileUpload).pipe(take(1)).subscribe(res => {
         user.profilePictureUrl = res.result.profilePictureUrl;
         localStorage.setItem('user', JSON.stringify(user));
         this.store.updateUserData(user);
@@ -115,8 +116,8 @@ export class EditPersonalDetailsComponent implements OnInit {
       });
     }
     console.log(this.personalDetails.form.value);
-    this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}}).subscribe(res => {
-      //console.log(res);
+    this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}}).
+    pipe(take(1)).subscribe(res => {
       user.firstName = res.result.firstName;
       user.lastName = res.result.lastName;
       localStorage.setItem('user', JSON.stringify(user));

@@ -4,6 +4,7 @@ import {ProfileService} from '../../services/profile.service';
 import {CompanyDetailsModel} from '../../models/company-details.model';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {Router} from '@angular/router';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-company-details',
@@ -26,13 +27,13 @@ export class EditCompanyDetailsComponent implements OnInit {
   onSubmit(): void{
     console.log(this.companyDetails.form.value);
     if (this.companyDetails.fileUpload){
-      this.profile.uploadCompanyPicture(this.companyDetails.fileUpload).subscribe(res => {
+      this.profile.uploadCompanyPicture(this.companyDetails.fileUpload).pipe(take(1)).subscribe(res => {
          console.log(res);
       }, error => {
         console.log(error);
       });
     }
-    this.profile.saveProfile({company: this.companyDetails.form.value}).subscribe(res => {
+    this.profile.saveProfile({company: this.companyDetails.form.value}).pipe(take(1)).subscribe(res => {
       // console.log(res);
       this.router.navigateByUrl('/home/profile').then();
       console.log(res);
@@ -53,7 +54,7 @@ export class EditCompanyDetailsComponent implements OnInit {
     });
   }
   setCompanyData(): void{
-    this.profile.getUserData().subscribe(res => {
+    this.profile.getUserData().pipe(take(1)).subscribe(res => {
       res = res.result.company;
       this.setCity(res.state);
       this.companyDetails.image = res.companyLogoUrl ? res.companyLogoUrl : null;

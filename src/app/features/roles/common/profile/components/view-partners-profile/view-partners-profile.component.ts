@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ProfileService} from '../../services/profile.service';
 import {ProfessionalProfileModel} from '../../models/user-profile.model';
+import {take} from 'rxjs/operators';
 @Component({
   selector: 'app-view-partners-profile',
   templateUrl: './view-partners-profile.component.html',
@@ -13,7 +14,7 @@ export class ViewPartnersProfileComponent implements OnInit {
   constructor(public sanitizer: DomSanitizer, private profile: ProfileService) { }
 
   ngOnInit(): void {
-    this.profile.getUserData().subscribe(res => {
+    this.profile.getUserData().pipe(take(1)).subscribe(res => {
       console.log(res);
       this.partnerProfile = res.result;
       this.loader = true;
