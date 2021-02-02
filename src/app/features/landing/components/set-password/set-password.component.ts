@@ -5,6 +5,7 @@ import {SetPasswordModel} from '../../models/set-password.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-set-password',
@@ -32,7 +33,8 @@ export class SetPasswordComponent implements OnInit {
   }
   onSubmit(): void{
     localStorage.setItem('token', this.setPassword.token);
-    this.auth.completeRegistration({password: this.setPassword.form.get('password').value}).subscribe(res => {
+    this.auth.completeRegistration({password: this.setPassword.form.get('password').value}).
+    pipe(take(1)).subscribe(res => {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));

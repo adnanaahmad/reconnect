@@ -5,6 +5,7 @@ import {RegistrationPartnerModel} from '../../models/registration-partner.model'
 import {AuthService} from '../../services/auth/auth.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {HelperService} from '../../../../core/helper/helper.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration-partner',
@@ -60,7 +61,7 @@ export class RegistrationPartnerComponent implements OnInit {
   onSubmit(): void{
     const data = {... this.register.form.get('personal').value, ...{company: this.register.form.get('company').value}};
     console.log(data);
-    this.auth.signUp(data).subscribe(res => {
+    this.auth.signUp(data).pipe(take(1)).subscribe(res => {
       console.log(res);
       if (res.result.user.accountStatus === 'pendingApproval'){
         this.register.screen.three = false;

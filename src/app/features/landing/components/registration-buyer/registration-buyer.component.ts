@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {AbstractControl, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {RegistrationBuyerModel} from '../../models/registration-buyer.model';
 import {AuthService} from '../../services/auth/auth.service';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, switchMap, take} from 'rxjs/operators';
 import {HelperService} from '../../../../core/helper/helper.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {LocationService} from '../../services/location/location.service';
@@ -37,7 +37,7 @@ export class RegistrationBuyerComponent implements OnInit {
     this.registration.other = false;
     this.registration.aboutUs = this.constant.aboutUs;
     this.registration.form = this.fb.group({
-      role: ['buyer'],
+      role: [this.constant.role.BUYER],
       firstName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
@@ -79,7 +79,7 @@ export class RegistrationBuyerComponent implements OnInit {
         this.registration.form.get(['referral', 'details']).disable();
   }
   onSubmit(): void{
-    this.auth.signUp(this.registration.form.value).subscribe(res => {
+    this.auth.signUp(this.registration.form.value).pipe(take(1)).subscribe(res => {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));

@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {LocationService} from '../../services/location/location.service';
 import { ToastrService } from 'ngx-toastr';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
     });
   }
   onSubmit(): void{
-    this.loginService.signIn(this.login.form.value).subscribe( res => {
+    this.loginService.signIn(this.login.form.value).pipe(take(1)).subscribe( res => {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));
