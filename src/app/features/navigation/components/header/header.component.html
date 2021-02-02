@@ -8,7 +8,7 @@
       <div class="d-flex route"  routerLink="/home/profile">
         <img *ngIf="image" class="profile" [src]="image">
         <img class="profile-emoji" *ngIf="!image" src="/assets/profile/profile.svg">
-        <p class="name align-self-center text-nowrap">{{name}}</p>
+        <p class="name align-self-center text-nowrap">{{firstName | titlecase}} {{lastName | titlecase}}</p>
 <!--        <img class="down-arrow align-self-center" src="/assets/search-home/down-arrow.svg">-->
       </div>
     </div>

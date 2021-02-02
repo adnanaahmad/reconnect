@@ -11,7 +11,8 @@ export class HeaderComponent implements OnInit {
   toggle: boolean;
   notification: any = {};
   image = '';
-  name = '';
+  firstName = '';
+  lastName = '';
   constructor(public store: StoreService, public profile: ProfileService) { }
 
   ngOnInit(): void {
@@ -21,7 +22,8 @@ export class HeaderComponent implements OnInit {
     });
     this.store.userData.subscribe(res => {
       this.image = res.profilePictureUrl;
-      this.name = res.firstName + ' ' + res.lastName;
+      this.firstName = res.firstName;
+      this.lastName = res.lastName;
     });
   }
   notificationToggle(): boolean{
