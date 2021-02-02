@@ -1,6 +1,8 @@
 <form [formGroup]="personalDetails.form" (ngSubmit)="onSubmit()" *ngIf="loader">
     <div class="d-flex parent-pg justify-content-end">
-        <button type="submit" class="save-btn">Save</button>
+        <button type="submit" [disabled]="!(personalDetails.form.get(['firstName']).valid &&
+         personalDetails.form.get(['lastName']).valid &&
+          personalDetails.form.get(['phoneNumber']).valid )" class="save-btn">Save</button>
         <div class="card-1">
             <div *ngIf="personalDetails.image" class="img-div">
                 <img [src]="personalDetails.image"  class="profile-image">
@@ -20,10 +22,10 @@
             </div>
             <!--        <p class="title">Full Name</p>-->
             <!--        <input  type="text" class="form-control f1 mb-custom"  placeholder="">-->
-            <p class="title">First Name</p>
-            <input formControlName="firstName" type="text" class="form-control f1 mb-custom"  placeholder="">
-            <p class="title">Last Name</p>
-            <input formControlName="lastName"  type="text" class="form-control f1 mb-custom"  placeholder="">
+            <p [ngClass]="{'danger': personalDetails.form.get('firstName').invalid&&personalDetails.form.get('firstName').touched}" class="title">First Name</p>
+            <input [class.is-invalid]="personalDetails.form.get('firstName').invalid&&personalDetails.form.get('firstName').touched" formControlName="firstName" type="text" class="form-control f1 mb-custom"  placeholder="">
+            <p [ngClass]="{'danger': personalDetails.form.get('lastName').invalid&&personalDetails.form.get('lastName').touched}" class="title">Last Name</p>
+            <input [class.is-invalid]="personalDetails.form.get('lastName').invalid&&personalDetails.form.get('lastName').touched" formControlName="lastName"  type="text" class="form-control f1 mb-custom"  placeholder="">
             <div class="d-flex justify-content-between div-2 mb-custom">
                 <a (click)="switchSocialMediaLink('facebook')"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
                 <a (click)="switchSocialMediaLink('instagram')"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
@@ -52,8 +54,8 @@
         <div class="d-flex flex-column column-2">
             <div class="card-2 d-flex">
                 <div class="c2-col1">
-                    <p class="label">Phone Number</p>
-                    <input formControlName="phoneNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <p [ngClass]="{'danger': personalDetails.form.get('phoneNumber').invalid && personalDetails.form.get('phoneNumber').touched}" class="label">Phone Number</p>
+                    <input [class.is-invalid]="personalDetails.form.get('phoneNumber').invalid && personalDetails.form.get('phoneNumber').touched" formControlName="phoneNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
                     <p class="label">Role</p>
                     <input formControlName="role" type="text" class="form-control f1 mb-custom"  placeholder="">
                     <p class="label">Title</p>

@@ -1,7 +1,9 @@
 <form [formGroup]="userProfile.profileForm" (ngSubmit)="onSubmit()">
   <div class="d-flex justify-content-between save-button">
     <h3>Edit Profile</h3>
-    <button  type="submit"><p>Save</p></button>
+    <button  type="submit" [disabled]="!(userProfile.profileForm.get('firstName').valid &&
+     userProfile.profileForm.get('lastName').valid &&
+      userProfile.profileForm.get('phoneNumber').valid)"><p>Save</p></button>
   </div>
   <div class="d-flex" *ngIf="userProfile.loader">
     <div class="column-1">
@@ -23,12 +25,12 @@
                 </div>
             </div>
             <div class="form-group name">
-              <p class="title">First Name</p>
-              <input formControlName = "firstName" type="text" class="form-control f1" placeholder="">
+              <p [ngClass]="{ 'danger': userProfile.profileForm.get('firstName').invalid&&userProfile.profileForm.get('firstName').touched}" class="title">First Name</p>
+              <input [class.is-valid]="userProfile.profileForm.get('firstName').invalid&&userProfile.profileForm.get('firstName').touched" formControlName = "firstName" type="text" class="form-control f1" placeholder="">
             </div>
             <div class="form-group name">
-                <p class="title">Last Name</p>
-                <input formControlName = "lastName" type="text" class="form-control f1" placeholder="">
+                <p [ngClass]="{ 'danger': userProfile.profileForm.get('lastName').invalid&&userProfile.profileForm.get('lastName').touched}" class="title">Last Name</p>
+                <input [class.is-invalid]="userProfile.profileForm.get('lastName').invalid&&userProfile.profileForm.get('lastName').touched" formControlName = "lastName" type="text" class="form-control f1" placeholder="">
             </div>
             <div class="form-group bio">
               <p class="title">Bio</p>
@@ -67,9 +69,9 @@
           <div class="row">
             <div class="card-2-margin-bottom col-md">
               <div class="form-group row">
-                <p class="col-3 label col-form-label col-form-label">Phone:</p>
+                <p [ngClass]="{ 'danger': userProfile.profileForm.get('phoneNumber').invalid&&userProfile.profileForm.get('phoneNumber').touched}" class="col-3 label col-form-label col-form-label">Phone:</p>
                 <div class="col-9">
-                  <input formControlName = "phoneNumber" type="email" class="form-control f1" placeholder="">
+                  <input [class.is-invalid]="userProfile.profileForm.get('phoneNumber').invalid&&userProfile.profileForm.get('phoneNumber').touched" formControlName = "phoneNumber" type="email" class="form-control f1" placeholder="">
                 </div>
               </div>
               <div class="form-group row website">

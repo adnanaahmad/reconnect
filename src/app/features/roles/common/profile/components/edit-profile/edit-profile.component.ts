@@ -59,10 +59,10 @@ export class EditProfileComponent implements OnInit {
 
   initialiseProfileForm(): void {
     this.userProfile.profileForm = this.fb.group({
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
+      firstName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
+      lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       bio: [null, Validators.required],
-      phoneNumber: [null, Validators.required],
+      phoneNumber: [null, [Validators.required, Validators.pattern('^[+][1][\\s][(]?\\d{3}[)]?[(\\s)?.-]\\d{3}[\\s.-]\\d{4}$')]],
       gender: [null, Validators.required],
       website: [null, Validators.required],
       birthday: this.fb.group({

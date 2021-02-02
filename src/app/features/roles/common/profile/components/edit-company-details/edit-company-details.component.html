@@ -1,6 +1,6 @@
 <form [formGroup]="companyDetails.form" (ngSubmit)="onSubmit()">
     <div class="d-flex parent-pg justify-content-end">
-        <button type="submit" class="save-btn">Save</button>
+        <button type="submit" [disabled]="!companyDetails.form.get('phoneNumber').valid" class="save-btn">Save</button>
         <div class="card-1" *ngIf="loader">
             <div *ngIf="companyDetails.image" class="img-div">
                 <img [src]="companyDetails.image"  class="profile-image">
@@ -26,8 +26,8 @@
                     <div class="c2-col1">
                         <p class="label">Company Name</p>
                         <input formControlName="name" type="text" class="form-control f1 mb-custom"  placeholder="">
-                        <p class="label">Office Phone #</p>
-                        <input formControlName="phoneNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
+                        <p [ngClass]="{'danger': companyDetails.form.get('phoneNumber').invalid && companyDetails.form.get('phoneNumber').touched}" class="label">Office Phone #</p>
+                        <input [class.is-invalid]="companyDetails.form.get('phoneNumber').invalid && companyDetails.form.get('phoneNumber').touched" formControlName="phoneNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
                     </div>
                     <div class="c2-col2">
                         <p class="label">License #</p>

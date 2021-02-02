@@ -33,8 +33,8 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
   initialisePersonalForm(): void{
     this.personalDetails.form = this.fb.group({
-      firstName:  [null, Validators.required],
-      lastName: [null, Validators.required],
+      firstName:  [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
+      lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       socialMedia: this.fb.group({
         facebook: [null, Validators.required],
         linkedIn: [null, Validators.required],
@@ -43,7 +43,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       }),
       bio: [null, Validators.required],
       profileVideoUrl: [null, Validators.required],
-      phoneNumber: [null, Validators.required],
+      phoneNumber: [null, [Validators.required, Validators.pattern('^[+][1][\\s][(]?\\d{3}[)]?[(\\s)?.-]\\d{3}[\\s.-]\\d{4}$')]],
       role: [null, Validators.required],
       birthday: this.fb.group({
         day: [null, Validators.required],
