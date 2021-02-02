@@ -15,6 +15,7 @@ export interface UserProfileModel {
   state: string;
   city: string;
   socialMedia: SocialMediaModel;
+  loader: boolean;
 }
 
 export interface UserProfileEditModel {
@@ -23,6 +24,7 @@ export interface UserProfileEditModel {
   fileUpload: File;
   states: Array<any>;
   cities: Array<any>;
+  loader: boolean;
 }
 interface SocialMediaModel{
   facebook: string;

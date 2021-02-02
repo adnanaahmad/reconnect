@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {UserProfileModel} from '../../models/user-profile.model';
 import {ProfileService} from '../../services/profile.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-buyer-profile',
@@ -11,15 +12,13 @@ export class ViewBuyerProfileComponent implements OnInit {
   userProfile: UserProfileModel = {} as UserProfileModel;
 
   constructor( public profileService: ProfileService) { }
-
   ngOnInit(): void {
-    this.profileService.getUserData().subscribe(res => {
+    this.userProfile.loader = false;
+    this.profileService.getUserData().pipe(take(1)).subscribe(res => {
       this.userProfile = res.result;
-      console.log(res.result);
-      console.log(this.userProfile);
+      this.userProfile.loader = true;
     }, error => {
       console.log(error);
     });
   }
-
 }

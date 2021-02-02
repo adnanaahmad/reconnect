@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {DatePipe} from '@angular/common';
+import {take} from 'rxjs/operators';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -26,6 +27,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userProfile.loader = false;
     this.getLocation();
     this.initialiseProfileForm();
     this.setProfileData();
@@ -82,8 +84,8 @@ export class EditProfileComponent implements OnInit {
     // this.userProfile.profileForm.valueChanges.subscribe(x => console.log(x));
   }
   setProfileData(): void {
-    this.profile.getUserData().subscribe(res => {
-      console.log(res);
+    this.profile.getUserData().pipe(take(1)).subscribe(res => {
+      this.userProfile.loader = true;
       const birthday = this.datePipe.transform(res.result.birthday, 'yyyy-MM-dd');
       this.userProfile.image = res.result.profilePictureUrl ? res.result.profilePictureUrl : null;
       this.setCity(res.result.state);
@@ -125,7 +127,7 @@ export class EditProfileComponent implements OnInit {
       delete this.userProfile.profileForm.value.birthday;
     }
     if (this.userProfile.fileUpload){
-      this.profile.uploadProfilePicture(this.userProfile.fileUpload).subscribe(res => {
+      this.profile.uploadProfilePicture(this.userProfile.fileUpload).pipe(take(1)).subscribe(res => {
         console.log(res);
         user.profilePictureUrl = res.result.profilePictureUrl;
         localStorage.setItem('user', JSON.stringify(user));
@@ -134,7 +136,7 @@ export class EditProfileComponent implements OnInit {
         console.log(error);
       });
     }
-    this.profile.saveProfile(this.userProfile.profileForm.value).subscribe(res => {
+    this.profile.saveProfile(this.userProfile.profileForm.value).pipe(take(1)).subscribe(res => {
       console.log(res);
       user.firstName = res.result.firstName;
       user.lastName = res.result.lastName;
