@@ -6,6 +6,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {HelperService} from '../../../../core/helper/helper.service';
 import {take} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-registration-partner',
@@ -18,7 +19,8 @@ export class RegistrationPartnerComponent implements OnInit {
               private fb: FormBuilder,
               private auth: AuthService,
               private constant: ConstantService,
-              public helper: HelperService) { }
+              public helper: HelperService,
+              private toaster: ToastrService) { }
 
   ngOnInit(): void {
     this.register.roleFormControl = new FormControl(null);
@@ -68,10 +70,10 @@ export class RegistrationPartnerComponent implements OnInit {
         this.register.screen.four = true;
       }
     }, error => {
-      if (error.error.result){
-        console.log(error.error.result.details[Object.keys(error.error.result.details)[0]].MESSAGE);
+      if (error.error.result.CODE === 'BAD_REQUEST'){
+        this.toaster.error(error.error.result.details.MESSAGE);
       } else {
-        console.log(error.statusText);
+        this.toaster.error(error.error.result.MESSAGE);
       }
     });
   }
