@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
   modal: boolean;
   houses: Array<string>;
   team: Array<string>;
-  constructor(private router: Router, private cdr: ChangeDetectorRef) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.showModal();
@@ -29,19 +29,19 @@ export class LandingComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void{
     this.changeBackground();
-    this.router.events.subscribe(result => {
+    this.router.events.subscribe(() => {
       this.changeBackground();
     });
   }
 
   logIn(): void{
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/login').then();
   }
   register(): void{
-    this.router.navigateByUrl('/register');
+    this.router.navigateByUrl('/register').then();
   }
   landing(): void{
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/').then();
   }
   changeBackground(): void{
     if (this.router.url === '/'){
