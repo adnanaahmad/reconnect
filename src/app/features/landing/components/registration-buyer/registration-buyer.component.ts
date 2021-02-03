@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {AbstractControl, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {RegistrationBuyerModel} from '../../models/registration-buyer.model';
@@ -93,5 +93,8 @@ export class RegistrationBuyerComponent implements OnInit {
         this.toaster.error(error.error.result.MESSAGE);
       }
     });
+  }
+  hideProfessionalList(): void{
+    this.registration.professional = null;
   }
 }
