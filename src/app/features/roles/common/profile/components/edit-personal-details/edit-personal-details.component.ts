@@ -43,7 +43,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       }),
       bio: [null, Validators.required],
       profileVideoUrl: [null, Validators.required],
-      phoneNumber: [null, [Validators.required, Validators.pattern('^[+][1][\\s][(]?\\d{3}[)]?[(\\s)?.-]\\d{3}[\\s.-]\\d{4}$')]],
+      phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       role: [null, Validators.required],
       birthday: this.fb.group({
         day: [null, Validators.required],

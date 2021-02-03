@@ -35,7 +35,7 @@
                             <p class="text-nowrap">Real Estate Lic #: </p>
                         </div>
                         <div class="value">
-                            <p>{{partnerProfile.phoneNumber}}&nbsp;</p>
+                            <p>{{partnerProfile.phoneNumber | mask: '(000) 000 0000'}}&nbsp;</p>
                             <p>{{partnerProfile.email}}&nbsp;</p>
                             <p>{{partnerProfile.realEstateLicenseNumber}}</p>
                         </div>
@@ -73,7 +73,7 @@
                             <p>Address: </p>
                         </div>
                         <div class="value">
-                            <p>{{partnerProfile.company.phoneNumber}}&nbsp;</p>
+                            <p>{{partnerProfile.company.phoneNumber | mask: '(000) 000 0000'}}&nbsp;</p>
                             <p>{{partnerProfile.company.street}} {{partnerProfile.company.city}}, {{partnerProfile.company.state}}</p>
                         </div>
                     </div>

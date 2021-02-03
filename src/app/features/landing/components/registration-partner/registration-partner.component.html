@@ -62,7 +62,7 @@
         <div class="d-flex">
             <div class="select-flex">
                 <p [ngClass]="{'danger':register.form.get(['company', 'phoneNumber']).invalid && register.form.get(['company', 'phoneNumber']).touched}" class="label">Phone Number</p>
-                <input [class.is-invalid]="register.form.get(['company', 'phoneNumber']).invalid && register.form.get(['company', 'phoneNumber']).touched" formControlName="phoneNumber" class="form-control form-custom" placeholder="+1 ANN-NNN-NNNN">
+                <input prefix="+1 " mask="(000) 000 0000" [class.is-invalid]="register.form.get(['company', 'phoneNumber']).invalid && register.form.get(['company', 'phoneNumber']).touched" formControlName="phoneNumber" class="form-control form-custom" placeholder="">
             </div>
             <div class="select-flex">
                 <p [ngClass]="{'danger': register.form.get(['company', 'zip']).invalid && register.form.get(['company', 'zip']).touched}" class="label">Zip Code</p>
@@ -100,7 +100,7 @@
                 </div>
                 <div class="input-flex" >
                     <p [ngClass]="{'danger': register.form.get(['personal', 'phoneNumber']).invalid && register.form.get(['personal', 'phoneNumber']).touched}" class="label">Phone Number</p>
-                    <input [class.is-invalid]="register.form.get(['personal', 'phoneNumber']).invalid && register.form.get(['personal', 'phoneNumber']).touched" formControlName="phoneNumber" class="form-control form-custom" placeholder="+1 ANN-NNN-NNNN">
+                    <input prefix="+1 " mask="(000) 000 0000" [class.is-invalid]="register.form.get(['personal', 'phoneNumber']).invalid && register.form.get(['personal', 'phoneNumber']).touched" formControlName="phoneNumber" class="form-control form-custom" placeholder="">
                 </div>
             </div>
             <div class="name-row" >

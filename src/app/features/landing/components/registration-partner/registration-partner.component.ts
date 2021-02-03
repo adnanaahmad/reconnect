@@ -36,7 +36,7 @@ export class RegistrationPartnerComponent implements OnInit {
       company: this.fb.group({
         name: [null, Validators.required],
         licenseNumber: [null, Validators.required],
-        phoneNumber: [null, [Validators.required, Validators.pattern('^[+][1][\\s][(]?\\d{3}[)]?[(\\s)?.-]\\d{3}[\\s.-]\\d{4}$')]],
+        phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
         city: [null, Validators.required],
         street: [null, Validators.required],
         state: [null, Validators.required],
@@ -47,7 +47,7 @@ export class RegistrationPartnerComponent implements OnInit {
         firstName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
         lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
         nmlsNumber: [null, Validators.required],
-        phoneNumber: [null, [Validators.required, Validators.pattern('^[+][1][\\s][(]?\\d{3}[)]?[(\\s)?.-]\\d{3}[\\s.-]\\d{4}$')]],
+        phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
         email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       }),
       agreed: [null, Validators.required]

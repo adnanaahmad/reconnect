@@ -55,7 +55,7 @@
             <div class="card-2 d-flex">
                 <div class="c2-col1">
                     <p [ngClass]="{'danger': personalDetails.form.get('phoneNumber').invalid && personalDetails.form.get('phoneNumber').touched}" class="label">Phone Number</p>
-                    <input [class.is-invalid]="personalDetails.form.get('phoneNumber').invalid && personalDetails.form.get('phoneNumber').touched" formControlName="phoneNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <input prefix="+1 " mask="(000) 000 0000" [class.is-invalid]="personalDetails.form.get('phoneNumber').invalid && personalDetails.form.get('phoneNumber').touched" formControlName="phoneNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
                     <p class="label">Role</p>
                     <input formControlName="role" type="text" class="form-control f1 mb-custom"  placeholder="">
                     <p class="label">Title</p>

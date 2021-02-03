@@ -17,7 +17,10 @@ import {SubjectPropertyComponent} from './components/subject-property/subject-pr
 import {TransactionProcessComponent} from './components/transaction-process/transaction-process.component';
 import {BuyerInfoComponent} from './components/buyer-info/buyer-info.component';
 import { SubjectPropertyDetailsComponent } from './components/subject-property-details/subject-property-details.component';
-
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { SubjectPropertyDetailsComponent } from './components/subject-property-d
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    NgxMaskModule.forRoot(maskConfig)
   ],
   exports: [
     ReactiveFormsModule,
@@ -45,6 +49,7 @@ import { SubjectPropertyDetailsComponent } from './components/subject-property-d
     FormsModule,
     NgbModule,
     NgxChartsModule,
+    NgxMaskModule,
     DeleteConfirmationPopupComponent,
     FhaComponent,
     ConventionalComponent,

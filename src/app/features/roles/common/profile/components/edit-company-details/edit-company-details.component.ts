@@ -45,7 +45,7 @@ export class EditCompanyDetailsComponent implements OnInit {
     this.companyDetails.form = this.fb.group({
       name: [null, Validators.required],
       licenseNumber: [null, Validators.required],
-      phoneNumber: [null, [Validators.required, Validators.pattern('^[+][1][\\s][(]?\\d{3}[)]?[(\\s)?.-]\\d{3}[\\s.-]\\d{4}$')]],
+      phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       faxNumber: [null, Validators.required],
       street: [null, Validators.required],
       city: [null, Validators.required],

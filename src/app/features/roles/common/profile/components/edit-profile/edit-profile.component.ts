@@ -62,7 +62,7 @@ export class EditProfileComponent implements OnInit {
       firstName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       bio: [null, Validators.required],
-      phoneNumber: [null, [Validators.required, Validators.pattern('^[+][1][\\s][(]?\\d{3}[)]?[(\\s)?.-]\\d{3}[\\s.-]\\d{4}$')]],
+      phoneNumber: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
       gender: [null, Validators.required],
       website: [null, Validators.required],
       birthday: this.fb.group({
