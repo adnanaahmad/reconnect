@@ -10,10 +10,10 @@
             <p class="role">{{formatRole(partnerProfile.role) | titlecase}}</p>
             <p class="bio">{{partnerProfile.bio}}</p>
             <div class="d-flex justify-content-between div-2" *ngIf="partnerProfile.socialMedia">
-                <a target="_blank" [href]="partnerProfile.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
-                <a target="_blank" [href]="partnerProfile.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
-                <a target="_blank" [href]="partnerProfile.socialMedia.linkedIn"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
-                <a target="_blank" [href]="partnerProfile.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+                <a [ngClass]="{'inactiveLink': !partnerProfile.socialMedia.facebook }" target="_blank" [href]="partnerProfile.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a [ngClass]="{'inactiveLink': !partnerProfile.socialMedia.instagram }" target="_blank" [href]="partnerProfile.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a [ngClass]="{'inactiveLink': !partnerProfile.socialMedia.linkedIn }" target="_blank" [href]="partnerProfile.socialMedia.linkedIn"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                <a [ngClass]="{'inactiveLink': !partnerProfile.socialMedia.twitter }" target="_blank" [href]="partnerProfile.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
             </div>
             <div *ngIf="partnerProfile.profileVideoUrl">
                 <p class="bio-video">Bio Video:</p>

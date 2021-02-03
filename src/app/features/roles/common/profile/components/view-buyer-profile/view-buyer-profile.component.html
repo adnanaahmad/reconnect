@@ -10,10 +10,10 @@
             <p class="role">{{userProfile.role | titlecase}}</p>
             <p class="bio">{{userProfile.bio}}</p>
             <div *ngIf="userProfile.socialMedia" class="d-flex justify-content-between div-2">
-                <a target="_blank" [href]="userProfile.socialMedia.facebook" ><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
-                <a target="_blank" [href]="userProfile.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
-                <a target="_blank" [href]="userProfile.socialMedia.linkedIn"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
-                <a target="_blank" [href]="userProfile.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+                <a [ngClass]="{'inactiveLink': !userProfile.socialMedia.facebook }" target="_blank" [href]="userProfile.socialMedia.facebook" ><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a [ngClass]="{'inactiveLink': !userProfile.socialMedia.instagram }" target="_blank" [href]="userProfile.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a [ngClass]="{'inactiveLink': !userProfile.socialMedia.linkedIn }" target="_blank" [href]="userProfile.socialMedia.linkedIn"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                <a [ngClass]="{'inactiveLink': !userProfile.socialMedia.twitter }" target="_blank" [href]="userProfile.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
             </div>
         </div>
     </div>
