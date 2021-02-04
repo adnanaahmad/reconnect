@@ -154,3 +154,18 @@
 .row-space{
   margin-bottom: 1vw;
 }
+.save-btn{
+  float: right;
+  background: var(--green);
+  padding: .5vw 1.5vw;
+  font-family: 'Poppins';
+  font-size: .8vw;
+  color: white;
+  border: none;
+  margin-bottom: 2vw;
+  border-radius: .5vw;
+  cursor: pointer;
+}
+.save-btn:focus{
+  outline: none;
+}

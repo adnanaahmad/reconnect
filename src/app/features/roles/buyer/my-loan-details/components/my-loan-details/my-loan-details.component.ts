@@ -151,38 +151,7 @@ export class MyLoanDetailsComponent implements OnInit {
 
     this.loanDetails.finance.valueChanges.subscribe(newval => console.log(newval));
   }
-  // toggle(value): void{
-  //   switch (value)
-  //   {
-  //     case'fha':
-  //       //this.finance.controls.toggle.controls.fha.setValue(!this.finance.value.toggle.fha);
-  //       break;
-  //
-  //     case'conventional':
-  //       this.conventionalToggle = !this.conventionalToggle;
-  //       break;
-  //
-  //     case'homePossible':
-  //       this.homePossibleToggle = !this.homePossibleToggle;
-  //       break;
-  //
-  //     case'homeReady':
-  //       this.homeReadyToggle = !this.homeReadyToggle;
-  //       break;
-  //
-  //     case'va':
-  //       this.vaToggle = !this.vaToggle;
-  //       break;
-  //
-  //     case'usda':
-  //       this.usdaToggle = !this.usdaToggle;
-  //       break;
-  //
-  //     default:
-  //       console.log('Invalid');
-  //   }
-  // }
-  onSubmit(){
-    //console.log(this.finance.value);
+  onSubmit(): void{
+    console.log(this.loanDetails.finance.value);
   }
 }
