@@ -1,8 +1,8 @@
 <div class="heading d-flex justify-content-between">
   <h3>My Finance</h3>
 </div>
-<form [formGroup]="loanDetails.finance" (ngSubmit)="onSubmit()">
-<div class="d-flex user-finance" formGroupName="myFinance">
+<form [formGroup]="loanDetails.finance" (ngSubmit)="onSubmit()" *ngIf="loader">
+<div class="d-flex user-finance">
   <div class="form-group">
     <input formControlName="income" type="" class="form-control form-control-lg" id="" placeholder="Income">
   </div>
