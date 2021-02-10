@@ -17,3 +17,11 @@ interface ApprovedLoanProgramModel {
   homeReady: boolean;
   homePossible: boolean;
 }
+export interface MoreFiltersModel{
+  minPrice: Array<number>;
+  maxPrice: Array<number>;
+  minBeds: Array<number>;
+  maxBeds: Array<number>;
+  minBaths: Array<number>;
+  maxBaths: Array<number>;
+}

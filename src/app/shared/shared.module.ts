@@ -18,6 +18,7 @@ import {TransactionProcessComponent} from './components/transaction-process/tran
 import {BuyerInfoComponent} from './components/buyer-info/buyer-info.component';
 import { SubjectPropertyDetailsComponent } from './components/subject-property-details/subject-property-details.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import {ThousandSuffixPipe} from './pipes/thousand-suffix.pipe';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -36,6 +37,7 @@ const maskConfig: Partial<IConfig> = {
     TransactionProcessComponent,
     BuyerInfoComponent,
     SubjectPropertyDetailsComponent,
+    ThousandSuffixPipe
 
   ],
   imports: [
@@ -62,6 +64,7 @@ const maskConfig: Partial<IConfig> = {
     TransactionProcessComponent,
     BuyerInfoComponent,
     SubjectPropertyDetailsComponent,
+    ThousandSuffixPipe
   ],
 })
 export class SharedModule { }

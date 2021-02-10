@@ -38,15 +38,15 @@
           </button>
           <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="propertyType">
             <ng-container *ngFor="let i of searchHome.moreFilters.value.propertyType| keyvalue: helper.originalOrder">
-              <label class="container" *ngIf="constant.searchFilters[i.key]">
-                  <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType[i.key]">
+              <label class="container">
+                  <input formControlName="{{i.key}}" type="checkbox">
                   <img class="checkmark" src="/assets/loan-details/tick.svg">
-                  <p class="label-txt">{{constant.searchFilters[i.key]}}</p>
+                  <p class="label-txt">{{i.key}}</p>
               </label>
             </ng-container>
             <div class="d-flex justify-content-end">
                 <div (click)="cancel($event)" class="cancel-btn" >Cancel</div>
-                <div (click)="applyFilter()" class="apply-btn" >Apply</div>
+                <div (click)="applyFilter($event)" class="apply-btn" >Apply</div>
             </div>
           </div>
         </div>
@@ -55,16 +55,17 @@
             Beds <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
           </button>
           <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="beds">
-            <ng-container *ngFor="let i of searchHome.moreFilters.value.beds| keyvalue: helper.originalOrder">
-              <label class="container" *ngIf="constant.searchFilters[i.key]">
-                  <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.beds[i.key]">
+            <ng-container *ngFor="let i of [1,2,3,4,5]">
+              <label class="container">
+                  <input formControlName="value" type="radio" [value]="i">
                   <img class="checkmark" src="/assets/loan-details/tick.svg">
-                  <p class="label-txt">{{constant.searchFilters[i.key]}}</p>
+                  <p class="label-txt">{{i}}+</p>
               </label>
             </ng-container>
             <div class="d-flex justify-content-end">
-                <div (click)="cancel($event)" class="cancel-btn" >Cancel</div>
-                <div (click)="applyFilter()" class="apply-btn" >Apply</div>
+<!--                <div *ngIf="searchHome.moreFilters.value.baths.value === null"  (click)="cancel($event)" class="cancel-btn" >Cancel</div>-->
+                <div (click)="searchHome.moreFilters.get(['beds','value']).setValue(null)" class="cancel-btn" >Clear</div>
+                <div (click)="applyFilter($event)" class="apply-btn" >Apply</div>
             </div>
           </div>
         </div>
@@ -73,34 +74,34 @@
             Baths <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
           </button>
           <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="baths">
-            <ng-container *ngFor="let i of searchHome.moreFilters.value.baths| keyvalue: helper.originalOrder">
-              <label class="container" *ngIf="constant.searchFilters[i.key]">
-                  <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.baths[i.key]">
+            <ng-container *ngFor="let i of [1,2,3,4,5]">
+              <label class="container">
+                  <input formControlName="value" type="radio" [value]="i">
                   <img class="checkmark" src="/assets/loan-details/tick.svg">
-                  <p class="label-txt">{{constant.searchFilters[i.key]}}</p>
+                  <p class="label-txt">{{i}}+</p>
               </label>
             </ng-container>
             <div class="d-flex justify-content-end">
-                <div (click)="cancel($event)" class="cancel-btn" >Cancel</div>
-                <div (click)="applyFilter()" class="apply-btn" >Apply</div>
+                <div (click)="searchHome.moreFilters.get(['baths','value']).setValue(null)" class="cancel-btn" >Clear</div>
+                <div (click)="applyFilter($event)" class="apply-btn" >Apply</div>
             </div>
           </div>
         </div>
         <div class="dropdown">
           <button (click)="hideMoreFilter()" class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Open Houses <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
+            Listing Status <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
           </button>
-          <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="listingStatus">
-            <ng-container *ngFor="let i of searchHome.moreFilters.value.listingStatus| keyvalue: helper.originalOrder">
-              <label class="container" *ngIf="constant.searchFilters[i.key]">
-                  <input formControlName="{{i.key}}" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus[i.key]">
+          <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="status">
+            <ng-container *ngFor="let i of searchHome.moreFilters.value.status| keyvalue: helper.originalOrder">
+              <label class="container">
+                  <input formControlName="{{i.key}}" type="checkbox">
                   <img class="checkmark" src="/assets/loan-details/tick.svg">
-                  <p class="label-txt text-nowrap">{{constant.searchFilters[i.key]}}</p>
+                  <p class="label-txt text-nowrap">{{i.key}}</p>
               </label>
             </ng-container>
             <div class="d-flex justify-content-end">
                 <div (click)="cancel($event)" class="cancel-btn" >Cancel</div>
-                <div (click)="applyFilter()" class="apply-btn" >Apply</div>
+                <div (click)="applyFilter($event)" class="apply-btn" >Apply</div>
             </div>
           </div>
         </div>
@@ -117,7 +118,7 @@
 </div>
 <form [formGroup]="searchHome.moreFilters">
 <div class="more-filter" *ngIf="store.toggleMoreFilter | async">
-    <app-more-filters [searchHome]="searchHome"></app-more-filters>
+    <app-more-filters [searchHome]="searchHome" (applyFilters)="applyFilters()"></app-more-filters>
 </div>
 </form>
 <div style="position: relative">
@@ -143,7 +144,7 @@
   <div class="home">
     <div class="row">
         <div class="col-3 home-margin" *ngFor="let home of searchHome.homes">
-            <app-home-card [home]="home"></app-home-card>
+            <app-home-card [home]="home" (click)="router.navigateByUrl('/home/propertyDetails?id='+home.id)"></app-home-card>
         </div>
     </div>
   </div>

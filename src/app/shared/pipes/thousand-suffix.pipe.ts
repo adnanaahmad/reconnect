@@ -10,7 +10,7 @@ export class ThousandSuffixPipe implements PipeTransform {
     if (number === null) return null;
     if (number === 0) return null;
     let abs = Math.abs(number);
-    const rounder = Math.pow(10, 1);
+    const rounder = Math.pow(10, 3);
     const isNegative = number < 0; // will also work for Negetive numbers
     let key = '';
 
@@ -19,7 +19,7 @@ export class ThousandSuffixPipe implements PipeTransform {
       {key: 'T', value: Math.pow(10, 12)},
       {key: 'B', value: Math.pow(10, 9)},
       {key: 'M', value: Math.pow(10, 6)},
-      {key: 'k', value: 1000}
+      {key: 'K', value: 1000}
     ];
 
     for (let i = 0; i < powers.length; i++) {

@@ -7,7 +7,8 @@ import {FavoritesModel} from '../../models/favorites.model';
   styleUrls: ['./favorites.component.scss'],
 })
 export class FavoritesComponent implements OnInit {
-  favorite: FavoritesModel = {} as FavoritesModel;
+  //favorite: FavoritesModel = {} as FavoritesModel;
+  favorite: any;
   constructor() { }
 
   ngOnInit(): void {

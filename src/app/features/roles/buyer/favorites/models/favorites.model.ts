@@ -3,13 +3,14 @@ export interface FavoritesModel {
 }
 export interface HomeModel {
   id: number;
-  image: string;
-  price: number;
-  area: number;
+  images: Array<string>;
+  listPrice: number;
+  size: number;
   garage: number;
-  bedroom: number;
-  bathroom: number;
+  beds: number;
+  baths: {total: number, full: number, half: number};
   description: string;
   status: string;
   favorite: boolean;
+  xf_garage_spaces: number;
 }

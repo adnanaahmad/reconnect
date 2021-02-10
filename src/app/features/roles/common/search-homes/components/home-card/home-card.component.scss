@@ -92,9 +92,13 @@
 .description{
   font-size: .6vw;
   font-weight: 300;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .description-div{
   margin-bottom: .5vw;
+  //min-height: 7vw;
 }
 .bath{
   background: var(--extraLightGray);
@@ -141,4 +145,22 @@
 }
 p{
   font-family: 'Poppins';
+}
+.read-more{
+  color: var(--darkGray);
+  font-size: .7vw;
+ // margin-bottom: 0;
+  cursor: pointer;
+  margin-bottom: .5vw;
+}
+.read-less{
+  display: none;
+  color: var(--darkGray);
+  font-size: .7vw;
+///  margin-bottom: 0;
+  cursor: pointer;
+  margin-bottom: .5vw;
+}
+:host{
+  cursor: pointer;
 }

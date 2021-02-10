@@ -31,6 +31,13 @@
   height: min-content;
   border-radius: .3vw;
   font-weight: 300;
+  background: var(--green);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.apply-btn:focus{
+  outline: none;
 }
 .filter-heading{
   margin-bottom: 0;
@@ -59,6 +66,10 @@
   -moz-appearance: none;
   appearance: none;
   border: 1px solid var(--lighGray);
+  padding: .2vw .5vw;
+}
+.filter-select select:disabled{
+  background: white;
 }
 .price-select{
   //margin-bottom: 3vw;
@@ -135,8 +146,8 @@
 
 .listing-1{
   padding-bottom: 2vw;
-  border-bottom: 1px solid var(--lighGray);
-  border-width: thin;
+  //border-bottom: 1px solid var(--lighGray);
+  //border-width: thin;
 }
 .listing-2{
   padding-top: 2vw;
@@ -198,4 +209,7 @@
   font-family: 'Poppins';
   font-size: .7vw;
   color: var(--lighGray);
+}
+button:focus{
+  box-shadow: none;
 }

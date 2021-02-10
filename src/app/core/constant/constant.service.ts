@@ -45,7 +45,8 @@ export class ConstantService {
      getTeam: `${environment.apiUrl}/team/my-team`,
      addTeamMember: `${environment.apiUrl}/team/add-member`,
      removeTeamMember: `${environment.apiUrl}/team/remove-member`,
-     getLoanDetails: `${environment.apiUrl}/loan/my-loan`
+     getLoanDetails: `${environment.apiUrl}/loan/my-loan`,
+     searchHome: `${environment.apiUrl}/listing/search?market=mlspin&test=true&`
   };
    httpOptions = {
      json: {
@@ -455,11 +456,11 @@ export class ConstantService {
     price: 'Price',
     propertyType: 'Property Type',
     moreFilters: 'More Filters',
-    fivePlus: '5+',
-    fourPlus: '4+',
-    threePlus: '3+',
-    twoPlus: '2+',
-    onePlus: '1+',
+    5: '5+',
+    4: '4+',
+    3: '3+',
+    2: '2+',
+    1: '1+',
     existingHomes: 'Existing Homes',
     fiftyFivePlusCommunity: '55+ Community',
     foreclosures: 'Foreclosures',

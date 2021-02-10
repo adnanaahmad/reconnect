@@ -3,7 +3,6 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {LoanDetailsModel} from '../../models/loanDetails.model';
 import {LoanDetailsService} from '../../services/loan-details.service';
 import {ToastrService} from 'ngx-toastr';
-//import {FhaComponent} from '../../../../../../shared/components/fha/fha.component';
 
 @Component({
   selector: 'app-my-loan-details',

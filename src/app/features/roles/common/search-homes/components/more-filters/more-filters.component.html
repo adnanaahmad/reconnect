@@ -4,25 +4,25 @@
        <p class="filter-heading">Filters your search</p>
        <div class="d-flex">
           <button (click)="clearAll()" class="btn btn-default clear-btn">Clear All</button>
-          <button (click)="applyFilter()" class="btn btn-success apply-btn">Apply Filters</button>
+          <button (click)="applyFilter()" class="apply-btn">Apply Filters</button>
        </div>
     </div>
     <div class="child-2">
         <div class="row margin-b2">
-            <div class="col-4" formGroupName="price">
+            <div class="col-4" formGroupName="listPrice">
               <div class="col-width">
                <p class="heading-sub">Price</p>
                <div class="filter-select row">
                   <div class="col-6">
                     <select formControlName="from" class="form-control">
-                      <option value="" [disabled]="true">Min</option>
-                      <option>Large select</option>
+                      <option [ngValue]="null" [disabled]="true">Min</option>
+                      <option [value]="i" *ngFor="let i of moreFilters.minPrice">${{i | thousandSuffix}}</option>
                     </select>
                   </div>
                   <div class="col-6">
                     <select formControlName="to" class="form-control">
-                      <option value="" [disabled]="true">Max</option>
-                      <option>Large select</option>
+                        <option [ngValue]="null" [disabled]="true">Max</option>
+                        <option [value]="i" *ngFor="let i of moreFilters.maxPrice">${{i | thousandSuffix}}</option>
                     </select>
                   </div>
                 </div>
@@ -35,43 +35,23 @@
                     <div class="col-6 bed-filter">
                       <p class="bed-label text-nowrap">Select bedroom range</p>
                       <select formControlName="from" class="form-control">
-                        <option value="" [disabled]="true">From</option>
-                        <option>Large select</option>
+                          <option [ngValue]="null" [disabled]="true">From</option>
+                          <option [value]="i" *ngFor="let i of moreFilters.minBeds">{{i}}+</option>
                       </select>
                     </div>
                     <div class="col-6 align-self-end">
                       <select formControlName="to" class="form-control">
-                        <option value="" [disabled]="true">To</option>
-                        <option>Large select</option>
+                          <option [ngValue]="null" [disabled]="true">To</option>
+                          <option [value]="i" *ngFor="let i of moreFilters.maxBeds">{{i}}+</option>
                       </select>
                     </div>
                  </div>
                  <p class="bed-label margin-b">or</p>
                  <div class="d-flex">
-                    <label class="container">
-                      <input formControlName="onePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.onePlus">
+                    <label class="container" *ngFor=" let i of [1,2,3,4,5]">
+                      <input formControlName="value" type="radio" [value]="i" [checked]="searchHome.moreFilters.value.beds.value === i">
                       <img class="checkmark" src="/assets/loan-details/tick.svg">
-                      <p class="label-txt">1+</p>
-                    </label>
-                    <label class="container">
-                      <input formControlName="twoPlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.twoPlus">
-                      <img class="checkmark" src="/assets/loan-details/tick.svg">
-                      <p class="label-txt">2+</p>
-                    </label>
-                    <label class="container">
-                      <input formControlName="threePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.threePlus">
-                      <img class="checkmark" src="/assets/loan-details/tick.svg">
-                      <p class="label-txt">3+</p>
-                    </label>
-                    <label class="container">
-                      <input formControlName="fourPlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.fourPlus">
-                      <img class="checkmark" src="/assets/loan-details/tick.svg">
-                      <p class="label-txt">4+</p>
-                    </label>
-                    <label class="container">
-                      <input formControlName="fivePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.beds.fivePlus">
-                      <img class="checkmark" src="/assets/loan-details/tick.svg">
-                      <p class="label-txt">5+</p>
+                      <p class="label-txt">{{i}}+</p>
                     </label>
                  </div>
                </div>
@@ -83,43 +63,23 @@
                     <div class="col-6 bed-filter">
                       <p class="bed-label text-nowrap">Select bathroom range</p>
                       <select formControlName="from" class="form-control">
-                        <option value="" [disabled]="true">From</option>
-                        <option>Large select</option>
+                          <option [ngValue]="null" [disabled]="true">From</option>
+                          <option [value]="i" *ngFor="let i of moreFilters.minBaths">{{i}}+</option>
                       </select>
                     </div>
                     <div class="col-6 align-self-end">
                       <select formControlName="to" class="form-control">
-                        <option value="" [disabled]="true">To</option>
-                        <option>Large select</option>
+                          <option [ngValue]="null" [disabled]="true">To</option>
+                          <option [value]="i" *ngFor="let i of moreFilters.maxBaths">{{i}}+</option>
                       </select>
                     </div>
                  </div>
                 <p class="bed-label margin-b">or</p>
                 <div class="d-flex">
-                   <label class="container">
-                     <input formControlName="onePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.onePlus">
+                   <label class="container" *ngFor="let i of [1,2,3,4,5]">
+                     <input formControlName="value" type="radio" [value]="i"  [checked]="searchHome.moreFilters.value.baths.value === i">
                      <img class="checkmark" src="/assets/loan-details/tick.svg">
-                     <p class="label-txt">1+</p>
-                   </label>
-                   <label class="container">
-                     <input formControlName="twoPlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.twoPlus">
-                     <img class="checkmark" src="/assets/loan-details/tick.svg">
-                     <p class="label-txt">2+</p>
-                   </label>
-                   <label class="container">
-                     <input formControlName="threePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.threePlus">
-                     <img class="checkmark" src="/assets/loan-details/tick.svg">
-                     <p class="label-txt">3+</p>
-                   </label>
-                   <label class="container">
-                     <input formControlName="fourPlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.fourPlus">
-                     <img class="checkmark" src="/assets/loan-details/tick.svg">
-                     <p class="label-txt">4+</p>
-                   </label>
-                   <label class="container">
-                     <input formControlName="fivePlus" type="checkbox"  [checked]="searchHome.moreFilters.value.baths.fivePlus">
-                     <img class="checkmark" src="/assets/loan-details/tick.svg">
-                     <p class="label-txt">5+</p>
+                     <p class="label-txt">{{i}}+</p>
                    </label>
                 </div>
                </div>
@@ -133,79 +93,98 @@
                 <div class="row">
                     <div class="col-6 space">
                         <label class="container">
-                          <input formControlName="singleFamily" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.singleFamily">
+                          <input formControlName="Single Family" type="checkbox">
                           <img class="checkmark" src="/assets/loan-details/tick.svg">
                           <p class="label-txt text-nowrap">Single Family</p>
                         </label>
                         <label class="container">
-                          <input formControlName="multiFamily" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.multiFamily">
+                          <input formControlName="Multi-family" type="checkbox">
                           <img class="checkmark" src="/assets/loan-details/tick.svg">
                           <p class="label-txt text-nowrap">Multi Family</p>
                         </label>
                         <label class="container">
-                          <input formControlName="farm" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.farm">
+                          <input formControlName="Farm" type="checkbox">
                           <img class="checkmark" src="/assets/loan-details/tick.svg">
                           <p class="label-txt">Farm</p>
                         </label>
                         <label class="container">
-                          <input formControlName="mobile" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.mobile">
-                          <img class="checkmark" src="/assets/loan-details/tick.svg">
-                          <p class="label-txt">Mobile</p>
+                            <input formControlName="Condominium/Co-Op" type="checkbox">
+                            <img class="checkmark" src="/assets/loan-details/tick.svg">
+                            <p class="label-txt text-nowrap">Condominium/Co-Op</p>
+                        </label>
+                        <label class="container">
+                            <input formControlName="Attached (Townhouse/Rowhouse/Duplex)" type="checkbox">
+                            <img class="checkmark" src="/assets/loan-details/tick.svg">
+                            <p class="label-txt">Attached (Townhouse/Rowhouse/Duplex)</p>
                         </label>
                     </div>
                     <div class="col-6  space">
                         <label class="container">
-                          <input formControlName="land" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.land">
+                          <input formControlName="Land" type="checkbox">
                           <img class="checkmark" src="/assets/loan-details/tick.svg">
                           <p class="label-txt">Land</p>
                         </label>
                         <label class="container">
-                          <input formControlName="condo" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.condo">
+                          <input formControlName="Condominium" type="checkbox">
                           <img class="checkmark" src="/assets/loan-details/tick.svg">
-                          <p class="label-txt">Condo</p>
+                          <p class="label-txt">Condominium</p>
                         </label>
-
                         <label class="container">
-                          <input formControlName="any" type="checkbox"  [checked]="searchHome.moreFilters.value.propertyType.any">
-                          <img class="checkmark" src="/assets/loan-details/tick.svg">
-                          <p class="label-txt">Any</p>
+                            <input formControlName="Mobile Home" type="checkbox">
+                            <img class="checkmark" src="/assets/loan-details/tick.svg">
+                            <p class="label-txt">Mobile</p>
+                        </label>
+                        <label class="container">
+                            <input formControlName="Apartment" type="checkbox">
+                            <img class="checkmark" src="/assets/loan-details/tick.svg">
+                            <p class="label-txt">Apartment</p>
                         </label>
                     </div>
                 </div>
               </div>
            </div>
-           <div class="col-4" formGroupName="listingStatus">
+           <div class="col-4">
             <div class="col-width">
               <p class="heading-sub">Listing Status</p>
-                  <div class="listing-1">
+                  <div class="listing-1" formGroupName="status">
                       <div class="row">
                           <div class="col-6 space">
                               <label class="container">
-                                <input formControlName="any" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.any">
+                                <input formControlName="Active" type="checkbox">
                                 <img class="checkmark" src="/assets/loan-details/tick.svg">
-                                <p class="label-txt">Any</p>
+                                <p class="label-txt">Active</p>
                               </label>
                               <label class="container">
-                                <input formControlName="newConstruction" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.newConstruction">
+                                <input formControlName="Back on Market" type="checkbox">
                                 <img class="checkmark" src="/assets/loan-details/tick.svg">
-                                <p class="label-txt text-nowrap">New Construction</p>
+                                <p class="label-txt text-nowrap">Back on Market</p>
                               </label>
                               <label class="container">
-                                <input formControlName="fiftyFivePlusCommunity" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.fiftyFivePlusCommunity">
+                                <input formControlName="Contingent" type="checkbox">
                                 <img class="checkmark" src="/assets/loan-details/tick.svg">
-                                <p class="label-txt text-nowrap">55+ Community</p>
+                                <p class="label-txt text-nowrap">Contingent</p>
+                              </label>
+                              <label class="container">
+                                  <input formControlName="Reactivated" type="checkbox">
+                                  <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                  <p class="label-txt text-nowrap">Reactivated</p>
                               </label>
                           </div>
                           <div class="col-6  space">
                               <label class="container">
-                                <input formControlName="existingHomes" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.existingHomes">
+                                <input formControlName="Extended" type="checkbox">
                                 <img class="checkmark" src="/assets/loan-details/tick.svg">
-                                <p class="label-txt">Existing Homes</p>
+                                <p class="label-txt">Extended</p>
                               </label>
                               <label class="container">
-                                <input formControlName="foreclosures" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.foreclosures">
+                                <input formControlName="New" type="checkbox">
                                 <img class="checkmark" src="/assets/loan-details/tick.svg">
-                                <p class="label-txt">Foreclosures</p>
+                                <p class="label-txt">New</p>
+                              </label>
+                              <label class="container">
+                                  <input formControlName="Price Changed" type="checkbox">
+                                  <img class="checkmark" src="/assets/loan-details/tick.svg">
+                                  <p class="label-txt text-nowrap">Price Changed</p>
                               </label>
                           </div>
                       </div>
@@ -213,28 +192,8 @@
                   <div class="listing-2">
                       <div class="row">
                           <div class="col-6 space">
-                              <label class="container">
-                                <input formControlName="hidePendingContingent" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.hidePendingContingent">
-                                <img class="checkmark" src="/assets/loan-details/tick.svg">
-                                <p class="label-txt text-nowrap">Hide Pending / Contingent</p>
-                              </label>
-                              <label class="container">
-                                <input formControlName="hideForeclosures" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.hideForeclosures">
-                                <img class="checkmark" src="/assets/loan-details/tick.svg">
-                                <p class="label-txt text-nowrap">Hide Foreclosures</p>
-                              </label>
-                              <label class="container">
-                                <input formControlName="priceReduced" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.priceReduced">
-                                <img class="checkmark" src="/assets/loan-details/tick.svg">
-                                <p class="label-txt">Price Reduced</p>
-                              </label>
                           </div>
                           <div class="col-6  space align-self-end">
-                              <label class="container">
-                                <input formControlName="openHouse" type="checkbox"  [checked]="searchHome.moreFilters.value.listingStatus.openHouse">
-                                <img class="checkmark" src="/assets/loan-details/tick.svg">
-                                <p class="label-txt">Open House</p>
-                              </label>
                           </div>
                       </div>
 

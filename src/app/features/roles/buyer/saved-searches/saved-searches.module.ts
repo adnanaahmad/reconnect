@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { SavedSearchesRoutingModule } from './saved-searches-routing.module';
 import {SavedSearchesComponent} from './components/saved-searches/saved-searches.component';
-import { ThousandSuffixPipe } from './pipes/thousand-suffix.pipe';
+import {SharedModule} from '../../../../shared/shared.module';
 
 
 @NgModule({
-  declarations: [SavedSearchesComponent, ThousandSuffixPipe],
+  declarations: [SavedSearchesComponent, ],
   imports: [
-    CommonModule,
-    SavedSearchesRoutingModule
+      CommonModule,
+      SavedSearchesRoutingModule,
+      SharedModule
   ]
 })
 export class SavedSearchesModule { }

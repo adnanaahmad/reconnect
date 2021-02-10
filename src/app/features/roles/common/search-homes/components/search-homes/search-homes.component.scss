@@ -14,7 +14,7 @@
   color: var(--darkGray);
 }
 .heading{
-  margin-bottom: 1vw;
+  margin-bottom: 2vw;
 }
 .loan-program p{
   margin-right: .8vw;
@@ -280,4 +280,7 @@ p{
   height: 2.3vw;
   font-weight: 300;
   border: 1px solid var(--lighGray);
+}
+button:focus{
+  box-shadow: none;
 }
