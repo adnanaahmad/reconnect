@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {PropertyDetailsModel} from '../../models/property-details.model';
 import {FormBuilder, Validators} from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
+import {PropertyDetailsService} from '../../services/property-details.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-property-details',
@@ -11,9 +13,17 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class PropertyDetailsComponent implements OnInit {
   propertyDetails: PropertyDetailsModel = {} as PropertyDetailsModel;
 
-  constructor(private fb: FormBuilder, public sanitizer: DomSanitizer) {}
+  constructor(private fb: FormBuilder,
+              public sanitizer: DomSanitizer,
+              private propertyDetailService: PropertyDetailsService,
+              private activatedRoute: ActivatedRoute) {
+    activatedRoute.queryParams.subscribe(params => {
+      this.propertyDetails.id = params.id;
+    });
+  }
 
   ngOnInit(): void {
+    this.getPropertyDetails();
     this.propertyDetails.propertyAd = {
       listedBy: 'James Hawken Broody',
       album: ['https://i.pinimg.com/originals/ab/86/0b/ab860b0b78eac0a11a098e0ec053346d.jpg',
@@ -193,5 +203,12 @@ export class PropertyDetailsComponent implements OnInit {
         domain: ['#53E773', '#E7EDF8']
       }
     };
+  }
+  getPropertyDetails(): void{
+    this.propertyDetailService.getPropertyDetails(this.propertyDetails.id).subscribe(res => {
+      console.log(res);
+    }, error => {
+      console.log(error);
+    });
   }
 }

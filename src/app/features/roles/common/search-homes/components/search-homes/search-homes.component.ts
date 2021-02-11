@@ -26,23 +26,7 @@ export class SearchHomesComponent implements OnInit {
     this.initialiseFilter();
     this.chooseEitherRangeOrMultiSelect();
     this.getHouses();
-
-    this.searchHome.hideSearch = true;
-    this.searchHome.searchKeyword = new FormControl(null);
-    this.searchHome.autoComplete = new BehaviorSubject<any>(null);
-    this.searchHome.searchKeyword.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe(data => {
-         if (data) {
-             this.searchHomeService.searchHomeByName(data).subscribe(res => {
-                 console.log(res);
-                 this.searchHome.autoComplete.next(res.result.areas);
-                 if (document.getElementById('search-list')){
-                     document.getElementById('search-list').style.display = 'block';
-                 }
-             }, error => {
-                 console.log(error);
-             });
-         }
-    });
+    this.autoComplete();
 
     this.searchHome.keyword = new FormControl(null);
     this.searchHome.keywordList = [];
@@ -66,6 +50,7 @@ export class SearchHomesComponent implements OnInit {
       res = res.result;
       this.searchHome.homes = res.listings;
       this.searchHome.total = res.total;
+      this.searchHome.pageNumber = res.paging.number;
     }, error => {
       console.log(error);
     });
@@ -132,6 +117,7 @@ export class SearchHomesComponent implements OnInit {
         value: [null]
       }),
     });
+    this.searchHome.sortBy = new FormControl(null);
   }
   toggleMoreFilter(): boolean {
     this.searchHome.toggle = !this.searchHome.toggle;
@@ -156,11 +142,12 @@ export class SearchHomesComponent implements OnInit {
     const data = this.filtersDataToQuery;
     console.log(data);
     window.history.replaceState({}, '', `/home/searchHomes?${data}`);
-    this.searchHomeService.getHouses(data).pipe(take(1)).subscribe(res => {
-      console.log(res);
+    const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+    this.searchHomeService.getHouses(data + sortBy).pipe(take(1)).subscribe(res => {
       res = res.result;
       this.searchHome.homes = res.listings;
       this.searchHome.total = res.total;
+      this.searchHome.pageNumber = res.paging.number;
       this.store.updateToggleMoreFilter(false);
       if (events){
         events.target.parentElement.parentElement.classList.toggle('show');
@@ -197,13 +184,44 @@ export class SearchHomesComponent implements OnInit {
   pageChange(pageNumber): void{
       console.log(pageNumber);
       const data = this.filtersDataToQuery;
-      this.searchHomeService.getHouses(`${data}&pageNumber=${pageNumber}`).pipe(take(1)).subscribe(res => {
-          console.log(res);
+      const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+      this.searchHomeService.getHouses(`${data}&pageNumber=${pageNumber}${sortBy}`).pipe(take(1)).subscribe(res => {
           res = res.result;
           this.searchHome.homes = res.listings;
           this.searchHome.total = res.total;
+          this.searchHome.pageNumber = res.paging.number;
       }, error => {
           console.log(error);
+      });
+  }
+  sortBy(): void{
+      const data = this.filtersDataToQuery;
+      this.searchHomeService.getHouses(`${data}&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}`).
+      pipe(take(1)).subscribe(res => {
+          res = res.result;
+          this.searchHome.homes = res.listings;
+          this.searchHome.total = res.total;
+          this.searchHome.pageNumber = res.paging.number;
+      }, error => {
+          console.log(error);
+      });
+  }
+  autoComplete(): void{
+      this.searchHome.hideSearch = true;
+      this.searchHome.searchKeyword = new FormControl(null);
+      this.searchHome.autoComplete = new BehaviorSubject<any>(null);
+      this.searchHome.searchKeyword.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe(data => {
+          if (data) {
+              this.searchHomeService.searchHomeByName(data).subscribe(res => {
+                  console.log(res);
+                  this.searchHome.autoComplete.next(res.result.areas);
+                  if (document.getElementById('search-list')){
+                      document.getElementById('search-list').style.display = 'block';
+                  }
+              }, error => {
+                  console.log(error);
+              });
+          }
       });
   }
 }

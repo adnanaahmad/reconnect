@@ -9,6 +9,7 @@ export interface PropertyDetailsModel {
   virtualTour: string;
   rentVsBuying: RentVsBuyingModel;
   publicTransport: PublicTransportModel;
+  id: number;
 }
 
 interface PropertyAdModel {

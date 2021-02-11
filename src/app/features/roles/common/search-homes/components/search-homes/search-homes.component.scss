@@ -277,10 +277,17 @@ p{
   background: var(--lightBlue);
   font-size: .75vw;
   border-radius: .5em;
-  padding: .2vw 0vw .2vw .2vw;
+  padding: .2vw 0vw .2vw .5vw;
   height: 2.3vw;
   font-weight: 300;
   border: 1px solid var(--lighGray);
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+#exampleFormControlSelect1.form-control:focus{
+  box-shadow: none;
 }
 button:focus{
   box-shadow: none;

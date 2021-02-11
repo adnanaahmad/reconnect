@@ -11,6 +11,8 @@ export interface SearchHomesModel {
   approvedLoanProgram: ApprovedLoanProgramModel;
   hideSearch: boolean;
   total: number;
+  pageNumber: number;
+  sortBy: FormControl;
   keywordList: Array<string>;
   keyword: FormControl;
 }

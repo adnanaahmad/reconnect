@@ -135,14 +135,12 @@
   <div class="d-flex justify-content-between second-row">
      <p class="second-row-txt text-nowrap align-self-center">Location name Real Estate & Homes for Sale </p>
      <div class="d-flex second-row-txt1">
-        <p class="no-home align-self-center text-nowrap">751 Homes</p>
+        <p *ngIf="searchHome.total" class="no-home align-self-center text-nowrap">{{searchHome.total}} Homes</p>
         <p class="sort-by align-self-center text-nowrap">Sort By:</p>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>All</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+        <select (change)="sortBy()" [formControl]="searchHome.sortBy" class="form-control" id="exampleFormControlSelect1">
+          <option [ngValue]="null" [disabled]="true">Choose</option>
+          <option value="desc" >Price High To Low</option>
+          <option value="asc">Price Low To High</option>
         </select>
      </div>
   </div>
@@ -158,6 +156,6 @@
 
 </div>
     <div class="paginator" *ngIf="searchHome.total">
-        <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="24" [maxSize]="5" [collectionSize]="searchHome.total" [page]="1"></ngb-pagination>
+        <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="24" [maxSize]="5" [collectionSize]="searchHome.total" [page]="searchHome.pageNumber"></ngb-pagination>
     </div>
 </form>

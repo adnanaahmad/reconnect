@@ -39,7 +39,7 @@ export class MyLoanDetailsComponent implements OnInit {
       this.toaster.success('Saved');
     }, error => {
       console.log(error);
-      this.toaster.error(error);
+      this.toaster.error('Failed To Save');
     });
   }
   resetLoanType(): void{
@@ -110,7 +110,12 @@ export class MyLoanDetailsComponent implements OnInit {
           monthlyMiUnder: ['', Validators.required],
           monthlyMiOver: ['', Validators.required],
         }),
-        reserves: ['', Validators.required],
+        reserves: this.fb.group({
+          oneUnit: ['', Validators.required],
+          twoUnit: ['', Validators.required],
+          threeToFourUnit: ['', Validators.required],
+        }),
+        additionalReserves: ['', Validators.required],
       }),
       conventional: this.fb.group({
         downPayment: ['', Validators.required],

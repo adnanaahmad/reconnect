@@ -47,7 +47,8 @@ export class ConstantService {
      removeTeamMember: `${environment.apiUrl}/team/remove-member`,
      getLoanDetails: `${environment.apiUrl}/loan/my-loan`,
      getHouses: `${environment.apiUrl}/listing/search?market=mlspin&test=true&`,
-     searchHomeByName: `${environment.apiUrl}/listing/autocomplete?keyword=`
+     searchHomeByName: `${environment.apiUrl}/listing/autocomplete?keyword=`,
+     getPropertyDetails: `${environment.apiUrl}/listing/fetch?market=mlspin&listingId=`,
   };
    httpOptions = {
      json: {
