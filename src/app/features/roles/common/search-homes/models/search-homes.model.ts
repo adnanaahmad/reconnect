@@ -1,13 +1,18 @@
 import {FormControl, FormGroup} from '@angular/forms';
 import {HomeModel} from '../../../buyer/favorites/models/favorites.model';
+import {BehaviorSubject, Subject} from 'rxjs';
 
 export interface SearchHomesModel {
-  keyword: FormControl;
+  searchKeyword: FormControl;
+  autoComplete: BehaviorSubject<any>;
   moreFilters: FormGroup;
-  keywordList: Array<string>;
   homes: Array<HomeModel>;
   toggle: boolean;
   approvedLoanProgram: ApprovedLoanProgramModel;
+  hideSearch: boolean;
+  total: number;
+  keywordList: Array<string>;
+  keyword: FormControl;
 }
 interface ApprovedLoanProgramModel {
   fha: boolean;

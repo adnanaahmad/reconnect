@@ -1,12 +1,13 @@
-import { Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {SearchHomesModel} from '../../models/search-homes.model';
 import {StoreService} from 'src/app/core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {SearchHomeService} from '../../services/search-home.service';
-import {take} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, take} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-search-homes',
@@ -24,9 +25,28 @@ export class SearchHomesComponent implements OnInit {
   ngOnInit(): void {
     this.initialiseFilter();
     this.chooseEitherRangeOrMultiSelect();
-    this.getHomes();
+    this.getHouses();
+
+    this.searchHome.hideSearch = true;
+    this.searchHome.searchKeyword = new FormControl(null);
+    this.searchHome.autoComplete = new BehaviorSubject<any>(null);
+    this.searchHome.searchKeyword.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe(data => {
+         if (data) {
+             this.searchHomeService.searchHomeByName(data).subscribe(res => {
+                 console.log(res);
+                 this.searchHome.autoComplete.next(res.result.areas);
+                 if (document.getElementById('search-list')){
+                     document.getElementById('search-list').style.display = 'block';
+                 }
+             }, error => {
+                 console.log(error);
+             });
+         }
+    });
+
     this.searchHome.keyword = new FormControl(null);
     this.searchHome.keywordList = [];
+
     this.searchHome.toggle = false;
     this.searchHome.approvedLoanProgram = {
       fha: true,
@@ -37,11 +57,15 @@ export class SearchHomesComponent implements OnInit {
       homeReady: false
     };
   }
-  getHomes(): void{
-    this.searchHomeService.searchHome().pipe(take(1)).subscribe(res => {
+  get searchContainerWidth(): number{
+      return document.getElementById('search').offsetWidth;
+  }
+    getHouses(): void{
+    this.searchHomeService.getHouses('').pipe(take(1)).subscribe(res => {
       console.log(res);
-      res = res.result.listings;
-      this.searchHome.homes = res;
+      res = res.result;
+      this.searchHome.homes = res.listings;
+      this.searchHome.total = res.total;
     }, error => {
       console.log(error);
     });
@@ -132,10 +156,11 @@ export class SearchHomesComponent implements OnInit {
     const data = this.filtersDataToQuery;
     console.log(data);
     window.history.replaceState({}, '', `/home/searchHomes?${data}`);
-    this.searchHomeService.searchHomeFilter(data).pipe(take(1)).subscribe(res => {
+    this.searchHomeService.getHouses(data).pipe(take(1)).subscribe(res => {
       console.log(res);
-      res = res.result.listings;
-      this.searchHome.homes = res;
+      res = res.result;
+      this.searchHome.homes = res.listings;
+      this.searchHome.total = res.total;
       this.store.updateToggleMoreFilter(false);
       if (events){
         events.target.parentElement.parentElement.classList.toggle('show');
@@ -168,5 +193,17 @@ export class SearchHomesComponent implements OnInit {
      });
      console.log('data', data);
      return Object.keys(data).map(key => key + '=' + data[key]).join('&');
+  }
+  pageChange(pageNumber): void{
+      console.log(pageNumber);
+      const data = this.filtersDataToQuery;
+      this.searchHomeService.getHouses(`${data}&pageNumber=${pageNumber}`).pipe(take(1)).subscribe(res => {
+          console.log(res);
+          res = res.result;
+          this.searchHome.homes = res.listings;
+          this.searchHome.total = res.total;
+      }, error => {
+          console.log(error);
+      });
   }
 }

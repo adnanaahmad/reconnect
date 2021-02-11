@@ -22,6 +22,9 @@ export class HidePopupDirective {
         item.style.display = 'none';
       }
     }
+    // if (document.getElementById('search-list')){
+    //   document.getElementById('search-list').style.display = 'none';
+    // }
   }
 
 }

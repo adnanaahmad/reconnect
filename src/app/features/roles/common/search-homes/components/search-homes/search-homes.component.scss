@@ -49,6 +49,7 @@
 .search-input{
   //width: 19.6%;
   width: 160vw;
+  position: relative;
 }
 #search.form-control{
   border-radius: .5em;
@@ -283,4 +284,50 @@ p{
 }
 button:focus{
   box-shadow: none;
+}
+.search-list-container{
+  position: absolute;
+  background: white;
+  padding: 1vw;
+  z-index: 2;
+  max-height: 20vw;
+ // width: 13.2vw;
+  overflow-y: auto;
+  border-radius: .5vw;
+  border: 1px solid rgba(0,0,0,.15);
+  top: 2.8vw;
+}
+.search-list{
+  color: var(--lighGray);
+  font-size: .7vw;
+  margin-bottom: .8vw;
+  cursor: pointer;
+}
+::ng-deep a.page-link{
+  padding: 0.5vw 1vw;
+  color: var(--darkGray);
+  font-weight: 300;
+  font-size: .9vw;
+  background: transparent;
+  border: 1px solid var(--lighGray);
+}
+::ng-deep a.page-link:hover{
+  border: 1px solid var(--lighGray);
+}
+::ng-deep li.page-item.disabled a.page-link{
+  background: transparent;
+  border: 1px solid var(--lighGray);
+}
+::ng-deep li.page-item.active a.page-link{
+  background: var(--green);
+  color: white;
+  border: 1px solid var(--green);
+}
+::ng-deep .page-link:focus{
+  box-shadow: none;
+}
+.paginator{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2vw;
 }

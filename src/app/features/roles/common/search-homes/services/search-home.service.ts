@@ -14,10 +14,10 @@ export class SearchHomeService {
     this.methods = this.constant.apiMethod;
     this.api = this.constant.apiRoutes;
   }
-  searchHome(): Observable<any>{
-    return this.helper.requestCall(this.methods.get, this.api.searchHome);
+  getHouses(data?): Observable<any>{
+    return this.helper.requestCall(this.methods.get, this.api.getHouses + data);
   }
-  searchHomeFilter(data): Observable<any>{
-    return this.helper.requestCall(this.methods.get, this.api.searchHome + data);
+  searchHomeByName(data): Observable<any> {
+    return this.helper.requestCall(this.methods.get, this.api.searchHomeByName + data);
   }
 }

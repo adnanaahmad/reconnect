@@ -20,7 +20,14 @@
 </div>
 
 <div class="d-flex filter" style="background: transparent">
-        <div class="align-self-center search-input"><input type="email" id="search" class="form-control form-control-lg" placeholder=""></div>
+        <div class="align-self-center search-input">
+            <input (input)="searchHome.hideSearch=true" [formControl]="searchHome.searchKeyword" type="text" id="search" class="form-control form-control-lg" placeholder="">
+            <div [style.width.px]="searchContainerWidth" id="search-list" *ngIf="searchHome.hideSearch&&(searchHome.autoComplete | async)" class="search-list-container">
+                <p (click)="searchHome.searchKeyword.setValue(i.label); searchHome.hideSearch = false" class="search-list" *ngFor="let i of searchHome.autoComplete | async">
+                        {{i.label}}
+                </p>
+            </div>
+        </div>
         <div class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
         <div class="dropdown">
           <button class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -150,5 +157,7 @@
   </div>
 
 </div>
-
+    <div class="paginator" *ngIf="searchHome.total">
+        <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="24" [maxSize]="5" [collectionSize]="searchHome.total" [page]="1"></ngb-pagination>
+    </div>
 </form>
