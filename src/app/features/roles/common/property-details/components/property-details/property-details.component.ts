@@ -4,7 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
 import {PropertyDetailsService} from '../../services/property-details.service';
 import {ActivatedRoute} from '@angular/router';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -16,7 +16,8 @@ export class PropertyDetailsComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public sanitizer: DomSanitizer,
               private propertyDetailService: PropertyDetailsService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              public location: Location) {
     activatedRoute.queryParams.subscribe(params => {
       this.propertyDetails.id = params.id;
     });
@@ -24,32 +25,6 @@ export class PropertyDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPropertyDetails();
-    this.propertyDetails.propertyAd = {
-      listedBy: 'James Hawken Broody',
-      album: ['https://i.pinimg.com/originals/ab/86/0b/ab860b0b78eac0a11a098e0ec053346d.jpg',
-        'https://wallpapercave.com/wp/wp2124316.jpg',
-        'https://www.globexdevelopments.com/Custom-Homes-Photo-Portfolio/304-McArthur-Mt-Prospect/big/House-Front-Driveway.jpg',
-        'https://wallpapercave.com/wp/wp2124317.jpg',
-        'https://www.wallpapertip.com/wmimgs/220-2208927_house-wallpaper-hd.jpg',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcrzLhuvUuLy7QAsqbIVriCoeWFGn4nR-fUA&usqp=CAU'],
-      image: '',
-      price: 429000,
-      address: '123 Main St Auburn, MA 0510',
-      status: 'Active',
-      time: '10 Days',
-      mls: 4324,
-      views: 512,
-      propertyType: 'Single Family',
-      yearBuilt: 1918,
-      lotSize: 10534,
-      pricePerSqFt: 200,
-      taxYear: 2020,
-      taxAmount: 5000,
-      garage: 1,
-      bedrooms: 2,
-      bathrooms: 2,
-      sqFt: 5621
-    };
     this.propertyDetails.realEstateAgent = {
       name: 'Rafael Nadal',
       image: 'https://www.menshairstylestoday.com/wp-content/uploads/2015/12/Professional-Haircuts-For-Men.jpg',
@@ -63,32 +38,6 @@ export class PropertyDetailsComponent implements OnInit {
         twitter: 'https://www.google.com/',
         world: 'https://www.google.com/',
         }
-    };
-    this.propertyDetails.propertyDetails = {
-      title: 'Interior Features',
-      feature: [
-        {
-        name: 'Bedrooms',
-        details: ['interior features', 'basement features'],
-        },
-
-        {
-          name: 'Bedrooms',
-          details: ['interior features', 'basement features'],
-        },
-        {
-          name: 'Bedrooms',
-          details: ['interior features', 'basement features'],
-        },
-        {
-          name: 'Bedrooms',
-          details: ['interior features', 'basement features'],
-        },
-        {
-          name: 'Bedrooms',
-          details: ['interior features', 'basement features'],
-        },
-      ]
     };
     this.propertyDetails.loanScenarioOne = this.fb.group({
       purchasePrice: ['', Validators.required],
@@ -112,7 +61,7 @@ export class PropertyDetailsComponent implements OnInit {
     });
     this.propertyDetails.loanScenarioOne.valueChanges.subscribe(x => console.log(x));
     this.propertyDetails.loanScenarioTwo.valueChanges.subscribe(x => console.log(x));
-    this.propertyDetails.virtualTour = 'https://www.youtube.com/embed/7q39Qe9pats';
+    // this.propertyDetails.tourURL = 'https://www.youtube.com/embed/7q39Qe9pats';
     this.propertyDetails.rentVsBuying = {
       costOfRent: {
         amount: 20,
@@ -207,8 +156,23 @@ export class PropertyDetailsComponent implements OnInit {
   getPropertyDetails(): void{
     this.propertyDetailService.getPropertyDetails(this.propertyDetails.id).subscribe(res => {
       console.log(res);
+      this.propertyDetails.propertyAd = res.result.listings[0];
+      this.propertyDetails.features = res.result.listings[0].features;
+      this.propertyDetails.tourURL = this.getVideoId(res.result.listings[0].tourURL);
+      console.log(this.propertyDetails.features);
     }, error => {
       console.log(error);
     });
+  }
+  getVideoId(url) {
+    if (!url) {
+      return null;
+    }
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+
+    return (match && match[2].length === 11)
+        ? '//www.youtube.com/embed/' + match[2]
+        : null;
   }
 }

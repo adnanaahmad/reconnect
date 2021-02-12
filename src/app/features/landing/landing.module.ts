@@ -18,6 +18,6 @@ import { SetPasswordComponent } from './components/set-password/set-password.com
       LandingRoutingModule,
       SharedModule
   ],
-    providers:[LocationService]
+    providers: [LocationService]
 })
 export class LandingModule { }

@@ -1,22 +1,23 @@
       <div class="card-1">
         <div class="card-1st-half">
               <div class="d-flex listed-by">
-                   <p>Listed by:</p><p>James Hawken Broody</p>
+                   <p>Listed by:</p><p>{{propertyAd.listingAgent.name}}</p>
               </div>
               <div>
                 <img class="main-img" [src]="propertyAd.image">
                 <div class="d-flex list-div">
-                    <img *ngFor="let i of propertyAd.album" (click)="changeImage(i)" class="list-img" [src]="i">
+                    <img *ngFor="let i of propertyAd.images" (click)="changeImage(i)" class="list-img" [src]="i">
                 </div>
               </div>
             <div class="d-flex justify-content-between">
-                <p class="price">${{propertyAd.price | number}}</p>
+                <p class="price">${{propertyAd.listPrice | number}}</p>
                 <button (click)="shareProperty()" class="share d-flex">
                     <img src="/assets/news-feed-icons/share.svg">
                     Share
                 </button>
             </div>
-            <p class="address">{{propertyAd.address}}</p>
+            <p class="address">{{propertyAd.address.deliveryLine}},
+                {{propertyAd.address.city+', '+propertyAd.address.state+', '+propertyAd.address.zip}}</p>
 
             <div class="d-flex">
                 <div class="d-flex activity activity-pr">
@@ -25,66 +26,66 @@
                 </div>
                 <div class="d-flex activity activity-pr activity-pl">
                     <p>Time on Re-Connect:</p>
-                    <p>{{propertyAd.time}}s</p>
+                    <p>{{propertyAd.xf_market_time_property}} Days</p>
                 </div>
                 <div class="d-flex activity activity-pr activity-pl">
                     <p>MLS</p>
-                    <p># {{propertyAd.mls}}</p>
+                    <p># {{propertyAd.id}}</p>
                 </div>
                 <div class="d-flex activity activity-pl">
                     <p>Views:</p>
-                    <p>{{propertyAd.views}}</p>
+                    <p>512</p>
                 </div>
             </div>
 
         </div>
         <div class="card-2nd-half">
             <p class="facts">Quick Facts</p>
-            <div class="row">
-              <div class="col-6">
+            <div class="d-flex">
+              <div class="qf-parent">
                 <div class="qf">
                     <div class="row">
-                        <div class="col-6 mb-custom font-weight1">
-                          <p>Property Type</p>
-                          <p>Year Built</p>
-                          <p>Lot Size</p>
-                          <p>Price / Sq Ft</p>
-                          <p>Tax Year</p>
-                          <p>Tax Amount</p>
+                        <div class="col-5 mb-custom font-weight1">
+                          <p class="text-nowrap">Property Type</p>
+                          <p class="text-nowrap">Year Built</p>
+                          <p class="text-nowrap">Lot Size</p>
+                          <p class="text-nowrap">Price / Sq Ft</p>
+                          <p class="text-nowrap">Tax Year</p>
+                          <p class="text-nowrap">Tax Amount</p>
                         </div>
-                        <div class="col-6 mb-custom font-weight2">
-                           <p>{{propertyAd.propertyType}}</p>
-                           <p>{{propertyAd.yearBuilt}}</p>
-                           <p>{{propertyAd.lotSize}} Sq Ft</p>
-                           <p>${{propertyAd.pricePerSqFt}}</p>
-                           <p>{{propertyAd.taxYear}}</p>
-                           <p>${{propertyAd.taxAmount}}</p>
+                        <div class="col-7 mb-custom font-weight2">
+                           <p class="text-nowrap">{{propertyAd.propertyType}}</p>
+                           <p>{{propertyAd.yearBuilt}} &nbsp;</p>
+                           <p>{{ propertyAd.lotSize ? propertyAd.lotSize.sqft + ' Sq Ft' : ''}} &nbsp;</p>
+                           <p>{{propertyAd.xf_list_price_per_sqft ? '$' + propertyAd.xf_list_price_per_sqft : '' }} &nbsp;</p>
+                           <p>{{propertyAd.xf_tax_year}} &nbsp;</p>
+                           <p>{{ propertyAd.xf_taxes ? '$'+ propertyAd.xf_taxes : ''}} &nbsp;</p>
                         </div>
                     </div>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="">
 
                 <div class="row" style="height: 100%">
                     <div class="col-6 d-flex align-items-start flex-column">
                        <div class="info-img mb-auto">
                         <img src="/assets/search-home/bathroom.png">
-                        <div class="d-flex info-number"><p>Bathrooms</p><p>{{propertyAd.bathrooms}}</p></div>
+                        <div class="d-flex info-number"><p>Bathrooms</p><p *ngIf="propertyAd.baths">{{propertyAd.baths.total}}</p></div>
                       </div>
                       <div class="info-img" style="">
                         <img src="/assets/search-home/garage.png">
-                        <div class="d-flex info-number"><p>Garage</p><p>{{propertyAd.garage}}</p></div>
+                        <div class="d-flex info-number"><p>Garage</p><p>{{propertyAd.xf_garage_spaces}}</p></div>
                       </div>
                     </div>
                     <div class="col-6 d-flex align-items-start flex-column">
                       <div class="info-img mb-auto">
                         <img class="bed" src="/assets/search-home/bedroom.png">
-                        <div class="align-self-end d-flex info-number"><p>Bedrooms</p><p>{{propertyAd.bedrooms}}</p></div>
+                        <div class="align-self-end d-flex info-number"><p>Bedrooms</p><p>{{propertyAd.beds}}</p></div>
                       </div>
 
                       <div class="info-img">
                         <img src="/assets/search-home/area.png">
-                        <div class="d-flex info-number text-nowrap"><p>Sq Ft</p><p>{{propertyAd.sqFt}}</p></div>
+                        <div class="d-flex info-number text-nowrap"><p>Sq Ft</p><p *ngIf="propertyAd.lotSize">{{propertyAd.lotSize.sqft}}</p></div>
                       </div>
                     </div>
                 </div>

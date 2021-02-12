@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 
 @Component({
   selector: 'app-features',
@@ -7,9 +7,25 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FeaturesComponent implements OnInit {
   @Input() propertyDetails;
+  limit: number;
   constructor() { }
 
   ngOnInit(): void {
+    this.limit = 3;
+  }
+  toggle(event): void{
+    const parent = (event.target as HTMLElement).closest('div.feature-parent');
+    parent.childNodes.forEach(element => {
+      if ( (element as HTMLElement).classList ? (element as HTMLElement).classList.contains('show') : false){
+        if ( (element as HTMLElement).classList.contains('hide') ) {
+          (element as HTMLElement).classList.remove('hide');
+          event.target.innerHTML = 'Show less';
+        } else {
+          (element as HTMLElement).classList.add('hide');
+          event.target.innerHTML = 'Show more';
+        }
+      }
+    });
   }
 
 }

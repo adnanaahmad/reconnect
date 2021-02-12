@@ -3,35 +3,47 @@ import {FormGroup} from '@angular/forms';
 export interface PropertyDetailsModel {
   propertyAd: PropertyAdModel;
   realEstateAgent: RealEstateAgentModel;
-  propertyDetails: PropertyFeaturesModel;
+  features: any;
   loanScenarioOne: FormGroup;
   loanScenarioTwo: FormGroup;
-  virtualTour: string;
+  tourURL: string;
   rentVsBuying: RentVsBuyingModel;
   publicTransport: PublicTransportModel;
   id: number;
 }
 
-interface PropertyAdModel {
-  listedBy: string;
-  album: string[];
+export interface PropertyAdModel {
+  listingAgent: {
+    id: string,
+    name: string
+  };
+  images: string[];
   image: string;
-  price: number;
-  address: string;
+  listPrice: number;
+  address: {
+    city: string;
+    deliveryLine: string;
+    state: string;
+    street: string;
+    zip: string;
+  };
   status: string;
-  time: string;
-  mls: number;
+  xf_market_time_property: number;
+  id: number;
   views: number;
   propertyType: string;
   yearBuilt: number;
-  lotSize: number;
-  pricePerSqFt: number;
-  taxYear: number;
-  taxAmount: number;
-  garage: number;
-  bedrooms: number;
-  bathrooms: number;
-  sqFt: number;
+  lotSize: {sqft: number, acres: number};
+  xf_list_price_per_sqft: number;
+  xf_tax_year: number;
+  xf_taxes: number;
+  xf_garage_spaces: number;
+  beds: number;
+  baths: {
+    total: number,
+    full: number,
+    half: number
+  };
 }
 
 interface RealEstateAgentModel {
@@ -51,11 +63,7 @@ interface RealEstateAgentModel {
 
 
 interface PropertyFeaturesModel {
-  title: string;
-  feature: {
-    name: string;
-    details: string[];
-  }[];
+  feature: Array<any>;
 }
 
 interface PublicTransportModel {

@@ -8,7 +8,6 @@ import {RoleGuard} from '../../core/roleGuard/role.guard';
 const routes: Routes = [{
   path: '',
   component: NavigationComponent,
-  canActivate: [AuthGuard],
   children: [
     {
       path: 'calendar',

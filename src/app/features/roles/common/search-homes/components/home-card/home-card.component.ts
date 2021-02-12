@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import {HomeModel} from '../../../../buyer/favorites/models/favorites.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-card',
@@ -10,7 +11,7 @@ export class HomeCardComponent implements OnInit, AfterViewInit {
   @Input() home: HomeModel = {} as HomeModel;
   @Output() toggleEvent = new EventEmitter<any>();
   @ViewChild('homeCard') homeCard: ElementRef;
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
   }

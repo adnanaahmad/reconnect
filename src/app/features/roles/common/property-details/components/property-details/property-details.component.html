@@ -1,5 +1,5 @@
 <div class="heading row">
-  <div class="heading-text d-flex col-1">
+  <div (click)="location.back()" class="heading-text d-flex col-1">
     <img class="arrow align-self-center" src="/assets/transaction-details/arrow.png">
     <p>Back</p>
   </div>
@@ -19,21 +19,23 @@
 </div>
 
   <div class="d-flex">
-    <div class="column-1">
+    <div *ngIf="propertyDetails.propertyAd" class="column-1">
       <app-property-ad [propertyAd]="propertyDetails.propertyAd"></app-property-ad>
       <app-real-estate-agent [realEstateAgent]="propertyDetails.realEstateAgent"></app-real-estate-agent>
       <p class="details-heading pd-heading">Property Details</p>
-      <app-features [propertyDetails]="propertyDetails.propertyDetails"></app-features>
+      <app-features [propertyDetails]="propertyDetails.features"></app-features>
     </div>
     <div class="column-2">
 
       <p class="text-nowrap pa-heading">Pre-Approval Scenarios</p>
       <app-scenario [scenarioNumber]="1" [loanScenario]="propertyDetails.loanScenarioOne" ></app-scenario>
       <app-scenario [scenarioNumber]="2"  [loanScenario]="propertyDetails.loanScenarioTwo"></app-scenario>
-      <p class="pa-heading">Virtual Tour</p>
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(propertyDetails.virtualTour)" allowfullscreen></iframe>
-      </div>
+     <ng-container *ngIf="propertyDetails.tourURL">
+       <p class="pa-heading">Virtual Tour</p>
+       <div class="embed-responsive embed-responsive-16by9">
+         <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(propertyDetails.tourURL)" allowfullscreen></iframe>
+       </div>
+     </ng-container>
       <div class="d-flex justify-content-between">
         <p class="pa-heading text-nowrap">Rent Vs Buying</p>
         <button class="btn btn-success cal">Calculations</button>

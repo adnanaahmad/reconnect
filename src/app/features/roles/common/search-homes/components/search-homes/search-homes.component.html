@@ -29,16 +29,16 @@
             </div>
         </div>
         <div class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
-        <div class="dropdown">
-          <button class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Payment <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button class="dropdown-item" type="button">Action</button>
-            <button class="dropdown-item" type="button">Another action</button>
-            <button class="dropdown-item" type="button">Something else here</button>
-          </div>
-        </div>
+<!--        <div class="dropdown">-->
+<!--          <button class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--            Payment <img class="down-arrow" src="/assets/search-home/down-arrow.svg">-->
+<!--          </button>-->
+<!--          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">-->
+<!--            <button class="dropdown-item" type="button">Action</button>-->
+<!--            <button class="dropdown-item" type="button">Another action</button>-->
+<!--            <button class="dropdown-item" type="button">Something else here</button>-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="dropdown">
           <button (click)="hideMoreFilter()" class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Property Type <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
@@ -149,13 +149,14 @@
   <div class="home">
     <div class="row">
         <div class="col-3 home-margin" *ngFor="let home of searchHome.homes">
-            <app-home-card [home]="home" (click)="router.navigateByUrl('/home/propertyDetails?id='+home.id)"></app-home-card>
+            <app-home-card [home]="home"></app-home-card>
         </div>
     </div>
   </div>
 
-</div>
+
     <div class="paginator" *ngIf="searchHome.total">
         <ngb-pagination (pageChange)="pageChange($event)" [pageSize]="24" [maxSize]="5" [collectionSize]="searchHome.total" [page]="searchHome.pageNumber"></ngb-pagination>
     </div>
+</div>
 </form>

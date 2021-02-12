@@ -41,3 +41,17 @@
 p{
   font-family: 'Poppins';
 }
+.hide{
+  display: none!important;
+}
+.show-more{
+  margin-bottom: 0;
+  font-size: .7vw;
+  font-weight: 300;
+  color: var(--lighGray);
+  cursor: pointer;
+  background: var(--extraLightGray);
+  padding: .3vw;
+  width: fit-content;
+  border-radius: .3vw;
+}

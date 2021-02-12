@@ -68,6 +68,7 @@
   object-fit: cover;
   border-top-left-radius: .5vw;
   border-top-right-radius: .5vw;
+  cursor: pointer;
 }
 .card-info{
   background: white;
@@ -160,7 +161,4 @@ p{
 ///  margin-bottom: 0;
   cursor: pointer;
   margin-bottom: .5vw;
-}
-:host{
-  cursor: pointer;
 }
