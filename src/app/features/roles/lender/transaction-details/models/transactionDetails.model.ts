@@ -6,18 +6,23 @@ export interface TransactionDetailsModel {
   user: UserModel;
   borrowerDetails: BorrowerDetailsModel;
   finance: FormGroup;
+  id: number;
+  loader: boolean;
 }
 
 export interface  UserModel {
-  name: string;
-  phone: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  image: string;
+  phoneNumber: string;
+  profilePictureUrl: string;
   socialMedia: {
     facebook: string;
     instagram: string;
     twitter: string;
   };
+  rentAmount: number;
+  birthday: Date;
   referredBy: string;
 }
 

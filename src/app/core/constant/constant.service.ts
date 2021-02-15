@@ -32,6 +32,7 @@ export class ConstantService {
     put: 'put',
     delete: 'delete'
   };
+   loanStatus = ['application', 'preApproved', 'acceptedOffer', 'underwriting', 'approvedWithConditions', 'clearedToClose', 'closed'];
 
    apiRoutes = {
      signin: `${environment.apiUrl}/user/signin`,
@@ -49,6 +50,9 @@ export class ConstantService {
      getHouses: `${environment.apiUrl}/listing/search?market=mlspin&test=true&`,
      searchHomeByName: `${environment.apiUrl}/listing/autocomplete?keyword=`,
      getPropertyDetails: `${environment.apiUrl}/listing/fetch?market=mlspin&listingId=`,
+     getBorrowers: `${environment.apiUrl}/team/professional-teams`,
+     getBorrowerLoanDetails: `${environment.apiUrl}/loan/borrowers-loan/`,
+     saveBorrowerLoanDetails: `${environment.apiUrl}/loan/borrowers-loan`,
   };
    httpOptions = {
      json: {

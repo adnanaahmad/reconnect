@@ -25,18 +25,18 @@ export class TransactionDetailsComponent implements OnInit {
       community: 'Worcester',
       mls: 726168,
     };
-    this.transactionDetails.user = {
-      name: 'Rafal Nadal',
-      phone: '+428 76 3 9823',
-      email: 'abc@gmail.com',
-      socialMedia: {
-        facebook: 'https://www.google.com/',
-        instagram: 'https://www.google.com/',
-        twitter: 'https://www.google.com/'
-      },
-      image: 'https://chicagophotovideo.com/wp-content/uploads/2018/01/professional-headshot-for-corporate-website-1024x683.jpg',
-      referredBy: 'Boris Gastelu'
-    };
+    // this.transactionDetails.user = {
+    //   name: 'Rafal Nadal',
+    //   phone: '+428 76 3 9823',
+    //   email: 'abc@gmail.com',
+    //   socialMedia: {
+    //     facebook: 'https://www.google.com/',
+    //     instagram: 'https://www.google.com/',
+    //     twitter: 'https://www.google.com/'
+    //   },
+    //   image: 'https://chicagophotovideo.com/wp-content/uploads/2018/01/professional-headshot-for-corporate-website-1024x683.jpg',
+    //   referredBy: 'Boris Gastelu'
+    // };
     this.transactionDetails.finance = this.fb.group({
       transactionProcess: this.fb.group({
         application: [{value: true, disabled: true}, Validators.required],

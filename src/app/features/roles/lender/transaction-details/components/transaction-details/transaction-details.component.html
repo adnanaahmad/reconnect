@@ -1,20 +1,20 @@
 
 <div class="heading d-flex justify-content-between">
 
-  <div class="heading-text d-flex ">
+  <div (click)="location.back()" class="heading-text d-flex ">
       <img class="arrow align-self-center" src="/assets/transaction-details/arrow.png">
       <p>Back</p>
   </div>
 </div>
-<form [formGroup]="transactionDetails.finance" (ngSubmit)="onSubmit()">
+<form [formGroup]="transactionDetails.finance" (ngSubmit)="onSubmit()" *ngIf="transactionDetails.loader">
 
 <div class="row first-row">
   <div class="col-7">
        <div class="child-1 d-flex justify-content-between" style="">
 
-            <app-buyer-info [transactionDetails]="transactionDetails"></app-buyer-info>
+            <app-buyer-info [transactionDetails]="transactionDetails.user"></app-buyer-info>
             <div class="div-3 d-flex flex-column" style="">
-                <button class="btn btn-default save-button">Save all</button>
+                <button class="save-button">Save all</button>
                 <button class="btn btn-success lineage-button">View Lineage</button>
             </div>
        </div>
@@ -25,14 +25,14 @@
           <div class="details">
           <div class="row ">
               <div class="col-6">
-                  <div class="row b-space b-text"><p class="col-4 text-nowrap">First Name:</p><p class="col-8">{{ transactionDetails.borrowerDetails.firstName }}</p></div>
-                  <div class="row b-space b-text"><p class="col-4">Phone:</p><p class="col-8">{{transactionDetails.borrowerDetails.phone}}</p></div>
-                  <div class="row b-text"><p class="col-4">Birthday:</p><p class="col-8">{{transactionDetails.borrowerDetails.birthday | date}}</p></div>
+                  <div class="row b-space b-text"><p class="col-4 text-nowrap">First Name:</p><p class="col-8">{{ transactionDetails.user.firstName | titlecase }}</p></div>
+                  <div class="row b-space b-text"><p class="col-4">Phone:</p><p class="col-8">{{transactionDetails.user.phoneNumber}}</p></div>
+                  <div class="row b-text"><p class="col-4">Birthday:</p><p class="col-8">{{transactionDetails.user.birthday | date}}</p></div>
               </div>
               <div class="col-6">
-                  <div class="row b-space b-text"><p class="col-4 text-nowrap">Last Name:</p><p class="col-8">{{transactionDetails.borrowerDetails.lastName}}</p></div>
-                  <div class="row b-space b-text"><p class="col-4">Email:</p><p class="col-8">{{transactionDetails.borrowerDetails.email}}</p></div>
-                  <div class="row b-text"><p class="col-4 text-nowrap">Rent Amount:</p><p class="col-8">${{transactionDetails.borrowerDetails.rentAmount}}</p></div>
+                  <div class="row b-space b-text"><p class="col-4 text-nowrap">Last Name:</p><p class="col-8">{{transactionDetails.user.lastName | titlecase}}</p></div>
+                  <div class="row b-space b-text"><p class="col-4">Email:</p><p class="col-8">{{transactionDetails.user.email}}</p></div>
+                  <div class="row b-text"><p class="col-4 text-nowrap">Rent Amount:</p><p class="col-8">{{transactionDetails.user.rentAmount ? '$'+transactionDetails.user.rentAmount : ''}}</p></div>
               </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
 </div>
 
 <p class="heading"> Pre-Approval Details</p>
-<div class="d-flex user-finance justify-content-between" formGroupName="myFinance">
+<div class="d-flex user-finance justify-content-between">
   <div class="form-group d-flex">
      <p class="align-self-center">Income:</p>
     <input formControlName="income" type="" class="form-control" id="" placeholder="">

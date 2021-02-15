@@ -30,12 +30,13 @@
 <div class="card-3 d-flex" style="background: transparent" *ngFor="let borrower of borrowers.borrower">
        <div class="card-4 " style="background: white">
             <div class="div-1 d-flex">
-              <img [src]="borrower.photo" class="display-img">
+              <img [src]="borrower.buyer.profilePictureUrl" class="display-img">
               <div class="info">
-                 <div class="name-div" [ngbTooltip]="borrower.fullName"> <p class="name">{{ borrower.fullName }}</p> </div>
+                 <div class="name-div" [ngbTooltip]="borrower.buyer.firstName+' '+borrower.buyer.lastName"> <p class="name">
+                     {{ borrower.buyer.firstName | titlecase}} {{ borrower.buyer.lastName | titlecase}}</p> </div>
                   <div class="phone d-flex">
                     <img class="align-self-center" src="/assets/directory-icons/call.svg">
-                    <p>{{ borrower.phoneNumber }}</p>
+                    <p>{{ borrower.buyer.phoneNumber }}</p>
                   </div>
                   <div class="message d-flex">
                       <img class="align-self-center" src="/assets/directory-icons/envelope.svg">
@@ -46,7 +47,7 @@
            </div>
 
           <div class="div-2">
-              <p class="text-center">View Transaction Details</p>
+              <p (click)="viewBorrower(borrower.buyer['_id'])" class="text-center">View Transaction Details</p>
 
           </div>
        </div>
@@ -72,29 +73,9 @@
                 </div>
            </div>
            <div class="bottom d-flex">
-              <div class="status" >
-                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.application === false}">
-                  <p>Application</p>
-              </div>
-              <div class="status" >
-                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.preApproved === false}">
-                  <p class="text-nowrap">Pre-Approved</p>
-              </div>
-              <div class="status" >
-                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.acceptedOffer === false}">
-                  <p class="text-nowrap">Accepted Offer</p>
-              </div>
-              <div class="status" >
-                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.underwriting === false}">
-                  <p>Underwriting</p>
-              </div>
-              <div class="status" >
-                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.approvedWithConditions === false}">
-                  <p class="text-nowrap">Approved with</p><p> conditions</p>
-              </div>
-              <div class="status" >
-                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': borrower.status.clearedToClose === false}">
-                  <p class="text-nowrap">Cleared to</p><p> close</p>
+              <div class="status" *ngFor="let status of constant.loanStatus; let i = index">
+                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !activeStatus(i, borrower.loan.processStatus)}">
+                  <p>{{status | splitCamelCase}}</p>
               </div>
            </div>
        </div>

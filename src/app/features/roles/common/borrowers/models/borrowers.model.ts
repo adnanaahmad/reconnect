@@ -11,16 +11,23 @@ interface StatusModel {
   underwriting: boolean;
   approvedWithConditions: boolean;
   clearedToClose: boolean;
+  closed: boolean;
 }
 
-interface BorrowerModel {
-  photo: string;
-  fullName: string;
-  phoneNumber: string;
+export interface BorrowerModel {
+  buyer: {
+    email: string;
+    firstName: string
+    lastName: string
+    phoneNumber: string
+    profilePictureUrl: string;
+  };
   targetPropertyAddress: string;
   closingDate: Date;
   commitmentDate: Date;
   homeInspectionDate: Date;
   purchaseSalesDate: Date;
-  status: StatusModel;
+  loan: {
+    processStatus: string
+  };
 }

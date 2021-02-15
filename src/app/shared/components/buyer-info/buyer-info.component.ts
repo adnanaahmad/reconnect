@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {UserModel} from '../../../features/roles/lender/transaction-details/models/transactionDetails.model';
 
 @Component({
   selector: 'app-buyer-info',
@@ -6,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./buyer-info.component.scss']
 })
 export class BuyerInfoComponent implements OnInit {
-  @Input() transactionDetails;
+  @Input() transactionDetails: UserModel = {} as UserModel;
   constructor() { }
 
   ngOnInit(): void {

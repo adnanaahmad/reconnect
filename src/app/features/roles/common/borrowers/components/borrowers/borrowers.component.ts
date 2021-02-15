@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {BorrowersModel} from '../../models/borrowers.model';
+import {BorrowersService} from '../../services/borrowers.service';
+import {element} from 'protractor';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {Router} from '@angular/router';
+import {StoreService} from '../../../../../../core/store/store.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-borrowers',
@@ -8,72 +14,35 @@ import {BorrowersModel} from '../../models/borrowers.model';
 })
 export class BorrowersComponent implements OnInit {
   borrowers: BorrowersModel = {} as BorrowersModel;
-  constructor() { }
+  constructor(private borrowerService: BorrowersService,
+              public constant: ConstantService,
+              private router: Router,
+              private store: StoreService) { }
 
   ngOnInit(): void {
     this.borrowers.buttons = ['Pending', 'Pre-Approved', 'Potential', 'Closed'];
     this.borrowers.selectedButton = this.borrowers.buttons[0];
-    this.borrowers.borrower = [
-      {
-        photo: 'https://img-cdn.tid.al/o/4858a4b2723b7d0c7d05584ff57701f7b0c54ce3.jpg',
-        fullName: 'James Hetfield',
-        phoneNumber: '+987 65 2 9873',
-        targetPropertyAddress: '123 Main St Auburn, MA 0510',
-        closingDate: new Date('2019-10-12'),
-        commitmentDate: new Date('2020-10-12'),
-        homeInspectionDate: new Date('2021-10-12'),
-        purchaseSalesDate: new Date('2022-10-12'),
-        status: {
-          application: true,
-          preApproved: true,
-          acceptedOffer: true,
-          underwriting: false,
-          approvedWithConditions: false,
-          clearedToClose: false
-        }
-      },
-      {
-        photo: 'https://img-cdn.tid.al/o/4858a4b2723b7d0c7d05584ff57701f7b0c54ce3.jpg',
-        fullName: 'James Hetfield',
-        phoneNumber: '+987 65 2 9873',
-        targetPropertyAddress: '123 Main St Auburn, MA 0510',
-        closingDate: new Date('2019-10-12'),
-        commitmentDate: new Date('2020-10-12'),
-        homeInspectionDate: new Date('2021-10-12'),
-        purchaseSalesDate: new Date('2022-10-12'),
-        status: {
-          application: true,
-          preApproved: true,
-          acceptedOffer: true,
-          underwriting: false,
-          approvedWithConditions: false,
-          clearedToClose: false
-        }
-      },
-      {
-        photo: 'https://img-cdn.tid.al/o/4858a4b2723b7d0c7d05584ff57701f7b0c54ce3.jpg',
-        fullName: 'James Hetfield',
-        phoneNumber: '+987 65 2 9873',
-        targetPropertyAddress: '123 Main St Auburn, MA 0510',
-        closingDate: new Date('2019-10-12'),
-        commitmentDate: new Date('2020-10-12'),
-        homeInspectionDate: new Date('2021-10-12'),
-        purchaseSalesDate: new Date('2022-10-12'),
-        status: {
-          application: true,
-          preApproved: true,
-          acceptedOffer: true,
-          underwriting: false,
-          approvedWithConditions: false,
-          clearedToClose: false
-        }
-      }
-
-      ];
+    this.getBorrowers();
   }
-
+  getBorrowers(): void{
+    this.borrowerService.getBorrowers().pipe(take(1)).subscribe(res => {
+      console.log(res);
+      this.borrowers.borrower = res.result;
+    }, error => {
+      console.log(error);
+    });
+  }
   listClick(button): void {
     this.borrowers.selectedButton = button;
   }
-
+  activeStatus(index, value): boolean{
+    return index <= this.constant.loanStatus.findIndex(data => data === value);
+  }
+  viewBorrower(id): void{
+    if (this.store.role === this.constant.role.LENDER){
+      this.router.navigateByUrl(`/home/borrowerTransactionDetails?id=${id}`).then();
+    } else{
+      this.router.navigateByUrl(`/home/buyerTransactionDetails?id=${id}`).then();
+    }
+  }
 }

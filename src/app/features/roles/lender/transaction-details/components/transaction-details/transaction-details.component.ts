@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {LoanDetailsModel} from '../../../../buyer/my-loan-details/models/loanDetails.model';
 import {FormBuilder, Validators} from '@angular/forms';
 import {TransactionDetailsModel} from '../../models/transactionDetails.model';
+import {BorrowerLoanDetailsService} from '../../services/borrower-loan-details.service';
+import {take} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {element} from 'protractor';
+import {log} from 'util';
+import {ToastrService} from 'ngx-toastr';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-transaction-details',
@@ -10,12 +17,20 @@ import {TransactionDetailsModel} from '../../models/transactionDetails.model';
 })
 export class TransactionDetailsComponent implements OnInit {
   transactionDetails: TransactionDetailsModel = {} as TransactionDetailsModel;
-  loanDetails: LoanDetailsModel = {} as LoanDetailsModel;
-
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private transactionService: BorrowerLoanDetailsService,
+              private activatedRoute: ActivatedRoute,
+              private toaster: ToastrService,
+              public location: Location) {
+    activatedRoute.queryParams.subscribe(params => {
+      this.transactionDetails.id = params.id;
+    });
   }
 
   ngOnInit(): void {
+    this.initializeForm();
+    this.transactionDetails.loader = false;
+    this.getLoanDetails();
     this.transactionDetails.subjectProperty = {
       image: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHw%3D&w=1000&q=80',
       bathrooms: 2,
@@ -29,172 +44,184 @@ export class TransactionDetailsComponent implements OnInit {
       community: 'Worcester',
       mls: 726168,
     };
-    this.transactionDetails.borrowerDetails = {
-      firstName: 'Rafael',
-      lastName: 'Nadal',
-      email: 'abc@gmail.com',
-      phone: '+428 76 3 9823',
-      birthday: new Date('2019-02-1'),
-      rentAmount: 23467
+    this.resetLoanType();
+    //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
+  }
+  onSubmit(): void{
+    const data = {
+      borrowerId: this.transactionDetails.id,
+      fha: this.transactionDetails.finance.get(['toggle', 'fha']).value ? this.transactionDetails.finance.get('fha').value : null,
+      usda: this.transactionDetails.finance.get(['toggle', 'usda']).value ? this.transactionDetails.finance.get('usda').value : null,
+      va: this.transactionDetails.finance.get(['toggle', 'va']).value ? this.transactionDetails.finance.get('va').value : null,
+      homePossible: this.transactionDetails.finance.get(['toggle', 'homePossible']).value ? this.transactionDetails.finance.get('homePossible').value : null,
+      homeReady: this.transactionDetails.finance.get(['toggle', 'homeReady']).value ? this.transactionDetails.finance.get('homeReady').value : null,
+      conventional: this.transactionDetails.finance.get(['toggle', 'conventional']).value ? this.transactionDetails.finance.get('conventional').value : null,
+      processStatus: Object.keys(this.transactionDetails.finance.getRawValue().processStatus).
+      filter(x => this.transactionDetails.finance.getRawValue().processStatus[x]).slice(-1)[0]
     };
-    this.transactionDetails.user = {
-      name: 'Rafal Nadal',
-      phone: '+428 76 3 9823',
-      email: 'abc@gmail.com',
-      socialMedia: {
-        facebook: 'https://www.google.com/',
-        instagram: 'https://www.google.com/',
-        twitter: 'https://www.google.com/'
-      },
-      image: 'https://chicagophotovideo.com/wp-content/uploads/2018/01/professional-headshot-for-corporate-website-1024x683.jpg',
-      referredBy: 'Boris Gastelu'
-    };
-    this.transactionDetails.finance = this.fb.group({
-      transactionProcess: this.fb.group({
-        application: [{value: true}, Validators.required],
-        preApproved: [false, Validators.required],
-        acceptedOffer: [{value: false, disabled: true}, Validators.required],
-        underwriting: [false, Validators.required],
-        approvedWithConditions: [true, Validators.required],
-        clearedToClose: [false, Validators.required],
+    //console.log(data);
+    this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).subscribe(res =>{
+      //console.log(res);
+      this.toaster.success('Saved');
+    }, error => {
+      //console.log(error);
+      this.toaster.error('Failed to save');
+    });
+  }
+  resetLoanType(): void{
+    Object.keys(this.transactionDetails.finance.get('toggle').value).forEach(key => {
+      this.transactionDetails.finance.get(['toggle', key]).valueChanges.subscribe(res => {
+        if (!res){
+          this.transactionDetails.finance.get(key).reset();
+        }
+      });
+    });
+  }
+  getLoanDetails(): void{
+    this.transactionService.getBorrowerLoanDetails(this.transactionDetails.id).pipe(take(1)).subscribe(res => {
+      console.log(res);
+      res = res.result;
+      this.transactionDetails.user = res.buyer;
+      this.transactionDetails.finance.patchValue({
+        income: res.income,
+        monthlyDebt: res.monthlyDebt,
+        funds: res.funds,
+        sellerCredit: res.sellerCredit,
+        toggle: {
+          fha: !!res.fha ,
+          conventional: !!res.conventional,
+          homePossible: !!res.homePossible,
+          homeReady: !!res.homeReady,
+          va: !!res.va,
+          usda: !!res.usda,
+        },
+        fha: res.fha ? res.fha : this.transactionDetails.finance.get('fha'),
+        va: res.va ? res.va : this.transactionDetails.finance.get('va'),
+        usda: res.usda ? res.usda : this.transactionDetails.finance.get('usda'),
+        homeReady: res.homeReady ? res.homeReady : this.transactionDetails.finance.get('homeReady'),
+        homePossible: res.homePossible ? res.homePossible : this.transactionDetails.finance.get('homePossible'),
+        conventional: res.conventional ? res.conventional : this.transactionDetails.finance.get('conventional')
+      });
+      const statusArray = Object.keys(this.transactionDetails.finance.getRawValue().processStatus);
+      const statusIndex = statusArray.findIndex(x => x === res.processStatus);
+      statusArray.forEach((x, index) => {
+         if (index <= statusIndex){
+            this.transactionDetails.finance.get(['processStatus', x]).setValue(true);
+          }
+      });
+      this.transactionDetails.loader = true;
+    }, error => {
+      console.log(error);
+    });
+  }
+  initializeForm(): void{
+    this.transactionDetails.finance  = this.fb.group({
+      income: [null, Validators.required],
+      monthlyDebt: [null, Validators.required],
+      funds: [null, Validators.required],
+      sellerCredit: [null, Validators.required],
+      processStatus: this.fb.group({
+        application: [null, Validators.required],
+        preApproved: [null, Validators.required],
+        acceptedOffer: [{value: null, disabled: true}, Validators.required],
+        underwriting: [null, Validators.required],
+        approvedWithConditions: [null, Validators.required],
+        clearedToClose: [null, Validators.required],
+        closed: [null, Validators.required],
       }) ,
-      myFinance: this.fb.group({
-        income: ['', Validators.required],
-        monthlyDebt: ['', Validators.required],
-        funds: ['', Validators.required],
-        sellerCredit: ['', Validators.required],
-      }),
       toggle: this.fb.group({
-        fha: [true, Validators.required],
-        conventional: [false, Validators.required],
-        homePossible: [false, Validators.required],
-        homeReady: [false, Validators.required],
-        va: [true, Validators.required],
-        usda: [false, Validators.required],
-      }),
+        fha: [null, Validators.required],
+        conventional: [null, Validators.required],
+        homePossible: [null, Validators.required],
+        homeReady: [null, Validators.required],
+        va: [null, Validators.required],
+        usda: [null, Validators.required],
+      }) ,
       fha: this.fb.group({
-        loanDetails: this.fb.group({
-          downPayment: ['', Validators.required],
-          loanTerm: ['', Validators.required],
-          loanRate: ['', Validators.required],
-        }),
-        ratios: this.fb.group({
-          housingRatio: ['', Validators.required],
-          debtRatio: ['', Validators.required],
-        }),
+        downPayment: [null, Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         mortgageInsuranceUnder: this.fb.group({
-          fundingFee: ['', Validators.required],
-          monthlyMiUnder: ['', Validators.required],
-          monthlyMiOver: ['', Validators.required],
+          fundingFee: [null, Validators.required],
+          monthlyMiUnder: [null, Validators.required],
+          monthlyMiOver: [null, Validators.required],
         }),
         mortgageInsuranceAbove: this.fb.group({
-          fundingFee: ['', Validators.required],
-          monthlyMiUnder: ['', Validators.required],
-          monthlyMiOver: ['', Validators.required],
+          fundingFee: [null, Validators.required],
+          monthlyMiUnder: [null, Validators.required],
+          monthlyMiOver: [null, Validators.required],
         }),
-        additionalReserves: this.fb.group({
-          reserves: ['', Validators.required],
+        reserves: this.fb.group({
+          oneUnit: [null, Validators.required],
+          twoUnit: [null, Validators.required],
+          threeToFourUnit: [null, Validators.required],
         }),
+        additionalReserves: [null, Validators.required],
       }),
       conventional: this.fb.group({
-        loanDetails: this.fb.group({
-          downPayment: ['', Validators.required],
-          loanTerm: ['', Validators.required],
-          loanRate: ['', Validators.required],
-        }),
-        ratios: this.fb.group({
-          housingRatio: ['', Validators.required],
-          debtRatio: ['', Validators.required],
-        }),
+        downPayment: [null, Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         privateMortgageInsurance: this.fb.group({
-          fivePercentDown: ['', Validators.required],
-          tenPercentDown: ['', Validators.required],
-          fifteenPercentDown: ['', Validators.required],
+          fivePercentDown: [null, Validators.required],
+          tenPercentDown: [null, Validators.required],
+          fifteenPercentDown: [null, Validators.required],
         }),
-        additionalReserves: this.fb.group({
-          reserves: ['', Validators.required],
-        }),
+        reserves: [null, Validators.required],
       }),
       homePossible: this.fb.group({
-        loanDetails: this.fb.group({
-          downPayment: ['', Validators.required],
-          loanTerm: ['', Validators.required],
-          loanRate: ['', Validators.required],
-        }),
-        ratios: this.fb.group({
-          housingRatio: ['', Validators.required],
-          debtRatio: ['', Validators.required],
-        }),
+        downPayment: [null, Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         privateMortgageInsurance: this.fb.group({
-          threePercentDown: ['', Validators.required],
-          fivePercentDown: ['', Validators.required],
-          tenPercentDown: ['', Validators.required],
-          fifteenPercentDown: ['', Validators.required],
+          threePercentDown: [null, Validators.required],
+          fivePercentDown: [null, Validators.required],
+          tenPercentDown: [null, Validators.required],
+          fifteenPercentDown: [null, Validators.required],
         }),
-        additionalReserves: this.fb.group({
-          reserves: ['', Validators.required],
-        }),
+        reserves: [null, Validators.required],
       }),
       homeReady: this.fb.group({
-        loanDetails: this.fb.group({
-          downPayment: ['', Validators.required],
-          loanTerm: ['', Validators.required],
-          loanRate: ['', Validators.required],
-        }),
-        ratios: this.fb.group({
-          housingRatio: ['', Validators.required],
-          debtRatio: ['', Validators.required],
-        }),
+        downPayment: [null, Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         privateMortgageInsurance: this.fb.group({
-          threePercentDown: ['', Validators.required],
-          fivePercentDown: ['', Validators.required],
-          tenPercentDown: ['', Validators.required],
-          fifteenPercentDown: ['', Validators.required],
+          threePercentDown: [null, Validators.required],
+          fivePercentDown: [null, Validators.required],
+          tenPercentDown: [null, Validators.required],
+          fifteenPercentDown: [null, Validators.required],
         }),
-        additionalReserves: this.fb.group({
-          reserves: ['', Validators.required],
-        }),
+        reserves: [null, Validators.required],
       }),
       va: this.fb.group({
-        loanDetails: this.fb.group({
-          downPayment: ['', Validators.required],
-          loanTerm: ['', Validators.required],
-          loanRate: ['', Validators.required],
-        }),
-        ratios: this.fb.group({
-          housingRatio: ['', Validators.required],
-          debtRatio: ['', Validators.required],
-        }),
-        mortgageInsurance: this.fb.group({
-          veteranType: ['', Validators.required],
-        }),
-        additionalReserves: this.fb.group({
-          reserves: ['', Validators.required],
-        }),
+        downPayment: [null, Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
+        veteranType: [null, Validators.required],
+        reserves: [null, Validators.required],
       }),
       usda: this.fb.group({
-        loanDetails: this.fb.group({
-          downPayment: ['', Validators.required],
-          loanTerm: ['', Validators.required],
-          loanRate: ['', Validators.required],
-        }),
-        ratios: this.fb.group({
-          housingRatio: ['', Validators.required],
-          debtRatio: ['', Validators.required],
-        }),
+        downPayment: [null, Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         mortgageInsurance: this.fb.group({
-          fundingFee: ['', Validators.required],
-          monthlyMi: ['', Validators.required],
+          fundingFee: [null, Validators.required],
+          monthlyMi: [null, Validators.required],
         }),
-        additionalReserves: this.fb.group({
-          reserves: ['', Validators.required],
-        }),
+        reserves: [null, Validators.required],
       })
     });
-
-    this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
-  }
-  onSubmit(){
-    //console.log(this.finance.value);
   }
 }

@@ -35,10 +35,14 @@
   border: none;
   margin-bottom: .8vw;
   border-radius: .5vw;
+  cursor: pointer;
 }
-.save-button:active{
-  background: var(--darkGray);
+.save-button:focus{
+  outline: none;
 }
+//.save-button:active{
+//  background: var(--darkGray);
+//}
 .lineage-button{
   border: none;
   font-size: .7vw;
@@ -52,7 +56,9 @@
   font-weight: 600;
   margin-bottom: 2vw;
 }
-
+.heading-text{
+  cursor: pointer;
+}
 .second-row div.col-6{
   margin-bottom: 2vw;
 }

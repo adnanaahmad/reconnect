@@ -19,6 +19,7 @@ import {BuyerInfoComponent} from './components/buyer-info/buyer-info.component';
 import { SubjectPropertyDetailsComponent } from './components/subject-property-details/subject-property-details.component';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import {ThousandSuffixPipe} from './pipes/thousand-suffix.pipe';
+import { SplitCamelCasePipe } from './pipes/splitCamelCase/split-camel-case.pipe';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -37,7 +38,8 @@ const maskConfig: Partial<IConfig> = {
     TransactionProcessComponent,
     BuyerInfoComponent,
     SubjectPropertyDetailsComponent,
-    ThousandSuffixPipe
+    ThousandSuffixPipe,
+    SplitCamelCasePipe
 
   ],
   imports: [
@@ -46,25 +48,26 @@ const maskConfig: Partial<IConfig> = {
     NgxMaskModule.forRoot(maskConfig)
   ],
   exports: [
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    NgbModule,
-    NgxChartsModule,
-    NgxMaskModule,
-    DeleteConfirmationPopupComponent,
-    FhaComponent,
-    ConventionalComponent,
-    HomePossibleComponent,
-    HomeReadyComponent,
-    VaComponent,
-    UsdaComponent,
-    LoanCheckboxComponent,
-    SubjectPropertyComponent,
-    TransactionProcessComponent,
-    BuyerInfoComponent,
-    SubjectPropertyDetailsComponent,
-    ThousandSuffixPipe
+      ReactiveFormsModule,
+      HttpClientModule,
+      FormsModule,
+      NgbModule,
+      NgxChartsModule,
+      NgxMaskModule,
+      DeleteConfirmationPopupComponent,
+      FhaComponent,
+      ConventionalComponent,
+      HomePossibleComponent,
+      HomeReadyComponent,
+      VaComponent,
+      UsdaComponent,
+      LoanCheckboxComponent,
+      SubjectPropertyComponent,
+      TransactionProcessComponent,
+      BuyerInfoComponent,
+      SubjectPropertyDetailsComponent,
+      ThousandSuffixPipe,
+      SplitCamelCasePipe
   ],
 })
 export class SharedModule { }

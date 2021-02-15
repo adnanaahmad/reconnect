@@ -113,6 +113,7 @@
   border-bottom-left-radius: .5vw;
   border-bottom-right-radius: .5vw;
   padding: .5vw;
+  cursor: pointer;
 }
 .info{
 }
@@ -235,7 +236,7 @@
   color: var(--darkGray);
   margin-bottom: 0;
   font-weight: 300;
-  font-size: .9vw;
+  font-size: .7vw;
 }
 .status{
   background: var(--lightBlueOne);
