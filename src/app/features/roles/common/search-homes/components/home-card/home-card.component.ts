@@ -1,6 +1,8 @@
 import {Component, Input, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import {HomeModel} from '../../../../buyer/favorites/models/favorites.model';
 import {Router} from '@angular/router';
+import {SearchHomeService} from '../../services/search-home.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-home-card',
@@ -11,12 +13,31 @@ export class HomeCardComponent implements OnInit, AfterViewInit {
   @Input() home: HomeModel = {} as HomeModel;
   @Output() toggleEvent = new EventEmitter<any>();
   @ViewChild('homeCard') homeCard: ElementRef;
-  constructor(public router: Router) { }
+  constructor(public router: Router,
+              private searchHomeService: SearchHomeService,
+              private toaster: ToastrService) { }
 
   ngOnInit(): void {
   }
   favoriteHome(): void{
+    const data = {
+      mlsId: this.home.id,
+      market: 'mlspin'
+    };
     this.home.favorite = !this.home.favorite;
+    if (this.home.favorite){
+      this.searchHomeService.addFavorite(data).subscribe(res => {
+        this.toaster.success('Added To Favorites');
+      }, error => {
+        this.toaster.error('Failed To Add To Favorites');
+      });
+    } else {
+      this.searchHomeService.removeFavorite(data.mlsId).subscribe(res => {
+        this.toaster.success('Removed From Favorites');
+      }, error => {
+        this.toaster.error('Failed To Remove From Favorites');
+      });
+    }
   }
   ngAfterViewInit(): void {
     const paragraph = this.homeCard.nativeElement.childNodes[0];
