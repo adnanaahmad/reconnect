@@ -3,19 +3,21 @@
   <div class="col-2" style="background: transparent">
         <h3 class="text-nowrap">Search Homes</h3>
   </div>
-  <div class="col-3 align-self-end" style="background: transparent">
-    <p class="heading-color text-center">Approved Loan Programs</p>
-  </div>
-  <div class="col-5 align-self-end d-flex justify-content-center" style="background: transparent">
-    <div class="loan-program d-flex" style="">
-        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.fha,'loan-gray':!searchHome.approvedLoanProgram.fha}">FHA</p>
-        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.va,'loan-gray':!searchHome.approvedLoanProgram.va}">VA</p>
-        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.usda,'loan-gray':!searchHome.approvedLoanProgram.usda }">USDA</p>
-        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.conventional,'loan-gray':!searchHome.approvedLoanProgram.conventional }">Coventional</p>
-        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.homeReady,'loan-gray':!searchHome.approvedLoanProgram.homeReady }" class="text-nowrap">Home Ready</p>
-        <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.homePossible,'loan-gray':!searchHome.approvedLoanProgram.homePossible }" class="text-nowrap">Home Possible</p>
-     </div>
-  </div>
+    <ng-container *ngIf="store.role === constant.role.BUYER">
+        <div class="col-3 align-self-end" style="background: transparent">
+            <p class="heading-color text-center">Approved Loan Programs</p>
+        </div>
+        <div class="col-5 align-self-end d-flex justify-content-center" style="background: transparent">
+            <div class="loan-program d-flex" style="">
+                <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.fha,'loan-gray':!searchHome.approvedLoanProgram.fha}">FHA</p>
+                <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.va,'loan-gray':!searchHome.approvedLoanProgram.va}">VA</p>
+                <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.usda,'loan-gray':!searchHome.approvedLoanProgram.usda }">USDA</p>
+                <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.conventional,'loan-gray':!searchHome.approvedLoanProgram.conventional }">Coventional</p>
+                <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.homeReady,'loan-gray':!searchHome.approvedLoanProgram.homeReady }" class="text-nowrap">Home Ready</p>
+                <p [ngClass]="{'loan-green': searchHome.approvedLoanProgram.homePossible,'loan-gray':!searchHome.approvedLoanProgram.homePossible }" class="text-nowrap">Home Possible</p>
+            </div>
+        </div>
+    </ng-container>
 
 </div>
 
@@ -118,7 +120,7 @@
            <img class="down-arrow align-self-center da-margin" src="/assets/search-home/down-arrow.svg">
           </div>
         </div>
-        <div class="save-search d-flex" (click)="saveSearch()">
+        <div *ngIf="store.role === constant.role.BUYER" class="save-search d-flex" (click)="saveSearch()">
             <img src="/assets/search-home/save.svg">
             <p class="text-nowrap">Save Search</p>
         </div>

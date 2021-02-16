@@ -3,6 +3,8 @@ import {HomeModel} from '../../../../buyer/favorites/models/favorites.model';
 import {Router} from '@angular/router';
 import {SearchHomeService} from '../../services/search-home.service';
 import {ToastrService} from 'ngx-toastr';
+import {StoreService} from '../../../../../../core/store/store.service';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-home-card',
@@ -15,7 +17,9 @@ export class HomeCardComponent implements OnInit, AfterViewInit {
   @ViewChild('homeCard') homeCard: ElementRef;
   constructor(public router: Router,
               private searchHomeService: SearchHomeService,
-              private toaster: ToastrService) { }
+              private toaster: ToastrService,
+              public store: StoreService,
+              public constant: ConstantService) { }
 
   ngOnInit(): void {
   }
