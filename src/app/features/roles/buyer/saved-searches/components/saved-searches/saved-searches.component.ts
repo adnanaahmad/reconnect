@@ -5,6 +5,9 @@ import {Router} from '@angular/router';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {KeyValue} from '@angular/common';
 import {HelperService} from '../../../../../../core/helper/helper.service';
+import {SavedSearchService} from '../../services/saved-search.service';
+import {take} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -13,132 +16,55 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
   styleUrls: ['./saved-searches.component.scss']
 })
 export class SavedSearchesComponent implements OnInit {
-  savedSearch: SavedSearchesModel = {} as SavedSearchesModel;
+  savedSearch: Array<SavedSearchesModel> = {} as Array<SavedSearchesModel>;
+  loader: boolean;
   constructor(public constant: ConstantService,
               private router: Router,
               private store: StoreService,
-              public helper: HelperService) { }
+              public helper: HelperService,
+              private savedSearchService: SavedSearchService,
+              private toaster: ToastrService) { }
 
   ngOnInit(): void {
-
-    this.savedSearch.searches = [{
-      baths: {
-        onePlus: false,
-        twoPlus: false,
-        threePlus: false,
-        fourPlus: false,
-        fivePlus: false,
-        from: 1,
-        to: 3,
-      },
-      beds: {
-        onePlus: false,
-        twoPlus: true,
-        threePlus: false,
-        fourPlus: false,
-        fivePlus: true,
-        from: null,
-        to: null,
-      },
-      listingStatus: {
-        any: false,
-        existingHomes: true,
-        fiftyFivePlusCommunity: false,
-        foreclosures: false,
-        hideForeclosures: false,
-        hidePendingContingent: false,
-        newConstruction: false,
-        openHouse: true,
-        priceReduced: false
-      },
-      price: {
-        from: 250000,
-        to: 3001
-      },
-      propertyType: {
-        any: false,
-        condo: false,
-        farm: false,
-        land: false,
-        mobile: true,
-        multiFamily: false,
-        singleFamily: true
-      },
-      moreFilters: {
-        keywords: ['Pool', 'Terrace'],
-        basement: true,
-        swimmingPool: false,
-        attic: true,
-        waterFront: false
-      }
-
-    },
-      {
-        baths: {
-          onePlus: null,
-          twoPlus: true,
-          threePlus: true,
-          fourPlus: true,
-          fivePlus: false,
-          from: null,
-          to: null,
-        },
-        beds: {
-          onePlus: true,
-          twoPlus: true,
-          threePlus: true,
-          fourPlus: true,
-          fivePlus: true,
-          from: null,
-          to: null,
-        },
-        listingStatus: {
-          any: false,
-          existingHomes: true,
-          fiftyFivePlusCommunity: true,
-          foreclosures: true,
-          hideForeclosures: true,
-          hidePendingContingent: true,
-          newConstruction: false,
-          openHouse: true,
-          priceReduced: false
-        },
-        price: {
-          from: 250000,
-          to: 3001
-        },
-        propertyType: {
-          any: false,
-          condo: true,
-          farm: true,
-          land: true,
-          mobile: true,
-          multiFamily: true,
-          singleFamily: true
-        },
-        moreFilters: {
-          keywords: ['Pool', 'Terrace'],
-          basement: true,
-          swimmingPool: true,
-          attic: true,
-          waterFront: true
-        }
-
-      }];
+    this.loader = false;
+    this.getSavedSearches();
   }
-
+  getSavedSearches(): void{
+    this.savedSearchService.getSavedSearches().pipe(take(1)).subscribe(res => {
+      console.log(res);
+      this.loader = true;
+      this.savedSearch = res.result;
+      console.log(this.savedSearch);
+    }, error => {
+      console.log(error);
+    });
+  }
   objectValuesNull(value): boolean{
     return !Object.values(value).every(o => o === null);
   }
 
   openPropertySearch(value): void{
-    this.store.updateSavedSearch(value);
-    this.router.navigateByUrl('/home/searchHomes');
+    const data = this.filtersDataToQuery(value);
+    this.router.navigateByUrl(`/home/searchHomes?${data}`).then();
   }
-  deleteSearch(): void{
-    console.log('delete');
+  filtersDataToQuery(data): {}{
+    Object.keys(data).forEach(key => {
+      if (data[key] ? data[key].length === 0 : true){
+        delete data[key];
+      }
+    });
+    console.log('data', data);
+    return Object.keys(data).map(key => key + '=' + data[key]).join('&');
   }
-  // originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
-  //   return 0;
-  // };
+  deleteSearch(id): void{
+    this.savedSearchService.deleteSavedSearches(id).pipe(take(1)).subscribe(res => {
+      this.toaster.success('Successfully Deleted');
+      this.savedSearch = res.result;
+    }, error => {
+      this.toaster.error('Failed To Delete');
+    });
+  }
+  checkRangeExist =  (value): boolean => {
+    return String(value).includes(':');
+  }
 }

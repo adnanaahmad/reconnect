@@ -3,6 +3,7 @@ import {HomeDetails, HomeModel} from '../../models/favorites.model';
 import {SearchHomeService} from '../../../../common/search-homes/services/search-home.service';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-card',
@@ -20,7 +21,7 @@ export class HomeCardComponent implements OnInit {
   }
 
   removeFromFavorites(): void{
-    this.searchHomeService.removeFavorite(this.homeDetails._id).subscribe(res => {
+    this.searchHomeService.removeFavorite(this.homeDetails._id).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.toaster.success('Removed From Favorites');
       this.removeFavorite.emit(res.result);

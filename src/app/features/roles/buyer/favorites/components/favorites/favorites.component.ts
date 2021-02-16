@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FavoritesModel} from '../../models/favorites.model';
 import {FavoritesService} from '../../services/favorites.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-favorites',
@@ -15,7 +16,7 @@ export class FavoritesComponent implements OnInit {
     this.getFavorites();
   }
   getFavorites(): void{
-    this.favoriteService.getFavorites().subscribe(res => {
+    this.favoriteService.getFavorites().pipe(take(1)).subscribe(res => {
       console.log(res);
       this.favorite.home = res.result;
     }, error => {

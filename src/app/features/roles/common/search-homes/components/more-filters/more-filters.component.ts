@@ -32,6 +32,11 @@ export class MoreFiltersComponent implements OnInit {
   helper(minArray, maxArray, length, value, object): void{
     this.moreFilters[minArray] = Array(length).fill(1).map((x, i) => (i + 1) * value);
     this.moreFilters[maxArray] = Array(length).fill(1).map((x, i) => (i + 1) * value);
+    if (this.searchHome.moreFilters.get([object, 'from']).value){
+      this.searchHome.moreFilters.get([object, 'to']).enable();
+      this.moreFilters[maxArray] = [...this.moreFilters[minArray]].slice(this.searchHome.moreFilters.
+      get([object, 'from']).value / value , length);
+    }
     this.searchHome.moreFilters.get([object, 'from']).valueChanges.subscribe(res => {
       this.searchHome.moreFilters.get([object, 'to']).enable();
       this.searchHome.moreFilters.get([object, 'to']).setValue(null);
@@ -65,7 +70,6 @@ export class MoreFiltersComponent implements OnInit {
     this.searchHome.moreFilters.reset();
   }
   applyFilter(): void{
-    this.store.updateSavedSearch(this.searchHome.moreFilters.value);
     this.applyFilters.emit();
   }
 }

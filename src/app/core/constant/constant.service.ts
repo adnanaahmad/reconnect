@@ -54,6 +54,7 @@ export class ConstantService {
      getBorrowerLoanDetails: `${environment.apiUrl}/loan/borrowers-loan/`,
      saveBorrowerLoanDetails: `${environment.apiUrl}/loan/borrowers-loan`,
      getFavorites: `${environment.apiUrl}/favourite`,
+     savedSearches: `${environment.apiUrl}/savedsearch`,
   };
    httpOptions = {
      json: {

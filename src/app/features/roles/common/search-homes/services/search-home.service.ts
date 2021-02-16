@@ -26,4 +26,7 @@ export class SearchHomeService {
   removeFavorite(data): Observable<any>{
     return this.helper.requestCall(this.methods.delete, this.api.getFavorites + `/${data}`);
   }
+  saveSearch(data): Observable<any>{
+    return this.helper.requestCall(this.methods.post, this.api.savedSearches, data);
+  }
 }

@@ -2,32 +2,33 @@
   <h3>Saved Searches</h3>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="loader">
   <div class="col-9">
     <p class="sub-heading">Saved Searches List</p>
-    <div class="card-1 d-flex" *ngFor="let search of savedSearch.searches">
+    <div class="card-1 d-flex" *ngFor="let search of savedSearch">
       <div class="details">
          <div class="row">
-            <div class="col-10 click" (click)="openPropertySearch(search)">
-              <div *ngFor="let child of search | keyvalue">
-                 <div class="row" *ngIf="objectValuesNull(child.value)">
-                      <p class="col-3 text-nowrap label"> {{constant.searchFilters[child.key]}}: </p>
+            <div class="col-10 click" (click)="openPropertySearch(search.query)">
+              <div *ngFor="let child of search.query | keyvalue">
+                 <div class="row">
+                      <p class="col-3 text-nowrap label"> {{child.key | splitCamelCase}}: </p>
                       <div class="col-9 d-flex">
-                          <div class="d-flex space" *ngIf="child.key == 'price' || (child.key == 'beds' && child.value.from) || (child.key == 'baths' && child.value.from)">
-                              <p class="price" *ngIf="child.key == 'price'">${{child.value.from | thousandSuffix}}</p>
-                              <p *ngIf="child.key != 'price'">{{child.value.from}}</p>
-                              <p>-</p>
-                              <p *ngIf="child.key != 'price'">{{child.value.to}}</p>
-                              <p class="price" *ngIf="child.key == 'price'">${{child.value.to | thousandSuffix}}</p>
+                          <div class="d-flex space" *ngIf="child.key === 'listPrice'">
+                              <p class="price">{{child.value ? '$' + child.value.split(':')[0] + ' - ' : '' }}</p>
+                              <p class="price">{{child.value ? '$' + child.value.split(':')[1] : '' }}</p>
                           </div>
-                          <div class="d-flex" *ngIf="child.key == 'moreFilters' ">
-                              <p id="comma" *ngFor="let i of child.value.keywords">
-                                {{i}}
-                              </p>
+                          <div class="d-flex" *ngIf="child.value ? child.key === 'beds' || child.key === 'baths' : false">
+                              <ng-container *ngIf="checkRangeExist(child.value)">
+                                  <p class="">{{child.value.split(':')[0] + ' - ' }}</p>
+                                  <p class="">{{child.value.split(':')[1] }}</p>
+                              </ng-container>
+                              <ng-container *ngIf="!checkRangeExist(child.value)">
+                                  <p class="">{{child.value}}</p>
+                              </ng-container>
                           </div>
-                          <div style="flex-wrap: wrap"  class="d-flex" *ngIf="child.key != 'price'">
-                            <ng-container *ngFor="let i  of child.value | keyvalue:helper.originalOrder">
-                                <p id="comma" *ngIf="constant.searchFilters[i.key] && i.value" class="text-nowrap">{{constant.searchFilters[i.key]}}</p>
+                          <div style="flex-wrap: wrap"  class="d-flex" *ngIf="child.key === 'propertyType' || child.key === 'status'">
+                            <ng-container *ngFor="let i  of child.value">
+                                <p id="comma" class="text-nowrap">{{i}}</p>
                             </ng-container>
                           </div>
                        </div>
@@ -37,7 +38,7 @@
         </div>
       </div>
       <div class="ml-auto d-flex">
-          <img class="delete" src="/assets/news-feed-icons/delete.svg">
+          <img (click)="deleteSearch(search._id)" class="delete" src="/assets/news-feed-icons/delete.svg">
           <img class="edit" src="/assets/saved-search/edit.svg">
           <select class="form-control">
             <option>Instantly</option>

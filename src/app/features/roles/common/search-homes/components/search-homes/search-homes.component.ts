@@ -6,8 +6,9 @@ import {ConstantService} from '../../../../../../core/constant/constant.service'
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {SearchHomeService} from '../../services/search-home.service';
 import {debounceTime, distinctUntilChanged, take} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-search-homes',
@@ -21,7 +22,9 @@ export class SearchHomesComponent implements OnInit {
               public constant: ConstantService,
               public  helper: HelperService,
               public searchHomeService: SearchHomeService,
-              public router: Router) { }
+              public router: Router,
+              private activatedRoute: ActivatedRoute,
+              private toaster: ToastrService) {}
   ngOnInit(): void {
     this.initialiseFilter();
     this.chooseEitherRangeOrMultiSelect();
@@ -44,16 +47,64 @@ export class SearchHomesComponent implements OnInit {
   get searchContainerWidth(): number{
       return document.getElementById('search').offsetWidth;
   }
-    getHouses(): void{
-    this.searchHomeService.getHouses('').pipe(take(1)).subscribe(res => {
-      console.log(res);
-      res = res.result;
-      this.searchHome.homes = res.listings;
-      this.searchHome.total = res.total;
-      this.searchHome.pageNumber = res.paging.number;
-    }, error => {
-      console.log(error);
-    });
+  setFilters(params): void{
+      this.searchHome.moreFilters.patchValue({
+          propertyType: {
+              Apartment: params.propertyType ? params.propertyType.includes('Apartment') : null,
+              'Attached (Townhouse/Rowhouse/Duplex)': params.propertyType ? params.propertyType.includes('Attached (Townhouse/Rowhouse/Duplex)') : null,
+              Condominium : params.propertyType ? params.propertyType.includes('Condominium') : null,
+              Farm : params.propertyType ? params.propertyType.includes('Farm') : null,
+              'Mobile Home' : params.propertyType ? params.propertyType.includes('Mobile Home') : null,
+              'Single Family' : params.propertyType ? params.propertyType.includes('Single Family') : null,
+              'Condominium/Co-Op' : params.propertyType ? params.propertyType.includes('Condominium/Co-Op') : null,
+              Land : params.propertyType ? params.propertyType.includes('Land') : null,
+              'Multi-family' : params.propertyType ? params.propertyType.includes('Multi-family') : null,
+          },
+          status: {
+              Active : params.status ? params.status.includes('Active') : null,
+              'Back on Market': params.status ? params.status.includes('Back on Market') : null,
+              Contingent: params.status ? params.status.includes('Contingent') : null,
+              Extended: params.status ? params.status.includes('Extended') : null,
+              New: params.status ? params.status.includes('New') : null,
+              'Price Changed': params.status ? params.status.includes('Price Changed') : null,
+              Reactivated: params.status ? params.status.includes('Reactivated') : null,
+          },
+          listPrice: {
+              from: params.listPrice ? params.listPrice.split(':')[0] : null,
+              to: params.listPrice ? params.listPrice.split(':')[1] : null
+          },
+          beds: {
+              from: params.beds ? params.beds.includes(':') ? params.beds.split(':')[0] : null : null,
+              to: params.beds ? params.beds.includes(':') ? params.beds.split(':')[1] : null : null,
+              value: params.beds ? !params.beds.includes(':') ? params.beds : null : null
+          },
+          baths: {
+              from: params.baths ? params.baths.includes(':') ? params.baths.split(':')[0] : null : null,
+              to: params.baths ? params.baths.includes(':') ? params.baths.split(':')[1] : null : null,
+              value: params.baths ? !params.baths.includes(':') ? params.baths : null : null
+          },
+      });
+  }
+  getHouses(): void{
+      this.activatedRoute.queryParams.subscribe(params => {
+            console.log(params);
+            console.log(Object.keys(params).length);
+            if (Object.keys(params).length !== 0){
+                this.setFilters(params);
+                this.applyFilters();
+                //console.log(this.searchHome.moreFilters.value);
+            } else {
+                this.searchHomeService.getHouses('').pipe(take(1)).subscribe(res => {
+                    console.log(res);
+                    res = res.result;
+                    this.searchHome.homes = res.listings;
+                    this.searchHome.total = res.total;
+                    this.searchHome.pageNumber = res.paging.number;
+                }, error => {
+                    console.log(error);
+                });
+            }
+      });
   }
   chooseEitherRangeOrMultiSelect(): void{
     this.helperForChoose('beds');
@@ -127,7 +178,11 @@ export class SearchHomesComponent implements OnInit {
     this.store.updateToggleMoreFilter(false);
   }
   saveSearch(): void {
-    console.log(this.searchHome.moreFilters.value);
+      this.searchHomeService.saveSearch(this.filtersObject).pipe(take(1)).subscribe(res => {
+          this.toaster.success('Added To Save Search');
+      }, error => {
+          this.toaster.error('Failed To Add To Save Search');
+      });
   }
   cancel(event): void {
     event.target.parentElement.parentElement.classList.toggle('show');
@@ -158,21 +213,7 @@ export class SearchHomesComponent implements OnInit {
   }
   get filtersDataToQuery(): {}{
      const data =  Object.assign({},
-         {
-           status: Object.keys(this.searchHome.moreFilters.get('status').value).filter(key =>
-               this.searchHome.moreFilters.get('status').value[key]),
-           propertyType: Object.keys(this.searchHome.moreFilters.get('propertyType').value).filter(key =>
-               this.searchHome.moreFilters.get('propertyType').value[key]),
-           listPrice: this.searchHome.moreFilters.get(['listPrice', 'from']).value &&
-           this.searchHome.moreFilters.get(['listPrice', 'to']).value ?
-               `${this.searchHome.moreFilters.get(['listPrice', 'from']).value}:${this.searchHome.moreFilters.get(['listPrice', 'to']).value}` : [],
-           beds:  this.searchHome.moreFilters.get(['beds', 'from']).value && this.searchHome.moreFilters.get(['beds', 'to']).value ?
-               `${this.searchHome.moreFilters.get(['beds', 'from']).value}:${this.searchHome.moreFilters.get(['beds', 'to']).value}`
-               : this.searchHome.moreFilters.get(['beds', 'value']).value,
-           baths:  this.searchHome.moreFilters.get(['baths', 'from']).value && this.searchHome.moreFilters.get(['baths', 'to']).value ?
-               `${this.searchHome.moreFilters.get(['baths', 'from']).value}:${this.searchHome.moreFilters.get(['baths', 'to']).value}`
-               : this.searchHome.moreFilters.get(['baths', 'value']).value
-         });
+         this.filtersObject);
      Object.keys(data).forEach(key => {
        if (data[key] ? data[key].length === 0 : true){
          delete data[key];
@@ -180,6 +221,23 @@ export class SearchHomesComponent implements OnInit {
      });
      console.log('data', data);
      return Object.keys(data).map(key => key + '=' + data[key]).join('&');
+  }
+  get filtersObject(): {}{
+      return  {
+          status: Object.keys(this.searchHome.moreFilters.get('status').value).filter(key =>
+              this.searchHome.moreFilters.get('status').value[key]),
+          propertyType: Object.keys(this.searchHome.moreFilters.get('propertyType').value).filter(key =>
+              this.searchHome.moreFilters.get('propertyType').value[key]),
+          listPrice: this.searchHome.moreFilters.get(['listPrice', 'from']).value &&
+          this.searchHome.moreFilters.get(['listPrice', 'to']).value ?
+              `${this.searchHome.moreFilters.get(['listPrice', 'from']).value}:${this.searchHome.moreFilters.get(['listPrice', 'to']).value}` : null,
+          beds:  this.searchHome.moreFilters.get(['beds', 'from']).value && this.searchHome.moreFilters.get(['beds', 'to']).value ?
+              `${this.searchHome.moreFilters.get(['beds', 'from']).value}:${this.searchHome.moreFilters.get(['beds', 'to']).value}`
+              : this.searchHome.moreFilters.get(['beds', 'value']).value,
+          baths:  this.searchHome.moreFilters.get(['baths', 'from']).value && this.searchHome.moreFilters.get(['baths', 'to']).value ?
+              `${this.searchHome.moreFilters.get(['baths', 'from']).value}:${this.searchHome.moreFilters.get(['baths', 'to']).value}`
+              : this.searchHome.moreFilters.get(['baths', 'value']).value
+      };
   }
   pageChange(pageNumber): void{
       console.log(pageNumber);

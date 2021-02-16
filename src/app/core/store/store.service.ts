@@ -6,8 +6,6 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class StoreService {
 
-  private savedSearchData = new BehaviorSubject<any>(1);
-  savedSearch = this.savedSearchData.asObservable();
   private toggleMoreFilterModal = new BehaviorSubject<any>(false);
   toggleMoreFilter = this.toggleMoreFilterModal.asObservable();
   private toggleNotificationModal = new BehaviorSubject<any>(false);
@@ -17,9 +15,6 @@ export class StoreService {
   userData = this.userDataSubject.asObservable();
   constructor() { }
 
-  updateSavedSearch(data: any): void {
-    this.savedSearchData.next(data);
-  }
   updateToggleMoreFilter(data: boolean): void{
     this.toggleMoreFilterModal.next(data);
   }
