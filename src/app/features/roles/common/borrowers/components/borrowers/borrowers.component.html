@@ -30,7 +30,8 @@
 <div class="card-3 d-flex" style="background: transparent" *ngFor="let borrower of borrowers.borrower">
        <div class="card-4 " style="background: white">
             <div class="div-1 d-flex">
-              <img [src]="borrower.buyer.profilePictureUrl" class="display-img">
+              <img *ngIf="borrower.buyer.profilePictureUrl" [src]="borrower.buyer.profilePictureUrl" class="display-img">
+              <img *ngIf="!borrower.buyer.profilePictureUrl" src="/assets/profile/profile.svg" class="dummy-img">
               <div class="info">
                  <div class="name-div" [ngbTooltip]="borrower.buyer.firstName+' '+borrower.buyer.lastName"> <p class="name">
                      {{ borrower.buyer.firstName | titlecase}} {{ borrower.buyer.lastName | titlecase}}</p> </div>

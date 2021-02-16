@@ -13,6 +13,7 @@ export class TransactionProcessComponent implements OnInit {
   ngOnInit(): void {
     this.lockStatus('application', '', 'preApproved');
     this.lockStatus('preApproved', 'application', 'acceptedOffer');
+    this.lockStatus('acceptedOffer', 'preApproved', 'underwriting');
     this.lockStatus('underwriting', 'acceptedOffer', 'approvedWithConditions');
     this.lockStatus('approvedWithConditions', 'underwriting', 'clearedToClose');
     this.lockStatus('clearedToClose', 'approvedWithConditions', 'closed');

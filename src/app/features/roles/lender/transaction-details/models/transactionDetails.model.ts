@@ -4,7 +4,7 @@ import {SubjectPropertyModel} from '../../../buyer/home-buying-dashboard/models/
 export interface TransactionDetailsModel {
   subjectProperty: SubjectPropertyModel;
   user: UserModel;
-  borrowerDetails: BorrowerDetailsModel;
+  // borrowerDetails: BorrowerDetailsModel;
   finance: FormGroup;
   id: number;
   loader: boolean;

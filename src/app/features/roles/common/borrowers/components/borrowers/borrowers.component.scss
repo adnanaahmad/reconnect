@@ -89,12 +89,18 @@
 .card-3{
   margin-bottom: 1.5vw;
 }
-.display-img{
+.display-img, .dummy-img{
   height: 7.5vw;
   width: 7.5vw;
-  object-fit: cover;
   margin-right: .5vw;
   border-radius: .5vw;
+}
+.dummy-img{
+  padding: 2vw;
+  background: var(--extraLightGray);
+}
+.display-img{
+  object-fit: cover;
 }
 .div-1{
   padding: 1vw 1vw 1.3vw 1vw;

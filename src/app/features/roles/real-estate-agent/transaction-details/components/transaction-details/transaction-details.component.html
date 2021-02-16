@@ -4,26 +4,29 @@
       <p>Back</p>
   </div>
 </div>
-
-<div class="row">
+<form [formGroup]="transactionDetails.finance" (ngSubmit)="onSubmit()">
+<div class="row" *ngIf="transactionDetails.loader">
   <div class="col-7 first-column">
        <div class="child-1 d-flex justify-content-between" style="">
-            <app-buyer-info [transactionDetails]="transactionDetails"></app-buyer-info>
-            <div class="align-self-end"><button class="btn btn-success lineage-button">View Lineage</button></div>
-            <div class="lead align-self-end">
-                 <p class="assign-lead">Assign lead</p>
-                 <div class="lead-info d-flex">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcssCmrKykaX2QK3Y-J6_IfIvq9nvGZ0YwHQ&usqp=CAU">
-                    <p class="align-self-center">James Kation</p>
-                 </div>
-                 <div class="d-flex">
-                     <p class="split-text align-self-center">Split:</p>
-                     <div class="d-flex percent">
-                          <p>50%</p>
-                          <p>50%</p>
-                     </div>
-                 </div>
+            <app-buyer-info [transactionDetails]="transactionDetails.user"></app-buyer-info>
+            <div class="d-flex flex-column">
+                <button type="submit" class="btn btn-success lineage-button">Save</button>
+                <button class="btn btn-success lineage-button mt-auto">View Lineage</button>
             </div>
+<!--            <div class="lead align-self-end">-->
+<!--                 <p class="assign-lead">Assign lead</p>-->
+<!--                 <div class="lead-info d-flex">-->
+<!--                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcssCmrKykaX2QK3Y-J6_IfIvq9nvGZ0YwHQ&usqp=CAU">-->
+<!--                    <p class="align-self-center">James Kation</p>-->
+<!--                 </div>-->
+<!--                 <div class="d-flex">-->
+<!--                     <p class="split-text align-self-center">Split:</p>-->
+<!--                     <div class="d-flex percent">-->
+<!--                          <p>50%</p>-->
+<!--                          <p>50%</p>-->
+<!--                     </div>-->
+<!--                 </div>-->
+<!--            </div>-->
        </div>
        <div class="transaction">
           <p class="heading-sub bottom">Transaction Process</p>
@@ -73,3 +76,4 @@
       <app-subject-property [subjectProperty]="transactionDetails.subjectProperty"></app-subject-property>
   </div>
 </div>
+</form>
