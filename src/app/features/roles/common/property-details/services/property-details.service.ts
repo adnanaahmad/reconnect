@@ -16,4 +16,7 @@ export class PropertyDetailsService {
   getPropertyDetails(data): Observable<any>{
     return this.helper.requestCall(this.methods.get, this.api.getPropertyDetails + data);
   }
+  getTeam(): Observable<any>{
+    return this.helper.requestCall(this.methods.get, this.api.getTeam);
+  }
 }

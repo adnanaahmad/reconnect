@@ -18,10 +18,10 @@
    </div>
 </div>
 
-  <div class="d-flex">
-    <div *ngIf="propertyDetails.propertyAd" class="column-1">
+  <div *ngIf="propertyDetails.loader" class="d-flex">
+    <div class="column-1">
       <app-property-ad [propertyAd]="propertyDetails.propertyAd"></app-property-ad>
-      <app-real-estate-agent [realEstateAgent]="propertyDetails.realEstateAgent"></app-real-estate-agent>
+      <app-real-estate-agent [realEstateAgent]="propertyDetails.realEstateAgent ? propertyDetails.realEstateAgent.userId : null"></app-real-estate-agent>
       <p class="details-heading pd-heading">Property Details</p>
       <app-features [propertyDetails]="propertyDetails.features"></app-features>
     </div>

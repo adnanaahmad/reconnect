@@ -5,6 +5,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {PropertyDetailsService} from '../../services/property-details.service';
 import {ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
+import {take} from 'rxjs/operators';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -23,21 +24,8 @@ export class PropertyDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.propertyDetails.loader = false;
     this.getPropertyDetails();
-    this.propertyDetails.realEstateAgent = {
-      name: 'Rafael Nadal',
-      image: 'https://www.menshairstylestoday.com/wp-content/uploads/2015/12/Professional-Haircuts-For-Men.jpg',
-      rating: 5,
-      reviews: 1574,
-      phone: '+421 32 6 4345',
-      socialMedia: {
-        facebook: 'https://www.google.com/',
-        instagram: 'https://www.google.com/',
-        linkedIn: 'https://www.google.com/',
-        twitter: 'https://www.google.com/',
-        world: 'https://www.google.com/',
-        }
-    };
     this.propertyDetails.loanScenarioOne = this.fb.group({
       purchasePrice: ['', Validators.required],
       loanAmount: ['', Validators.required],
@@ -153,12 +141,19 @@ export class PropertyDetailsComponent implements OnInit {
     };
   }
   getPropertyDetails(): void{
-    this.propertyDetailService.getPropertyDetails(this.propertyDetails.id).subscribe(res => {
+    this.propertyDetailService.getPropertyDetails(this.propertyDetails.id).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.propertyDetails.propertyAd = res.result.listings[0];
       this.propertyDetails.features = res.result.listings[0].features;
       this.propertyDetails.tourURL = this.getVideoId(res.result.listings[0].tourURL);
+      this.propertyDetails.loader = true;
       console.log(this.propertyDetails.features);
+    }, error => {
+      console.log(error);
+    });
+    this.propertyDetailService.getTeam().pipe(take(1)).subscribe(res => {
+        console.log(res);
+        this.propertyDetails.realEstateAgent = res.result.realEstateAgent;
     }, error => {
       console.log(error);
     });

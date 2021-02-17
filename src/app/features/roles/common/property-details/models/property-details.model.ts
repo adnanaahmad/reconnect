@@ -2,7 +2,7 @@ import {FormGroup} from '@angular/forms';
 
 export interface PropertyDetailsModel {
   propertyAd: PropertyAdModel;
-  realEstateAgent: RealEstateAgentModel;
+  realEstateAgent: RealEstateAgentUserModel;
   features: any;
   loanScenarioOne: FormGroup;
   loanScenarioTwo: FormGroup;
@@ -10,6 +10,7 @@ export interface PropertyDetailsModel {
   rentVsBuying: RentVsBuyingModel;
   publicTransport: PublicTransportModel;
   id: string;
+  loader: boolean;
 }
 
 export interface PropertyAdModel {
@@ -46,12 +47,18 @@ export interface PropertyAdModel {
   };
 }
 
-interface RealEstateAgentModel {
-  name: string;
-  image: string;
+interface RealEstateAgentUserModel {
+  userId: RealEstateAgentModel;
+}
+
+export interface RealEstateAgentModel {
+  firstName: string;
+  lastName: string
+  profilePictureUrl: string;
   rating: number;
   reviews: number;
-  phone: string;
+  email: string;
+  phoneNumber: string;
   socialMedia: {
     facebook: string;
     instagram: string;
@@ -60,7 +67,6 @@ interface RealEstateAgentModel {
     world: string;
   };
 }
-
 
 interface PropertyFeaturesModel {
   feature: Array<any>;
