@@ -51,15 +51,15 @@
             <div class="d-flex mb2-custom justify-content-between">
               <div class="form-input">
                  <p class="text-nowrap title">Monthly Payment</p>
-                  <div class="d-flex">
-                      <p style="border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0" class="loan-fields">{{scenario.monthlyPayment}}</p>
+                  <div class="d-flex" style="flex-grow: 1">
+                      <p style="width: 100%;border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0" class="loan-fields">{{scenario.monthlyPayment}}</p>
                       <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto" src="/assets/property-details/eye.svg"><p>View</p></div>
                   </div>
               </div>
               <div class="form-input">
                   <p class="text-nowrap title">Funds Needed</p>
-                  <div class="d-flex">
-                      <p style="border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0" class="loan-fields">{{scenario.fundsNeeded}}</p>
+                  <div class="d-flex justify-content-between" style="flex-grow: 1">
+                      <p style="width: 100%;border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0" class="loan-fields">{{scenario.fundsNeeded}}</p>
                       <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto" src="/assets/property-details/eye.svg"><p>View</p></div>
                   </div>
               </div>

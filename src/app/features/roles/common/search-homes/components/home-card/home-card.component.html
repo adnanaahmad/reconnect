@@ -5,12 +5,14 @@
             <ng-container *ngIf="store.role === constant.role.BUYER">
                 <img (click)="favoriteHome()" *ngIf="!home.favourite" src="/assets/search-home/like.svg">
                 <img (click)="favoriteHome()" *ngIf="home.favourite" src="/assets/search-home/heart.svg">
-                <img [ngClass]="{'thumb-red': home.financing.fha.housingRatio > housingRatio ||
+                <ng-container *ngIf="home.financing">
+                    <img [ngClass]="{'thumb-red': home.financing.fha.housingRatio > housingRatio ||
                 home.financing.fha.debtRatio > debtRatio}" class="thumb" src="/assets/search-home/thumb.svg">
-                <img [ngClass]="{'dollar-red': home.financing.fha.fundsNeeded < 0}" class="dollar" src="/assets/search-home/dollar.svg">
+                    <img [ngClass]="{'dollar-red': home.financing.fha.fundsNeeded < 0}" class="dollar" src="/assets/search-home/dollar.svg">
+                </ng-container>
             </ng-container>
         </div>
-        <div *ngIf="store.role === constant.role.BUYER" class="pre-approved-div d-flex justify-content-end">
+        <div *ngIf="store.role === constant.role.BUYER && home.financing" class="pre-approved-div d-flex justify-content-end">
             <p *ngIf="!((home.financing.fha.housingRatio > housingRatio ||
                 home.financing.fha.debtRatio > debtRatio)||(home.financing.fha.fundsNeeded < 0))" class="pre-approved text-nowrap">Pre-Approved</p>
             <p *ngIf="(home.financing.fha.housingRatio > housingRatio ||

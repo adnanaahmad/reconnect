@@ -26,10 +26,11 @@
       <app-features [propertyDetails]="propertyDetails.features"></app-features>
     </div>
     <div class="column-2">
-
-      <p class="text-nowrap pa-heading">Pre-Approval Scenarios</p>
-      <app-scenario [scenarioNumber]="1" [loanScenario]="propertyDetails.loanScenarioOne" ></app-scenario>
-      <app-scenario [scenarioNumber]="2"  [loanScenario]="propertyDetails.loanScenarioOne"></app-scenario>
+        <ng-container *ngIf="propertyDetails.loanScenarioOne.listings[0].financing">
+             <p class="text-nowrap pa-heading">Pre-Approval Scenarios</p>
+            <app-scenario [scenarioNumber]="1" [loanScenario]="propertyDetails.loanScenarioOne" ></app-scenario>
+            <app-scenario [scenarioNumber]="2"  [loanScenario]="propertyDetails.loanScenarioOne"></app-scenario>
+        </ng-container>
      <ng-container *ngIf="propertyDetails.tourURL">
        <p class="pa-heading">Virtual Tour</p>
        <div class="embed-responsive embed-responsive-16by9">
