@@ -22,11 +22,10 @@ export class HidePopupDirective {
       for (const item of elements) {
         item.style.display = 'none';
       }
+      if (document.getElementById('search-list')){
       document.getElementById('search-list').style.display = 'none';
+      }
     }
-    // if (document.getElementById('search-list')){
-    //   document.getElementById('search-list').style.display = 'none';
-    // }
   }
 
 }
