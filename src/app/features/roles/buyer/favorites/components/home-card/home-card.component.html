@@ -2,7 +2,7 @@
     <div class="img-div">
         <div class="status"><p>{{homeDetails.details.status}}</p></div>
         <div class="card-icons d-flex">
-            <img (click)="removeFromFavorites()" *ngIf="!homeDetails.details.favorite" src="/assets/search-home/heart.svg">
+            <img class="heart" (click)="removeFromFavorites()" src="/assets/search-home/heart.svg">
 <!--            <img *ngIf="homeDetails.details.favorite" src="/assets/search-home/heart.svg">-->
 <!--            <img class="thumb" src="/assets/search-home/thumb.svg">-->
 <!--            <img class="dollar" src="/assets/search-home/dollar.svg">-->

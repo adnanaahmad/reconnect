@@ -34,10 +34,16 @@
   padding: .3vw;
   border-radius: .3vw;
 }
-.dollar{
+.thumb-red{
   background: var(--red);
+}
+.dollar{
+  background: var(--green);
   padding: .3vw;
   border-radius: .3vw;
+}
+.dollar-red{
+  background: var(--red);
 }
 .pre-approved, .not-approved{
   border-radius: .3vw;

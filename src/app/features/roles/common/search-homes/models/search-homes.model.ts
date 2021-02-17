@@ -15,6 +15,7 @@ export interface SearchHomesModel {
   sortBy: FormControl;
   keywordList: Array<string>;
   keyword: FormControl;
+  loan: any;
 }
 interface ApprovedLoanProgramModel {
   fha: boolean;

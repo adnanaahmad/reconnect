@@ -10,8 +10,9 @@ export interface HomeModel {
   baths: {total: number, full: number, half: number};
   description: string;
   status: string;
-  favorite: boolean;
+  favourite: boolean;
   xf_garage_spaces: number;
+  financing: any;
 }
 export interface HomeDetails {
   _id: number;

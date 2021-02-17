@@ -3,15 +3,18 @@
         <div class="status"><p>{{home.status}}</p></div>
         <div class="card-icons d-flex">
             <ng-container *ngIf="store.role === constant.role.BUYER">
-                <img (click)="favoriteHome()" *ngIf="!home.favorite" src="/assets/search-home/like.svg">
-                <img (click)="favoriteHome()" *ngIf="home.favorite" src="/assets/search-home/heart.svg">
-                <img class="thumb" src="/assets/search-home/thumb.svg">
-                <img class="dollar" src="/assets/search-home/dollar.svg">
+                <img (click)="favoriteHome()" *ngIf="!home.favourite" src="/assets/search-home/like.svg">
+                <img (click)="favoriteHome()" *ngIf="home.favourite" src="/assets/search-home/heart.svg">
+                <img [ngClass]="{'thumb-red': home.financing.fha.housingRatio > housingRatio ||
+                home.financing.fha.debtRatio > debtRatio}" class="thumb" src="/assets/search-home/thumb.svg">
+                <img [ngClass]="{'dollar-red': home.financing.fha.fundsNeeded < 0}" class="dollar" src="/assets/search-home/dollar.svg">
             </ng-container>
         </div>
         <div *ngIf="store.role === constant.role.BUYER" class="pre-approved-div d-flex justify-content-end">
-            <p *ngIf="true" class="pre-approved text-nowrap">Pre-Approved</p>
-            <p *ngIf="false" class="not-approved text-nowrap">No Approved</p>
+            <p *ngIf="!((home.financing.fha.housingRatio > housingRatio ||
+                home.financing.fha.debtRatio > debtRatio)||(home.financing.fha.fundsNeeded < 0))" class="pre-approved text-nowrap">Pre-Approved</p>
+            <p *ngIf="(home.financing.fha.housingRatio > housingRatio ||
+                home.financing.fha.debtRatio > debtRatio)||home.financing.fha.fundsNeeded < 0" class="not-approved text-nowrap">No Approved</p>
         </div>
         <img *ngIf="home.images" class="home-img" [src]="home.images[0]" (click)="router.navigateByUrl('/home/propertyDetails/'+home.id)">
         <img *ngIf="!home.images" src="/assets/search-home/no-img.jpg" class="home-img" (click)="router.navigateByUrl('/home/propertyDetails/'+home.id)">

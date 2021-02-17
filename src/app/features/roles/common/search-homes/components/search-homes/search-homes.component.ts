@@ -87,12 +87,9 @@ export class SearchHomesComponent implements OnInit {
   }
   getHouses(): void{
       this.activatedRoute.queryParams.subscribe(params => {
-            console.log(params);
-            console.log(Object.keys(params).length);
             if (Object.keys(params).length !== 0){
                 this.setFilters(params);
                 this.applyFilters();
-                //console.log(this.searchHome.moreFilters.value);
             } else {
                 this.searchHomeService.getHouses('').pipe(take(1)).subscribe(res => {
                     console.log(res);
@@ -100,6 +97,7 @@ export class SearchHomesComponent implements OnInit {
                     this.searchHome.homes = res.listings;
                     this.searchHome.total = res.total;
                     this.searchHome.pageNumber = res.paging.number;
+                    this.searchHome.loan = res.userLoan;
                 }, error => {
                     console.log(error);
                 });
@@ -203,6 +201,7 @@ export class SearchHomesComponent implements OnInit {
       this.searchHome.homes = res.listings;
       this.searchHome.total = res.total;
       this.searchHome.pageNumber = res.paging.number;
+      this.searchHome.loan = res.userLoan;
       this.store.updateToggleMoreFilter(false);
       if (events){
         events.target.parentElement.parentElement.classList.toggle('show');
@@ -248,6 +247,7 @@ export class SearchHomesComponent implements OnInit {
           this.searchHome.homes = res.listings;
           this.searchHome.total = res.total;
           this.searchHome.pageNumber = res.paging.number;
+          this.searchHome.loan = res.userLoan;
       }, error => {
           console.log(error);
       });
@@ -260,6 +260,7 @@ export class SearchHomesComponent implements OnInit {
           this.searchHome.homes = res.listings;
           this.searchHome.total = res.total;
           this.searchHome.pageNumber = res.paging.number;
+          this.searchHome.loan = res.userLoan;
       }, error => {
           console.log(error);
       });
