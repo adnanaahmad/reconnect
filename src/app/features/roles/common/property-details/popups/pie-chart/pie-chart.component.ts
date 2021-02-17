@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HelperService} from '../../../../../../core/helper/helper.service';
+import {ViewPaymentBreakDownModel} from '../../models/property-details.model';
 
 @Component({
   selector: 'app-pie-chart',
@@ -7,6 +8,7 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
   styleUrls: ['./pie-chart.component.scss']
 })
 export class PieChartComponent implements OnInit {
+  @Input() breakDown: ViewPaymentBreakDownModel = {} as ViewPaymentBreakDownModel;
   single: any[];
   view: any[];
 
@@ -29,25 +31,26 @@ export class PieChartComponent implements OnInit {
     this.helper.setModalPosition();
     this.single = [
       {
-        name: 'Down Payment',
-        value: 89
+        name: 'Principal and Interest',
+        value: this.breakDown.principalAndInterest
       },
       {
-        name: 'Principal',
-        value: 100
-      },
-      {
-        name: 'Extra Payments',
-        value: 32
-      },
-      {
-        name: 'Interest',
-        value: 62
+        name: 'Insurance',
+        value: this.breakDown.insurance
       },
       {
         name: 'Taxes',
-        value: 12
-      }
+        value: this.breakDown.taxes
+      },
+      {
+        name: 'Mortgage Insurance',
+        value: this.breakDown.mortgageInsurance
+      },
+      {
+        name: 'HOA',
+        value: this.breakDown.hoa
+      },
+
     ];
     this.view = [innerWidth / 5, innerWidth / 8.5];
   }

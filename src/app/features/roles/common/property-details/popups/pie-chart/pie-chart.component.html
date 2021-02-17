@@ -1,27 +1,46 @@
 <div class="card-1">
-  <div class="d-flex">
-    <div class="">
-      <ngx-charts-pie-chart #PieChartComponent
-                            (window:resize)="onResize($event)"
-                            [view]="view"
-                            [scheme]="colorScheme"
-                            [results]="single"
-                            [gradient]="gradient"
-                            [legend]="showLegend"
-                            [legendPosition]="legendPosition"
-                            [labels]="showLabels"
-                            [doughnut]="isDoughnut"
-                            [legendTitle]="123">
-      </ngx-charts-pie-chart>
-    </div>
-    <div class="ml-custom">
-      <div class="d-flex legend"><div class="yellow square"></div><p class="text-nowrap align-self-center">Down Payment & 1 time Expenses</p><p class="ml-auto align-self-center">$1300</p></div>
-      <div class="d-flex legend"><div class="green square"></div><p class="text-nowrap align-self-center">Principal</p><p class="ml-auto align-self-center">$1300</p></div>
-      <div class="d-flex legend"><div class="red square"></div><p class="text-nowrap align-self-center">Extra Payments</p><p class="ml-auto align-self-center">$1300</p></div>
-      <div class="d-flex legend"><div class="gray square"></div><p class="text-nowrap align-self-center">Interest</p><p class="ml-auto align-self-center">$1300</p></div>
-      <div class="d-flex legend"><div class="purple square"></div><p class="text-nowrap align-self-center">Taxes, MIP, Insurance & fees</p><p class="ml-auto align-self-center">$1300</p></div>
-      <div class="legend total-payment d-flex"><p>Total of all Payment</p><p class="ml-auto">$45000</p></div>
-    </div>
+    <div class="d-flex">
+        <div class="">
+            <ngx-charts-pie-chart #PieChartComponent
+                                  (window:resize)="onResize($event)"
+                                  [view]="view"
+                                  [scheme]="colorScheme"
+                                  [results]="single"
+                                  [gradient]="gradient"
+                                  [legend]="showLegend"
+                                  [legendPosition]="legendPosition"
+                                  [labels]="showLabels"
+                                  [doughnut]="isDoughnut"
+                                  [legendTitle]="123">
+            </ngx-charts-pie-chart>
+        </div>
+        <div class="ml-custom">
+            <div class="d-flex legend">
+                <div class="yellow square"></div>
+                <div class="mr-custom d-flex">
+                <p class="text-nowrap align-self-center">Principal and Interest</p>
+                <p class="ml-auto align-self-center">${{breakDown.principalAndInterest}}</p>
+                </div>
+            </div>
+            <div class="d-flex legend">
+                <div class="green square"></div>
+                <p class="text-nowrap align-self-center">Insurance</p>
+                <p class="ml-auto align-self-center">${{breakDown.insurance}}</p></div>
+            <div class="d-flex legend">
+                <div class="red square"></div>
+                <p class="text-nowrap align-self-center">Taxes</p>
+                <p class="ml-auto align-self-center">${{breakDown.taxes}}</p></div>
+            <div class="d-flex legend">
+                <div class="gray square"></div>
+                <p class="text-nowrap align-self-center">Mortgage Insurance</p>
+                <p class="ml-auto align-self-center">${{breakDown.mortgageInsurance}}</p></div>
+            <div class="d-flex legend">
+                <div class="purple square"></div>
+                <p class="text-nowrap align-self-center">HOA</p>
+                <p class="ml-auto align-self-center">${{breakDown.hoa}}</p></div>
+            <div class="legend total-payment d-flex"><p>Total of all Payment</p>
+                <p class="ml-auto">${{breakDown.totalPayment}}</p></div>
+        </div>
 
-  </div>
+    </div>
 </div>

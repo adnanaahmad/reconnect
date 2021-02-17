@@ -22,6 +22,15 @@ export interface LoanScenarioModel{
   monthlyPayment: number;
   fundsNeeded: number;
 }
+export interface ViewPaymentBreakDownModel{
+  principalAndInterest: number;
+  insurance: number;
+  taxes: number;
+  mortgageInsurance: number;
+  hoa: number;
+  totalPayment: number;
+
+}
 export interface PropertyAdModel {
   listingAgent: {
     id: string,
