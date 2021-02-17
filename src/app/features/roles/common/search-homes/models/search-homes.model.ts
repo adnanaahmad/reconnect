@@ -16,6 +16,7 @@ export interface SearchHomesModel {
   keywordList: Array<string>;
   keyword: FormControl;
   loan: any;
+  polygon: string;
 }
 interface ApprovedLoanProgramModel {
   fha: boolean;

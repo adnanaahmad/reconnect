@@ -25,12 +25,13 @@
         <div class="align-self-center search-input">
             <input (input)="searchHome.hideSearch=true" [formControl]="searchHome.searchKeyword" type="text" id="search" class="form-control form-control-lg" placeholder="">
             <div [style.width.px]="searchContainerWidth" id="search-list" *ngIf="searchHome.hideSearch&&(searchHome.autoComplete | async)" class="search-list-container">
-                <p (click)="searchHome.searchKeyword.setValue(i.label); searchHome.hideSearch = false" class="search-list" *ngFor="let i of searchHome.autoComplete | async">
+                <p (click)="searchHome.searchKeyword.setValue(i.label); searchHome.hideSearch = false;
+                 searchHome.polygon = i.id;searchHomeByName();" class="search-list" *ngFor="let i of searchHome.autoComplete | async">
                         {{i.label}}
                 </p>
             </div>
         </div>
-        <div class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
+        <div (click)="searchHomeByName()" class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
 <!--        <div class="dropdown">-->
 <!--          <button class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
 <!--            Payment <img class="down-arrow" src="/assets/search-home/down-arrow.svg">-->

@@ -11,7 +11,8 @@ export class HidePopupDirective {
   hidePopup(event): void {
     if (!((event.target as HTMLElement).closest('div.more-filter') ||
       (event.target as HTMLElement).closest('div.notification') ||
-      (event.target as HTMLElement).closest('div.buyer-div.align-self-end'))
+      (event.target as HTMLElement).closest('div.buyer-div.align-self-end') ||
+        (event.target as HTMLElement).closest('div.search-input')  )
       && !((event.target as HTMLElement).closest('div.filter-menu') ||
         (event.target as HTMLElement).closest('img.bell.align-self-center') ||
         (event.target as HTMLElement).closest('div.date-cards'))){
@@ -21,6 +22,7 @@ export class HidePopupDirective {
       for (const item of elements) {
         item.style.display = 'none';
       }
+      document.getElementById('search-list').style.display = 'none';
     }
     // if (document.getElementById('search-list')){
     //   document.getElementById('search-list').style.display = 'none';

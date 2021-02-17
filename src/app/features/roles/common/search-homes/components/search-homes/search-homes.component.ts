@@ -30,6 +30,11 @@ export class SearchHomesComponent implements OnInit {
     this.chooseEitherRangeOrMultiSelect();
     this.getHouses();
     this.autoComplete();
+    this.searchHome.searchKeyword.valueChanges.subscribe(res => {
+        if (res === ''){
+            this.searchHome.polygon = null;
+        }
+    });
 
     this.searchHome.keyword = new FormControl(null);
     this.searchHome.keywordList = [];
@@ -196,7 +201,8 @@ export class SearchHomesComponent implements OnInit {
     console.log(data);
     window.history.replaceState({}, '', `/home/searchHomes?${data}`);
     const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
-    this.searchHomeService.getHouses(data + sortBy).pipe(take(1)).subscribe(res => {
+    const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+    this.searchHomeService.getHouses(data + sortBy + searchInput).pipe(take(1)).subscribe(res => {
       res = res.result;
       this.searchHome.homes = res.listings;
       this.searchHome.total = res.total;
@@ -242,7 +248,8 @@ export class SearchHomesComponent implements OnInit {
       console.log(pageNumber);
       const data = this.filtersDataToQuery;
       const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
-      this.searchHomeService.getHouses(`${data}&pageNumber=${pageNumber}${sortBy}`).pipe(take(1)).subscribe(res => {
+      const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+      this.searchHomeService.getHouses(`${data}&pageNumber=${pageNumber}${sortBy}${searchInput}`).pipe(take(1)).subscribe(res => {
           res = res.result;
           this.searchHome.homes = res.listings;
           this.searchHome.total = res.total;
@@ -254,7 +261,8 @@ export class SearchHomesComponent implements OnInit {
   }
   sortBy(): void{
       const data = this.filtersDataToQuery;
-      this.searchHomeService.getHouses(`${data}&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}`).
+      const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+      this.searchHomeService.getHouses(`${data}&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}${searchInput}`).
       pipe(take(1)).subscribe(res => {
           res = res.result;
           this.searchHome.homes = res.listings;
@@ -281,6 +289,21 @@ export class SearchHomesComponent implements OnInit {
                   console.log(error);
               });
           }
+      });
+  }
+  searchHomeByName(): void{
+      console.log(this.searchHome.polygon);
+      const data = this.filtersDataToQuery;
+      const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+      const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+      this.searchHomeService.getHouses(data + sortBy + searchInput).pipe(take(1)).subscribe(res => {
+          res = res.result;
+          this.searchHome.homes = res.listings;
+          this.searchHome.total = res.total;
+          this.searchHome.pageNumber = res.paging.number;
+          this.searchHome.loan = res.userLoan;
+      }, error => {
+          console.log(error);
       });
   }
 }
