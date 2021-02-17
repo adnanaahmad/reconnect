@@ -1,8 +1,14 @@
-.display-img{
+.display-img, .dummy-img{
   height: 7.5vw;
   width: 7.5vw;
-  object-fit: cover;
   border-radius: .5vw;
+}
+.display-img{
+  object-fit: cover;
+}
+.dummy-img{
+  background: var(--extraLightGray);
+  padding: 2vw;
 }
 .name{
   font-weight: 500;

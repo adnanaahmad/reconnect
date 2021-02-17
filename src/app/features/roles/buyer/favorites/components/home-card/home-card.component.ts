@@ -21,7 +21,7 @@ export class HomeCardComponent implements OnInit {
   }
 
   removeFromFavorites(): void{
-    this.searchHomeService.removeFavorite(this.homeDetails._id).pipe(take(1)).subscribe(res => {
+    this.searchHomeService.removeFavorite(this.homeDetails.details.id).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.toaster.success('Removed From Favorites');
       this.removeFavorite.emit(res.result);
@@ -30,6 +30,6 @@ export class HomeCardComponent implements OnInit {
     });
   }
   propertyDetails(): void{
-    this.router.navigateByUrl(`/home/propertyDetails?id=${this.homeDetails.details.id}`).then();
+    this.router.navigateByUrl(`/home/propertyDetails/${this.homeDetails.details.id}`).then();
   }
 }

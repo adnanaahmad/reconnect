@@ -89,17 +89,17 @@ const routes: Routes = [{
       canLoad: [RoleGuard]
     },
     {
-      path: 'borrowerTransactionDetails',
+      path: 'borrowerTransactionDetails/:id',
       loadChildren: () => import('../roles/lender/transaction-details/transaction-details.module').then(m => m.TransactionDetailsModule),
       canLoad: [RoleGuard]
     },
     {
-      path: 'buyerTransactionDetails',
+      path: 'buyerTransactionDetails/:id',
       loadChildren: () => import('../roles/real-estate-agent/transaction-details/transaction-details.module').then(m => m.TransactionDetailsModule),
       canLoad: [RoleGuard]
     },
     {
-      path: 'propertyDetails',
+      path: 'propertyDetails/:id',
       loadChildren: () => import('../roles/common/property-details/property-details.module').then(m => m.PropertyDetailsModule),
       canLoad: [RoleGuard]
     },

@@ -7,7 +7,7 @@ export interface BuyerTransactionDetailsModel {
   finance: FormGroup;
   subjectProperty: SubjectPropertyModel;
   transactionDetails: TransactionDetailsModel;
-  id: number;
+  id: string;
   loader: boolean;
 }
 

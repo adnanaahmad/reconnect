@@ -1,6 +1,7 @@
 <div  class="d-flex div-1">
   <div>
-    <img [src] = "transactionDetails.profilePictureUrl" class="display-img">
+        <img *ngIf="transactionDetails.profilePictureUrl" [src] = "transactionDetails.profilePictureUrl" class="display-img">
+        <img *ngIf="!transactionDetails.profilePictureUrl"  src = "/assets/profile/profile.svg" class="dummy-img">
   </div>
   <div class="user-info">
     <p ngbTooltip=""  class="name">{{ transactionDetails.firstName | titlecase }} {{ transactionDetails.lastName | titlecase }}</p>

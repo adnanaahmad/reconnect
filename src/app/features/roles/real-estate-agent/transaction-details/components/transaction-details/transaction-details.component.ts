@@ -5,6 +5,7 @@ import {take} from 'rxjs/operators';
 import {BorrowerLoanDetailsService} from '../../../../lender/transaction-details/services/borrower-loan-details.service';
 import {ActivatedRoute} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-transaction-details',
@@ -16,10 +17,10 @@ export class TransactionDetailsComponent implements OnInit {
   constructor( private fb: FormBuilder,
                private transactionService: BorrowerLoanDetailsService,
                private activatedRoute: ActivatedRoute,
-               private toaster: ToastrService) {
-    activatedRoute.queryParams.subscribe(params => {
-      this.transactionDetails.id = params.id;
-    });
+               private toaster: ToastrService,
+               public location: Location) {
+    const routeParams = this.activatedRoute.snapshot.paramMap;
+    this.transactionDetails.id = routeParams.get('id');
   }
 
   ngOnInit(): void {

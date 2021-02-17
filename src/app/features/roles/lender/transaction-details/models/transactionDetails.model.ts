@@ -6,7 +6,7 @@ export interface TransactionDetailsModel {
   user: UserModel;
   // borrowerDetails: BorrowerDetailsModel;
   finance: FormGroup;
-  id: number;
+  id: string;
   loader: boolean;
 }
 

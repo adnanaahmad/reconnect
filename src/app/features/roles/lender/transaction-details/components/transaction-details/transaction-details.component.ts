@@ -22,9 +22,8 @@ export class TransactionDetailsComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private toaster: ToastrService,
               public location: Location) {
-    activatedRoute.queryParams.subscribe(params => {
-      this.transactionDetails.id = params.id;
-    });
+    const routeParams = this.activatedRoute.snapshot.paramMap;
+    this.transactionDetails.id = routeParams.get('id');
   }
 
   ngOnInit(): void {

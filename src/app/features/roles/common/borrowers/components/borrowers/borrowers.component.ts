@@ -40,9 +40,9 @@ export class BorrowersComponent implements OnInit {
   }
   viewBorrower(id): void{
     if (this.store.role === this.constant.role.LENDER){
-      this.router.navigateByUrl(`/home/borrowerTransactionDetails?id=${id}`).then();
+      this.router.navigateByUrl(`/home/borrowerTransactionDetails/${id}`).then();
     } else{
-      this.router.navigateByUrl(`/home/buyerTransactionDetails?id=${id}`).then();
+      this.router.navigateByUrl(`/home/buyerTransactionDetails/${id}`).then();
     }
   }
 }

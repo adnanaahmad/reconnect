@@ -515,9 +515,9 @@ export class ConstantService {
       lineage: false,
       borrowers: false,
       dashboard: false,
-      borrowerTransactionDetails: false,
-      buyerTransactionDetails: false,
-      propertyDetails: true,
+      'borrowerTransactionDetails/:id': false,
+      'buyerTransactionDetails/:id': false,
+      'propertyDetails/:id': true,
       quoteRequests: false
     },
     lender: {
@@ -537,9 +537,9 @@ export class ConstantService {
       lineage: true,
       borrowers: true,
       dashboard: true,
-      borrowerTransactionDetails: true,
-      buyerTransactionDetails: false,
-      propertyDetails: true,
+      'borrowerTransactionDetails/:id': true,
+      'buyerTransactionDetails/:id': false,
+      'propertyDetails/:id': true,
       quoteRequests: false
     },
     realEstateAgent: {
@@ -559,9 +559,9 @@ export class ConstantService {
       lineage: true,
       borrowers: true,
       dashboard: true,
-      borrowerTransactionDetails: false,
-      buyerTransactionDetails: true,
-      propertyDetails: true,
+      'borrowerTransactionDetails/:id': false,
+      'buyerTransactionDetails/:id': true,
+      'propertyDetails/:id': true,
       quoteRequests: false
 
     },
@@ -582,9 +582,9 @@ export class ConstantService {
       lineage: true,
       borrowers: true,
       dashboard: true,
-      borrowerTransactionDetails: false,
-      buyerTransactionDetails: true,
-      propertyDetails: true,
+      'borrowerTransactionDetails/:id': false,
+      'buyerTransactionDetails/:id': true,
+      'propertyDetails/:id': true,
       quoteRequests: false
     },
     insuranceAgent: {
@@ -604,9 +604,9 @@ export class ConstantService {
       lineage: false,
       borrowers: false,
       dashboard: true,
-      borrowerTransactionDetails: false,
-      buyerTransactionDetails: false,
-      propertyDetails: true,
+      'borrowerTransactionDetails/:id': false,
+      'buyerTransactionDetails/:id': false,
+      'propertyDetails/:id': true,
       quoteRequests: true
     },
     homeInspector: {
@@ -626,9 +626,9 @@ export class ConstantService {
       lineage: false,
       borrowers: false,
       dashboard: true,
-      borrowerTransactionDetails: false,
-      buyerTransactionDetails: false,
-      propertyDetails: true,
+      'borrowerTransactionDetails/:id': false,
+      'buyerTransactionDetails/:id': false,
+      'propertyDetails/:id': true,
       quoteRequests: true
     },
   };

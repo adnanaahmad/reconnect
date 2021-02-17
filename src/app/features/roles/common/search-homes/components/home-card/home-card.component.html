@@ -13,8 +13,8 @@
             <p *ngIf="true" class="pre-approved text-nowrap">Pre-Approved</p>
             <p *ngIf="false" class="not-approved text-nowrap">No Approved</p>
         </div>
-        <img *ngIf="home.images" class="home-img" [src]="home.images[0]" (click)="router.navigateByUrl('/home/propertyDetails?id='+home.id)">
-        <img *ngIf="!home.images" src="/assets/search-home/no-img.jpg" class="home-img" (click)="router.navigateByUrl('/home/propertyDetails?id='+home.id)">
+        <img *ngIf="home.images" class="home-img" [src]="home.images[0]" (click)="router.navigateByUrl('/home/propertyDetails/'+home.id)">
+        <img *ngIf="!home.images" src="/assets/search-home/no-img.jpg" class="home-img" (click)="router.navigateByUrl('/home/propertyDetails/'+home.id)">
     </div>
     <div class="card-info">
        <div class="d-flex justify-content-between price-area">
