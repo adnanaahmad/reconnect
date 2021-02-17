@@ -28,25 +28,22 @@
   margin-right: 1.5vw;
 }
 .form-input p{
-  margin-bottom: 0.2vw;
+  margin-bottom: 0;
   color: var(--lighGray);
   font-size: .6vw;
 }
-
-.form-input input{
-  padding: 0 0 0 .3vw;
-  font-size: .7vw;
-  color: var(--darkGray);
-  font-family: 'Poppins';
-  height: 1.4vw;
-  border: 1px solid var(--lighGray);
-  border-radius: .2vw;
+.title{
+  margin-bottom: .2vw !important;
 }
 .mb2-custom{
   margin-bottom: 1.1vw;
 }
 .form-input{
   position: relative;
+  flex-basis: 9vw;
+}
+.form-input:first-child{
+  margin-right: 2vw;
 }
 .letter{
   background: var(--green);
@@ -77,29 +74,18 @@ p{
 .view{
   background: var(--green);
   width: fit-content;
-  position: absolute;
-  left: 80%;
-  top:43.8%;
-  //height: 1.4vw;
   padding: .2vw .3vw .15vw .3vw;
   border-top-right-radius: .2vw;
   border-bottom-right-radius: .2vw;
   cursor: pointer;
 }
 
-@media only screen and (max-width: 1440px) {
-  .view{
-    top:42%;
-    left: 81%;
-    padding-bottom: .2vw;
-  }
-}
 
-
-@media only screen and (max-width: 1024px) {
-  .view{
-    top:44%;
-    left: 78%;
-    padding:.15vw .3vw .1vw .3vw;
-  }
+.loan-fields{
+  padding: .25vw .5vw .25vw .5vw;
+  font-size: .7vw;
+  color: var(--darkGray);
+  height: 1.4vw;
+  border: 1px solid var(--lighGray);
+  border-radius: .2vw;
 }

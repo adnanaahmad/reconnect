@@ -1,5 +1,4 @@
 
-<form [formGroup]="loanScenario">
       <div class="card-4">
         <div class="lsh-div">
           <p class="text-nowrap ls-heading">Loan Scenario {{scenarioNumber}}</p>
@@ -12,26 +11,26 @@
             </div>
             <div class="d-flex mb2-custom justify-content-between">
               <div class="form-input">
-                 <p class="text-nowrap">Purchase Price</p>
-                 <input formControlName="purchasePrice" class="form-control form-control-sm" type="text" placeholder="">
+                 <p class="text-nowrap title">Purchase Price</p>
+                  <p class="loan-fields">{{scenario.purchasePrice}}</p>
 
               </div>
               <div class="form-input">
-                  <p class="text-nowrap">Loan Amount</p>
-                  <input formControlName="loanAmount" class="form-control form-control-sm" type="text" placeholder="">
+                  <p class="text-nowrap title">Loan Amount</p>
+                  <p class="loan-fields">{{scenario.loanAmount}}</p>
               </div>
 
             </div>
 
             <div class="d-flex mb2-custom justify-content-between">
               <div class="form-input">
-                 <p class="text-nowrap">Finance Amount</p>
-                 <input formControlName="financeAmount" class="form-control form-control-sm" type="text" placeholder="">
+                 <p class="text-nowrap title">Finance Amount</p>
+                  <p class="loan-fields">{{scenario.financeAmount}}</p>
 
               </div>
               <div class="form-input">
-                  <p class="text-nowrap">Down Payment</p>
-                  <input formControlName="downPayment" class="form-control form-control-sm" type="text" placeholder="">
+                  <p class="text-nowrap title">Down Payment</p>
+                  <p class="loan-fields">{{scenario.downPayment}}</p>
               </div>
 
             </div>
@@ -39,27 +38,30 @@
 
             <div class="d-flex mb2-custom justify-content-between">
               <div class="form-input">
-                 <p class="text-nowrap">Loan Rate</p>
-                 <input formControlName="loanRate" class="form-control form-control-sm" type="text" placeholder="">
+                 <p class="text-nowrap title">Loan Rate</p>
+                  <p class="loan-fields">{{scenario.loanRate}}</p>
 
               </div>
               <div class="form-input">
-                  <p class="text-nowrap">Loan Term</p>
-                  <input formControlName="loanTerm" class="form-control form-control-sm" type="text" placeholder="">
+                  <p class="text-nowrap title">Loan Term</p>
+                  <p class="loan-fields">{{scenario.loanTerm}}</p>
               </div>
 
             </div>
             <div class="d-flex mb2-custom justify-content-between">
               <div class="form-input">
-                 <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto" src="/assets/property-details/eye.svg"><p>View</p></div>
-                 <p class="text-nowrap">Monthly Payment</p>
-                 <input formControlName="monthlyPayment" class="form-control form-control-sm" type="text" placeholder="">
-
+                 <p class="text-nowrap title">Monthly Payment</p>
+                  <div class="d-flex">
+                      <p style="border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0" class="loan-fields">{{scenario.monthlyPayment}}</p>
+                      <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto" src="/assets/property-details/eye.svg"><p>View</p></div>
+                  </div>
               </div>
               <div class="form-input">
-                  <p class="text-nowrap">Funds Needed</p>
-                   <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto" src="/assets/property-details/eye.svg"><p>View</p></div>
-                  <input formControlName="fundsNeeded" class="form-control form-control-sm" type="text" placeholder="">
+                  <p class="text-nowrap title">Funds Needed</p>
+                  <div class="d-flex">
+                      <p style="border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0" class="loan-fields">{{scenario.fundsNeeded}}</p>
+                      <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto" src="/assets/property-details/eye.svg"><p>View</p></div>
+                  </div>
               </div>
 
             </div>
@@ -68,5 +70,3 @@
             <p class="text-nowrap text-center">Pre-Approval Letter</p>
         </div>
       </div>
-
-</form>

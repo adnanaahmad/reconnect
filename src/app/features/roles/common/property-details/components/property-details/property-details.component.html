@@ -29,7 +29,7 @@
 
       <p class="text-nowrap pa-heading">Pre-Approval Scenarios</p>
       <app-scenario [scenarioNumber]="1" [loanScenario]="propertyDetails.loanScenarioOne" ></app-scenario>
-      <app-scenario [scenarioNumber]="2"  [loanScenario]="propertyDetails.loanScenarioTwo"></app-scenario>
+      <app-scenario [scenarioNumber]="2"  [loanScenario]="propertyDetails.loanScenarioOne"></app-scenario>
      <ng-container *ngIf="propertyDetails.tourURL">
        <p class="pa-heading">Virtual Tour</p>
        <div class="embed-responsive embed-responsive-16by9">

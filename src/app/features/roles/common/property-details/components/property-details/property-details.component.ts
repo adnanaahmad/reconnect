@@ -26,29 +26,6 @@ export class PropertyDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.propertyDetails.loader = false;
     this.getPropertyDetails();
-    this.propertyDetails.loanScenarioOne = this.fb.group({
-      purchasePrice: ['', Validators.required],
-      loanAmount: ['', Validators.required],
-      financeAmount: ['', Validators.required],
-      downPayment: ['', Validators.required],
-      loanRate: ['', Validators.required],
-      loanTerm: ['', Validators.required],
-      monthlyPayment: ['', Validators.required],
-      fundsNeeded: ['', Validators.required],
-    });
-    this.propertyDetails.loanScenarioTwo = this.fb.group({
-      purchasePrice: ['', Validators.required],
-      loanAmount: ['', Validators.required],
-      financeAmount: ['', Validators.required],
-      downPayment: ['', Validators.required],
-      loanRate: ['', Validators.required],
-      loanTerm: ['', Validators.required],
-      monthlyPayment: ['', Validators.required],
-      fundsNeeded: ['', Validators.required],
-    });
-    this.propertyDetails.loanScenarioOne.valueChanges.subscribe(x => console.log(x));
-    this.propertyDetails.loanScenarioTwo.valueChanges.subscribe(x => console.log(x));
-    // this.propertyDetails.tourURL = 'https://www.youtube.com/embed/7q39Qe9pats';
     this.propertyDetails.rentVsBuying = {
       costOfRent: {
         amount: 20,
@@ -147,6 +124,7 @@ export class PropertyDetailsComponent implements OnInit {
       this.propertyDetails.features = res.result.listings[0].features;
       this.propertyDetails.tourURL = this.getVideoId(res.result.listings[0].tourURL);
       this.propertyDetails.loader = true;
+      this.propertyDetails.loanScenarioOne = res.result;
       console.log(this.propertyDetails.features);
     }, error => {
       console.log(error);
@@ -158,7 +136,7 @@ export class PropertyDetailsComponent implements OnInit {
       console.log(error);
     });
   }
-  getVideoId(url) {
+  getVideoId(url): string {
     if (!url) {
       return null;
     }

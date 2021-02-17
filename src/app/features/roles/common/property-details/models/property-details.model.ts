@@ -1,18 +1,27 @@
-import {FormGroup} from '@angular/forms';
+import {FormGroup, Validators} from '@angular/forms';
 
 export interface PropertyDetailsModel {
   propertyAd: PropertyAdModel;
   realEstateAgent: RealEstateAgentUserModel;
   features: any;
-  loanScenarioOne: FormGroup;
-  loanScenarioTwo: FormGroup;
+  loanScenarioOne: LoanScenarioModel;
+  loanScenarioTwo: LoanScenarioModel;
   tourURL: string;
   rentVsBuying: RentVsBuyingModel;
   publicTransport: PublicTransportModel;
   id: string;
   loader: boolean;
 }
-
+export interface LoanScenarioModel{
+  purchasePrice: number;
+  loanAmount: number;
+  financeAmount: number;
+  downPayment: number;
+    loanRate: number;
+  loanTerm: number;
+  monthlyPayment: number;
+  fundsNeeded: number;
+}
 export interface PropertyAdModel {
   listingAgent: {
     id: string,
