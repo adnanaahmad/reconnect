@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProfileService} from '../../services/profile.service';
 import {HelperService} from '../../../../../../core/helper/helper.service';
-import {DatePipe} from '@angular/common';
+import {DatePipe, TitleCasePipe} from '@angular/common';
 import {PersonalDetailsModel} from '../../models/personal-details.model';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {Router} from '@angular/router';
@@ -22,7 +22,8 @@ export class EditPersonalDetailsComponent implements OnInit {
               private helper: HelperService,
               private datePipe: DatePipe,
               private store: StoreService,
-              private router: Router) { }
+              private router: Router,
+              private titleCase: TitleCasePipe) { }
 
   ngOnInit(): void {
     this.initialisePersonalForm();
@@ -44,7 +45,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       bio: [null, Validators.required],
       profileVideoUrl: [null, Validators.required],
       phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
-      role: [null, Validators.required],
+      role: [{value: null, disabled: true }, Validators.required],
       birthday: this.fb.group({
         day: [null, Validators.required],
         month: [null, Validators.required],
@@ -73,7 +74,7 @@ export class EditPersonalDetailsComponent implements OnInit {
         realEstateLicenseNumber: res.realEstateLicenseNumber,
         brokerLicense: res.brokerLicense,
         title: res.title,
-        role: res.role,
+        role: this.titleCase.transform(res.role.replace(/([a-z])([A-Z])/g, '$1 $2')),
         bio: res.bio
       });
       if (res.birthday){

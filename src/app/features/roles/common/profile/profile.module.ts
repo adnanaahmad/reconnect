@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
+import {CommonModule, DatePipe, TitleCasePipe} from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import {ProfileComponent} from './components/profile/profile.component';
@@ -20,6 +20,6 @@ import {LocationService} from '../../../landing/services/location/location.servi
     ProfileRoutingModule,
     SharedModule
   ],
-  providers: [LocationService, DatePipe]
+  providers: [LocationService, DatePipe, TitleCasePipe]
 })
 export class ProfileModule { }
