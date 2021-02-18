@@ -79,20 +79,29 @@ export class RegistrationBuyerComponent implements OnInit {
         this.registration.form.get(['referral', 'details']).disable();
   }
   onSubmit(): void{
-    this.auth.signUp(this.registration.form.value).pipe(take(1)).subscribe(res => {
-      if (res.result.user.accountStatus === 'approved'){
-        localStorage.setItem('token', res.result.authToken);
-        localStorage.setItem('user', JSON.stringify(res.result.user));
-        this.router.navigateByUrl('/home/profile').then();
-        this.toaster.success('You have successfully logged in');
+    if (!this.registration.form.valid || !this.registration.agreed.value){
+      this.registration.form.markAllAsTouched();
+      if (this.registration.form.get('password').value !== this.registration.form.get('confirmPassword').value ||
+          !this.registration.form.get('confirmPassword').value) {
+        document.getElementById('confirmPasswordInput').classList.add('is-invalid');
+        document.getElementById('confirmPasswordText').classList.add('danger');
       }
-    }, error => {
-      if (error.error.result.CODE === 'BAD_REQUEST'){
-        this.toaster.error(error.error.result.details.MESSAGE);
-      } else {
-        this.toaster.error(error.error.result.MESSAGE);
-      }
-    });
+    } else {
+      this.auth.signUp(this.registration.form.value).pipe(take(1)).subscribe(res => {
+        if (res.result.user.accountStatus === 'approved'){
+          localStorage.setItem('token', res.result.authToken);
+          localStorage.setItem('user', JSON.stringify(res.result.user));
+          this.router.navigateByUrl('/home/profile').then();
+          this.toaster.success('You have successfully logged in');
+        }
+      }, error => {
+        if (error.error.result.CODE === 'BAD_REQUEST'){
+          this.toaster.error(error.error.result.details.MESSAGE);
+        } else {
+          this.toaster.error(error.error.result.MESSAGE);
+        }
+      });
+    }
   }
   hideProfessionalList(): void{
     this.registration.professional = null;

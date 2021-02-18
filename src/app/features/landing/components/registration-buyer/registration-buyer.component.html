@@ -1,4 +1,4 @@
-<form [formGroup]="registration.form" (ngSubmit)="onSubmit()" class="form-parent">
+<form [formGroup]="registration.form" class="form-parent">
     <div *ngIf="registration.screen['one']" class="second-screen d-flex flex-column">
         <p class="heading">How did you hear about us?</p>
         <div class="mt-auto mb-auto d-flex flex-column">
@@ -80,10 +80,10 @@
                     <input type="password" [class.is-invalid]="registration.form.get('password').invalid && registration.form.get('password').touched" formControlName="password" class="form-control form-custom" placeholder="">
                 </div>
                 <div class="input-flex" >
-                    <p class="label" [ngClass]="{'danger': registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null}">
+                    <p id="confirmPasswordText" class="label" [ngClass]="{'danger': registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null}">
                         Confirm Password
                     </p>
-                    <input type="password" [class.is-invalid]="registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null" formControlName="confirmPassword" class="form-control form-custom" placeholder="">
+                    <input id="confirmPasswordInput" type="password" [class.is-invalid]="registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null" formControlName="confirmPassword" class="form-control form-custom" placeholder="">
                 </div>
             </div>
 
@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="d-flex">
-            <button type="submit" [disabled]="!registration.form.valid || !registration.agreed.value" class="signup">Sign Up</button>
+            <button (click)="onSubmit()"  class="signup">Sign Up</button>
         </div>
     </div>
 </form>
