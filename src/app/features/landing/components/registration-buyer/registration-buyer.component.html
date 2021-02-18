@@ -45,7 +45,13 @@
     </div>
     <div *ngIf="registration.screen['three']" class="fourth-screen d-flex flex-column">
         <div class="first-row4">
-            <p class="heading">Sign up</p>
+            <div class="d-flex justify-content-between">
+                <p class="heading">Sign up</p>
+                <div class="d-flex back" (click)="registration.screen['three']=false;registration.screen['two']=true;">
+                    <img src="/assets/transaction-details/arrow.png" class="arrow-back">
+                    <p>Back</p>
+                </div>
+            </div>
             <p class="sub-heading">Sign up to use our services</p>
         </div>
         <div class="mb-auto">

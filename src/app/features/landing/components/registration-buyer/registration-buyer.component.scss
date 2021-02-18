@@ -281,3 +281,20 @@ select{
 .ppl-list:hover{
   background: var(--extraLightGray);
 }
+.back{
+  margin-left: auto;
+  cursor: pointer;
+}
+.arrow-back{
+  width: 1vw;
+  height: 1vw;
+  align-self: center;
+  margin-right: .5vw;
+}
+.back p{
+  color: var(--green);
+  font-size: 1vw;
+  font-weight: 500;
+  margin-bottom: 0;
+  align-self: center;
+}
