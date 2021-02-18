@@ -298,3 +298,13 @@ select{
   margin-bottom: 0;
   align-self: center;
 }
+.select-div{
+  position: relative;
+}
+.drop{
+  width: .8vw;
+  height: .4vw;
+  position: absolute;
+  left: 94%;
+  top: 45%;
+}

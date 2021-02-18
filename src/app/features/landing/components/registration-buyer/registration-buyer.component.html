@@ -3,10 +3,13 @@
         <p class="heading">How did you hear about us?</p>
         <div class="mt-auto mb-auto d-flex flex-column">
             <p class="label">Select an option</p>
-            <select #select (change)="showReferral(select.value)" class="form-control form-custom" id="">
-                <option [ngValue]="null" [disabled]="true" >Select</option>
-                <option *ngFor="let i of registration.aboutUs | keyvalue: helper.originalOrder">{{i.key}}</option>
-            </select>
+            <div class="select-div">
+                <select #select (change)="showReferral(select.value)" class="form-control form-custom" id="">
+                    <option [ngValue]="null" [disabled]="true" >Select</option>
+                    <option *ngFor="let i of registration.aboutUs | keyvalue: helper.originalOrder">{{i.key}}</option>
+                </select>
+                <img src="/assets/landing/drop.svg" class="drop">
+            </div>
             <div *ngIf="registration.other" class="referral mt1-custom" formGroupName="referral">
                 <input formControlName="referralDetails" class="form-control form-custom" placeholder="">
             </div>
