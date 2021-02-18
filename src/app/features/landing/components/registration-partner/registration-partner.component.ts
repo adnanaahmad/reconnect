@@ -34,8 +34,7 @@ export class RegistrationPartnerComponent implements OnInit {
     });
     this.register.form = this.fb.group({
       company: this.fb.group({
-        name: [null, [Validators.required, Validators.pattern('^((?![\\^!@#$*~ <>?]).)((?![\\^!@#$*~<>?]).){0,73}((?![\\^!@#$*~ <>?]).)$'),
-          Validators.minLength(2), Validators.maxLength(50)]],
+        name: [null, [Validators.required, Validators.pattern('^((?![\\^!@#$*~ <>?]).)((?![\\^!@#$*~<>?]).){0,73}((?![\\^!@#$*~ <>?]).)$'), Validators.minLength(2), Validators.maxLength(50)]],
         licenseNumber: [null, Validators.required],
         phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
         city: [null, Validators.required],
