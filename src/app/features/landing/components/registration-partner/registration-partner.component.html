@@ -11,7 +11,7 @@
                 <img src="/assets/landing/drop.svg" class="drop">
             </div>
         </div>
-        <button [disabled]="!register.form.get('personal.role').valid" (click)="register.screen['one']=false;register.screen['two']=true;" class="continue mt-auto align-self-end">Continue</button>
+        <button [disabled]="!register.form.get('personal.role').valid" (click)="register.screen['one']=false;register.screen['two']=true;" class="continue continue-mt">Continue</button>
     </div>
 
     <div *ngIf="register.screen['two']" class="d-flex flex-column parent" formGroupName="company">
