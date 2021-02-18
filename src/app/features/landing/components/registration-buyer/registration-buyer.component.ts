@@ -38,8 +38,8 @@ export class RegistrationBuyerComponent implements OnInit {
     this.registration.aboutUs = this.constant.aboutUs;
     this.registration.form = this.fb.group({
       role: [this.constant.role.BUYER],
-      firstName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
-      lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
+      firstName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
+      lastName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
       email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [null, [Validators.required, Validators.minLength(6)]],
       confirmPassword: [null, Validators.required],
