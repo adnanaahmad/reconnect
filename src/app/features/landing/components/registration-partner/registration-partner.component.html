@@ -30,7 +30,7 @@
             </div>
             <div class="input-flex" >
                 <p [ngClass]="{'danger':register.form.get(['company', 'licenseNumber']).invalid && register.form.get(['company', 'licenseNumber']).touched}" class="label">License</p>
-                <input [class.is-invalid]="register.form.get(['company', 'licenseNumber']).invalid && register.form.get(['company', 'licenseNumber']).touched" type="number" formControlName="licenseNumber" class="form-control form-custom" placeholder="">
+                <input [class.is-invalid]="register.form.get(['company', 'licenseNumber']).invalid && register.form.get(['company', 'licenseNumber']).touched" type="text" formControlName="licenseNumber" class="form-control form-custom" placeholder="">
             </div>
         </div>
         <div class="d-flex name-row">
