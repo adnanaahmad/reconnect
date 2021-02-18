@@ -40,7 +40,7 @@ export class RegistrationPartnerComponent implements OnInit {
         city: [null, Validators.required],
         street: [null, [Validators.required, Validators.maxLength(150), Validators.pattern('^((?![\\^!@#$*~ <>?]).)((?![\\^!@#$*~<>?]).){0,73}((?![\\^!@#$*~ <>?]).)$')]],
         state: [null, Validators.required],
-        zip: [null, Validators.required],
+        zip: [null, [Validators.required, Validators.pattern('^[0-9]{1,5}$')]],
       }),
       personal: this.fb.group({
         role: [null, Validators.required],
