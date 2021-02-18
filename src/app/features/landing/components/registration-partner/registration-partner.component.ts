@@ -38,7 +38,7 @@ export class RegistrationPartnerComponent implements OnInit {
         licenseNumber: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
         phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
         city: [null, Validators.required],
-        street: [null, Validators.required],
+        street: [null, [Validators.required, Validators.maxLength(150), Validators.pattern('^((?![\\^!@#$*~ <>?]).)((?![\\^!@#$*~<>?]).){0,73}((?![\\^!@#$*~ <>?]).)$')]],
         state: [null, Validators.required],
         zip: [null, Validators.required],
       }),
