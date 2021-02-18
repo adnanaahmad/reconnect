@@ -42,7 +42,7 @@ export class RegistrationBuyerComponent implements OnInit {
       lastName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
       email: [null, [Validators.required, Validators.pattern('^(([^<>()[\\]\\\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\"]+)*)|(\\".+\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]],
       password: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
-      confirmPassword: [null, Validators.required, Validators.minLength(8), Validators.maxLength(16)],
+      confirmPassword: [null, [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       referral : this.fb.group({
         type: [null, Validators.required],
         details: [null, Validators.required],
