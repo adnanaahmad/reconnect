@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {take} from 'rxjs/operators';
+import {ConstantService} from '../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-set-password',
@@ -21,7 +22,8 @@ export class SetPasswordComponent implements OnInit {
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute,
               private router: Router,
               private auth: AuthService,
-              private toaster: ToastrService) {
+              private toaster: ToastrService,
+              private constant: ConstantService) {
     activatedRoute.queryParams.subscribe(params => {
       this.setPassword.firstName = params.firstName;
       this.setPassword.lastName = params.lastName;
@@ -46,7 +48,8 @@ export class SetPasswordComponent implements OnInit {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));
-        this.router.navigateByUrl('/home/profile/edit/personalDetails').then();
+        res.result.user.role === this.constant.role.BUYER ? this.router.navigateByUrl('/home/profile').then() :
+            this.router.navigateByUrl('/home/profile/edit/personalDetails').then();
         this.toaster.success('You have successfully logged in');
       }
     }, error => {
