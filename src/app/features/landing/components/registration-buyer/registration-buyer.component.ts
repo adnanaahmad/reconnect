@@ -15,6 +15,10 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./registration-buyer.component.scss']
 })
 export class RegistrationBuyerComponent implements OnInit {
+  @ViewChild('password') password: ElementRef;
+  @ViewChild('confirmPassword') confirmPassword: ElementRef;
+  @ViewChild('showPassword') togglePassword: ElementRef;
+  @ViewChild('showConfirmPassword') toggleConfirmPassword: ElementRef;
   registration: RegistrationBuyerModel = {} as RegistrationBuyerModel;
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -105,5 +109,13 @@ export class RegistrationBuyerComponent implements OnInit {
   }
   hideProfessionalList(): void{
     this.registration.professional = null;
+  }
+  toggle(value): void{
+    if (value) {
+      this.auth.helperToggle(this.password.nativeElement, this.togglePassword.nativeElement);
+    }
+    else{
+      this.auth.helperToggle(this.confirmPassword.nativeElement, this.toggleConfirmPassword.nativeElement);
+    }
   }
 }

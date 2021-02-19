@@ -177,6 +177,7 @@ p{
 
 .input-flex{
   flex-grow: 1;
+  position: relative;
 }
 .input-flex:first-child{
   margin-right: 1vw;
@@ -307,4 +308,12 @@ select{
   position: absolute;
   left: 94%;
   top: 45%;
+}
+.password{
+  position: absolute;
+  height: 1.3vw;
+  width: 1.3vw;
+  left: 12vw;
+  top: 2vw;
+  cursor: pointer;
 }

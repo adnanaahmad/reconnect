@@ -77,13 +77,15 @@
                     <p [ngClass]="{'danger':registration.form.get('password').invalid && registration.form.get('password').touched}" class="label">
                         Password
                     </p>
-                    <input type="password" [class.is-invalid]="registration.form.get('password').invalid && registration.form.get('password').touched" formControlName="password" class="form-control form-custom" placeholder="">
+                    <input #password type="password" [class.is-invalid]="registration.form.get('password').invalid && registration.form.get('password').touched" formControlName="password" class="form-control form-custom" placeholder="">
+                    <img #showPassword (click)="toggle(true)" class="password" src="/assets/password/Show.svg">
                 </div>
                 <div class="input-flex" >
                     <p id="confirmPasswordText" class="label" [ngClass]="{'danger': registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null}">
                         Confirm Password
                     </p>
-                    <input id="confirmPasswordInput" type="password" [class.is-invalid]="registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null" formControlName="confirmPassword" class="form-control form-custom" placeholder="">
+                    <input #confirmPassword id="confirmPasswordInput" type="password" [class.is-invalid]="registration.form.get('password').value != registration.form.get('confirmPassword').value && registration.form.get('confirmPassword').value != null" formControlName="confirmPassword" class="form-control form-custom" placeholder="">
+                    <img #showConfirmPassword (click)="toggle(false)" class="password" src="/assets/password/Show.svg">
                 </div>
             </div>
 
