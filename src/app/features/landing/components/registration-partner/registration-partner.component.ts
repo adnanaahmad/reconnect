@@ -46,7 +46,7 @@ export class RegistrationPartnerComponent implements OnInit {
         role: [null, Validators.required],
         firstName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
         lastName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
-        nmlsNumber: [null, Validators.required],
+        nmlsNumber: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]],
         phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
         email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       }),

@@ -96,7 +96,7 @@
             <div class="d-flex name-row">
                 <div class="input-flex">
                     <p [ngClass]="{'danger': register.form.get(['personal', 'nmlsNumber']).invalid && register.form.get(['personal', 'nmlsNumber']).touched}" class="label">NMLS#</p>
-                    <input type="number" [class.is-invalid]="register.form.get(['personal', 'nmlsNumber']).invalid && register.form.get(['personal', 'nmlsNumber']).touched" formControlName="nmlsNumber" class="form-control form-custom" placeholder="">
+                    <input type="text" [class.is-invalid]="register.form.get(['personal', 'nmlsNumber']).invalid && register.form.get(['personal', 'nmlsNumber']).touched" formControlName="nmlsNumber" class="form-control form-custom" placeholder="">
                 </div>
                 <div class="input-flex" >
                     <p [ngClass]="{'danger': register.form.get(['personal', 'phoneNumber']).invalid && register.form.get(['personal', 'phoneNumber']).touched}" class="label">Phone Number</p>
