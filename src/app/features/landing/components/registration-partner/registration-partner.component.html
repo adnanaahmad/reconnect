@@ -1,4 +1,4 @@
-<form [formGroup]="register.form" class="parent" (ngSubmit)="onSubmit()">
+<form [formGroup]="register.form" class="parent">
     <div *ngIf="register.screen['one']" class="d-flex flex-column parent" formGroupName="personal">
         <p class="heading">Become a Partner</p>
         <div class="mt-custom">
@@ -112,10 +112,10 @@
             <label class="container">
                 <input formControlName="agreed" id="myCheck" type="checkbox">
                 <img class="checkmark" src="/assets/loan-details/tick.svg">
-                <p class="remember text-nowrap">I have agreed to the terms and conditions</p>
+                <p [ngClass]="{'danger': register.form.get('agreed').invalid && register.form.get('agreed').touched || !register.form.get('agreed').value&&register.form.get('agreed').touched}" class="remember text-nowrap">I have agreed to the terms and conditions</p>
             </label>
         </div>
-        <button type="submit" [disabled]="(!register.form.get('personal').valid) || !register.form.get('agreed').value" class="continue mt-auto">
+        <button (click)="onSubmit()" class="continue mt-auto">
             Sign up
         </button>
     </div>

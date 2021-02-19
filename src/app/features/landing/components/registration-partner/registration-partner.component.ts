@@ -61,21 +61,26 @@ export class RegistrationPartnerComponent implements OnInit {
     });
   }
   onSubmit(): void{
-    const data = {... this.register.form.get('personal').value, ...{company: this.register.form.get('company').value}};
-    console.log(data);
-    this.auth.signUp(data).pipe(take(1)).subscribe(res => {
-      console.log(res);
-      if (res.result.user.accountStatus === 'pendingApproval'){
-        this.register.screen.three = false;
-        this.register.screen.four = true;
-      }
-    }, error => {
-      if (error.error.result.CODE === 'BAD_REQUEST'){
-        this.toaster.error(error.error.result.details.MESSAGE);
-      } else {
-        this.toaster.error(error.error.result.MESSAGE);
-      }
-    });
+    if ((!this.register.form.get('personal').valid) || !this.register.form.get('agreed').value){
+      this.register.form.get('personal').markAllAsTouched();
+      this.register.form.get('agreed').markAllAsTouched();
+    } else {
+      const data = {... this.register.form.get('personal').value, ...{company: this.register.form.get('company').value}};
+      console.log(data);
+      this.auth.signUp(data).pipe(take(1)).subscribe(res => {
+        console.log(res);
+        if (res.result.user.accountStatus === 'pendingApproval'){
+          this.register.screen.three = false;
+          this.register.screen.four = true;
+        }
+      }, error => {
+        if (error.error.result.CODE === 'BAD_REQUEST'){
+          this.toaster.error(error.error.result.details.MESSAGE);
+        } else {
+          this.toaster.error(error.error.result.MESSAGE);
+        }
+      });
+    }
   }
   proceedToScreenThree(): void{
     if (!this.register.form.get('company').valid){
