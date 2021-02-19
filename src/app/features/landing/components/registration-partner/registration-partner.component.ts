@@ -48,7 +48,7 @@ export class RegistrationPartnerComponent implements OnInit {
         lastName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
         nmlsNumber: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]],
         phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
-        email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+        email: [null, [Validators.required, Validators.pattern('^(([^<>()[\\]\\\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\"]+)*)|(\\".+\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]],
       }),
       agreed: [null, Validators.required]
     });
