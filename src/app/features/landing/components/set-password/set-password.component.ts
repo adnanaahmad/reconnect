@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {LoginModel} from '../../models/login.model';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {SetPasswordModel} from '../../models/set-password.model';
@@ -13,6 +13,10 @@ import {take} from 'rxjs/operators';
   styleUrls: ['./set-password.component.scss']
 })
 export class SetPasswordComponent implements OnInit {
+  @ViewChild('password') password: ElementRef;
+  @ViewChild('confirmPassword') confirmPassword: ElementRef;
+  @ViewChild('showPassword') togglePassword: ElementRef;
+  @ViewChild('showConfirmPassword') toggleConfirmPassword: ElementRef;
   setPassword: SetPasswordModel = {} as SetPasswordModel;
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -55,5 +59,12 @@ export class SetPasswordComponent implements OnInit {
       return {invalid: true};
     }
   }
-
+  toggle(value): void{
+    if (value) {
+      this.auth.helperToggle(this.password.nativeElement, this.togglePassword.nativeElement);
+    }
+     else{
+      this.auth.helperToggle(this.confirmPassword.nativeElement, this.toggleConfirmPassword.nativeElement);
+    }
+  }
 }

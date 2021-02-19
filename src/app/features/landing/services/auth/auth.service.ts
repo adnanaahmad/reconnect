@@ -30,5 +30,16 @@ export class AuthService {
   completeRegistration(data): Observable<any>{
     return  this.helper.requestCall(this.method.post, this.apiRoutes.completeRegistration, data);
   }
+  helperToggle(password, toggle): void{
+    const element = password as HTMLInputElement;
+    const image = toggle as HTMLImageElement;
+    if (element.type === 'password') {
+      element.type = 'text';
+      image.src = '/assets/password/Hide.svg';
+    } else {
+      element.type = 'password';
+      image.src = '/assets/password/Show.svg';
+    }
+  }
 
 }
