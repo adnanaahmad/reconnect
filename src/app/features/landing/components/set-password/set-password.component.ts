@@ -26,6 +26,7 @@ export class SetPasswordComponent implements OnInit {
       this.setPassword.firstName = params.firstName;
       this.setPassword.lastName = params.lastName;
       this.setPassword.token = params.token;
+      this.setPassword.resetPassword = (params.resetPassword === 'true');
     });
   }
 
@@ -37,7 +38,10 @@ export class SetPasswordComponent implements OnInit {
   }
   onSubmit(): void{
     localStorage.setItem('token', this.setPassword.token);
-    this.auth.completeRegistration({password: this.setPassword.form.get('password').value}).
+    this.setPassword.resetPassword ? this.helperSubmit('resetPassword') : this.helperSubmit('completeRegistration');
+  }
+  helperSubmit(api): void{
+    this.auth[api]({password: this.setPassword.form.get('password').value}).
     pipe(take(1)).subscribe(res => {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);

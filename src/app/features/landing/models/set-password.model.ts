@@ -5,4 +5,5 @@ export interface SetPasswordModel{
     firstName: string;
     lastName: string;
     token: string;
+    resetPassword: boolean;
 }

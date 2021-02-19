@@ -44,5 +44,8 @@ export class AuthService {
   forgotPassword(data: string): Observable<any>{
     return this.helper.requestCall(this.method.post, this.apiRoutes.forgotPassword, data);
   }
+  resetPassword(data): Observable<any>{
+    return  this.helper.requestCall(this.method.post, this.apiRoutes.resetPassword, data);
+  }
 
 }
