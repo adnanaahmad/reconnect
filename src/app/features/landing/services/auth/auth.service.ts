@@ -41,5 +41,8 @@ export class AuthService {
       image.src = '/assets/password/Show.svg';
     }
   }
+  forgotPassword(data: string): Observable<any>{
+    return this.helper.requestCall(this.method.post, this.apiRoutes.forgotPassword, data);
+  }
 
 }

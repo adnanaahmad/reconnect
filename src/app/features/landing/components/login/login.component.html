@@ -11,7 +11,7 @@
     </p>
     <input type="password" [class.is-invalid] = "login.form.get('password').invalid && login.form.get('password').touched" formControlName="password" class="form-control form-custom" placeholder="">
     <div class="mb-custom1">
-        <p class="forgot-pass">Forgot Password?</p>
+        <a routerLink="/forgotPassword"><p class="forgot-pass">Forgot Password?</p></a>
     </div>
     <div>
         <label class="container">

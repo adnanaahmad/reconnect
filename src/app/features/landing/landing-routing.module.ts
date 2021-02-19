@@ -5,6 +5,7 @@ import {LoginComponent} from './components/login/login.component';
 import {RegistrationBuyerComponent} from './components/registration-buyer/registration-buyer.component';
 import {RegistrationPartnerComponent} from './components/registration-partner/registration-partner.component';
 import {SetPasswordComponent} from './components/set-password/set-password.component';
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
             {
                 path: 'setPassword',
                 component: SetPasswordComponent
+            },
+            {
+                path: 'forgotPassword',
+                component: ForgotPasswordComponent
             },
       ],
     }

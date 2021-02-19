@@ -37,6 +37,7 @@ export class ConstantService {
    apiRoutes = {
      signin: `${environment.apiUrl}/user/signin`,
      signup: `${environment.apiUrl}/user/signup`,
+     forgotPassword: `${environment.apiUrl}/user/forgot-password`,
      searchReference: `${environment.apiUrl}/user/search-name`,
      editBuyer: `${environment.apiUrl}/user/update`,
      viewBuyer: `${environment.apiUrl}/user/profile`,

@@ -9,10 +9,11 @@ import {RegistrationPartnerComponent} from './components/registration-partner/re
 import {SharedModule} from '../../shared/shared.module';
 import {LocationService} from './services/location/location.service';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 
 @NgModule({
-  declarations: [LandingComponent, LoginComponent, RegistrationPartnerComponent, RegistrationBuyerComponent, SetPasswordComponent],
+  declarations: [LandingComponent, LoginComponent, RegistrationPartnerComponent, RegistrationBuyerComponent, SetPasswordComponent, ForgotPasswordComponent],
   imports: [
       CommonModule,
       LandingRoutingModule,
