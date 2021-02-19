@@ -98,3 +98,12 @@ p{
 .danger{
   color: var(--red);
 }
+.forgot-pass{
+  color: var(--green);
+  font-size: .8vw;
+  margin-bottom: 0;
+  float: right;
+  margin-top: .5vw;
+  font-weight: 500;
+  cursor: pointer;
+}
