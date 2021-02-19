@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <button [disabled]="!register.form.get('company').valid" (click)="register.screen['two']=false;register.screen['three']=true;" class="continue mt-auto align-self-end">Continue</button>
+        <div (click)="proceedToScreenThree()" class="continue mt-auto align-self-end">Continue</div>
     </div>
 
     <div *ngIf="register.screen['three']" class="d-flex flex-column parent">

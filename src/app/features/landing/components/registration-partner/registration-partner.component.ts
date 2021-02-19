@@ -77,4 +77,12 @@ export class RegistrationPartnerComponent implements OnInit {
       }
     });
   }
+  proceedToScreenThree(): void{
+    if (!this.register.form.get('company').valid){
+      this.register.form.get('company').markAllAsTouched();
+    } else {
+      this.register.screen.two = false;
+      this.register.screen.three = true;
+    }
+  }
 }
