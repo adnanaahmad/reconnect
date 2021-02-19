@@ -22,7 +22,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
               private router: Router,
               private store: StoreService,
               private constant: ConstantService,
-              private location: LocationService) {}
+              private location: LocationService) {
+    if (!localStorage.getItem('token')) {
+      this.router.navigateByUrl('/login').then();
+    }
+  }
 
   ngOnInit(): void {
     this.navigation.menuItems = this.navigationService.getBuyerMenuItems();
