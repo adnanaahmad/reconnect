@@ -51,7 +51,7 @@ export class EditPersonalDetailsComponent implements OnInit {
         month: [null, Validators.required],
         year: [null, Validators.required]
       }),
-      email: [null, Validators.required],
+      email: [{value: null, disabled: true }, Validators.required],
       title: [null, Validators.required],
       licenseNumber: [null, Validators.required],
       realEstateLicenseNumber: [null, Validators.required],
