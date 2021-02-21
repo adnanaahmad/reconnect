@@ -67,20 +67,23 @@
                 <div class="c2-col2">
                     <p class="label">Birthday</p>
                     <div class="d-flex justify-content-between mb-custom" formGroupName="birthday">
-                        <div class="selected">
+                        <div class="selected d-flex justify-content-end">
                             <select formControlName="month" class="form-control f1">
                                 <option *ngFor="let month of months; let i = index" [value]="i+1">{{month}}</option>
                             </select>
+                            <img src="/assets/landing/drop.svg" class="drop">
                         </div>
-                        <div class="selected">
+                        <div class="selected d-flex justify-content-end">
                             <select formControlName="day" class="form-control f1">
                                 <option *ngFor="let day of days" [value]="day">{{day}}</option>
                             </select>
+                            <img src="/assets/landing/drop.svg" class="drop">
                         </div>
-                        <div class="selected">
+                        <div class="selected d-flex justify-content-end">
                             <select formControlName="year" class="form-control f1">
                                 <option *ngFor="let year of years; let i = index" [value]="year">{{year}}</option>
                             </select>
+                            <img src="/assets/landing/drop.svg" class="drop">
                         </div>
                     </div>
                     <p class="label">Email</p>
