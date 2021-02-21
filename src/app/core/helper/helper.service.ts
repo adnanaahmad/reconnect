@@ -75,14 +75,18 @@ export class HelperService {
   handleFileInput(files, user): void {
     const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
     if (validImageTypes.includes(files[0].type)) {
-      const reader = new FileReader();
-      if (files && files.length) {
-        const file = files.item(0);
-        user.fileUpload = file;
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          user.image = reader.result as string;
-        };
+      if (Number(files[0].size) < 3145728) {
+        const reader = new FileReader();
+        if (files && files.length) {
+          const file = files.item(0);
+          user.fileUpload = file;
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            user.image = reader.result as string;
+          };
+        }
+      } else {
+        this.toaster.error('File size is greater than 3 Mb');
       }
     } else {
       this.toaster.error('Invalid image format');
