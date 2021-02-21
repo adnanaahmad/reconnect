@@ -4,13 +4,14 @@ import {ConstantService} from '../constant/constant.service';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
 
-  constructor(private constants: ConstantService, private http: HttpClient) { }
+  constructor(private constants: ConstantService, private http: HttpClient, private toaster: ToastrService) { }
 
   setModalPosition(): void {
     const modal = document.getElementsByClassName('modal-content') as HTMLCollectionOf<HTMLElement>;
@@ -72,14 +73,19 @@ export class HelperService {
     return response;
   }
   handleFileInput(files, user): void {
-    const reader = new FileReader();
-    if (files && files.length) {
-      const file = files.item(0);
-      user.fileUpload = file;
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        user.image = reader.result as string;
-      };
+    const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/jpg'];
+    if (validImageTypes.includes(files[0].type)) {
+      const reader = new FileReader();
+      if (files && files.length) {
+        const file = files.item(0);
+        user.fileUpload = file;
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          user.image = reader.result as string;
+        };
+      }
+    } else {
+      this.toaster.error('Invalid image format');
     }
   }
 }

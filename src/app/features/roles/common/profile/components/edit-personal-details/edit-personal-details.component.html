@@ -14,7 +14,8 @@
             <div *ngIf="!personalDetails.image" class="profile-div mb-custom">
                 <img src="/assets/profile/profile.svg" class="profile">
                 <div>
-                    <input type="file"
+                    <input accept="image/*"
+                           type="file"
                            id="file"
                            (change)="handleFileInput($event.target.files)">
                     <label for="file" class="upload">Upload</label>
