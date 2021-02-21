@@ -118,6 +118,7 @@ select{
 }
 .selected{
   flex: 1;
+  position: relative;
 }
 .selected:first-child{
   margin-right: 2.5vw;
@@ -153,4 +154,11 @@ select{
 .danger-select:focus{
   border-color: #dc3545;
   box-shadow: 0 0 0 0.2rem rgb(220 53 69 / 25%);
+}
+.drop{
+  width: .8vw;
+  height: .4vw;
+  position: absolute;
+  top: 2.7vw;
+  right: .3vw;
 }

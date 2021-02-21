@@ -26,31 +26,35 @@ export class EditCompanyDetailsComponent implements OnInit {
   }
   onSubmit(): void{
     console.log(this.companyDetails.form.value);
-    if (this.companyDetails.fileUpload){
-      this.profile.uploadCompanyPicture(this.companyDetails.fileUpload).pipe(take(1)).subscribe(res => {
-         console.log(res);
+    if (!this.companyDetails.form.valid){
+      this.companyDetails.form.markAllAsTouched();
+    } else {
+      if (this.companyDetails.fileUpload){
+        this.profile.uploadCompanyPicture(this.companyDetails.fileUpload).pipe(take(1)).subscribe(res => {
+          console.log(res);
+        }, error => {
+          console.log(error);
+        });
+      }
+      this.profile.saveProfile({company: this.companyDetails.form.value}).pipe(take(1)).subscribe(res => {
+        // console.log(res);
+        this.router.navigateByUrl('/home/profile').then();
+        console.log(res);
       }, error => {
         console.log(error);
       });
     }
-    this.profile.saveProfile({company: this.companyDetails.form.value}).pipe(take(1)).subscribe(res => {
-      // console.log(res);
-      this.router.navigateByUrl('/home/profile').then();
-      console.log(res);
-    }, error => {
-      console.log(error);
-    });
   }
   initialiseCompanyForm(): void{
     this.companyDetails.form = this.fb.group({
-      name: [null, Validators.required],
-      licenseNumber: [null, Validators.required],
+      name: [null, [Validators.required, Validators.pattern('^((?![\\^!@#$*~ <>?]).)((?![\\^!@#$*~<>?]).){0,73}((?![\\^!@#$*~ <>?]).)$'), Validators.minLength(2), Validators.maxLength(50)]],
+      licenseNumber: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
       phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
-      faxNumber: [null, Validators.required],
-      street: [null, Validators.required],
+      faxNumber: [null, [Validators.required, Validators.pattern('^\\d{11}$')]],
+      street: [null, [Validators.required, Validators.maxLength(150), Validators.pattern('^((?![\\^!@#$*~ <>?]).)((?![\\^!@#$*~<>?]).){0,73}((?![\\^!@#$*~ <>?]).)$')]],
       city: [null, Validators.required],
       state: [null, Validators.required],
-      zip: [null, Validators.required],
+      zip: [null, [Validators.required, Validators.pattern('^[0-9]{1,5}$')]],
     });
   }
   setCompanyData(): void{
