@@ -37,13 +37,13 @@ export class EditPersonalDetailsComponent implements OnInit {
       firstName:  [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       socialMedia: this.fb.group({
-        facebook: [null, Validators.required],
-        linkedIn: [null, Validators.required],
-        instagram: [null, Validators.required],
-        twitter: [null, Validators.required]
+        facebook: [null],
+        linkedIn: [null],
+        instagram: [null],
+        twitter: [null]
       }),
-      bio: [null, Validators.required],
-      profileVideoUrl: [null, Validators.required],
+      bio: [null, [Validators.required, Validators.maxLength(500), Validators.pattern('^(.|\\s)*[a-zA-Z]+(.|\\s)*$')]],
+      profileVideoUrl: [null],
       phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
       role: [{value: null, disabled: true }, Validators.required],
       birthday: this.fb.group({
@@ -52,10 +52,10 @@ export class EditPersonalDetailsComponent implements OnInit {
         year: [null, Validators.required]
       }),
       email: [{value: null, disabled: true }, Validators.required],
-      title: [null, Validators.required],
-      licenseNumber: [null, Validators.required],
-      realEstateLicenseNumber: [null, Validators.required],
-      brokerLicense: [null, Validators.required]
+      title: [null, [Validators.required, Validators.maxLength(50), Validators.pattern('^(.|\\s)*[a-zA-Z]+(.|\\s)*$')]],
+      licenseNumber: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
+      realEstateLicenseNumber: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
+      brokerLicense: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]]
     });
   }
 
@@ -103,31 +103,35 @@ export class EditPersonalDetailsComponent implements OnInit {
     });
   }
   onSubmit(): void{
-    const user = this.store.getUserData();
-    if (Object.values(this.personalDetails.form.get('birthday').value).some(element => element === null)){
-      delete this.personalDetails.form.value.birthday;
-    }
-    if (this.personalDetails.fileUpload){
-      this.profile.uploadProfilePicture(this.personalDetails.fileUpload).pipe(take(1)).subscribe(res => {
-        user.profilePictureUrl = res.result.profilePictureUrl;
+    if (this.personalDetails.form.valid){
+      const user = this.store.getUserData();
+      if (Object.values(this.personalDetails.form.get('birthday').value).some(element => element === null)){
+        delete this.personalDetails.form.value.birthday;
+      }
+      if (this.personalDetails.fileUpload){
+        this.profile.uploadProfilePicture(this.personalDetails.fileUpload).pipe(take(1)).subscribe(res => {
+          user.profilePictureUrl = res.result.profilePictureUrl;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.store.updateUserData(user);
+        }, error => {
+          console.log(error);
+        });
+      }
+      console.log(this.personalDetails.form.value);
+      this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}}).
+      pipe(take(1)).subscribe(res => {
+        user.firstName = res.result.firstName;
+        user.lastName = res.result.lastName;
         localStorage.setItem('user', JSON.stringify(user));
         this.store.updateUserData(user);
+        this.router.navigateByUrl('/home/profile').then();
+        console.log(res);
       }, error => {
         console.log(error);
       });
+    } else {
+      this.personalDetails.form.markAllAsTouched();
     }
-    console.log(this.personalDetails.form.value);
-    this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}}).
-    pipe(take(1)).subscribe(res => {
-      user.firstName = res.result.firstName;
-      user.lastName = res.result.lastName;
-      localStorage.setItem('user', JSON.stringify(user));
-      this.store.updateUserData(user);
-      this.router.navigateByUrl('/home/profile');
-      console.log(res);
-    }, error => {
-      console.log(error);
-    });
   }
   getMonth(idx): string {
     const objDate = new Date();

@@ -1,8 +1,6 @@
-<form [formGroup]="personalDetails.form" (ngSubmit)="onSubmit()" *ngIf="loader">
+<form [formGroup]="personalDetails.form" *ngIf="loader">
     <div class="d-flex parent-pg justify-content-end">
-        <button type="submit" [disabled]="!(personalDetails.form.get(['firstName']).valid &&
-         personalDetails.form.get(['lastName']).valid &&
-          personalDetails.form.get(['phoneNumber']).valid )" class="save-btn">Save</button>
+        <button (click)="onSubmit()" class="save-btn">Save</button>
         <div class="card-1">
             <div *ngIf="personalDetails.image" class="img-div">
                 <img [src]="personalDetails.image"  class="profile-image">
@@ -59,13 +57,15 @@
                     <input prefix="+1 " mask="(000) 000 0000" [class.is-invalid]="personalDetails.form.get('phoneNumber').invalid && personalDetails.form.get('phoneNumber').touched" formControlName="phoneNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
                     <p class="label">Role</p>
                     <input formControlName="role" type="text" class="form-control f1 mb-custom"  placeholder="">
-                    <p class="label">Title</p>
-                    <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
-                    <p class="label">Real Estate Lic #</p>
-                    <input formControlName="realEstateLicenseNumber" type="text" class="form-control f1"  placeholder="">
+                    <p [ngClass]="{'danger': personalDetails.form.get('title').invalid&&personalDetails.form.get('title').touched}" class="label">Title</p>
+                    <input [ngClass]="{'is-invalid': personalDetails.form.get('title').invalid&&personalDetails.form.get('title').touched}" formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <p [ngClass]="{'danger': personalDetails.form.get('realEstateLicenseNumber').invalid&&personalDetails.form.get('realEstateLicenseNumber').touched}" class="label">Real Estate Lic #</p>
+                    <input [ngClass]="{'is-invalid': personalDetails.form.get('realEstateLicenseNumber').invalid&&personalDetails.form.get('realEstateLicenseNumber').touched}" formControlName="realEstateLicenseNumber" type="text" class="form-control f1"  placeholder="">
                 </div>
                 <div class="c2-col2">
-                    <p class="label">Birthday</p>
+                    <p [ngClass]="{'danger': personalDetails.form.get(['birthday', 'month']).invalid&&personalDetails.form.get(['birthday', 'month']).touched
+                    && personalDetails.form.get(['birthday', 'day']).invalid&&personalDetails.form.get(['birthday', 'day']).touched
+                    && personalDetails.form.get(['birthday', 'year']).invalid&&personalDetails.form.get(['birthday', 'year']).touched}" class="label">Birthday</p>
                     <div class="d-flex justify-content-between mb-custom" formGroupName="birthday">
                         <div class="selected d-flex justify-content-end">
                             <select formControlName="month" class="form-control f1">
@@ -88,17 +88,17 @@
                     </div>
                     <p class="label">Email</p>
                     <input formControlName="email" type="text" class="form-control f1 mb-custom"  placeholder="">
-                    <p class="label">License #</p>
-                    <input formControlName="licenseNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
-                    <p class="label">Broker Lic #</p>
-                    <input formControlName="brokerLicense" type="text" class="form-control f1"  placeholder="">
+                    <p [ngClass]="{'danger': personalDetails.form.get('licenseNumber').invalid&&personalDetails.form.get('licenseNumber').touched}" class="label">License #</p>
+                    <input [ngClass]="{'is-invalid': personalDetails.form.get('licenseNumber').invalid&&personalDetails.form.get('licenseNumber').touched}" formControlName="licenseNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <p [ngClass]="{'danger': personalDetails.form.get('brokerLicense').invalid&&personalDetails.form.get('brokerLicense').touched}" class="label">Broker Lic #</p>
+                    <input [ngClass]="{'is-invalid': personalDetails.form.get('brokerLicense').invalid&&personalDetails.form.get('brokerLicense').touched}" formControlName="brokerLicense" type="text" class="form-control f1"  placeholder="">
                 </div>
             </div>
             <div class="card-3">
                 <div class="d-flex">
                     <div class="bio">
-                        <p class="label">Bio</p>
-                        <textarea formControlName="bio" type="text" class="form-control f2"  rows="7"></textarea>
+                        <p [ngClass]="{'danger': personalDetails.form.get('bio').invalid&&personalDetails.form.get('bio').touched}" class="label">Bio</p>
+                        <textarea [ngClass]="{'is-invalid': personalDetails.form.get('bio').invalid&&personalDetails.form.get('bio').touched}"  formControlName="bio" type="text" class="form-control f2"  rows="7"></textarea>
                     </div>
                     <div class="video">
                         <p class="label">Video Link</p>
