@@ -8,29 +8,42 @@
           <div class="loan-heading"><p>Loan Details</p></div>
           <div class="row d-flex loan-label">
              <div class="col-4 form-group">
-                <label for="inputEmail4"><p>Down Payment</p></label>
-                <input formControlName="downPayment" type="" class="form-control" id="" placeholder="">
+               <label><p>Loan Term</p></label>
+               <input formControlName="loanTerm" type="" class="form-control" placeholder="">
              </div>
              <div class="col-4 form-group">
-               <label for="inputEmail4"><p>Loan Term</p></label>
-               <input formControlName="loanTerm" type="" class="form-control" id="" placeholder="">
-             </div>
-             <div class="col-4 form-group">
-               <label for="inputEmail4"><p>Loan Rate</p></label>
-               <input formControlName="loanRate" type="" class="form-control" id="" placeholder="">
+               <label><p>Loan Rate</p></label>
+               <input formControlName="loanRate" type="" class="form-control" placeholder="">
              </div>
           </div>
        </div>
+        <div class="mortgage-over row-space" formGroupName="downPayment">
+            <div class="loan-heading"><p>Down Payment</p></div>
+            <div class="row d-flex loan-label">
+                <div class="col-4 form-group">
+                    <label><p>1 Unit</p></label>
+                    <input formControlName="oneUnit" type="number" class="form-control">
+                </div>
+                <div class="col-4 form-group">
+                    <label><p>2 Unit</p></label>
+                    <input formControlName="twoUnit" type="number" class="form-control">
+                </div>
+                <div class="col-4 form-group">
+                    <label><p>3-4 Unit</p></label>
+                    <input formControlName="threeToFourUnit" type="number" class="form-control">
+                </div>
+            </div>
+        </div>
         <div class="ratios row-space">
           <div class="loan-heading"><p>Ratios</p></div>
           <div class="row d-flex loan-label">
              <div class="col-4 form-group">
-                <label for="inputEmail4"><p>Housing Ratio</p></label>
-                <input formControlName="housingRatio" type="" class="form-control" id="" placeholder="">
+                <label><p>Housing Ratio</p></label>
+                <input formControlName="housingRatio" type="" class="form-control" placeholder="">
              </div>
              <div class="col-4 form-group">
-               <label for="inputEmail4"><p>Debt Ratio</p></label>
-               <input formControlName="debtRatio" type="" class="form-control" id="" placeholder="">
+               <label><p>Debt Ratio</p></label>
+               <input formControlName="debtRatio" type="" class="form-control" placeholder="">
              </div>
           </div>
         </div>
@@ -38,30 +51,47 @@
             <div class="loan-heading"><p>Private Mortgage Insurance</p></div>
             <div class="row d-flex loan-label">
                <div class="col-3 form-group">
-                  <label for="inputEmail4"><p>3% Down</p></label>
-                  <input formControlName="threePercentDown" type="" class="form-control" id="" placeholder="">
+                  <label><p>3% Down</p></label>
+                  <input formControlName="threePercentDown" type="" class="form-control" placeholder="">
                </div>
                <div class="col-3 form-group">
-                 <label for="inputEmail4"><p>5% Down</p></label>
-                 <input formControlName="fivePercentDown" type="" class="form-control" id="" placeholder="">
+                 <label><p>5% Down</p></label>
+                 <input formControlName="fivePercentDown" type="" class="form-control" placeholder="">
                </div>
               <div class="col-3 form-group">
-                <label for="inputEmail4"><p>10% Down</p></label>
-                <input formControlName="tenPercentDown" type="" class="form-control" id="" placeholder="">
+                <label><p>10% Down</p></label>
+                <input formControlName="tenPercentDown" type="" class="form-control" placeholder="">
               </div>
               <div class="col-3 form-group">
-                <label for="inputEmail4"><p>15% Down</p></label>
-                <input formControlName="fifteenPercentDown" type="" class="form-control" id="" placeholder="">
+                <label><p>15% Down</p></label>
+                <input formControlName="fifteenPercentDown" type="" class="form-control" placeholder="">
               </div>
+            </div>
+        </div>
+        <div class="mortgage-over row-space" formGroupName="reserves">
+            <div class="loan-heading"><p>Reserves Needed</p></div>
+            <div class="row d-flex loan-label">
+                <div class="col-4 form-group">
+                    <label><p>1 Unit</p></label>
+                    <input formControlName="oneUnit" type="number" class="form-control">
+                </div>
+                <div class="col-4 form-group">
+                    <label><p>2 Unit</p></label>
+                    <input formControlName="twoUnit" type="number" class="form-control">
+                </div>
+                <div class="col-4 form-group">
+                    <label><p>3-4 Unit</p></label>
+                    <input formControlName="threeToFourUnit" type="number" class="form-control">
+                </div>
             </div>
         </div>
         <div class="add-reserve row-space">
             <div class="loan-heading"><p>Additional Reserves Needed</p></div>
             <div class="row d-flex loan-label">
-               <div class="col-4 form-group">
-                  <label for="inputEmail4"><p>Reserves</p></label>
-                  <input formControlName="reserves" type="" class="form-control" id="" placeholder="">
-               </div>
+                <div class="col-4 form-group">
+                    <label><p>Reserves</p></label>
+                    <input formControlName="additionalReserves" type="" class="form-control" placeholder="">
+                </div>
             </div>
         </div>
   </div>

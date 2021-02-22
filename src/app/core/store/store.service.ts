@@ -13,6 +13,8 @@ export class StoreService {
   public roleSubject = new BehaviorSubject<any>(null);
   private userDataSubject = new BehaviorSubject<any>(null);
   userData = this.userDataSubject.asObservable();
+  private toggleLoanTypeSubject = new BehaviorSubject<any>(null);
+  toggleLoanType = this.toggleLoanTypeSubject.asObservable();
   constructor() { }
 
   updateToggleMoreFilter(data: boolean): void{
@@ -35,5 +37,8 @@ export class StoreService {
   }
   get role(): string {
     return this.roleSubject.value;
+  }
+  updateToggleLoanType(data): void{
+    this.toggleLoanTypeSubject.next(data);
   }
 }

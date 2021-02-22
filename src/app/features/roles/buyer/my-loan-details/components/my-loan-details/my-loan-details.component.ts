@@ -118,7 +118,6 @@ export class MyLoanDetailsComponent implements OnInit {
         additionalReserves: ['', Validators.required],
       }),
       conventional: this.fb.group({
-        downPayment: ['', Validators.required],
         loanTerm: ['', Validators.required],
         loanRate: ['', Validators.required],
         housingRatio: ['', Validators.required],
@@ -128,12 +127,26 @@ export class MyLoanDetailsComponent implements OnInit {
           tenPercentDown: ['', Validators.required],
           fifteenPercentDown: ['', Validators.required],
         }),
-        reserves: ['', Validators.required],
+        downPayment: this.fb.group({
+          oneUnit: ['', Validators.required],
+          twoUnit: ['', Validators.required],
+          threeToFourUnit: ['', Validators.required],
+        }),
+        reserves: this.fb.group({
+          oneUnit: ['', Validators.required],
+          twoUnit: ['', Validators.required],
+          threeToFourUnit: ['', Validators.required],
+        }),
+        additionalReserves: ['', Validators.required],
       }),
       homePossible: this.fb.group({
-        downPayment: ['', Validators.required],
         loanTerm: ['', Validators.required],
         loanRate: ['', Validators.required],
+        downPayment: this.fb.group({
+          oneUnit: ['', Validators.required],
+          twoUnit: ['', Validators.required],
+          threeToFourUnit: ['', Validators.required],
+        }),
         housingRatio: ['', Validators.required],
         debtRatio: ['', Validators.required],
         privateMortgageInsurance: this.fb.group({
@@ -142,12 +155,21 @@ export class MyLoanDetailsComponent implements OnInit {
           tenPercentDown: ['', Validators.required],
           fifteenPercentDown: ['', Validators.required],
         }),
-        reserves: ['', Validators.required],
+        reserves: this.fb.group({
+          oneUnit: ['', Validators.required],
+          twoUnit: ['', Validators.required],
+          threeToFourUnit: ['', Validators.required],
+        }),
+        additionalReserves: ['', Validators.required],
       }),
       homeReady: this.fb.group({
-        downPayment: ['', Validators.required],
         loanTerm: ['', Validators.required],
         loanRate: ['', Validators.required],
+        downPayment: this.fb.group({
+          oneUnit: ['', Validators.required],
+          twoUnit: ['', Validators.required],
+          threeToFourUnit: ['', Validators.required],
+        }),
         housingRatio: ['', Validators.required],
         debtRatio: ['', Validators.required],
         privateMortgageInsurance: this.fb.group({
@@ -156,7 +178,12 @@ export class MyLoanDetailsComponent implements OnInit {
           tenPercentDown: ['', Validators.required],
           fifteenPercentDown: ['', Validators.required],
         }),
-        reserves: ['', Validators.required],
+        reserves: this.fb.group({
+          oneUnit: ['', Validators.required],
+          twoUnit: ['', Validators.required],
+          threeToFourUnit: ['', Validators.required],
+        }),
+        additionalReserves: ['', Validators.required],
       }),
       va: this.fb.group({
         downPayment: ['', Validators.required],
@@ -165,7 +192,12 @@ export class MyLoanDetailsComponent implements OnInit {
         housingRatio: ['', Validators.required],
         debtRatio: ['', Validators.required],
         veteranType: ['', Validators.required],
-        reserves: ['', Validators.required],
+        reserves: this.fb.group({
+          oneUnit: ['', Validators.required],
+          twoUnit: ['', Validators.required],
+          threeToFourUnit: ['', Validators.required],
+        }),
+        additionalReserves: ['', Validators.required],
       }),
       usda: this.fb.group({
         downPayment: ['', Validators.required],
@@ -177,7 +209,7 @@ export class MyLoanDetailsComponent implements OnInit {
           fundingFee: ['', Validators.required],
           monthlyMi: ['', Validators.required],
         }),
-        reserves: ['', Validators.required],
+        additionalReserves: ['', Validators.required],
       })
     });
   }
