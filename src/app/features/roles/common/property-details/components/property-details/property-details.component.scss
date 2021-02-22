@@ -17,6 +17,7 @@ p{
 .loan-program p{
   margin-right: .8vw;
   color: var(--darkGray);
+  cursor: pointer;
 }
 .loan-program p:last-child{
   margin-right: 0;
@@ -80,7 +81,12 @@ p{
   padding: .35vw 1.5vw .35vw 1.5vw;
   border-radius: .4vw;
 }
-
+.loan-green{
+  color: var(--green) !important;
+}
+.loan-gray{
+  color: var(--darkGray);
+}
 
 ///////////////////////////////////////// card-5
 

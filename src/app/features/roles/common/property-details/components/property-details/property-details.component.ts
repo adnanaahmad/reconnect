@@ -6,6 +6,7 @@ import {PropertyDetailsService} from '../../services/property-details.service';
 import {ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
 import {take} from 'rxjs/operators';
+import {StoreService} from '../../../../../../core/store/store.service';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -18,7 +19,8 @@ export class PropertyDetailsComponent implements OnInit {
               public sanitizer: DomSanitizer,
               private propertyDetailService: PropertyDetailsService,
               private activatedRoute: ActivatedRoute,
-              public location: Location) {
+              public location: Location,
+              public store: StoreService) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.propertyDetails.id = routeParams.get('id');
   }
@@ -125,6 +127,7 @@ export class PropertyDetailsComponent implements OnInit {
       this.propertyDetails.tourURL = this.getVideoId(res.result.listings[0].tourURL);
       this.propertyDetails.loader = true;
       this.propertyDetails.loanScenarioOne = res.result;
+      this.setDefaultLoanType(res.result.userLoan);
       console.log(this.propertyDetails.features);
     }, error => {
       console.log(error);
@@ -146,5 +149,17 @@ export class PropertyDetailsComponent implements OnInit {
     return (match && match[2].length === 11)
         ? '//www.youtube.com/embed/' + match[2]
         : null;
+  }
+  setDefaultLoanType(data): void{
+    if (data){
+      data.fha ? this.store.updateToggleLoanType('fha') :
+          data.va ? this.store.updateToggleLoanType('va') :
+              data.usda ? this.store.updateToggleLoanType('usda') :
+                  data.conventional ? this.store.updateToggleLoanType('conventional') :
+                      data.homeReady ? this.store.updateToggleLoanType('homeReady') :
+                          data.homePossible ? this.store.updateToggleLoanType('homePossible') :
+                              this.store.updateToggleLoanType('null');
+
+    }
   }
 }

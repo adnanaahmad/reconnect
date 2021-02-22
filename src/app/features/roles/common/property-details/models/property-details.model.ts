@@ -13,14 +13,24 @@ export interface PropertyDetailsModel {
   loader: boolean;
 }
 export interface LoanScenarioModel{
+  listings: any;
+  userLoan: {
+    fha: any;
+    va: any;
+    usda: any;
+    conventional: any;
+    homeReady: any;
+    homePossible: any;
+  };
   purchasePrice: number;
   loanAmount: number;
   financeAmount: number;
   downPayment: number;
-    loanRate: number;
+  loanRate: number;
   loanTerm: number;
   monthlyPayment: number;
   fundsNeeded: number;
+
 }
 export interface ViewPaymentBreakDownModel{
   principalAndInterest: number;

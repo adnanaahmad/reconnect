@@ -7,13 +7,13 @@
       <p class="heading-color text-center">Approved Loan Programs</p>
     </div>
     <div class="col-5 align-self-end d-flex align-self-center">
-      <div class="loan-program d-flex heading-txt">
-          <p >FHA</p>
-          <p >VA</p>
-          <p >USDA</p>
-          <p >Coventional</p>
-          <p  class="text-nowrap">Home Ready</p>
-          <p  class="text-nowrap">Home Possible</p>
+      <div *ngIf="propertyDetails.loanScenarioOne" class="loan-program d-flex heading-txt">
+          <p (click)="store.updateToggleLoanType('fha')" *ngIf="propertyDetails.loanScenarioOne.userLoan.fha" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'fha','loan-gray':!((store.toggleLoanType | async) === 'fha')}">FHA</p>
+          <p (click)="store.updateToggleLoanType('va')" *ngIf="propertyDetails.loanScenarioOne.userLoan.va" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'va','loan-gray':!((store.toggleLoanType | async) === 'va')}">VA</p>
+          <p (click)="store.updateToggleLoanType('usda')" *ngIf="propertyDetails.loanScenarioOne.userLoan.usda" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'usda','loan-gray':!((store.toggleLoanType | async) === 'usda') }">USDA</p>
+          <p (click)="store.updateToggleLoanType('conventional')" *ngIf="propertyDetails.loanScenarioOne.userLoan.conventional" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'conventional','loan-gray':!((store.toggleLoanType | async) === 'conventional') }">Coventional</p>
+          <p (click)="store.updateToggleLoanType('homeReady')" *ngIf="propertyDetails.loanScenarioOne.userLoan.homeReady" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'homeReady','loan-gray':!((store.toggleLoanType | async) === 'homeReady') }" class="text-nowrap">Home Ready</p>
+          <p (click)="store.updateToggleLoanType('homePossible')" *ngIf="propertyDetails.loanScenarioOne.userLoan.homePossible" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'homePossible','loan-gray':!((store.toggleLoanType | async) === 'homePossible') }" class="text-nowrap">Home Possible</p>
        </div>
    </div>
 </div>
