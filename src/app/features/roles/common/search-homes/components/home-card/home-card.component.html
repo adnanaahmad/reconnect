@@ -6,35 +6,45 @@
                 <img (click)="favoriteHome()" *ngIf="!home.favourite" src="/assets/search-home/like.svg">
                 <img (click)="favoriteHome()" *ngIf="home.favourite" src="/assets/search-home/heart.svg">
                 <ng-container *ngIf="home.financing">
-                    <img [ngClass]="{'thumb-red': home.financing.fha.housingRatio > housingRatio ||
-                home.financing.fha.debtRatio > debtRatio}" class="thumb" src="/assets/search-home/thumb.svg">
-                    <img [ngClass]="{'dollar-red': home.financing.fha.fundsNeeded < 0}" class="dollar" src="/assets/search-home/dollar.svg">
+                    <img [ngClass]="{'thumb-red': home.financing[store.toggleLoanType | async].housingRatio > loan[store.toggleLoanType | async].housingRatio ||
+                home.financing[store.toggleLoanType | async].debtRatio > loan[store.toggleLoanType | async].debtRatio}"
+                         class="thumb" src="/assets/search-home/thumb.svg">
+                    <img [ngClass]="{'dollar-red': home.financing[store.toggleLoanType | async].fundsNeeded < 0}"
+                         class="dollar" src="/assets/search-home/dollar.svg">
                 </ng-container>
             </ng-container>
         </div>
-        <div *ngIf="store.role === constant.role.BUYER && home.financing" class="pre-approved-div d-flex justify-content-end">
-            <p *ngIf="!((home.financing.fha.housingRatio > housingRatio ||
-                home.financing.fha.debtRatio > debtRatio)||(home.financing.fha.fundsNeeded < 0))" class="pre-approved text-nowrap">Pre-Approved</p>
-            <p *ngIf="(home.financing.fha.housingRatio > housingRatio ||
-                home.financing.fha.debtRatio > debtRatio)||home.financing.fha.fundsNeeded < 0" class="not-approved text-nowrap">No Approved</p>
+        <div *ngIf="store.role === constant.role.BUYER && home.financing"
+             class="pre-approved-div d-flex justify-content-end">
+            <p *ngIf="!((home.financing[store.toggleLoanType | async].housingRatio > loan[store.toggleLoanType | async].housingRatio ||
+                home.financing[store.toggleLoanType | async].debtRatio > loan[store.toggleLoanType | async].debtRatio)||(home.financing[store.toggleLoanType | async].fundsNeeded < 0))"
+               class="pre-approved text-nowrap">Pre-Approved</p>
+            <p *ngIf="(home.financing[store.toggleLoanType | async].housingRatio > loan[store.toggleLoanType | async].housingRatio ||
+                home.financing[store.toggleLoanType | async].debtRatio > loan[store.toggleLoanType | async].debtRatio)||home.financing[store.toggleLoanType | async].fundsNeeded < 0"
+               class="not-approved text-nowrap">No Approved</p>
         </div>
-        <img *ngIf="home.images" class="home-img" [src]="home.images[0]" (click)="router.navigateByUrl('/home/propertyDetails/'+home.id)">
-        <img *ngIf="!home.images" src="/assets/search-home/no-img.jpg" class="home-img" (click)="router.navigateByUrl('/home/propertyDetails/'+home.id)">
+        <img *ngIf="home.images" class="home-img" [src]="home.images[0]"
+             (click)="router.navigateByUrl('/home/propertyDetails/'+home.id)">
+        <img *ngIf="!home.images" src="/assets/search-home/no-img.jpg" class="home-img"
+             (click)="router.navigateByUrl('/home/propertyDetails/'+home.id)">
     </div>
     <div class="card-info">
-       <div class="d-flex justify-content-between price-area">
-          <p class="price">${{home.listPrice}}</p>
-          <p class="area align-self-end">{{home.size}} Sq Ft</p>
-       </div>
-       <div class="description-div" #homeCard>
-           <p class="description">{{ home.description }}</p>
-           <p (click)="toggle()" class="read-more">Read more</p>
-           <p (click)="toggle()" class="read-less">Read less</p>
-       </div>
-       <div class="d-flex">
-          <div class="bath d-flex"><img class="" src="/assets/search-home/bathroom.png"><p *ngIf="home.baths" class="align-self-end">{{home.baths.total}}</p></div>
-          <div class="bed d-flex"><img class="" src="/assets/search-home/bedroom.png"><p class="align-self-end">{{home.beds}}</p></div>
-          <div class="garage d-flex"><img class="" src="/assets/search-home/garage.png"><p class="align-self-end">{{home.xf_garage_spaces}}</p></div>
-       </div>
+        <div class="d-flex justify-content-between price-area">
+            <p class="price">${{home.listPrice}}</p>
+            <p class="area align-self-end">{{home.size}} Sq Ft</p>
+        </div>
+        <div class="description-div" #homeCard>
+            <p class="description">{{ home.description }}</p>
+            <p (click)="toggle()" class="read-more">Read more</p>
+            <p (click)="toggle()" class="read-less">Read less</p>
+        </div>
+        <div class="d-flex">
+            <div class="bath d-flex"><img class="" src="/assets/search-home/bathroom.png">
+                <p *ngIf="home.baths" class="align-self-end">{{home.baths.total}}</p></div>
+            <div class="bed d-flex"><img class="" src="/assets/search-home/bedroom.png">
+                <p class="align-self-end">{{home.beds}}</p></div>
+            <div class="garage d-flex"><img class="" src="/assets/search-home/garage.png">
+                <p class="align-self-end">{{home.xf_garage_spaces}}</p></div>
+        </div>
     </div>
 </div>

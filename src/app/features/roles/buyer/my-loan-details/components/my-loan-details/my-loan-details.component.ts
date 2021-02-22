@@ -209,7 +209,7 @@ export class MyLoanDetailsComponent implements OnInit {
           fundingFee: ['', Validators.required],
           monthlyMi: ['', Validators.required],
         }),
-        additionalReserves: ['', Validators.required],
+        reserves: ['', Validators.required],
       })
     });
   }

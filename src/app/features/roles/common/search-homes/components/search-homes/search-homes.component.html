@@ -9,12 +9,12 @@
         </div>
         <div *ngIf="searchHome.loan" class="col-5 align-self-end d-flex justify-content-center" style="background: transparent">
             <div class="loan-program d-flex" style="">
-                <p (click)="store.updateToggleLoanType('fha')" *ngIf="searchHome.loan.fha" [ngClass]="{'loan-green': searchHome.approvedLoanProgram.fha,'loan-gray':!searchHome.approvedLoanProgram.fha}">FHA</p>
-                <p (click)="store.updateToggleLoanType('va')" *ngIf="searchHome.loan.va" [ngClass]="{'loan-green': searchHome.approvedLoanProgram.va,'loan-gray':!searchHome.approvedLoanProgram.va}">VA</p>
-                <p (click)="store.updateToggleLoanType('usda')" *ngIf="searchHome.loan.usda" [ngClass]="{'loan-green': searchHome.approvedLoanProgram.usda,'loan-gray':!searchHome.approvedLoanProgram.usda }">USDA</p>
-                <p (click)="store.updateToggleLoanType('conventional')" *ngIf="searchHome.loan.conventional" [ngClass]="{'loan-green': searchHome.approvedLoanProgram.conventional,'loan-gray':!searchHome.approvedLoanProgram.conventional }">Coventional</p>
-                <p (click)="store.updateToggleLoanType('homeReady')" *ngIf="searchHome.loan.homeReady" [ngClass]="{'loan-green': searchHome.approvedLoanProgram.homeReady,'loan-gray':!searchHome.approvedLoanProgram.homeReady }" class="text-nowrap">Home Ready</p>
-                <p (click)="store.updateToggleLoanType('homePossible')" *ngIf="searchHome.loan.homePossible" [ngClass]="{'loan-green': searchHome.approvedLoanProgram.homePossible,'loan-gray':!searchHome.approvedLoanProgram.homePossible }" class="text-nowrap">Home Possible</p>
+                <p (click)="store.updateToggleLoanType('fha')" *ngIf="searchHome.loan.fha" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'fha','loan-gray':!((store.toggleLoanType | async) === 'fha')}">FHA</p>
+                <p (click)="store.updateToggleLoanType('va')" *ngIf="searchHome.loan.va" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'va','loan-gray':!((store.toggleLoanType | async) === 'va')}">VA</p>
+                <p (click)="store.updateToggleLoanType('usda')" *ngIf="searchHome.loan.usda" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'usda','loan-gray':!((store.toggleLoanType | async) === 'usda') }">USDA</p>
+                <p (click)="store.updateToggleLoanType('conventional')" *ngIf="searchHome.loan.conventional" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'conventional','loan-gray':!((store.toggleLoanType | async) === 'conventional') }">Coventional</p>
+                <p (click)="store.updateToggleLoanType('homeReady')" *ngIf="searchHome.loan.homeReady" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'homeReady','loan-gray':!((store.toggleLoanType | async) === 'homeReady') }" class="text-nowrap">Home Ready</p>
+                <p (click)="store.updateToggleLoanType('homePossible')" *ngIf="searchHome.loan.homePossible" [ngClass]="{'loan-green': (store.toggleLoanType | async) === 'homePossible','loan-gray':!((store.toggleLoanType | async) === 'homePossible') }" class="text-nowrap">Home Possible</p>
             </div>
         </div>
     </ng-container>

@@ -103,6 +103,7 @@ export class SearchHomesComponent implements OnInit {
                     this.searchHome.total = res.total;
                     this.searchHome.pageNumber = res.paging.number;
                     this.searchHome.loan = res.userLoan;
+                    this.setDefaultLoanType();
                 }, error => {
                     console.log(error);
                 });
@@ -208,6 +209,7 @@ export class SearchHomesComponent implements OnInit {
       this.searchHome.total = res.total;
       this.searchHome.pageNumber = res.paging.number;
       this.searchHome.loan = res.userLoan;
+      this.setDefaultLoanType();
       this.store.updateToggleMoreFilter(false);
       if (events){
         events.target.parentElement.parentElement.classList.toggle('show');
@@ -255,6 +257,7 @@ export class SearchHomesComponent implements OnInit {
           this.searchHome.total = res.total;
           this.searchHome.pageNumber = res.paging.number;
           this.searchHome.loan = res.userLoan;
+          this.setDefaultLoanType();
       }, error => {
           console.log(error);
       });
@@ -269,6 +272,7 @@ export class SearchHomesComponent implements OnInit {
           this.searchHome.total = res.total;
           this.searchHome.pageNumber = res.paging.number;
           this.searchHome.loan = res.userLoan;
+          this.setDefaultLoanType();
       }, error => {
           console.log(error);
       });
@@ -302,8 +306,21 @@ export class SearchHomesComponent implements OnInit {
           this.searchHome.total = res.total;
           this.searchHome.pageNumber = res.paging.number;
           this.searchHome.loan = res.userLoan;
+          this.setDefaultLoanType();
       }, error => {
           console.log(error);
       });
+  }
+  setDefaultLoanType(): void{
+      if (this.searchHome.loan){
+          this.searchHome.loan.fha ? this.store.updateToggleLoanType('fha') :
+          this.searchHome.loan.va ? this.store.updateToggleLoanType('va') :
+          this.searchHome.loan.usda ? this.store.updateToggleLoanType('usda') :
+          this.searchHome.loan.conventional ? this.store.updateToggleLoanType('conventional') :
+          this.searchHome.loan.homeReady ? this.store.updateToggleLoanType('homeReady') :
+          this.searchHome.loan.homePossible ? this.store.updateToggleLoanType('homePossible') :
+              this.store.updateToggleLoanType('null');
+
+      }
   }
 }
