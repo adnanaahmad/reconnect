@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {PieChartComponent} from '../../popups/pie-chart/pie-chart.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {LoanScenarioModel, ViewPaymentBreakDownModel} from '../../models/property-details.model';
@@ -9,19 +9,21 @@ import {StoreService} from '../../../../../../core/store/store.service';
   templateUrl: './scenario.component.html',
   styleUrls: ['./scenario.component.scss']
 })
-export class ScenarioComponent implements OnInit {
+export class ScenarioComponent implements OnInit, OnChanges {
   @Input() loanScenario;
   @Input() scenarioNumber;
   scenario: LoanScenarioModel = {} as LoanScenarioModel;
   pieChart: ViewPaymentBreakDownModel = {} as ViewPaymentBreakDownModel;
-  constructor(private modalService: NgbModal, configuration: NgbModalConfig, private store: StoreService) {
+  constructor(private modalService: NgbModal, configuration: NgbModalConfig, public store: StoreService) {
     configuration.centered = true;
     configuration.container =  'app-property-details';
   }
 
-  ngOnInit(): void {
-    //console.log(this.loanScenario);
+  ngOnInit(): void {}
+  ngOnChanges(changes: SimpleChanges): void {
     this.store.toggleLoanType.subscribe(loanType => {
+      this.scenario.housingRatio = Number(this.loanScenario.listings[0].financing[loanType].housingRatio.toFixed(2));
+      this.scenario.debtRatio = Number(this.loanScenario.listings[0].financing[loanType].debtRatio.toFixed(2));
       this.scenario.purchasePrice = Math.round(this.loanScenario.listings[0].listPrice);
       this.scenario.loanAmount = Math.round(this.loanScenario.listings[0].financing[loanType].loanAmount);
       this.scenario.financeAmount = Math.round(this.loanScenario.listings[0].financing[loanType].financeAmount);
@@ -39,6 +41,7 @@ export class ScenarioComponent implements OnInit {
       this.pieChart.totalPayment = Math.round(this.loanScenario.listings[0].financing[loanType].totalPayment);
     });
   }
+
   view(): void {
     const modalRef = this.modalService.open(PieChartComponent);
     modalRef.componentInstance.breakDown = this.pieChart;
@@ -52,3 +55,9 @@ export class ScenarioComponent implements OnInit {
     });
   }
 }
+
+
+/*
+ loanScenario.listings[0].financing[store.toggleLoanType | async].housingRatio > loanScenario.userLoan[store.toggleLoanType | async].housingRatio ||
+                loanScenario.listings[0].financing[store.toggleLoanType | async].debtRatio > loanScenario.userLoan[store.toggleLoanType | async].debtRatio
+ */

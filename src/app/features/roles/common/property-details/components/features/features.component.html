@@ -1,13 +1,37 @@
-      <div class="card-3">
-        <p class="card-heading">Features</p>
-        <div class="row">
-          <div class="col-6 col-mb feature-parent" *ngFor="let feature of propertyDetails | keyvalue">
-              <p class="feature">{{feature.key}}</p>
-              <div [ngClass]="{'hide': i>limit, 'show': i>limit}"  class="d-flex detail" *ngFor="let detail of feature.value;let i=index" >
-                  <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">
-                  <p>{{detail}}</p>
-              </div>
-              <p class="show-more" *ngIf="feature.value.length > limit+1" (click)="toggle($event)">Show more</p>
-          </div>
+<!--      <div class="card-3">-->
+<!--        <p class="card-heading">Features</p>-->
+<!--        <div class="row">-->
+<!--          <div class="col-6 col-mb feature-parent" *ngFor="let feature of propertyDetails | keyvalue">-->
+<!--              <p class="feature">{{feature.key}}</p>-->
+<!--              <div [ngClass]="{'hide': i>limit, 'show': i>limit}"  class="d-flex detail" *ngFor="let detail of feature.value;let i=index" >-->
+<!--                  <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">-->
+<!--                  <p>{{detail}}</p>-->
+<!--              </div>-->
+<!--              <p class="show-more" *ngIf="feature.value.length > limit+1" (click)="toggle($event)">Show more</p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<div class="card-3">
+    <p class="card-heading">Features</p>
+    <div class="row">
+        <div class="col-6 col-mb">
+            <div class="feature-parent" *ngFor="let feature of propertyDetails | keyvalue | slice:0:halfLength">
+                <p class="feature">{{feature.key}}</p>
+                <div class="d-flex detail" *ngFor="let detail of feature.value;let i=index" >
+                    <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">
+                    <p>{{detail}}</p>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="col-6 col-mb" >
+            <div class="feature-parent" *ngFor="let feature of propertyDetails | keyvalue |  slice:otherHalfLength:length;">
+                <p class="feature">{{feature.key}}</p>
+                <div class="d-flex detail" *ngFor="let detail of feature.value;let i=index" >
+                    <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">
+                    <p>{{detail}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

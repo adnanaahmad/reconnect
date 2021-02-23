@@ -24,6 +24,10 @@
       <app-real-estate-agent [realEstateAgent]="propertyDetails.realEstateAgent ? propertyDetails.realEstateAgent.userId : null"></app-real-estate-agent>
       <p class="details-heading pd-heading">Property Details</p>
       <app-features [propertyDetails]="propertyDetails.features"></app-features>
+      <ng-container *ngIf="propertyDetails.loanScenarioOne.listings[0].propertyType === 'Multi-family'">
+          <p class="details-heading pd-heading">Multi Family</p>
+          <app-multi-family [multiFamilyUnits]="propertyDetails.multiFamilyUnits" (marketRentValues) = "calculationFromApi($event)"></app-multi-family>
+      </ng-container>
     </div>
     <div class="column-2">
         <ng-container *ngIf="propertyDetails.loanScenarioOne.listings[0].financing">

@@ -1,0 +1,97 @@
+p{
+  font-family: 'Poppins';
+}
+.parent{
+  padding: 2vw;
+  background: white;
+  border-radius: .5vw;
+  margin-bottom: 2vw;
+}
+.container {
+  position: relative;
+  padding-left: 2vw;
+  cursor: pointer;
+  padding-right: 0;
+  margin: 0 0 1.5vw 0;
+  line-height: 0;
+  width: fit-content;
+  //max-width: 8.5vw;
+}
+.container:last-child{
+  margin-bottom: 0;
+}
+/* Hide the browser's default checkbox */
+.container input {
+  //position: absolute;
+  top:0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  height: 1.4vw;
+  width: 1.4vw;
+  background-color: white;
+  padding: .25vw;
+  border-radius: .3vw;
+  border: 1px solid var(--lighGray);
+}
+
+/* On mouse-over, add a grey background color */
+/* When the checkbox is checked, add a blue background */
+.green {
+  background-color: var(--green);
+  border: none;
+}
+.f1{
+  font-size: .85vw;
+  color: var(--darkGray);
+  border-radius: .5vw;
+  border: 1px solid var(--lighGray);
+  padding: 0 .8vw;
+  background: white;
+  height: 2vw;
+  margin-bottom: .7vw;
+}
+.f1:last-child{
+  margin-bottom: 0;
+}
+.label{
+  color: var(--lighGray);
+  font-size: .8vw;
+  margin-bottom: 0;
+}
+.value{
+  color: var(--darkGray);
+  font-size: .9vw;
+  margin-bottom: 1.5vw;
+}
+.value:last-child{
+  margin-bottom: 0;
+}
+.mb-custom-label{
+  margin-bottom: 1vw;
+}
+.apply{
+  border: none;
+  border-radius: 0.5vw;
+  padding: .5vw 1.5vw;
+  background: var(--green);
+  cursor: pointer;
+  color: white;
+  float: right;
+  font-family: 'Poppins';
+  font-size: .8vw;
+}
+.apply:focus{
+  outline: none;
+}
+.child{
+  border-bottom: 1px solid var(--extraLightGray);
+  padding: 1vw 0vw 2vw 0vw;
+  margin-bottom: 2vw;
+}

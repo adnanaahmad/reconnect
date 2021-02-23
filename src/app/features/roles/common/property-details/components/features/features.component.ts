@@ -27,5 +27,16 @@ export class FeaturesComponent implements OnInit {
       }
     });
   }
+  get length(): number{
+    return Object.keys(this.propertyDetails).length;
+  }
+  get halfLength(): number {
+    const half = Object.keys(this.propertyDetails).length;
+    return half % 2 === 0 ?  half / 2 : Math.floor(half / 2);
+  }
+  get otherHalfLength(): number{
+    const half = Object.keys(this.propertyDetails).length;
+    return half % 2 === 0 ?  half / 2 : Math.floor(half / 2);
+  }
 
 }

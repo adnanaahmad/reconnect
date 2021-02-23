@@ -12,10 +12,11 @@ import { PublicTransportComponent } from './components/public-transport/public-t
 import { FeaturesComponent } from './components/features/features.component';
 import { PieChartComponent } from './popups/pie-chart/pie-chart.component';
 import { SharePropertyComponent } from './popups/share-property/share-property.component';
+import { MultiFamilyComponent } from './components/multi-family/multi-family.component';
 
 
 @NgModule({
-  declarations: [PropertyDetailsComponent, PropertyAdComponent, RealEstateAgentComponent, ScenarioComponent, RentVsBuyingComponent, PublicTransportComponent, FeaturesComponent, PieChartComponent, SharePropertyComponent],
+  declarations: [PropertyDetailsComponent, PropertyAdComponent, RealEstateAgentComponent, ScenarioComponent, RentVsBuyingComponent, PublicTransportComponent, FeaturesComponent, PieChartComponent, SharePropertyComponent, MultiFamilyComponent],
   imports: [
     CommonModule,
     PropertyDetailsRoutingModule,

@@ -127,6 +127,7 @@ export class PropertyDetailsComponent implements OnInit {
       this.propertyDetails.tourURL = this.getVideoId(res.result.listings[0].tourURL);
       this.propertyDetails.loader = true;
       this.propertyDetails.loanScenarioOne = res.result;
+      this.propertyDetails.multiFamilyUnits = res.result;
       this.setDefaultLoanType(res.result.userLoan);
       console.log(this.propertyDetails.features);
     }, error => {
@@ -161,5 +162,17 @@ export class PropertyDetailsComponent implements OnInit {
                               this.store.updateToggleLoanType('null');
 
     }
+  }
+  calculationFromApi(queryParam: string): void{
+    this.propertyDetailService.getPropertyDetails(`${this.propertyDetails.id}&${queryParam}`).pipe(take(1)).subscribe(res => {
+      console.log(res);
+      this.propertyDetails.loanScenarioOne = res.result;
+      this.propertyDetails.multiFamilyUnits = res.result;
+      if (!this.store.toggleLoanTypeSubject.value){
+        this.setDefaultLoanType(res.result.userLoan);
+      }
+    }, error => {
+      console.log(error);
+    });
   }
 }

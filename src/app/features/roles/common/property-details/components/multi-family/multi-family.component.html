@@ -1,0 +1,31 @@
+<form [formGroup]="multiFamily" (ngSubmit)="onSubmit()">
+    <div class="parent d-flex flex-column">
+         <div class="d-flex justify-content-between child">
+             <div>
+                 <p class="label mb-custom-label">Unit#</p>
+                 <p *ngFor="let object of units; let i = index;" class="value">Unit {{i+1}}
+             </div>
+             <div formGroupName="rent">
+                 <p class="label mb-custom-label">Rent</p>
+                 <input  *ngFor="let object of multiFamily.getRawValue().rent | keyvalue: helper.originalOrder |  slice:0:limit;trackBy: trackByFn" formControlName="{{object.key}}" type="number" class="form-control f1"  placeholder="">
+             </div>
+             <div class="d-flex flex-column" formGroupName="selectUnitOccupying">
+                 <p class="label mb-custom-label">Select Unit Occupying</p>
+                 <label class="container" *ngFor="let object of multiFamily.get('selectUnitOccupying').value | keyvalue: helper.originalOrder |  slice:0:limit ; let i = index;">
+                     <input formControlName="{{object.key}}" type="checkbox">
+                     <img [ngClass]="{'green': object.value}" class="checkmark" src="/assets/loan-details/tick.svg">
+                 </label>
+             </div>
+             <div class="d-flex flex-column" formGroupName="useMarketRent">
+                 <p class="label mb-custom-label">Use Market Rent</p>
+                 <label class="container" *ngFor="let object of multiFamily.get('useMarketRent').value | keyvalue: helper.originalOrder |  slice:0:limit ; let i = index;">
+                     <input formControlName="{{object.key}}" type="checkbox">
+                     <img [ngClass]="{'green': object.value}" class="checkmark" src="/assets/loan-details/tick.svg">
+                 </label>
+             </div>
+         </div>
+        <div>
+            <button type="submit" class="apply">Apply</button>
+        </div>
+    </div>
+</form>

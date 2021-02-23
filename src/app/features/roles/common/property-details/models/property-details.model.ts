@@ -11,6 +11,7 @@ export interface PropertyDetailsModel {
   publicTransport: PublicTransportModel;
   id: string;
   loader: boolean;
+  multiFamilyUnits: any;
 }
 export interface LoanScenarioModel{
   listings: any;
@@ -30,6 +31,8 @@ export interface LoanScenarioModel{
   loanTerm: number;
   monthlyPayment: number;
   fundsNeeded: number;
+  housingRatio: number;
+  debtRatio: number;
 
 }
 export interface ViewPaymentBreakDownModel{

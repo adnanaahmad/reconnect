@@ -13,7 +13,7 @@ export class StoreService {
   public roleSubject = new BehaviorSubject<any>(null);
   private userDataSubject = new BehaviorSubject<any>(null);
   userData = this.userDataSubject.asObservable();
-  private toggleLoanTypeSubject = new BehaviorSubject<any>(null);
+  public toggleLoanTypeSubject = new BehaviorSubject<any>(null);
   toggleLoanType = this.toggleLoanTypeSubject.asObservable();
   constructor() { }
 
