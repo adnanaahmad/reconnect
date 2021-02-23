@@ -49,7 +49,7 @@
                  <p class="bed-label margin-b">or</p>
                  <div class="d-flex">
                     <label class="container" *ngFor=" let i of [1,2,3,4,5]">
-                      <input formControlName="value" type="radio" [value]="i" [checked]="searchHome.moreFilters.value.beds.value === i">
+                      <input formControlName="value" type="radio" value="{{i}}" [checked]="searchHome.moreFilters.value.beds.value === i">
                       <img class="checkmark" src="/assets/loan-details/tick.svg">
                       <p class="label-txt">{{i}}+</p>
                     </label>
@@ -77,7 +77,7 @@
                 <p class="bed-label margin-b">or</p>
                 <div class="d-flex">
                    <label class="container" *ngFor="let i of [1,2,3,4,5]">
-                     <input formControlName="value" type="radio" [value]="i"  [checked]="searchHome.moreFilters.value.baths.value === i">
+                     <input formControlName="value" type="radio" value="{{i}}"  [checked]="searchHome.moreFilters.value.baths.value === i">
                      <img class="checkmark" src="/assets/loan-details/tick.svg">
                      <p class="label-txt">{{i}}+</p>
                    </label>

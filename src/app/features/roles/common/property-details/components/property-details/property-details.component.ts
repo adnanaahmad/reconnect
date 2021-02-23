@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PropertyDetailsModel} from '../../models/property-details.model';
 import {FormBuilder, Validators} from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import {StoreService} from '../../../../../../core/store/store.service';
   templateUrl: './property-details.component.html',
   styleUrls: ['./property-details.component.scss']
 })
-export class PropertyDetailsComponent implements OnInit {
+export class PropertyDetailsComponent implements OnInit, OnDestroy {
   propertyDetails: PropertyDetailsModel = {} as PropertyDetailsModel;
 
   constructor(private fb: FormBuilder,
@@ -23,6 +23,14 @@ export class PropertyDetailsComponent implements OnInit {
               public store: StoreService) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.propertyDetails.id = routeParams.get('id');
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params.loanType) {
+        this.store.updateToggleLoanType(params.loanType);
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    //this.store.updateToggleLoanType(null);
   }
 
   ngOnInit(): void {
@@ -128,7 +136,9 @@ export class PropertyDetailsComponent implements OnInit {
       this.propertyDetails.loader = true;
       this.propertyDetails.loanScenarioOne = res.result;
       this.propertyDetails.multiFamilyUnits = res.result;
-      this.setDefaultLoanType(res.result.userLoan);
+      if (!this.store.toggleLoanTypeSubject.value){
+        this.setDefaultLoanType(res.result.userLoan);
+      }
       console.log(this.propertyDetails.features);
     }, error => {
       console.log(error);

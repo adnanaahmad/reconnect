@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl} from '@angular/forms';
 import {SearchHomesModel} from '../../models/search-homes.model';
 import {StoreService} from 'src/app/core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
@@ -7,6 +7,7 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
 import {SearchHomeService} from '../../services/search-home.service';
 import {debounceTime, distinctUntilChanged, take} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 
@@ -24,7 +25,8 @@ export class SearchHomesComponent implements OnInit {
               public searchHomeService: SearchHomeService,
               public router: Router,
               private activatedRoute: ActivatedRoute,
-              private toaster: ToastrService) {}
+              private toaster: ToastrService,
+              private location: Location) {}
   ngOnInit(): void {
     this.initialiseFilter();
     this.chooseEitherRangeOrMultiSelect();
@@ -94,6 +96,7 @@ export class SearchHomesComponent implements OnInit {
       this.activatedRoute.queryParams.subscribe(params => {
             if (Object.keys(params).length !== 0){
                 this.setFilters(params);
+                this.setDefaultLoanTypeWithQueryParams(params);
                 this.applyFilters();
             } else {
                 this.searchHomeService.getHouses('').pipe(take(1)).subscribe(res => {
@@ -109,6 +112,11 @@ export class SearchHomesComponent implements OnInit {
                 });
             }
       });
+  }
+  setDefaultLoanTypeWithQueryParams(params): void{
+      if (params.loanType){
+          this.store.updateToggleLoanType(params.loanType);
+      }
   }
   chooseEitherRangeOrMultiSelect(): void{
     this.helperForChoose('beds');
@@ -200,7 +208,8 @@ export class SearchHomesComponent implements OnInit {
   applyFilters(events?): void{
     const data = this.filtersDataToQuery;
     console.log(data);
-    window.history.replaceState({}, '', `/home/searchHomes?${data}`);
+    const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
+    window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}`);
     const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
     const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
     this.searchHomeService.getHouses(data + sortBy + searchInput).pipe(take(1)).subscribe(res => {
@@ -312,15 +321,21 @@ export class SearchHomesComponent implements OnInit {
       });
   }
   setDefaultLoanType(): void{
-      if (this.searchHome.loan){
-          this.searchHome.loan.fha ? this.store.updateToggleLoanType('fha') :
-          this.searchHome.loan.va ? this.store.updateToggleLoanType('va') :
-          this.searchHome.loan.usda ? this.store.updateToggleLoanType('usda') :
-          this.searchHome.loan.conventional ? this.store.updateToggleLoanType('conventional') :
-          this.searchHome.loan.homeReady ? this.store.updateToggleLoanType('homeReady') :
-          this.searchHome.loan.homePossible ? this.store.updateToggleLoanType('homePossible') :
-              this.store.updateToggleLoanType('null');
+      if (!this.store.toggleLoanTypeSubject.value){
+          if (this.searchHome.loan){
+              this.searchHome.loan.fha ? this.store.updateToggleLoanType('fha') :
+                  this.searchHome.loan.va ? this.store.updateToggleLoanType('va') :
+                      this.searchHome.loan.usda ? this.store.updateToggleLoanType('usda') :
+                          this.searchHome.loan.conventional ? this.store.updateToggleLoanType('conventional') :
+                              this.searchHome.loan.homeReady ? this.store.updateToggleLoanType('homeReady') :
+                                  this.searchHome.loan.homePossible ? this.store.updateToggleLoanType('homePossible') :
+                                      this.store.updateToggleLoanType('null');
 
+          }
       }
+  }
+  selectedLoanProgramInQueryParam(queryParam: string): void{
+      const data = this.filtersDataToQuery;
+      window.history.replaceState({}, '', `/home/searchHomes?${data}${data ? '&' : ''}loanType=${queryParam}`);
   }
 }
