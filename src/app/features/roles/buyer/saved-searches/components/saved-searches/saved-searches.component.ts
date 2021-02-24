@@ -67,4 +67,8 @@ export class SavedSearchesComponent implements OnInit {
   checkRangeExist =  (value): boolean => {
     return String(value).includes(':');
   }
+  editPropertySearch(value, id): void{
+    const data = this.filtersDataToQuery(value);
+    this.router.navigateByUrl(`/home/searchHomes?${data}${ data ? '&' : ''}savedSearchId=${id}`).then();
+  }
 }

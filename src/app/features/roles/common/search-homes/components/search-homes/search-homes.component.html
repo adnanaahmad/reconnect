@@ -123,7 +123,7 @@
         </div>
         <div *ngIf="store.role === constant.role.BUYER" class="save-search d-flex" (click)="saveSearch()">
             <img src="/assets/search-home/save.svg">
-            <p class="text-nowrap">Save Search</p>
+            <p class="text-nowrap">{{searchHome.savedSearchId ? 'Update' : 'Save'}} Search</p>
         </div>
 </div>
 <form [formGroup]="searchHome.moreFilters">

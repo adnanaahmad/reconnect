@@ -29,4 +29,7 @@ export class SearchHomeService {
   saveSearch(data): Observable<any>{
     return this.helper.requestCall(this.methods.post, this.api.savedSearches, data);
   }
+  updateSearch(data, id): Observable<any>{
+    return this.helper.requestCall(this.methods.put, this.api.savedSearches + `/${id}`, data);
+  }
 }

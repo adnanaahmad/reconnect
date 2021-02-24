@@ -39,7 +39,7 @@
       </div>
       <div class="ml-auto d-flex">
           <img (click)="deleteSearch(search._id)" class="delete" src="/assets/news-feed-icons/delete.svg">
-          <img class="edit" src="/assets/saved-search/edit.svg">
+          <img (click)="editPropertySearch(search.query, search._id)" class="edit" src="/assets/saved-search/edit.svg">
           <select class="form-control">
             <option>Instantly</option>
             <option>48</option>
