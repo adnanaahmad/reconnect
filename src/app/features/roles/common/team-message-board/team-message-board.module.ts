@@ -6,10 +6,11 @@ import {TeamMessageBoardComponent} from './components/team-message-board/team-me
 import {SharedModule} from '../../../../shared/shared.module';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { HighlightPipe } from './pipes/highlight.pipe';
+import { CreateGroupChatComponent } from './popups/create-group-chat/create-group-chat.component';
 
 
 @NgModule({
-  declarations: [TeamMessageBoardComponent, HighlightPipe],
+  declarations: [TeamMessageBoardComponent, HighlightPipe, CreateGroupChatComponent],
   imports: [
     CommonModule,
     TeamMessageBoardRoutingModule,

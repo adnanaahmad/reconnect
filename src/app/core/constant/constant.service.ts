@@ -26,6 +26,7 @@ export class ConstantService {
     'Home Inspector': 'homeInspector',
     'Insurance Agent': 'insuranceAgent',
   };
+  roleArray = ['buyer', 'seller', 'lender', 'realEstateAgent', 'attorney', 'homeInspector', 'insuranceAgent'];
    apiMethod = {
     get: 'get',
     post: 'post',
@@ -56,7 +57,8 @@ export class ConstantService {
      saveBorrowerLoanDetails: `${environment.apiUrl}/loan/borrowers-loan`,
      getFavorites: `${environment.apiUrl}/favourite`,
      savedSearches: `${environment.apiUrl}/savedsearch`,
-     resetPassword: `${environment.apiUrl}/user/reset-password`
+     resetPassword: `${environment.apiUrl}/user/reset-password`,
+     getConversation: `${environment.apiUrl}/conversation`
   };
    httpOptions = {
      json: {

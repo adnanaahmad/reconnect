@@ -33,13 +33,14 @@
     "ngx-mask": "^11.1.4",
     "ngx-toastr": "^13.2.0",
     "rxjs": "~6.6.0",
+    "socket.io-client": "^2.4.0",
     "tslib": "^2.0.0",
     "yfiles": "file:yFiles/lib/es-modules",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1002.0",
-    "@angular/cli": "~10.1.7",
+    "@angular/cli": "^10.2.1",
     "@angular/compiler-cli": "~10.1.6",
     "@angular/localize": "^10.1.6",
     "@schematics/angular": "~10.1.7",

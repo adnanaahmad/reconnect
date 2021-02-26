@@ -1,8 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {DeleteConfirmationPopupComponent} from '../../../../../../shared/components/delete-confirmation-popup/delete-confirmation-popup.component';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ChatModel} from 'src/app/features/roles/common/team-message-board/models/chat.model';
+import {WebSocketService} from '../../../../../../core/webSockets/web-socket.service';
+import {ChatService} from '../../services/chat.service';
+import {CreateGroupChatComponent} from '../../popups/create-group-chat/create-group-chat.component';
 @Component({
   selector: 'app-team-message-board',
   templateUrl: './team-message-board.component.html',
@@ -11,21 +14,25 @@ import {ChatModel} from 'src/app/features/roles/common/team-message-board/models
 })
 export class TeamMessageBoardComponent implements OnInit {
   chat: ChatModel = {} as ChatModel;
-  //selectedFriend;
-  searchTerm: string = 'on';
-  //recentChats: any;
+  searchTerm: string = '';
   @ViewChild('textArea') inputBox: ElementRef;
   @ViewChild('chatBox') chatBoxScroll: ElementRef;
-  //messages: any[] = [];
-  //toggle: boolean = false;
-  // inputForm = this.fb.group({
-  //   inputText: ['', Validators.required],
-  // });
 
-  constructor(private fb: FormBuilder, private modalService: NgbModal ) {
+
+  constructor(private fb: FormBuilder,
+              private modalService: NgbModal,
+              private webSocket: WebSocketService,
+              private chatService: ChatService,
+              private configuration: NgbModalConfig) {
+    configuration.centered = true;
+    configuration.container = 'app-team-message-board';
   }
 
   ngOnInit(): void {
+    this.getRecentConversations();
+    this.webSocket.listen('hello').subscribe(res => {
+      console.log(res);
+    });
     this.chat.inputForm = this.fb.group({
       inputText: ['', Validators.required],
     });
@@ -63,7 +70,6 @@ export class TeamMessageBoardComponent implements OnInit {
     }, 1);
   }
   sendMessage(): void {
-    //console.log(this.inputForm.value)
     this.chat.messages.push({
       text: this.chat.inputForm.value.inputText,
       userId: 1
@@ -95,6 +101,24 @@ export class TeamMessageBoardComponent implements OnInit {
       if (result === 'Yes') {
         console.log(result);
         this.chat.messages = [];
+      }
+    }, error => {
+      //console.log(error);
+    });
+  }
+  getRecentConversations(): void{
+    this.chatService.getConversation().subscribe(res => {
+      console.log(res);
+    }, error => {
+      console.log(error);
+    });
+  }
+  createGroupChat(): void{
+    const modalRef = this.modalService.open(CreateGroupChatComponent);
+    modalRef.result.then((result) => {
+      if (result === 'Yes') {
+        console.log(result);
+        //this.chat.messages = [];
       }
     }, error => {
       //console.log(error);
