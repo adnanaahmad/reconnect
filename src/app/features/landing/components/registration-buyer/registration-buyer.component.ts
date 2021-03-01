@@ -52,7 +52,7 @@ export class RegistrationBuyerComponent implements OnInit {
         details: [null, Validators.required],
       }),
     }, {validator: this.passwordConfirming});
-    this.registration.agreed = new FormControl(false);
+    this.registration.agreed = new FormControl(null);
   }
 
 
@@ -85,6 +85,7 @@ export class RegistrationBuyerComponent implements OnInit {
   onSubmit(): void{
     if (!this.registration.form.valid || !this.registration.agreed.value){
       this.registration.form.markAllAsTouched();
+      this.registration.agreed.markAllAsTouched();
       if (this.registration.form.get('password').value !== this.registration.form.get('confirmPassword').value ||
           !this.registration.form.get('confirmPassword').value) {
         document.getElementById('confirmPasswordInput').classList.add('is-invalid');

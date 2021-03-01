@@ -93,7 +93,7 @@
                 <label class="container">
                     <input [formControl]="registration.agreed" id="myCheck" type="checkbox">
                     <img class="checkmark" src="/assets/loan-details/tick.svg">
-                    <p class="remember text-nowrap">I have agreed to the terms and conditions</p>
+                    <p [ngClass]="{'danger' : registration.agreed.invalid && registration.agreed.touched || !registration.agreed.value && registration.agreed.touched}" class="remember text-nowrap">I have agreed to the terms and conditions</p>
                 </label>
             </div>
         </div>
