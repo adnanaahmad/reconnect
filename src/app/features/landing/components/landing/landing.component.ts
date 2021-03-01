@@ -61,6 +61,14 @@ export class LandingComponent implements OnInit, AfterViewInit {
           'var(--green)',
           'transparent'
       );
+    } else if (this.router.url === '/forgotPassword'){
+      this.changeBackgroundHelper(
+          true, '1',
+          '0.4s',
+          'white',
+          'transparent',
+          'transparent'
+      );
     } else {
       this.changeBackgroundHelper(
           true,
