@@ -8,13 +8,16 @@ selectedFriend: SelectedFriendModel;
 searchTerm: string;
 toggle: boolean;
 inputForm: FormGroup;
+loader: boolean;
 }
 
 interface SelectedFriendModel {
-  image: string;
-  name: string;
-  id: string;
+  firstName: string;
+  lastName: string;
   role: string;
+  profilePictureUrl: string;
+  phoneNumber: string;
+  email: string;
 }
 export interface CreateGroupChatModel{
   team: TeamDataModel;

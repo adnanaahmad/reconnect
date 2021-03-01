@@ -92,4 +92,7 @@ export class HelperService {
       this.toaster.error('Invalid image format');
     }
   }
+  formatRole(data): string{
+    return data.split(/(?=[A-Z])/).join(' ');
+  }
 }

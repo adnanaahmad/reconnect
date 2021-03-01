@@ -34,6 +34,10 @@ export class ConstantService {
     delete: 'delete'
   };
    loanStatus = ['application', 'preApproved', 'acceptedOffer', 'underwriting', 'approvedWithConditions', 'clearedToClose', 'closed'];
+   conversationType = {
+     PRIVATE: 'private',
+     GROUP: 'group'
+   };
 
    apiRoutes = {
      signin: `${environment.apiUrl}/user/signin`,
@@ -58,7 +62,8 @@ export class ConstantService {
      getFavorites: `${environment.apiUrl}/favourite`,
      savedSearches: `${environment.apiUrl}/savedsearch`,
      resetPassword: `${environment.apiUrl}/user/reset-password`,
-     getConversation: `${environment.apiUrl}/conversation`
+     getConversation: `${environment.apiUrl}/conversation`,
+     getMessages: `${environment.apiUrl}/message`
   };
    httpOptions = {
      json: {

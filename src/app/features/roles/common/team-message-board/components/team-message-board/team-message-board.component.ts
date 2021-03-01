@@ -6,6 +6,11 @@ import {ChatModel} from 'src/app/features/roles/common/team-message-board/models
 import {WebSocketService} from '../../../../../../core/webSockets/web-socket.service';
 import {ChatService} from '../../services/chat.service';
 import {CreateGroupChatComponent} from '../../popups/create-group-chat/create-group-chat.component';
+import {StoreService} from '../../../../../../core/store/store.service';
+import {element} from 'protractor';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {HelperService} from '../../../../../../core/helper/helper.service';
+import {take} from 'rxjs/operators';
 @Component({
   selector: 'app-team-message-board',
   templateUrl: './team-message-board.component.html',
@@ -23,16 +28,18 @@ export class TeamMessageBoardComponent implements OnInit {
               private modalService: NgbModal,
               private webSocket: WebSocketService,
               private chatService: ChatService,
-              private configuration: NgbModalConfig) {
+              private configuration: NgbModalConfig,
+              public store: StoreService,
+              public constant: ConstantService,
+              public helper: HelperService) {
     configuration.centered = true;
     configuration.container = 'app-team-message-board';
   }
 
   ngOnInit(): void {
+    this.chat.loader = false;
     this.getRecentConversations();
-    this.webSocket.listen('hello').subscribe(res => {
-      console.log(res);
-    });
+    this.listenMessages();
     this.chat.inputForm = this.fb.group({
       inputText: ['', Validators.required],
     });
@@ -43,38 +50,23 @@ export class TeamMessageBoardComponent implements OnInit {
       status: 'Online',
       image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_2NLMlYCATt8ioaZsg-nuEGSsWVDBoAPIZw&usqp=CAU',
     };
-
-    this.chat.recentChats = [
-      {image: 'https://img-cdn.tid.al/o/4858a4b2723b7d0c7d05584ff57701f7b0c54ce3.jpg', name: 'Rafael Nadal', id: '1', role: 'Real Estate Agent'},
-      {image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHPzYd8Zq8A3IXMaeSeTyfaSTce2CLi0NZ-Q&usqp=CAU', name: 'Kevin Herman', id: '2', role: 'Lender'},
-      {image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFfao9ML9S9TYzrCqtva7w0FW1Y2RL2CriuQ&usqp=CAU', name: 'Daniel Ho', id: '3', role: 'Home Inspector'},
-      {image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6zes53m4a_2VLTcmTn_bHk8NO5SkuWfcQbg&usqp=CAU', name: 'Remi Abd', id: '4', role: 'Seller'},
-      {image: 'https://alicepropertymanagement.com/images/temp-profile.jpg', name: 'Ch Marc Rauf', id: '5', role: 'Attorney'},
-      {image: 'https://alicepropertymanagement.com/images/temp-profile.jpg', name: 'Ch Marc Rauf', id: '5', role: 'Attorney'}
-    ];
-    this.chat.selectedFriend = this.chat.recentChats[0];
-
-
-    this.chat.messages = [
-      {text: 'Hello', userId: 2, file: [{media: 'https://media.istockphoto.com/photos/beautiful-luxury-home-exterior-at-twilight-picture-id1026205392?k=6&m=1026205392&s=612x612&w=0&h=pe0Pqbm7GKHl7cmEjf9Drc7Fp-JwJ6aTywsGfm5eQm4=', type: 'image'},{media: 'https://media.istockphoto.com/photos/beautiful-luxury-home-exterior-at-twilight-picture-id1026205392?k=6&m=1026205392&s=612x612&w=0&h=pe0Pqbm7GKHl7cmEjf9Drc7Fp-JwJ6aTywsGfm5eQm4=', type: 'image'}, {media: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4', type: 'video'}]},
-      {text: 'Hi', userId: 1 },
-      {text: 'working to revolutionize transportation both on Earth,  \n through electric car maker  - and in space, via rocket producer Space', userId: 2, file: [] },
-      {text: 'stepped down as chairman in 2018, after making alleged "false statements" about a plan', userId: 2, file: [] },
-      {text: 'Powerwall users have mistakenly configured their \n devices to be exposed on the Web', userId: 2, file: [] },
-      {text: 'users have mistakenly configured their devices to be exposed on the Web', userId: 2 },
-      {text: 'mistakenly configured their devices to be exposed on the Web', userId: 1, file: [] },
-      {text: 'revolutionize transportation both on Earth', userId: 2, file: [] }
-    ];
     setTimeout(() => {
       this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
     }, 1);
   }
-  sendMessage(): void {
-    this.chat.messages.push({
-      text: this.chat.inputForm.value.inputText,
-      userId: 1
+  listenMessages(): void{
+    this.webSocket.listen('client-conversation-newMessage').subscribe(res => {
+      this.chat.messages.push(res);
     });
-
+  }
+  sendMessage(): void {
+    const data = {
+      text: this.chat.inputForm.value.inputText,
+      conversation: this.chat.selectedFriend['_id'],
+      files: [],
+      type: 'text',
+    };
+    this.webSocket.emit('server-conversation-newMessage', data);
     this.chat.inputForm.controls.inputText.setValue('');
     this.inputBox.nativeElement.focus();
 
@@ -92,8 +84,14 @@ export class TeamMessageBoardComponent implements OnInit {
   toggleEmojiMart(): void {
     this.chat.toggle = !this.chat.toggle;
   }
-  listClick(newValue): void {
-    this.chat.selectedFriend = newValue;
+  listClick(data): void {
+    this.chat.selectedFriend = data;
+    this.chatService.getMessages(data._id).pipe(take(1)).subscribe(res => {
+      console.log(res);
+     this.chat.messages = res.result;
+    }, error => {
+      console.log(error);
+    });
   }
   deleteChat(): void {
     const modalRef = this.modalService.open(DeleteConfirmationPopupComponent);
@@ -109,6 +107,8 @@ export class TeamMessageBoardComponent implements OnInit {
   getRecentConversations(): void{
     this.chatService.getConversation().subscribe(res => {
       console.log(res);
+      this.chat.loader = true;
+      this.chat.recentChats = res.result;
     }, error => {
       console.log(error);
     });
@@ -123,6 +123,9 @@ export class TeamMessageBoardComponent implements OnInit {
     }, error => {
       //console.log(error);
     });
+  }
+  recentChatMember(array: Array<any>): {}{
+    return array.find(data => data._id !== this.store.userId);
   }
   //sendMessage(event) {
     //   const files = !event.files ? [] : event.files.map((file) => {
@@ -145,5 +148,4 @@ export class TeamMessageBoardComponent implements OnInit {
     //     },
     //   });
     // }
-
 }

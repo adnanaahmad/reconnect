@@ -57,11 +57,21 @@
 .active{
   background: var(--extraLightGray);
 }
-.friend-image{
+.friend-image, .friend-image-dummy{
   height: 3.4vw;
   width: 3.8vw;
-  object-fit: cover;
   border-radius: .5vw;
+}
+.friend-image{
+  object-fit: cover;
+}
+.friend-image-dummy{
+  padding: .8vw;
+  background: var(--extraLightGray);
+}
+.group-img{
+  padding: .6vw;
+  background: white;
 }
 .friend-name{
   margin: 0;

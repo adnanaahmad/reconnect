@@ -1,86 +1,122 @@
 <div class="heading d-flex justify-content-between">
-  <h3>Team Message Board</h3>
+    <h3>Team Message Board</h3>
 </div>
-<div class="row" style="background: transparent">
-  <div class="col-md-3 first-column" style="">
-      <div class="card-1 d-flex justify-content-start mb-4">
-           <div class="user-display-div"> <img class="img-fluid user-display" [src]="chat.user.image">
-           </div>
-           <div class="user-detail"><p class="user-name">{{ chat.user.name }}</p><p class="user-role">{{ chat.user.role }}</p><div class="d-flex justify-content-start"><p class="user-status">{{ chat.user.status }}</p><span class="align-self-center circle"></span></div></div>
+<div class="row" style="background: transparent" *ngIf="chat.loader">
+    <div class="col-md-3 first-column" style="">
+        <div class="card-1 d-flex justify-content-start mb-4">
+            <div class="user-display-div"><img class="img-fluid user-display" [src]="chat.user.image">
+            </div>
+            <div class="user-detail"><p class="user-name">{{ chat.user.name }}</p>
+                <p class="user-role">{{ chat.user.role }}</p>
+                <div class="d-flex justify-content-start"><p class="user-status">{{ chat.user.status }}</p><span
+                        class="align-self-center circle"></span></div>
+            </div>
 
             <img class="align-self-center notification img-fluid" src="/assets/chat/notification.svg">
 
-      </div>
-     <div class="card-2">
-
-          <div class="d-flex justify-content-between">
-              <p class="create-chat-group">Create Chat Group</p>
-              <img (click)="createGroupChat()" class="align-self-center add-group img-fluid" src="/assets/chat/add-group.svg">
-          </div>
-
-          <div class="recent-chat"><p>Recent Chats</p></div>
-         <div class="recent-chat-scroll">
-          <div *ngFor = "let friend of chat.recentChats" [ngClass]="{'active': chat.selectedFriend == friend}" (click)="listClick(friend)" class="friends d-flex justify-content-start">
-           <div class="friend-image-div" > <img class="friend-image img-fluid" [src]="friend.image"> </div>
-            <div class="align-self-center friend-text"><div class="d-flex justify-content-start"><p class="friend-name">{{ friend.name }}</p><span class="circle align-self-center"></span></div><p class="friend-role">{{ friend.role }}</p></div>
-            <img *ngIf="!(chat.selectedFriend == friend)" class="align-self-center envelope img-fluid" src="/assets/chat/envelope.svg">
-          </div>
-         </div>
-
-
-
-     </div>
-  </div>
-  <div class="col-md-9 second-column">
-      <div class="card-3">
-        <div class="d-flex justify-content-start current-friend">
-           <div class="current-friend-image-div" >
-                <img class="current-friend-image" [src]="chat.selectedFriend.image">
-           </div>
-          <div class="align-self-center current-friend-text">
-              <p class="current-friend-name">{{ chat.selectedFriend.name }}</p>
-              <div class="d-flex justify-content-start"><p class="current-friend-status">Online</p><span class="circle-2 align-self-center"></span></div>
-          </div>
-          <div  class="ml-auto">
-              <img class="search-icon img-fluid" src="/assets/chat/search.svg">
-              <img (click) = "deleteChat()" class="delete-icon img-fluid" src="/assets/news-feed-icons/delete.svg">
-
-          </div>
-
         </div>
+        <div class="card-2">
 
-        <div class="chat-box" #chatBox>
-          <div *ngFor="let message of chat.messages">
-              <div *ngIf = "message.userId != 1">
-                 <div class="d-flex justify-content-start">
-                      <p class="receive"[innerHTML]="message.text | highlight: searchTerm"></p>
-                 </div>
-                 <div class="d-flex justify-content-start">
-                   <div *ngFor="let file of message.file">
-                         <a [href]="file.media" download><img *ngIf = "file.type == 'image'" class="img-fluid mr-2" style="border-radius: .5em; width: 7vw; height: 7vw; object-fit: cover" [src]="file.media"></a>
-                         <video controls *ngIf = "file.type == 'video'" style="border-radius: .5em; width: 7vw; height: 7vw; object-fit: cover"><source [src]="file.media"> </video>
-                    </div>
-                 </div>
-              </div>
-             <div *ngIf = "message.userId == 1" class="d-flex justify-content-end"><p class="send">{{ message.text }}</p></div>
-          </div>
-        </div>
-        <form [formGroup] = "chat.inputForm" (ngSubmit)="sendMessage()">
-            <div class="send-msg d-flex">
-                    <div class=" input-box align-self-center">
-                         <textarea #textArea formControlName = "inputText" class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                    </div>
-                    <emoji-mart *ngIf="chat.toggle" [darkMode]="false" [emojiSize]="16"  (emojiClick)="addEmoji($event)" [emojiTooltip]="false"
-                                [enableFrequentEmojiSort]="true"   [style]="{ position: 'absolute', bottom: '4.5vw', right: '2.9vw' }"
-                    ></emoji-mart>
-                    <div class="align-self-center" (click) = "toggleEmojiMart()" >
-                    <img class="emoji img-fluid" src="/assets/chat/smile.svg">
-
-                    </div>
-                    <div class="align-self-center"><img class="attachment img-fluid" src="/assets/chat/attachment.svg"></div>
-                    <div class="send-button align-self-center"><button [disabled] = "chat.inputForm.invalid" type="submit" class="btn btn-success"><p>Send</p></button></div>
+            <div class="d-flex justify-content-between">
+                <p class="create-chat-group">Create Chat Group</p>
+                <img (click)="createGroupChat()" class="align-self-center add-group img-fluid"
+                     src="/assets/chat/add-group.svg">
             </div>
-        </form>
-      </div>
-  </div>
+
+            <div class="recent-chat"><p>Recent Chats</p></div>
+            <div class="recent-chat-scroll">
+                <div *ngFor="let friend of chat.recentChats" [ngClass]="{'active': chat.selectedFriend == friend}"
+                     (click)="listClick(friend)" class="friends d-flex justify-content-start">
+                    <div class="friend-image-div">
+                        <img *ngIf="friend.type === constant.conversationType.PRIVATE && recentChatMember(friend.allTimeMembers).profilePictureUrl" class="friend-image img-fluid" [src]="recentChatMember(friend.allTimeMembers).profilePictureUrl">
+                        <img *ngIf="friend.type === constant.conversationType.PRIVATE && !recentChatMember(friend.allTimeMembers).profilePictureUrl" class="friend-image-dummy img-fluid" src="/assets/profile/profile.svg">
+                        <img *ngIf="friend.type === constant.conversationType.GROUP" class="friend-image group-img img-fluid" src="/assets/profile/group.png">
+                    </div>
+                    <div class="align-self-center friend-text">
+                        <div class="d-flex justify-content-start">
+                            <p *ngIf="friend.type === constant.conversationType.GROUP" class="friend-name">{{ friend.title | titlecase }}</p>
+                            <ng-container *ngIf="friend.type === constant.conversationType.PRIVATE">
+                                <p class="friend-name">{{ recentChatMember(friend.allTimeMembers).firstName | titlecase}} {{ recentChatMember(friend.allTimeMembers).lastName | titlecase }}</p>
+                                <span class="circle align-self-center"></span>
+                            </ng-container>
+                        </div>
+                        <p *ngIf="friend.type === constant.conversationType.PRIVATE" class="friend-role">{{ helper.formatRole(recentChatMember(friend.allTimeMembers).role) | titlecase }}</p>
+                    </div>
+                    <img *ngIf="!(chat.selectedFriend == friend)" class="align-self-center envelope img-fluid"
+                         src="/assets/chat/envelope.svg">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-md-9 second-column">
+        <div class="card-3">
+            <div class="d-flex justify-content-start current-friend">
+              <ng-container *ngIf="chat.selectedFriend">
+                  <div class="current-friend-image-div">
+                      <img class="current-friend-image" [src]="recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl">
+                  </div>
+                  <div class="align-self-center current-friend-text">
+                      <p class="current-friend-name">{{ recentChatMember(chat.selectedFriend.allTimeMembers).firstName }}</p>
+                      <div class="d-flex justify-content-start"><p class="current-friend-status">Online</p><span
+                              class="circle-2 align-self-center"></span></div>
+                  </div>
+              </ng-container>
+                <div class="ml-auto">
+                    <img class="search-icon img-fluid" src="/assets/chat/search.svg">
+                    <img (click)="deleteChat()" class="delete-icon img-fluid" src="/assets/news-feed-icons/delete.svg">
+
+                </div>
+
+            </div>
+
+            <div class="chat-box" #chatBox>
+                <div *ngFor="let message of chat.messages">
+                    <div *ngIf="message.createdBy !== store.userId" class="d-flex justify-content-start">
+                        <p class="receive" [innerHTML]="message.text | highlight: searchTerm"></p>
+                    </div>
+                    <div *ngIf="message.createdBy === store.userId" class="d-flex justify-content-end">
+                        <p class="send">{{ message.text }}</p>
+                    </div>
+                </div>
+            </div>
+            <form [formGroup]="chat.inputForm" (ngSubmit)="sendMessage()">
+                <div class="send-msg d-flex">
+                    <div class=" input-box align-self-center">
+                        <textarea #textArea formControlName="inputText" class="form-control"
+                                  id="exampleFormControlTextarea1" rows="1"></textarea>
+                    </div>
+                    <emoji-mart *ngIf="chat.toggle" [darkMode]="false" [emojiSize]="16" (emojiClick)="addEmoji($event)"
+                                [emojiTooltip]="false"
+                                [enableFrequentEmojiSort]="true"
+                                [style]="{ position: 'absolute', bottom: '4.5vw', right: '2.9vw' }"
+                    ></emoji-mart>
+                    <div class="align-self-center" (click)="toggleEmojiMart()">
+                        <img class="emoji img-fluid" src="/assets/chat/smile.svg">
+
+                    </div>
+                    <div class="align-self-center"><img class="attachment img-fluid" src="/assets/chat/attachment.svg">
+                    </div>
+                    <div class="send-button align-self-center">
+                        <button [disabled]="chat.inputForm.invalid" type="submit" class="btn btn-success"><p>Send</p>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
+<!--                        <div class="d-flex justify-content-start">-->
+<!--                            <div *ngFor="let file of message.file">-->
+<!--                                <a [href]="file.media" download><img *ngIf="file.type == 'image'" class="img-fluid mr-2"-->
+<!--                                                                     style="border-radius: .5em; width: 7vw; height: 7vw; object-fit: cover"-->
+<!--                                                                     [src]="file.media"></a>-->
+<!--                                <video controls *ngIf="file.type == 'video'"-->
+<!--                                       style="border-radius: .5em; width: 7vw; height: 7vw; object-fit: cover">-->
+<!--                                    <source [src]="file.media">-->
+<!--                                </video>-->
+<!--                            </div>-->
+<!--                        </div>-->

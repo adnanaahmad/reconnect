@@ -41,4 +41,7 @@ export class StoreService {
   updateToggleLoanType(data): void{
     this.toggleLoanTypeSubject.next(data);
   }
+  get userId(): string{
+    return JSON.parse(localStorage.getItem('user'))._id;
+  }
 }
