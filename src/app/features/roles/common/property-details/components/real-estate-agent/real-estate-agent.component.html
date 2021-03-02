@@ -1,40 +1,52 @@
-
-
 <div *ngIf="!realEstateAgent">
     <button (click)="addTeamMember()" class="add-button">Add Real Estate Agent</button>
 </div>
 <div class="card-2 d-flex justify-content-between" *ngIf="realEstateAgent">
-        <div class="div-1 d-flex">
-            <img *ngIf="realEstateAgent.profilePictureUrl" [src]="realEstateAgent.profilePictureUrl" class="display-img">
-            <img *ngIf="!realEstateAgent.profilePictureUrl" src="/assets/profile/profile.svg" class="dummy-img">
-          <div class="info d-flex align-items-start flex-column">
-             <div class="name-div"> <p class="name">{{realEstateAgent.firstName | titlecase}} {{realEstateAgent.lastName | titlecase}}</p> </div>
-             <div style="float: left" class="d-flex rating"><img class="align-self-center" src="/assets/property-details/star.svg"><p>{{realEstateAgent.rating}}</p><p>({{realEstateAgent.reviews}} Reviews)</p></div>
+    <div class="div-1 d-flex">
+        <img *ngIf="realEstateAgent.profilePictureUrl" [src]="realEstateAgent.profilePictureUrl" class="display-img">
+        <img *ngIf="!realEstateAgent.profilePictureUrl" src="/assets/profile/profile.svg" class="dummy-img">
+        <div class="info d-flex align-items-start flex-column">
+            <div class="name-div"><p
+                    class="name">{{realEstateAgent.firstName | titlecase}} {{realEstateAgent.lastName | titlecase}}</p>
+            </div>
+            <div style="float: left" class="d-flex rating"><img class="align-self-center"
+                                                                src="/assets/property-details/star.svg">
+                <p>{{realEstateAgent.rating}}</p>
+                <p>({{realEstateAgent.reviews}} Reviews)</p></div>
 
-               <div class="mt-auto">
+            <div class="mt-auto">
                 <div class="phone d-flex">
-                  <img class="align-self-center" src="/assets/directory-icons/call.svg">
-                  <p class="align-self-center">{{realEstateAgent.phoneNumber}}</p>
+                    <img class="align-self-center" src="/assets/directory-icons/call.svg">
+                    <p class="align-self-center">{{realEstateAgent.phoneNumber}}</p>
                 </div>
                 <div class="message d-flex">
                     <img class="align-self-center" src="/assets/directory-icons/envelope.svg">
                     <p class="align-self-center">Ask a Question</p>
                 </div>
-              </div>
+            </div>
 
-          </div>
-       </div>
-       <div class="div-2 d-flex align-items-end flex-column">
-           <p>I Want to See This ASAP!</p>
-           <div class="d-flex"><button class="btn btn-success book-btn ml-auto d-flex">
-           <img src="/assets/property-details/booking.svg"> <p class="align-self-center">Book Now</p></button></div>
-           <div *ngIf="realEstateAgent.socialMedia" class="d-flex justify-content-between social-media mt-auto">
-                <a *ngIf="true" target="_blank" [href] = "realEstateAgent.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
-                <a *ngIf="true" target="_blank" [href] = "realEstateAgent.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
-                <a *ngIf="true" target="_blank" [href] = "realEstateAgent.socialMedia.linkedIn"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
-                <a *ngIf="true" target="_blank" [href] = "realEstateAgent.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
-                <a *ngIf="true" target="_blank" [href] = "realEstateAgent.socialMedia.world"> <img src="/assets/directory-icons/world.svg" class="img-fluid world"> </a>
-           </div>
-       </div>
+        </div>
+    </div>
+    <div class="div-2 d-flex align-items-end flex-column">
+        <p>I Want to See This ASAP!</p>
+        <div class="d-flex">
+            <button (click)="bookNow()" class="book-btn ml-auto d-flex">
+                <img src="/assets/property-details/booking.svg">
+                <p class="align-self-center">Book Now</p>
+            </button>
+        </div>
+        <div *ngIf="realEstateAgent.socialMedia" class="d-flex justify-content-between social-media mt-auto">
+            <a *ngIf="true" target="_blank" [href]="realEstateAgent.socialMedia.facebook"><img
+                    src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+            <a *ngIf="true" target="_blank" [href]="realEstateAgent.socialMedia.instagram"> <img
+                    src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+            <a *ngIf="true" target="_blank" [href]="realEstateAgent.socialMedia.linkedIn"> <img
+                    src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+            <a *ngIf="true" target="_blank" [href]="realEstateAgent.socialMedia.twitter"><img
+                    src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+            <a *ngIf="true" target="_blank" [href]="realEstateAgent.socialMedia.world"> <img
+                    src="/assets/directory-icons/world.svg" class="img-fluid world"> </a>
+        </div>
+    </div>
 
-      </div>
+</div>

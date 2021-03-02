@@ -3,6 +3,10 @@ import {RealEstateAgentModel} from '../../models/property-details.model';
 import {AddMemberComponent} from '../../../../buyer/home-buying-dashboard/popups/add-member/add-member.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {PropertyDetailsService} from '../../services/property-details.service';
+import {ToastrService} from 'ngx-toastr';
+import {take} from 'rxjs/operators';
+import {environment} from '../../../../../../../environments/environment';
 
 @Component({
   selector: 'app-real-estate-agent',
@@ -11,7 +15,11 @@ import {ConstantService} from '../../../../../../core/constant/constant.service'
 })
 export class RealEstateAgentComponent implements OnInit {
   @Input() realEstateAgent: RealEstateAgentModel = {} as RealEstateAgentModel;
-  constructor(private modalService: NgbModal) { }
+  @Input() mlsId: string;
+  constructor(private modalService: NgbModal,
+              private propertyDetails: PropertyDetailsService,
+              private toaster: ToastrService,
+              private constant: ConstantService) { }
 
   ngOnInit(): void {
   }
@@ -25,5 +33,19 @@ export class RealEstateAgentComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  bookNow(): void{
+    const data = {
+      to: this.realEstateAgent._id,
+      text: `${environment.clientUrl}/home/propertyDetails/${this.mlsId}`,
+      files: [],
+      type: this.constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY,
+      shareMeta: {}
+    };
+    this.propertyDetails.shareOrBookProperty(data).pipe(take(1)).subscribe(res => {
+      this.toaster.success('Property has been shared');
+      }, error => {
+        this.toaster.error('Failed to share property');
+      });
   }
 }

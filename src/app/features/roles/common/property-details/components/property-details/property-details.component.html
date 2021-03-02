@@ -21,7 +21,7 @@
   <div *ngIf="propertyDetails.loader" class="d-flex">
     <div class="column-1">
       <app-property-ad [propertyAd]="propertyDetails.propertyAd"></app-property-ad>
-      <app-real-estate-agent [realEstateAgent]="propertyDetails.realEstateAgent ? propertyDetails.realEstateAgent.userId : null"></app-real-estate-agent>
+      <app-real-estate-agent [mlsId]="propertyDetails.propertyAd.id" [realEstateAgent]="propertyDetails.realEstateAgent ? propertyDetails.realEstateAgent.userId : null"></app-real-estate-agent>
       <p class="details-heading pd-heading">Property Details</p>
       <app-features [propertyDetails]="propertyDetails.features"></app-features>
       <ng-container *ngIf="propertyDetails.loanScenarioOne.listings[0].propertyType === 'Multi-family'">

@@ -93,15 +93,21 @@
                             {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName}} has been removed from your
                             team</p>
                     </ng-container>
-                    <ng-container *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT">
+                    <ng-container *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT || message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY">
                         <div *ngIf="message.createdBy !== store.userId" class="d-flex justify-content-start">
                             <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
                                  *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
                                  src="{{groupMembersProfileImage(message.createdBy)}}" class="mr-custom">
-                            <p class="receive" [innerHTML]="message.text | highlight: searchTerm"></p>
+                            <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT" class="receive" [innerHTML]="message.text | highlight: searchTerm"></p>
+                            <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY" [href]="message.text" target="_blank">
+                                <p class="receive" [innerHTML]="message.text | highlight: searchTerm"></p>
+                            </a>
                         </div>
                         <div *ngIf="message.createdBy === store.userId" class="d-flex justify-content-end">
-                            <p class="send">{{ message.text }}</p>
+                            <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT" class="send">{{ message.text }}</p>
+                            <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY" [href]="message.text" target="_blank">
+                                <p class="send" [innerHTML]="message.text | highlight: searchTerm"></p>
+                            </a>
                             <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
                                  *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
                                  src="{{groupMembersProfileImage(message.createdBy)}}" class="ml-custom">

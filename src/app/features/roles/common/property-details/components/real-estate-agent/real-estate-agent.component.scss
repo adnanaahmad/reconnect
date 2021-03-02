@@ -79,6 +79,12 @@
 .book-btn{
   padding: .4vw 1.2vw .4vw 1.2vw;
   border-radius: .3vw;
+  background: var(--green);
+  border: none;
+  cursor: pointer;
+}
+.book-btn:focus{
+  outline: none;
 }
 .book-btn p{
   font-size: .76vw;

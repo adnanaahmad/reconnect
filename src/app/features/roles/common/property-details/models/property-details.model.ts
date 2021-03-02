@@ -84,7 +84,7 @@ interface RealEstateAgentUserModel {
 
 export interface RealEstateAgentModel {
   firstName: string;
-  lastName: string
+  lastName: string;
   profilePictureUrl: string;
   rating: number;
   reviews: number;
@@ -97,6 +97,7 @@ export interface RealEstateAgentModel {
     twitter: string;
     world: string;
   };
+  _id: string;
 }
 
 interface PropertyFeaturesModel {

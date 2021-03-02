@@ -19,4 +19,7 @@ export class PropertyDetailsService {
   getTeam(): Observable<any>{
     return this.helper.requestCall(this.methods.get, this.api.getTeam);
   }
+  shareOrBookProperty(data): Observable<any>{
+    return this.helper.requestCall(this.methods.post, this.api.shareProperty, data);
+  }
 }
