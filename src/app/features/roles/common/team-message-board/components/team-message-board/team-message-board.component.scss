@@ -34,12 +34,10 @@
   background: white;
   padding: 1.1vw;
   border-radius: .6vw;
-  //height: 34.5vw;
-  //overflow: scroll;
 }
 .recent-chat-scroll{
   height: 27.5vw;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .card-3{
   background: white;
@@ -53,6 +51,9 @@
   border-radius: .5vw;
   margin-top: 1vw;
   cursor: pointer;
+}
+.friends:first-child{
+  margin-top: 0;
 }
 .active{
   background: var(--extraLightGray);
@@ -69,9 +70,31 @@
   padding: .8vw;
   background: var(--extraLightGray);
 }
+
+
+.group-member, .dummy-member{
+  height: 3vw;
+  width: 3vw;
+  border-radius: .4vw;
+}
+.group-member{
+  object-fit: cover;
+}
+.dummy-member{
+  padding: .8vw;
+  background: var(--extraLightGray);
+}
+.mr-custom{
+  margin-right: .5vw;
+}
+.ml-custom{
+  margin-left: .5vw;
+}
+
 .group-img{
   padding: .6vw;
   background: white;
+  border: 1px solid var(--extraLightGray);
 }
 .friend-name{
   margin: 0;
@@ -174,7 +197,7 @@
 .chat-box{
   background-color: white;
   padding-top: 2vw;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 30.5vw;
 }
 .receive{
@@ -183,7 +206,8 @@
   color: var(--darkGray);
   font-size: .7vw;
   border-radius: .5vw;
-
+  word-wrap: break-word;
+  max-width: 24vw;
 }
 .send{
   background-color: var(--extraLightGray);
@@ -191,6 +215,12 @@
   color: var(--darkGray);
   font-size: .7vw;
   border-radius: .5vw;
+  word-wrap: break-word;
+  max-width: 24vw;
+}
+.add-remove-professional{
+  color: var(--lighGray);
+  font-size: .7vw;
 }
 .input-box{
   width: -webkit-fill-available;

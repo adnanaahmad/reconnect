@@ -4,11 +4,12 @@
 <div class="row" style="background: transparent" *ngIf="chat.loader">
     <div class="col-md-3 first-column" style="">
         <div class="card-1 d-flex justify-content-start mb-4">
-            <div class="user-display-div"><img class="img-fluid user-display" [src]="chat.user.image">
+            <div class="user-display-div"><img class="img-fluid user-display" [src]="chat.user.profilePictureUrl">
             </div>
-            <div class="user-detail"><p class="user-name">{{ chat.user.name }}</p>
-                <p class="user-role">{{ chat.user.role }}</p>
-                <div class="d-flex justify-content-start"><p class="user-status">{{ chat.user.status }}</p><span
+            <div class="user-detail"><p
+                    class="user-name">{{ chat.user.firstName | titlecase }} {{chat.user.lastName | titlecase}}</p>
+                <p class="user-role">{{ helper.formatRole(chat.user.role) | titlecase}}</p>
+                <div class="d-flex justify-content-start"><p class="user-status">{{ 'Online' }}</p><span
                         class="align-self-center circle"></span></div>
             </div>
 
@@ -28,19 +29,25 @@
                 <div *ngFor="let friend of chat.recentChats" [ngClass]="{'active': chat.selectedFriend == friend}"
                      (click)="listClick(friend)" class="friends d-flex justify-content-start">
                     <div class="friend-image-div">
-                        <img *ngIf="friend.type === constant.conversationType.PRIVATE && recentChatMember(friend.allTimeMembers).profilePictureUrl" class="friend-image img-fluid" [src]="recentChatMember(friend.allTimeMembers).profilePictureUrl">
-                        <img *ngIf="friend.type === constant.conversationType.PRIVATE && !recentChatMember(friend.allTimeMembers).profilePictureUrl" class="friend-image-dummy img-fluid" src="/assets/profile/profile.svg">
-                        <img *ngIf="friend.type === constant.conversationType.GROUP" class="friend-image group-img img-fluid" src="/assets/profile/group.png">
+                        <img *ngIf="friend.type === constant.conversationType.PRIVATE && recentChatMember(friend.allTimeMembers).profilePictureUrl"
+                             class="friend-image img-fluid"
+                             [src]="recentChatMember(friend.allTimeMembers).profilePictureUrl">
+                        <img *ngIf="friend.type === constant.conversationType.PRIVATE && !recentChatMember(friend.allTimeMembers).profilePictureUrl"
+                             class="friend-image-dummy img-fluid" src="/assets/profile/profile.svg">
+                        <img *ngIf="friend.type === constant.conversationType.GROUP"
+                             class="friend-image group-img img-fluid" src="/assets/profile/group.png">
                     </div>
                     <div class="align-self-center friend-text">
                         <div class="d-flex justify-content-start">
-                            <p *ngIf="friend.type === constant.conversationType.GROUP" class="friend-name">{{ friend.title | titlecase }}</p>
+                            <p *ngIf="friend.type === constant.conversationType.GROUP"
+                               class="friend-name">{{ friend.title | titlecase }}</p>
                             <ng-container *ngIf="friend.type === constant.conversationType.PRIVATE">
                                 <p class="friend-name">{{ recentChatMember(friend.allTimeMembers).firstName | titlecase}} {{ recentChatMember(friend.allTimeMembers).lastName | titlecase }}</p>
                                 <span class="circle align-self-center"></span>
                             </ng-container>
                         </div>
-                        <p *ngIf="friend.type === constant.conversationType.PRIVATE" class="friend-role">{{ helper.formatRole(recentChatMember(friend.allTimeMembers).role) | titlecase }}</p>
+                        <p *ngIf="friend.type === constant.conversationType.PRIVATE"
+                           class="friend-role">{{ helper.formatRole(recentChatMember(friend.allTimeMembers).role) | titlecase }}</p>
                     </div>
                     <img *ngIf="!(chat.selectedFriend == friend)" class="align-self-center envelope img-fluid"
                          src="/assets/chat/envelope.svg">
@@ -53,16 +60,17 @@
     <div class="col-md-9 second-column">
         <div class="card-3">
             <div class="d-flex justify-content-start current-friend">
-              <ng-container *ngIf="chat.selectedFriend">
-                  <div class="current-friend-image-div">
-                      <img class="current-friend-image" [src]="recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl">
-                  </div>
-                  <div class="align-self-center current-friend-text">
-                      <p class="current-friend-name">{{ recentChatMember(chat.selectedFriend.allTimeMembers).firstName }}</p>
-                      <div class="d-flex justify-content-start"><p class="current-friend-status">Online</p><span
-                              class="circle-2 align-self-center"></span></div>
-                  </div>
-              </ng-container>
+                <ng-container *ngIf="chat.selectedFriend">
+                    <div class="current-friend-image-div">
+                        <img class="current-friend-image"
+                             [src]="chat.selectedFriend.type === constant.conversationType.PRIVATE ? recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl : '/assets/profile/group.png'">
+                    </div>
+                    <div class="align-self-center current-friend-text">
+                        <p class="current-friend-name">{{ (chat.selectedFriend.type === constant.conversationType.PRIVATE ? recentChatMember(chat.selectedFriend.allTimeMembers).firstName  : chat.selectedFriend.title) | titlecase}}</p>
+                        <div class="d-flex justify-content-start"><p class="current-friend-status">Online</p><span
+                                class="circle-2 align-self-center"></span></div>
+                    </div>
+                </ng-container>
                 <div class="ml-auto">
                     <img class="search-icon img-fluid" src="/assets/chat/search.svg">
                     <img (click)="deleteChat()" class="delete-icon img-fluid" src="/assets/news-feed-icons/delete.svg">
@@ -73,15 +81,35 @@
 
             <div class="chat-box" #chatBox>
                 <div *ngFor="let message of chat.messages">
-                    <div *ngIf="message.createdBy !== store.userId" class="d-flex justify-content-start">
-                        <p class="receive" [innerHTML]="message.text | highlight: searchTerm"></p>
-                    </div>
-                    <div *ngIf="message.createdBy === store.userId" class="d-flex justify-content-end">
-                        <p class="send">{{ message.text }}</p>
-                    </div>
+                    <ng-container
+                            *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_LOG_PROFESSIONAL_ADDED_TO_TEAM">
+                        <p class="text-center add-remove-professional"> {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
+                            {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName}} has been added to your
+                            team</p>
+                    </ng-container>
+                    <ng-container
+                            *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_LOG_PROFESSIONAL_REMOVED_FROM_TEAM">
+                        <p class="text-center add-remove-professional"> {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
+                            {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName}} has been removed from your
+                            team</p>
+                    </ng-container>
+                    <ng-container *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT">
+                        <div *ngIf="message.createdBy !== store.userId" class="d-flex justify-content-start">
+                            <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
+                                 *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
+                                 src="{{groupMembersProfileImage(message.createdBy)}}" class="mr-custom">
+                            <p class="receive" [innerHTML]="message.text | highlight: searchTerm"></p>
+                        </div>
+                        <div *ngIf="message.createdBy === store.userId" class="d-flex justify-content-end">
+                            <p class="send">{{ message.text }}</p>
+                            <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
+                                 *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
+                                 src="{{groupMembersProfileImage(message.createdBy)}}" class="ml-custom">
+                        </div>
+                    </ng-container>
                 </div>
             </div>
-            <form [formGroup]="chat.inputForm" (ngSubmit)="sendMessage()">
+            <form *ngIf="showHideSendMessage()" [formGroup]="chat.inputForm" (ngSubmit)="sendMessage()">
                 <div class="send-msg d-flex">
                     <div class=" input-box align-self-center">
                         <textarea #textArea formControlName="inputText" class="form-control"

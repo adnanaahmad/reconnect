@@ -65,6 +65,15 @@ export class ConstantService {
      getConversation: `${environment.apiUrl}/conversation`,
      getMessages: `${environment.apiUrl}/message`
   };
+
+  chatMessageType = {
+    MESSAGE_TYPE_TEXT: 'text',
+    MESSAGE_TYPE_TEXT_WITH_FILE: 'textWithFile',
+    MESSAGE_TYPE_LOG_PROFESSIONAL_ADDED_TO_TEAM: 'logProfessionalAddedToTeam',
+    MESSAGE_TYPE_LOG_PROFESSIONAL_REMOVED_FROM_TEAM: 'logProfessionalRemovedFromTeam',
+    MESSAGE_TYPE_SHARE_PROPERTY: 'shareProperty',
+    MESSAGE_TYPE_BOOK_PROPERTY: 'bookProperty'
+  };
    httpOptions = {
      json: {
        headers: new HttpHeaders({

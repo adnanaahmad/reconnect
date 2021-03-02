@@ -2,12 +2,11 @@ import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angu
 import {FormBuilder, Validators} from '@angular/forms';
 import {DeleteConfirmationPopupComponent} from '../../../../../../shared/components/delete-confirmation-popup/delete-confirmation-popup.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {ChatModel} from 'src/app/features/roles/common/team-message-board/models/chat.model';
+import {ChatModel, UserModel} from 'src/app/features/roles/common/team-message-board/models/chat.model';
 import {WebSocketService} from '../../../../../../core/webSockets/web-socket.service';
 import {ChatService} from '../../services/chat.service';
 import {CreateGroupChatComponent} from '../../popups/create-group-chat/create-group-chat.component';
 import {StoreService} from '../../../../../../core/store/store.service';
-import {element} from 'protractor';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {take} from 'rxjs/operators';
@@ -19,7 +18,7 @@ import {take} from 'rxjs/operators';
 })
 export class TeamMessageBoardComponent implements OnInit {
   chat: ChatModel = {} as ChatModel;
-  searchTerm: string = '';
+  searchTerm = '';
   @ViewChild('textArea') inputBox: ElementRef;
   @ViewChild('chatBox') chatBoxScroll: ElementRef;
 
@@ -38,41 +37,33 @@ export class TeamMessageBoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.chat.loader = false;
+    this.chat.messages = [];
+    this.chat.user = this.store.getUserData();
     this.getRecentConversations();
     this.listenMessages();
     this.chat.inputForm = this.fb.group({
       inputText: ['', Validators.required],
     });
     this.chat.toggle = false;
-    this.chat.user = {
-      name: 'James Kanist',
-      role: 'Real Estate Agent',
-      status: 'Online',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_2NLMlYCATt8ioaZsg-nuEGSsWVDBoAPIZw&usqp=CAU',
-    };
-    setTimeout(() => {
-      this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
-    }, 1);
   }
   listenMessages(): void{
     this.webSocket.listen('client-conversation-newMessage').subscribe(res => {
       this.chat.messages.push(res);
+      setTimeout(() => {
+        this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
+      }, 0);
     });
   }
   sendMessage(): void {
     const data = {
       text: this.chat.inputForm.value.inputText,
-      conversation: this.chat.selectedFriend['_id'],
+      conversation: this.chat.selectedFriend._id,
       files: [],
       type: 'text',
     };
     this.webSocket.emit('server-conversation-newMessage', data);
     this.chat.inputForm.controls.inputText.setValue('');
     this.inputBox.nativeElement.focus();
-
-    setTimeout(() => {
-          this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
-    }, 1);
   }
 
   addEmoji(event): void {
@@ -85,10 +76,14 @@ export class TeamMessageBoardComponent implements OnInit {
     this.chat.toggle = !this.chat.toggle;
   }
   listClick(data): void {
+    console.log(data);
     this.chat.selectedFriend = data;
     this.chatService.getMessages(data._id).pipe(take(1)).subscribe(res => {
       console.log(res);
-     this.chat.messages = res.result;
+      this.chat.messages = res.result;
+      setTimeout(() => {
+        this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
+      }, 0);
     }, error => {
       console.log(error);
     });
@@ -101,7 +96,7 @@ export class TeamMessageBoardComponent implements OnInit {
         this.chat.messages = [];
       }
     }, error => {
-      //console.log(error);
+      console.log(error);
     });
   }
   getRecentConversations(): void{
@@ -109,6 +104,9 @@ export class TeamMessageBoardComponent implements OnInit {
       console.log(res);
       this.chat.loader = true;
       this.chat.recentChats = res.result;
+      if (this.chat.recentChats.length > 0){
+        this.listClick(this.chat.recentChats[0]);
+      }
     }, error => {
       console.log(error);
     });
@@ -116,36 +114,29 @@ export class TeamMessageBoardComponent implements OnInit {
   createGroupChat(): void{
     const modalRef = this.modalService.open(CreateGroupChatComponent);
     modalRef.result.then((result) => {
-      if (result === 'Yes') {
-        console.log(result);
-        //this.chat.messages = [];
+      if (result.status === 'yes') {
+        this.chat.recentChats.unshift(result.data);
+        this.listClick(this.chat.recentChats[0]);
       }
     }, error => {
-      //console.log(error);
+      console.log(error);
     });
   }
-  recentChatMember(array: Array<any>): {}{
+  recentChatMember(array: Array<any>): UserModel{
     return array.find(data => data._id !== this.store.userId);
   }
-  //sendMessage(event) {
-    //   const files = !event.files ? [] : event.files.map((file) => {
-    //     return {
-    //       url: file.src,
-    //       type: file.type,
-    //       icon: 'file-text-outline',
-    //     };
-    //   });
-    //
-    //   this.messages.push({
-    //     text: event.message,
-    //     date: new Date(),
-    //     files: files,
-    //     type: files.length ? 'file' : 'text',
-    //     reply: true,
-    //     user: {
-    //       name: 'Jonh Doe',
-    //       avatar: 'https://i.gifer.com/no.gif',
-    //     },
-    //   });
-    // }
+  groupMembersProfileImage(id: string): string{
+    const user = this.chat.selectedFriend.allTimeMembers.find(x => x._id === id);
+    return user.profilePictureUrl ? user.profilePictureUrl : '/assets/profile/profile.svg';
+  }
+  showHideSendMessage(): boolean{
+    if (!this.chat.selectedFriend) {
+      return false;
+    }
+    if (this.chat.selectedFriend.type === this.constant.conversationType.PRIVATE){
+      return this.chat.selectedFriend.allTimeMembers.length === this.chat.selectedFriend.members.length;
+    } else {
+      return  this.chat.selectedFriend.members.find(x => x._id === this.store.userId) ? true : false;
+    }
+  }
 }

@@ -51,9 +51,9 @@ export class CreateGroupChatComponent implements OnInit {
         members: this.teamData.selectedTeam,
         title: this.teamData.groupForm.get('title').value
       };
-      this.chatService.createGroupConversation(data).subscribe(res => {
+      this.chatService.createGroupConversation(data).pipe(take(1)).subscribe(res => {
         console.log(res);
-        this.activeModal.close({status: 'yes', data: res});
+        this.activeModal.close({status: 'yes', data: res.result});
       }, error => {
         console.log(error);
       })
@@ -96,7 +96,7 @@ export class CreateGroupChatComponent implements OnInit {
   }
   filterTeam(data): void{
     Object.keys(data).filter(element => {
-      if (!this.constant.roleArray.includes(element) || element === this.store.role){
+      if (!this.constant.roleArray.includes(element) || element === this.store.role || !data[element]){
         delete data[element];
       }
     });
