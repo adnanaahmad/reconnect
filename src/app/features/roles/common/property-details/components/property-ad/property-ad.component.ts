@@ -24,6 +24,7 @@ export class PropertyAdComponent implements OnInit, OnChanges {
   }
   shareProperty(): void{
     const modalRef = this.modalService.open(SharePropertyComponent);
+    modalRef.componentInstance.mlsId = this.propertyAd.id;
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
         console.log(result.data);

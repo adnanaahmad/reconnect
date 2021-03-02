@@ -56,7 +56,7 @@ export class CreateGroupChatComponent implements OnInit {
         this.activeModal.close({status: 'yes', data: res.result});
       }, error => {
         console.log(error);
-      })
+      });
     } else {
       this.teamData.groupForm.markAllAsTouched();
     }

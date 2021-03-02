@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {CreateGroupChatModel} from '../../../team-message-board/models/chat.model';
+import {ChatService} from '../../../team-message-board/services/chat.service';
+import {StoreService} from '../../../../../../core/store/store.service';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {ToastrService} from 'ngx-toastr';
+import {take} from 'rxjs/operators';
+import {environment} from '../../../../../../../environments/environment';
+import {PropertyDetailsService} from '../../services/property-details.service';
 
 @Component({
   selector: 'app-share-property',
@@ -9,59 +17,96 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['./share-property.component.scss']
 })
 export class SharePropertyComponent implements OnInit {
-  teamData: any;
-  selectedTeam: any[] = [];
-  message: any;
-  constructor(private helper: HelperService, private modal: NgbActiveModal) { }
+  @Input() mlsId: string;
+  @ViewChildren('member') teamMembers: QueryList<ElementRef>;
+  teamData: CreateGroupChatModel = {} as CreateGroupChatModel;
+
+  constructor(public activeModal: NgbActiveModal,
+              private fb: FormBuilder,
+              private helper: HelperService,
+              private propertyDetailsService: PropertyDetailsService,
+              public store: StoreService,
+              public constant: ConstantService,
+              private toaster: ToastrService,
+              private chatService: ChatService) {}
 
   ngOnInit(): void {
     this.helper.setModalPosition();
-    this.message = new FormControl('', Validators.required);
-    this.teamData = [
-      {
-        name: 'Rafael Nadal',
-        role: 'Real Estate Agent',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkqkWLzMbf_6cUuaxj9rAaJ61f3ntPBoto9g&usqp=CAU',
-        phone: '+942 23 1 6783',
-        email: 'abc@gmail.com'
-      },
-      {
-        name: 'Parineeti Akash',
-        role: 'Lender',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3UQl0sqcrJGd-tT4QCmfmPFv6AQKmQpSJHA&usqp=CAU',
-        phone: '+942 23 1 6783',
-        email: 'abc@gmail.com'
-      },
-      {
-        name: 'Paul Jensen',
-        role: 'Attorney',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr2RcD2fiReC2iLFK2CFL0MXCJrWaD7pPf5Q&usqp=CAU',
-        phone: '+942 23 1 6783',
-        email: 'abc@gmail.com'
-      },
-      {
-        name: 'Ali Mustaqeem',
-        role: 'Home Inspector',
-        image: 'https://www.rashidahdevore.com/uploads/9/0/0/6/90067921/ssp-64544-fs-web.jpg',
-        phone: '+942 23 1 6783',
-        email: 'abc@gmail.com'
-      },
-      {
-        name: 'Rahim Ali',
-        role: 'Insurance Agent',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcQeTDPANCGDQkVik0SBPix19KW-EFxphfag&usqp=CAU',
-        phone: '+942 23 1 6783',
-        email: 'abc@gmail.com'
-      }
-    ];
+    this.initializeForm();
+    if (this.store.role === this.constant.role.BUYER){
+      this.getTeam();
+    } else {
+      this.getBuyers();
+    }
+  }
+  initializeForm(): void{
+    this.teamData.groupForm = this.fb.group({
+      message: [null, Validators.required],
+    });
+    this.teamData.selectedTeam = [];
+  }
+  onSubmit(): void {
+    if (!this.teamData.selectedTeam.length) {
+      this.toaster.error('Select atleast one team member');
+    }
+    if (this.teamData.selectedTeam.length) {
+      const data = {
+        to: this.teamData.selectedTeam,
+        text: this.teamData.groupForm.get('message').value,
+        files: [],
+        type: this.constant.chatMessageType.MESSAGE_TYPE_SHARE_PROPERTY,
+        shareMeta: {
+          propertyUrl: `${environment.clientUrl}/home/propertyDetails/${this.mlsId}`,
+        }
+      };
+      this.propertyDetailsService.shareOrBookProperty(data).pipe(take(1)).subscribe(res => {
+        console.log(res);
+        this.activeModal.close({status: 'yes', data: res.result});
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      this.teamData.groupForm.markAllAsTouched();
+    }
   }
   close(): void{
-    this.modal.dismiss();
+    this.activeModal.close({status: 'no'});
   }
   toggleTeamMember(i, member): void{
-      this.helper.toggleTeamMember(i, member, this.selectedTeam);
+    member = this.store.role === this.constant.role.BUYER ? member.userId._id : member._id;
+    this.helper.toggleTeamMember(i, member, this.teamData.selectedTeam);
+    console.log(this.teamData.selectedTeam);
   }
-  share(): void{
-    this.modal.close({status: 'yes', data: {team: this.selectedTeam, message: this.message.value}});
+  getTeam(): void{
+    this.chatService.getTeamsData().pipe(take(1)).subscribe(res => {
+      console.log(res);
+      this.teamData.team = res.result;
+      this.teamData.id  = res.result._id;
+      this.filterTeam(this.teamData.team);
+      console.log(this.teamData);
+    }, error => {
+      console.log(error);
+    });
+  }
+  getBuyers(): void{
+    this.chatService.getBorrowers().pipe(take(1)).subscribe(res => {
+      console.log(res);
+      this.teamData.buyers = res.result;
+    }, error => {
+      console.log(error);
+    });
+  }
+  getBuyersTeam(member): void{
+    this.teamData.selectedButton = member;
+    this.teamData.id =  member._id;
+    this.teamData.team = member;
+    this.filterTeam(this.teamData.team);
+  }
+  filterTeam(data): void{
+    Object.keys(data).filter(element => {
+      if (!this.constant.roleArray.includes(element) || element === this.store.role || !data[element]){
+        delete data[element];
+      }
+    });
   }
 }
