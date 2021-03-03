@@ -74,6 +74,7 @@
          <button type="button" (click)="addPropertyMls()" class="mls">Add Property MLS#</button>
       </div>
       <app-subject-property *ngIf="transactionDetails.subjectProperty" [subjectProperty]="transactionDetails.subjectProperty"></app-subject-property>
+      <app-subject-property-template *ngIf="!transactionDetails.subjectProperty"></app-subject-property-template>
   </div>
 </div>
 </form>

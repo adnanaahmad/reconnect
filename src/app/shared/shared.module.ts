@@ -20,6 +20,7 @@ import { SubjectPropertyDetailsComponent } from './components/subject-property-d
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import {ThousandSuffixPipe} from './pipes/thousand-suffix.pipe';
 import { SplitCamelCasePipe } from './pipes/splitCamelCase/split-camel-case.pipe';
+import { SubjectPropertyTemplateComponent } from './components/subject-property-template/subject-property-template.component';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -39,7 +40,8 @@ const maskConfig: Partial<IConfig> = {
     BuyerInfoComponent,
     SubjectPropertyDetailsComponent,
     ThousandSuffixPipe,
-    SplitCamelCasePipe
+    SplitCamelCasePipe,
+    SubjectPropertyTemplateComponent
 
   ],
   imports: [
@@ -47,27 +49,28 @@ const maskConfig: Partial<IConfig> = {
     ReactiveFormsModule,
     NgxMaskModule.forRoot(maskConfig)
   ],
-  exports: [
-      ReactiveFormsModule,
-      HttpClientModule,
-      FormsModule,
-      NgbModule,
-      NgxChartsModule,
-      NgxMaskModule,
-      DeleteConfirmationPopupComponent,
-      FhaComponent,
-      ConventionalComponent,
-      HomePossibleComponent,
-      HomeReadyComponent,
-      VaComponent,
-      UsdaComponent,
-      LoanCheckboxComponent,
-      SubjectPropertyComponent,
-      TransactionProcessComponent,
-      BuyerInfoComponent,
-      SubjectPropertyDetailsComponent,
-      ThousandSuffixPipe,
-      SplitCamelCasePipe
-  ],
+    exports: [
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule,
+        NgbModule,
+        NgxChartsModule,
+        NgxMaskModule,
+        DeleteConfirmationPopupComponent,
+        FhaComponent,
+        ConventionalComponent,
+        HomePossibleComponent,
+        HomeReadyComponent,
+        VaComponent,
+        UsdaComponent,
+        LoanCheckboxComponent,
+        SubjectPropertyComponent,
+        TransactionProcessComponent,
+        BuyerInfoComponent,
+        SubjectPropertyDetailsComponent,
+        ThousandSuffixPipe,
+        SplitCamelCasePipe,
+        SubjectPropertyTemplateComponent
+    ],
 })
 export class SharedModule { }

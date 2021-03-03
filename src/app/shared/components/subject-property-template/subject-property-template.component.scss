@@ -1,0 +1,86 @@
+.property-img{
+  width: 100%;
+  height: 17vw;
+  border-radius: .5vw;
+  background: var(--extraLightGray);
+  position: relative;
+}
+.subject-property{
+  height: 6vw;
+  width: 6vw;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+}
+.subject-property-txt{
+  color: var(--darkGray);
+  font-weight: 500;
+  font-size: 1vw;
+  position: absolute;
+  top: 75%;
+  left: 28%;
+}
+p{
+  font-family: 'Poppins';
+}
+.details{
+  //background: white;
+  padding: 2vw;
+}
+.first-rect{
+  width: 15vw;
+  height: 1vw;
+  background: var(--extraLightGray);
+  margin-bottom: 1.5vw;
+}
+.second-rect{
+  height: 4.5vw;
+  width: 5.2vw;
+  background: var(--extraLightGray);
+  border-radius: .5vw;
+  margin-bottom: 1.5vw;
+}
+.parent{
+  background: white;
+  border-radius: .5vw;
+}
+
+.third-rect-one{
+  background: var(--extraLightGray);
+  height: .8vw;
+  width: 6vw;
+  margin-bottom: 1vw;
+}
+.third-rect-two{
+  background: var(--mediumLightGray);
+  height: .8vw;
+  width: 7vw;
+  margin-bottom: 1vw;
+}
+.third-rect-three{
+  background: var(--extraLightGray);
+  height: .8vw;
+  width: 4vw;
+  margin-bottom: 1vw;
+}
+.third-rect-four{
+  background: var(--mediumLightGray);
+  height: .8vw;
+  width: 7vw;
+  margin-bottom: 1vw;
+}
+.third-rect-five{
+  background: var(--extraLightGray);
+  height: .8vw;
+  width: 4vw;
+  margin-bottom: 1vw;
+}
+.third-rect-six{
+  background: var(--mediumLightGray);
+  height: .8vw;
+  width: 4vw;
+  margin-bottom: 1vw;
+}
+.third-rect-parent{
+  flex-grow: 1;
+}
