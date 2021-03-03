@@ -25,4 +25,7 @@ export class BuyerDashboardService {
   removeTeamMember(data): Observable<any>{
     return this.helper.requestCall(this.methods.put, this.api.removeTeamMember, data);
   }
+  getLoanDetails(): Observable<any>{
+    return this.helper.requestCall(this.methods.get, this.api.getLoanDetails);
+  }
 }

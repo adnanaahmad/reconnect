@@ -1,8 +1,11 @@
+import {PropertyAdModel} from '../../../common/property-details/models/property-details.model';
+
 export interface BuyerDashboardModel {
   preApprovalDetails: PreApprovalDetailsModel;
   team: TeamObjectModel;
   homeBuyingProcess: HomeBuyingProcessModel;
-  subjectProperty: SubjectPropertyModel;
+  subjectProperty: PropertyAdModel;
+  loader: boolean;
 }
 interface PreApprovalDetailsModel {
    income: number;

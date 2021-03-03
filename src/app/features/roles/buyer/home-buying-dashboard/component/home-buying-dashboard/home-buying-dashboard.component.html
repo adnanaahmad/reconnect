@@ -4,7 +4,7 @@
 <div class="welcome">
     <p>Here's what's happening to your re-connect account today</p>
 </div>
-<div class="row">
+<div class="row" *ngIf="dashboard.loader">
     <div class="col-7 first-column d-flex flex-column" style="">
         <div class="d-flex card-div">
             <div class="card">
@@ -36,52 +36,54 @@
                              [member]="dashboard.team.insuranceAgent" [role]="'Insurance Agent'"></app-team-person>
 
         </div>
-        <div class="buying">
-            <p>Home Buying Process</p>
-        </div>
-        <div class="d-flex" style="margin-top: auto">
-            <div class="status">
-                <img src="/assets/borrower/tick.svg" class="tick"
-                     [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.application}">
-                <p class="text-center">Application</p>
+        <div class="mt-auto">
+            <div class="buying">
+                <p>Home Buying Process</p>
             </div>
-            <div class="status">
-                <img src="/assets/borrower/tick.svg" class="tick"
-                     [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.preApproved}">
-                <p class="text-center text-nowrap">Pre-Approved</p>
-            </div>
-            <div class="status">
-                <img src="/assets/borrower/tick.svg" class="tick"
-                     [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.acceptedOffer}">
-                <p class="text-center text-nowrap">Accepted Offer</p>
-            </div>
-            <div class="status">
-                <img src="/assets/borrower/tick.svg" class="tick"
-                     [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.underwriting}">
-                <p class="text-center">Underwriting</p>
-            </div>
-            <div class="status">
-                <img src="/assets/borrower/tick.svg" class="tick"
-                     [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.approvedWithConditions}">
-                <p class="text-center text-nowrap">Approved with</p>
-                <p class="text-center"> conditions</p>
-            </div>
-            <div class="status">
-                <img src="/assets/borrower/tick.svg" class="tick"
-                     [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.clearedToClose}">
-                <p class="text-center text-nowrap">Cleared to</p>
-                <p class="text-center"> close</p>
-            </div>
-            <div class="status">
-                <img src="/assets/borrower/tick.svg" class="tick"
-                     [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.closed}">
-                <p class="text-center"> Closed</p>
+            <div class="d-flex" style="margin-top: auto">
+                <div class="status">
+                    <img src="/assets/borrower/tick.svg" class="tick"
+                         [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.application}">
+                    <p class="text-center">Application</p>
+                </div>
+                <div class="status">
+                    <img src="/assets/borrower/tick.svg" class="tick"
+                         [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.preApproved}">
+                    <p class="text-center text-nowrap">Pre-Approved</p>
+                </div>
+                <div class="status">
+                    <img src="/assets/borrower/tick.svg" class="tick"
+                         [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.acceptedOffer}">
+                    <p class="text-center text-nowrap">Accepted Offer</p>
+                </div>
+                <div class="status">
+                    <img src="/assets/borrower/tick.svg" class="tick"
+                         [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.underwriting}">
+                    <p class="text-center">Underwriting</p>
+                </div>
+                <div class="status">
+                    <img src="/assets/borrower/tick.svg" class="tick"
+                         [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.approvedWithConditions}">
+                    <p class="text-center text-nowrap">Approved with</p>
+                    <p class="text-center"> conditions</p>
+                </div>
+                <div class="status">
+                    <img src="/assets/borrower/tick.svg" class="tick"
+                         [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.clearedToClose}">
+                    <p class="text-center text-nowrap">Cleared to</p>
+                    <p class="text-center"> close</p>
+                </div>
+                <div class="status">
+                    <img src="/assets/borrower/tick.svg" class="tick"
+                         [ngClass]="{'tick-disable': !dashboard.homeBuyingProcess.closed}">
+                    <p class="text-center"> Closed</p>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-5 second-column" style="">
         <p class="subject">Subject Property</p>
-        <app-subject-property *ngIf="false" [subjectProperty]="dashboard.subjectProperty"></app-subject-property>
-        <app-subject-property-template></app-subject-property-template>
+        <app-subject-property *ngIf="dashboard.subjectProperty" [subjectProperty]="dashboard.subjectProperty"></app-subject-property>
+        <app-subject-property-template *ngIf="!dashboard.subjectProperty"></app-subject-property-template>
     </div>
 </div>
