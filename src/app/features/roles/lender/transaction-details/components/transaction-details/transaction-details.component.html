@@ -9,7 +9,7 @@
 <form [formGroup]="transactionDetails.finance" (ngSubmit)="onSubmit()" *ngIf="transactionDetails.loader">
 
 <div class="row first-row">
-  <div class="col-7">
+  <div class="col-7 d-flex flex-column">
        <div class="child-1 d-flex justify-content-between" style="">
 
             <app-buyer-info [transactionDetails]="transactionDetails.user"></app-buyer-info>
@@ -18,9 +18,11 @@
                 <button class="btn btn-success lineage-button">View Lineage</button>
             </div>
        </div>
-       <p class="heading">Transaction Process</p>
-       <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
-       <div class="b-details">
+      <div>
+          <p class="heading">Transaction Process</p>
+          <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
+      </div>
+       <div class="b-details mt-auto">
           <p class="heading">Borrower details</p>
           <div class="details">
           <div class="row ">
