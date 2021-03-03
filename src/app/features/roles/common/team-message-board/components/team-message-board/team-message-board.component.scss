@@ -18,11 +18,17 @@
   //width: 100%;
   border-radius: .6vw;
 }
-.user-display{
+.user-display, .user-display-dummy{
   width: 3.9vw;
   height: 3.9vw;
-  object-fit: cover;
   border-radius: .5vw;
+}
+.user-display{
+  object-fit: cover;
+}
+.user-display-dummy{
+  padding: 1vw;
+  background: var(--extraLightGray);
 }
 .card-1 i{
   float: right;
@@ -299,6 +305,25 @@ textarea{
 }
 .btn-success.disabled, .btn-success:disabled{
   background: var(--green);
+}
+.inbox{
+  height: 12vw;
+  width: 12vw;
+}
+.inbox-parent{
+  height: 100%;
+}
+.dummy-txt{
+  font-size: 1vw;
+  color: var(--darkGray);
+  font-weight: 500;
+  margin-bottom: .5vw;
+}
+.dummy-txt-1{
+  font-size: .8vw;
+  color: var(--lighGray);
+  margin-bottom: 0;
+  font-weight: 300;
 }
 ::ng-deep .emoji-mart-preview{
   display: none;
