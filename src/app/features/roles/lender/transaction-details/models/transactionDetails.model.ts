@@ -1,8 +1,9 @@
 import {FormGroup} from '@angular/forms';
 import {SubjectPropertyModel} from '../../../buyer/home-buying-dashboard/models/dashboard.model';
+import {PropertyAdModel} from '../../../common/property-details/models/property-details.model';
 
 export interface TransactionDetailsModel {
-  subjectProperty: SubjectPropertyModel;
+  subjectProperty: PropertyAdModel;
   user: UserModel;
   // borrowerDetails: BorrowerDetailsModel;
   finance: FormGroup;

@@ -30,19 +30,6 @@ export class TransactionDetailsComponent implements OnInit {
     this.initializeForm();
     this.transactionDetails.loader = false;
     this.getLoanDetails();
-    this.transactionDetails.subjectProperty = {
-      image: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHw%3D&w=1000&q=80',
-      bathrooms: 2,
-      bedrooms: 2,
-      garage: 1,
-      sqFt: 1594,
-      status: 'Active',
-      propertyType: '2 Units Up/Down',
-      lotSize: 4898,
-      timeOnMarket: '8 Days',
-      community: 'Worcester',
-      mls: 726168,
-    };
     this.resetLoanType();
     //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
   }
@@ -108,6 +95,7 @@ export class TransactionDetailsComponent implements OnInit {
             this.transactionDetails.finance.get(['processStatus', x]).setValue(true);
           }
       });
+      this.transactionDetails.subjectProperty = res.targetProperty ? res.targetPropertyDetails : null;
       this.transactionDetails.loader = true;
     }, error => {
       console.log(error);

@@ -42,7 +42,8 @@
   </div>
   <div class="col-5 second-column">
       <p class="heading bottom">Subject Property</p>
-      <app-subject-property [subjectProperty]="transactionDetails.subjectProperty"></app-subject-property>
+      <app-subject-property *ngIf="transactionDetails.subjectProperty" [subjectProperty]="transactionDetails.subjectProperty"></app-subject-property>
+      <app-subject-property-template *ngIf="!transactionDetails.subjectProperty"></app-subject-property-template>
   </div>
 </div>
 
