@@ -76,6 +76,7 @@ export interface PropertyAdModel {
     full: number,
     half: number
   };
+  daysOnMarket: number;
 }
 
 interface RealEstateAgentUserModel {

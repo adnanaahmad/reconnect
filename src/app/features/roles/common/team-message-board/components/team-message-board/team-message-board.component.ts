@@ -48,6 +48,7 @@ export class TeamMessageBoardComponent implements OnInit {
   }
   listenMessages(): void{
     this.webSocket.listen('client-conversation-newMessage').subscribe(res => {
+      console.log('socket messages', res);
       this.chat.messages.push(res);
       setTimeout(() => {
         this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
@@ -67,7 +68,7 @@ export class TeamMessageBoardComponent implements OnInit {
   }
 
   addEmoji(event): void {
-    console.log(event.emoji.native);
+   // console.log(event.emoji.native);
     this.chat.inputForm.controls.inputText.setValue(this.chat.inputForm.controls.inputText.value + event.emoji.native);
     this.toggleEmojiMart();
     this.inputBox.nativeElement.focus();
@@ -76,10 +77,10 @@ export class TeamMessageBoardComponent implements OnInit {
     this.chat.toggle = !this.chat.toggle;
   }
   listClick(data): void {
-    console.log(data);
+   // console.log(data);
     this.chat.selectedFriend = data;
     this.chatService.getMessages(data._id).pipe(take(1)).subscribe(res => {
-      console.log(res);
+    //  console.log(res);
       this.chat.messages = res.result;
       setTimeout(() => {
         this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
@@ -101,7 +102,7 @@ export class TeamMessageBoardComponent implements OnInit {
   }
   getRecentConversations(): void{
     this.chatService.getConversation().subscribe(res => {
-      console.log(res);
+      console.log('conversations', res);
       this.chat.loader = true;
       this.chat.recentChats = res.result;
       if (this.chat.recentChats.length > 0){

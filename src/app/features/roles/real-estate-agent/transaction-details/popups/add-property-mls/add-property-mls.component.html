@@ -1,0 +1,13 @@
+<div class="form-div">
+    <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+    <form [formGroup]="mlsForm" class="d-flex flex-column">
+        <div class="card-1 d-flex flex-column">
+            <p class="heading">Add MLS Number</p>
+            <p [ngClass]="{'danger' : mlsForm.get('targetProperty').invalid && mlsForm.get('targetProperty').touched}"
+               class="title">MLS Number</p>
+            <input [ngClass]="{'is-invalid' : mlsForm.get('targetProperty').invalid && mlsForm.get('targetProperty').touched}"
+                   formControlName="targetProperty" type="number" class="form-control f1 mb-custom" placeholder="">
+        </div>
+        <button (click)="onSubmit()" class="launch">Add</button>
+    </form>
+</div>

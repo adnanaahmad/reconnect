@@ -79,6 +79,13 @@
   font-size: .77vw;
   padding: .4vw 1.2vw .4vw 1.2vw;
   border-radius: .5vw;
+  background: var(--green);
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+.mls:focus{
+  outline: none;
 }
 .subject{
   margin-bottom: .7vw;
@@ -87,7 +94,7 @@
   margin-bottom: 2vw;
 }
 .transaction{
-  margin-bottom: 3vw;
+ // margin-bottom: 3vw;
 }
 .second-column{
   padding-left: 3vw;

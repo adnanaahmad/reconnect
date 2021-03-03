@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {PropertyAdModel} from '../../../features/roles/common/property-details/models/property-details.model';
 
 @Component({
   selector: 'app-subject-property-details',
@@ -6,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./subject-property-details.component.scss']
 })
 export class SubjectPropertyDetailsComponent implements OnInit {
-  @Input() subjectProperty;
+  @Input() subjectProperty: PropertyAdModel;
   constructor() { }
 
   ngOnInit(): void {

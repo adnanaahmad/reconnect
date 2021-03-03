@@ -6,6 +6,9 @@ import {BorrowerLoanDetailsService} from '../../../../lender/transaction-details
 import {ActivatedRoute} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Location} from '@angular/common';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {AddPropertyMlsComponent} from '../../popups/add-property-mls/add-property-mls.component';
+import {BuyerTransactionDetailsService} from '../../services/buyer-transaction-details.service';
 
 @Component({
   selector: 'app-transaction-details',
@@ -18,27 +21,18 @@ export class TransactionDetailsComponent implements OnInit {
                private transactionService: BorrowerLoanDetailsService,
                private activatedRoute: ActivatedRoute,
                private toaster: ToastrService,
-               public location: Location) {
+               public location: Location,
+               private modalService: NgbModal,
+               private configuration: NgbModalConfig) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
+    configuration.centered = true;
+    configuration.container = 'app-transaction-details';
   }
 
   ngOnInit(): void {
     this.transactionDetails.loader = false;
     this.initializeForm();
-    this.transactionDetails.subjectProperty = {
-      image: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHw%3D&w=1000&q=80',
-      bathrooms: 2,
-      bedrooms: 2,
-      garage: 1,
-      sqFt: 1594,
-      status: 'Active',
-      propertyType: '2 Units Up/Down',
-      lotSize: 4898,
-      timeOnMarket: '8 Days',
-      community: 'Worcester',
-      mls: 726168,
-    };
     this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.getLoanDetails();
   }
@@ -60,6 +54,7 @@ export class TransactionDetailsComponent implements OnInit {
       console.log(res);
       res = res.result;
       this.transactionDetails.user = res.buyer;
+      this.transactionDetails.loanId = res._id;
       const statusArray = Object.keys(this.transactionDetails.finance.getRawValue().processStatus);
       const statusIndex = statusArray.findIndex(x => x === res.processStatus);
       statusArray.forEach((x, index) => {
@@ -67,6 +62,7 @@ export class TransactionDetailsComponent implements OnInit {
           this.transactionDetails.finance.get(['processStatus', x]).setValue(true);
         }
       });
+      this.transactionDetails.subjectProperty = res.targetProperty ? res.targetPropertyDetails : null;
       this.transactionDetails.transactionDetails = {
         purchasePrice: 200000,
         closingDate: new Date('3-3-2020'),
@@ -88,10 +84,22 @@ export class TransactionDetailsComponent implements OnInit {
       processStatus: Object.keys(this.transactionDetails.finance.getRawValue().processStatus).
       filter(x => this.transactionDetails.finance.getRawValue().processStatus[x]).slice(-1)[0]
     };
-    this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).subscribe(res => {
+    this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
       this.toaster.success('Saved');
     }, error => {
       this.toaster.error('Failed to save');
+    });
+  }
+  addPropertyMls(): void{
+    console.log(this.transactionDetails.id);
+    const modalRef = this.modalService.open(AddPropertyMlsComponent);
+    modalRef.componentInstance.loanId = this.transactionDetails.loanId;
+    modalRef.result.then((result) => {
+      if (result.status === 'yes') {
+        this.transactionDetails.subjectProperty = result.data;
+      }
+    }, error => {
+      console.log(error);
     });
   }
 }

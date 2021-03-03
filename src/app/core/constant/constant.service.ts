@@ -64,7 +64,8 @@ export class ConstantService {
      resetPassword: `${environment.apiUrl}/user/reset-password`,
      getConversation: `${environment.apiUrl}/conversation`,
      getMessages: `${environment.apiUrl}/message`,
-     shareProperty: `${environment.apiUrl}/message/send-private-message`
+     shareProperty: `${environment.apiUrl}/message/send-private-message`,
+     targetProperty: `${environment.apiUrl}/loan/target-property`
   };
 
   chatMessageType = {

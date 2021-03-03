@@ -1,0 +1,86 @@
+p{
+  font-family: 'Poppins';
+}
+.form-div{
+  position: relative;
+  min-width: 30vw;
+}
+.card-1{
+  padding: 2.5vw;
+}
+.heading{
+  font-size: .85vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-bottom: 2vw;
+}
+.close-btn{
+  position: absolute;
+  left: 94%;
+  top: 7%;
+  height: .7vw;
+  width: .7vw;
+  cursor: pointer;
+}
+.title{
+  font-size: .7vw;
+  color: var(--lighGray);
+  margin-bottom: 0.2vw;
+  font-weight: 300;
+}
+.mb-custom{
+  margin-bottom: 1.5vw;
+}
+
+.f1{
+  height: 2.5vw;
+  font-size: .8vw;
+  color: var(--darkGray);
+  border-radius: .5vw;
+  border: 1px solid var(--lighGray);
+}
+.f2{
+  font-size: .8vw;
+  color: var(--darkGray);
+  border-radius: .5vw;
+  border: 1px solid var(--lighGray);
+}
+.launch{
+  color: white;
+  background: var(--green);
+  border-bottom-left-radius: .3vw;
+  border-bottom-right-radius: .3vw;
+  font-size: .7vw;
+  margin-bottom: 0;
+  height: fit-content;
+  padding: .7vw 1.5vw .7vw 1.5vw;
+  cursor: pointer;
+  border: none;
+  font-family: 'Poppins';
+}
+.launch:focus{
+  outline: none;
+}
+.width-custom{
+  width: 15vw;
+}
+.mr-custom{
+  margin-right: 2.5vw;
+}
+.form-control:disabled{
+  background: white;
+  color: var(--lighGray);
+}
+
+.mb-custom1{
+  margin-bottom: 1vw;
+}
+.activate-tick{
+  display: block;
+}
+.activate-border{
+  border: 1px solid var(--green);
+}
+.danger{
+  color: var(--red);
+}

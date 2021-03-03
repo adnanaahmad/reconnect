@@ -15,7 +15,7 @@ export class BorrowerLoanDetailsService {
     this.methods = this.constant.apiMethod;
   }
   getBorrowerLoanDetails(data): Observable<any>{
-    return this.helper.requestCall(this.methods.get, this.api.getBorrowerLoanDetails + data);
+    return this.helper.requestCall(this.methods.get, this.api.getBorrowerLoanDetails + data + '?targetPropertyDetails=true');
   }
   saveLoanDetails(data): Observable<any>{
     return this.helper.requestCall(this.methods.put, this.api.saveBorrowerLoanDetails, data);

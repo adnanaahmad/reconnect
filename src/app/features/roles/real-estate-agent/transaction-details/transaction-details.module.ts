@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { TransactionDetailsRoutingModule } from './transaction-details-routing.module';
 import {TransactionDetailsComponent} from './components/transaction-details/transaction-details.component';
 import {SharedModule} from '../../../../shared/shared.module';
+import { AddPropertyMlsComponent } from './popups/add-property-mls/add-property-mls.component';
 
 
 @NgModule({
-  declarations: [TransactionDetailsComponent],
+  declarations: [TransactionDetailsComponent, AddPropertyMlsComponent],
   imports: [
     CommonModule,
     TransactionDetailsRoutingModule,

@@ -6,7 +6,7 @@
 </div>
 <form [formGroup]="transactionDetails.finance" (ngSubmit)="onSubmit()">
 <div class="row" *ngIf="transactionDetails.loader">
-  <div class="col-7 first-column">
+  <div class="col-7 first-column d-flex flex-column">
        <div class="child-1 d-flex justify-content-between" style="">
             <app-buyer-info [transactionDetails]="transactionDetails.user"></app-buyer-info>
             <div class="d-flex flex-column">
@@ -32,7 +32,7 @@
           <p class="heading-sub bottom">Transaction Process</p>
           <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
        </div>
-       <div class="">
+       <div class="mt-auto">
           <p class="heading-sub bottom">Transaction Details</p>
           <div class="details">
                <div class="row">
@@ -71,9 +71,9 @@
   <div class="col-5 second-column">
       <div class="d-flex justify-content-between subject">
          <p class="heading-sub align-self-center">Subject Property</p>
-         <button class="btn btn-success mls">Add Property MLS#</button>
+         <button type="button" (click)="addPropertyMls()" class="mls">Add Property MLS#</button>
       </div>
-      <app-subject-property [subjectProperty]="transactionDetails.subjectProperty"></app-subject-property>
+      <app-subject-property *ngIf="transactionDetails.subjectProperty" [subjectProperty]="transactionDetails.subjectProperty"></app-subject-property>
   </div>
 </div>
 </form>
