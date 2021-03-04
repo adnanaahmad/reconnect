@@ -23,10 +23,8 @@
           </ngx-charts-advanced-pie-chart></div>
       </div>
           <div class="d-flex percent justify-content-around">
-              <p>{{publicTransport.transitScore[0].value}}%</p>
+              <p>{{publicTransport.notAvailable === null ? 'N.A.' : publicTransport.transitScore[0].value + '%'}}</p>
               <p>{{publicTransport.walkScore[0].value}}%</p>
           </div>
-          <p class="transport-details">This area is very walkable. Most errands can be accomplished on foot. Transit is also available,
-             with a few nearby public transport options.
-          </p>
+          <p class="transport-details">{{publicTransport.description}}</p>
       </div>

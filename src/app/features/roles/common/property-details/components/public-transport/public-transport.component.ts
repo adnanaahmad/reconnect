@@ -7,22 +7,6 @@ import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 })
 export class PublicTransportComponent implements OnInit, AfterViewInit {
   @Input() publicTransport;
-  // single: any[] =  [
-  //   {
-  //     name: 'Green',
-  //     value: 64
-  //   },
-  //   {
-  //     name: 'Gray',
-  //     value: 36
-  //   },
-  // ];
-  // view: any[];
-  // gradient: boolean = false;
-  //
-  // colorScheme = {
-  //   domain: ['#53E773', '#E7EDF8']
-  // };
   constructor() { }
 
   ngOnInit(): void {

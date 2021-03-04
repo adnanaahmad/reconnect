@@ -102,32 +102,6 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
         ]
       }
     };
-    this.propertyDetails.publicTransport = {
-      transitScore: [
-        {
-          name: 'Green',
-          value: 64
-        },
-        {
-          name: 'Gray',
-          value: 36
-        },
-      ],
-      walkScore: [
-        {
-          name: 'Green',
-          value: 36
-        },
-        {
-          name: 'Gray',
-          value: 64
-        },
-      ],
-      view: [],
-      colorScheme: {
-        domain: ['#53E773', '#E7EDF8']
-      }
-    };
   }
   getPropertyDetails(): void{
     this.propertyDetailService.getPropertyDetails(this.propertyDetails.id).pipe(take(1)).subscribe(res => {
@@ -141,7 +115,23 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
       if (!this.store.toggleLoanTypeSubject.value){
         this.setDefaultLoanType(res.result.userLoan);
       }
-      console.log(this.propertyDetails.features);
+      this.propertyDetails.publicTransport = {
+        transitScore: [
+            {name: 'Green', value: Number(res.result.listings[0].walkscore.transitScore)},
+            {name: 'Gray', value: 100 - Number(res.result.listings[0].walkscore.transitScore)},
+        ],
+        walkScore: [
+            {name: 'Green', value: Number(res.result.listings[0].walkscore.walkScore)},
+            {name: 'Gray', value: 100 - Number(res.result.listings[0].walkscore.walkScore)},
+        ],
+        view: [],
+        colorScheme: {
+          domain: ['#53E773', '#E7EDF8']
+        },
+        description: res.result.listings[0].walkscore.description,
+        notAvailable: res.result.listings[0].walkscore.transitScore
+      };
+      //console.log(this.propertyDetails.features);
     }, error => {
       console.log(error);
     });

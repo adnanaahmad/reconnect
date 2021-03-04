@@ -118,6 +118,8 @@ interface PublicTransportModel {
   colorScheme: {
     domain: string[]
   };
+  description: string;
+  notAvailable: string;
 }
 
 interface RentVsBuyingModel {
