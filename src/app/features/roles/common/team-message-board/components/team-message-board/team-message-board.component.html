@@ -5,7 +5,8 @@
     <div class="col-md-3 first-column" style="">
         <div class="card-1 d-flex justify-content-start mb-4">
             <div class="user-display-div">
-                <img *ngIf="chat.user.profilePictureUrl" class="img-fluid user-display" [src]="chat.user.profilePictureUrl">
+                <img *ngIf="chat.user.profilePictureUrl" class="img-fluid user-display"
+                     [src]="chat.user.profilePictureUrl">
                 <img *ngIf="!chat.user.profilePictureUrl" class="user-display-dummy" src="/assets/profile/profile.svg">
             </div>
             <div class="user-detail"><p
@@ -27,7 +28,7 @@
             </div>
 
             <div class="recent-chat"><p>{{chat.recentChats.length ? 'Recent Chats' : 'No Recent Chats' }}</p></div>
-            <div class="recent-chat-scroll">
+            <div #conversationList class="recent-chat-scroll">
                 <div *ngFor="let friend of chat.recentChats" [ngClass]="{'active': chat.selectedFriend == friend}"
                      (click)="listClick(friend)" class="friends d-flex justify-content-start">
                     <div class="friend-image-div">
@@ -90,45 +91,60 @@
             </div>
 
             <div class="chat-box" #chatBox>
-                <div *ngFor="let message of chat.messages">
-                    <ng-container
-                            *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_LOG_PROFESSIONAL_ADDED_TO_TEAM">
-                        <p class="text-center add-remove-professional"> {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
-                            {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName}} has been added to your
-                            team</p>
-                    </ng-container>
-                    <ng-container
-                            *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_LOG_PROFESSIONAL_REMOVED_FROM_TEAM">
-                        <p class="text-center add-remove-professional"> {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
-                            {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName}} has been removed from your
-                            team</p>
-                    </ng-container>
-                    <ng-container
-                            *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT || message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY">
-                        <div *ngIf="message.createdBy !== store.userId" class="d-flex justify-content-start">
-                            <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
-                                 *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
-                                 src="{{groupMembersProfileImage(message.createdBy)}}" class="mr-custom">
-                            <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT" class="receive"
-                               [innerHTML]="message.text | highlight: searchTerm"></p>
-                            <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY"
-                               [href]="message.text" target="_blank">
-                                <p class="receive" [innerHTML]="message.text | highlight: searchTerm"></p>
-                            </a>
-                        </div>
-                        <div *ngIf="message.createdBy === store.userId" class="d-flex justify-content-end">
-                            <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT"
-                               class="send">{{ message.text }}</p>
-                            <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY"
-                               [href]="message.text" target="_blank">
-                                <p class="send" [innerHTML]="message.text | highlight: searchTerm"></p>
-                            </a>
-                            <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
-                                 *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
-                                 src="{{groupMembersProfileImage(message.createdBy)}}" class="ml-custom">
-                        </div>
-                    </ng-container>
-                </div>
+                <ng-container *ngIf="chat.messageLoader">
+                    <div *ngFor="let message of chat.messages">
+                        <ng-container
+                                *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_LOG_PROFESSIONAL_ADDED_TO_TEAM">
+                            <p *ngIf="store.role === constant.role.BUYER"
+                               class="text-center add-remove-professional"> {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
+                                {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName | titlecase}} has been added to your
+                                team</p>
+                            <p *ngIf="store.role !== constant.role.BUYER"
+                               class="text-center add-remove-professional"> You have been added
+                                to {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
+                                {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName | titlecase}}'s team
+                            </p>
+                        </ng-container>
+                        <ng-container
+                                *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_LOG_PROFESSIONAL_REMOVED_FROM_TEAM">
+                            <p *ngIf="store.role === constant.role.BUYER"
+                               class="text-center add-remove-professional"> {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
+                                {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName | titlecase}} has been removed from
+                                your team
+                            </p>
+                            <p *ngIf="store.role !== constant.role.BUYER" class="text-center add-remove-professional">
+                                You have been removed from
+                                {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
+                                {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName | titlecase}}'s team
+                            </p>
+                        </ng-container>
+                        <ng-container
+                                *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT || message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY">
+                            <div *ngIf="message.createdBy !== store.userId" class="d-flex justify-content-start">
+                                <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
+                                     *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
+                                     src="{{groupMembersProfileImage(message.createdBy)}}" class="mr-custom">
+                                <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT" class="receive"
+                                   [innerHTML]="message.text | highlight: searchTerm"></p>
+                                <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY"
+                                   [href]="message.text" target="_blank">
+                                    <p class="receive" [innerHTML]="message.text | highlight: searchTerm"></p>
+                                </a>
+                            </div>
+                            <div *ngIf="message.createdBy === store.userId" class="d-flex justify-content-end">
+                                <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT"
+                                   class="send">{{ message.text }}</p>
+                                <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY"
+                                   [href]="message.text" target="_blank">
+                                    <p class="send" [innerHTML]="message.text | highlight: searchTerm"></p>
+                                </a>
+                                <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
+                                     *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
+                                     src="{{groupMembersProfileImage(message.createdBy)}}" class="ml-custom">
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
             </div>
             <form *ngIf="showHideSendMessage()" [formGroup]="chat.inputForm" (ngSubmit)="sendMessage()">
                 <div class="send-msg d-flex">

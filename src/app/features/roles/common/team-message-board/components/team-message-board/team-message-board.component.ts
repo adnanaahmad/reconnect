@@ -21,6 +21,7 @@ export class TeamMessageBoardComponent implements OnInit {
   searchTerm = '';
   @ViewChild('textArea') inputBox: ElementRef;
   @ViewChild('chatBox') chatBoxScroll: ElementRef;
+  @ViewChild('conversationList') conversationListScroll: ElementRef;
 
 
   constructor(private fb: FormBuilder,
@@ -50,10 +51,20 @@ export class TeamMessageBoardComponent implements OnInit {
     this.webSocket.listen('client-conversation-newMessage').subscribe(res => {
       console.log('socket messages', res);
       this.chat.messages.push(res);
+      this.updateRecentChat(res);
       setTimeout(() => {
         this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
       }, 0);
     });
+  }
+  updateRecentChat(res): void {
+    const index = this.chat.recentChats.findIndex(x => x._id === res.conversation);
+    if ( index > 0){
+      const recentChat = this.chat.recentChats[index];
+      this.chat.recentChats.splice(index, 1);
+      this.chat.recentChats.unshift(recentChat);
+      this.conversationListScroll.nativeElement.scrollTop = 0;
+    }
   }
   sendMessage(): void {
     const data = {
@@ -78,9 +89,11 @@ export class TeamMessageBoardComponent implements OnInit {
   }
   listClick(data): void {
    // console.log(data);
+    this.chat.messageLoader = false;
     this.chat.selectedFriend = data;
     this.chatService.getMessages(data._id).pipe(take(1)).subscribe(res => {
     //  console.log(res);
+      this.chat.messageLoader = true;
       this.chat.messages = res.result;
       setTimeout(() => {
         this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;

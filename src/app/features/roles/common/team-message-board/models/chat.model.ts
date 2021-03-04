@@ -9,6 +9,7 @@ export interface ChatModel {
   toggle: boolean;
   inputForm: FormGroup;
   loader: boolean;
+  messageLoader: boolean;
 }
 interface SelectedFriendModel{
   allTimeMembers: Array<UserModel>;
