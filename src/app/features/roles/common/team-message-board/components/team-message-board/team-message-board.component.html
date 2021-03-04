@@ -73,10 +73,11 @@
             <div class="d-flex justify-content-start current-friend">
                 <ng-container *ngIf="chat.selectedFriend">
                     <div class="current-friend-image-div">
-                        <img *ngIf="chat.selectedFriend.type === constant.conversationType.PRIVATE ? recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl ? true : false : true"  class="current-friend-image"
+                        <img *ngIf="chat.selectedFriend.type === constant.conversationType.PRIVATE ? recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl ? true : false : true"
+                             class="current-friend-image"
                              [src]="chat.selectedFriend.type === constant.conversationType.PRIVATE ? recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl : '/assets/profile/group.png'">
                         <img *ngIf="chat.selectedFriend.type === constant.conversationType.PRIVATE ? !recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl ? true : false : false"
-                             src = "/assets/profile/profile.svg" class="current-friend-image-dummy">
+                             src="/assets/profile/profile.svg" class="current-friend-image-dummy">
                     </div>
                     <div class="align-self-center current-friend-text">
                         <p class="current-friend-name">{{ (chat.selectedFriend.type === constant.conversationType.PRIVATE ? recentChatMember(chat.selectedFriend.allTimeMembers).firstName : chat.selectedFriend.title) | titlecase}}</p>
@@ -99,7 +100,8 @@
                                 *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_LOG_PROFESSIONAL_ADDED_TO_TEAM">
                             <p *ngIf="store.role === constant.role.BUYER"
                                class="text-center add-remove-professional"> {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
-                                {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName | titlecase}} has been added to your
+                                {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName | titlecase}} has been
+                                added to your
                                 team</p>
                             <p *ngIf="store.role !== constant.role.BUYER"
                                class="text-center add-remove-professional"> You have been added
@@ -111,7 +113,8 @@
                                 *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_LOG_PROFESSIONAL_REMOVED_FROM_TEAM">
                             <p *ngIf="store.role === constant.role.BUYER"
                                class="text-center add-remove-professional"> {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
-                                {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName | titlecase}} has been removed from
+                                {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName | titlecase}} has been
+                                removed from
                                 your team
                             </p>
                             <p *ngIf="store.role !== constant.role.BUYER" class="text-center add-remove-professional">
@@ -121,7 +124,8 @@
                             </p>
                         </ng-container>
                         <ng-container
-                                *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT || message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY">
+                                *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT || message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY
+                                || message.type === constant.chatMessageType.MESSAGE_TYPE_SHARE_PROPERTY">
                             <div *ngIf="message.createdBy !== store.userId" class="d-flex justify-content-start">
                                 <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
                                      *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
@@ -129,16 +133,18 @@
                                 <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT" class="receive"
                                    [innerHTML]="message.text | highlight: searchTerm"></p>
                                 <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY"
-                                   [href]="message.text" target="_blank">
-                                    <p class="receive" [innerHTML]="message.text | highlight: searchTerm"></p>
+                                   [href]="message.shareMeta.propertyUrl" target="_blank">
+                                    <p class="receive"
+                                       [innerHTML]="message.text + ': ' + message.shareMeta.propertyUrl | highlight: searchTerm"></p>
                                 </a>
                             </div>
                             <div *ngIf="message.createdBy === store.userId" class="d-flex justify-content-end">
                                 <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT"
                                    class="send">{{ message.text }}</p>
-                                <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY"
-                                   [href]="message.text" target="_blank">
-                                    <p class="send" [innerHTML]="message.text | highlight: searchTerm"></p>
+                                <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY || message.type === constant.chatMessageType.MESSAGE_TYPE_SHARE_PROPERTY"
+                                   [href]="message.shareMeta.propertyUrl" target="_blank">
+                                    <p class="send"
+                                       [innerHTML]="message.text + ': ' + message.shareMeta.propertyUrl | highlight: searchTerm"></p>
                                 </a>
                                 <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
                                      *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"

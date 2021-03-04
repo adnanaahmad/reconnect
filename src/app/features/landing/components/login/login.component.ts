@@ -7,6 +7,9 @@ import {ConstantService} from '../../../../core/constant/constant.service';
 import {LocationService} from '../../services/location/location.service';
 import { ToastrService } from 'ngx-toastr';
 import {take} from 'rxjs/operators';
+import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
+import {environment} from '../../../../../environments/environment';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +23,8 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private constant: ConstantService,
               private location: LocationService,
-              private toaster: ToastrService) { }
+              private toaster: ToastrService,
+              private webSocket: WebSocketService) { }
 
   ngOnInit(): void {
     this.login.form = this.fb.group({
@@ -33,6 +37,8 @@ export class LoginComponent implements OnInit {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));
+        this.webSocket.socket.disconnect();
+        this.webSocket.socket = io(environment.serverUrl, {query: {token: res.result.authToken}});
         this.toaster.success('You have successfully logged in');
         if (res.result.user.role === this.constant.role.BUYER){
           this.router.navigateByUrl('/home/homeBuyingDashboard').then();

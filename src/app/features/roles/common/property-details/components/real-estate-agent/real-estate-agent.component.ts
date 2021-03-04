@@ -7,6 +7,7 @@ import {PropertyDetailsService} from '../../services/property-details.service';
 import {ToastrService} from 'ngx-toastr';
 import {take} from 'rxjs/operators';
 import {environment} from '../../../../../../../environments/environment';
+import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
   selector: 'app-real-estate-agent',
@@ -19,7 +20,8 @@ export class RealEstateAgentComponent implements OnInit {
   constructor(private modalService: NgbModal,
               private propertyDetails: PropertyDetailsService,
               private toaster: ToastrService,
-              private constant: ConstantService) { }
+              public constant: ConstantService,
+              public store: StoreService ) { }
 
   ngOnInit(): void {
   }
@@ -36,11 +38,13 @@ export class RealEstateAgentComponent implements OnInit {
   }
   bookNow(): void{
     const data = {
-      to: this.realEstateAgent._id,
-      text: `${environment.clientUrl}/home/propertyDetails/${this.mlsId}`,
+      to: [this.realEstateAgent._id],
+      text: 'Book this property',
       files: [],
       type: this.constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY,
-      shareMeta: {}
+      shareMeta: {
+        propertyUrl: `${environment.clientUrl}/home/propertyDetails/${this.mlsId}`
+      }
     };
     this.propertyDetails.shareOrBookProperty(data).pipe(take(1)).subscribe(res => {
       this.toaster.success('Property has been shared');

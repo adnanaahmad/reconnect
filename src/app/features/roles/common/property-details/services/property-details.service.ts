@@ -22,4 +22,7 @@ export class PropertyDetailsService {
   shareOrBookProperty(data): Observable<any>{
     return this.helper.requestCall(this.methods.post, this.api.shareProperty, data);
   }
+  sharePropertyProfessionals(data): Observable<any>{
+    return this.helper.requestCall(this.methods.post, this.api.sharePropertyProfessional, data);
+  }
 }

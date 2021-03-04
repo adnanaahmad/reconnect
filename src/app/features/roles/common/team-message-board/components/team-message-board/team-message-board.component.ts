@@ -92,7 +92,7 @@ export class TeamMessageBoardComponent implements OnInit {
     this.chat.messageLoader = false;
     this.chat.selectedFriend = data;
     this.chatService.getMessages(data._id).pipe(take(1)).subscribe(res => {
-    //  console.log(res);
+      console.log(res);
       this.chat.messageLoader = true;
       this.chat.messages = res.result;
       setTimeout(() => {

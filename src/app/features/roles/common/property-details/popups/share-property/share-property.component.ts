@@ -8,6 +8,7 @@ import {StoreService} from '../../../../../../core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {ToastrService} from 'ngx-toastr';
 import {take} from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 import {environment} from '../../../../../../../environments/environment';
 import {PropertyDetailsService} from '../../services/property-details.service';
 
@@ -36,7 +37,7 @@ export class SharePropertyComponent implements OnInit {
     if (this.store.role === this.constant.role.BUYER){
       this.getTeam();
     } else {
-      this.getBuyers();
+      this.getBuyersAndGroups();
     }
   }
   initializeForm(): void{
@@ -69,6 +70,31 @@ export class SharePropertyComponent implements OnInit {
       this.teamData.groupForm.markAllAsTouched();
     }
   }
+  onSubmitProfessional(): void {
+    if (!this.teamData.selectedGroups.length && !this.teamData.selectedBuyers.length) {
+      this.toaster.error('Select atleast one member');
+    }
+    if (this.teamData.selectedGroups.length || this.teamData.selectedBuyers.length) {
+      const data = {
+        toUsers: this.teamData.selectedBuyers,
+        toGroupConversations: this.teamData.selectedGroups,
+        text: this.teamData.groupForm.get('message').value,
+        files: [],
+        type: this.constant.chatMessageType.MESSAGE_TYPE_SHARE_PROPERTY,
+        shareMeta: {
+          propertyUrl: `${environment.clientUrl}/home/propertyDetails/${this.mlsId}`,
+        }
+      };
+      this.propertyDetailsService.sharePropertyProfessionals(data).pipe(take(1)).subscribe(res => {
+        console.log(res);
+        this.activeModal.close({status: 'yes', data: res.result});
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      this.teamData.groupForm.markAllAsTouched();
+    }
+  }
   close(): void{
     this.activeModal.close({status: 'no'});
   }
@@ -76,6 +102,18 @@ export class SharePropertyComponent implements OnInit {
     member = this.store.role === this.constant.role.BUYER ? member.userId._id : member._id;
     this.helper.toggleTeamMember(i, member, this.teamData.selectedTeam);
     console.log(this.teamData.selectedTeam);
+  }
+  toggleBuyer(i, member): void{
+    console.log(member);
+    member = member.buyer._id;
+    this.helper.toggleTeamMember(i, member, this.teamData.selectedBuyers);
+    console.log(this.teamData.selectedBuyers);
+  }
+  toggleGroup(i, member): void{
+    console.log(member);
+    member = member._id;
+    this.helper.toggleTeamMember(i, member, this.teamData.selectedGroups);
+    console.log(this.teamData.selectedGroups);
   }
   getTeam(): void{
     this.chatService.getTeamsData().pipe(take(1)).subscribe(res => {
@@ -88,20 +126,25 @@ export class SharePropertyComponent implements OnInit {
       console.log(error);
     });
   }
-  getBuyers(): void{
-    this.chatService.getBorrowers().pipe(take(1)).subscribe(res => {
-      console.log(res);
-      this.teamData.buyers = res.result;
+  getBuyersAndGroups(): void{
+    this.teamData.selectedBuyers = [];
+    this.teamData.selectedGroups = [];
+    forkJoin([this.chatService.getBorrowers(), this.chatService.getConversation()]).pipe(take(1)).subscribe(res => {
+        console.log('fork join', res);
+        this.teamData.buyers = res[0].result;
+        this.teamData.groups = (res[1].result.filter(x => x.type === this.constant.conversationType.GROUP)).filter( x => {
+          return x.members.findIndex(y => y._id === this.store.userId) !== -1;
+        });
     }, error => {
       console.log(error);
     });
   }
-  getBuyersTeam(member): void{
-    this.teamData.selectedButton = member;
-    this.teamData.id =  member._id;
-    this.teamData.team = member;
-    this.filterTeam(this.teamData.team);
-  }
+  // getBuyersTeam(member): void{
+  //   this.teamData.selectedButton = member;
+  //   this.teamData.id =  member._id;
+  //   this.teamData.team = member;
+  //   this.filterTeam(this.teamData.team);
+  // }
   filterTeam(data): void{
     Object.keys(data).filter(element => {
       if (!this.constant.roleArray.includes(element) || element === this.store.role || !data[element]){

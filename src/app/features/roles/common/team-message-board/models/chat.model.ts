@@ -38,10 +38,13 @@ export interface UserModel {
 export interface CreateGroupChatModel{
   team: TeamDataModel;
   buyers: any;
+  groups: any;
   id: string;
   selectedButton: any;
   selectedTeam: Array<any>;
   groupForm: FormGroup;
+  selectedBuyers: any;
+  selectedGroups: any;
 }
 
 interface TeamDataModel{

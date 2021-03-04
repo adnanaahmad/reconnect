@@ -65,7 +65,8 @@ export class CreateGroupChatComponent implements OnInit {
     this.activeModal.close({status: 'no'});
   }
   toggleTeamMember(i, member): void{
-    member = this.store.role === this.constant.role.BUYER ? member.userId._id : member._id;
+    //console.log(member.userId);
+    member = member.userId ?  member.userId._id : member._id;
     this.helper.toggleTeamMember(i, member, this.teamData.selectedTeam);
     console.log(this.teamData.selectedTeam);
   }
