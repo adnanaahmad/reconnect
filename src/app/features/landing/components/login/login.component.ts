@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
               private webSocket: WebSocketService) { }
 
   ngOnInit(): void {
+    localStorage.clear();
+    this.webSocket.socket.disconnect();
     this.login.form = this.fb.group({
       email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       password: [null, Validators.required]

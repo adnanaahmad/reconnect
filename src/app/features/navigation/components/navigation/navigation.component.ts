@@ -65,11 +65,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
   listClick(value): void{
     this.navigation.selectedButton = value;
-    if (value.name === 'Logout'){
-      this.router.navigateByUrl('/login').then();
-      this.webSockets.socket.disconnect();
-      localStorage.clear();
-    }
   }
   showProfileButton(): void{
     this.showHeader = !this.router.url.includes('profile');
