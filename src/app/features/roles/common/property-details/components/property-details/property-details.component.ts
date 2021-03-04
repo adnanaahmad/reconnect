@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
 import {take} from 'rxjs/operators';
 import {StoreService} from '../../../../../../core/store/store.service';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -20,7 +21,8 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
               private propertyDetailService: PropertyDetailsService,
               private activatedRoute: ActivatedRoute,
               public location: Location,
-              public store: StoreService) {
+              public store: StoreService,
+              public constant: ConstantService) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.propertyDetails.id = routeParams.get('id');
     this.activatedRoute.queryParams.subscribe(params => {

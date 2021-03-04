@@ -4,7 +4,7 @@
     <p>Back</p>
   </div>
     <div class="col-3 align-self-end heading-txt align-self-center" style="background: transparent">
-      <p class="heading-color text-center">Approved Loan Programs</p>
+      <p *ngIf="store.role === constant.role.BUYER" class="heading-color text-center">Approved Loan Programs</p>
     </div>
     <div class="col-5 align-self-end d-flex align-self-center">
       <div *ngIf="propertyDetails.loanScenarioOne" class="loan-program d-flex heading-txt">
