@@ -73,8 +73,10 @@
             <div class="d-flex justify-content-start current-friend">
                 <ng-container *ngIf="chat.selectedFriend">
                     <div class="current-friend-image-div">
-                        <img class="current-friend-image"
+                        <img *ngIf="chat.selectedFriend.type === constant.conversationType.PRIVATE ? recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl ? true : false : true"  class="current-friend-image"
                              [src]="chat.selectedFriend.type === constant.conversationType.PRIVATE ? recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl : '/assets/profile/group.png'">
+                        <img *ngIf="chat.selectedFriend.type === constant.conversationType.PRIVATE ? !recentChatMember(chat.selectedFriend.allTimeMembers).profilePictureUrl ? true : false : false"
+                             src = "/assets/profile/profile.svg" class="current-friend-image-dummy">
                     </div>
                     <div class="align-self-center current-friend-text">
                         <p class="current-friend-name">{{ (chat.selectedFriend.type === constant.conversationType.PRIVATE ? recentChatMember(chat.selectedFriend.allTimeMembers).firstName : chat.selectedFriend.title) | titlecase}}</p>

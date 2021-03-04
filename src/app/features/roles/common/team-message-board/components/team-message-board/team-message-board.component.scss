@@ -156,11 +156,17 @@
 .user-display-div{
   margin-right: .8vw;
 }
-.current-friend-image{
+.current-friend-image, .current-friend-image-dummy{
   height: 3vw;
   width: 3vw;
-  object-fit: cover;
   border-radius: .5vw;
+}
+.current-friend-image{
+  object-fit: cover;
+}
+.current-friend-image-dummy{
+  padding: .8vw;
+  background: var(--extraLightGray);
 }
 .current-friend-image-div{
   padding: 0;
