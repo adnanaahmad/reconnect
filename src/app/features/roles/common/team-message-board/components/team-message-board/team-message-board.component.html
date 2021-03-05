@@ -88,6 +88,7 @@
                 <div class="ml-auto">
                     <img class="search-icon img-fluid" src="/assets/chat/search.svg">
                     <img (click)="deleteChat()" class="delete-icon img-fluid" src="/assets/news-feed-icons/delete.svg">
+                    <img (click)="editGroup()" *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP" class="edit-group" src="/assets/chat/edit.svg">
 
                 </div>
 

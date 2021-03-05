@@ -15,6 +15,9 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./create-group-chat.component.scss']
 })
 export class CreateGroupChatComponent implements OnInit {
+  @Input() groupMembers: Array<any>;
+  @Input() type: string;
+  @Input() groupTitle: string;
   @ViewChildren('member') teamMembers: QueryList<ElementRef>;
   teamData: CreateGroupChatModel = {} as CreateGroupChatModel;
 
@@ -29,10 +32,19 @@ export class CreateGroupChatComponent implements OnInit {
   ngOnInit(): void {
     this.helper.setModalPosition();
     this.initializeForm();
-    if (this.store.role === this.constant.role.BUYER){
-      this.getTeam();
+    if ( this.type === 'create') {
+      if (this.store.role === this.constant.role.BUYER){
+        this.getTeam();
+      } else {
+        this.getBuyers();
+      }
     } else {
-      this.getBuyers();
+      if (this.store.role === this.constant.role.BUYER){
+        this.getTeam();
+      } else {
+        this.getBuyers();
+      }
+      this.teamData.groupForm.get('title').setValue(this.groupTitle);
     }
   }
   initializeForm(): void{
@@ -76,6 +88,19 @@ export class CreateGroupChatComponent implements OnInit {
       this.teamData.team = res.result;
       this.teamData.id  = res.result._id;
       this.filterTeam(this.teamData.team);
+      if (this.groupMembers && this.groupMembers.length){
+        setTimeout(() => {
+          Object.keys(this.teamData.team).forEach((x, index) => {
+            //console.log('oye', x , this.teamData.team[x]);
+            const indexValue = this.groupMembers.findIndex(y =>
+                y._id === (this.teamData.team[x].userId ? this.teamData.team[x].userId._id : this.teamData.team[x]._id));
+            if (indexValue > -1){
+              console.log(index, this.teamData.team[x]);
+              this.toggleTeamMember(index, this.teamData.team[x]);
+            }
+          });
+        }, 1);
+      }
       console.log(this.teamData);
     }, error => {
       console.log(error);

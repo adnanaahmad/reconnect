@@ -2,7 +2,7 @@
     <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
     <form [formGroup] = "teamData.groupForm" class="d-flex flex-column">
         <div class="card-1 d-flex flex-column">
-            <p class="heading">Create Group</p>
+            <p class="heading">{{type === 'create' ? 'Create' : 'Edit' }} Group</p>
             <p [ngClass]="{'danger' : this.teamData.groupForm.get('title').invalid && this.teamData.groupForm.get('title').touched}" class="title">Group title</p>
             <input [ngClass]="{'is-invalid' : this.teamData.groupForm.get('title').invalid && this.teamData.groupForm.get('title').touched}" formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
             <ng-container *ngIf="store.role !== constant.role.BUYER">
@@ -40,6 +40,6 @@
                 </div>
             </ng-container>
         </div>
-        <button (click)="onSubmit()" class="launch">Create Group</button>
+        <button (click)="onSubmit()" class="launch">{{type === 'create' ?'Create' : 'Edit'}} Group</button>
     </form>
 </div>

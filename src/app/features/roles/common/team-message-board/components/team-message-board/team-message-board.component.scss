@@ -331,6 +331,12 @@ textarea{
   margin-bottom: 0;
   font-weight: 300;
 }
+.edit-group{
+  height: 1.5vw;
+  width: 1.5vw;
+  margin-left: 1vw;
+  cursor: pointer;
+}
 ::ng-deep .emoji-mart-preview{
   display: none;
 }

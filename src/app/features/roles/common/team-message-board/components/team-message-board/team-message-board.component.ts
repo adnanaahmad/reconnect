@@ -127,10 +127,13 @@ export class TeamMessageBoardComponent implements OnInit {
   }
   createGroupChat(): void{
     const modalRef = this.modalService.open(CreateGroupChatComponent);
+    modalRef.componentInstance.type = 'create';
+    modalRef.componentInstance.groupMembers = null;
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
         this.chat.recentChats.unshift(result.data);
         this.listClick(this.chat.recentChats[0]);
+        this.conversationListScroll.nativeElement.scrollTop = 0;
       }
     }, error => {
       console.log(error);
@@ -152,5 +155,19 @@ export class TeamMessageBoardComponent implements OnInit {
     } else {
       return  this.chat.selectedFriend.members.find(x => x._id === this.store.userId) ? true : false;
     }
+  }
+  editGroup(): void{
+    const modalRef = this.modalService.open(CreateGroupChatComponent);
+    modalRef.componentInstance.type = 'edit';
+    modalRef.componentInstance.groupMembers = this.chat.selectedFriend.members;
+    modalRef.componentInstance.groupTitle = this.chat.selectedFriend.title;
+    modalRef.result.then((result) => {
+      if (result.status === 'yes') {
+        //this.chat.recentChats.unshift(result.data);
+        //this.listClick(this.chat.recentChats[0]);
+      }
+    }, error => {
+      console.log(error);
+    });
   }
 }
