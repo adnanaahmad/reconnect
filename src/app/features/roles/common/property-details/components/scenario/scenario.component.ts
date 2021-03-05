@@ -22,8 +22,10 @@ export class ScenarioComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
     this.store.toggleLoanType.subscribe(loanType => {
-      this.scenario.housingRatio = Number(this.loanScenario.listings[0].financing[loanType].housingRatio.toFixed(2));
-      this.scenario.debtRatio = Number(this.loanScenario.listings[0].financing[loanType].debtRatio.toFixed(2));
+      this.scenario.housingRatio = Number(this.loanScenario.listings[0].financing[loanType].housingRatio ?
+          this.loanScenario.listings[0].financing[loanType].housingRatio.toFixed(2) : null);
+      this.scenario.debtRatio = Number(this.loanScenario.listings[0].financing[loanType].debtRatio ?
+          this.loanScenario.listings[0].financing[loanType].debtRatio.toFixed(2) : null);
       this.scenario.purchasePrice = Math.round(this.loanScenario.listings[0].listPrice);
       this.scenario.loanAmount = Math.round(this.loanScenario.listings[0].financing[loanType].loanAmount);
       this.scenario.financeAmount = Math.round(this.loanScenario.listings[0].financing[loanType].financeAmount);
