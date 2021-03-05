@@ -95,13 +95,13 @@ p{
 .div-2 a:last-child{
   margin-right: 0;
 }
-.card-1 > div{
+.list > div{
   margin-bottom: 1vw;
 }
-.card-1 > div:last-child{
+.list > div:last-child{
   margin-bottom: 0vw;
 }
-.card-1 > div:first-child{
+.list > div:first-child{
   margin-bottom: 0.5vw;
 }
 .rating img{
@@ -150,4 +150,11 @@ p{
   padding: 0;
   justify-content: flex-end;
   flex-direction: row;
+}
+.list{
+  max-height: 30vw;
+  overflow-y: auto;
+}
+.first-row{
+  margin-bottom: 2vw;
 }
