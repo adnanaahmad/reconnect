@@ -42,7 +42,7 @@ export class CreateGroupChatComponent implements OnInit {
       if (this.store.role === this.constant.role.BUYER){
         this.getTeam();
       } else {
-        this.getBuyers();
+        // api to get team for professional + edit group api
       }
       this.teamData.groupForm.get('title').setValue(this.groupTitle);
     }

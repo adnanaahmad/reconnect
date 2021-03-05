@@ -653,4 +653,13 @@ export class ConstantService {
       quoteRequests: true
     },
   };
+  homeBuyingProcessStatusIndex = {
+    application: 0,
+    preApproved: 1,
+    acceptedOffer: 2,
+    underwriting: 3,
+    approvedWithConditions: 4,
+    clearedToClose: 5,
+    closed: 6,
+  };
 }

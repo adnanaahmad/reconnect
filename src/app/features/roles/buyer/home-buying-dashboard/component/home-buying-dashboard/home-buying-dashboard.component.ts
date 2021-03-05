@@ -1,9 +1,11 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {RemoveMemberComponent} from '../../popups/remove-member/remove-member.component';
-import {config, Subscription} from 'rxjs';
+import {config, forkJoin, Subscription} from 'rxjs';
 import {BuyerDashboardModel} from '../../models/dashboard.model';
 import {BuyerDashboardService} from '../../services/buyer-dashboard.service';
+import {take} from 'rxjs/operators';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
     selector: 'app-home-buying-dashboard',
@@ -12,34 +14,25 @@ import {BuyerDashboardService} from '../../services/buyer-dashboard.service';
 })
 export class HomeBuyingDashboardComponent implements OnInit, OnDestroy {
     dashboard: BuyerDashboardModel = {} as BuyerDashboardModel;
-    teamSubscription: Subscription;
 
-    constructor(private dashboardService: BuyerDashboardService) {
+    constructor(private dashboardService: BuyerDashboardService,
+                private constant: ConstantService) {
     }
 
-    ngOnDestroy(): void {
-        this.teamSubscription.unsubscribe();
-    }
+    ngOnDestroy(): void {}
 
     ngOnInit(): void {
         this.dashboard.loader = false;
-        this.getTeam();
-        this.getLoanDetails();
-        this.dashboard.preApprovalDetails = {
-            income: 5321.12,
-            monthlyLiabilities: 921.12,
-            assets: 1021.12
-        };
-
         this.dashboard.homeBuyingProcess = {
-            application: true,
-            preApproved: true,
-            acceptedOffer: true,
-            underwriting: true,
-            approvedWithConditions: true,
-            clearedToClose: true,
-            closed: true,
+            application: false,
+            preApproved: false,
+            acceptedOffer: false,
+            underwriting: false,
+            approvedWithConditions: false,
+            clearedToClose: false,
+            closed: false,
         };
+        this.getTeamAndLoanDetails();
     }
 
     removeMember(members): void {
@@ -50,22 +43,30 @@ export class HomeBuyingDashboardComponent implements OnInit, OnDestroy {
         this.dashboard.team = members;
     }
 
-    getTeam(): void {
-        this.teamSubscription = this.dashboardService.getTeam().subscribe(res => {
-            console.log(res);
-            this.dashboard.team = res.result;
+    getTeamAndLoanDetails(): void {
+        forkJoin([this.dashboardService.getTeam(), this.dashboardService.getLoanDetails()]).pipe(take(1)).subscribe(res => {
+            console.log('forkJoin', res);
+            this.dashboard.team = res[0].result;
+            this.dashboard.subjectProperty = res[1].result.targetProperty ? res[1].result.targetPropertyDetails : null;
+            this.setHomeBuyingProcessStatus(res[1].result.processStatus);
+            this.dashboard.preApprovalDetails = {
+                income: res[1].result.income,
+                monthlyLiabilities: res[1].result.monthlyDebt,
+                assets: res[1].result.funds
+            };
+            this.dashboard.loader = true;
         }, error => {
             console.log(error);
         });
     }
-    getLoanDetails(): void{
-        this.dashboardService.getLoanDetails().subscribe(res => {
-            res = res.result;
-            this.dashboard.subjectProperty = res.targetProperty ? res.targetPropertyDetails : null;
-            this.dashboard.loader = true;
 
-        }, error => {
-            console.log(error);
-        });
+    setHomeBuyingProcessStatus(status): void {
+        if (status) {
+            Object.keys(this.dashboard.homeBuyingProcess).forEach((x, index) => {
+                if (index <= this.constant.homeBuyingProcessStatusIndex[status]) {
+                    this.dashboard.homeBuyingProcess[x] = true;
+                }
+            });
+        }
     }
 }
