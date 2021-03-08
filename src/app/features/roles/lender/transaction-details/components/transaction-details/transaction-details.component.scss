@@ -115,3 +115,19 @@
 .second-column{
   padding-left: 3vw;
 }
+p{
+  font-family: 'Poppins';
+}
+.lock-expiry{
+  padding: .5vw 1.3vw;
+  background: var(--green);
+  border: none;
+  color: white;
+  font-size: .7vw;
+  height: fit-content;
+  border-radius: .3vw;
+  cursor: pointer;
+}
+.lock-expiry:focus{
+  outline: none;
+}

@@ -19,7 +19,10 @@
             </div>
        </div>
       <div>
-          <p class="heading">Transaction Process</p>
+          <div class="d-flex">
+              <p class="heading">Transaction Process</p>
+              <button type="button" class="lock-expiry ml-auto">Add Lock expiry</button>
+          </div>
           <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
       </div>
        <div class="b-details mt-auto">
