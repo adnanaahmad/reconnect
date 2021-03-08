@@ -5,6 +5,7 @@ import { TransactionDetailsRoutingModule } from './transaction-details-routing.m
 import {TransactionDetailsComponent} from './components/transaction-details/transaction-details.component';
 import {SharedModule} from '../../../../shared/shared.module';
 import { AddPropertyMlsComponent } from './popups/add-property-mls/add-property-mls.component';
+import {NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { AddPropertyMlsComponent } from './popups/add-property-mls/add-property-
     CommonModule,
     TransactionDetailsRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [NgbDateNativeAdapter]
 })
 export class TransactionDetailsModule { }

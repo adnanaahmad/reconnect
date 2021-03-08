@@ -8,7 +8,8 @@ import {ActivatedRoute} from '@angular/router';
 import {element} from 'protractor';
 import {log} from 'util';
 import {ToastrService} from 'ngx-toastr';
-import {Location} from '@angular/common';
+import {DatePipe, Location} from '@angular/common';
+import {NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-transaction-details',
@@ -21,7 +22,8 @@ export class TransactionDetailsComponent implements OnInit {
               private transactionService: BorrowerLoanDetailsService,
               private activatedRoute: ActivatedRoute,
               private toaster: ToastrService,
-              public location: Location) {
+              public location: Location,
+              private dateFormat: NgbDateNativeAdapter) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
   }
@@ -35,6 +37,8 @@ export class TransactionDetailsComponent implements OnInit {
   }
   onSubmit(): void{
     const data = {
+      lockExpiryDate: this.transactionDetails.finance.get('lockExpiryDate').value ?
+          new Date(new DatePipe('en-US').transform(this.dateFormat.toModel(this.transactionDetails.finance.get('lockExpiryDate').value), 'yyyy-MM-dd')).toISOString() : null,
       borrowerId: this.transactionDetails.id,
       fha: this.transactionDetails.finance.get(['toggle', 'fha']).value ? this.transactionDetails.finance.get('fha').value : null,
       usda: this.transactionDetails.finance.get(['toggle', 'usda']).value ? this.transactionDetails.finance.get('usda').value : null,
@@ -69,6 +73,8 @@ export class TransactionDetailsComponent implements OnInit {
       res = res.result;
       this.transactionDetails.user = res.buyer;
       this.transactionDetails.finance.patchValue({
+        lockExpiryDate: res.lockExpiryDate ? this.dateFormat.fromModel(new Date(res.lockExpiryDate)) : null,
+        lenderCommissionPercentage: res.lenderCommissionPercentage,
         income: res.income,
         monthlyDebt: res.monthlyDebt,
         funds: res.funds,
@@ -103,6 +109,8 @@ export class TransactionDetailsComponent implements OnInit {
   }
   initializeForm(): void{
     this.transactionDetails.finance  = this.fb.group({
+      lockExpiryDate: [null],
+      lenderCommissionPercentage: [null],
       income: [null, Validators.required],
       monthlyDebt: [null, Validators.required],
       funds: [null, Validators.required],

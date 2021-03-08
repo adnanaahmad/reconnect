@@ -29,11 +29,25 @@
 <!--            </div>-->
        </div>
        <div class="transaction">
-          <p class="heading-sub bottom">Transaction Process</p>
-          <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
+           <p class="heading-sub bottom">Transaction Process</p>
+           <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
        </div>
        <div class="mt-auto">
-          <p class="heading-sub bottom">Transaction Details</p>
+           <div class="d-flex">
+               <p class="heading-sub">Transaction Details</p>
+               <div class="d-flex ml-auto date-parent">
+                   <p class="date align-self-center">Commitment Date:</p>
+                   <input class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
+                          name="dp" formControlName="commitmentDate"  ngbDatepicker #d="ngbDatepicker">
+                   <img class="calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="d.toggle()">
+               </div>
+           </div>
+           <div class="d-flex ml-auto date-parent bottom justify-content-end">
+               <p class="date align-self-center">Closing Date:</p>
+               <input class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
+                      name="dp" formControlName="dealClosingDate"  ngbDatepicker #d1="ngbDatepicker">
+               <img class="calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="d1.toggle()">
+           </div>
           <div class="details">
                <div class="row">
                   <div class="col-6 d-flex">

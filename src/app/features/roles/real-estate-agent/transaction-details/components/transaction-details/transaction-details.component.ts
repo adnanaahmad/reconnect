@@ -5,8 +5,8 @@ import {take} from 'rxjs/operators';
 import {BorrowerLoanDetailsService} from '../../../../lender/transaction-details/services/borrower-loan-details.service';
 import {ActivatedRoute} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Location} from '@angular/common';
-import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {DatePipe, Location} from '@angular/common';
+import {NgbDateNativeAdapter, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddPropertyMlsComponent} from '../../popups/add-property-mls/add-property-mls.component';
 import {BuyerTransactionDetailsService} from '../../services/buyer-transaction-details.service';
 
@@ -23,7 +23,8 @@ export class TransactionDetailsComponent implements OnInit {
                private toaster: ToastrService,
                public location: Location,
                private modalService: NgbModal,
-               private configuration: NgbModalConfig) {
+               private configuration: NgbModalConfig,
+               private dateFormat: NgbDateNativeAdapter) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
     configuration.centered = true;
@@ -46,7 +47,9 @@ export class TransactionDetailsComponent implements OnInit {
         approvedWithConditions: [{value: null, disabled: true}, Validators.required],
         clearedToClose: [{value: null, disabled: true}, Validators.required],
         closed: [{value: null, disabled: true}, Validators.required],
-      })
+      }),
+      dealClosingDate: [null],
+      commitmentDate: [null]
     });
   }
   getLoanDetails(): void{
@@ -63,6 +66,10 @@ export class TransactionDetailsComponent implements OnInit {
         }
       });
       this.transactionDetails.subjectProperty = res.targetProperty ? res.targetPropertyDetails : null;
+      this.transactionDetails.finance.patchValue({
+        commitmentDate: res.commitmentDate ? this.dateFormat.fromModel(new Date(res.commitmentDate)) : null,
+        dealClosingDate: res.dealClosingDate ? this.dateFormat.fromModel(new Date(res.dealClosingDate)) : null,
+      });
       this.transactionDetails.transactionDetails = {
         purchasePrice: 200000,
         closingDate: new Date('3-3-2020'),
@@ -80,6 +87,10 @@ export class TransactionDetailsComponent implements OnInit {
   }
   onSubmit(): void{
     const data = {
+      commitmentDate: this.transactionDetails.finance.get('commitmentDate').value ?
+          new Date(new DatePipe('en-US').transform(this.dateFormat.toModel(this.transactionDetails.finance.get('commitmentDate').value), 'yyyy-MM-dd')).toISOString() : null,
+      dealClosingDate: this.transactionDetails.finance.get('dealClosingDate').value ?
+          new Date(new DatePipe('en-US').transform(this.dateFormat.toModel(this.transactionDetails.finance.get('dealClosingDate').value), 'yyyy-MM-dd')).toISOString() : null,
       borrowerId: this.transactionDetails.id,
       processStatus: Object.keys(this.transactionDetails.finance.getRawValue().processStatus).
       filter(x => this.transactionDetails.finance.getRawValue().processStatus[x]).slice(-1)[0]
