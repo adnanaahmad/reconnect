@@ -8,7 +8,9 @@ import {HelperService} from '../../../../core/helper/helper.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {LocationService} from '../../services/location/location.service';
 import {ToastrService} from 'ngx-toastr';
-
+import {environment} from '../../../../../environments/environment';
+import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
+import * as io from 'socket.io-client';
 @Component({
   selector: 'app-registration-buyer',
   templateUrl: './registration-buyer.component.html',
@@ -26,7 +28,8 @@ export class RegistrationBuyerComponent implements OnInit {
               public helper: HelperService,
               private constant: ConstantService,
               private location: LocationService,
-              private toaster: ToastrService) { }
+              private toaster: ToastrService,
+              private webSocket: WebSocketService) { }
 
   ngOnInit(): void {
     // this.registration.form.valueChanges.subscribe(res => {
@@ -96,6 +99,8 @@ export class RegistrationBuyerComponent implements OnInit {
         if (res.result.user.accountStatus === 'approved'){
           localStorage.setItem('token', res.result.authToken);
           localStorage.setItem('user', JSON.stringify(res.result.user));
+          this.webSocket.socket.disconnect();
+          this.webSocket.socket = io(environment.serverUrl, {query: {token: res.result.authToken}});
           this.router.navigateByUrl('/home/profile').then();
           this.toaster.success('You have successfully logged in');
         }

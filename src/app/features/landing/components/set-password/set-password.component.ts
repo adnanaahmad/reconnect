@@ -7,6 +7,9 @@ import {AuthService} from '../../services/auth/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {take} from 'rxjs/operators';
 import {ConstantService} from '../../../../core/constant/constant.service';
+import {environment} from '../../../../../environments/environment';
+import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-set-password',
@@ -23,7 +26,8 @@ export class SetPasswordComponent implements OnInit {
               private router: Router,
               private auth: AuthService,
               private toaster: ToastrService,
-              private constant: ConstantService) {
+              private constant: ConstantService,
+              private webSocket: WebSocketService) {
     activatedRoute.queryParams.subscribe(params => {
       this.setPassword.firstName = params.firstName;
       this.setPassword.lastName = params.lastName;
@@ -48,6 +52,8 @@ export class SetPasswordComponent implements OnInit {
       if (res.result.user.accountStatus === 'approved'){
         localStorage.setItem('token', res.result.authToken);
         localStorage.setItem('user', JSON.stringify(res.result.user));
+        this.webSocket.socket.disconnect();
+        this.webSocket.socket = io(environment.serverUrl, {query: {token: res.result.authToken}});
         res.result.user.role === this.constant.role.BUYER ? this.router.navigateByUrl('/home/profile').then() :
             this.router.navigateByUrl('/home/profile/edit/personalDetails').then();
         this.toaster.success('You have successfully logged in');
