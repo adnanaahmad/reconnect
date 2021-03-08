@@ -29,4 +29,10 @@ export class ChatService {
   getMessages(data): Observable<any>{
     return this.helper.requestCall(this.methods.get, `${this.api.getMessages}/${data}`);
   }
+  editConversation(data, id): Observable<any>{
+    return this.helper.requestCall(this.methods.put, this.api.getConversation + `/${id}`, data);
+  }
+  getTeamById(data): Observable<any>{
+    return this.helper.requestCall(this.methods.get, this.api.getTeamById + `/${data}`);
+  }
 }

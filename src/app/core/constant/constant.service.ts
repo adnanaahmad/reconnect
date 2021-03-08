@@ -50,6 +50,7 @@ export class ConstantService {
      getProfessionals: `${environment.apiUrl}/user/professionals`,
      completeRegistration: `${environment.apiUrl}/user/complete-registration`,
      getTeam: `${environment.apiUrl}/team/my-team`,
+     getTeamById: `${environment.apiUrl}/team`,
      addTeamMember: `${environment.apiUrl}/team/add-member`,
      removeTeamMember: `${environment.apiUrl}/team/remove-member`,
      getLoanDetails: `${environment.apiUrl}/loan/my-loan`,

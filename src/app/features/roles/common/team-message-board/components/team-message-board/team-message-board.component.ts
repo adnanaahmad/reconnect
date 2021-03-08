@@ -161,10 +161,14 @@ export class TeamMessageBoardComponent implements OnInit {
     modalRef.componentInstance.type = 'edit';
     modalRef.componentInstance.groupMembers = this.chat.selectedFriend.members;
     modalRef.componentInstance.groupTitle = this.chat.selectedFriend.title;
+    modalRef.componentInstance.conversationId = this.chat.selectedFriend._id;
+    modalRef.componentInstance.teamId = this.chat.selectedFriend.team;
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
-        //this.chat.recentChats.unshift(result.data);
-        //this.listClick(this.chat.recentChats[0]);
+        const index = this.chat.recentChats.findIndex(x => x._id === this.chat.selectedFriend._id);
+        console.log(result.data);
+        this.chat.recentChats[index] = result.data;
+        this.listClick(result.data);
       }
     }, error => {
       console.log(error);

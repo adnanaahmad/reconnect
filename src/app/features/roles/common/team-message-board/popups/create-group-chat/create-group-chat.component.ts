@@ -18,6 +18,8 @@ export class CreateGroupChatComponent implements OnInit {
   @Input() groupMembers: Array<any>;
   @Input() type: string;
   @Input() groupTitle: string;
+  @Input() conversationId: string;
+  @Input() teamId: string;
   @ViewChildren('member') teamMembers: QueryList<ElementRef>;
   teamData: CreateGroupChatModel = {} as CreateGroupChatModel;
 
@@ -42,7 +44,7 @@ export class CreateGroupChatComponent implements OnInit {
       if (this.store.role === this.constant.role.BUYER){
         this.getTeam();
       } else {
-        // api to get team for professional + edit group api
+        this.getTeamProfessional();
       }
       this.teamData.groupForm.get('title').setValue(this.groupTitle);
     }
@@ -58,17 +60,27 @@ export class CreateGroupChatComponent implements OnInit {
       this.toaster.error('Select atleast one team member');
     }
     if (this.teamData.groupForm.valid && this.teamData.selectedTeam.length) {
+      this.teamData.selectedTeam.push(this.store.userId);
       const data = {
         teamId: this.teamData.id,
         members: this.teamData.selectedTeam,
         title: this.teamData.groupForm.get('title').value
       };
-      this.chatService.createGroupConversation(data).pipe(take(1)).subscribe(res => {
-        console.log(res);
-        this.activeModal.close({status: 'yes', data: res.result});
-      }, error => {
-        console.log(error);
-      });
+      if (this.type === 'create') {
+        this.chatService.createGroupConversation(data).pipe(take(1)).subscribe(res => {
+          console.log(res);
+          this.activeModal.close({status: 'yes', data: res.result});
+        }, error => {
+          console.log(error);
+        });
+      } else {
+        this.chatService.editConversation(data, this.conversationId).pipe(take(1)).subscribe(res => {
+          console.log(res);
+          this.activeModal.close({status: 'yes', data: res.result});
+        }, error => {
+          console.log(error);
+        });
+      }
     } else {
       this.teamData.groupForm.markAllAsTouched();
     }
@@ -76,35 +88,37 @@ export class CreateGroupChatComponent implements OnInit {
   close(): void{
     this.activeModal.close({status: 'no'});
   }
-  toggleTeamMember(i, member): void{
+  toggleTeamMember(member): void{
     //console.log(member.userId);
     member = member.userId ?  member.userId._id : member._id;
-    this.helper.toggleTeamMember(i, member, this.teamData.selectedTeam);
+    this.helper.toggleTeamMember(member, member, this.teamData.selectedTeam);
     console.log(this.teamData.selectedTeam);
   }
   getTeam(): void{
     this.chatService.getTeamsData().pipe(take(1)).subscribe(res => {
-      console.log(res);
-      this.teamData.team = res.result;
-      this.teamData.id  = res.result._id;
-      this.filterTeam(this.teamData.team);
-      if (this.groupMembers && this.groupMembers.length){
-        setTimeout(() => {
-          Object.keys(this.teamData.team).forEach((x, index) => {
-            //console.log('oye', x , this.teamData.team[x]);
-            const indexValue = this.groupMembers.findIndex(y =>
-                y._id === (this.teamData.team[x].userId ? this.teamData.team[x].userId._id : this.teamData.team[x]._id));
-            if (indexValue > -1){
-              console.log(index, this.teamData.team[x]);
-              this.toggleTeamMember(index, this.teamData.team[x]);
-            }
-          });
-        }, 1);
-      }
-      console.log(this.teamData);
+      this.getTeamHelper(res);
     }, error => {
       console.log(error);
     });
+  }
+  getTeamProfessional(): void{
+    this.chatService.getTeamById(this.teamId).pipe(take(1)).subscribe(res => {
+        this.getTeamHelper(res);
+    }, error => {
+      console.log(error);
+    });
+  }
+  getTeamHelper(res): void{
+    console.log(res);
+    this.teamData.team = res.result;
+    this.teamData.id  = res.result._id;
+    this.filterTeam(this.teamData.team);
+    if (this.groupMembers && this.groupMembers.length){
+      setTimeout(() => {
+        this.highlightUsersInChat();
+      }, 1);
+    }
+    console.log(this.teamData);
   }
   getBuyers(): void{
     this.chatService.getBorrowers().pipe(take(1)).subscribe(res => {
@@ -124,6 +138,14 @@ export class CreateGroupChatComponent implements OnInit {
     Object.keys(data).filter(element => {
       if (!this.constant.roleArray.includes(element) || element === this.store.role || !data[element]){
         delete data[element];
+      }
+    });
+  }
+  highlightUsersInChat(): void{
+    this.teamMembers.forEach(x => {
+      const indexValue = this.groupMembers.findIndex(y => y._id === x.nativeElement.id);
+      if (indexValue > -1){
+        this.helper.toggleTeamMember(x.nativeElement.id, x.nativeElement.id, this.teamData.selectedTeam);
       }
     });
   }
