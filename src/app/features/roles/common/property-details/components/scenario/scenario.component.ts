@@ -50,16 +50,9 @@ export class ScenarioComponent implements OnInit, OnChanges {
     modalRef.result.then((result) => {
       if (result !== 'Close click') {
         console.log(result);
-        //this.calendar.eventCategories.push(result);
       }
     }, error => {
-      //console.log(error);
+      console.log(error);
     });
   }
 }
-
-
-/*
- loanScenario.listings[0].financing[store.toggleLoanType | async].housingRatio > loanScenario.userLoan[store.toggleLoanType | async].housingRatio ||
-                loanScenario.listings[0].financing[store.toggleLoanType | async].debtRatio > loanScenario.userLoan[store.toggleLoanType | async].debtRatio
- */
