@@ -1,5 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {PersonalSalesAnalyticsModel} from '../../models/dashboard.model';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {PersonalSalesAnalyticsModel, SalesModel} from '../../models/dashboard.model';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
   selector: 'app-personal-sales',
@@ -7,9 +9,10 @@ import {PersonalSalesAnalyticsModel} from '../../models/dashboard.model';
   styleUrls: ['./personal-sales.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class PersonalSalesComponent implements OnInit {
+export class PersonalSalesComponent implements OnInit, OnChanges {
   @Input() salesType;
   @Input() personalSalesAnalytics: PersonalSalesAnalyticsModel;
+  @Input() sales: SalesModel;
   single: any[];
   view: any[];
 
@@ -24,8 +27,17 @@ export class PersonalSalesComponent implements OnInit {
     domain: ['#FCF37E', '#A0F68B', '#F5B887', '#AF9CF9']
   };
 
-  constructor() {}
+  constructor(public constant: ConstantService, public store: StoreService) {}
   ngOnInit(): void {
+    this.view = [innerWidth / 5, innerWidth / 7.8];
+    // console.log('check 123' , this.salesType);
+    // if (this.salesType === 'Personal'){
+    //   // Fetch Personal Data
+    // } else{
+    //   // Fetch Dynasty Data
+    // }
+  }
+  ngOnChanges(changes: SimpleChanges): void {
     this.single = [
       {
         name: 'Pending Deals',
@@ -37,21 +49,15 @@ export class PersonalSalesComponent implements OnInit {
       },
       {
         name: 'Cancelled Deals',
-        value: this.personalSalesAnalytics.canceledDeals
+        value: this.personalSalesAnalytics.cancelledDeals
       },
       {
         name: 'Pre-Approved Deals',
         value: this.personalSalesAnalytics.preApprovalDeals
       }
     ];
-    this.view = [innerWidth / 5, innerWidth / 7.8];
-    // console.log('check 123' , this.salesType);
-    // if (this.salesType === 'Personal'){
-    //   // Fetch Personal Data
-    // } else{
-    //   // Fetch Dynasty Data
-    // }
   }
+
   onResize(event) {
     //console.log(event.target.innerWidth);
     this.view = [event.target.innerWidth / 5, event.target.innerWidth / 7.8 ];

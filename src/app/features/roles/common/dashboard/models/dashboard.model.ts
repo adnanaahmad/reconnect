@@ -28,11 +28,20 @@ export interface AnalyticsModel{
   commission: any;
   personalSales: any;
   personalVolume: any;
+  sales: any;
 }
 
 export interface PersonalSalesAnalyticsModel{
-  canceledDeals: number;
+  cancelledDeals: number;
   dealsClosed: number;
   dealsPending: number;
   preApprovalDeals: number;
+}
+export interface SalesModel{
+  averageSaleAmount: number;
+  averageLoanAmount: number;
+  closedVsPreApproved: number;
+  totalPreApprovedCount: number;
+  totalSalesAmount: number;
+  totalSalesCount: number;
 }
