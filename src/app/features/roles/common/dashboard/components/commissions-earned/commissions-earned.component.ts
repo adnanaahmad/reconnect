@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-commissions-earned',
@@ -6,13 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./commissions-earned.component.scss']
 })
 export class CommissionsEarnedComponent implements OnInit {
-
-  constructor() { }
+  @Input() commissionAnalytics: any;
+  @Input() personalVolume: number;
+  constructor(public helper: HelperService) { }
 
   ngOnInit(): void {
   }
-  commission(val): void{
-    console.log(val);
-  }
-
 }

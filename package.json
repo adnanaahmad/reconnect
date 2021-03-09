@@ -30,6 +30,7 @@
     "@swimlane/ngx-charts": "^16.0.0",
     "bootstrap": "^4.5.3",
     "ng2-search-filter": "^0.5.1",
+    "ngx-image-compress": "^11.0.3",
     "ngx-mask": "^11.1.4",
     "ngx-toastr": "^13.2.0",
     "rxjs": "~6.6.0",

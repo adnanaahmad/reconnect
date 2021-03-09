@@ -3,19 +3,19 @@
    <div class="col-9">
     <div class="d-flex justify-content-between commission-heading">
         <p style="">Commissions Earned</p>
-        <app-date-picker (dateRange)="commission($event)" [section]="'commission'"></app-date-picker>
+        <app-date-picker [section]="'commission'"></app-date-picker>
     </div>
     <div class="d-flex">
-       <div *ngFor="let i of [1,2]" class="date-cards date-space" style="">
-            <p class="date-number" style="">5</p>
-            <p class="date-type" style="">Mortgage Commitments</p>
+       <div *ngFor="let i of commissionAnalytics | keyvalue" class="date-cards date-space" style="">
+            <p class="date-number" style="">{{i.value}}</p>
+            <p class="date-type" style="">{{helper.formatRole(i.key) | titlecase}}</p>
        </div>
     </div>
    </div>
    <div class="col-3 align-self-end">
      <div class="personal-vol">
         <p class="al-text">Personal Volume</p>
-        <p class="al-number">$123,567</p>
+        <p class="al-number">${{personalVolume}}</p>
      </div>
    </div>
 </div>

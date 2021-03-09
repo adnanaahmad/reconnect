@@ -9,6 +9,7 @@ import { BorrowersDatesComponent } from './components/borrowers-dates/borrowers-
 import { PersonalSalesComponent } from './components/personal-sales/personal-sales.component';
 import { CommissionsEarnedComponent } from './components/commissions-earned/commissions-earned.component';
 import { NewQuoteRequestsComponent } from './components/new-quote-requests/new-quote-requests.component';
+import {NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [DashboardComponent, DatePickerComponent, BorrowersDatesComponent, PersonalSalesComponent, CommissionsEarnedComponent, NewQuoteRequestsComponent],
@@ -16,6 +17,7 @@ import { NewQuoteRequestsComponent } from './components/new-quote-requests/new-q
     CommonModule,
     DashboardRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [NgbDateNativeAdapter]
 })
 export class DashboardModule { }

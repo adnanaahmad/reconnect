@@ -23,6 +23,7 @@
 }
 .date-cards-sub{
   padding: .7vw 1vw .7vw 1vw;
+  height: 6.198vw;
 }
 .date-cards:last-child {
   margin-right: 0;
@@ -69,12 +70,18 @@
 .tile:last-child{
   margin-bottom: 0;
 }
-.image{
+.image, .image-dummy{
   width: 5vw;
   height: 5vw;
-  object-fit: cover;
   border-radius: .5vw;
   margin-right: 1vw;
+}
+.image{
+  object-fit: cover;
+}
+.image-dummy{
+  padding: 1vw;
+  background: var(--extraLightGray);
 }
 .heading{
   color: var(--darkGray);

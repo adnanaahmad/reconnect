@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BorrowersDateModel} from '../../models/dashboard.model';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-borrowers-dates',
@@ -7,8 +8,9 @@ import {BorrowersDateModel} from '../../models/dashboard.model';
   styleUrls: ['./borrowers-dates.component.scss']
 })
 export class BorrowersDatesComponent implements OnInit {
+  @Input() buyerAnalytics: any;
   datesSnapShot: Array<BorrowersDateModel> = {} as Array<BorrowersDateModel>;
-  constructor() { }
+  constructor(public helper: HelperService) { }
 //
   ngOnInit(): void {
     this.datesSnapShot = [{
@@ -49,9 +51,6 @@ export class BorrowersDatesComponent implements OnInit {
           date: new Date('2020-12-12'),
         }]
     }];
-  }
-  borrower(val): void{
-    console.log(val);
   }
   toggleCard(event): void{
     // close all

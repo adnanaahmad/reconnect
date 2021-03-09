@@ -15,6 +15,8 @@ export class StoreService {
   userData = this.userDataSubject.asObservable();
   public toggleLoanTypeSubject = new BehaviorSubject<any>(null);
   toggleLoanType = this.toggleLoanTypeSubject.asObservable();
+  private dashboardDateSubject = new BehaviorSubject<any>(null);
+  dashboardDate = this.dashboardDateSubject.asObservable();
   constructor() { }
 
   updateToggleMoreFilter(data: boolean): void{
@@ -43,5 +45,8 @@ export class StoreService {
   }
   get userId(): string{
     return JSON.parse(localStorage.getItem('user'))._id;
+  }
+  updateDashboardDate(data): void{
+    this.dashboardDateSubject.next(data);
   }
 }

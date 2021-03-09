@@ -1,4 +1,5 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {PersonalSalesAnalyticsModel} from '../../models/dashboard.model';
 
 @Component({
   selector: 'app-personal-sales',
@@ -7,8 +8,8 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
   encapsulation: ViewEncapsulation.Emulated
 })
 export class PersonalSalesComponent implements OnInit {
-
   @Input() salesType;
+  @Input() personalSalesAnalytics: PersonalSalesAnalyticsModel;
   single: any[];
   view: any[];
 
@@ -23,26 +24,33 @@ export class PersonalSalesComponent implements OnInit {
     domain: ['#FCF37E', '#A0F68B', '#F5B887', '#AF9CF9']
   };
 
-  constructor() {
+  constructor() {}
+  ngOnInit(): void {
     this.single = [
       {
         name: 'Pending Deals',
-        value: 89
+        value: this.personalSalesAnalytics.dealsPending
       },
       {
         name: 'Deals Closed',
-        value: 100
+        value: this.personalSalesAnalytics.dealsClosed
       },
       {
         name: 'Cancelled Deals',
-        value: 32
+        value: this.personalSalesAnalytics.canceledDeals
       },
       {
         name: 'Pre-Approved Deals',
-        value: 72
+        value: this.personalSalesAnalytics.preApprovalDeals
       }
     ];
     this.view = [innerWidth / 5, innerWidth / 7.8];
+    // console.log('check 123' , this.salesType);
+    // if (this.salesType === 'Personal'){
+    //   // Fetch Personal Data
+    // } else{
+    //   // Fetch Dynasty Data
+    // }
   }
   onResize(event) {
     //console.log(event.target.innerWidth);
@@ -59,25 +67,4 @@ export class PersonalSalesComponent implements OnInit {
   onDeactivate(data): void {
     // console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-  personal(val): void{
-    //console.log(val);
-    if (this.salesType === 'Personal'){
-      // Fetch Personal Data
-      console.log('personal ', val);
-    } else{
-      // Fetch Dynasty Data
-      console.log('dynasty ', val);
-    }
-  }
-
-
-  ngOnInit(): void {
-    console.log('check 123' , this.salesType);
-    if (this.salesType === 'Personal'){
-      // Fetch Personal Data
-    } else{
-      // Fetch Dynasty Data
-    }
-  }
-
 }

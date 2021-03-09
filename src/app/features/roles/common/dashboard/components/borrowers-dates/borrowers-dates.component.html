@@ -3,27 +3,30 @@
   <div class="col-9">
     <div class="d-flex justify-content-between borrowers-heading">
        <p class="bh" style="">Borrowers Important Dates Snap Shot</p>
-       <app-date-picker (dateRange)="borrower($event)" [section]="'borrower'"></app-date-picker>
+       <app-date-picker [section]="'borrower'"></app-date-picker>
 
     </div>
     <div class="d-flex date-row">
 
-      <div (click)="toggleCard($event);" *ngFor="let date of datesSnapShot" class="date-cards" style="">
+      <div (click)="date.value.buyers.length ? toggleCard($event) : ''" *ngFor="let date of buyerAnalytics | keyvalue" class="date-cards" style="">
         <div class="date-cards-sub">
-          <p class="date-number" style="">{{date.number}}</p>
-          <p class="date-type" style="">{{date.name}}</p>
+          <p class="date-number" style="">{{date.value.count}}</p>
+          <p class="date-type" style="">{{helper.formatRole(date.key) | titlecase}}</p>
         </div>
         <div class="buyer-div align-self-end">
           <div class="triangle"></div>
           <p class="heading">{{date.name}}</p>
-          <div class="d-flex tile" *ngFor="let buyer of date.buyers">
-            <img class="image" [src]="buyer.image">
+          <div class="d-flex tile" *ngFor="let buyer of date.value.buyers">
+            <img *ngIf="buyer.profilePictureUrl" class="image" [src]="buyer.profilePictureUrl">
+            <img *ngIf="!buyer.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
             <div class="row">
               <div class="col-10 d-flex align-items-start flex-column">
-                <p class="name">{{buyer.name}}</p>
+                <p class="name text-nowrap">{{buyer.firstName}} {{buyer.lastName}}</p>
                 <p class="address">{{buyer.address}}</p>
-                <p class="mt-auto date">{{ date.name === 'Deals Closing'? 'Offer accepted:' :
-                  date.name === 'Mortgage Commitments'? 'Commitment:' : 'Locks Expiring:'}} {{buyer.date | date}}</p>
+                <p class="mt-auto date text-nowrap">{{helper.formatRole(date.key)+' Date: ' | titlecase}}
+                  {{ (date.key === 'commitments' ? buyer.commitmentDate :
+                          date.key === 'dealsClosing' ? buyer.dealClosingDate :
+                                  date.key === 'locksExpiring' ? buyer.lockExpiryDate : '')  | date}}</p>
               </div>
             </div>
           </div>
@@ -32,3 +35,7 @@
      </div>
    </div>
 </div>
+
+commitments:
+dealsClosing:
+locksExpiring:

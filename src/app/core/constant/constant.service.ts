@@ -67,7 +67,8 @@ export class ConstantService {
      getMessages: `${environment.apiUrl}/message`,
      shareProperty: `${environment.apiUrl}/message/send-private-message`,
      sharePropertyProfessional: `${environment.apiUrl}/message/send-multiple-messages`,
-     targetProperty: `${environment.apiUrl}/loan/target-property`
+     targetProperty: `${environment.apiUrl}/loan/target-property`,
+     professionalDashboard: `${environment.apiUrl}/analytics/dashboard`
   };
 
   chatMessageType = {

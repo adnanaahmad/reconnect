@@ -30,7 +30,7 @@
        </ng-template>
        <ng-template #footerTemplate>
          <button class="btn btn-sm close-button float-left" (click)="datepicker.toggle()"><p>Close</p></button>
-         <button class="btn btn-sm save-button float-right" (click)="save(); datepicker.toggle()" [disabled]="!toDate" ><p>Save</p></button>
+         <button class="btn btn-sm save-button float-right" (click)="save(); datepicker.toggle()" [disabled]="!toDate" ><p>Apply</p></button>
        </ng-template>
     </div>
     <img #buttonEl class="align-self-center calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="datepicker.toggle()">
