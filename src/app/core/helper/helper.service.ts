@@ -5,13 +5,16 @@ import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
-
+import {NgxImageCompressService} from 'ngx-image-compress';
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
 
-  constructor(private constants: ConstantService, private http: HttpClient, private toaster: ToastrService) { }
+  constructor(private constants: ConstantService,
+              private http: HttpClient,
+              private toaster: ToastrService,
+              private imageCompress: NgxImageCompressService) { }
 
   setModalPosition(): void {
     const modal = document.getElementsByClassName('modal-content') as HTMLCollectionOf<HTMLElement>;
@@ -36,7 +39,6 @@ export class HelperService {
   toggleTeamMember(i, member, selectedTeam): void{
     const tick = document.getElementById(i).children[0];
     const border = document.getElementById(i).children[1];
-    //console.log(member);
     if (getComputedStyle(tick).display === 'block') {
       (tick as HTMLImageElement).style.display = 'none';
       (border as HTMLImageElement).style.border = 'none';
@@ -79,9 +81,9 @@ export class HelperService {
         const reader = new FileReader();
         if (files && files.length) {
           const file = files.item(0);
-          user.fileUpload = file;
           reader.readAsDataURL(file);
-          reader.onload = () => {
+          reader.onload = (event) => {
+            this.imageCompression(event.target.result, user);
             user.image = reader.result as string;
           };
         }
@@ -95,4 +97,24 @@ export class HelperService {
   formatRole(data): string{
     return data.split(/(?=[A-Z])/).join(' ');
   }
+  imageCompression(image, user): void{
+//    console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+    this.imageCompress.compressFile(image, -1, 50, 50).then(
+        result => {
+//          console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+          user.fileUpload = this.dataURItoBlob(result.split(',')[1]);
+        }
+    );
+  }
+  dataURItoBlob(dataURI): Blob {
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/jpeg' });
+    return blob;
+  }
+
 }

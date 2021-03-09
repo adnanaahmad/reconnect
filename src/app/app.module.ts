@@ -9,6 +9,7 @@ import {SharedModule} from './shared/shared.module';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptorService} from './core/interceptors/token-interceptor.service';
 import {ToastrModule} from 'ngx-toastr';
+import {NgxImageCompressService} from 'ngx-image-compress';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {ToastrModule} from 'ngx-toastr';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+    NgxImageCompressService
   ],
   bootstrap: [AppComponent]
 })
