@@ -55,11 +55,11 @@
                         </div>
                         <div class="col-7 mb-custom font-weight2">
                            <p class="text-nowrap">{{propertyAd.propertyType}}</p>
-                           <p>{{propertyAd.yearBuilt}} &nbsp;</p>
+                           <p>{{propertyAd.yearBuilt ? propertyAd.yearBuilt : 'N.A.'}} &nbsp;</p>
                            <p>{{propertyAd.xf_lot_size ? propertyAd.xf_lot_size + ' Sq Ft' : 'N.A.'}} &nbsp;</p>
-                           <p>{{propertyAd.xf_list_price_per_sqft ? '$' + propertyAd.xf_list_price_per_sqft : '' }} &nbsp;</p>
-                           <p>{{propertyAd.xf_tax_year}} &nbsp;</p>
-                           <p>{{ '$'+ propertyAd.xf_taxes}} &nbsp;</p>
+                           <p>{{propertyAd.xf_list_price_per_sqft ? '$' + propertyAd.xf_list_price_per_sqft : 'N.A.' }} &nbsp;</p>
+                           <p>{{propertyAd.xf_tax_year ? propertyAd.xf_tax_year : 'N.A.'}} &nbsp;</p>
+                           <p>{{ propertyAd.xf_taxes || propertyAd.xf_taxes === 0 ? '$'+ propertyAd.xf_taxes : 'N.A.'}} &nbsp;</p>
                         </div>
                     </div>
                 </div>
