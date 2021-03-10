@@ -7,11 +7,11 @@
           <div class="row d-flex loan-label">
              <div class="col-4 form-group">
                <label><p>Loan Term</p></label>
-               <input formControlName="loanTerm" type="" class="form-control" placeholder="">
+               <input suffix=" year(s)" mask="0*" formControlName="loanTerm" type="" class="form-control" placeholder="">
              </div>
              <div class="col-4 form-group">
                <label><p>Loan Rate</p></label>
-               <input formControlName="loanRate" type="" class="form-control" placeholder="">
+               <input suffix="%" mask="0*.0000" formControlName="loanRate" type="text" class="form-control" placeholder="">
              </div>
           </div>
        </div>
@@ -20,15 +20,15 @@
             <div class="row d-flex loan-label">
                 <div class="col-4 form-group">
                     <label><p>1 Unit</p></label>
-                    <input formControlName="oneUnit" type="number" class="form-control">
+                    <input suffix="%" mask="0*.0000" formControlName="oneUnit" type="text" class="form-control">
                 </div>
                 <div class="col-4 form-group">
                     <label><p>2 Unit</p></label>
-                    <input formControlName="twoUnit" type="number" class="form-control">
+                    <input suffix="%" mask="0*.0000" formControlName="twoUnit" type="text" class="form-control">
                 </div>
                 <div class="col-4 form-group">
                     <label><p>3-4 Unit</p></label>
-                    <input formControlName="threeToFourUnit" type="number" class="form-control">
+                    <input suffix="%" mask="0*.0000" formControlName="threeToFourUnit" type="text" class="form-control">
                 </div>
             </div>
         </div>
@@ -37,11 +37,11 @@
           <div class="row d-flex loan-label">
              <div class="col-4 form-group">
                 <label><p>Housing Ratio</p></label>
-                <input formControlName="housingRatio" type="" class="form-control" placeholder="">
+                <input suffix="%" mask="0*.0000" formControlName="housingRatio" type="text" class="form-control" placeholder="">
              </div>
              <div class="col-4 form-group">
                <label><p>Debt Ratio</p></label>
-               <input formControlName="debtRatio" type="" class="form-control" placeholder="">
+               <input suffix="%" mask="0*.0000" formControlName="debtRatio" type="text" class="form-control" placeholder="">
              </div>
           </div>
         </div>
@@ -50,15 +50,15 @@
             <div class="row d-flex loan-label">
                <div class="col-4 form-group">
                   <label><p>5% Down</p></label>
-                  <input formControlName="fivePercentDown" type="" class="form-control" placeholder="">
+                  <input suffix="%" mask="0*.0000" formControlName="fivePercentDown" type="text" class="form-control" placeholder="">
                </div>
                <div class="col-4 form-group">
                  <label><p>10% Down</p></label>
-                 <input formControlName="tenPercentDown" type="" class="form-control" placeholder="">
+                 <input suffix="%" mask="0*.0000" formControlName="tenPercentDown" type="text" class="form-control" placeholder="">
                </div>
               <div class="col-4 form-group">
                 <label><p>15% Down</p></label>
-                <input formControlName="fifteenPercentDown" type="" class="form-control" placeholder="">
+                <input suffix="%" mask="0*.0000" formControlName="fifteenPercentDown" type="text" class="form-control" placeholder="">
               </div>
             </div>
         </div>
