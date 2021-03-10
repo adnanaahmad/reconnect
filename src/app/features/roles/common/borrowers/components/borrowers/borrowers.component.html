@@ -11,7 +11,9 @@
     <div class="col-6 d-flex flex-row-reverse" style="background: transparent">
         <div class="align-self-center add-button"><p>Add new Borrower</p></div>
         <div class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
-        <div class="align-self-center search-input"><input type="email" id="search" class="form-control form-control-lg" placeholder="Search Contacts"></div>
+        <div class="align-self-center search-input">
+            <input [formControl]="searchName" type="text" id="search" class="form-control form-control-lg" placeholder="Search Contacts">
+        </div>
     </div>
 
   </div>
@@ -27,7 +29,7 @@
           <option>5</option>
         </select>
 </div>
-<ng-container *ngFor="let borrower of borrowers.borrower">
+<ng-container *ngFor="let borrower of borrowers.borrower | filter:searchName.value" >
     <div *ngIf="constant.borrowersStatusObject[store.borrowersStatus | async].includes(borrower.loan.processStatus)" class="card-3 d-flex" style="background: transparent">
         <div class="card-4 " style="background: white">
             <div class="div-1 d-flex">

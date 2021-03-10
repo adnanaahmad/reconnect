@@ -6,6 +6,7 @@ import {ConstantService} from '../../../../../../core/constant/constant.service'
 import {Router} from '@angular/router';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {take} from 'rxjs/operators';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-borrowers',
@@ -14,6 +15,7 @@ import {take} from 'rxjs/operators';
 })
 export class BorrowersComponent implements OnInit {
   borrowers: BorrowersModel = {} as BorrowersModel;
+  searchName: FormControl;
   constructor(private borrowerService: BorrowersService,
               public constant: ConstantService,
               private router: Router,
@@ -21,6 +23,7 @@ export class BorrowersComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.updateBorrowersStatus(this.constant.borrowersStatus[0]);
+    this.searchName = new FormControl(null, Validators.required);
     this.getBorrowers();
   }
   getBorrowers(): void{
