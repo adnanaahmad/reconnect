@@ -56,10 +56,10 @@
                         <div class="col-7 mb-custom font-weight2">
                            <p class="text-nowrap">{{propertyAd.propertyType}}</p>
                            <p>{{propertyAd.yearBuilt}} &nbsp;</p>
-                           <p>{{ propertyAd.lotSize ? propertyAd.lotSize.sqft + ' Sq Ft' : ''}} &nbsp;</p>
+                           <p>{{propertyAd.xf_lot_size ? propertyAd.xf_lot_size + ' Sq Ft' : 'N.A.'}} &nbsp;</p>
                            <p>{{propertyAd.xf_list_price_per_sqft ? '$' + propertyAd.xf_list_price_per_sqft : '' }} &nbsp;</p>
                            <p>{{propertyAd.xf_tax_year}} &nbsp;</p>
-                           <p>{{ propertyAd.xf_taxes ? '$'+ propertyAd.xf_taxes : ''}} &nbsp;</p>
+                           <p>{{ '$'+ propertyAd.xf_taxes}} &nbsp;</p>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
 
                       <div class="info-img">
                         <img src="/assets/search-home/area.png">
-                        <div class="d-flex info-number text-nowrap"><p>Sq Ft</p><p *ngIf="propertyAd.lotSize">{{propertyAd.lotSize.sqft}}</p></div>
+                        <div class="d-flex info-number text-nowrap"><p>Sq Ft</p><p>{{propertyAd.xf_square_feet ? propertyAd.xf_square_feet : 'N.A.'}}</p></div>
                       </div>
                     </div>
                 </div>

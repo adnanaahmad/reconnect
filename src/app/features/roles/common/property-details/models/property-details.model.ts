@@ -77,6 +77,8 @@ export interface PropertyAdModel {
     half: number
   };
   daysOnMarket: number;
+  xf_lot_size: number;
+  xf_square_feet: number;
 }
 
 interface RealEstateAgentUserModel {
