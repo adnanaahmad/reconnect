@@ -7,15 +7,15 @@
          <div class="row d-flex loan-label">
             <div class="col-4 form-group">
                <label><p>Down Payment</p></label>
-               <input formControlName="downPayment" type="" class="form-control" placeholder="">
+               <input suffix="%" mask="0*.0000" formControlName="downPayment" type="text" class="form-control" placeholder="">
             </div>
             <div class="col-4 form-group">
               <label><p>Loan Term</p></label>
-              <input formControlName="loanTerm" type="" class="form-control" placeholder="">
+              <input suffix=" year(s)" mask="0*" formControlName="loanTerm" type="text" class="form-control" placeholder="">
             </div>
             <div class="col-4 form-group">
               <label><p>Loan Rate</p></label>
-              <input formControlName="loanRate" type="" class="form-control" placeholder="">
+              <input suffix="%" mask="0*.0000" formControlName="loanRate" type="text" class="form-control" placeholder="">
             </div>
          </div>
       </div>
@@ -24,11 +24,11 @@
          <div class="row d-flex loan-label">
             <div class="col-4 form-group">
                <label><p>Housing Ratio</p></label>
-               <input formControlName="housingRatio" type="" class="form-control" placeholder="">
+               <input suffix="%" mask="0*.0000" formControlName="housingRatio" type="text" class="form-control" placeholder="">
             </div>
             <div class="col-4 form-group">
               <label><p>Debt Ratio</p></label>
-              <input formControlName="debtRatio" type="" class="form-control" placeholder="">
+              <input suffix="%" mask="0*.0000" formControlName="debtRatio" type="text" class="form-control" placeholder="">
             </div>
          </div>
        </div>
@@ -37,11 +37,11 @@
            <div class="row d-flex loan-label">
               <div class="col-4 form-group">
                  <label><p>Funding Fee</p></label>
-                 <input formControlName="fundingFee" type="" class="form-control" placeholder="">
+                 <input suffix="%" mask="0*.0000" formControlName="fundingFee" type="text" class="form-control" placeholder="">
               </div>
               <div class="col-4 form-group">
                 <label><p>Monthly MI</p></label>
-                <input formControlName="monthlyMi" type="" class="form-control" placeholder="">
+                <input suffix="%" mask="0*.0000" formControlName="monthlyMi" type="text" class="form-control" placeholder="">
               </div>
            </div>
        </div>
