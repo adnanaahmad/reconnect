@@ -38,6 +38,9 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.propertyDetails.loader = false;
     this.getPropertyDetails();
+    this.store.toggleLoanType.subscribe(res => {
+      window.history.replaceState({}, '', `/home/propertyDetails/${this.propertyDetails.id}?loanType=${res}`);
+    });
     this.propertyDetails.rentVsBuying = {
       costOfRent: {
         amount: 20,
