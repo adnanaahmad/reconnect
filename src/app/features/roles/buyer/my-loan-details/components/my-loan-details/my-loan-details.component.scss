@@ -1,6 +1,7 @@
 .heading h3{
   font-size: var(--heading);
   color: var(--darkGray);
+  font-family: 'Poppins';
 }
 .heading{
   margin-bottom: 1vw;
@@ -168,4 +169,7 @@
 }
 .save-btn:focus{
   outline: none;
+}
+p{
+  font-family: 'Poppins';
 }
