@@ -4,16 +4,16 @@
 <form [formGroup]="loanDetails.finance" (ngSubmit)="onSubmit()" *ngIf="loader">
 <div class="d-flex user-finance">
   <div class="form-group">
-    <input formControlName="income" type="" class="form-control form-control-lg" id="" placeholder="Income">
+    <input prefix="$" mask="0*.00" formControlName="income" type="" class="form-control form-control-lg" id="" placeholder="Income">
   </div>
   <div class="form-group">
-    <input formControlName="monthlyDebt" type="" class="form-control form-control-lg" id="" placeholder="Monthly debt">
+    <input prefix="$" mask="0*.00" formControlName="monthlyDebt" type="" class="form-control form-control-lg" id="" placeholder="Monthly debt">
   </div>
   <div class="form-group">
-    <input formControlName="funds" type="" class="form-control form-control-lg" id="" placeholder="Funds/Assets">
+    <input prefix="$" mask="0*.00" formControlName="funds" type="" class="form-control form-control-lg" id="" placeholder="Funds/Assets">
   </div>
   <div class="form-group">
-    <input formControlName="sellerCredit" type="" class="form-control form-control-lg" id="" placeholder="Seller Credit">
+    <input prefix="$" mask="0*.00" formControlName="sellerCredit" type="" class="form-control form-control-lg" id="" placeholder="Seller Credit">
   </div>
   <button class="btn btn-success"> <p>Add Closing Cost</p> </button>
 </div>

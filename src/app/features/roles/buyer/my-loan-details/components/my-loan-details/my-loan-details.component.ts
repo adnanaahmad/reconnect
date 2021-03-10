@@ -20,7 +20,7 @@ export class MyLoanDetailsComponent implements OnInit {
     this.loader = false;
     this.initializeLoanDetails();
     this.getLoanDetails();
-    //this.loanDetails.finance.valueChanges.subscribe(newval => console.log(newval));
+//    this.loanDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.resetLoanType();
   }
   onSubmit(): void{
@@ -29,9 +29,11 @@ export class MyLoanDetailsComponent implements OnInit {
       fha: this.loanDetails.finance.get(['toggle', 'fha']).value ? this.loanDetails.finance.get('fha').value : null,
       usda: this.loanDetails.finance.get(['toggle', 'usda']).value ? this.loanDetails.finance.get('usda').value : null,
       va: this.loanDetails.finance.get(['toggle', 'va']).value ? this.loanDetails.finance.get('va').value : null,
-      homePossible: this.loanDetails.finance.get(['toggle', 'homePossible']).value ? this.loanDetails.finance.get('homePossible').value : null,
+      homePossible: this.loanDetails.finance.get(['toggle', 'homePossible']).value ?
+          this.loanDetails.finance.get('homePossible').value : null,
       homeReady: this.loanDetails.finance.get(['toggle', 'homeReady']).value ? this.loanDetails.finance.get('homeReady').value : null,
-      conventional: this.loanDetails.finance.get(['toggle', 'conventional']).value ? this.loanDetails.finance.get('conventional').value : null,
+      conventional: this.loanDetails.finance.get(['toggle', 'conventional']).value ?
+          this.loanDetails.finance.get('conventional').value : null,
     };
     console.log(data);
     this.loadDetailsService.setLoanDetails({...this.loanDetails.finance.value, ...data}).subscribe(res => {
