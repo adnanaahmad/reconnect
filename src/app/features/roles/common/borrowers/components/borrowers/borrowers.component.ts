@@ -17,11 +17,10 @@ export class BorrowersComponent implements OnInit {
   constructor(private borrowerService: BorrowersService,
               public constant: ConstantService,
               private router: Router,
-              private store: StoreService) { }
+              public store: StoreService) { }
 
   ngOnInit(): void {
-    this.borrowers.buttons = ['Pending', 'Pre-Approved', 'Potential', 'Closed'];
-    this.borrowers.selectedButton = this.borrowers.buttons[0];
+    this.store.updateBorrowersStatus(this.constant.borrowersStatus[0]);
     this.getBorrowers();
   }
   getBorrowers(): void{
@@ -33,7 +32,7 @@ export class BorrowersComponent implements OnInit {
     });
   }
   listClick(button): void {
-    this.borrowers.selectedButton = button;
+    this.store.updateBorrowersStatus(button);
   }
   activeStatus(index, value): boolean{
     return index <= this.constant.loanStatus.findIndex(data => data === value);

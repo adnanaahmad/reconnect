@@ -4,7 +4,7 @@
 <div class="card-1">
   <div class="row">
     <div class="col-6 d-flex justify-content-between" style="background: transparent">
-        <div class="buttons align-self-center" *ngFor="let button of borrowers.buttons" [ngClass]="{'active': borrowers.selectedButton == button}" (click)="listClick(button)">
+        <div class="buttons align-self-center" *ngFor="let button of constant.borrowersStatus" [ngClass]="{'active': (store.borrowersStatus | async) === button}" (click)="listClick(button)">
             <p><nobr>{{ button }}</nobr></p>
         </div>
     </div>
@@ -27,42 +27,43 @@
           <option>5</option>
         </select>
 </div>
-<div class="card-3 d-flex" style="background: transparent" *ngFor="let borrower of borrowers.borrower">
-       <div class="card-4 " style="background: white">
+<ng-container *ngFor="let borrower of borrowers.borrower">
+    <div *ngIf="constant.borrowersStatusObject[store.borrowersStatus | async].includes(borrower.loan.processStatus)" class="card-3 d-flex" style="background: transparent">
+        <div class="card-4 " style="background: white">
             <div class="div-1 d-flex">
-              <img *ngIf="borrower.buyer.profilePictureUrl" [src]="borrower.buyer.profilePictureUrl" class="display-img">
-              <img *ngIf="!borrower.buyer.profilePictureUrl" src="/assets/profile/profile.svg" class="dummy-img">
-              <div class="info">
-                 <div class="name-div" [ngbTooltip]="borrower.buyer.firstName+' '+borrower.buyer.lastName"> <p class="name">
-                     {{ borrower.buyer.firstName | titlecase}} {{ borrower.buyer.lastName | titlecase}}</p> </div>
-                  <div class="phone d-flex">
-                    <img class="align-self-center" src="/assets/directory-icons/call.svg">
-                    <p>{{ borrower.buyer.phoneNumber }}</p>
-                  </div>
-                  <div class="message d-flex">
-                      <img class="align-self-center" src="/assets/directory-icons/envelope.svg">
-                      <p>Ask a Question</p>
-                  </div>
+                <img *ngIf="borrower.buyer.profilePictureUrl" [src]="borrower.buyer.profilePictureUrl" class="display-img">
+                <img *ngIf="!borrower.buyer.profilePictureUrl" src="/assets/profile/profile.svg" class="dummy-img">
+                <div class="info">
+                    <div class="name-div" [ngbTooltip]="borrower.buyer.firstName+' '+borrower.buyer.lastName"> <p class="name">
+                        {{ borrower.buyer.firstName | titlecase}} {{ borrower.buyer.lastName | titlecase}}</p> </div>
+                    <div class="phone d-flex">
+                        <img class="align-self-center" src="/assets/directory-icons/call.svg">
+                        <p>{{ borrower.buyer.phoneNumber }}</p>
+                    </div>
+                    <div class="message d-flex">
+                        <img class="align-self-center" src="/assets/directory-icons/envelope.svg">
+                        <p>Ask a Question</p>
+                    </div>
 
-              </div>
-           </div>
+                </div>
+            </div>
 
-          <div class="div-2">
-              <p (click)="viewBorrower(borrower.buyer['_id'])" class="text-center">View Transaction Details</p>
+            <div class="div-2">
+                <p (click)="viewBorrower(borrower.buyer['_id'])" class="text-center">View Transaction Details</p>
 
-          </div>
-       </div>
+            </div>
+        </div>
 
 
-       <div class="card-5" style="background: white">
+        <div class="card-5" style="background: white">
             <div class="top d-flex">
-               <div class="d-flex address" style="background: transparent">
-                  <img src="/assets/borrower/pin.svg" class="pin">
-                  <p [ngbTooltip]="borrower.targetPropertyAddress" >{{ borrower.targetPropertyAddress }}</p>
-               </div>
+                <div class="d-flex address" style="background: transparent">
+                    <img src="/assets/borrower/pin.svg" class="pin">
+                    <p [ngbTooltip]="borrower.targetPropertyAddress" >{{ borrower.targetPropertyAddress }}</p>
+                </div>
                 <div class="date1" style="background: transparent">
                     <div class="d-flex justify-content-end txt-div">
-                      <p class="txt">Closing Date:</p><p class="txt-date">{{ borrower.closingDate | date :  "dd-MM-y"}}</p>
+                        <p class="txt">Closing Date:</p><p class="txt-date">{{ borrower.closingDate | date :  "dd-MM-y"}}</p>
                     </div>
                     <div class="d-flex">
                         <p class="txt">Commitment Date:</p><p class="txt-date">{{ borrower.commitmentDate | date :  "dd-MM-y" }}</p>
@@ -72,12 +73,14 @@
                     <div class="d-flex txt-div"><p class="txt">Home Inspection Date:</p><p class="txt-date">{{ borrower.homeInspectionDate | date :  "dd-MM-y" }}</p></div>
                     <div class="d-flex"><p class="txt">Purchase & Sales Date:</p><p class="txt-date">{{ borrower.purchaseSalesDate | date :  "dd-MM-y"}}</p></div>
                 </div>
-           </div>
-           <div class="bottom d-flex">
-              <div class="status" *ngFor="let status of constant.loanStatus; let i = index">
-                  <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !activeStatus(i, borrower.loan.processStatus)}">
-                  <p>{{status | splitCamelCase}}</p>
-              </div>
-           </div>
-       </div>
-</div>
+            </div>
+            <div class="bottom d-flex">
+                <div class="status" *ngFor="let status of constant.loanStatus; let i = index">
+                    <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !activeStatus(i, borrower.loan.processStatus)}">
+                    <p>{{status | splitCamelCase}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-container>

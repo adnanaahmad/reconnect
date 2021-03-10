@@ -8,37 +8,6 @@ import {HttpHeaders} from '@angular/common/http';
 export class ConstantService {
 
   constructor() { }
-
-   role = {
-      BUYER: 'buyer',
-      SELLER: 'seller',
-      LENDER: 'lender',
-      REAL_ESTATE: 'realEstateAgent',
-      ATTORNEY: 'attorney',
-      HOME_INSPECTOR: 'homeInspector',
-      INSURANCE: 'insuranceAgent',
-      CONTRACTOR: 'contractor'
-    };
-  chooseRole = {
-    'Real Estate Agent': 'realEstateAgent',
-    Attorney : 'attorney',
-    Lender: 'lender',
-    'Home Inspector': 'homeInspector',
-    'Insurance Agent': 'insuranceAgent',
-  };
-  roleArray = ['buyer', 'seller', 'lender', 'realEstateAgent', 'attorney', 'homeInspector', 'insuranceAgent'];
-   apiMethod = {
-    get: 'get',
-    post: 'post',
-    put: 'put',
-    delete: 'delete'
-  };
-   loanStatus = ['application', 'preApproved', 'acceptedOffer', 'underwriting', 'approvedWithConditions', 'clearedToClose', 'closed'];
-   conversationType = {
-     PRIVATE: 'private',
-     GROUP: 'group'
-   };
-
    apiRoutes = {
      signin: `${environment.apiUrl}/user/signin`,
      signup: `${environment.apiUrl}/user/signup`,
@@ -70,14 +39,11 @@ export class ConstantService {
      targetProperty: `${environment.apiUrl}/loan/target-property`,
      professionalDashboard: `${environment.apiUrl}/analytics/dashboard`
   };
-
-  chatMessageType = {
-    MESSAGE_TYPE_TEXT: 'text',
-    MESSAGE_TYPE_TEXT_WITH_FILE: 'textWithFile',
-    MESSAGE_TYPE_LOG_PROFESSIONAL_ADDED_TO_TEAM: 'logProfessionalAddedToTeam',
-    MESSAGE_TYPE_LOG_PROFESSIONAL_REMOVED_FROM_TEAM: 'logProfessionalRemovedFromTeam',
-    MESSAGE_TYPE_SHARE_PROPERTY: 'shareProperty',
-    MESSAGE_TYPE_BOOK_PROPERTY: 'bookProperty'
+  apiMethod = {
+    get: 'get',
+    post: 'post',
+    put: 'put',
+    delete: 'delete'
   };
    httpOptions = {
      json: {
@@ -655,6 +621,54 @@ export class ConstantService {
       quoteRequests: true
     },
   };
+  chatMessageType = {
+    MESSAGE_TYPE_TEXT: 'text',
+    MESSAGE_TYPE_TEXT_WITH_FILE: 'textWithFile',
+    MESSAGE_TYPE_LOG_PROFESSIONAL_ADDED_TO_TEAM: 'logProfessionalAddedToTeam',
+    MESSAGE_TYPE_LOG_PROFESSIONAL_REMOVED_FROM_TEAM: 'logProfessionalRemovedFromTeam',
+    MESSAGE_TYPE_SHARE_PROPERTY: 'shareProperty',
+    MESSAGE_TYPE_BOOK_PROPERTY: 'bookProperty'
+  };
+  conversationType = {
+    PRIVATE: 'private',
+    GROUP: 'group'
+  };
+  role = {
+    BUYER: 'buyer',
+    SELLER: 'seller',
+    LENDER: 'lender',
+    REAL_ESTATE: 'realEstateAgent',
+    ATTORNEY: 'attorney',
+    HOME_INSPECTOR: 'homeInspector',
+    INSURANCE: 'insuranceAgent',
+    CONTRACTOR: 'contractor'
+  };
+  chooseRole = {
+    'Real Estate Agent': 'realEstateAgent',
+    Attorney : 'attorney',
+    Lender: 'lender',
+    'Home Inspector': 'homeInspector',
+    'Insurance Agent': 'insuranceAgent',
+  };
+  roleArray = ['buyer', 'seller', 'lender', 'realEstateAgent', 'attorney', 'homeInspector', 'insuranceAgent'];
+  loanStatusObject = {
+    APPLICATION: 'application',
+    PRE_APPROVED: 'preApproved',
+    ACCEPTED_OFFER: 'acceptedOffer',
+    UNDERWRITING: 'underwriting',
+    APPROVED_WITH_CONDITIONS: 'approvedWithConditions',
+    CLEARED_TO_CLOSE: 'clearedToClose',
+    CLOSED: 'closed'
+  };
+  loanStatus = [
+      this.loanStatusObject.APPLICATION,
+      this.loanStatusObject.PRE_APPROVED,
+      this.loanStatusObject.ACCEPTED_OFFER,
+      this.loanStatusObject.UNDERWRITING,
+      this.loanStatusObject.APPROVED_WITH_CONDITIONS,
+      this.loanStatusObject.CLEARED_TO_CLOSE,
+      this.loanStatusObject.CLOSED
+  ];
   homeBuyingProcessStatusIndex = {
     application: 0,
     preApproved: 1,
@@ -663,5 +677,18 @@ export class ConstantService {
     approvedWithConditions: 4,
     clearedToClose: 5,
     closed: 6,
+  };
+  borrowersStatus = ['Pending', 'Application', 'Pre-Approved', 'Potential', 'Closed'];
+  borrowersStatusObject = {
+    Pending: ['pending'],
+    Application: [this.loanStatusObject.APPLICATION],
+    'Pre-Approved': [this.loanStatusObject.PRE_APPROVED],
+    Potential: [
+      this.loanStatusObject.ACCEPTED_OFFER,
+      this.loanStatusObject.UNDERWRITING,
+      this.loanStatusObject.APPROVED_WITH_CONDITIONS,
+      this.loanStatusObject.CLEARED_TO_CLOSE,
+    ],
+    Closed: [this.loanStatusObject.CLOSED]
   };
 }

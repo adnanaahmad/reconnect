@@ -1,6 +1,4 @@
 export interface BorrowersModel {
-  buttons: Array<string>;
-  selectedButton: string;
   borrower: Array<BorrowerModel>;
 }
 
