@@ -235,8 +235,9 @@
   font-size: .7vw;
 }
 .input-box{
-  width: -webkit-fill-available;
+  //width: -webkit-fill-available;
   margin-right: .4vw;
+  flex: auto;
 }
 .input-box textarea{
 }
