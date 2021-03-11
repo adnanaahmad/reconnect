@@ -46,7 +46,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   public get years(): Array<number> {
-    return Array((new Date()).getFullYear() - 1920).fill(0).map((_, i) => 1920 + i);
+    return Array((new Date()).getFullYear() - 17 - 1920).fill(0).map((_, i) => 1920 + i);
   }
 
   public get months(): Array<string> {

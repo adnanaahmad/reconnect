@@ -21,6 +21,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import {ThousandSuffixPipe} from './pipes/thousand-suffix.pipe';
 import { SplitCamelCasePipe } from './pipes/splitCamelCase/split-camel-case.pipe';
 import { SubjectPropertyTemplateComponent } from './components/subject-property-template/subject-property-template.component';
+import { ReversePipe } from './pipes/reverse/reverse.pipe';
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -41,7 +42,8 @@ const maskConfig: Partial<IConfig> = {
     SubjectPropertyDetailsComponent,
     ThousandSuffixPipe,
     SplitCamelCasePipe,
-    SubjectPropertyTemplateComponent
+    SubjectPropertyTemplateComponent,
+    ReversePipe
 
   ],
   imports: [
@@ -70,6 +72,7 @@ const maskConfig: Partial<IConfig> = {
         SubjectPropertyDetailsComponent,
         ThousandSuffixPipe,
         SplitCamelCasePipe,
+        ReversePipe,
         SubjectPropertyTemplateComponent
     ],
 })

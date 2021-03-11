@@ -81,7 +81,7 @@
                         </div>
                         <div class="selected d-flex justify-content-end">
                             <select formControlName="year" class="form-control f1">
-                                <option *ngFor="let year of years; let i = index" [value]="year">{{year}}</option>
+                                <option *ngFor="let year of years | reverse" [value]="year">{{year}}</option>
                             </select>
                             <img src="/assets/landing/drop.svg" class="drop">
                         </div>

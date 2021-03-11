@@ -123,7 +123,7 @@
                   </div>
                   <div class="">
                     <select formControlName = "year" class="form-control form-custom">
-                        <option *ngFor="let year of years; let i = index" [value]="year">{{year}}</option>
+                        <option *ngFor="let year of years | reverse" [value]="year">{{year}}</option>
                     </select>
                   </div>
                 </div>
