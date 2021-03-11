@@ -1,4 +1,5 @@
 import {FormGroup, Validators} from '@angular/forms';
+import {SafeValue} from '@angular/platform-browser';
 
 export interface PropertyDetailsModel {
   propertyAd: PropertyAdModel;
@@ -6,7 +7,7 @@ export interface PropertyDetailsModel {
   features: any;
   loanScenarioOne: LoanScenarioModel;
   loanScenarioTwo: LoanScenarioModel;
-  tourURL: string;
+  tourURL: string | SafeValue;
   rentVsBuying: RentVsBuyingModel;
   publicTransport: PublicTransportModel;
   id: string;

@@ -38,7 +38,7 @@
      <ng-container *ngIf="propertyDetails.tourURL">
        <p class="pa-heading">Virtual Tour</p>
        <div class="embed-responsive embed-responsive-16by9">
-         <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(propertyDetails.tourURL)" allowfullscreen></iframe>
+         <iframe class="embed-responsive-item" [src]="propertyDetails.tourURL" allowfullscreen></iframe>
        </div>
      </ng-container>
       <div class="d-flex justify-content-between">

@@ -111,7 +111,7 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
       console.log(res);
       this.propertyDetails.propertyAd = res.result.listings[0];
       this.propertyDetails.features = res.result.listings[0].features;
-      this.propertyDetails.tourURL = this.getVideoId(res.result.listings[0].tourURL);
+      this.propertyDetails.tourURL = this.sanitizer.bypassSecurityTrustResourceUrl(this.getVideoId(res.result.listings[0].tourURL));
       this.propertyDetails.loader = true;
       this.propertyDetails.loanScenarioOne = res.result;
       this.propertyDetails.multiFamilyUnits = res.result;
