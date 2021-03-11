@@ -1,48 +1,56 @@
 <div class="heading d-flex justify-content-between">
-  <h3>My Finance</h3>
+    <h3>My Finance</h3>
 </div>
 <form [formGroup]="loanDetails.finance" (ngSubmit)="onSubmit()" *ngIf="loader">
-<div class="d-flex user-finance">
-  <div class="form-group">
-    <input prefix="$" mask="0*.00" formControlName="income" type="" class="form-control form-control-lg" id="" placeholder="Income">
-  </div>
-  <div class="form-group">
-    <input prefix="$" mask="0*.00" formControlName="monthlyDebt" type="" class="form-control form-control-lg" id="" placeholder="Monthly debt">
-  </div>
-  <div class="form-group">
-    <input prefix="$" mask="0*.00" formControlName="funds" type="" class="form-control form-control-lg" id="" placeholder="Funds/Assets">
-  </div>
-  <div class="form-group">
-    <input prefix="$" mask="0*.00" formControlName="sellerCredit" type="" class="form-control form-control-lg" id="" placeholder="Seller Credit">
-  </div>
-  <button class="btn btn-success"> <p>Add Closing Cost</p> </button>
-</div>
-
-
-<div class="lc--heading"><p>Select Approved Loan Types</p></div>
-<app-loan-checkbox [loanDetails]="loanDetails"></app-loan-checkbox>
-
-
-<div class="row">
-    <div *ngIf="loanDetails.finance.value.toggle.fha" class="col-6" style="">
-        <app-fha [finance]="loanDetails.finance"></app-fha>
+    <div class="d-flex user-finance">
+        <div class="form-group">
+            <p class="label">Income</p>
+            <input prefix="$" mask="0*.00" formControlName="income" type="text" class="form-control form-control-lg"
+                   placeholder="Income">
+        </div>
+        <div class="form-group">
+            <p class="label">Monthly Debt</p>
+            <input prefix="$" mask="0*.00" formControlName="monthlyDebt" type="text"
+                   class="form-control form-control-lg" placeholder="Monthly debt">
+        </div>
+        <div class="form-group">
+            <p class="label">Funds/Assets</p>
+            <input prefix="$" mask="0*.00" formControlName="funds" type="text" class="form-control form-control-lg"
+                   placeholder="Funds/Assets">
+        </div>
+        <div class="form-group">
+            <p class="label">Seller Credit</p>
+            <input prefix="$" mask="0*.00" formControlName="sellerCredit" type="text"
+                   class="form-control form-control-lg" placeholder="Seller Credit">
+        </div>
+        <button class="closing-cost mt-auto"><p>Add Closing Cost</p></button>
     </div>
 
-    <div *ngIf="loanDetails.finance.value.toggle.conventional" class="col-6" style="">
-        <app-conventional [finance]="loanDetails.finance"></app-conventional>
+
+    <div class="lc--heading"><p>Select Approved Loan Types</p></div>
+    <app-loan-checkbox [loanDetails]="loanDetails"></app-loan-checkbox>
+
+
+    <div class="row">
+        <div *ngIf="loanDetails.finance.value.toggle.fha" class="col-6" style="">
+            <app-fha [finance]="loanDetails.finance"></app-fha>
+        </div>
+
+        <div *ngIf="loanDetails.finance.value.toggle.conventional" class="col-6" style="">
+            <app-conventional [finance]="loanDetails.finance"></app-conventional>
+        </div>
+        <div *ngIf="loanDetails.finance.value.toggle.homePossible" class="col-6" style="">
+            <app-home-possible [finance]="loanDetails.finance"></app-home-possible>
+        </div>
+        <div *ngIf="loanDetails.finance.value.toggle.homeReady" class="col-6" style="">
+            <app-home-ready [finance]="loanDetails.finance"></app-home-ready>
+        </div>
+        <div *ngIf="loanDetails.finance.value.toggle.va" class="col-6" style="">
+            <app-va [finance]="loanDetails.finance"></app-va>
+        </div>
+        <div *ngIf="loanDetails.finance.value.toggle.usda" class="col-6" style="">
+            <app-usda [finance]="loanDetails.finance"></app-usda>
+        </div>
     </div>
-    <div *ngIf="loanDetails.finance.value.toggle.homePossible" class="col-6" style="">
-        <app-home-possible [finance]="loanDetails.finance"></app-home-possible>
-    </div>
-    <div *ngIf="loanDetails.finance.value.toggle.homeReady" class="col-6" style="">
-        <app-home-ready [finance]="loanDetails.finance"></app-home-ready>
-    </div>
-    <div *ngIf="loanDetails.finance.value.toggle.va" class="col-6" style="">
-        <app-va [finance]="loanDetails.finance"></app-va>
-    </div>
-     <div *ngIf="loanDetails.finance.value.toggle.usda" class="col-6" style="">
-        <app-usda [finance]="loanDetails.finance"></app-usda>
-    </div>
-</div>
     <button type="submit" class="save-btn">Save</button>
 </form>

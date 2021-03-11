@@ -173,3 +173,20 @@
 p{
   font-family: 'Poppins';
 }
+.label{
+  color: var(--lighGray);
+  font-size: .8vw;
+  margin-bottom: 0.2vw !important;
+  margin-left: .5vw;
+}
+.closing-cost{
+  padding: .5vw 1.5vw;
+  background: var(--green);
+  color: white;
+  font-size: .8vw;
+  border: none;
+  height: fit-content;
+}
+.closing-cost:focus{
+  outline: none;
+}
