@@ -72,13 +72,13 @@ export class TransactionDetailsComponent implements OnInit {
       });
       this.transactionDetails.transactionDetails = {
         purchasePrice: 200000,
-        closingDate: new Date('3-3-2020'),
-        commitmentDate: new Date('6-15-2020'),
+        closingDate: new Date('2020-03-03'),
+        commitmentDate: new Date('2020-03-03'),
         commissionAmount: 2.5,
         listingAgent: 'Jose Smith / Remax Professionals',
         sellerCredit: res.sellerCredit,
-        homeInspectionDate: new Date('9-20-2020'),
-        purchaseSalesDate: new Date('12-31-2020')
+        homeInspectionDate: new Date('2020-03-03'),
+        purchaseSalesDate: new Date('2020-03-03')
       };
       this.transactionDetails.loader = true;
     }, error => {
