@@ -3,9 +3,7 @@ import * as io from 'socket.io-client';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class WebSocketService {
   socket: any;
   constructor() {
