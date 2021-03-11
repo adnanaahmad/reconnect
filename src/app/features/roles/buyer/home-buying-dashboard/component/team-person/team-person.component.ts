@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import {RemoveMemberComponent} from '../../popups/remove-member/remove-member.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {AddMemberComponent} from '../../popups/add-member/add-member.component';
+import {AddMemberComponent} from '../../../../../../shared/components/add-member/add-member.component';
 
 @Component({
   selector: 'app-team-person',

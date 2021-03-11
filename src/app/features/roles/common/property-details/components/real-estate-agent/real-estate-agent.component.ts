@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RealEstateAgentModel} from '../../models/property-details.model';
-import {AddMemberComponent} from '../../../../buyer/home-buying-dashboard/popups/add-member/add-member.component';
+import {AddMemberComponent} from '../../../../../../shared/components/add-member/add-member.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {PropertyDetailsService} from '../../services/property-details.service';

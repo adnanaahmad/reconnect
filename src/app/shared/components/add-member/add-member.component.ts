@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HelperService} from '../../../../../../core/helper/helper.service';
+import {HelperService} from '../../../core/helper/helper.service';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {BuyerDashboardService} from '../../services/buyer-dashboard.service';
-import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {BuyerDashboardService} from '../../../features/roles/buyer/home-buying-dashboard/services/buyer-dashboard.service';
+import {ConstantService} from '../../../core/constant/constant.service';
 import {FormControl, Validators} from '@angular/forms';
 
 @Component({

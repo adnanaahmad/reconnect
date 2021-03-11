@@ -6,17 +6,14 @@ import {HomeBuyingDashboardComponent} from './component/home-buying-dashboard/ho
 import { RemoveMemberComponent } from './popups/remove-member/remove-member.component';
 import { TeamPersonComponent } from './component/team-person/team-person.component';
 import {SharedModule} from '../../../../shared/shared.module';
-import { AddMemberComponent } from './popups/add-member/add-member.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
-  declarations: [HomeBuyingDashboardComponent, RemoveMemberComponent, TeamPersonComponent, AddMemberComponent],
+  declarations: [HomeBuyingDashboardComponent, RemoveMemberComponent, TeamPersonComponent],
   imports: [
     CommonModule,
     HomeBuyingDashboardRoutingModule,
     SharedModule,
-    Ng2SearchPipeModule
   ]
 })
 export class HomeBuyingDashboardModule { }
