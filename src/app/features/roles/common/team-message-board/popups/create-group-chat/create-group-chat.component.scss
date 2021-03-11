@@ -61,7 +61,8 @@ p{
   padding: .8vw;
 }
 .team-member{
-  margin-right: 1vw;
+  margin-right: .7vw;
+  margin-bottom: .5vw;
 }
 .active{
   display: none;
@@ -151,4 +152,7 @@ p{
 }
 .danger{
   color: var(--red);
+}
+.select-buyer{
+  flex-wrap: wrap;
 }
