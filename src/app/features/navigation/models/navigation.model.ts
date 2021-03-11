@@ -1,3 +1,4 @@
+import {Subscription} from 'rxjs';
 
 export interface MenuItem{
   name: string;
@@ -9,4 +10,7 @@ export interface MenuItem{
 export interface NavigationModel {
   menuItems: Array<MenuItem>;
   selectedButton: MenuItem;
+  loader: any;
+  loaderSubscription: Subscription;
+  profileButtonSubscription: Subscription;
 }

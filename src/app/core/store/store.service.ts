@@ -19,6 +19,8 @@ export class StoreService {
   dashboardDate = this.dashboardDateSubject.asObservable();
   private borrowersStatusSubject = new BehaviorSubject<any>(null);
   borrowersStatus = this.borrowersStatusSubject.asObservable();
+  private progressBarLoadingSubject = new BehaviorSubject<any>(null);
+  progressBarLoading = this.progressBarLoadingSubject.asObservable();
   constructor() { }
 
   updateToggleMoreFilter(data: boolean): void{
@@ -53,5 +55,8 @@ export class StoreService {
   }
   updateBorrowersStatus(data): void{
     this.borrowersStatusSubject.next(data);
+  }
+  updateProgressBarLoading(data): void{
+    this.progressBarLoadingSubject.next(data);
   }
 }

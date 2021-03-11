@@ -3,10 +3,10 @@ import {NavigationService} from '../../service/navigation.service';
 import { NavigationModel } from '../../models/navigation.model';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
 import {StoreService} from '../../../../core/store/store.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {LocationService} from '../../../landing/services/location/location.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-navigation',
@@ -15,23 +15,28 @@ import {LocationService} from '../../../landing/services/location/location.servi
 })
 export class NavigationComponent implements OnInit, OnDestroy {
   navigation: NavigationModel = {} as NavigationModel;
-  subscription: Subscription;
   showHeader: boolean;
   constructor(private navigationService: NavigationService,
               private sanitizer: DomSanitizer,
               private router: Router,
               private store: StoreService,
               private constant: ConstantService,
-              private location: LocationService) {}
+              private location: LocationService,
+              private loadingBar: LoadingBarService) {}
 
   ngOnInit(): void {
+    this.navigation.loader = this.loadingBar.useRef();
+    this.navigation.loaderSubscription = this.store.progressBarLoading.subscribe(res => {
+      res ? this.startLoading() : this.stopLoading();
+    });
     this.setRoleAndMenu();
     this.showProfileButton();
     this.store.updateUserData(JSON.parse(localStorage.getItem('user')));
     this.location.saveLocationApiToken();
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.navigation.profileButtonSubscription.unsubscribe();
+    this.navigation.loaderSubscription.unsubscribe();
   }
   setRoleAndMenu(): void{
     const data = JSON.parse(localStorage.getItem('user')).role;
@@ -65,9 +70,16 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
   showProfileButton(): void{
     this.showHeader = !this.router.url.includes('profile');
-    this.subscription = this.router.events.subscribe((val) => {
+    this.navigation.profileButtonSubscription = this.router.events.subscribe((val) => {
       this.navigation.selectedButton = this.navigation.menuItems[this.navigation.menuItems.findIndex(x => x.route === this.router.url)];
       this.showHeader = !this.router.url.includes('profile');
     });
+  }
+  startLoading(): void {
+    this.navigation.loader.start();
+  }
+
+  stopLoading(): void {
+    this.navigation.loader.complete();
   }
 }

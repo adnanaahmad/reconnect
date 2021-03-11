@@ -6,6 +6,7 @@ import {BuyerDashboardModel} from '../../models/dashboard.model';
 import {BuyerDashboardService} from '../../services/buyer-dashboard.service';
 import {take} from 'rxjs/operators';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
     selector: 'app-home-buying-dashboard',
@@ -16,13 +17,15 @@ export class HomeBuyingDashboardComponent implements OnInit, OnDestroy {
     dashboard: BuyerDashboardModel = {} as BuyerDashboardModel;
 
     constructor(private dashboardService: BuyerDashboardService,
-                private constant: ConstantService) {
+                private constant: ConstantService,
+                private store: StoreService) {
     }
 
     ngOnDestroy(): void {}
 
     ngOnInit(): void {
         this.dashboard.loader = false;
+        this.store.updateProgressBarLoading(true);
         this.dashboard.homeBuyingProcess = {
             application: false,
             preApproved: false,
@@ -45,7 +48,7 @@ export class HomeBuyingDashboardComponent implements OnInit, OnDestroy {
 
     getTeamAndLoanDetails(): void {
         forkJoin([this.dashboardService.getTeam(), this.dashboardService.getLoanDetails()]).pipe(take(1)).subscribe(res => {
-            console.log('forkJoin', res);
+//            console.log('forkJoin', res);
             this.dashboard.team = res[0].result;
             this.dashboard.subjectProperty = res[1].result.targetProperty ? res[1].result.targetPropertyDetails : null;
             this.setHomeBuyingProcessStatus(res[1].result.processStatus);
@@ -55,8 +58,10 @@ export class HomeBuyingDashboardComponent implements OnInit, OnDestroy {
                 assets: res[1].result.funds
             };
             this.dashboard.loader = true;
+            this.store.updateProgressBarLoading(false);
         }, error => {
             console.log(error);
+            this.store.updateProgressBarLoading(false);
         });
     }
 

@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {LoanDetailsModel} from '../../models/loanDetails.model';
 import {LoanDetailsService} from '../../services/loan-details.service';
 import {ToastrService} from 'ngx-toastr';
+import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
   selector: 'app-my-loan-details',
@@ -14,10 +15,12 @@ export class MyLoanDetailsComponent implements OnInit {
   loader: boolean;
   constructor(private fb: FormBuilder,
               private loadDetailsService: LoanDetailsService,
-              private toaster: ToastrService) { }
+              private toaster: ToastrService,
+              private store: StoreService) { }
 
   ngOnInit(): void {
     this.loader = false;
+    this.store.updateProgressBarLoading(true);
     this.initializeLoanDetails();
     this.getLoanDetails();
 //    this.loanDetails.finance.valueChanges.subscribe(newval => console.log(newval));
@@ -78,8 +81,10 @@ export class MyLoanDetailsComponent implements OnInit {
         conventional: res.conventional ? res.conventional : this.loanDetails.finance.get('conventional')
       });
       this.loader = true;
+      this.store.updateProgressBarLoading(false);
     }, error => {
       console.log(error);
+      this.store.updateProgressBarLoading(false);
     });
   }
   initializeLoanDetails(): void{
