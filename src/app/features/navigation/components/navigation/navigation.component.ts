@@ -27,18 +27,15 @@ export class NavigationComponent implements OnInit, OnDestroy {
               private webSockets: WebSocketService) {}
 
   ngOnInit(): void {
-    this.navigation.menuItems = this.navigationService.getBuyerMenuItems();
-    const index = this.navigation.menuItems.findIndex(x => x.route === this.router.url);
-    this.navigation.selectedButton = this.navigation.menuItems[index];
+    this.setRoleAndMenu();
     this.showProfileButton();
-    this.setRole();
     this.store.updateUserData(JSON.parse(localStorage.getItem('user')));
     this.location.saveLocationApiToken();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  setRole(): void{
+  setRoleAndMenu(): void{
     const data = JSON.parse(localStorage.getItem('user')).role;
     this.store.roleSubject.next(data);
     switch (this.store.role) {
@@ -59,6 +56,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
         break;
       default:
     }
+    const index = this.navigation.menuItems.findIndex(x => x.route === this.router.url);
+    this.navigation.selectedButton = this.navigation.menuItems[index];
   }
   iconURL(data) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(data);
