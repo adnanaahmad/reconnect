@@ -58,7 +58,8 @@ p{
   padding: .8vw;
 }
 .team-member{
-  margin-right: 1vw;
+  margin-right: .7vw;
+  margin-bottom: .5vw;
 }
 .active{
   display: none;
@@ -109,4 +110,8 @@ p{
   font-size: .8vw;
   word-break: break-all;
   font-weight: 300;
+}
+.select-member{
+  flex-wrap: wrap;
+  margin-bottom: 1vw;
 }

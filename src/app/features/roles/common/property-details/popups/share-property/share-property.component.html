@@ -12,7 +12,7 @@
         <ng-container *ngIf="store.role !== constant.role.BUYER">
             <p class="title">Select Buyer/Group</p>
             <div class="d-flex justify-content-between mb-custom1">
-                <div class="d-flex">
+                <div class="d-flex select-member">
                     <ng-container *ngFor="let member of teamData.buyers; let i = index">
                         <div #member (click)="toggleBuyer('buyer'+i,member)" class="d-flex team-member" [attr.id]="'buyer'+i">
                             <img class="active" src="/assets/calendar-icons/tick.svg">
