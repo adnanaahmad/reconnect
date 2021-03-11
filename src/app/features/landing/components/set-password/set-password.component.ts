@@ -1,5 +1,4 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {LoginModel} from '../../models/login.model';
 import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {SetPasswordModel} from '../../models/set-password.model';
 import {ActivatedRoute, Router} from '@angular/router';

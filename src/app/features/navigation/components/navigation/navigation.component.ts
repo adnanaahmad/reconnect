@@ -7,7 +7,6 @@ import {Subscription} from 'rxjs';
 import {StoreService} from '../../../../core/store/store.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {LocationService} from '../../../landing/services/location/location.service';
-import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
 
 @Component({
   selector: 'app-navigation',
@@ -23,8 +22,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
               private router: Router,
               private store: StoreService,
               private constant: ConstantService,
-              private location: LocationService,
-              private webSockets: WebSocketService) {}
+              private location: LocationService) {}
 
   ngOnInit(): void {
     this.setRoleAndMenu();
