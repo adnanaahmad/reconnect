@@ -24,9 +24,16 @@ p{
   margin-bottom: 2vw;
 }
 .lineage-button{
-  padding: .2vw .8vw .2vw .8vw;
-  font-size: .55vw;
+  padding: .4vw 1.4vw;
+  font-size: .7vw;
   border-radius: .3vw;
+  background: var(--green);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.lineage-button:focus{
+  outline: none;
 }
 .heading-sub{
   margin-bottom: 0;
@@ -79,9 +86,9 @@ p{
   border-bottom-right-radius: .3vw;
 }
 .mls{
-  font-size: .77vw;
-  padding: .4vw 1.2vw .4vw 1.2vw;
-  border-radius: .5vw;
+  font-size: .7vw;
+  padding: .4vw 1.4vw;
+  border-radius: .3vw;
   background: var(--green);
   border: none;
   cursor: pointer;

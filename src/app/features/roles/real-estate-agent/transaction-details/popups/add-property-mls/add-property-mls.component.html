@@ -6,7 +6,7 @@
             <p [ngClass]="{'danger' : mlsForm.get('targetProperty').invalid && mlsForm.get('targetProperty').touched}"
                class="title">MLS Number</p>
             <input [ngClass]="{'is-invalid' : mlsForm.get('targetProperty').invalid && mlsForm.get('targetProperty').touched}"
-                   formControlName="targetProperty" type="number" class="form-control f1 mb-custom" placeholder="">
+                   formControlName="targetProperty" type="text" class="form-control f1 mb-custom" placeholder="">
         </div>
         <button (click)="onSubmit()" class="launch">Add</button>
     </form>
