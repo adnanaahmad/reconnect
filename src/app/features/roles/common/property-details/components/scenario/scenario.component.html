@@ -22,12 +22,12 @@
         <div class="d-flex mb2-custom justify-content-between">
             <div class="form-input">
                 <p class="text-nowrap title">Purchase Price</p>
-                <p class="loan-fields">{{scenario.purchasePrice}}</p>
+                <p class="loan-fields">${{scenario.purchasePrice}}</p>
 
             </div>
             <div class="form-input">
                 <p class="text-nowrap title">Loan Amount</p>
-                <p class="loan-fields">{{scenario.loanAmount}}</p>
+                <p class="loan-fields">${{scenario.loanAmount}}</p>
             </div>
 
         </div>
@@ -35,12 +35,12 @@
         <div class="d-flex mb2-custom justify-content-between">
             <div class="form-input">
                 <p class="text-nowrap title">Finance Amount</p>
-                <p class="loan-fields">{{scenario.financeAmount}}</p>
+                <p class="loan-fields">${{scenario.financeAmount}}</p>
 
             </div>
             <div class="form-input">
                 <p class="text-nowrap title">Down Payment</p>
-                <p class="loan-fields">{{scenario.downPayment}}</p>
+                <p class="loan-fields">${{scenario.downPayment}}</p>
             </div>
 
         </div>
@@ -49,12 +49,12 @@
         <div class="d-flex mb2-custom justify-content-between">
             <div class="form-input">
                 <p class="text-nowrap title">Loan Rate</p>
-                <p class="loan-fields">{{scenario.loanRate}}</p>
+                <p class="loan-fields">{{scenario.loanRate}}%</p>
 
             </div>
             <div class="form-input">
                 <p class="text-nowrap title">Loan Term</p>
-                <p class="loan-fields">{{scenario.loanTerm}}</p>
+                <p class="loan-fields">{{scenario.loanTerm}} year(s)</p>
             </div>
 
         </div>
@@ -63,7 +63,7 @@
                 <p class="text-nowrap title">Monthly Payment</p>
                 <div class="d-flex" style="flex-grow: 1">
                     <p style="width: 100%;border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0"
-                       class="loan-fields">{{scenario.monthlyPayment}}</p>
+                       class="loan-fields">${{scenario.monthlyPayment}}</p>
                     <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto"
                                                                                                  src="/assets/property-details/eye.svg">
                         <p>View</p></div>
@@ -73,7 +73,7 @@
                 <p class="text-nowrap title">Funds Needed</p>
                 <div class="d-flex justify-content-between" style="flex-grow: 1">
                     <p style="width: 100%;border-right: none; border-top-right-radius: 0; border-bottom-right-radius: 0"
-                       class="loan-fields">{{scenario.fundsNeeded}}</p>
+                       class="loan-fields">${{scenario.fundsNeeded}}</p>
                     <div (click)="view()" class="view d-flex align-items-start flex-column"><img class="mb-auto"
                                                                                                  src="/assets/property-details/eye.svg">
                         <p>View</p></div>
