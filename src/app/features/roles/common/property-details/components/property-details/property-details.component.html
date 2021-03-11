@@ -35,7 +35,7 @@
             <app-scenario [scenarioNumber]="1" [loanScenario]="propertyDetails.loanScenarioOne" ></app-scenario>
             <app-scenario [scenarioNumber]="2"  [loanScenario]="propertyDetails.loanScenarioOne"></app-scenario>
         </ng-container>
-     <ng-container *ngIf="propertyDetails.tourURL">
+     <ng-container *ngIf="propertyDetails.tourURL.changingThisBreaksApplicationSecurity">
        <p class="pa-heading">Virtual Tour</p>
        <div class="embed-responsive embed-responsive-16by9">
          <iframe class="embed-responsive-item" [src]="propertyDetails.tourURL" allowfullscreen></iframe>
