@@ -114,6 +114,7 @@ export class TeamMessageBoardComponent implements OnInit {
     });
   }
   getRecentConversations(): void{
+    this.store.updateProgressBarLoading(true);
     this.chatService.getConversation().subscribe(res => {
       console.log('conversations', res);
       this.chat.loader = true;
@@ -121,8 +122,10 @@ export class TeamMessageBoardComponent implements OnInit {
       if (this.chat.recentChats.length > 0){
         this.listClick(this.chat.recentChats[0]);
       }
+      this.store.updateProgressBarLoading(false);
     }, error => {
       console.log(error);
+      this.store.updateProgressBarLoading(false);
     });
   }
   createGroupChat(): void{

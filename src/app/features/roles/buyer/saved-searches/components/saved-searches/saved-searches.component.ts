@@ -30,13 +30,16 @@ export class SavedSearchesComponent implements OnInit {
     this.getSavedSearches();
   }
   getSavedSearches(): void{
+    this.store.updateProgressBarLoading(true);
     this.savedSearchService.getSavedSearches().pipe(take(1)).subscribe(res => {
       console.log(res);
       this.loader = true;
       this.savedSearch = res.result;
       console.log(this.savedSearch);
+      this.store.updateProgressBarLoading(false);
     }, error => {
       console.log(error);
+      this.store.updateProgressBarLoading(false);
     });
   }
   objectValuesNull(value): boolean{

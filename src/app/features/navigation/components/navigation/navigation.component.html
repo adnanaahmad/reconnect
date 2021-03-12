@@ -19,9 +19,9 @@
             </ul>
         </div>
         <div class="col-10 nav-content">
+            <ngx-loading-bar [fixed]="false" height=".15vw" [includeSpinner]="false" color="var(--green)"></ngx-loading-bar>
             <div class="router-outlet-class">
                 <app-header *ngIf="showHeader"></app-header>
-                <ngx-loading-bar height=".2vw" [includeSpinner]="false" color="var(--green)"></ngx-loading-bar>
                 <router-outlet></router-outlet>
             </div>
         </div>

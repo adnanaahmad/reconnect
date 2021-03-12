@@ -27,8 +27,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                 public searchHomeService: SearchHomeService,
                 public router: Router,
                 private activatedRoute: ActivatedRoute,
-                private toaster: ToastrService,
-                private location: Location) {
+                private toaster: ToastrService) {
     }
 
     ngOnInit(): void {
@@ -108,6 +107,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                     this.setSavedSearchId(params);
                     this.applyFilters();
                 } else {
+                    this.store.updateProgressBarLoading(true);
                     this.searchHomeService.getHouses('').pipe(take(1)).subscribe(res => {
                         console.log(res);
                         res = res.result;
@@ -116,8 +116,10 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                         this.searchHome.pageNumber = res.paging.number;
                         this.searchHome.loan = res.userLoan;
                         this.setDefaultLoanType();
+                        this.store.updateProgressBarLoading(false);
                     }, error => {
                         console.log(error);
+                        this.store.updateProgressBarLoading(false);
                     });
                 }
             })

@@ -115,6 +115,7 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
     };
   }
   getPropertyDetails(): void{
+    this.store.updateProgressBarLoading(true);
     this.propertyDetailService.getPropertyDetails(this.propertyDetails.id).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.propertyDetails.propertyAd = res.result.listings[0];
@@ -147,9 +148,10 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
         description: res.result.listings[0].walkscore.description,
         notAvailable: res.result.listings[0].walkscore.transitScore
       };
-      //console.log(this.propertyDetails.features);
+      this.store.updateProgressBarLoading(false);
     }, error => {
       console.log(error);
+      this.store.updateProgressBarLoading(false);
     });
     this.propertyDetailService.getTeam().pipe(take(1)).subscribe(res => {
         console.log(res);
