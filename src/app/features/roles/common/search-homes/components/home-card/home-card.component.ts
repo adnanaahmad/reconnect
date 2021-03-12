@@ -5,6 +5,7 @@ import {SearchHomeService} from '../../services/search-home.service';
 import {ToastrService} from 'ngx-toastr';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-card',
@@ -30,13 +31,13 @@ export class HomeCardComponent implements OnInit, AfterViewInit {
     };
     this.home.favourite = !this.home.favourite;
     if (this.home.favourite){
-      this.searchHomeService.addFavorite(data).subscribe(res => {
+      this.searchHomeService.addFavorite(data).pipe(take(1)).subscribe(res => {
         this.toaster.success('Added To Favorites');
       }, error => {
         this.toaster.error('Failed To Add To Favorites');
       });
     } else {
-      this.searchHomeService.removeFavorite(data.mlsId).subscribe(res => {
+      this.searchHomeService.removeFavorite(data.mlsId).pipe(take(1)).subscribe(res => {
         this.toaster.success('Removed From Favorites');
       }, error => {
         this.toaster.error('Failed To Remove From Favorites');
