@@ -1,19 +1,21 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {PieChartComponent} from '../../popups/pie-chart/pie-chart.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {LoanScenarioModel, ViewPaymentBreakDownModel} from '../../models/property-details.model';
 import {StoreService} from '../../../../../../core/store/store.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-scenario',
   templateUrl: './scenario.component.html',
   styleUrls: ['./scenario.component.scss']
 })
-export class ScenarioComponent implements OnInit, OnChanges {
+export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
   @Input() loanScenario;
   @Input() scenarioNumber;
   scenario: LoanScenarioModel = {} as LoanScenarioModel;
   pieChart: ViewPaymentBreakDownModel = {} as ViewPaymentBreakDownModel;
+  subscription: Subscription;
   constructor(private modalService: NgbModal, configuration: NgbModalConfig, public store: StoreService) {
     configuration.centered = true;
     configuration.container =  'app-property-details';
@@ -21,7 +23,7 @@ export class ScenarioComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
-    this.store.toggleLoanType.subscribe(loanType => {
+    this.subscription = this.store.toggleLoanType.subscribe(loanType => {
       this.scenario.housingRatio = Number(this.loanScenario.listings[0].financing[loanType].housingRatio ?
           this.loanScenario.listings[0].financing[loanType].housingRatio.toFixed(2) : null);
       this.scenario.debtRatio = Number(this.loanScenario.listings[0].financing[loanType].debtRatio ?
@@ -42,6 +44,9 @@ export class ScenarioComponent implements OnInit, OnChanges {
       this.pieChart.hoa = Math.round(this.loanScenario.listings[0].hoa);
       this.pieChart.totalPayment = Math.round(this.loanScenario.listings[0].financing[loanType].totalPayment);
     });
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   view(): void {

@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import {take} from 'rxjs/operators';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {Subscription} from 'rxjs';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -15,6 +16,7 @@ import {ConstantService} from '../../../../../../core/constant/constant.service'
 })
 export class PropertyDetailsComponent implements OnInit, OnDestroy {
   propertyDetails: PropertyDetailsModel = {} as PropertyDetailsModel;
+  subscription: Array<Subscription>;
 
   constructor(private fb: FormBuilder,
               public sanitizer: DomSanitizer,
@@ -23,24 +25,30 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
               public location: Location,
               public store: StoreService,
               public constant: ConstantService) {
+    this.subscription = [];
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.propertyDetails.id = routeParams.get('id');
-    this.activatedRoute.queryParams.subscribe(params => {
-      if (params.loanType) {
-        this.store.updateToggleLoanType(params.loanType);
-      }
-    });
+    this.subscription.push(
+        this.activatedRoute.queryParams.subscribe(params => {
+          if (params.loanType) {
+            this.store.updateToggleLoanType(params.loanType);
+          }
+        })
+    );
   }
   ngOnDestroy(): void {
-    //this.store.updateToggleLoanType(null);
+    this.subscription.forEach(s => s.unsubscribe());
+    this.store.updateToggleLoanType(null);
   }
 
   ngOnInit(): void {
     this.propertyDetails.loader = false;
     this.getPropertyDetails();
-    this.store.toggleLoanType.subscribe(res => {
-      window.history.replaceState({}, '', `/home/propertyDetails/${this.propertyDetails.id}?loanType=${res}`);
-    });
+    this.subscription.push(
+        this.store.toggleLoanType.subscribe(res => {
+          window.history.replaceState({}, '', `/home/propertyDetails/${this.propertyDetails.id}?loanType=${res}`);
+        })
+    );
     this.propertyDetails.rentVsBuying = {
       costOfRent: {
         amount: 20,
@@ -116,9 +124,13 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
       this.propertyDetails.loader = true;
       this.propertyDetails.loanScenarioOne = res.result;
       this.propertyDetails.multiFamilyUnits = res.result;
-      if (!this.store.toggleLoanTypeSubject.value){
-        this.setDefaultLoanType(res.result.userLoan);
-      }
+      this.subscription.push(
+          this.store.toggleLoanType.subscribe(data => {
+            if (data === null){
+              this.setDefaultLoanType(res.result.userLoan);
+            }
+          })
+      );
       this.propertyDetails.publicTransport = {
         transitScore: [
             {name: 'Green', value: Number(res.result.listings[0].walkscore.transitScore)},

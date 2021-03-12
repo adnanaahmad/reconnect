@@ -54,7 +54,6 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.subscription.forEach(s => s.unsubscribe());
         this.store.updateToggleLoanType(null);
-        console.log('destroy');
     }
 
     get searchContainerWidth(): number {
