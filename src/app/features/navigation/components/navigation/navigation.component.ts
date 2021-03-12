@@ -59,8 +59,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
         break;
       default:
     }
-    const index = this.navigation.menuItems.findIndex(x => x.route === this.router.url);
-    this.navigation.selectedButton = this.navigation.menuItems[index];
+    this.setMenuButton();
   }
   iconURL(data) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(data);
@@ -71,7 +70,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   showProfileButton(): void{
     this.showHeader = !this.router.url.includes('profile');
     this.navigation.profileButtonSubscription = this.router.events.subscribe((val) => {
-      this.navigation.selectedButton = this.navigation.menuItems[this.navigation.menuItems.findIndex(x => x.route === this.router.url)];
+      this.setMenuButton();
       this.showHeader = !this.router.url.includes('profile');
     });
   }
@@ -81,5 +80,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   stopLoading(): void {
     this.navigation.loader.complete();
+  }
+  setMenuButton(): void{
+    const index = this.navigation.menuItems.findIndex(x =>  this.router.url.includes(x.route));
+    this.navigation.selectedButton = this.navigation.menuItems[index];
   }
 }
