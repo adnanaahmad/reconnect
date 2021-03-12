@@ -22,6 +22,7 @@ export class ConstantService {
      getTeamById: `${environment.apiUrl}/team`,
      addTeamMember: `${environment.apiUrl}/team/add-member`,
      buyerRequestQuote: `${environment.apiUrl}/team/request-quote`,
+     professionalRequestQuote: `${environment.apiUrl}/team/my-quotes`,
      removeTeamMember: `${environment.apiUrl}/team/remove-member`,
      getLoanDetails: `${environment.apiUrl}/loan/my-loan`,
      getHouses: `${environment.apiUrl}/listing/search?market=mlspin&test=true&`,

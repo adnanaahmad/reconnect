@@ -2,6 +2,11 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {QuoteRequestsModel} from '../../models/quote-requests.model';
 import {NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
+import {QuoteRequestService} from '../../services/quote-request.service';
+import {take} from 'rxjs/operators';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {HelperService} from '../../../../../../core/helper/helper.service';
+import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
   selector: 'app-quote-requests',
@@ -12,118 +17,44 @@ import {DatePipe} from '@angular/common';
 export class QuoteRequestsComponent implements OnInit {
   quoteRequests: QuoteRequestsModel = {} as QuoteRequestsModel;
   date: any;
-  acceptedQuote: any;
-  constructor(private dateFormat: NgbDateNativeAdapter) { }
+  constructor(private dateFormat: NgbDateNativeAdapter,
+              private quoteReqService: QuoteRequestService,
+              public constant: ConstantService,
+              public helper: HelperService,
+              private store: StoreService) { }
 
   ngOnInit(): void {
-    this.quoteRequests.buttons = ['Pending', 'Accepted', 'Rejected'];
-    this.quoteRequests.selectedButton = this.quoteRequests.buttons[0];
-    this.quoteRequests.quoteRequests = [
-      {
-        subjectProperty: {
-          image: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHw%3D&w=1000&q=80',
-          bathrooms: 2,
-          bedrooms: 2,
-          garage: 4,
-          sqFt: 1594,
-          status: 'Active',
-          propertyType: '2 Units Up/Down',
-          lotSize: 4898,
-          timeOnMarket: '8 Days',
-          community: 'Worcester',
-          mls: 726168,
-        },
-        buyer: {
-          name: 'James Hetfield',
-          image: 'https://cdn.luxe.digital/media/2019/09/12090502/business-professional-dress-code-men-style-luxe-digital.jpg',
-          socialMedia: {
-            facebook: 'https://www.google.com/',
-            instagram: 'https://www.google.com/',
-            twitter: 'https://www.google.com/'
-          }
-        }
-      },
-      {
-        subjectProperty: {
-          image: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHw%3D&w=1000&q=80',
-          bathrooms: 2,
-          bedrooms: 2,
-          garage: 4,
-          sqFt: 1594,
-          status: 'Active',
-          propertyType: '2 Units Up/Down',
-          lotSize: 4898,
-          timeOnMarket: '8 Days',
-          community: 'Worcester',
-          mls: 726168,
-        },
-        buyer: {
-          name: 'James Hetfield',
-          image: 'https://cdn.luxe.digital/media/2019/09/12090502/business-professional-dress-code-men-style-luxe-digital.jpg',
-          socialMedia: {
-            facebook: 'https://www.google.com/',
-            instagram: 'https://www.google.com/',
-            twitter: 'https://www.google.com/'
-          }
-        }
-      }
-    ];
-    this.acceptedQuote = [
-      {
-        subjectProperty: {
-          image: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHw%3D&w=1000&q=80',
-          bathrooms: 2,
-          bedrooms: 2,
-          garage: 4,
-          sqFt: 1594,
-          status: 'Active',
-          propertyType: '2 Units Up/Down',
-          lotSize: 4898,
-          timeOnMarket: '8 Days',
-          community: 'Worcester',
-          mls: 726168,
-        },
-        buyer: {
-          name: 'James Hetfield',
-          image: 'https://cdn.luxe.digital/media/2019/09/12090502/business-professional-dress-code-men-style-luxe-digital.jpg',
-          socialMedia: {
-            facebook: 'https://www.google.com/',
-            instagram: 'https://www.google.com/',
-            twitter: 'https://www.google.com/'
-          }
-        },
-        homeInspectionDate: this.dateFormat.fromModel(new Date(''))
-      },
-      {
-        subjectProperty: {
-          image: 'https://images.unsplash.com/photo-1591474200742-8e512e6f98f8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Nnx8fGVufDB8fHw%3D&w=1000&q=80',
-          bathrooms: 2,
-          bedrooms: 2,
-          garage: 4,
-          sqFt: 1594,
-          status: 'Active',
-          propertyType: '2 Units Up/Down',
-          lotSize: 4898,
-          timeOnMarket: '8 Days',
-          community: 'Worcester',
-          mls: 726168,
-        },
-        buyer: {
-          name: 'James Hetfield',
-          image: 'https://cdn.luxe.digital/media/2019/09/12090502/business-professional-dress-code-men-style-luxe-digital.jpg',
-          socialMedia: {
-            facebook: 'https://www.google.com/',
-            instagram: 'https://www.google.com/',
-            twitter: 'https://www.google.com/'
-          }
-        },
-        homeInspectionDate: this.dateFormat.fromModel(new Date(''))
-      }
-    ];
+    this.quoteRequests.selectedButton = this.constant.quoteRequestStatus.PENDING;
+    this.store.updateProgressBarLoading(true);
+    this.quoteReqService.getQuoteRequest().pipe(take(1)).subscribe(res => {
+      console.log(res);
+      this.quoteRequests.pending = res.result.pendingQuotes;
+      this.quoteRequests.accepted = res.result.acceptedQuotes;
+      this.quoteRequests.rejected = res.result.rejectedQuotes;
+      this.quoteRequests.renderArray = this.quoteRequests.pending;
+      this.store.updateProgressBarLoading(false);
+    }, error => {
+      console.log(error);
+      this.store.updateProgressBarLoading(false);
+    });
   }
 
   listClick(value): void{
     this.quoteRequests.selectedButton = value;
+    switch (value) {
+      case this.constant.quoteRequestStatus.PENDING:
+        this.quoteRequests.renderArray = this.quoteRequests.pending;
+        break;
+      case this.constant.quoteRequestStatus.ACCEPTED:
+        this.quoteRequests.renderArray = this.quoteRequests.accepted;
+        break;
+      case this.constant.quoteRequestStatus.REJECTED:
+        this.quoteRequests.renderArray = this.quoteRequests.rejected;
+        break;
+      default:
+        this.quoteRequests.renderArray = this.quoteRequests.pending;
+    }
+
   }
   dateView(result){
     console.log(result);
