@@ -21,6 +21,7 @@ export class ConstantService {
      getTeam: `${environment.apiUrl}/team/my-team`,
      getTeamById: `${environment.apiUrl}/team`,
      addTeamMember: `${environment.apiUrl}/team/add-member`,
+     buyerRequestQuote: `${environment.apiUrl}/team/request-quote`,
      removeTeamMember: `${environment.apiUrl}/team/remove-member`,
      getLoanDetails: `${environment.apiUrl}/loan/my-loan`,
      getHouses: `${environment.apiUrl}/listing/search?market=mlspin&test=true&`,
@@ -690,5 +691,10 @@ export class ConstantService {
       this.loanStatusObject.CLEARED_TO_CLOSE,
     ],
     Closed: [this.loanStatusObject.CLOSED]
+  };
+  quoteRequestStatus = {
+    PENDING: 'pending',
+    ACCEPTED: 'accepted',
+    REJECTED: 'rejected'
   };
 }

@@ -159,3 +159,11 @@ p{
   margin-bottom: 2vw;
   position: relative;
 }
+.quote-status{
+  margin-bottom: 0;
+  color: var(--lighGray);
+  font-size: .7vw;
+}
+.quote-status-manually{
+  display: none;
+}

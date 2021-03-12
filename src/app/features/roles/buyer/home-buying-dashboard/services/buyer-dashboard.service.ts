@@ -28,4 +28,7 @@ export class BuyerDashboardService {
   getLoanDetails(): Observable<any>{
     return this.helper.requestCall(this.methods.get, this.api.getLoanDetails);
   }
+  buyerRequestQuote(data): Observable<any>{
+    return  this.helper.requestCall(this.methods.post, this.api.buyerRequestQuote, data);
+  }
 }
