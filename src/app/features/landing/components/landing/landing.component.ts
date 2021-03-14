@@ -1,12 +1,13 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
 })
-export class LandingComponent implements OnInit, AfterViewInit {
+export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('card') cardComponent: ElementRef;
   @ViewChild('reconnect') reconnectButton: ElementRef;
   @ViewChild('login') loginButton: ElementRef;
@@ -14,6 +15,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
   modal: boolean;
   houses: Array<string>;
   team: Array<string>;
+  subscription: Subscription;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -25,13 +27,16 @@ export class LandingComponent implements OnInit, AfterViewInit {
     this.team = ['https://bambiniphoto.sg/wp-content/uploads/Professional-Headshots-1.jpg',
     'https://www.marketingdonut.co.uk/sites/default/files/what-should-you-include-professional-profile142825543.jpg',
     'https://agencia-fotografia.com/wp-content/uploads/2019/08/Linkedin-photo-session.jpg',
-    'https://lh3.googleusercontent.com/proxy/ec_Df4z9R571DwDdKk2Yi3vqDiDFm7HDS5Kq_DD856mOJX8916nlCE4j2r062r0I4RqfIQ9Cq0LhrsITfHMuZxXcBUtZI-gwQir93skLmAni3WoouA'];
+    'https://i.pinimg.com/originals/9e/23/5d/9e235d85d4b242e78a0f59ccbb25399d.jpg'];
   }
   ngAfterViewInit(): void{
     this.changeBackground();
-    this.router.events.subscribe(() => {
+    this.subscription = this.router.events.subscribe(() => {
       this.changeBackground();
     });
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   logIn(): void{

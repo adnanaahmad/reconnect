@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {LoanDetailsModel} from '../../models/loanDetails.model';
 import {LoanDetailsService} from '../../services/loan-details.service';
 import {ToastrService} from 'ngx-toastr';
 import {StoreService} from '../../../../../../core/store/store.service';
+import {take} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-my-loan-details',
   templateUrl: './my-loan-details.component.html',
   styleUrls: ['./my-loan-details.component.scss']
 })
-export class MyLoanDetailsComponent implements OnInit {
+export class MyLoanDetailsComponent implements OnInit, OnDestroy {
   loanDetails: LoanDetailsModel = {} as LoanDetailsModel;
   loader: boolean;
+  subscription: Array<Subscription>;
   constructor(private fb: FormBuilder,
               private loadDetailsService: LoanDetailsService,
               private toaster: ToastrService,
@@ -26,6 +29,10 @@ export class MyLoanDetailsComponent implements OnInit {
 //    this.loanDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.resetLoanType();
   }
+  ngOnDestroy(): void {
+    this.subscription.forEach(x => x.unsubscribe());
+  }
+
   onSubmit(): void{
     console.log(this.loanDetails.finance.value);
     const data = {
@@ -39,7 +46,7 @@ export class MyLoanDetailsComponent implements OnInit {
           this.loanDetails.finance.get('conventional').value : null,
     };
     console.log(data);
-    this.loadDetailsService.setLoanDetails({...this.loanDetails.finance.value, ...data}).subscribe(res => {
+    this.loadDetailsService.setLoanDetails({...this.loanDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.toaster.success('Saved');
     }, error => {
@@ -49,15 +56,17 @@ export class MyLoanDetailsComponent implements OnInit {
   }
   resetLoanType(): void{
     Object.keys(this.loanDetails.finance.get('toggle').value).forEach(key => {
-      this.loanDetails.finance.get(['toggle', key]).valueChanges.subscribe(res => {
-        if (!res){
-          this.loanDetails.finance.get(key).reset();
-        }
-      });
+      this.subscription.push(
+          this.loanDetails.finance.get(['toggle', key]).valueChanges.subscribe(res => {
+            if (!res){
+              this.loanDetails.finance.get(key).reset();
+            }
+          })
+      );
     });
   }
   getLoanDetails(): void{
-    this.loadDetailsService.getLoanDetails().subscribe(res => {
+    this.loadDetailsService.getLoanDetails().pipe(take(1)).subscribe(res => {
       console.log(res);
       res = res.result;
       this.loanDetails.finance.patchValue({

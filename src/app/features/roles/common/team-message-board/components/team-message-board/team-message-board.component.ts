@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {DeleteConfirmationPopupComponent} from '../../../../../../shared/components/delete-confirmation-popup/delete-confirmation-popup.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -10,14 +10,16 @@ import {StoreService} from '../../../../../../core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {take} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 @Component({
   selector: 'app-team-message-board',
   templateUrl: './team-message-board.component.html',
   styleUrls: ['./team-message-board.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class TeamMessageBoardComponent implements OnInit {
+export class TeamMessageBoardComponent implements OnInit, OnDestroy {
   chat: ChatModel = {} as ChatModel;
+  subscription: Subscription;
   searchTerm = '';
   @ViewChild('textArea') inputBox: ElementRef;
   @ViewChild('chatBox') chatBoxScroll: ElementRef;
@@ -47,8 +49,12 @@ export class TeamMessageBoardComponent implements OnInit {
     });
     this.chat.toggle = false;
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   listenMessages(): void{
-    this.webSocket.listen('client-conversation-newMessage').subscribe(res => {
+    this.subscription = this.webSocket.listen('client-conversation-newMessage').subscribe(res => {
       console.log('socket messages', res);
       this.chat.messages.push(res);
       this.updateRecentChat(res);
@@ -115,7 +121,7 @@ export class TeamMessageBoardComponent implements OnInit {
   }
   getRecentConversations(): void{
     this.store.updateProgressBarLoading(true);
-    this.chatService.getConversation().subscribe(res => {
+    this.chatService.getConversation().pipe(take(1)).subscribe(res => {
       console.log('conversations', res);
       this.chat.loader = true;
       this.chat.recentChats = res.result;

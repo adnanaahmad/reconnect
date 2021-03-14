@@ -3,6 +3,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {BuyerDashboardService} from '../../services/buyer-dashboard.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-remove-member',
@@ -21,7 +22,7 @@ export class RemoveMemberComponent implements OnInit {
     this.helper.setModalPosition();
   }
   remove(): void{
-    this.dashboard.removeTeamMember({role: this.constant.chooseRole[this.role]}).subscribe(res => {
+    this.dashboard.removeTeamMember({role: this.constant.chooseRole[this.role]}).pipe(take(1)).subscribe(res => {
       //console.log(res.result);
       this.modal.close({status: 'yes', data: res.result});
     }, error => {

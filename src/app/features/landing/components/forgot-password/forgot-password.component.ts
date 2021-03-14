@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth/auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-forgot-password',
@@ -22,7 +23,7 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
   onSubmit(): void{
-    this.auth.forgotPassword(this.form.value).subscribe(res => {
+    this.auth.forgotPassword(this.form.value).pipe(take(1)).subscribe(res => {
       this.nextScreen = true;
     }, error => {
       if (error.error.result.CODE === 'BAD_REQUEST'){

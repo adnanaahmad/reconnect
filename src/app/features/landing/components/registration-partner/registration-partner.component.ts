@@ -26,9 +26,9 @@ export class RegistrationPartnerComponent implements OnInit {
     this.register.roleFormControl = new FormControl(null);
     this.register.screen = {one: true, two: false, three: false, four: false};
     this.register.role = this.constant.chooseRole;
-    this.location.authToken().subscribe(res => {
+    this.location.authToken().pipe(take(1)).subscribe(res => {
       this.register.token = res.auth_token;
-      this.location.getStates(this.register.token).subscribe(response => {
+      this.location.getStates(this.register.token).pipe(take(1)).subscribe(response => {
         this.register.states = response;
       });
     });
@@ -56,7 +56,7 @@ export class RegistrationPartnerComponent implements OnInit {
   }
 
   changeState(state): void{
-    this.location.getCities(state, this.register.token).subscribe(res => {
+    this.location.getCities(state, this.register.token).pipe(take(1)).subscribe(res => {
       this.register.cities = res;
     });
   }

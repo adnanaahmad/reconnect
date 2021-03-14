@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, ElementRef, ViewChild, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {AbstractControl, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {RegistrationBuyerModel} from '../../models/registration-buyer.model';
@@ -11,17 +11,19 @@ import {ToastrService} from 'ngx-toastr';
 import {environment} from '../../../../../environments/environment';
 import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
 import * as io from 'socket.io-client';
+import {Subscription} from 'rxjs';
 @Component({
   selector: 'app-registration-buyer',
   templateUrl: './registration-buyer.component.html',
   styleUrls: ['./registration-buyer.component.scss']
 })
-export class RegistrationBuyerComponent implements OnInit {
+export class RegistrationBuyerComponent implements OnInit, OnDestroy {
   @ViewChild('password') password: ElementRef;
   @ViewChild('confirmPassword') confirmPassword: ElementRef;
   @ViewChild('showPassword') togglePassword: ElementRef;
   @ViewChild('showConfirmPassword') toggleConfirmPassword: ElementRef;
   registration: RegistrationBuyerModel = {} as RegistrationBuyerModel;
+  subscription: Subscription;
   constructor(private router: Router,
               private fb: FormBuilder,
               private auth: AuthService,
@@ -38,6 +40,10 @@ export class RegistrationBuyerComponent implements OnInit {
     this.initialise();
     this.getReferralList();
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   initialise(): void{
     this.registration.screen = {one: true, two: false, three: false};
     this.registration.referral = false;
@@ -60,9 +66,9 @@ export class RegistrationBuyerComponent implements OnInit {
 
 
   getReferralList(): void{
-    this.auth.searchName.pipe(debounceTime(300), distinctUntilChanged()).subscribe( term => {
+    this.subscription = this.auth.searchName.pipe(debounceTime(300), distinctUntilChanged()).subscribe( term => {
       if (term !== 1 && term.length > 2){
-        this.auth.referenceList(term).subscribe(data => {
+        this.auth.referenceList(term).pipe(take(1)).subscribe(data => {
           this.registration.professional = data.result;
         });
       }

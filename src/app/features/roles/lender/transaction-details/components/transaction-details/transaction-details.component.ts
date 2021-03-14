@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoanDetailsModel} from '../../../../buyer/my-loan-details/models/loanDetails.model';
 import {FormBuilder, Validators} from '@angular/forms';
 import {TransactionDetailsModel} from '../../models/transactionDetails.model';
@@ -10,14 +10,16 @@ import {log} from 'util';
 import {ToastrService} from 'ngx-toastr';
 import {DatePipe, Location} from '@angular/common';
 import {NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-transaction-details',
   templateUrl: './transaction-details.component.html',
   styleUrls: ['./transaction-details.component.scss']
 })
-export class TransactionDetailsComponent implements OnInit {
+export class TransactionDetailsComponent implements OnInit, OnDestroy {
   transactionDetails: TransactionDetailsModel = {} as TransactionDetailsModel;
+  subscription: Array<Subscription>;
   constructor(private fb: FormBuilder,
               private transactionService: BorrowerLoanDetailsService,
               private activatedRoute: ActivatedRoute,
@@ -29,12 +31,17 @@ export class TransactionDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subscription = [];
     this.initializeForm();
     this.transactionDetails.loader = false;
     this.getLoanDetails();
     this.resetLoanType();
     //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
   }
+  ngOnDestroy(): void {
+    this.subscription.forEach(x => x.unsubscribe());
+  }
+
   onSubmit(): void{
     const data = {
       lockExpiryDate: this.transactionDetails.finance.get('lockExpiryDate').value ?
@@ -50,7 +57,7 @@ export class TransactionDetailsComponent implements OnInit {
       filter(x => this.transactionDetails.finance.getRawValue().processStatus[x]).slice(-1)[0]
     };
     //console.log(data);
-    this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).subscribe(res =>{
+    this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
       //console.log(res);
       this.toaster.success('Saved');
     }, error => {
@@ -60,11 +67,13 @@ export class TransactionDetailsComponent implements OnInit {
   }
   resetLoanType(): void{
     Object.keys(this.transactionDetails.finance.get('toggle').value).forEach(key => {
-      this.transactionDetails.finance.get(['toggle', key]).valueChanges.subscribe(res => {
-        if (!res){
-          this.transactionDetails.finance.get(key).reset();
-        }
-      });
+      this.subscription.push(
+          this.transactionDetails.finance.get(['toggle', key]).valueChanges.subscribe(res => {
+            if (!res){
+              this.transactionDetails.finance.get(key).reset();
+            }
+          })
+      );
     });
   }
   getLoanDetails(): void{

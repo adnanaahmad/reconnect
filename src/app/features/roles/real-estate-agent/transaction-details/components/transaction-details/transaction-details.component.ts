@@ -34,7 +34,7 @@ export class TransactionDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.transactionDetails.loader = false;
     this.initializeForm();
-    this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
+    //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.getLoanDetails();
   }
   initializeForm(): void{

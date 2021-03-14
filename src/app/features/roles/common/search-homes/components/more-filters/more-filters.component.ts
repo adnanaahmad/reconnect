@@ -1,16 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {MoreFiltersModel} from '../../models/search-homes.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-more-filters',
   templateUrl: './more-filters.component.html',
   styleUrls: ['./more-filters.component.scss']
 })
-export class MoreFiltersComponent implements OnInit {
+export class MoreFiltersComponent implements OnInit, OnDestroy {
   @Input() searchHome;
   @Output() applyFilters =  new EventEmitter<any>();
   moreFilters: MoreFiltersModel;
+  subscription: Subscription;
   constructor(private store: StoreService) { }
 
   ngOnInit(): void {
@@ -20,6 +22,10 @@ export class MoreFiltersComponent implements OnInit {
     this.initialiseBathFilter();
     this.searchHome.keywordList = this.searchHome.moreFilters.value.moreFilters.keywords;
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   initialiseBathFilter(): void{
     this.helper('minBaths', 'maxBaths', 5, 1, 'baths');
   }
@@ -37,7 +43,7 @@ export class MoreFiltersComponent implements OnInit {
       this.moreFilters[maxArray] = [...this.moreFilters[minArray]].slice(this.searchHome.moreFilters.
       get([object, 'from']).value / value , length);
     }
-    this.searchHome.moreFilters.get([object, 'from']).valueChanges.subscribe(res => {
+    this.subscription = this.searchHome.moreFilters.get([object, 'from']).valueChanges.subscribe(res => {
       this.searchHome.moreFilters.get([object, 'to']).enable();
       this.searchHome.moreFilters.get([object, 'to']).setValue(null);
       this.moreFilters[maxArray] = [...this.moreFilters[minArray]].slice(res / value , length);
