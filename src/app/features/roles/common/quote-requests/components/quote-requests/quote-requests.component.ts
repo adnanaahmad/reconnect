@@ -61,4 +61,26 @@ export class QuoteRequestsComponent implements OnInit {
     const date = new DatePipe('en-US').transform(this.dateFormat.toModel(result), 'yyyy-MM-dd');
     return date;
   }
+  acceptRequest(id): void{
+    this.quoteReqService.acceptQuoteRequest({buyerId: id}).pipe(take(1)).subscribe(res => {
+      //console.log(res);
+      this.quoteRequests.pending = res.result.pendingQuotes;
+      this.quoteRequests.accepted = res.result.acceptedQuotes;
+      this.quoteRequests.rejected = res.result.rejectedQuotes;
+      this.quoteRequests.renderArray = this.quoteRequests.pending;
+    }, error => {
+      console.log(error);
+    });
+  }
+  rejectRequest(id): void{
+    this.quoteReqService.rejectQuoteRequest({buyerId: id}).pipe(take(1)).subscribe(res => {
+      console.log(res);
+      this.quoteRequests.pending = res.result.pendingQuotes;
+      this.quoteRequests.accepted = res.result.acceptedQuotes;
+      this.quoteRequests.rejected = res.result.rejectedQuotes;
+      this.quoteRequests.renderArray = this.quoteRequests.pending;
+    }, error => {
+      console.log(error);
+    });
+  }
 }

@@ -14,7 +14,8 @@
 <div>
     <div class="card-1 d-flex" *ngFor="let request of quoteRequests.renderArray">
         <div class="div-1">
-            <img class="profile-img" [src]="request.buyer.profilePictureUrl">
+            <img *ngIf="request.buyer.profilePictureUrl" class="profile-img" [src]="request.buyer.profilePictureUrl">
+            <img *ngIf="!request.buyer.profilePictureUrl" class="profile-img-dummy" src="/assets/profile/profile.svg">
             <p class="name">{{request.buyer.firstName | titlecase}} {{request.buyer.firstName | titlecase}} </p>
             <div class="d-flex div-2" *ngIf="request.buyer.socialMedia">
                 <a *ngIf="request.buyer.socialMedia.facebook" target="_blank" [href] = "request.buyer.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
@@ -22,8 +23,8 @@
                 <a *ngIf="request.buyer.socialMedia.twitter" target="_blank" [href] = "request.buyer.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
             </div>
             <div *ngIf="quoteRequests.selectedButton === constant.quoteRequestStatus.PENDING" class="d-flex justify-content-between">
-                <button class="respond-btn accept"><p class="">Accept</p></button>
-                <button class="respond-btn reject"><p class="">Reject</p></button>
+                <button (click)="acceptRequest(request.buyer._id)" class="respond-btn accept"><p class="">Accept</p></button>
+                <button (click)="rejectRequest(request.buyer._id)" class="respond-btn reject"><p class="">Reject</p></button>
             </div>
             <div *ngIf="quoteRequests.selectedButton === constant.quoteRequestStatus.ACCEPTED" class="d-flex justify-content-between date-div">
                 <p *ngIf="request.homeInspectionDate" class="date align-self-end">{{dateView(request.homeInspectionDate)}}</p>

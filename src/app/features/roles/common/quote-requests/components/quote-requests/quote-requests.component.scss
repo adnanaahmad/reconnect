@@ -44,12 +44,18 @@ h3{
   //height: 17.3vw;;
   margin-right: 2vw;
 }
-.profile-img{
+.profile-img, .profile-img-dummy{
   width: 13.5vw;
   height: 10vw;
   border-radius: .5vw;
-  object-fit: cover;
   margin-bottom: .5vw;
+}
+.profile-img{
+  object-fit: cover;
+}
+.profile-img-dummy{
+  padding: 3vw;
+  background: var(--extraLightGray);
 }
 .respond-btn{
   cursor: pointer;

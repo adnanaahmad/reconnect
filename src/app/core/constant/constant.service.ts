@@ -23,6 +23,8 @@ export class ConstantService {
      addTeamMember: `${environment.apiUrl}/team/add-member`,
      buyerRequestQuote: `${environment.apiUrl}/team/request-quote`,
      professionalRequestQuote: `${environment.apiUrl}/team/my-quotes`,
+     acceptRequestQuote: `${environment.apiUrl}/team/accept-quote`,
+     rejectRequestQuote: `${environment.apiUrl}/team/reject-quote`,
      removeTeamMember: `${environment.apiUrl}/team/remove-member`,
      getLoanDetails: `${environment.apiUrl}/loan/my-loan`,
      getHouses: `${environment.apiUrl}/listing/search?market=mlspin&test=true&`,
