@@ -31,7 +31,7 @@
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
                              [member]="dashboard.team.attorney" [role]="'Attorney'"></app-team-person>
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
-                             [member]="dashboard.team.homeInspector" [role]="'Home Inspector'"></app-team-person>
+                             [member]="dashboard.team.homeInspector" [targetProperty]="dashboard.subjectProperty" [role]="'Home Inspector'"></app-team-person>
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
                              [member]="dashboard.team.insuranceAgent" [role]="'Insurance Agent'"></app-team-person>
 

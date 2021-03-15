@@ -2,6 +2,9 @@ import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges
 import {RemoveMemberComponent} from '../../popups/remove-member/remove-member.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddMemberComponent} from '../../../../../../shared/components/add-member/add-member.component';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {escapeLabel} from '@swimlane/ngx-charts';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-team-person',
@@ -11,10 +14,14 @@ import {AddMemberComponent} from '../../../../../../shared/components/add-member
 export class TeamPersonComponent implements OnInit, OnChanges {
   @Input() member;
   @Input() role;
+  @Input() targetProperty;
   @Output() removeMemberEvent = new EventEmitter<any>();
   @Output() addMemberEvent = new EventEmitter<any>();
 
-  constructor(private modalService: NgbModal, configuration: NgbModalConfig) {
+  constructor(private modalService: NgbModal,
+              configuration: NgbModalConfig,
+              private constant: ConstantService,
+              private toaster: ToastrService) {
     configuration.centered = true;
     configuration.container = 'app-home-buying-dashboard';
     configuration.animation = true;
@@ -42,6 +49,15 @@ export class TeamPersonComponent implements OnInit, OnChanges {
     });
   }
   addTeamMember(): void{
+    if (this.constant.role.HOME_INSPECTOR === this.constant.chooseRole[this.role] && this.targetProperty) {
+      this.addTeamMemberHelper();
+    } else if(this.constant.role.HOME_INSPECTOR !== this.constant.chooseRole[this.role]){
+      this.addTeamMemberHelper();
+    } else {
+      this.toaster.error('Subject Property is not set');
+    }
+  }
+  addTeamMemberHelper(): void{
     const modalRef = this.modalService.open(AddMemberComponent);
     modalRef.componentInstance.role = this.role;
     modalRef.result.then((result) => {

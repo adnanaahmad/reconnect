@@ -142,3 +142,11 @@ p{
   opacity: 0;
   transition: .4s;
 }
+.add-btn{
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+.add-btn:focus{
+  outline: none;
+}
