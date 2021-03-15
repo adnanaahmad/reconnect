@@ -194,6 +194,7 @@
   width: 1.7vw;
   border-radius: .45vw;
   cursor: pointer;
+  height: fit-content;
 }
 .search-icon{
   background-color: var(--green);
@@ -201,6 +202,7 @@
   margin-right: .7vw;
   width: 2vw;
   border-radius: .5vw;
+  height: fit-content;
 }
 .current-friend{
   border-bottom: 1px solid var(--extraLightGray);
@@ -337,6 +339,30 @@ textarea{
   width: 1.5vw;
   margin-left: 1vw;
   cursor: pointer;
+}
+.plus-icon{
+  width: 2vw;
+  height: 2vw;
+  padding:.5vw;
+  border-radius: .4vw;
+  cursor: pointer;
+}
+.add-to-team{
+  border: none;
+  background: var(--green);
+  color: white;
+  height: fit-content;
+  border-radius: .3vw;
+  margin-right: .7vw;
+  cursor: pointer;
+  padding-right: .5vw;
+}
+.add-to-team p{
+  margin-bottom: 0;
+  font-size: .7vw;
+}
+.add-to-team{
+  outline: none;
 }
 ::ng-deep .emoji-mart-preview{
   display: none;

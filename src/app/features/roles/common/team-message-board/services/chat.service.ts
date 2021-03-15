@@ -35,4 +35,10 @@ export class ChatService {
   getTeamById(data): Observable<any>{
     return this.helper.requestCall(this.methods.get, this.api.getTeamById + `/${data}`);
   }
+  getTeam(): Observable<any>{
+    return this.helper.requestCall(this.methods.get, this.api.getTeam);
+  }
+  addTeamMember(data): Observable<any>{
+    return  this.helper.requestCall(this.methods.put, this.api.addTeamMember, data);
+  }
 }

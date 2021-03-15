@@ -11,6 +11,7 @@ import {ConstantService} from '../../../../../../core/constant/constant.service'
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {take} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 @Component({
   selector: 'app-team-message-board',
   templateUrl: './team-message-board.component.html',
@@ -33,7 +34,8 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
               private configuration: NgbModalConfig,
               public store: StoreService,
               public constant: ConstantService,
-              public helper: HelperService) {
+              public helper: HelperService,
+              private toaster: ToastrService) {
     configuration.centered = true;
     configuration.container = 'app-team-message-board';
   }
@@ -44,6 +46,7 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
     this.chat.user = this.store.getUserData();
     this.getRecentConversations();
     this.listenMessages();
+    this.getTeam();
     this.chat.inputForm = this.fb.group({
       inputText: ['', Validators.required],
     });
@@ -181,6 +184,23 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
       }
     }, error => {
       console.log(error);
+    });
+  }
+  getTeam(): void{
+    this.chatService.getTeam().pipe(take(1)).subscribe(res => {
+      // console.log(res);
+      this.chat.homeInspectorExistsInTeam = res.result.homeInspector ? true : false;
+      // console.log(this.chat.homeInspectorExistsInTeam);
+    }, error => {
+      console.log(error);
+    });
+  }
+  addHomeInspectorToTeam(id: string): void{
+    this.chatService.addTeamMember({userId: id}).pipe(take(1)).subscribe(res => {
+      this.chat.homeInspectorExistsInTeam = true;
+      this.toaster.success('Professional has been added to team');
+    }, error => {
+      this.toaster.error('Failed to add professional to team');
     });
   }
 }

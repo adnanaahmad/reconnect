@@ -85,7 +85,13 @@
                                 class="circle-2 align-self-center"></span></div>
                     </div>
                 </ng-container>
-                <div class="ml-auto">
+                <div class="ml-auto d-flex">
+                    <button class="add-to-team d-flex" (click)="addHomeInspectorToTeam(recentChatMember(chat.selectedFriend.allTimeMembers)._id)" *ngIf="chat.selectedFriend.type === constant.conversationType.PRIVATE &&
+                     (recentChatMember(chat.selectedFriend.allTimeMembers).role === constant.role.HOME_INSPECTOR || recentChatMember(chat.selectedFriend.allTimeMembers).role === constant.role.INSURANCE)
+                      && !chat.homeInspectorExistsInTeam && showHideSendMessage()">
+                        <img class="plus-icon" src="/assets/calendar-icons/plus.svg">
+                        <p class="align-self-center">Add To Team</p>
+                    </button>
                     <img class="search-icon img-fluid" src="/assets/chat/search.svg">
                     <img (click)="deleteChat()" class="delete-icon img-fluid" src="/assets/news-feed-icons/delete.svg">
                     <img (click)="editGroup()" *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP" class="edit-group" src="/assets/chat/edit.svg">
@@ -108,6 +114,13 @@
                                class="text-center add-remove-professional"> You have been added
                                 to {{recentChatMember(chat.selectedFriend.allTimeMembers).firstName | titlecase}}
                                 {{recentChatMember(chat.selectedFriend.allTimeMembers).lastName | titlecase}}'s team
+                            </p>
+                        </ng-container>
+                        <ng-container
+                                *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_LOG_PROFESSIONAL_ACCEPT_QUOTE_REQUEST">
+                            <p
+                               class="text-center add-remove-professional">
+                                Quote request has been accepted
                             </p>
                         </ng-container>
                         <ng-container

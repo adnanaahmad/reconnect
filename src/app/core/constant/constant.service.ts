@@ -632,7 +632,8 @@ export class ConstantService {
     MESSAGE_TYPE_LOG_PROFESSIONAL_ADDED_TO_TEAM: 'logProfessionalAddedToTeam',
     MESSAGE_TYPE_LOG_PROFESSIONAL_REMOVED_FROM_TEAM: 'logProfessionalRemovedFromTeam',
     MESSAGE_TYPE_SHARE_PROPERTY: 'shareProperty',
-    MESSAGE_TYPE_BOOK_PROPERTY: 'bookProperty'
+    MESSAGE_TYPE_BOOK_PROPERTY: 'bookProperty',
+    MESSAGE_TYPE_LOG_PROFESSIONAL_ACCEPT_QUOTE_REQUEST: 'logProfessionalAcceptQuoteRequest',
   };
   conversationType = {
     PRIVATE: 'private',

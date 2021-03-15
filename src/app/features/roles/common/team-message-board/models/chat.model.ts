@@ -10,6 +10,7 @@ export interface ChatModel {
   inputForm: FormGroup;
   loader: boolean;
   messageLoader: boolean;
+  homeInspectorExistsInTeam: boolean;
 }
 interface SelectedFriendModel{
   allTimeMembers: Array<UserModel>;
