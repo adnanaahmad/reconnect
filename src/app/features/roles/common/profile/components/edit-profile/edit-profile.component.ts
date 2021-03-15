@@ -76,7 +76,7 @@ export class EditProfileComponent implements OnInit {
       addresses: new FormArray([]),
       socialMedia: this.fb.group({
         facebook: [null, Validators.required],
-        linkedIn: [null, Validators.required],
+        linkedin: [null, Validators.required],
         instagram: [null, Validators.required],
         twitter: [null, Validators.required]
       }),
@@ -107,7 +107,7 @@ export class EditProfileComponent implements OnInit {
           facebook: res.result.socialMedia ? res.result.socialMedia.facebook : null,
           instagram: res.result.socialMedia ? res.result.socialMedia.instagram : null,
           twitter: res.result.socialMedia ? res.result.socialMedia.twitter : null,
-          linkedIn: res.result.socialMedia ? res.result.socialMedia.linkedIn : null,
+          linkedin: res.result.socialMedia ? res.result.socialMedia.linkedin : null,
         },
         email: res.result.email,
       });

@@ -38,7 +38,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       socialMedia: this.fb.group({
         facebook: [null],
-        linkedIn: [null],
+        linkedin: [null],
         instagram: [null],
         twitter: [null]
       }),
@@ -86,7 +86,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       if (res.socialMedia){
         this.personalDetails.form.get(['socialMedia', 'facebook']).setValue(res.socialMedia.facebook);
         this.personalDetails.form.get(['socialMedia', 'instagram']).setValue(res.socialMedia.instagram);
-        this.personalDetails.form.get(['socialMedia', 'linkedIn']).setValue(res.socialMedia.linkedIn);
+        this.personalDetails.form.get(['socialMedia', 'linkedin']).setValue(res.socialMedia.linkedin);
         this.personalDetails.form.get(['socialMedia', 'twitter']).setValue(res.socialMedia.twitter);
       }
       this.personalDetails.company = res.company;
