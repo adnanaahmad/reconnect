@@ -27,9 +27,9 @@
                 <button (click)="rejectRequest(request.buyer._id)" class="respond-btn reject"><p class="">Reject</p></button>
             </div>
             <div *ngIf="quoteRequests.selectedButton === constant.quoteRequestStatus.ACCEPTED" class="d-flex justify-content-between date-div">
-                <p *ngIf="request.homeInspectionDate" class="date align-self-end">{{dateView(request.homeInspectionDate)}}</p>
-                <p *ngIf="!request.homeInspectionDate" class="date align-self-end">Choose date</p>
-                <input [(ngModel)]="request.homeInspectionDate" class="form-control f1" placeholder=""
+                <p *ngIf="date.value" class="date align-self-end">{{date.value}}</p>
+                <p *ngIf="!date.value" class="date align-self-end">Choose date</p>
+                <input #date (dateSelect)="onDateSelect($event, request.buyer._id)" class="form-control f1" placeholder=""
                        name="dp"  ngbDatepicker #d="ngbDatepicker">
                 <div class="calendar-div d-flex align-self-center" (click)="d.toggle()">
                     <img src="/assets/dashboard/Calendar.svg" class="calendar">

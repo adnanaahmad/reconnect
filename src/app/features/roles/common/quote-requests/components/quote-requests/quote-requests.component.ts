@@ -16,7 +16,6 @@ import {StoreService} from '../../../../../../core/store/store.service';
 })
 export class QuoteRequestsComponent implements OnInit {
   quoteRequests: QuoteRequestsModel = {} as QuoteRequestsModel;
-  date: any;
   constructor(private dateFormat: NgbDateNativeAdapter,
               private quoteReqService: QuoteRequestService,
               public constant: ConstantService,
@@ -82,5 +81,18 @@ export class QuoteRequestsComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  onDateSelect(date: any, id: string): void {
+    console.log(id);
+    const data = {
+      homeInspectionDate: (new DatePipe('en-US').transform(this.dateFormat.toModel(date), 'yyyy-MM-dd')),
+      buyerId: id
+    };
+    this.quoteReqService.setHomeInspectionDate(data).pipe(take(1)).subscribe( res => {
+      console.log(res);
+    }, error => {
+      console.log(error);
+    });
+    console.log(new Date(date.year, date.month - 1, date.day));
   }
 }

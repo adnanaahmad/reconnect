@@ -26,6 +26,7 @@ export class ConstantService {
      acceptRequestQuote: `${environment.apiUrl}/team/accept-quote`,
      rejectRequestQuote: `${environment.apiUrl}/team/reject-quote`,
      removeTeamMember: `${environment.apiUrl}/team/remove-member`,
+     homeInspectionDate: `${environment.apiUrl}/loan/set-homeinspection-date`,
      getLoanDetails: `${environment.apiUrl}/loan/my-loan`,
      getHouses: `${environment.apiUrl}/listing/search?market=mlspin&test=true&`,
      searchHomeByName: `${environment.apiUrl}/listing/autocomplete?keyword=`,
@@ -41,7 +42,7 @@ export class ConstantService {
      shareProperty: `${environment.apiUrl}/message/send-private-message`,
      sharePropertyProfessional: `${environment.apiUrl}/message/send-multiple-messages`,
      targetProperty: `${environment.apiUrl}/loan/target-property`,
-     professionalDashboard: `${environment.apiUrl}/analytics/dashboard`
+     professionalDashboard: `${environment.apiUrl}/analytics/dashboard`,
   };
   apiMethod = {
     get: 'get',

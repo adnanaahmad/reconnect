@@ -22,6 +22,7 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
               private store: StoreService) { }
 
   ngOnInit(): void {
+    this.subscription = [];
     this.loader = false;
     this.store.updateProgressBarLoading(true);
     this.initializeLoanDetails();

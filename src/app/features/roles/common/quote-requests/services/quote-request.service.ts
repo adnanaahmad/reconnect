@@ -23,4 +23,7 @@ export class QuoteRequestService {
   rejectQuoteRequest(data): Observable<any>{
     return this.helper.requestCall(this.methods.put, this.api.rejectRequestQuote, data);
   }
+  setHomeInspectionDate(data): Observable<any>{
+    return this.helper.requestCall(this.methods.put, this.api.homeInspectionDate, data);
+  }
 }
