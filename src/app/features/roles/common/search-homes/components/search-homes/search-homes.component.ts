@@ -88,12 +88,12 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             beds: {
                 from: params.beds ? params.beds.includes(':') ? params.beds.split(':')[0] : null : null,
                 to: params.beds ? params.beds.includes(':') ? params.beds.split(':')[1] : null : null,
-                value: params.beds ? !params.beds.includes(':') ? params.beds : null : null
+                value: params.beds ? !params.beds.includes(':') ? params.beds.replace('>=', '') : null : null
             },
             baths: {
                 from: params.baths ? params.baths.includes(':') ? params.baths.split(':')[0] : null : null,
                 to: params.baths ? params.baths.includes(':') ? params.baths.split(':')[1] : null : null,
-                value: params.baths ? !params.baths.includes(':') ? params.baths : null : null
+                value: params.baths ? !params.baths.includes(':') ? params.baths.replace('>=', '') : null : null
             },
         });
     }
@@ -261,6 +261,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}`);
         const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+        this.store.updateProgressBarLoading(true);
         this.searchHomeService.getHouses(data + sortBy + searchInput).pipe(take(1)).subscribe(res => {
             res = res.result;
             this.searchHome.homes = res.listings;
@@ -272,8 +273,10 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             if (events) {
                 events.target.parentElement.parentElement.classList.toggle('show');
             }
+            this.store.updateProgressBarLoading(false);
         }, error => {
             console.log(error);
+            this.store.updateProgressBarLoading(false);
         });
     }
 
@@ -281,7 +284,8 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const data = Object.assign({},
             this.filtersObject);
         Object.keys(data).forEach(key => {
-            if (data[key] ? data[key].length === 0 : true) {
+            console.log(data[key]);
+            if ((data[key] ? data[key].length === 0 : true) || data[key] === '>=null') {
                 delete data[key];
             }
         });
