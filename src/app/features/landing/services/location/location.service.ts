@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Injectable, OnDestroy} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LocationService {
+export class LocationService implements OnDestroy {
+  subscription: Subscription;
   constructor(private http: HttpClient) { }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   authToken(): Observable<any> {
     const apiURL = 'https://www.universal-tutorial.com/api/getaccesstoken';
     const httpOptions = {
@@ -39,7 +44,7 @@ export class LocationService {
     return this.http.get(apiURL, httpOptions);
   }
   saveLocationApiToken(): void{
-    this.authToken().subscribe(res => {
+    this.subscription = this.authToken().subscribe(res => {
       localStorage.setItem('locationApiToken', res.auth_token);
       }, error => {
         console.log(error);
