@@ -154,6 +154,11 @@
         <div class="col-3 home-margin" *ngFor="let home of searchHome.homes">
             <app-home-card [loan]="searchHome.loan" [home]="home"></app-home-card>
         </div>
+        <ng-container *ngIf="searchHome.homes ? !searchHome.homes.length : false">
+            <div class="d-flex flex-column no-result-parent">
+                <app-no-results-found class="ml-auto mr-auto"></app-no-results-found>
+            </div>
+        </ng-container>
     </div>
   </div>
 

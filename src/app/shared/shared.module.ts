@@ -24,6 +24,7 @@ import {SubjectPropertyTemplateComponent} from './components/subject-property-te
 import {ReversePipe} from './pipes/reverse/reverse.pipe';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {AddMemberComponent} from './components/add-member/add-member.component';
+import { NoResultsFoundComponent } from './components/no-results-found/no-results-found.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -47,7 +48,8 @@ const maskConfig: Partial<IConfig> = {
         ThousandSuffixPipe,
         SplitCamelCasePipe,
         SubjectPropertyTemplateComponent,
-        ReversePipe
+        ReversePipe,
+        NoResultsFoundComponent
 
     ],
     imports: [
@@ -81,6 +83,7 @@ const maskConfig: Partial<IConfig> = {
         SubjectPropertyTemplateComponent,
         Ng2SearchPipeModule,
         AddMemberComponent,
+        NoResultsFoundComponent
     ],
 })
 export class SharedModule {
