@@ -29,7 +29,7 @@ export interface UserProfileEditModel {
 interface SocialMediaModel{
   facebook: string;
   instagram: string;
-  linkedIn: string;
+  linkedin: string;
   twitter: string;
 }
 
