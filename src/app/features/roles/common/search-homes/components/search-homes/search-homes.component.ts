@@ -300,10 +300,10 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                 `${this.searchHome.moreFilters.get(['listPrice', 'from']).value}:${this.searchHome.moreFilters.get(['listPrice', 'to']).value}` : null,
             beds: this.searchHome.moreFilters.get(['beds', 'from']).value && this.searchHome.moreFilters.get(['beds', 'to']).value ?
                 `${this.searchHome.moreFilters.get(['beds', 'from']).value}:${this.searchHome.moreFilters.get(['beds', 'to']).value}`
-                : this.searchHome.moreFilters.get(['beds', 'value']).value,
+                : `>=${this.searchHome.moreFilters.get(['beds', 'value']).value}`,
             baths: this.searchHome.moreFilters.get(['baths', 'from']).value && this.searchHome.moreFilters.get(['baths', 'to']).value ?
                 `${this.searchHome.moreFilters.get(['baths', 'from']).value}:${this.searchHome.moreFilters.get(['baths', 'to']).value}`
-                : this.searchHome.moreFilters.get(['baths', 'value']).value
+                : `>=${this.searchHome.moreFilters.get(['baths', 'value']).value}`
         };
     }
 
