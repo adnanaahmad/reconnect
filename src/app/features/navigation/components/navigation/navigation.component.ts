@@ -57,6 +57,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
       case this.constant.role.HOME_INSPECTOR:
         this.navigation.menuItems = this.navigationService.getHomeInspectorMenuItems();
         break;
+      case this.constant.role.INSURANCE:
+        this.navigation.menuItems = this.navigationService.getHomeInspectorMenuItems();
+        break;
       default:
     }
     this.setMenuButton();
