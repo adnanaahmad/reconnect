@@ -51,7 +51,10 @@ export class TeamPersonComponent implements OnInit, OnChanges {
   addTeamMember(): void{
     if (this.constant.role.HOME_INSPECTOR === this.constant.chooseRole[this.role] && this.targetProperty) {
       this.addTeamMemberHelper();
-    } else if(this.constant.role.HOME_INSPECTOR !== this.constant.chooseRole[this.role]){
+    } else if (this.constant.role.INSURANCE === this.constant.chooseRole[this.role] && this.targetProperty) {
+      this.addTeamMemberHelper();
+    } else if (this.constant.role.HOME_INSPECTOR !== this.constant.chooseRole[this.role]
+        && this.constant.role.INSURANCE !== this.constant.chooseRole[this.role]){
       this.addTeamMemberHelper();
     } else {
       this.toaster.error('Subject Property is not set');

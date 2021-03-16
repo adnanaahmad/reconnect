@@ -33,7 +33,7 @@
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
                              [member]="dashboard.team.homeInspector" [targetProperty]="dashboard.subjectProperty" [role]="'Home Inspector'"></app-team-person>
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
-                             [member]="dashboard.team.insuranceAgent" [role]="'Insurance Agent'"></app-team-person>
+                             [member]="dashboard.team.insuranceAgent" [targetProperty]="dashboard.subjectProperty" [role]="'Insurance Agent'"></app-team-person>
 
         </div>
         <div class="mt-auto">
