@@ -130,4 +130,14 @@ export class RegistrationBuyerComponent implements OnInit, OnDestroy {
       this.auth.helperToggle(this.confirmPassword.nativeElement, this.toggleConfirmPassword.nativeElement);
     }
   }
+  nextOnScreenOne(): void{
+    if (this.registration.referral || this.registration.other ? !this.registration.form.get(['referral', 'details']).valid :
+        !this.registration.form.get(['referral', 'type']).valid){
+      this.registration.form.get(['referral', 'type']).markAllAsTouched();
+      //this.registration.form.get(['referral', 'details']).markAllAsTouched();
+    } else {
+      this.registration.screen['two'] = true;
+      this.registration.screen['one'] = false;
+    }
+  }
 }

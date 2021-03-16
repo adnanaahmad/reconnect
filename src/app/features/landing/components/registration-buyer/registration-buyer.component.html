@@ -2,9 +2,10 @@
     <div *ngIf="registration.screen['one']" class="second-screen d-flex flex-column">
         <p class="heading">How did you hear about us?</p>
         <div class="mt-auto mb-auto d-flex flex-column">
-            <p class="label">Select an option</p>
+            <p [ngClass]="{'danger': registration.form.get(['referral', 'type']).invalid && registration.form.get(['referral', 'type']).touched}" class="label">Select an option</p>
             <div class="select-div">
-                <select #select (change)="showReferral(select.value)" class="form-control form-custom" id="">
+                <select [class.is-invalid]="registration.form.get(['referral', 'type']).invalid && registration.form.get(['referral', 'type']).touched"
+                        #select (change)="showReferral(select.value)" class="form-control form-custom" id="">
                     <option [ngValue]="null" [disabled]="true" >Select</option>
                     <option *ngFor="let i of registration.aboutUs | keyvalue: helper.originalOrder">{{i.key}}</option>
                 </select>
@@ -28,8 +29,8 @@
                     </div>
                 </div>
             </div>
-            <button (click)="registration.screen['two']=true;registration.screen['one']=false;"
-                    [disabled]="registration.referral || registration.other ? !registration.form.get(['referral', 'details']).valid : !registration.form.get(['referral', 'type']).valid" class="signup next">
+            <button (click)="nextOnScreenOne()"
+                    [disabled]="" class="signup next">
                 Next
             </button>
         </div>
