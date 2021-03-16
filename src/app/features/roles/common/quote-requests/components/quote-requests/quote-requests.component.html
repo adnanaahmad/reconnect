@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<div>
+<div style="position: relative;">
     <div class="card-1 d-flex" *ngFor="let request of quoteRequests.renderArray">
         <div class="div-1">
             <img *ngIf="request.buyer.profilePictureUrl" class="profile-img" [src]="request.buyer.profilePictureUrl">
@@ -41,5 +41,8 @@
 <!--        <img class="subject-img" [src]="request.subjectProperty.image">-->
 
 <!--        <app-subject-property-details class="subject-property" [subjectProperty]="request.subjectProperty"></app-subject-property-details>-->
+    </div>
+    <div *ngIf="quoteRequests.renderArray ? quoteRequests.renderArray.length === 0 : false " class="d-flex no-results flex-column">
+        <app-no-results-found class="ml-auto mr-auto"></app-no-results-found>
     </div>
 </div>

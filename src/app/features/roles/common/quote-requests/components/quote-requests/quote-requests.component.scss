@@ -153,7 +153,11 @@ h3{
 .date-div{
   position: relative;
 }
-
+.no-results{
+  position: absolute;
+  top: 10vw;
+  width: 100%;
+}
 
 ::ng-deep .ngb-dp-weekday.small{
   font-style: normal;
