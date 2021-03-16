@@ -16,7 +16,7 @@
         <div class="div-1">
             <img *ngIf="request.buyer.profilePictureUrl" class="profile-img" [src]="request.buyer.profilePictureUrl">
             <img *ngIf="!request.buyer.profilePictureUrl" class="profile-img-dummy" src="/assets/profile/profile.svg">
-            <p class="name">{{request.buyer.firstName | titlecase}} {{request.buyer.firstName | titlecase}} </p>
+            <p class="name">{{request.buyer.firstName | titlecase}} {{request.buyer.lastName | titlecase}} </p>
             <div class="d-flex div-2" *ngIf="request.buyer.socialMedia">
                 <a *ngIf="request.buyer.socialMedia.facebook" target="_blank" [href] = "request.buyer.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
                 <a *ngIf="request.buyer.socialMedia.instagram" target="_blank" [href] = "request.buyer.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
@@ -38,9 +38,9 @@
             </div>
 
         </div>
-<!--        <img class="subject-img" [src]="request.subjectProperty.image">-->
+        <img class="subject-img" [src]="request.loan.targetProperty.images[0]">
 
-<!--        <app-subject-property-details class="subject-property" [subjectProperty]="request.subjectProperty"></app-subject-property-details>-->
+        <app-subject-property-details class="subject-property" [subjectProperty]="request.loan.targetProperty"></app-subject-property-details>
     </div>
     <div *ngIf="quoteRequests.renderArray ? quoteRequests.renderArray.length === 0 : false " class="d-flex no-results flex-column">
         <app-no-results-found class="ml-auto mr-auto"></app-no-results-found>

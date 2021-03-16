@@ -13,7 +13,7 @@
             </div>
             <div class="info-img">
               <img src="/assets/search-home/area.png">
-              <div class="d-flex info-number"><p>Sq Ft</p><p>{{subjectProperty.lotSize ? subjectProperty.lotSize.sqft : ''}}</p></div>
+              <div class="d-flex info-number"><p>Sq Ft</p><p>{{subjectProperty.xf_square_feet ? subjectProperty.xf_square_feet : 'N.A.'}}</p></div>
             </div>
       </div>
       <div class="d-flex details">
@@ -28,7 +28,7 @@
          <div class="detail-right" style="">
             <p>{{ subjectProperty.status }}&nbsp;</p>
             <p>{{subjectProperty.propertyType}}&nbsp;</p>
-            <p>{{subjectProperty.lotSize ? subjectProperty.lotSize.sqft + ' Sq Ft' : ''}}&nbsp;</p>
+            <p>{{subjectProperty.lotSize ? subjectProperty.lotSize.sqft + ' Sq Ft' : 'N.A.'}}&nbsp;</p>
             <p>{{subjectProperty.daysOnMarket}}&nbsp;</p>
 <!--            <p>{{subjectProperty.community}}</p>-->
             <p>{{subjectProperty.id}}</p>

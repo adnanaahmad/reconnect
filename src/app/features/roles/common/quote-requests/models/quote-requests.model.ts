@@ -1,4 +1,5 @@
 import {SubjectPropertyModel} from '../../../buyer/home-buying-dashboard/models/dashboard.model';
+import {PropertyAdModel} from '../../property-details/models/property-details.model';
 
 export interface QuoteRequestsModel{
   pending: Array<any>;
@@ -9,5 +10,5 @@ export interface QuoteRequestsModel{
   selectedButton: string;
 }
 interface QuoteReqModel {
-  subjectProperty: SubjectPropertyModel;
+  subjectProperty: PropertyAdModel;
 }
