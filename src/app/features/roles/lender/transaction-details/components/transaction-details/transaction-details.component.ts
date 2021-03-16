@@ -110,7 +110,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
             this.transactionDetails.finance.get(['processStatus', x]).setValue(true);
           }
       });
-      this.transactionDetails.subjectProperty = res.targetProperty ? res.targetPropertyDetails : null;
+      this.transactionDetails.subjectProperty = res.targetProperty;
       this.transactionDetails.loader = true;
     }, error => {
       console.log(error);

@@ -38,7 +38,7 @@ export class AddPropertyMlsComponent implements OnInit {
         if (this.mlsForm.valid) {
             this.mlsService.setTargetProperty(this.mlsForm.value).pipe(take(1)).subscribe(res => {
                 console.log(res);
-                this.activeModal.close({status: 'yes', data: res.result.targetPropertyDetails});
+                this.activeModal.close({status: 'yes', data: res.result.targetProperty});
             }, error => {
                 this.toaster.error('Invalid MLS number');
             });

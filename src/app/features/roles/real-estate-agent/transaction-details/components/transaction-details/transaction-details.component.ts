@@ -65,7 +65,7 @@ export class TransactionDetailsComponent implements OnInit {
           this.transactionDetails.finance.get(['processStatus', x]).setValue(true);
         }
       });
-      this.transactionDetails.subjectProperty = res.targetProperty ? res.targetPropertyDetails : null;
+      this.transactionDetails.subjectProperty = res.targetProperty;
       this.transactionDetails.finance.patchValue({
         commitmentDate: res.commitmentDate ? this.dateFormat.fromModel(new Date(res.commitmentDate)) : null,
         dealClosingDate: res.dealClosingDate ? this.dateFormat.fromModel(new Date(res.dealClosingDate)) : null,

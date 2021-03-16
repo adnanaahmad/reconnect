@@ -50,7 +50,7 @@ export class HomeBuyingDashboardComponent implements OnInit, OnDestroy {
         forkJoin([this.dashboardService.getTeam(), this.dashboardService.getLoanDetails()]).pipe(take(1)).subscribe(res => {
 //            console.log('forkJoin', res);
             this.dashboard.team = res[0].result;
-            this.dashboard.subjectProperty = res[1].result.targetProperty ? res[1].result.targetPropertyDetails : null;
+            this.dashboard.subjectProperty = res[1].result.targetProperty;
             this.setHomeBuyingProcessStatus(res[1].result.processStatus);
             this.dashboard.preApprovalDetails = {
                 income: res[1].result.income,
