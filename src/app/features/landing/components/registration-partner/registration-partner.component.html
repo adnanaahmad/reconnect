@@ -4,14 +4,15 @@
         <div class="mt-custom">
             <p [ngClass]="{'danger': register.form.get(['personal', 'role']).invalid && register.form.get(['personal', 'role']).touched}" class="choose">Choose a role</p>
             <div class="select-div">
-                <select [formControl]="register.roleFormControl" #role (change)="register.form.get(['personal', 'role']).setValue(register.role[role.value])" [ngClass]="{'danger-select': register.form.get(['personal', 'role']).invalid && register.form.get(['personal', 'role']).touched}"  class="form-control form-custom">
+                <select [class.is-invalid]="register.form.get(['personal', 'role']).invalid && register.form.get(['personal', 'role']).touched"
+                        [formControl]="register.roleFormControl" #role (change)="register.form.get(['personal', 'role']).setValue(register.role[role.value])" [ngClass]="{'danger-select': register.form.get(['personal', 'role']).invalid && register.form.get(['personal', 'role']).touched}"  class="form-control form-custom">
                     <option [ngValue]="null" [disabled]="true" >Select Role</option>
                     <option *ngFor="let i of register.role| keyvalue:helper.originalOrder">{{i.key}}</option>
                 </select>
                 <img src="/assets/landing/drop.svg" class="drop">
             </div>
         </div>
-        <button [disabled]="!register.form.get('personal.role').valid" (click)="register.screen['one']=false;register.screen['two']=true;" class="continue continue-mt">Continue</button>
+        <button (click)="proceedToScreenTwo()" class="continue continue-mt">Continue</button>
     </div>
 
     <div *ngIf="register.screen['two']" class="d-flex flex-column parent" formGroupName="company">

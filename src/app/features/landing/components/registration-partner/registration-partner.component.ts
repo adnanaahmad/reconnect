@@ -90,4 +90,12 @@ export class RegistrationPartnerComponent implements OnInit {
       this.register.screen.three = true;
     }
   }
+  proceedToScreenTwo(): void{
+    if (!this.register.form.get('personal.role').valid){
+      this.register.form.get(['personal', 'role']).markAllAsTouched();
+    } else {
+      this.register.screen['one'] = false;
+      this.register.screen['two'] = true;
+    }
+  }
 }
