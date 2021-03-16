@@ -26,7 +26,7 @@
                 <button (click)="acceptRequest(request.buyer._id)" class="respond-btn accept"><p class="">Accept</p></button>
                 <button (click)="rejectRequest(request.buyer._id)" class="respond-btn reject"><p class="">Reject</p></button>
             </div>
-            <div *ngIf="quoteRequests.selectedButton === constant.quoteRequestStatus.ACCEPTED" class="d-flex justify-content-between date-div">
+            <div *ngIf="quoteRequests.selectedButton === constant.quoteRequestStatus.TEAM" class="d-flex justify-content-between date-div">
                 <p *ngIf="date.value" class="date align-self-end">{{date.value}}</p>
                 <p *ngIf="!date.value" class="date align-self-end">Choose date</p>
                 <input #date (dateSelect)="onDateSelect($event, request.buyer._id)" class="form-control f1" placeholder=""

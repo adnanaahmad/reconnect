@@ -86,9 +86,10 @@
                     </div>
                 </ng-container>
                 <div class="ml-auto d-flex">
-                    <button class="add-to-team d-flex" (click)="addHomeInspectorToTeam(recentChatMember(chat.selectedFriend.allTimeMembers)._id)" *ngIf="chat.selectedFriend.type === constant.conversationType.PRIVATE &&
-                     (recentChatMember(chat.selectedFriend.allTimeMembers).role === constant.role.HOME_INSPECTOR || recentChatMember(chat.selectedFriend.allTimeMembers).role === constant.role.INSURANCE)
-                      && !chat.homeInspectorExistsInTeam && showHideSendMessage()">
+                    <button class="add-to-team d-flex" (click)="addProfessionalToTeam(recentChatMember(chat.selectedFriend.allTimeMembers)._id, recentChatMember(chat.selectedFriend.allTimeMembers).role)"
+                            *ngIf="chat.selectedFriend.type === constant.conversationType.PRIVATE &&
+                             (recentChatMember(chat.selectedFriend.allTimeMembers).role === constant.role.HOME_INSPECTOR || recentChatMember(chat.selectedFriend.allTimeMembers).role === constant.role.INSURANCE)
+                      && professionalExistsInTeam(recentChatMember(chat.selectedFriend.allTimeMembers).role) && showHideSendMessage()">
                         <img class="plus-icon" src="/assets/calendar-icons/plus.svg">
                         <p class="align-self-center">Add To Team</p>
                     </button>

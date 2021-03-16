@@ -30,6 +30,7 @@ export class QuoteRequestsComponent implements OnInit {
       this.quoteRequests.pending = res.result.pendingQuotes;
       this.quoteRequests.accepted = res.result.acceptedQuotes;
       this.quoteRequests.rejected = res.result.rejectedQuotes;
+      this.quoteRequests.teams = res.result.teams;
       this.quoteRequests.renderArray = this.quoteRequests.pending;
       this.store.updateProgressBarLoading(false);
     }, error => {
@@ -49,6 +50,9 @@ export class QuoteRequestsComponent implements OnInit {
         break;
       case this.constant.quoteRequestStatus.REJECTED:
         this.quoteRequests.renderArray = this.quoteRequests.rejected;
+        break;
+      case this.constant.quoteRequestStatus.TEAM:
+        this.quoteRequests.renderArray = this.quoteRequests.teams;
         break;
       default:
         this.quoteRequests.renderArray = this.quoteRequests.pending;

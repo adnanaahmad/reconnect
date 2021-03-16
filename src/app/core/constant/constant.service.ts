@@ -700,6 +700,7 @@ export class ConstantService {
   quoteRequestStatus = {
     PENDING: 'pending',
     ACCEPTED: 'accepted',
-    REJECTED: 'rejected'
+    REJECTED: 'rejected',
+    TEAM: 'team'
   };
 }

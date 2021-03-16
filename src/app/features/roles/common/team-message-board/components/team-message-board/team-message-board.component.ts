@@ -190,17 +190,21 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
     this.chatService.getTeam().pipe(take(1)).subscribe(res => {
       // console.log(res);
       this.chat.homeInspectorExistsInTeam = res.result.homeInspector ? true : false;
+      this.chat.insuranceAgentExistsInTeam = res.result.insuranceAgent ? true : false;
       // console.log(this.chat.homeInspectorExistsInTeam);
     }, error => {
       console.log(error);
     });
   }
-  addHomeInspectorToTeam(id: string): void{
+  addProfessionalToTeam(id: string, role: string): void{
     this.chatService.addTeamMember({userId: id}).pipe(take(1)).subscribe(res => {
-      this.chat.homeInspectorExistsInTeam = true;
+      role === this.constant.role.INSURANCE ? this.chat.insuranceAgentExistsInTeam = true : this.chat.homeInspectorExistsInTeam = true;
       this.toaster.success('Professional has been added to team');
     }, error => {
       this.toaster.error('Failed to add professional to team');
     });
+  }
+  professionalExistsInTeam(role): boolean{
+    return role === this.constant.role.INSURANCE ? !this.chat.insuranceAgentExistsInTeam : !this.chat.homeInspectorExistsInTeam;
   }
 }
