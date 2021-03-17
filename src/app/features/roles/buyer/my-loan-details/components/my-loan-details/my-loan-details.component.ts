@@ -27,7 +27,7 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
     this.store.updateProgressBarLoading(true);
     this.initializeLoanDetails();
     this.getLoanDetails();
-//    this.loanDetails.finance.valueChanges.subscribe(newval => console.log(newval));
+  //  this.loanDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.resetLoanType();
   }
   ngOnDestroy(): void {
@@ -47,12 +47,20 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
           this.loanDetails.finance.get('conventional').value : null,
     };
     console.log(data);
+    this.validateLoanDetails();
     this.loadDetailsService.setLoanDetails({...this.loanDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.toaster.success('Saved');
     }, error => {
       console.log(error);
       this.toaster.error('Failed To Save');
+    });
+  }
+  validateLoanDetails(): void{
+    Object.keys(this.loanDetails.finance.get('toggle').value).forEach(x => {
+      if (this.loanDetails.finance.get(['toggle', x]).value){
+        console.log('validate : ', x, ' = ', !this.loanDetails.finance.get(x).invalid);
+      }
     });
   }
   resetLoanType(): void{
@@ -99,10 +107,10 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
   }
   initializeLoanDetails(): void{
     this.loanDetails.finance = this.fb.group({
-      income: ['', Validators.required],
-      monthlyDebt: ['', Validators.required],
-      funds: ['', Validators.required],
-      sellerCredit: ['', Validators.required],
+      income: [null, Validators.required],
+      monthlyDebt: [null, Validators.required],
+      funds: [null, Validators.required],
+      sellerCredit: [null, Validators.required],
       toggle: this.fb.group({
         fha: [null, Validators.required],
         conventional: [null, Validators.required],
@@ -112,121 +120,121 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
         usda: [null, Validators.required],
       }) ,
       fha: this.fb.group({
-        downPayment: ['', Validators.required],
-        loanTerm: ['', Validators.required],
-        loanRate: ['', Validators.required],
-        housingRatio: ['', Validators.required],
-        debtRatio: ['', Validators.required],
+        downPayment: [null, Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         mortgageInsuranceUnder: this.fb.group({
-          fundingFee: ['', Validators.required],
-          monthlyMiUnder: ['', Validators.required],
-          monthlyMiOver: ['', Validators.required],
+          fundingFee: [null, Validators.required],
+          monthlyMiUnder: [null, Validators.required],
+          monthlyMiOver: [null, Validators.required],
         }),
         mortgageInsuranceAbove: this.fb.group({
-          fundingFee: ['', Validators.required],
-          monthlyMiUnder: ['', Validators.required],
-          monthlyMiOver: ['', Validators.required],
+          fundingFee: [null, Validators.required],
+          monthlyMiUnder: [null, Validators.required],
+          monthlyMiOver: [null, Validators.required],
         }),
         reserves: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: [null, Validators.required],
+          twoUnit: [null, Validators.required],
+          threeToFourUnit: [null, Validators.required],
         }),
-        additionalReserves: ['', Validators.required],
+        additionalReserves: [null, Validators.required],
       }),
       conventional: this.fb.group({
-        loanTerm: ['', Validators.required],
-        loanRate: ['', Validators.required],
-        housingRatio: ['', Validators.required],
-        debtRatio: ['', Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         privateMortgageInsurance: this.fb.group({
-          fivePercentDown: ['', Validators.required],
-          tenPercentDown: ['', Validators.required],
-          fifteenPercentDown: ['', Validators.required],
+          fivePercentDown: [null, Validators.required],
+          tenPercentDown: [null, Validators.required],
+          fifteenPercentDown: [null, Validators.required],
         }),
         downPayment: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: [null, Validators.required],
+          twoUnit: [null, Validators.required],
+          threeToFourUnit: [null, Validators.required],
         }),
         reserves: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: [null, Validators.required],
+          twoUnit: [null, Validators.required],
+          threeToFourUnit: [null, Validators.required],
         }),
-        additionalReserves: ['', Validators.required],
+        additionalReserves: [null, Validators.required],
       }),
       homePossible: this.fb.group({
-        loanTerm: ['', Validators.required],
-        loanRate: ['', Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
         downPayment: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: [null, Validators.required],
+          twoUnit: [null, Validators.required],
+          threeToFourUnit: [null, Validators.required],
         }),
-        housingRatio: ['', Validators.required],
-        debtRatio: ['', Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         privateMortgageInsurance: this.fb.group({
-          threePercentDown: ['', Validators.required],
-          fivePercentDown: ['', Validators.required],
-          tenPercentDown: ['', Validators.required],
-          fifteenPercentDown: ['', Validators.required],
+          threePercentDown: [null, Validators.required],
+          fivePercentDown: [null, Validators.required],
+          tenPercentDown: [null, Validators.required],
+          fifteenPercentDown: [null, Validators.required],
         }),
         reserves: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: [null, Validators.required],
+          twoUnit: [null, Validators.required],
+          threeToFourUnit: [null, Validators.required],
         }),
-        additionalReserves: ['', Validators.required],
+        additionalReserves: [null, Validators.required],
       }),
       homeReady: this.fb.group({
-        loanTerm: ['', Validators.required],
-        loanRate: ['', Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
         downPayment: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: [null, Validators.required],
+          twoUnit: [null, Validators.required],
+          threeToFourUnit: [null, Validators.required],
         }),
-        housingRatio: ['', Validators.required],
-        debtRatio: ['', Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         privateMortgageInsurance: this.fb.group({
-          threePercentDown: ['', Validators.required],
-          fivePercentDown: ['', Validators.required],
-          tenPercentDown: ['', Validators.required],
-          fifteenPercentDown: ['', Validators.required],
+          threePercentDown: [null, Validators.required],
+          fivePercentDown: [null, Validators.required],
+          tenPercentDown: [null, Validators.required],
+          fifteenPercentDown: [null, Validators.required],
         }),
         reserves: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: [null, Validators.required],
+          twoUnit: [null, Validators.required],
+          threeToFourUnit: [null, Validators.required],
         }),
-        additionalReserves: ['', Validators.required],
+        additionalReserves: [null, Validators.required],
       }),
       va: this.fb.group({
-        downPayment: ['', Validators.required],
-        loanTerm: ['', Validators.required],
-        loanRate: ['', Validators.required],
-        housingRatio: ['', Validators.required],
-        debtRatio: ['', Validators.required],
-        veteranType: ['', Validators.required],
+        downPayment: [null, Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
+        veteranType: [null, Validators.required],
         reserves: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: [null, Validators.required],
+          twoUnit: [null, Validators.required],
+          threeToFourUnit: [null, Validators.required],
         }),
-        additionalReserves: ['', Validators.required],
+        additionalReserves: [null, Validators.required],
       }),
       usda: this.fb.group({
-        downPayment: ['', Validators.required],
-        loanTerm: ['', Validators.required],
-        loanRate: ['', Validators.required],
-        housingRatio: ['', Validators.required],
-        debtRatio: ['', Validators.required],
+        downPayment: [null, Validators.required],
+        loanTerm: [null, Validators.required],
+        loanRate: [null, Validators.required],
+        housingRatio: [null, Validators.required],
+        debtRatio: [null, Validators.required],
         mortgageInsurance: this.fb.group({
-          fundingFee: ['', Validators.required],
-          monthlyMi: ['', Validators.required],
+          fundingFee: [null, Validators.required],
+          monthlyMi: [null, Validators.required],
         }),
-        reserves: ['', Validators.required],
+        reserves: [null, Validators.required],
       })
     });
   }
