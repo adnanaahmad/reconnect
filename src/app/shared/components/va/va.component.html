@@ -6,16 +6,22 @@
           <div class="loan-heading"><p>Loan Details</p></div>
           <div class="row d-flex loan-label">
              <div class="col-4 form-group">
-                <label><p>Down Payment</p></label>
-                <input formControlName="downPayment" type="" class="form-control" placeholder="">
+                <label><p [style.color]=" finance.get(['va', 'downPayment']).invalid && finance.get(['va', 'downPayment']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                    Down Payment</p></label>
+                <input [class.is-invalid]="finance.get(['va', 'downPayment']).invalid && finance.get(['va', 'downPayment']).touched"
+                       suffix="%" mask="0*.0000" formControlName="downPayment" type="text" class="form-control" placeholder="">
              </div>
              <div class="col-4 form-group">
-               <label><p>Loan Term</p></label>
-               <input formControlName="loanTerm" type="" class="form-control" placeholder="">
+               <label><p [style.color]=" finance.get(['va', 'loanTerm']).invalid && finance.get(['va', 'loanTerm']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                   Loan Term</p></label>
+               <input [class.is-invalid]="finance.get(['va', 'loanTerm']).invalid && finance.get(['va', 'loanTerm']).touched"
+                      suffix=" year(s)" mask="0*" formControlName="loanTerm" type="" class="form-control" placeholder="">
              </div>
              <div class="col-4 form-group">
-               <label><p>Loan Rate</p></label>
-               <input formControlName="loanRate" type="" class="form-control" placeholder="">
+               <label><p [style.color]=" finance.get(['va', 'loanRate']).invalid && finance.get(['va', 'loanRate']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                   Loan Rate</p></label>
+               <input [class.is-invalid]="finance.get(['va', 'loanRate']).invalid && finance.get(['va', 'loanRate']).touched "
+                      suffix="%" mask="0*.0000" formControlName="loanRate" type="" class="form-control" placeholder="">
              </div>
           </div>
        </div>
@@ -23,12 +29,16 @@
           <div class="loan-heading"><p>Ratios</p></div>
           <div class="row d-flex loan-label">
              <div class="col-4 form-group">
-                <label><p>Housing Ratio</p></label>
-                <input formControlName="housingRatio" type="" class="form-control" placeholder="">
+                <label><p [style.color]=" finance.get(['va', 'housingRatio']).invalid && finance.get(['va', 'housingRatio']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                    Housing Ratio</p></label>
+                <input [class.is-invalid]="finance.get(['va', 'housingRatio']).invalid && finance.get(['va', 'housingRatio']).touched"
+                       suffix="%" mask="0*.0000" formControlName="housingRatio" type="" class="form-control" placeholder="">
              </div>
              <div class="col-4 form-group">
-               <label><p>Debt Ratio</p></label>
-               <input formControlName="debtRatio" type="" class="form-control" placeholder="">
+               <label><p [style.color]=" finance.get(['va', 'debtRatio']).invalid && finance.get(['va', 'debtRatio']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                   Debt Ratio</p></label>
+               <input [class.is-invalid]="finance.get(['va', 'debtRatio']).invalid && finance.get(['va', 'debtRatio']).touched"
+                      suffix="%" mask="0*.0000" formControlName="debtRatio" type="" class="form-control" placeholder="">
              </div>
           </div>
         </div>
@@ -36,8 +46,10 @@
             <div class="loan-heading"><p>Mortgage Insurance "Select Veteran Type"</p></div>
             <div class="row d-flex loan-label">
                <div class="col-4 form-group">
-                  <label><p>Type of Veteran</p></label>
-                  <input formControlName="veteranType" type="" class="form-control" placeholder="">
+                  <label><p [style.color]=" finance.get(['va', 'veteranType']).invalid && finance.get(['va', 'veteranType']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                      Type of Veteran</p></label>
+                  <input [class.is-invalid]="finance.get(['va', 'veteranType']).invalid && finance.get(['va', 'veteranType']).touched"
+                         formControlName="veteranType" type="" class="form-control" placeholder="">
                </div>
             </div>
         </div>
@@ -45,16 +57,22 @@
             <div class="loan-heading"><p>Reserves Needed</p></div>
             <div class="row d-flex loan-label">
                 <div class="col-4 form-group">
-                    <label><p>1 Unit</p></label>
-                    <input formControlName="oneUnit" type="number" class="form-control">
+                    <label><p [style.color]=" finance.get(['va', 'reserves', 'oneUnit']).invalid && finance.get(['va', 'reserves', 'oneUnit']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                        1 Unit</p></label>
+                    <input [class.is-invalid]="finance.get(['va', 'reserves', 'oneUnit']).invalid && finance.get(['va', 'reserves', 'oneUnit']).touched"
+                           formControlName="oneUnit" type="number" class="form-control">
                 </div>
                 <div class="col-4 form-group">
-                    <label><p>2 Unit</p></label>
-                    <input formControlName="twoUnit" type="number" class="form-control">
+                    <label><p [style.color]=" finance.get(['va', 'reserves', 'twoUnit']).invalid && finance.get(['va', 'reserves', 'twoUnit']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                        2 Unit</p></label>
+                    <input [class.is-invalid]="finance.get(['va', 'reserves', 'twoUnit']).invalid && finance.get(['va', 'reserves', 'twoUnit']).touched"
+                           formControlName="twoUnit" type="number" class="form-control">
                 </div>
                 <div class="col-4 form-group">
-                    <label><p>3-4 Unit</p></label>
-                    <input formControlName="threeToFourUnit" type="number" class="form-control">
+                    <label><p [style.color]=" finance.get(['va', 'reserves', 'threeToFourUnit']).invalid && finance.get(['va', 'reserves', 'threeToFourUnit']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                        3-4 Unit</p></label>
+                    <input [class.is-invalid]="finance.get(['va', 'reserves', 'threeToFourUnit']).invalid && finance.get(['va', 'reserves', 'threeToFourUnit']).touched"
+                           formControlName="threeToFourUnit" type="number" class="form-control">
                 </div>
             </div>
         </div>
@@ -62,8 +80,10 @@
             <div class="loan-heading"><p>Additional Reserves Needed</p></div>
             <div class="row d-flex loan-label">
                 <div class="col-4 form-group">
-                    <label><p>Reserves</p></label>
-                    <input formControlName="additionalReserves" type="" class="form-control" placeholder="">
+                    <label><p [style.color]=" finance.get(['va', 'additionalReserves']).invalid && finance.get(['va', 'additionalReserves']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                        Reserves</p></label>
+                    <input [class.is-invalid]="finance.get(['va', 'additionalReserves']).invalid && finance.get(['va', 'additionalReserves']).touched "
+                           formControlName="additionalReserves" type="" class="form-control" placeholder="">
                 </div>
             </div>
         </div>
