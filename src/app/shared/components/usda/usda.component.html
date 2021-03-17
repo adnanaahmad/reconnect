@@ -1,59 +1,90 @@
 <div class="parent" [formGroup]="finance">
-<div formGroupName="usda">
-   <div class="loan-type"><p>USDA</p></div>
-   <div class="loan-form">
-     <div class="loan-detail row-space">
-         <div class="loan-heading"><p>Loan Details</p></div>
-         <div class="row d-flex loan-label">
-            <div class="col-4 form-group">
-               <label><p>Down Payment</p></label>
-               <input suffix="%" mask="0*.0000" formControlName="downPayment" type="text" class="form-control" placeholder="">
+    <div formGroupName="usda">
+        <div class="loan-type"><p>USDA</p></div>
+        <div class="loan-form">
+            <div class="loan-detail row-space">
+                <div class="loan-heading"><p>Loan Details</p></div>
+                <div class="row d-flex loan-label">
+                    <div class="col-4 form-group">
+                        <label><p
+                                [style.color]=" finance.get(['usda', 'downPayment']).invalid && finance.get(['usda', 'downPayment']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                            Down Payment</p></label>
+                        <input [class.is-invalid]="finance.get(['usda', 'downPayment']).invalid && finance.get(['usda', 'downPayment']).touched"
+                               suffix="%" mask="0*.0000" formControlName="downPayment" type="text" class="form-control"
+                               placeholder="">
+                    </div>
+                    <div class="col-4 form-group">
+                        <label><p
+                                [style.color]=" finance.get(['usda', 'loanTerm']).invalid && finance.get(['usda', 'loanTerm']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                            Loan Term</p></label>
+                        <input [class.is-invalid]="finance.get(['usda', 'loanTerm']).invalid && finance.get(['usda', 'loanTerm']).touched"
+                               suffix=" year(s)" mask="0*" formControlName="loanTerm" type="text" class="form-control"
+                               placeholder="">
+                    </div>
+                    <div class="col-4 form-group">
+                        <label><p
+                                [style.color]=" finance.get(['usda', 'loanRate']).invalid && finance.get(['usda', 'loanRate']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                            Loan Rate</p></label>
+                        <input [class.is-invalid]="finance.get(['usda', 'loanRate']).invalid && finance.get(['usda', 'loanRate']).touched"
+                               suffix="%" mask="0*.0000" formControlName="loanRate" type="text" class="form-control"
+                               placeholder="">
+                    </div>
+                </div>
             </div>
-            <div class="col-4 form-group">
-              <label><p>Loan Term</p></label>
-              <input suffix=" year(s)" mask="0*" formControlName="loanTerm" type="text" class="form-control" placeholder="">
+            <div class="ratios row-space">
+                <div class="loan-heading"><p>Ratios</p></div>
+                <div class="row d-flex loan-label">
+                    <div class="col-4 form-group">
+                        <label><p
+                                [style.color]=" finance.get(['usda', 'housingRatio']).invalid && finance.get(['usda', 'housingRatio']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                            Housing Ratio</p></label>
+                        <input [class.is-invalid]="finance.get(['usda', 'housingRatio']).invalid && finance.get(['usda', 'housingRatio']).touched "
+                               suffix="%" mask="0*.0000" formControlName="housingRatio" type="text" class="form-control"
+                               placeholder="">
+                    </div>
+                    <div class="col-4 form-group">
+                        <label><p
+                                [style.color]=" finance.get(['usda', 'debtRatio']).invalid && finance.get(['usda', 'debtRatio']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                            Debt Ratio</p></label>
+                        <input [class.is-invalid]="finance.get(['usda', 'debtRatio']).invalid && finance.get(['usda', 'debtRatio']).touched"
+                               suffix="%" mask="0*.0000" formControlName="debtRatio" type="text" class="form-control"
+                               placeholder="">
+                    </div>
+                </div>
             </div>
-            <div class="col-4 form-group">
-              <label><p>Loan Rate</p></label>
-              <input suffix="%" mask="0*.0000" formControlName="loanRate" type="text" class="form-control" placeholder="">
+            <div class="mortgage-under row-space" formGroupName="mortgageInsurance">
+                <div class="loan-heading"><p>Mortgage Insurance</p></div>
+                <div class="row d-flex loan-label">
+                    <div class="col-4 form-group">
+                        <label><p
+                                [style.color]=" finance.get(['usda', 'mortgageInsurance', 'fundingFee']).invalid && finance.get(['usda', 'mortgageInsurance', 'fundingFee']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                            Funding Fee</p></label>
+                        <input [class.is-invalid]="finance.get(['usda', 'mortgageInsurance', 'fundingFee']).invalid && finance.get(['usda', 'mortgageInsurance', 'fundingFee']).touched"
+                               suffix="%" mask="0*.0000" formControlName="fundingFee" type="text" class="form-control"
+                               placeholder="">
+                    </div>
+                    <div class="col-4 form-group">
+                        <label><p
+                                [style.color]=" finance.get(['usda', 'mortgageInsurance', 'monthlyMi']).invalid && finance.get(['usda', 'mortgageInsurance', 'monthlyMi']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                            Monthly MI</p></label>
+                        <input [class.is-invalid]="finance.get(['usda', 'mortgageInsurance', 'monthlyMi']).invalid && finance.get(['usda', 'mortgageInsurance', 'monthlyMi']).touched"
+                               suffix="%" mask="0*.0000" formControlName="monthlyMi" type="text" class="form-control"
+                               placeholder="">
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-       <div class="ratios row-space">
-         <div class="loan-heading"><p>Ratios</p></div>
-         <div class="row d-flex loan-label">
-            <div class="col-4 form-group">
-               <label><p>Housing Ratio</p></label>
-               <input suffix="%" mask="0*.0000" formControlName="housingRatio" type="text" class="form-control" placeholder="">
+            <div class="add-reserve row-space">
+                <div class="loan-heading"><p>Additional Reserves Needed</p></div>
+                <div class="row d-flex loan-label">
+                    <div class="col-4 form-group">
+                        <label><p
+                                [style.color]=" finance.get(['usda', 'reserves']).invalid && finance.get(['usda', 'reserves']).touched ? 'var(--red)' : 'var(--lighGray)'">
+                            Reserves</p></label>
+                        <input [class.is-invalid]="finance.get(['usda', 'reserves']).invalid && finance.get(['usda', 'reserves']).touched"
+                               formControlName="reserves" type="" class="form-control" placeholder="">
+                    </div>
+                </div>
             </div>
-            <div class="col-4 form-group">
-              <label><p>Debt Ratio</p></label>
-              <input suffix="%" mask="0*.0000" formControlName="debtRatio" type="text" class="form-control" placeholder="">
-            </div>
-         </div>
-       </div>
-       <div class="mortgage-under row-space" formGroupName="mortgageInsurance">
-           <div class="loan-heading"><p>Mortgage Insurance</p></div>
-           <div class="row d-flex loan-label">
-              <div class="col-4 form-group">
-                 <label><p>Funding Fee</p></label>
-                 <input suffix="%" mask="0*.0000" formControlName="fundingFee" type="text" class="form-control" placeholder="">
-              </div>
-              <div class="col-4 form-group">
-                <label><p>Monthly MI</p></label>
-                <input suffix="%" mask="0*.0000" formControlName="monthlyMi" type="text" class="form-control" placeholder="">
-              </div>
-           </div>
-       </div>
-       <div class="add-reserve row-space">
-           <div class="loan-heading"><p>Additional Reserves Needed</p></div>
-           <div class="row d-flex loan-label">
-              <div class="col-4 form-group">
-                 <label><p>Reserves</p></label>
-                 <input formControlName="reserves" type="" class="form-control" placeholder="">
-              </div>
-           </div>
-       </div>
- </div>
-</div>
+        </div>
+    </div>
 </div>
