@@ -58,3 +58,10 @@
 p{
   font-family: 'Poppins';
 }
+.form-control.is-invalid:focus{
+  border-color: var(--red);
+}
+.form-control.is-invalid{
+  border-color: var(--extraLightGray);
+}
+
