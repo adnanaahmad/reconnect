@@ -147,7 +147,7 @@
                                      src="{{groupMembersProfileImage(message.createdBy)}}" class="mr-custom">
                                 <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT" class="receive"
                                    [innerHTML]="message.text | highlight: searchTerm"></p>
-                                <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY"
+                                <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY || message.type === constant.chatMessageType.MESSAGE_TYPE_SHARE_PROPERTY"
                                    [href]="message.shareMeta.propertyUrl" target="_blank">
                                     <p class="receive"
                                        [innerHTML]="message.text + ': ' + message.shareMeta.propertyUrl | highlight: searchTerm"></p>
