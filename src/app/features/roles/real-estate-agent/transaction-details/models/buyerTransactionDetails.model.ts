@@ -14,12 +14,8 @@ export interface BuyerTransactionDetailsModel {
 }
 
 interface TransactionDetailsModel {
-  purchasePrice: number;
-  closingDate: Date;
-  commitmentDate: Date;
-  commissionAmount: number;
+  commissionAmount: string;
   listingAgent: string;
-  sellerCredit: number;
+  sellerCredit: string;
   homeInspectionDate: Date;
-  purchaseSalesDate: Date;
 }

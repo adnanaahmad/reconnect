@@ -49,7 +49,10 @@ export class TransactionDetailsComponent implements OnInit {
         closed: [{value: null, disabled: true}, Validators.required],
       }),
       dealClosingDate: [null],
-      commitmentDate: [null]
+      commitmentDate: [null],
+      'targetProperty.listPrice': [null],
+      purchaseAndSalesDate: [null],
+      dealCancelled: [false]
     });
   }
   getLoanDetails(): void{
@@ -69,16 +72,15 @@ export class TransactionDetailsComponent implements OnInit {
       this.transactionDetails.finance.patchValue({
         commitmentDate: res.commitmentDate ? this.dateFormat.fromModel(new Date(res.commitmentDate)) : null,
         dealClosingDate: res.dealClosingDate ? this.dateFormat.fromModel(new Date(res.dealClosingDate)) : null,
+        purchaseAndSalesDate: res.purchaseAndSalesDate ? this.dateFormat.fromModel(new Date(res.purchaseAndSalesDate)) : null,
+        'targetProperty.listPrice': res.targetProperty ? res.targetProperty.listPrice : null,
+        dealCancelled: res.dealCancelled ? res.dealCancelled : false
       });
       this.transactionDetails.transactionDetails = {
-        purchasePrice: 200000,
-        closingDate: new Date('2020-03-03'),
-        commitmentDate: new Date('2020-03-03'),
-        commissionAmount: 2.5,
-        listingAgent: 'Jose Smith / Remax Professionals',
-        sellerCredit: res.sellerCredit,
-        homeInspectionDate: new Date('2020-03-03'),
-        purchaseSalesDate: new Date('2020-03-03')
+        commissionAmount: res.targetProperty ? res.targetProperty.xf_buyer_broker_comp + '%' : 'N.A.',
+        listingAgent: res.targetProperty ? res.targetProperty.listingAgent.name : 'N.A.',
+        sellerCredit: res.sellerCredit ? '$' + res.sellerCredit : 'N.A.',
+        homeInspectionDate: res.homeInspectionDate,
       };
       this.transactionDetails.loader = true;
     }, error => {
@@ -87,6 +89,8 @@ export class TransactionDetailsComponent implements OnInit {
   }
   onSubmit(): void{
     const data = {
+      purchaseAndSalesDate: this.transactionDetails.finance.get('purchaseAndSalesDate').value ? new Date(new DatePipe('en-US').transform(
+          this.dateFormat.toModel(this.transactionDetails.finance.get('purchaseAndSalesDate').value), 'yyyy-MM-dd')).toISOString() : null,
       commitmentDate: this.transactionDetails.finance.get('commitmentDate').value ?
           new Date(new DatePipe('en-US').transform(this.dateFormat.toModel(this.transactionDetails.finance.get('commitmentDate').value), 'yyyy-MM-dd')).toISOString() : null,
       dealClosingDate: this.transactionDetails.finance.get('dealClosingDate').value ?

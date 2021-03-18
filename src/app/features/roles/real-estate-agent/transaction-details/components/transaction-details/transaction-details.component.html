@@ -13,72 +13,67 @@
                 <button type="submit" class="lineage-button">Save</button>
                 <button type="button" class="lineage-button mt-auto">View Lineage</button>
             </div>
-<!--            <div class="lead align-self-end">-->
-<!--                 <p class="assign-lead">Assign lead</p>-->
-<!--                 <div class="lead-info d-flex">-->
-<!--                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcssCmrKykaX2QK3Y-J6_IfIvq9nvGZ0YwHQ&usqp=CAU">-->
-<!--                    <p class="align-self-center">James Kation</p>-->
-<!--                 </div>-->
-<!--                 <div class="d-flex">-->
-<!--                     <p class="split-text align-self-center">Split:</p>-->
-<!--                     <div class="d-flex percent">-->
-<!--                          <p>50%</p>-->
-<!--                          <p>50%</p>-->
-<!--                     </div>-->
-<!--                 </div>-->
-<!--            </div>-->
        </div>
        <div class="transaction">
            <p class="heading-sub bottom">Transaction Process</p>
            <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
        </div>
        <div class="mt-auto">
-           <div class="d-flex">
-               <p class="heading-sub">Transaction Details</p>
-               <div class="d-flex ml-auto date-parent">
-                   <p class="date align-self-center">Commitment Date:</p>
-                   <input class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
-                          name="dp" formControlName="commitmentDate"  ngbDatepicker #d="ngbDatepicker">
-                   <img class="calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="d.toggle()">
-               </div>
-           </div>
-           <div class="d-flex ml-auto date-parent bottom justify-content-end">
-               <p class="date align-self-center">Closing Date:</p>
-               <input class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
-                      name="dp" formControlName="dealClosingDate"  ngbDatepicker #d1="ngbDatepicker">
-               <img class="calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="d1.toggle()">
-           </div>
+           <p class="heading-sub">Transaction Details</p>
           <div class="details">
-               <div class="row">
-                  <div class="col-6 d-flex">
-                      <div class="div-1">
+               <div class="d-flex parent-c">
+                  <div class="d-flex c1">
+                      <div class="div-1 d-flex flex-column">
                           <p class="text-nowrap">Purchase Price:</p>
                           <p class="text-nowrap">Closing Date:</p>
                           <p class="text-nowrap">Commitment Date:</p>
-                          <p class="text-nowrap">Commission Amount:</p>
-                          <p class="text-nowrap">Listing Agent:</p>
+                          <p class="text-nowrap">Purchase & Sales Date</p>
                       </div>
-                      <div class="div-2">
-                          <p>${{transactionDetails.transactionDetails.purchasePrice}}</p>
-                          <p>{{transactionDetails.transactionDetails.closingDate | date: 'MM/dd/yyyy'}}</p>
-                          <p>{{transactionDetails.transactionDetails.commitmentDate | date: 'MM/dd/yyyy'}}</p>
-                          <p>{{transactionDetails.transactionDetails.commissionAmount}}</p>
-                          <p class="text-nowrap">{{transactionDetails.transactionDetails.listingAgent}}</p>
+                      <div class="d-flex flex-column">
+                          <div class="d-flex">
+                              <input class="form-control f1 custom-mb" placeholder=""
+                                     name="dp" formControlName="targetProperty.listPrice">
+                              <p class="unit dollar">$</p>
+                          </div>
+                          <div class="d-flex">
+                              <input class="form-control f1 custom-mb" placeholder="yyyy-mm-dd"
+                                     name="dp" formControlName="dealClosingDate"  ngbDatepicker #d1="ngbDatepicker">
+                              <img class="calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="d1.toggle()">
+                          </div>
+                          <div class="d-flex">
+                              <input class="form-control f1 custom-mb" placeholder="yyyy-mm-dd"
+                                     name="dp" formControlName="commitmentDate"  ngbDatepicker #d2="ngbDatepicker">
+                              <img class="calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="d2.toggle()">
+                          </div>
+                          <div class="d-flex">
+                              <input class="form-control f1" placeholder="yyyy-mm-dd"
+                                     name="dp" formControlName="purchaseAndSalesDate"  ngbDatepicker #d3="ngbDatepicker">
+                              <img class="calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="d3.toggle()">
+                          </div>
                       </div>
                   </div>
-                  <div class="col-6 d-flex details-1 justify-content-between">
-                    <div class="div-1">
-                          <p>Seller Credit:</p>
-                          <p>House Inspection Date:</p>
-                          <p>Purchase & Sales Date</p>
+                  <div class="d-flex justify-content-between">
+                    <div class="div-1 d-flex flex-column">
+                        <p class="text-nowrap">Commission Amount:</p>
+                        <p class="text-nowrap">Seller Credit:</p>
+                          <p class="text-nowrap">House Inspection Date:</p>
+                          <p class="text-nowrap">Listing Agent:</p>
                     </div>
-                    <div class="div-2">
+                    <div class="div-2 d-flex flex-column">
+                          <p>{{transactionDetails.transactionDetails.commissionAmount}}</p>
                           <p>{{transactionDetails.transactionDetails.sellerCredit}}</p>
-                          <p>{{transactionDetails.transactionDetails.homeInspectionDate | date: 'MM/dd/yyyy'}}</p>
-                          <p>{{transactionDetails.transactionDetails.purchaseSalesDate | date: 'MM/dd/yyyy'}}</p>
+                          <p *ngIf="transactionDetails.transactionDetails.homeInspectionDate">{{transactionDetails.transactionDetails.homeInspectionDate | date: 'MM/dd/yyyy'}}</p>
+                          <p *ngIf="!transactionDetails.transactionDetails.homeInspectionDate">N.A.</p>
+                          <p class="text-nowrap">{{transactionDetails.transactionDetails.listingAgent}}</p>
                     </div>
                   </div>
                </div>
+              <div>
+                  <label class="container"><p class="cancel">Cancelled Deal</p>
+                      <input type="checkbox"  formControlName="dealCancelled" [checked]="">
+                      <img class="checkmark" src="/assets/loan-details/tick.svg">
+                  </label>
+              </div>
           </div>
        </div>
   </div>
