@@ -6,6 +6,8 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
 import {NgxImageCompressService} from 'ngx-image-compress';
+import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
+import {AbstractControl} from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
@@ -116,5 +118,12 @@ export class HelperService {
     const blob = new Blob([int8Array], { type: 'image/jpeg' });
     return blob;
   }
-
+  downPaymentValidator(value: any): ValidateFn<any> {
+    return (control: AbstractControl): any => {
+      if ( parseFloat(control.value) < parseFloat(value)) {
+        return { downPayment: true };
+      }
+      return null;
+    };
+  }
 }

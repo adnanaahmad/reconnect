@@ -10,7 +10,7 @@
                                 [style.color]=" finance.get(['usda', 'downPayment']).invalid && finance.get(['usda', 'downPayment']).touched ? 'var(--red)' : 'var(--lighGray)'">
                             Down Payment</p></label>
                         <input [class.is-invalid]="finance.get(['usda', 'downPayment']).invalid && finance.get(['usda', 'downPayment']).touched"
-                               suffix="%" mask="0*.0000" formControlName="downPayment" type="text" class="form-control"
+                               suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="downPayment" type="text" class="form-control"
                                placeholder="">
                     </div>
                     <div class="col-4 form-group">
@@ -26,7 +26,7 @@
                                 [style.color]=" finance.get(['usda', 'loanRate']).invalid && finance.get(['usda', 'loanRate']).touched ? 'var(--red)' : 'var(--lighGray)'">
                             Loan Rate</p></label>
                         <input [class.is-invalid]="finance.get(['usda', 'loanRate']).invalid && finance.get(['usda', 'loanRate']).touched"
-                               suffix="%" mask="0*.0000" formControlName="loanRate" type="text" class="form-control"
+                               suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="loanRate" type="text" class="form-control"
                                placeholder="">
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                                 [style.color]=" finance.get(['usda', 'housingRatio']).invalid && finance.get(['usda', 'housingRatio']).touched ? 'var(--red)' : 'var(--lighGray)'">
                             Housing Ratio</p></label>
                         <input [class.is-invalid]="finance.get(['usda', 'housingRatio']).invalid && finance.get(['usda', 'housingRatio']).touched "
-                               suffix="%" mask="0*.0000" formControlName="housingRatio" type="text" class="form-control"
+                               suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="housingRatio" type="text" class="form-control"
                                placeholder="">
                     </div>
                     <div class="col-4 form-group">
@@ -47,7 +47,7 @@
                                 [style.color]=" finance.get(['usda', 'debtRatio']).invalid && finance.get(['usda', 'debtRatio']).touched ? 'var(--red)' : 'var(--lighGray)'">
                             Debt Ratio</p></label>
                         <input [class.is-invalid]="finance.get(['usda', 'debtRatio']).invalid && finance.get(['usda', 'debtRatio']).touched"
-                               suffix="%" mask="0*.0000" formControlName="debtRatio" type="text" class="form-control"
+                               suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="debtRatio" type="text" class="form-control"
                                placeholder="">
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                                 [style.color]=" finance.get(['usda', 'mortgageInsurance', 'fundingFee']).invalid && finance.get(['usda', 'mortgageInsurance', 'fundingFee']).touched ? 'var(--red)' : 'var(--lighGray)'">
                             Funding Fee</p></label>
                         <input [class.is-invalid]="finance.get(['usda', 'mortgageInsurance', 'fundingFee']).invalid && finance.get(['usda', 'mortgageInsurance', 'fundingFee']).touched"
-                               suffix="%" mask="0*.0000" formControlName="fundingFee" type="text" class="form-control"
+                               suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="fundingFee" type="text" class="form-control"
                                placeholder="">
                     </div>
                     <div class="col-4 form-group">
@@ -68,7 +68,7 @@
                                 [style.color]=" finance.get(['usda', 'mortgageInsurance', 'monthlyMi']).invalid && finance.get(['usda', 'mortgageInsurance', 'monthlyMi']).touched ? 'var(--red)' : 'var(--lighGray)'">
                             Monthly MI</p></label>
                         <input [class.is-invalid]="finance.get(['usda', 'mortgageInsurance', 'monthlyMi']).invalid && finance.get(['usda', 'mortgageInsurance', 'monthlyMi']).touched"
-                               suffix="%" mask="0*.0000" formControlName="monthlyMi" type="text" class="form-control"
+                               suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="monthlyMi" type="text" class="form-control"
                                placeholder="">
                     </div>
                 </div>

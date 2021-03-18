@@ -9,7 +9,7 @@
                 <label><p [style.color]=" finance.get(['va', 'downPayment']).invalid && finance.get(['va', 'downPayment']).touched ? 'var(--red)' : 'var(--lighGray)'">
                     Down Payment</p></label>
                 <input [class.is-invalid]="finance.get(['va', 'downPayment']).invalid && finance.get(['va', 'downPayment']).touched"
-                       suffix="%" mask="0*.0000" formControlName="downPayment" type="text" class="form-control" placeholder="">
+                       suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="downPayment" type="text" class="form-control" placeholder="">
              </div>
              <div class="col-4 form-group">
                <label><p [style.color]=" finance.get(['va', 'loanTerm']).invalid && finance.get(['va', 'loanTerm']).touched ? 'var(--red)' : 'var(--lighGray)'">
@@ -21,7 +21,7 @@
                <label><p [style.color]=" finance.get(['va', 'loanRate']).invalid && finance.get(['va', 'loanRate']).touched ? 'var(--red)' : 'var(--lighGray)'">
                    Loan Rate</p></label>
                <input [class.is-invalid]="finance.get(['va', 'loanRate']).invalid && finance.get(['va', 'loanRate']).touched "
-                      suffix="%" mask="0*.0000" formControlName="loanRate" type="" class="form-control" placeholder="">
+                      suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="loanRate" type="" class="form-control" placeholder="">
              </div>
           </div>
        </div>
@@ -32,13 +32,13 @@
                 <label><p [style.color]=" finance.get(['va', 'housingRatio']).invalid && finance.get(['va', 'housingRatio']).touched ? 'var(--red)' : 'var(--lighGray)'">
                     Housing Ratio</p></label>
                 <input [class.is-invalid]="finance.get(['va', 'housingRatio']).invalid && finance.get(['va', 'housingRatio']).touched"
-                       suffix="%" mask="0*.0000" formControlName="housingRatio" type="" class="form-control" placeholder="">
+                       suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="housingRatio" type="" class="form-control" placeholder="">
              </div>
              <div class="col-4 form-group">
                <label><p [style.color]=" finance.get(['va', 'debtRatio']).invalid && finance.get(['va', 'debtRatio']).touched ? 'var(--red)' : 'var(--lighGray)'">
                    Debt Ratio</p></label>
                <input [class.is-invalid]="finance.get(['va', 'debtRatio']).invalid && finance.get(['va', 'debtRatio']).touched"
-                      suffix="%" mask="0*.0000" formControlName="debtRatio" type="" class="form-control" placeholder="">
+                      suffix="%" mask="0*.0000" mask="separator.4" thousandSeparator="," formControlName="debtRatio" type="" class="form-control" placeholder="">
              </div>
           </div>
         </div>

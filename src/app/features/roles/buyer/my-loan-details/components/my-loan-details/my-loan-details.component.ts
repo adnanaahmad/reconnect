@@ -1,11 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {LoanDetailsModel} from '../../models/loanDetails.model';
 import {LoanDetailsService} from '../../services/loan-details.service';
 import {ToastrService} from 'ngx-toastr';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {take} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
+import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-my-loan-details',
@@ -19,7 +21,8 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private loadDetailsService: LoanDetailsService,
               private toaster: ToastrService,
-              private store: StoreService) { }
+              private store: StoreService,
+              private helper: HelperService) { }
 
   ngOnInit(): void {
     this.subscription = [];
@@ -27,7 +30,7 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
     this.store.updateProgressBarLoading(true);
     this.initializeLoanDetails();
     this.getLoanDetails();
-  //  this.loanDetails.finance.valueChanges.subscribe(newval => console.log(newval));
+    //this.loanDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.resetLoanType();
   }
   ngOnDestroy(): void {
@@ -36,32 +39,41 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
 
   onSubmit(): void{
     console.log(this.loanDetails.finance.value);
-    const data = {
-      fha: this.loanDetails.finance.get(['toggle', 'fha']).value ? this.loanDetails.finance.get('fha').value : null,
-      usda: this.loanDetails.finance.get(['toggle', 'usda']).value ? this.loanDetails.finance.get('usda').value : null,
-      va: this.loanDetails.finance.get(['toggle', 'va']).value ? this.loanDetails.finance.get('va').value : null,
-      homePossible: this.loanDetails.finance.get(['toggle', 'homePossible']).value ?
-          this.loanDetails.finance.get('homePossible').value : null,
-      homeReady: this.loanDetails.finance.get(['toggle', 'homeReady']).value ? this.loanDetails.finance.get('homeReady').value : null,
-      conventional: this.loanDetails.finance.get(['toggle', 'conventional']).value ?
-          this.loanDetails.finance.get('conventional').value : null,
-    };
-    console.log(data);
-    this.validateLoanDetails();
-    this.loadDetailsService.setLoanDetails({...this.loanDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
-      console.log(res);
-      this.toaster.success('Saved');
-    }, error => {
-      console.log(error);
+    if (this.validateLoanDetails()) {
+      const data = {
+        fha: this.loanDetails.finance.get(['toggle', 'fha']).value ? this.loanDetails.finance.get('fha').value : null,
+        usda: this.loanDetails.finance.get(['toggle', 'usda']).value ? this.loanDetails.finance.get('usda').value : null,
+        va: this.loanDetails.finance.get(['toggle', 'va']).value ? this.loanDetails.finance.get('va').value : null,
+        homePossible: this.loanDetails.finance.get(['toggle', 'homePossible']).value ?
+            this.loanDetails.finance.get('homePossible').value : null,
+        homeReady: this.loanDetails.finance.get(['toggle', 'homeReady']).value ? this.loanDetails.finance.get('homeReady').value : null,
+        conventional: this.loanDetails.finance.get(['toggle', 'conventional']).value ?
+            this.loanDetails.finance.get('conventional').value : null,
+      };
+      console.log(data);
+      this.loadDetailsService.setLoanDetails({...this.loanDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
+        console.log(res);
+        this.toaster.success('Saved');
+      }, error => {
+        console.log(error);
+        this.toaster.error('Failed To Save');
+      });
+    } else{
       this.toaster.error('Failed To Save');
-    });
+    }
+
   }
-  validateLoanDetails(): void{
+  validateLoanDetails(): boolean{
+    let bool = true;
     Object.keys(this.loanDetails.finance.get('toggle').value).forEach(x => {
       if (this.loanDetails.finance.get(['toggle', x]).value){
-        console.log('validate : ', x, ' = ', !this.loanDetails.finance.get(x).invalid);
+        if (!this.loanDetails.finance.get(x).valid){
+          this.loanDetails.finance.markAllAsTouched();
+          bool = false;
+        }
       }
     });
+    return bool;
   }
   resetLoanType(): void{
     Object.keys(this.loanDetails.finance.get('toggle').value).forEach(key => {
@@ -153,9 +165,9 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
           fifteenPercentDown: [null, Validators.required],
         }),
         downPayment: this.fb.group({
-          oneUnit: [null, Validators.required],
-          twoUnit: [null, Validators.required],
-          threeToFourUnit: [null, Validators.required],
+          oneUnit: [null, [Validators.required, this.helper.downPaymentValidator(5)]],
+          twoUnit: [null, [Validators.required, this.helper.downPaymentValidator(5)]],
+          threeToFourUnit: [null, [Validators.required, this.helper.downPaymentValidator(5)]],
         }),
         reserves: this.fb.group({
           oneUnit: [null, Validators.required],
@@ -168,9 +180,9 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
         loanTerm: [null, Validators.required],
         loanRate: [null, Validators.required],
         downPayment: this.fb.group({
-          oneUnit: [null, Validators.required],
-          twoUnit: [null, Validators.required],
-          threeToFourUnit: [null, Validators.required],
+          oneUnit: [null, [Validators.required, this.helper.downPaymentValidator(3)]],
+          twoUnit: [null, [Validators.required, this.helper.downPaymentValidator(3)]],
+          threeToFourUnit: [null, [Validators.required, this.helper.downPaymentValidator(3)]],
         }),
         housingRatio: [null, Validators.required],
         debtRatio: [null, Validators.required],
@@ -191,9 +203,9 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
         loanTerm: [null, Validators.required],
         loanRate: [null, Validators.required],
         downPayment: this.fb.group({
-          oneUnit: [null, Validators.required],
-          twoUnit: [null, Validators.required],
-          threeToFourUnit: [null, Validators.required],
+          oneUnit: [null, [Validators.required, this.helper.downPaymentValidator(2)]],
+          twoUnit: [null, [Validators.required, this.helper.downPaymentValidator(2)]],
+          threeToFourUnit: [null, [Validators.required, this.helper.downPaymentValidator(2)]],
         }),
         housingRatio: [null, Validators.required],
         debtRatio: [null, Validators.required],
