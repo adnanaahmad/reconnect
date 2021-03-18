@@ -105,6 +105,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                     this.setFilters(params);
                     this.setDefaultLoanTypeWithQueryParams(params);
                     this.setSavedSearchId(params);
+                    this.setPageNumber(params);
                     this.applyFilters();
                 } else {
                     this.store.updateProgressBarLoading(true);
@@ -125,7 +126,11 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             })
         );
     }
-
+    setPageNumber(params): void {
+        if (params.pageNumber){
+            this.searchHome.pageNumber = params.pageNumber;
+        }
+    }
     setDefaultLoanTypeWithQueryParams(params): void {
         if (params.loanType) {
             this.store.updateToggleLoanType(params.loanType);
@@ -221,15 +226,16 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     saveSearch(): void {
         const data = this.filtersDataToQuery;
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
+        const page = this.searchHome.pageNumber ? `${data || loanType ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
         if (this.searchHome.savedSearchId) {
             this.searchHomeService.updateSearch(this.filtersObject, this.searchHome.savedSearchId).pipe(take(1)).subscribe(res => {
                 this.toaster.success('Updated Save Search');
                 this.searchHome.savedSearchId = null;
-                window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}`);
+                window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}`);
                 this.router.navigateByUrl('home/savedSearches').then();
             }, error => {
                 this.toaster.error('Failed To Update Save Search');
-                window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}`);
+                window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}`);
                 this.searchHome.savedSearchId = null;
             });
         } else {
@@ -252,17 +258,17 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     applyFilter(event): void {
         this.applyFilters(event);
     }
-
     applyFilters(events?): void {
         const data = this.filtersDataToQuery;
         console.log(data);
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
-        window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}`);
+        const page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
+        window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}`);
         const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
         this.store.updateProgressBarLoading(true);
-        this.searchHomeService.getHouses(data + sortBy + searchInput).pipe(take(1)).subscribe(res => {
+        this.searchHomeService.getHouses(data + sortBy + searchInput + page).pipe(take(1)).subscribe(res => {
             res = res.result;
             this.searchHome.homes = res.listings;
             this.searchHome.total = res.total;
@@ -314,6 +320,8 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     pageChange(pageNumber): void {
         console.log(pageNumber);
         const data = this.filtersDataToQuery;
+        const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
+        const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
         const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
         this.searchHomeService.getHouses(`${data}&pageNumber=${pageNumber}${sortBy}${searchInput}`).pipe(take(1)).subscribe(res => {
@@ -323,6 +331,8 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             this.searchHome.pageNumber = res.paging.number;
             this.searchHome.loan = res.userLoan;
             this.setDefaultLoanType();
+            const page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
+            window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}`);
         }, error => {
             console.log(error);
         });
@@ -406,6 +416,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const data = this.filtersDataToQuery;
         const savedSearchId = this.searchHome.savedSearchId ?
             `${data || queryParam ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
-        window.history.replaceState({}, '', `/home/searchHomes?${data}${data ? '&' : ''}loanType=${queryParam}${savedSearchId}`);
+        const page = this.searchHome.pageNumber ? `${data || queryParam || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
+        window.history.replaceState({}, '', `/home/searchHomes?${data}${data ? '&' : ''}loanType=${queryParam}${savedSearchId}${page}`);
     }
 }
