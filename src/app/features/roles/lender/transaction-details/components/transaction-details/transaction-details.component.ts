@@ -11,6 +11,7 @@ import {ToastrService} from 'ngx-toastr';
 import {DatePipe, Location} from '@angular/common';
 import {NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import {Subscription} from 'rxjs';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-transaction-details',
@@ -25,7 +26,8 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
               private activatedRoute: ActivatedRoute,
               private toaster: ToastrService,
               public location: Location,
-              private dateFormat: NgbDateNativeAdapter) {
+              private dateFormat: NgbDateNativeAdapter,
+              private helper: HelperService) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
   }
@@ -43,27 +45,31 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void{
-    const data = {
-      lockExpiryDate: this.transactionDetails.finance.get('lockExpiryDate').value ?
-          new Date(new DatePipe('en-US').transform(this.dateFormat.toModel(this.transactionDetails.finance.get('lockExpiryDate').value), 'yyyy-MM-dd')).toISOString() : null,
-      borrowerId: this.transactionDetails.id,
-      fha: this.transactionDetails.finance.get(['toggle', 'fha']).value ? this.transactionDetails.finance.get('fha').value : null,
-      usda: this.transactionDetails.finance.get(['toggle', 'usda']).value ? this.transactionDetails.finance.get('usda').value : null,
-      va: this.transactionDetails.finance.get(['toggle', 'va']).value ? this.transactionDetails.finance.get('va').value : null,
-      homePossible: this.transactionDetails.finance.get(['toggle', 'homePossible']).value ? this.transactionDetails.finance.get('homePossible').value : null,
-      homeReady: this.transactionDetails.finance.get(['toggle', 'homeReady']).value ? this.transactionDetails.finance.get('homeReady').value : null,
-      conventional: this.transactionDetails.finance.get(['toggle', 'conventional']).value ? this.transactionDetails.finance.get('conventional').value : null,
-      processStatus: Object.keys(this.transactionDetails.finance.getRawValue().processStatus).
-      filter(x => this.transactionDetails.finance.getRawValue().processStatus[x]).slice(-1)[0]
-    };
-    //console.log(data);
-    this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
-      //console.log(res);
-      this.toaster.success('Saved');
-    }, error => {
-      //console.log(error);
+    if (this.validateLoanDetails()){
+      const data = {
+        lockExpiryDate: this.transactionDetails.finance.get('lockExpiryDate').value ?
+            new Date(new DatePipe('en-US').transform(this.dateFormat.toModel(this.transactionDetails.finance.get('lockExpiryDate').value), 'yyyy-MM-dd')).toISOString() : null,
+        borrowerId: this.transactionDetails.id,
+        fha: this.transactionDetails.finance.get(['toggle', 'fha']).value ? this.transactionDetails.finance.get('fha').value : null,
+        usda: this.transactionDetails.finance.get(['toggle', 'usda']).value ? this.transactionDetails.finance.get('usda').value : null,
+        va: this.transactionDetails.finance.get(['toggle', 'va']).value ? this.transactionDetails.finance.get('va').value : null,
+        homePossible: this.transactionDetails.finance.get(['toggle', 'homePossible']).value ? this.transactionDetails.finance.get('homePossible').value : null,
+        homeReady: this.transactionDetails.finance.get(['toggle', 'homeReady']).value ? this.transactionDetails.finance.get('homeReady').value : null,
+        conventional: this.transactionDetails.finance.get(['toggle', 'conventional']).value ? this.transactionDetails.finance.get('conventional').value : null,
+        processStatus: Object.keys(this.transactionDetails.finance.getRawValue().processStatus).
+        filter(x => this.transactionDetails.finance.getRawValue().processStatus[x]).slice(-1)[0]
+      };
+      //console.log(data);
+      this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
+        //console.log(res);
+        this.toaster.success('Saved');
+      }, error => {
+        //console.log(error);
+        this.toaster.error('Failed to save');
+      });
+    } else {
       this.toaster.error('Failed to save');
-    });
+    }
   }
   resetLoanType(): void{
     Object.keys(this.transactionDetails.finance.get('toggle').value).forEach(key => {
@@ -115,6 +121,18 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error);
     });
+  }
+  validateLoanDetails(): boolean{
+    let bool = true;
+    Object.keys(this.transactionDetails.finance.get('toggle').value).forEach(x => {
+      if (this.transactionDetails.finance.get(['toggle', x]).value){
+        if (!this.transactionDetails.finance.get(x).valid){
+          this.transactionDetails.finance.markAllAsTouched();
+          bool = false;
+        }
+      }
+    });
+    return bool;
   }
   initializeForm(): void{
     this.transactionDetails.finance  = this.fb.group({
@@ -175,9 +193,9 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
           fifteenPercentDown: ['', Validators.required],
         }),
         downPayment: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: ['', [Validators.required, this.helper.downPaymentValidator(5)]],
+          twoUnit: ['', [Validators.required, this.helper.downPaymentValidator(5)]],
+          threeToFourUnit: ['', [Validators.required, this.helper.downPaymentValidator(5)]],
         }),
         reserves: this.fb.group({
           oneUnit: ['', Validators.required],
@@ -190,9 +208,9 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
         loanTerm: ['', Validators.required],
         loanRate: ['', Validators.required],
         downPayment: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: ['', [Validators.required, this.helper.downPaymentValidator(3)]],
+          twoUnit: ['', [Validators.required, this.helper.downPaymentValidator(3)]],
+          threeToFourUnit: ['', [Validators.required, this.helper.downPaymentValidator(3)]],
         }),
         housingRatio: ['', Validators.required],
         debtRatio: ['', Validators.required],
@@ -213,9 +231,9 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
         loanTerm: ['', Validators.required],
         loanRate: ['', Validators.required],
         downPayment: this.fb.group({
-          oneUnit: ['', Validators.required],
-          twoUnit: ['', Validators.required],
-          threeToFourUnit: ['', Validators.required],
+          oneUnit: ['', [Validators.required, this.helper.downPaymentValidator(2)]],
+          twoUnit: ['', [Validators.required, this.helper.downPaymentValidator(2)]],
+          threeToFourUnit: ['', [Validators.required, this.helper.downPaymentValidator(2)]],
         }),
         housingRatio: ['', Validators.required],
         debtRatio: ['', Validators.required],
