@@ -263,7 +263,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         console.log(data);
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
-        const page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
+        let page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
         window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}`);
         const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
@@ -280,6 +280,8 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                 events.target.parentElement.parentElement.classList.toggle('show');
             }
             this.store.updateProgressBarLoading(false);
+            page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
+            window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}`);
         }, error => {
             console.log(error);
             this.store.updateProgressBarLoading(false);
