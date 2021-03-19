@@ -173,7 +173,7 @@
                 <div class="send-msg d-flex">
                     <div class=" input-box align-self-center">
                         <textarea #textArea formControlName="inputText" class="form-control"
-                                  id="exampleFormControlTextarea1" rows="1"></textarea>
+                                  id="exampleFormControlTextarea1" rows="1" placeholder="Write here ...."></textarea>
                     </div>
                     <emoji-mart *ngIf="chat.toggle" [darkMode]="false" [emojiSize]="16" (emojiClick)="addEmoji($event)"
                                 [emojiTooltip]="false"
