@@ -1,9 +1,7 @@
-<form [formGroup]="userProfile.profileForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="userProfile.profileForm">
   <div class="d-flex justify-content-between save-button">
     <h3>Edit Profile</h3>
-    <button  type="submit" [disabled]="!(userProfile.profileForm.get('firstName').valid &&
-     userProfile.profileForm.get('lastName').valid &&
-      userProfile.profileForm.get('phoneNumber').valid)"><p>Save</p></button>
+    <button  type="button" (click)="onSubmit()"><p>Save</p></button>
   </div>
   <div class="d-flex" *ngIf="userProfile.loader">
     <div class="column-1">
@@ -33,8 +31,8 @@
                 <input [class.is-invalid]="userProfile.profileForm.get('lastName').invalid&&userProfile.profileForm.get('lastName').touched" formControlName = "lastName" type="text" class="form-control f1" placeholder="">
             </div>
             <div class="form-group bio">
-              <p class="title">Bio</p>
-              <textarea formControlName = "bio" class="form-control f2" rows="3">
+              <p [ngClass]="{ 'danger': userProfile.profileForm.get('bio').invalid&&userProfile.profileForm.get('bio').touched}" class="title">Bio</p>
+              <textarea [class.is-invalid]="userProfile.profileForm.get('bio').invalid&&userProfile.profileForm.get('bio').touched" formControlName = "bio" class="form-control f2" rows="3">
               </textarea>
             </div>
             <div class="d-flex justify-content-between div-2 mb-custom">
@@ -81,9 +79,10 @@
                 </div>
               </div>
                 <div class="form-group row location">
-                    <p class="col-3 label col-form-label col-form-label">State:</p>
+                    <p [ngClass]="{ 'danger': userProfile.profileForm.get('state').invalid&&userProfile.profileForm.get('state').touched}" class="col-3 label col-form-label col-form-label">
+                        State:</p>
                     <div class="col-9">
-                        <select formControlName = "state"  class="form-control form-custom" (change) = "changeState(userProfile.profileForm.get('state').value)">
+                        <select [class.is-invalid]="userProfile.profileForm.get('state').invalid&&userProfile.profileForm.get('state').touched" formControlName = "state"  class="form-control form-custom" (change) = "changeState(userProfile.profileForm.get('state').value)">
                             <option [ngValue]="null" [disabled]="true" >Select State</option>
                             <option [value]="i.state_name" *ngFor="let i of userProfile.states">{{i.state_name}}</option>
                         </select>
@@ -109,7 +108,8 @@
             </div>
             <div class="card-2-margin-bottom col-md">
               <div formGroupName = "birthday" class="row">
-                <p class="col-3 label col-form-label col-form-label">Birthday:</p>
+                <p [ngClass]="{ 'danger': userProfile.profileForm.get('birthday').invalid&&userProfile.profileForm.get('birthday').touched}" class="col-3 label col-form-label col-form-label">
+                    Birthday:</p>
                 <div class="col-9 fields-class d-flex justify-content-between">
                   <div class="">
                     <select formControlName = "month"  class="form-control form-custom">
@@ -135,9 +135,9 @@
                 </div>
               </div>
                 <div class="form-group row location">
-                    <p class="col-3 label col-form-label col-form-label">City:</p>
+                    <p [ngClass]="{ 'danger': userProfile.profileForm.get('city').invalid&&userProfile.profileForm.get('city').touched}" class="col-3 label col-form-label col-form-label">City:</p>
                     <div class="col-9">
-                        <select formControlName = "city"  class="form-control form-custom">
+                        <select [class.is-invalid]="userProfile.profileForm.get('city').invalid&&userProfile.profileForm.get('city').touched" formControlName = "city"  class="form-control form-custom">
                             <option [ngValue]="null" [disabled]="true" >Select City</option>
                             <option [value]="i.city_name" *ngFor="let i of userProfile.cities">{{i.city_name}}</option>
                         </select>

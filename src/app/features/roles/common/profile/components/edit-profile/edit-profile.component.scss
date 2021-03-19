@@ -274,3 +274,6 @@ label{
 .danger{
   color:var(--red);
 }
+.form-control:disabled{
+  background: white;
+}

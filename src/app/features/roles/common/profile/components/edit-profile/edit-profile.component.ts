@@ -8,6 +8,7 @@ import {StoreService} from '../../../../../../core/store/store.service';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {DatePipe} from '@angular/common';
 import {take} from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -22,8 +23,9 @@ export class EditProfileComponent implements OnInit {
               private profile: ProfileService,
               private router: Router,
               private store: StoreService,
-              private  helper: HelperService,
-              private datePipe: DatePipe) {
+              private helper: HelperService,
+              private datePipe: DatePipe,
+              private toaster: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -63,22 +65,22 @@ export class EditProfileComponent implements OnInit {
       lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
       bio: [null, Validators.required],
       phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
-      gender: [null, Validators.required],
-      website: [null, Validators.required],
+      gender: [null],
+      website: [null],
       birthday: this.fb.group({
         month: [null, Validators.required],
         day: [null, Validators.required],
         year: [null, Validators.required],
       }),
-      email: [null, Validators.required],
+      email: [{value: null, disabled: true }, Validators.required],
       city: [null, Validators.required],
       state: [null, Validators.required],
       addresses: new FormArray([]),
       socialMedia: this.fb.group({
-        facebook: [null, Validators.required],
-        linkedin: [null, Validators.required],
-        instagram: [null, Validators.required],
-        twitter: [null, Validators.required]
+        facebook: [null],
+        linkedin: [null],
+        instagram: [null],
+        twitter: [null]
       }),
     });
     // this.userProfile.profileForm.valueChanges.subscribe(x => console.log(x));
@@ -121,31 +123,38 @@ export class EditProfileComponent implements OnInit {
 
   onSubmit(): void {
     // TODO: Use EventEmitter with form value
-    const user = this.store.getUserData();
-    console.log(this.userProfile.profileForm.value);
-    if (Object.values(this.userProfile.profileForm.get('birthday').value).some(element => element === null)){
-      delete this.userProfile.profileForm.value.birthday;
-    }
-    if (this.userProfile.fileUpload){
-      this.profile.uploadProfilePicture(this.userProfile.fileUpload).pipe(take(1)).subscribe(res => {
+    if (this.userProfile.profileForm.valid) {
+      const user = this.store.getUserData();
+      console.log(this.userProfile.profileForm.value);
+      if (Object.values(this.userProfile.profileForm.get('birthday').value).some(element => element === null)){
+        delete this.userProfile.profileForm.value.birthday;
+      }
+      if (this.userProfile.fileUpload){
+        this.profile.uploadProfilePicture(this.userProfile.fileUpload).pipe(take(1)).subscribe(res => {
+          console.log(res);
+          user.profilePictureUrl = res.result.profilePictureUrl;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.store.updateUserData(user);
+        }, error => {
+          console.log(error);
+        });
+      }
+      this.profile.saveProfile(this.userProfile.profileForm.value).pipe(take(1)).subscribe(res => {
         console.log(res);
-        user.profilePictureUrl = res.result.profilePictureUrl;
+        user.firstName = res.result.firstName;
+        user.lastName = res.result.lastName;
         localStorage.setItem('user', JSON.stringify(user));
         this.store.updateUserData(user);
+        this.toaster.success('Successfully Saved');
+        this.router.navigateByUrl('/home/profile');
       }, error => {
         console.log(error);
+        this.toaster.error('Failed To Save');
       });
+    } else{
+      this.userProfile.profileForm.markAllAsTouched();
+      this.toaster.error('Failed To Save');
     }
-    this.profile.saveProfile(this.userProfile.profileForm.value).pipe(take(1)).subscribe(res => {
-      console.log(res);
-      user.firstName = res.result.firstName;
-      user.lastName = res.result.lastName;
-      localStorage.setItem('user', JSON.stringify(user));
-      this.store.updateUserData(user);
-      this.router.navigateByUrl('/home/profile');
-    }, error => {
-      console.log(error);
-    });
   }
 
   get address(): FormArray {
