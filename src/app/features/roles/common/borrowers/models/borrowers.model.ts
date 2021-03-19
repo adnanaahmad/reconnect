@@ -27,5 +27,9 @@ export interface BorrowerModel {
   purchaseSalesDate: Date;
   loan: {
     processStatus: string
+    commitmentDate?: string,
+    dealClosingDate?: string,
+    purchaseAndSalesDate?: string
+    targetProperty?: any
   };
 }

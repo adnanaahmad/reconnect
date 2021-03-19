@@ -61,19 +61,20 @@
             <div class="top d-flex">
                 <div class="d-flex address" style="background: transparent">
                     <img src="/assets/borrower/pin.svg" class="pin">
-                    <p [ngbTooltip]="borrower.targetPropertyAddress" >{{ borrower.targetPropertyAddress }}</p>
+                    <p *ngIf="borrower.loan.targetProperty" [ngbTooltip]="" >{{borrower.loan.targetProperty.address.deliveryLine + ',' + borrower.loan.targetProperty.address.city + ', ' + borrower.loan.targetProperty.address.state + ', ' + borrower.loan.targetProperty.address.zip}}</p>
+                    <p *ngIf="!borrower.loan.targetProperty">N.A.</p>
                 </div>
                 <div class="date1" style="background: transparent">
                     <div class="d-flex justify-content-end txt-div">
-                        <p class="txt">Closing Date:</p><p class="txt-date">{{ borrower.closingDate | date :  "dd-MM-y"}}</p>
+                        <p class="txt">Closing Date:</p><p class="txt-date">{{borrower.loan.dealClosingDate ? (borrower.loan.dealClosingDate | date :  "dd-MM-y") : 'N.A.'}}</p>
                     </div>
                     <div class="d-flex">
-                        <p class="txt">Commitment Date:</p><p class="txt-date">{{ borrower.commitmentDate | date :  "dd-MM-y" }}</p>
+                        <p class="txt">Commitment Date:</p><p class="txt-date">{{ borrower.loan.commitmentDate ? (borrower.loan.commitmentDate | date :  "dd-MM-y") : 'N.A.'}}</p>
                     </div>
                 </div>
                 <div class="date-2" style="background-color: transparent;">
-                    <div class="d-flex txt-div"><p class="txt">Home Inspection Date:</p><p class="txt-date">{{ borrower.homeInspectionDate | date :  "dd-MM-y" }}</p></div>
-                    <div class="d-flex"><p class="txt">Purchase & Sales Date:</p><p class="txt-date">{{ borrower.purchaseSalesDate | date :  "dd-MM-y"}}</p></div>
+                    <div class="d-flex txt-div"><p class="txt">Home Inspection Date:</p><p class="txt-date">{{ borrower.loan.homeInspectionDate ? (borrower.loan.homeInspectionDate | date :  "dd-MM-y") : 'N.A.'}}</p></div>
+                    <div class="d-flex"><p class="txt">Purchase & Sales Date:</p><p class="txt-date">{{borrower.loan.purchaseAndSalesDate ? (borrower.loan.purchaseAndSalesDate | date :  "dd-MM-y") : 'N.A.'}}</p></div>
                 </div>
             </div>
             <div class="bottom d-flex">
