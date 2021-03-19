@@ -51,7 +51,7 @@ export class CreateGroupChatComponent implements OnInit {
   }
   initializeForm(): void{
     this.teamData.groupForm = this.fb.group({
-      title: [null, Validators.required],
+      title: [null, [Validators.required, Validators.pattern('^((?![\\^ ]).)((?![\\^]).){0,20}((?![\\^! ]).)$')]],
     });
     this.teamData.selectedTeam = [];
   }
