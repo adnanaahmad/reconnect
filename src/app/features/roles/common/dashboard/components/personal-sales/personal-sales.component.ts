@@ -44,7 +44,7 @@ export class PersonalSalesComponent implements OnInit, OnChanges {
         value: this.personalSalesAnalytics.dealsPending
       },
       {
-        name: 'Deals Closed',
+        name: this.store.role === this.constant.role.REAL_ESTATE ? 'Deals Closing' : 'Deals Closed',
         value: this.personalSalesAnalytics.dealsClosed
       },
       {

@@ -6,6 +6,7 @@ import {AnalyticsModel, DashboardModel, DatesModel} from '../../models/dashboard
 import {DatePipe} from '@angular/common';
 import {NgbCalendar, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import {DashboardService} from '../../services/dashboard.service';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,10 +16,11 @@ import {DashboardService} from '../../services/dashboard.service';
 export class DashboardComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   dashboard: DashboardModel;
-  constructor(private store: StoreService,
+  constructor(public store: StoreService,
               private dateFormat: NgbDateNativeAdapter,
               private dashboardService: DashboardService,
-              private calendar: NgbCalendar) {
+              private calendar: NgbCalendar,
+              public constant: ConstantService) {
   }
   ngOnInit(): void {
     this.initializeData();
