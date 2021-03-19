@@ -48,7 +48,7 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
     this.listenMessages();
     this.getTeam();
     this.chat.inputForm = this.fb.group({
-      inputText: ['', Validators.required],
+      inputText: ['', [Validators.required]],
     });
     this.chat.toggle = false;
   }
