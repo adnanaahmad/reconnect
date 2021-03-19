@@ -684,7 +684,7 @@ export class ConstantService {
     clearedToClose: 5,
     closed: 6,
   };
-  borrowersStatus = ['Pending', 'Application', 'Pre-Approved', 'Potential', 'Closed'];
+  borrowersStatus = ['Pending', 'Application', 'Pre-Approved', 'Potential', 'Closed', 'Cancelled'];
   borrowersStatusObject = {
     Pending: ['pending'],
     Application: [this.loanStatusObject.APPLICATION],
@@ -695,7 +695,8 @@ export class ConstantService {
       this.loanStatusObject.APPROVED_WITH_CONDITIONS,
       this.loanStatusObject.CLEARED_TO_CLOSE,
     ],
-    Closed: [this.loanStatusObject.CLOSED]
+    Closed: [this.loanStatusObject.CLOSED],
+    Cancelled: ['Cancelled']
   };
   quoteRequestStatus = {
     PENDING: 'pending',

@@ -27,11 +27,14 @@ export class BorrowersComponent implements OnInit {
     this.getBorrowers();
   }
   getBorrowers(): void{
+    this.store.updateProgressBarLoading(true);
     this.borrowerService.getBorrowers().pipe(take(1)).subscribe(res => {
       console.log(res);
       this.borrowers.borrower = res.result;
+      this.store.updateProgressBarLoading(false);
     }, error => {
       console.log(error);
+      this.store.updateProgressBarLoading(false);
     });
   }
   listClick(button): void {

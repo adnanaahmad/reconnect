@@ -3,12 +3,12 @@
 </div>
 <div class="card-1">
   <div class="row">
-    <div class="col-6 d-flex justify-content-between" style="background: transparent">
+    <div class="col-7 d-flex justify-content-between" style="background: transparent">
         <div class="buttons align-self-center" *ngFor="let button of constant.borrowersStatus" [ngClass]="{'active': (store.borrowersStatus | async) === button}" (click)="listClick(button)">
             <p><nobr>{{ button }}</nobr></p>
         </div>
     </div>
-    <div class="col-6 d-flex flex-row-reverse" style="background: transparent">
+    <div class="col-5 d-flex flex-row-reverse" style="background: transparent">
         <div class="align-self-center add-button"><p>Add new Borrower</p></div>
         <div class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
         <div class="align-self-center search-input">
@@ -30,7 +30,8 @@
         </select>
 </div>
 <ng-container *ngFor="let borrower of borrowers.borrower | filter:searchName.value" >
-    <div *ngIf="constant.borrowersStatusObject[store.borrowersStatus | async].includes(borrower.loan.processStatus)" class="card-3 d-flex" style="background: transparent">
+    <div *ngIf="constant.borrowersStatusObject[store.borrowersStatus | async].includes(borrower.loan.processStatus) && !borrower.loan.dealCancelled ||
+     (borrower.loan.dealCancelled && (store.borrowersStatus | async) === constant.borrowersStatusObject.Cancelled[0])" class="card-3 d-flex" style="background: transparent">
         <div class="card-4 " style="background: white">
             <div class="div-1 d-flex">
                 <img *ngIf="borrower.buyer.profilePictureUrl" [src]="borrower.buyer.profilePictureUrl" class="display-img">
