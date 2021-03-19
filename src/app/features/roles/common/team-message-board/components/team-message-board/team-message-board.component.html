@@ -163,7 +163,7 @@
                                 </a>
                                 <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
                                      *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
-                                     src="{{groupMembersProfileImage(message.createdBy)}}" class="ml-custom">
+                                     src="{{groupMembersProfileImage(message.createdBy)}}" class="ml-custom mr-custom">
                             </div>
                         </ng-container>
                     </div>
