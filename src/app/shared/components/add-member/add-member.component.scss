@@ -167,3 +167,11 @@ p{
 .quote-status-manually{
   display: none;
 }
+.add-btn{
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+.add-btn:focus{
+  outline: none;
+}

@@ -16,6 +16,7 @@ export class AddMemberComponent implements OnInit {
     @Input() role;
     public members: any;
     searchName: FormControl;
+    addButtonDisable: boolean;
 
     constructor(private helper: HelperService,
                 public modal: NgbActiveModal,
@@ -29,6 +30,7 @@ export class AddMemberComponent implements OnInit {
         this.searchName = new FormControl(null, Validators.required);
         console.log(this.role);
         this.getProfessionals();
+        this.addButtonDisable = false;
     }
 
     addMember(member, id?): void {
@@ -42,13 +44,17 @@ export class AddMemberComponent implements OnInit {
                 //this.modal.close({status: 'yes', data: res.result});
             }, error => {
                 console.log(error);
-                this.toaster.success('Failed to send request');
+                this.toaster.error('Failed to send request');
             });
         } else {
+            this.addButtonDisable = true;
             this.dashboard.addTeamMember({userId: member._id}).pipe(take(1)).subscribe(res => {
+                this.toaster.success('Professional added to your team');
                 this.modal.close({status: 'yes', data: res.result});
             }, error => {
                 console.log(error);
+                this.toaster.error('Failed to add professional');
+                this.addButtonDisable = false;
             });
         }
     }
