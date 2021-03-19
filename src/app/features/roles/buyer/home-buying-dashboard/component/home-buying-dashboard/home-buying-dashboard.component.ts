@@ -36,6 +36,9 @@ export class HomeBuyingDashboardComponent implements OnInit, OnDestroy {
             closed: false,
         };
         this.getTeamAndLoanDetails();
+        this.store.userData.pipe(take(1)).subscribe(res => {
+            this.dashboard.userName = res.firstName;
+        });
     }
 
     removeMember(members): void {

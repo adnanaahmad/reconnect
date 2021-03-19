@@ -6,6 +6,7 @@ export interface BuyerDashboardModel {
   homeBuyingProcess: HomeBuyingProcessModel;
   subjectProperty: PropertyAdModel;
   loader: boolean;
+  userName: string;
 }
 interface PreApprovalDetailsModel {
    income: number;
