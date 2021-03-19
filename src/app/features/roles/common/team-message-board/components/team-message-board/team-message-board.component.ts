@@ -12,6 +12,7 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
 import {take} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
+import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-team-message-board',
   templateUrl: './team-message-board.component.html',
@@ -35,7 +36,8 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
               public store: StoreService,
               public constant: ConstantService,
               public helper: HelperService,
-              private toaster: ToastrService) {
+              private toaster: ToastrService,
+              private activatedRoute: ActivatedRoute) {
     configuration.centered = true;
     configuration.container = 'app-team-message-board';
   }
@@ -51,6 +53,11 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
       inputText: ['', [Validators.required]],
     });
     this.chat.toggle = false;
+    this.activatedRoute.queryParams.pipe(take(1)).subscribe(params => {
+      if (Object.keys(params).length !== 0) {
+        this.chat.activateChatId = params.professional;
+      }
+    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -128,7 +135,10 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
       console.log('conversations', res);
       this.chat.loader = true;
       this.chat.recentChats = res.result;
-      if (this.chat.recentChats.length > 0){
+      if (this.chat.activateChatId){
+        const index = this.getActivatedChatIndex;
+        this.listClick(this.chat.recentChats[index]);
+      } else if (this.chat.recentChats.length > 0){
         this.listClick(this.chat.recentChats[0]);
       }
       this.store.updateProgressBarLoading(false);
@@ -206,5 +216,13 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
   }
   professionalExistsInTeam(role): boolean{
     return role === this.constant.role.INSURANCE ? !this.chat.insuranceAgentExistsInTeam : !this.chat.homeInspectorExistsInTeam;
+  }
+  get getActivatedChatIndex(): number{
+    return this.chat.recentChats.findIndex(x => {
+      if (x.type === this.constant.conversationType.PRIVATE){
+        const id = x.allTimeMembers.findIndex( y => y._id === this.chat.activateChatId);
+        return id !== -1;
+      }
+    });
   }
 }

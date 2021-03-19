@@ -5,6 +5,7 @@ import {AddMemberComponent} from '../../../../../../shared/components/add-member
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {escapeLabel} from '@swimlane/ngx-charts';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-team-person',
@@ -21,7 +22,8 @@ export class TeamPersonComponent implements OnInit, OnChanges {
   constructor(private modalService: NgbModal,
               configuration: NgbModalConfig,
               private constant: ConstantService,
-              private toaster: ToastrService) {
+              private toaster: ToastrService,
+              private router: Router) {
     configuration.centered = true;
     configuration.container = 'app-home-buying-dashboard';
     configuration.animation = true;
@@ -71,5 +73,11 @@ export class TeamPersonComponent implements OnInit, OnChanges {
     }, error => {
       //console.log(error);
     });
+  }
+  chatWithProfessional(id: string): void{
+    this.router.navigateByUrl(`/home/teamMessageBoard?professional=${id}`).then();
+  }
+  sendEmail(email: string): void{
+    window.open(`mailto:${email}`);
   }
 }

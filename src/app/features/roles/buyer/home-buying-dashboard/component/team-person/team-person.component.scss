@@ -77,6 +77,9 @@
   height: .75vw;
   filter: brightness(2);
 }
+.chat:focus{
+  outline: none;
+}
 .email{
   border-radius: 0;
   width: .8vw;

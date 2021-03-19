@@ -23,8 +23,8 @@
      <div class="hide">
           <div class="d-flex justify-content-between">
             <img class="call" src="/assets/directory-icons/call.svg">
-            <img class="chat" src="/assets/referral-lineage/chat.svg">
-            <img class="email" src="/assets/referral-lineage/email.svg">
+            <img (click)="chatWithProfessional(member._id)" class="chat" src="/assets/referral-lineage/chat.svg">
+            <img (click)="sendEmail(member.email)" class="email" src="/assets/referral-lineage/email.svg">
           </div>
      </div>
    </div>

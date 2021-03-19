@@ -12,6 +12,7 @@ export interface ChatModel {
   messageLoader: boolean;
   homeInspectorExistsInTeam: boolean;
   insuranceAgentExistsInTeam: boolean;
+  activateChatId: string;
 }
 interface SelectedFriendModel{
   allTimeMembers: Array<UserModel>;
