@@ -10,7 +10,7 @@
                 <div class="d-flex justify-content-between mb-custom1">
                     <div class="select-buyer d-flex">
                         <ng-container *ngFor="let member of teamData.buyers; let i = index">
-                            <div  #member (click)="getBuyersTeam(member)" class="d-flex team-member">
+                            <div [ngbTooltip]="member.buyer.firstName + ' ' + member.buyer.lastName"  #member (click)="getBuyersTeam(member)" class="d-flex team-member">
                                 <img [ngClass]="{'activate-tick': teamData.selectedButton === member}" class="active" src="/assets/calendar-icons/tick.svg">
                                 <img [ngClass]="{'activate-border': teamData.selectedButton === member}" *ngIf="member.buyer.profilePictureUrl" class="team" [src]="member.buyer.profilePictureUrl">
                                 <img [ngClass]="{'activate-border': teamData.selectedButton === member}" *ngIf="!member.buyer.profilePictureUrl"  class="team-dummy" src="/assets/profile/profile.svg">
@@ -24,7 +24,8 @@
                 <div class="d-flex justify-content-between">
                     <div class="d-flex">
                         <ng-container *ngFor="let member of teamData.team | keyvalue; let i = index">
-                            <div #member (click)="toggleTeamMember(member.value)" [attr.id]="member.value.userId ?  member.value.userId._id : member.value._id" class="d-flex team-member">
+                            <div [ngbTooltip]="member.key !== constant.role.BUYER ? member.value.userId.firstName + ' ' + member.value.userId.lastName : member.value.firstName + ' ' + member.value.lastName"
+                                 #member (click)="toggleTeamMember(member.value)" [attr.id]="member.value.userId ?  member.value.userId._id : member.value._id" class="d-flex team-member">
                                 <img class="active" src="/assets/calendar-icons/tick.svg">
                                 <ng-container *ngIf="store.role === constant.role.BUYER">
                                     <img *ngIf="member.value.userId.profilePictureUrl" class="team" [src]="member.value.userId.profilePictureUrl">
