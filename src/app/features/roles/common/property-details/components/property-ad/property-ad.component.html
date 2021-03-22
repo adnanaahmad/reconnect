@@ -44,8 +44,8 @@
             <div class="d-flex">
               <div class="qf-parent">
                 <div class="qf">
-                    <div class="row">
-                        <div class="col-5 mb-custom font-weight1">
+                    <div class="d-flex">
+                        <div class="mb-custom font-weight1">
                           <p class="text-nowrap">Property Type</p>
                           <p class="text-nowrap">Year Built</p>
                           <p class="text-nowrap">Lot Size</p>
@@ -53,8 +53,8 @@
                           <p class="text-nowrap">Tax Year</p>
                           <p class="text-nowrap">Tax Amount</p>
                         </div>
-                        <div class="col-7 mb-custom font-weight2">
-                           <p class="property-type text-nowrap">{{propertyAd.propertyType}}</p>
+                        <div class="mb-custom font-weight2">
+                           <p class="text-nowrap">{{propertyAd.propertyType}}</p>
                            <p>{{propertyAd.yearBuilt ? propertyAd.yearBuilt : 'N.A.'}} &nbsp;</p>
                            <p>{{propertyAd.xf_lot_size ? propertyAd.xf_lot_size + ' Sq Ft' : 'N.A.'}} &nbsp;</p>
                            <p>{{propertyAd.xf_list_price_per_sqft ? '$' + propertyAd.xf_list_price_per_sqft : 'N.A.' }} &nbsp;</p>
@@ -74,7 +74,7 @@
                       </div>
                       <div class="info-img" style="">
                         <img src="/assets/search-home/garage.png">
-                        <div class="d-flex info-number"><p>Garage</p><p>{{propertyAd.xf_garage_spaces}}</p></div>
+                        <div class="d-flex info-number"><p>Garage</p><p>{{propertyAd.xf_garage_spaces ? propertyAd.xf_garage_spaces : 'N.A.'}}</p></div>
                       </div>
                     </div>
                     <div class="col-6 d-flex align-items-start flex-column">
