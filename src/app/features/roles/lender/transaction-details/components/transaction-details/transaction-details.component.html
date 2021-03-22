@@ -82,23 +82,23 @@
 <p class="heading mb-custom">Select Approved Loan Types</p>
 <app-loan-checkbox [loanDetails]="transactionDetails"></app-loan-checkbox>
 <div class="row second-row">
-    <div *ngIf="transactionDetails.finance.value.toggle.fha" class="col-6" style="">
+    <div *ngIf="transactionDetails.finance.getRawValue().toggle.fha" class="col-6" style="">
         <app-fha [finance]="transactionDetails.finance"></app-fha>
     </div>
 
-    <div *ngIf="transactionDetails.finance.value.toggle.conventional" class="col-6" style="">
+    <div *ngIf="transactionDetails.finance.getRawValue().toggle.conventional" class="col-6" style="">
         <app-conventional [finance]="transactionDetails.finance"></app-conventional>
     </div>
-    <div *ngIf="transactionDetails.finance.value.toggle.homePossible" class="col-6" style="">
+    <div *ngIf="transactionDetails.finance.getRawValue().toggle.homePossible" class="col-6" style="">
         <app-home-possible [finance]="transactionDetails.finance"></app-home-possible>
     </div>
-    <div *ngIf="transactionDetails.finance.value.toggle.homeReady" class="col-6" style="">
+    <div *ngIf="transactionDetails.finance.getRawValue().toggle.homeReady" class="col-6" style="">
         <app-home-ready [finance]="transactionDetails.finance"></app-home-ready>
     </div>
-    <div *ngIf="transactionDetails.finance.value.toggle.va" class="col-6" style="">
+    <div *ngIf="transactionDetails.finance.getRawValue().toggle.va" class="col-6" style="">
         <app-va [finance]="transactionDetails.finance"></app-va>
     </div>
-     <div *ngIf="transactionDetails.finance.value.toggle.usda" class="col-6" style="">
+     <div *ngIf="transactionDetails.finance.getRawValue().toggle.usda" class="col-6" style="">
         <app-usda [finance]="transactionDetails.finance"></app-usda>
     </div>
 </div>

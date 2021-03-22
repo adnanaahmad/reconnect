@@ -23,7 +23,7 @@
             <input prefix="$" mask="0*.00" mask="separator.2" thousandSeparator="," formControlName="sellerCredit" type="text"
                    class="form-control form-control-lg" placeholder="Seller Credit">
         </div>
-        <button class="closing-cost mt-auto"><p>Add Closing Cost</p></button>
+        <button type="button" class="closing-cost mt-auto"><p>Add Closing Cost</p></button>
     </div>
 
 
@@ -52,5 +52,5 @@
             <app-usda [finance]="loanDetails.finance"></app-usda>
         </div>
     </div>
-    <button type="submit" class="save-btn">Save</button>
+    <button [disabled]="loanDetails.disableSave" type="submit" class="save-btn">Save</button>
 </form>

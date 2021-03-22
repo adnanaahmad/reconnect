@@ -190,3 +190,6 @@ p{
 .closing-cost:focus{
   outline: none;
 }
+::ng-deep .form-control:disabled{
+  background: white;
+}

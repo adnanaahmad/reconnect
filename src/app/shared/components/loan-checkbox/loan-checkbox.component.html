@@ -1,27 +1,27 @@
 <div [formGroup]="loanDetails.finance">
   <div class="d-flex loan-checkbox" formGroupName="toggle">
     <label class="container"><p>FHA</p>
-      <input type="checkbox"  formControlName="fha" [checked]="loanDetails.finance.value.toggle.fha">
+      <input type="checkbox"  formControlName="fha" [checked]="loanDetails.finance.getRawValue().toggle.fha">
       <img class="checkmark" src="/assets/loan-details/tick.svg">
     </label>
     <label class="container"><p>Conventional</p>
-      <input type="checkbox"  formControlName="conventional" [checked]="loanDetails.finance.value.toggle.conventional">
+      <input type="checkbox"  formControlName="conventional" [checked]="loanDetails.finance.getRawValue().toggle.conventional">
       <img class="checkmark" src="/assets/loan-details/tick.svg">
     </label>
     <label class="container"><p>Home Possible</p>
-      <input type="checkbox"  formControlName="homePossible" [checked]="loanDetails.finance.value.toggle.homePossible">
+      <input type="checkbox"  formControlName="homePossible" [checked]="loanDetails.finance.getRawValue().toggle.homePossible">
       <img class="checkmark" src="/assets/loan-details/tick.svg">
     </label>
     <label class="container"><p>Home Ready</p>
-      <input type="checkbox"  formControlName="homeReady" [checked]="loanDetails.finance.value.toggle.homeReady">
+      <input type="checkbox"  formControlName="homeReady" [checked]="loanDetails.finance.getRawValue().toggle.homeReady">
       <img class="checkmark" src="/assets/loan-details/tick.svg">
     </label>
     <label class="container"><p>VA</p>
-      <input type="checkbox" formControlName="va" [checked]="loanDetails.finance.value.toggle.va">
+      <input type="checkbox" formControlName="va" [checked]="loanDetails.finance.getRawValue().toggle.va">
       <img class="checkmark" src="/assets/loan-details/tick.svg">
     </label>
     <label class="container"><p>USDA</p>
-        <input type="checkbox"  formControlName="usda" [checked]="loanDetails.finance.value.toggle.usda">
+        <input type="checkbox"  formControlName="usda" [checked]="loanDetails.finance.getRawValue().toggle.usda">
       <img class="checkmark" src="/assets/loan-details/tick.svg">
       </label>
   </div>

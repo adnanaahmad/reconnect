@@ -8,6 +8,7 @@ import {take} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
 import {HelperService} from '../../../../../../core/helper/helper.service';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-my-loan-details',
@@ -22,7 +23,8 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
               private loadDetailsService: LoanDetailsService,
               private toaster: ToastrService,
               private store: StoreService,
-              private helper: HelperService) { }
+              private helper: HelperService,
+              private constant: ConstantService) { }
 
   ngOnInit(): void {
     this.subscription = [];
@@ -112,12 +114,17 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
       });
       this.loader = true;
       this.store.updateProgressBarLoading(false);
+      if (this.constant.homeBuyingProcessStatusIndex[res.processStatus] >= 2){
+        this.loanDetails.finance.disable();
+        this.loanDetails.disableSave = true;
+      }
     }, error => {
       console.log(error);
       this.store.updateProgressBarLoading(false);
     });
   }
   initializeLoanDetails(): void{
+    this.loanDetails.disableSave = false;
     this.loanDetails.finance = this.fb.group({
       income: [null, Validators.required],
       monthlyDebt: [null, Validators.required],

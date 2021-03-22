@@ -12,6 +12,7 @@ import {DatePipe, Location} from '@angular/common';
 import {NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import {Subscription} from 'rxjs';
 import {HelperService} from '../../../../../../core/helper/helper.service';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-transaction-details',
@@ -27,7 +28,8 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
               private toaster: ToastrService,
               public location: Location,
               private dateFormat: NgbDateNativeAdapter,
-              private helper: HelperService) {
+              private helper: HelperService,
+              private constant: ConstantService) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
   }
@@ -63,9 +65,16 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
         //console.log(res);
         this.toaster.success('Saved');
+        if (this.constant.homeBuyingProcessStatusIndex[data.processStatus] >= 5){
+          this.getLoanDetails();
+        }
       }, error => {
         //console.log(error);
-        this.toaster.error('Failed to save');
+        if (this.constant.RESPONSE_ERRORS[error.error.result.CODE]){
+          this.toaster.error(error.error.result.details.MESSAGE);
+        } else{
+          this.toaster.error('Failed to save');
+        }
       });
     } else {
       this.toaster.error('Failed to save');
@@ -118,15 +127,37 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       });
       this.transactionDetails.subjectProperty = res.targetProperty;
       this.transactionDetails.loader = true;
+      if (this.constant.homeBuyingProcessStatusIndex[res.processStatus] >= 5){
+        this.disableLoanForm();
+      }
     }, error => {
       console.log(error);
     });
   }
+  disableLoanForm(): void{
+    this.transactionDetails.finance.get('toggle').disable();
+    this.transactionDetails.finance.get('fha') ? this.transactionDetails.finance.get('fha').disable()
+        : this.transactionDetails.finance.get('fha');
+    this.transactionDetails.finance.get('usda') ? this.transactionDetails.finance.get('usda').disable()
+        : this.transactionDetails.finance.get('usda');
+    this.transactionDetails.finance.get('va') ? this.transactionDetails.finance.get('va').disable()
+        : this.transactionDetails.finance.get('va');
+    this.transactionDetails.finance.get('houseReady') ? this.transactionDetails.finance.get('houseReady').disable()
+        : this.transactionDetails.finance.get('houseReady');
+    this.transactionDetails.finance.get('homePossible') ? this.transactionDetails.finance.get('homePossible').disable()
+        : this.transactionDetails.finance.get('homePossible');
+    this.transactionDetails.finance.get('conventional') ? this.transactionDetails.finance.get('conventional').disable()
+        : this.transactionDetails.finance.get('conventional');
+    this.transactionDetails.finance.get('income').disable();
+    this.transactionDetails.finance.get('sellerCredit').disable();
+    this.transactionDetails.finance.get('funds').disable();
+    this.transactionDetails.finance.get('monthlyDebt').disable();
+  }
   validateLoanDetails(): boolean{
     let bool = true;
-    Object.keys(this.transactionDetails.finance.get('toggle').value).forEach(x => {
-      if (this.transactionDetails.finance.get(['toggle', x]).value){
-        if (!this.transactionDetails.finance.get(x).valid){
+    Object.keys(this.transactionDetails.finance.getRawValue().toggle).forEach(x => {
+      if (this.transactionDetails.finance.getRawValue().toggle[x]){
+        if (!this.transactionDetails.finance.get(x).valid && !this.transactionDetails.finance.get(x).disabled){
           this.transactionDetails.finance.markAllAsTouched();
           bool = false;
         }

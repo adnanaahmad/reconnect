@@ -279,3 +279,6 @@ p{
 .mb-custom1{
   margin-bottom: 1.5vw;
 }
+::ng-deep .form-control:disabled{
+  background: white;
+}

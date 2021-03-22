@@ -9,6 +9,7 @@ import {DatePipe, Location} from '@angular/common';
 import {NgbDateNativeAdapter, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddPropertyMlsComponent} from '../../popups/add-property-mls/add-property-mls.component';
 import {BuyerTransactionDetailsService} from '../../services/buyer-transaction-details.service';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-transaction-details',
@@ -24,7 +25,8 @@ export class TransactionDetailsComponent implements OnInit {
                public location: Location,
                private modalService: NgbModal,
                private configuration: NgbModalConfig,
-               private dateFormat: NgbDateNativeAdapter) {
+               private dateFormat: NgbDateNativeAdapter,
+               private constant: ConstantService) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
     configuration.centered = true;
@@ -102,7 +104,11 @@ export class TransactionDetailsComponent implements OnInit {
     this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
       this.toaster.success('Saved');
     }, error => {
-      this.toaster.error('Failed to save');
+      if (this.constant.RESPONSE_ERRORS[error.error.result.CODE]){
+        this.toaster.error(error.error.result.details.MESSAGE);
+      } else{
+        this.toaster.error('Failed to save');
+      }
     });
   }
   addPropertyMls(): void{
