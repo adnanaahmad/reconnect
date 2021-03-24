@@ -31,9 +31,11 @@ export class AddClosingCostComponent implements OnInit {
     //console.log(this.variableExpenses, this.fixedExpenses);
   }
   getClosingCost(): void{
-    this.closingCost.patchValue({
-      variableExpenses: this.variableExpenses,
-    });
+    if (this.variableExpenses){
+      this.closingCost.patchValue({
+        variableExpenses: this.variableExpenses,
+      });
+    }
     if (this.fixedExpenses){
       const fixedExpenses = this.closingCost.get('fixedExpenses') as FormArray;
       Object.keys(this.fixedExpenses).forEach(x => {
