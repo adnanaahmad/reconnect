@@ -40,9 +40,9 @@
         </div>
         <div class="d-flex">
             <div class="bath d-flex"><img class="" src="/assets/search-home/bathroom.png">
-                <p *ngIf="home.baths" class="align-self-end">{{home.baths.total}}</p></div>
+                <p class="align-self-end">{{home.xf_no_full_baths + home.xf_no_half_baths}}</p></div>
             <div class="bed d-flex"><img class="" src="/assets/search-home/bedroom.png">
-                <p class="align-self-end">{{home.beds}}</p></div>
+                <p class="align-self-end">{{home.xf_no_bedrooms}}</p></div>
             <div class="garage d-flex"><img class="" src="/assets/search-home/garage.png">
                 <p class="align-self-end">{{home.xf_garage_spaces}}</p></div>
         </div>

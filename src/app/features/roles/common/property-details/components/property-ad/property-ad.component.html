@@ -70,7 +70,7 @@
                     <div class="col-6 d-flex align-items-start flex-column">
                        <div class="info-img mb-auto">
                         <img src="/assets/search-home/bathroom.png">
-                        <div class="d-flex info-number"><p>Bathrooms</p><p *ngIf="propertyAd.baths">{{propertyAd.baths.total}}</p></div>
+                        <div class="d-flex info-number"><p>Bathrooms</p><p>{{propertyAd.xf_no_half_baths + propertyAd.xf_no_full_baths}}</p></div>
                       </div>
                       <div class="info-img" style="">
                         <img src="/assets/search-home/garage.png">
@@ -80,7 +80,7 @@
                     <div class="col-6 d-flex align-items-start flex-column">
                       <div class="info-img mb-auto">
                         <img class="bed" src="/assets/search-home/bedroom.png">
-                        <div class="align-self-end d-flex info-number"><p>Bedrooms</p><p>{{propertyAd.beds}}</p></div>
+                        <div class="align-self-end d-flex info-number"><p>Bedrooms</p><p>{{propertyAd.xf_no_bedrooms}}</p></div>
                       </div>
 
                       <div class="info-img">

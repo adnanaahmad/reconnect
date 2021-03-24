@@ -80,6 +80,9 @@ export interface PropertyAdModel {
   daysOnMarket: number;
   xf_lot_size: number;
   xf_square_feet: number;
+  xf_no_bedrooms: number;
+  xf_no_full_baths: number;
+  xf_no_half_baths: number;
 }
 
 interface RealEstateAgentUserModel {

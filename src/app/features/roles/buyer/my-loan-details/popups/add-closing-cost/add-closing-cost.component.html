@@ -1,0 +1,93 @@
+
+<form [formGroup]="closingCost" class="form-group-custom">
+    <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+    <div class="parent">
+        <div class="d-flex">
+            <div class="fixed-exp" formArrayName="fixedExpenses">
+                <div class="d-flex heading-parent">
+                    <img (click)="addFixedExpense()" class="plus-btn" src="/assets/calendar-icons/plus.svg">
+                    <p class="heading align-self-center text-nowrap">Fixed Expenses</p>
+                </div>
+                <div class="d-flex ml-custom" *ngIf="closingCost.get('fixedExpenses').value.length">
+                    <p class="sub-heading mr-custom-1 mb-0">L</p>
+                    <p class="sub-heading mb-0">T</p>
+                </div>
+                <ng-container *ngFor="let item of closingCost.get('fixedExpenses')['controls']; let i = index;">
+                    <div class="d-flex mb-custom fixed-exp-array" [formGroupName]="i">
+                        <input formControlName="name" type="text" class="form-control f1"  placeholder="Add Title ...">
+                        <input formControlName="amount" type="text" class="form-control f2 f2-width"  placeholder=""
+                               prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=",">
+                        <div class="d-flex align-self-center">
+                            <label class="container">
+                                <input formControlName="type" type="radio" id="{{i +'male'}}" value="lenderFee">
+                                <span class="checkmark border-right-none"></span>
+                            </label>
+                            <label class="container">
+                                <input formControlName="type" type="radio" id="{{i + 'female'}}" value="titleFee">
+                                <span [ngClass]="{'border-left-none': closingCost.get(['fixedExpenses', i, 'type']).value}" class="checkmark"></span>
+                            </label>
+                        </div>
+                        <img (click)="deleteFixedExpense(i)" class="delete-btn" src="assets/news-feed-icons/delete.svg">
+                    </div>
+                </ng-container>
+            </div>
+            <div formGroupName="variableExpenses" class="variable-exp">
+                <p class="heading text-nowrap heading-parent">Variable Expenses</p>
+                <div class="d-flex">
+                    <div class="mr-custom" formGroupName="homeownersInsurance">
+                        <p class="sub-heading text-nowrap">Home Insurance</p>
+                        <p class="label">Single Family</p>
+                        <input formControlName="oneFamily" type="text" class="form-control f2 f2-mb-custom"  placeholder="" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=",">
+                        <p class="label">2 Family</p>
+                        <input formControlName="twoFamily" type="text" class="form-control f2 f2-mb-custom"  placeholder="" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=",">
+                        <p class="label">3 Family</p>
+                        <input formControlName="threeFamily" type="text" class="form-control f2 f2-mb-custom"  placeholder="" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=",">
+                        <p class="label">4 Family</p>
+                        <input formControlName="fourFamily" type="text" class="form-control f2 f2-mb-custom"  placeholder="" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=",">
+                        <p class="label">Condo</p>
+                        <input formControlName="condo" type="text" class="form-control f2"  placeholder="" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=",">
+
+                    </div>
+                    <div class="mr-custom">
+                        <div class="mb-custom-1" formGroupName="titleInsurance">
+                            <p class="sub-heading text-nowrap">Title Insurance</p>
+                            <p class="label">Lenders</p>
+                            <input formControlName="lender" type="number" class="form-control f2 f2-mb-custom"  placeholder="">
+                            <p class="label">Owners</p>
+                            <input formControlName="owner" type="number" class="form-control f2"  placeholder="">
+                        </div>
+                        <div formGroupName="escrowReserves">
+                            <p class="sub-heading text-nowrap">Escrow Reserves</p>
+                            <p class="label">Hazard Insurance</p>
+                            <input formControlName="hazardInsurance" type="number" class="form-control f2 f2-mb-custom"  placeholder="">
+                            <p class="label">Tax</p>
+                            <input formControlName="tax" type="number" class="form-control f2"  placeholder="">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="mb-custom-1" formGroupName="appraisalAmount">
+                            <p class="sub-heading text-nowrap">Appraisal Amount</p>
+                            <p class="label">Single Family</p>
+                            <input formControlName="oneFamily" type="text" class="form-control f2 f2-mb-custom"  placeholder="" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=",">
+
+                            <p class="label">Two Family</p>
+                            <input formControlName="twoFamily" type="text" class="form-control f2"  placeholder="" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=",">
+                        </div>
+
+                        <p class="sub-heading text-nowrap">Daily Interest</p>
+                        <p class="label">Days</p>
+                        <input formControlName="dailyInterestDays" type="number" class="form-control f2 mb-custom-1"  placeholder="">
+
+                        <p class="sub-heading text-nowrap">Origination Point</p>
+                        <p class="label">Points</p>
+                        <input formControlName="originationChargePoint" type="text" class="form-control f2"  placeholder="" suffix="%" mask="0*.00" mask="separator.2" thousandSeparator=",">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex flex-column">
+        <button (click)="onSubmit()" class="save-btn">Save</button>
+    </div>
+</form>

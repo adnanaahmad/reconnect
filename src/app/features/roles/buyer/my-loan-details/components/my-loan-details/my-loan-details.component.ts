@@ -1,14 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {LoanDetailsModel} from '../../models/loanDetails.model';
 import {LoanDetailsService} from '../../services/loan-details.service';
 import {ToastrService} from 'ngx-toastr';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {take} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
-import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {AddClosingCostComponent} from '../../popups/add-closing-cost/add-closing-cost.component';
 
 @Component({
   selector: 'app-my-loan-details',
@@ -24,7 +25,12 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
               private toaster: ToastrService,
               private store: StoreService,
               private helper: HelperService,
-              private constant: ConstantService) { }
+              private constant: ConstantService,
+              private configuration: NgbModalConfig,
+              private modalService: NgbModal) {
+    configuration.centered = true;
+    configuration.container = 'app-my-loan-details';
+  }
 
   ngOnInit(): void {
     this.subscription = [];
@@ -92,6 +98,8 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
     this.loadDetailsService.getLoanDetails().pipe(take(1)).subscribe(res => {
       console.log(res);
       res = res.result;
+      this.loanDetails.fixedExpenses = res.fixedExpenses;
+      this.loanDetails.variableExpenses = res.variableExpenses;
       this.loanDetails.finance.patchValue({
         income: res.income,
         monthlyDebt: res.monthlyDebt,
@@ -255,6 +263,20 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
         }),
         reserves: [null, Validators.required],
       })
+    });
+  }
+
+  addClosingCost(): void{
+    const modalRef = this.modalService.open(AddClosingCostComponent);
+    modalRef.componentInstance.variableExpenses = this.loanDetails.variableExpenses;
+    modalRef.componentInstance.fixedExpenses = this.loanDetails.fixedExpenses;
+    modalRef.result.then((result) => {
+      if (result.status === 'yes') {
+        this.loanDetails.fixedExpenses = result.data.fixedExpenses;
+        this.loanDetails.variableExpenses = result.data.variableExpenses;
+      }
+    }, error => {
+      console.log(error);
     });
   }
 }
