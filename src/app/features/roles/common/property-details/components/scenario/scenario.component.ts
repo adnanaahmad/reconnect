@@ -4,6 +4,7 @@ import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {LoanScenarioModel, ViewPaymentBreakDownModel} from '../../models/property-details.model';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {Subscription} from 'rxjs';
+import {CalculatorComponent} from '../../popups/calculator/calculator.component';
 
 @Component({
   selector: 'app-scenario',
@@ -49,9 +50,21 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  view(): void {
+  viewPieChart(): void {
     const modalRef = this.modalService.open(PieChartComponent);
     modalRef.componentInstance.breakDown = this.pieChart;
+    modalRef.result.then((result) => {
+      if (result !== 'Close click') {
+        console.log(result);
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+  viewCalculator(): void {
+    const modalRef = this.modalService.open(CalculatorComponent);
+    modalRef.componentInstance.calculator = this.loanScenario;
+    modalRef.componentInstance.scenarioNumber = this.scenarioNumber;
     modalRef.result.then((result) => {
       if (result !== 'Close click') {
         console.log(result);

@@ -720,4 +720,8 @@ export class ConstantService {
     INVALID_NAME: 'INVALID_NAME',
     MINIMUM_SEARCH_NAME_QUERY_LENGTH: 'MINIMUM_SEARCH_NAME_QUERY_LENGTH',
   };
+  fixedExpensesType = {
+    LENDER_FEE: 'lenderFee',
+    TITLE_FEE: 'titleFee'
+  };
 }

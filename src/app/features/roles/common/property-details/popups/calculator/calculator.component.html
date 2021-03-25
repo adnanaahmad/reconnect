@@ -1,0 +1,165 @@
+<div class="parent d-flex">
+    <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+    <div class="column-1">
+        <p class="heading text-nowrap">Closing Costs</p>
+        <div class="details">
+            <div class="Lender mb-custom">
+                <p class="sub-heading text-nowrap">Lender Fees</p>
+                <div class="add-border">
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Origination Charge 1%</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].originationCharge | mask: 'separator.2':',')}}</p>
+                    </div>
+                    <div *ngFor=" let fixedExpense of calculator.userLoan.fixedExpenses | keyvalue" class="d-flex justify-content-between">
+                       <ng-container *ngIf="fixedExpense.value.type === constant.fixedExpensesType.LENDER_FEE">
+                           <p class="value text-nowrap">{{fixedExpense.key| titlecase}}</p>
+                           <p class="value">{{'$' + (fixedExpense.value.amount | mask: 'separator.2':',')}}</p>
+                       </ng-container>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="value">Total</p>
+                    <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].totalLenderFee | mask: 'separator.2':',')}}</p>
+                </div>
+            </div>
+
+            <div class="Title-Charges mb-custom">
+                <p class="sub-heading text-nowrap">Title Charges</p>
+                <div class="add-border">
+                    <div *ngFor=" let fixedExpense of calculator.userLoan.fixedExpenses | keyvalue" class="d-flex justify-content-between">
+                        <ng-container *ngIf="fixedExpense.value.type === constant.fixedExpensesType.TITLE_FEE">
+                            <p class="value text-nowrap">{{fixedExpense.key| titlecase}}</p>
+                            <p class="value">{{'$' + (fixedExpense.value.amount | mask: 'separator.2':',')}}</p>
+                        </ng-container>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Lender Title Insurance</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].lenderTitleInsurance | mask: 'separator.2':',')}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Owner Title Insurance</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].ownerTitleInsurance | mask: 'separator.2':',')}}</p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="value">Total</p>
+                    <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].totalTitleCharges | mask: 'separator.2':',')}}</p>
+                </div>
+            </div>
+
+            <div class="Prepaid-and-Escrows">
+                <p class="sub-heading text-nowrap">Prepaid and Escrows</p>
+                <div class="add-border">
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Insurance</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].prepaidAndEscrowInterest | mask: 'separator.2':',')}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Taxes</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].prepaidAndEscrowTaxes | mask: 'separator.2':',')}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Pre-Paid Interest</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].prepaidInterest | mask: 'separator.2':',')}}</p>
+                    </div>
+                </div>
+                <div class="add-border d-flex justify-content-between">
+                    <p class="value">Total</p>
+                    <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].totalPrepaidAndEscrow | mask: 'separator.2':',')}}</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="value">Total Closing Cost</p>
+                    <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].closingCost | mask: 'separator.2':',')}}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="column-2">
+        <div class="Reserves">
+            <p class="heading text-nowrap">Reserves</p>
+            <div class="details">
+                <p class="sub-heading text-nowrap">Reserves Required to Close</p>
+                <div class="add-border">
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Reserves</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].reserves | mask: 'separator.2':',')}}</p>
+                    </div>
+                </div>
+                <div class="add-border d-flex justify-content-between">
+                    <p class="value">Total Reserves</p>
+                    <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].reserves | mask: 'separator.2':',')}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="Down-Payment">
+            <p class="heading text-nowrap">Down Payment</p>
+            <div class="details">
+                <p class="sub-heading text-nowrap">Down Payment Required to Close</p>
+                <div class="add-border">
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">{{(calculator.listings[0].financing[store.toggleLoanType | async].downPaymentPercentage | mask: 'separator.3':',') + '%'}}</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].downPaymentCalculated | mask: 'separator.2':',')}}</p>
+                    </div>
+                </div>
+                <div class="add-border d-flex justify-content-between">
+                    <p class="value">Total Down Payment</p>
+                    <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].downPaymentCalculated | mask: 'separator.2':',')}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="Total-Funds-Needed">
+            <p class="heading text-nowrap">Total Funds Needed</p>
+            <div class="details">
+                <p class="sub-heading text-nowrap">Total Funds Needed to Close</p>
+                <div class="add-border">
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Closing Costs</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].closingCost | mask: 'separator.2':',')}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Reserves</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].reserves | mask: 'separator.2':',')}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">DownPayment</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].downPaymentCalculated | mask: 'separator.2':',')}}</p>
+                    </div>
+                </div>
+                <div class="add-border d-flex justify-content-between">
+                    <p class="value">Total Funds Needed</p>
+                    <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].totalFundsNeeded | mask: 'separator.2':',')}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="Total-Verified-Assets">
+            <p class="heading text-nowrap">Total Verified Assets</p>
+            <div class="details">
+                <p class="sub-heading text-nowrap">Total Verified Assets</p>
+                <div class="add-border">
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">In Accounts</p>
+                        <p class="value">{{'$' + (calculator.userLoan.funds | mask: 'separator.2':',')}}</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Seller Credit</p>
+                        <p class="value">{{'$' + (calculator.userLoan.sellerCredit | mask: 'separator.2':',')}}</p>
+                    </div>
+                    <div *ngIf="scenarioNumber === 2" class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Additional Seller Credit</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].LS2_additionalSellerCredit | mask: 'separator.2':',')}}</p>
+                    </div>
+                </div>
+                <div class="add-border-no-mb d-flex justify-content-between">
+                    <p class="value">Total Assets Verified</p>
+                    <p *ngIf="scenarioNumber === 1" class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].totalVerifiedAssets | mask: 'separator.2':',')}}</p>
+                    <p *ngIf="scenarioNumber === 2" class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].LS2_totalVarifiedAssets | mask: 'separator.2':',')}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="excess">
+    <p *ngIf="scenarioNumber === 1" class="excess-txt">Excess / Additional Funds &nbsp; &nbsp;{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].fundsNeeded | mask: 'separator.2':',')}}</p>
+    <p *ngIf="scenarioNumber === 2" class="excess-txt">Excess / Additional Funds &nbsp; &nbsp;{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].LS2_fundsNeeded | mask: 'separator.2':',')}}</p>
+</div>
