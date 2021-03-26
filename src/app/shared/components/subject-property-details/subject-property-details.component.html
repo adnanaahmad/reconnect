@@ -24,7 +24,7 @@
             <p>Property Type</p>
             <p>Lot Size</p>
             <p>Time On Market</p>
-<!--            <p>Community</p>-->
+            <p>County</p>
             <p>MLS#</p>
          </div>
          <div class="detail-right" style="">
@@ -32,7 +32,7 @@
             <p>{{subjectProperty.propertyType}}&nbsp;</p>
             <p>{{subjectProperty.lotSize ? subjectProperty.lotSize.sqft + ' Sq Ft' : 'N.A.'}}&nbsp;</p>
             <p>{{subjectProperty.daysOnMarket}}&nbsp;</p>
-<!--            <p>{{subjectProperty.community}}</p>-->
+            <p>{{subjectProperty.xf_county ? subjectProperty.xf_county : 'N.A.'}}</p>
             <p>{{subjectProperty.id}}</p>
          </div>
       </div>

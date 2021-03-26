@@ -83,6 +83,7 @@ export interface PropertyAdModel {
   xf_no_bedrooms: number;
   xf_no_full_baths: number;
   xf_no_half_baths: number;
+  xf_county: string;
 }
 
 interface RealEstateAgentUserModel {
