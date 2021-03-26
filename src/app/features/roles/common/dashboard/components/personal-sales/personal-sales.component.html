@@ -43,9 +43,10 @@
   <div class="col-3 align-self-end">
     <div class="average-loan">
        <p class="al-text">{{store.role === constant.role.REAL_ESTATE ? 'Average Sales Price' : 'Average Loan Amount'}}</p>
-       <p class="al-number">${{ store.role === constant.role.REAL_ESTATE ? sales.averageSaleAmount : sales.averageLoanAmount}}</p>
+       <p class="al-number">${{ store.role === constant.role.REAL_ESTATE ? (sales.averageSaleAmount | mask: 'separator.2':',') :
+           (sales.averageLoanAmount | mask: 'separator.2':',')}}</p>
        <p class="al-text">Closed Vs Pre-Approved Deals</p>
-       <p class="al-number">{{sales.closedVsPreApproved}}%</p>
+       <p class="al-number">{{sales.closedVsPreApproved | mask: 'separator.2':','}}%</p>
     </div>
   </div>
 
