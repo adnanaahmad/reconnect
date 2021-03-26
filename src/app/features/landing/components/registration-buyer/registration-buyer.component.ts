@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, ElementRef, ViewChild, OnDestroy} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractControl, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {RegistrationBuyerModel} from '../../models/registration-buyer.model';
 import {AuthService} from '../../services/auth/auth.service';
@@ -31,7 +31,8 @@ export class RegistrationBuyerComponent implements OnInit, OnDestroy {
               private constant: ConstantService,
               private location: LocationService,
               private toaster: ToastrService,
-              private webSocket: WebSocketService) { }
+              private webSocket: WebSocketService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     // this.registration.form.valueChanges.subscribe(res => {
@@ -39,11 +40,25 @@ export class RegistrationBuyerComponent implements OnInit, OnDestroy {
     // });
     this.initialise();
     this.getReferralList();
+    this.referralBasedRegistration();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
+  referralBasedRegistration(): void{
+    this.activatedRoute.queryParams.pipe(take(1)).subscribe(params => {
+      if (params.referrerId) {
+        this.registration.screen = {one: false, two: false, three: true};
+        this.registration.form.patchValue({
+          email: params.email,
+          referral: {
+            type: 'user',
+            details: params.referrerId
+          }
+        });
+      }
+    });
+  }
   initialise(): void{
     this.registration.screen = {one: true, two: false, three: false};
     this.registration.referral = false;
