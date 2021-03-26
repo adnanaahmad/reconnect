@@ -12,8 +12,8 @@
 </div>
 
 <div style="position: relative;">
-    <div class="card-1 d-flex" *ngFor="let request of quoteRequests.renderArray">
-        <div class="div-1">
+    <div class="card-1 d-flex" *ngFor="let request of quoteRequests.renderArray; let i = index">
+        <div class="div-1 d-flex flex-column">
             <img *ngIf="request.buyer.profilePictureUrl" class="profile-img" [src]="request.buyer.profilePictureUrl">
             <img *ngIf="!request.buyer.profilePictureUrl" class="profile-img-dummy" src="/assets/profile/profile.svg">
             <p class="name">{{request.buyer.firstName | titlecase}} {{request.buyer.lastName | titlecase}} </p>
@@ -22,14 +22,14 @@
                 <a *ngIf="request.buyer.socialMedia.instagram" target="_blank" [href] = "request.buyer.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
                 <a *ngIf="request.buyer.socialMedia.twitter" target="_blank" [href] = "request.buyer.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
             </div>
-            <div *ngIf="quoteRequests.selectedButton === constant.quoteRequestStatus.PENDING" class="d-flex justify-content-between">
+            <div *ngIf="quoteRequests.selectedButton === constant.quoteRequestStatus.PENDING" class="d-flex justify-content-between mt-auto">
                 <button (click)="acceptRequest(request.buyer._id)" class="respond-btn accept"><p class="">Accept</p></button>
                 <button (click)="rejectRequest(request.buyer._id)" class="respond-btn reject"><p class="">Reject</p></button>
             </div>
-            <div *ngIf="quoteRequests.selectedButton === constant.quoteRequestStatus.TEAM" class="d-flex justify-content-between date-div">
-                <p *ngIf="date.value" class="date align-self-end">{{date.value}}</p>
-                <p *ngIf="!date.value" class="date align-self-end">Choose date</p>
-                <input #date (dateSelect)="onDateSelect($event, request.buyer._id)" class="form-control f1" placeholder=""
+            <div *ngIf="quoteRequests.selectedButton === constant.quoteRequestStatus.TEAM" class="d-flex justify-content-between date-div mt-auto">
+                <p id="{{i}}" *ngIf="request.loan.homeInspectionDate" class="date align-self-end">{{request.loan.homeInspectionDate | date:'d MMM y'}}</p>
+                <p id="{{i+'1'}}" *ngIf="!request.loan.homeInspectionDate" class="date align-self-end">Choose date</p>
+                <input #date (dateSelect)="onDateSelect($event, request.buyer._id, request.loan.homeInspectionDate ? i : (i+'1'))" class="form-control f1" placeholder=""
                        name="dp"  ngbDatepicker #d="ngbDatepicker">
                 <div class="calendar-div d-flex align-self-center" (click)="d.toggle()">
                     <img src="/assets/dashboard/Calendar.svg" class="calendar">

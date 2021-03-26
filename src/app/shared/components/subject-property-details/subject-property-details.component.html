@@ -1,7 +1,9 @@
       <div class="d-flex justify-content-between">
             <div class="info-img">
               <img src="/assets/search-home/bathroom.png">
-              <div class="d-flex info-number"><p>Bathrooms</p><p>{{ subjectProperty.xf_no_half_baths +  subjectProperty.xf_no_full_baths}}</p></div>
+              <div class="d-flex info-number"><p>Bathrooms</p>
+                  <p *ngIf="subjectProperty.xf_no_half_baths && subjectProperty.xf_no_full_baths">{{ subjectProperty.xf_no_half_baths +  subjectProperty.xf_no_full_baths}}</p>
+              </div>
             </div>
             <div class="info-img">
               <img class="bed" src="/assets/search-home/bedroom.png">

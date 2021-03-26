@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 import { QuoteRequestsRoutingModule } from './quote-requests-routing.module';
 import {QuoteRequestsComponent} from './components/quote-requests/quote-requests.component';
@@ -14,6 +14,6 @@ import {NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
     QuoteRequestsRoutingModule,
     SharedModule
   ],
-  providers: [NgbDateNativeAdapter]
+  providers: [NgbDateNativeAdapter, DatePipe]
 })
 export class QuoteRequestsModule { }

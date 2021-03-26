@@ -50,4 +50,7 @@ export class BorrowersComponent implements OnInit {
       this.router.navigateByUrl(`/home/buyerTransactionDetails/${id}`).then();
     }
   }
+  sendEmail(email: string): void{
+    window.open(`mailto:${email}`);
+  }
 }

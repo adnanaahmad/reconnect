@@ -43,7 +43,7 @@
                         <img class="align-self-center" src="/assets/directory-icons/call.svg">
                         <p>{{ borrower.buyer.phoneNumber }}</p>
                     </div>
-                    <div class="message d-flex">
+                    <div class="message d-flex" (click)="sendEmail(borrower.buyer.email)">
                         <img class="align-self-center" src="/assets/directory-icons/envelope.svg">
                         <p>Ask a Question</p>
                     </div>
