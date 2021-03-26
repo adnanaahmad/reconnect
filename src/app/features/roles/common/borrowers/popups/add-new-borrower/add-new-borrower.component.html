@@ -1,0 +1,21 @@
+<div class="form-div d-flex flex-column">
+    <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+    <form [formGroup]="borrower" class="d-flex flex-column">
+        <div class="card-1 d-flex flex-column">
+            <p class="heading">Add New {{store.role === constant.role.LENDER ? 'Borrower' : 'Buyer'}}</p>
+            <p [ngClass]="{'danger' : this.borrower.get('name').invalid && this.borrower.get('name').touched}"
+               class="title">
+                Name
+            </p>
+            <input [ngClass]="{'is-invalid' : this.borrower.get('name').invalid && this.borrower.get('name').touched}"
+                   formControlName="name" type="text" class="form-control f1 mb-custom" placeholder="">
+            <p [ngClass]="{'danger' : this.borrower.get('email').invalid && this.borrower.get('email').touched}"
+               class="title">
+                Email
+            </p>
+            <input [ngClass]="{'is-invalid' : this.borrower.get('email').invalid && this.borrower.get('email').touched}"
+                   formControlName="email" type="text" class="form-control f1 mb-custom" placeholder="">
+        </div>
+    </form>
+    <button (click)="onSubmit()" class="invite">Invite</button>
+</div>

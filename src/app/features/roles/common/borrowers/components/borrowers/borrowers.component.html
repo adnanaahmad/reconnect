@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="col-5 d-flex flex-row-reverse" style="background: transparent">
-        <div class="align-self-center add-button"><p>Add new Borrower</p></div>
+        <button (click)="addNewBorrower()" class="align-self-center add-button"><p>Add new {{store.role === constant.role.LENDER ? 'Borrower' : 'Buyer'}}</p></button>
         <div class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
         <div class="align-self-center search-input">
             <input [formControl]="searchName" type="text" id="search" class="form-control form-control-lg" placeholder="Search Contacts">

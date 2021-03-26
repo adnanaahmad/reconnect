@@ -43,6 +43,7 @@ export class ConstantService {
      sharePropertyProfessional: `${environment.apiUrl}/message/send-multiple-messages`,
      targetProperty: `${environment.apiUrl}/loan/target-property`,
      professionalDashboard: `${environment.apiUrl}/analytics/dashboard`,
+     sendInvite: `${environment.apiUrl}/user/send-invite`,
   };
   apiMethod = {
     get: 'get',

@@ -29,6 +29,11 @@
   height: fit-content;
   border-radius: .5vw;
   margin-left: .85vw;
+  border: none;
+  cursor: pointer;
+}
+.add-button:focus{
+  outline: none;
 }
 .add-button p{
   margin-bottom: 0;

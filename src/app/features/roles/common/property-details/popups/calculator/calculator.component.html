@@ -7,7 +7,7 @@
                 <p class="sub-heading text-nowrap">Lender Fees</p>
                 <div class="add-border">
                     <div class="d-flex justify-content-between">
-                        <p class="value text-nowrap">Origination Charge 1%</p>
+                        <p class="value text-nowrap">Origination Charge {{calculator.userLoan.variableExpenses.originationChargePoint | mask: 'separator.2':','}}%</p>
                         <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].originationCharge | mask: 'separator.2':',')}}</p>
                     </div>
                     <div *ngFor=" let fixedExpense of calculator.userLoan.fixedExpenses | keyvalue" class="d-flex justify-content-between">
@@ -15,6 +15,10 @@
                            <p class="value text-nowrap">{{fixedExpense.key| titlecase}}</p>
                            <p class="value">{{'$' + (fixedExpense.value.amount | mask: 'separator.2':',')}}</p>
                        </ng-container>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="value text-nowrap">Appraisal</p>
+                        <p class="value">{{'$' + (calculator.listings[0].financing[store.toggleLoanType | async].appraisal | mask: 'separator.2':',')}}</p>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">

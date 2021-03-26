@@ -7,6 +7,9 @@ import {Router} from '@angular/router';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {take} from 'rxjs/operators';
 import {FormControl, Validators} from '@angular/forms';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {CreateGroupChatComponent} from '../../../team-message-board/popups/create-group-chat/create-group-chat.component';
+import {AddNewBorrowerComponent} from '../../popups/add-new-borrower/add-new-borrower.component';
 
 @Component({
   selector: 'app-borrowers',
@@ -19,7 +22,12 @@ export class BorrowersComponent implements OnInit {
   constructor(private borrowerService: BorrowersService,
               public constant: ConstantService,
               private router: Router,
-              public store: StoreService) { }
+              public store: StoreService,
+              private configuration: NgbModalConfig,
+              private modalService: NgbModal) {
+    configuration.centered = true;
+    configuration.container = 'app-borrowers';
+  }
 
   ngOnInit(): void {
     this.store.updateBorrowersStatus(this.constant.borrowersStatus[0]);
@@ -52,5 +60,14 @@ export class BorrowersComponent implements OnInit {
   }
   sendEmail(email: string): void{
     window.open(`mailto:${email}`);
+  }
+  addNewBorrower(): void{
+    const modalRef = this.modalService.open(AddNewBorrowerComponent);
+    modalRef.result.then((result) => {
+      if (result.status === 'yes') {
+      }
+    }, error => {
+      console.log(error);
+    });
   }
 }

@@ -1,8 +1,7 @@
 <div class="heading d-flex justify-content-between">
   <h3>Dashboard</h3>
 </div>
-<div class="" style="background: transparent" *ngIf="dashboard.loader &&
- (store.role !== constant.role.REAL_ESTATE || store.role !== constant.role.INSURANCE)">
+<div class="" style="background: transparent" *ngIf="dashboard.loader">
     <app-borrowers-dates [buyerAnalytics]="dashboard.analytics.buyerAnalytics"></app-borrowers-dates>
     <app-personal-sales [sales]="dashboard.analytics.sales" [personalSalesAnalytics]="dashboard.analytics.personalSales" [salesType]="'Personal'"></app-personal-sales>
     <app-personal-sales *ngIf="false" [salesType]="'Team Dynasty'"></app-personal-sales>

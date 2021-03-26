@@ -55,12 +55,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
   getDashboardData(): void{
+    this.store.updateProgressBarLoading(true);
     this.dashboardService.getDashboardAnalytics(this.objectToQueryParam(this.dashboard.dates)).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.dashboard.loader = true;
       this.dashboard.analytics = res.result;
+      this.store.updateProgressBarLoading(false);
     }, error => {
       console.log(error);
+      this.store.updateProgressBarLoading(false);
     });
   }
   dateConversion(date): string{

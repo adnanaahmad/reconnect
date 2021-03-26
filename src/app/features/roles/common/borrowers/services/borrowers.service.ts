@@ -17,4 +17,7 @@ export class BorrowersService {
   getBorrowers(): Observable<any>{
     return this.helper.requestCall(this.methods.get, this.api.getBorrowers);
   }
+  sendInvite(data): Observable<any>{
+    return this.helper.requestCall(this.methods.post, this.api.sendInvite, data);
+  }
 }
