@@ -1,4 +1,5 @@
 import {Subscription} from 'rxjs';
+import {UserProfileModel} from '../../roles/common/profile/models/user-profile.model';
 
 export interface MenuItem{
   name: string;
@@ -13,4 +14,17 @@ export interface NavigationModel {
   loader: any;
   loaderSubscription: Subscription;
   profileButtonSubscription: Subscription;
+}
+
+export interface NotificationModel{
+  createdAt: string;
+  from: UserProfileModel;
+  listable: boolean;
+  meta: any;
+  read: boolean;
+  target: string;
+  type: string;
+  updatedAt: string;
+  __v: number;
+  _id: string;
 }

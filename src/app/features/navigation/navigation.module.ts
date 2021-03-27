@@ -8,9 +8,10 @@ import {SharedModule} from '../../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { HidePopupDirective } from './directive/hide-popup.directive';
 import {LoadingBarModule} from '@ngx-loading-bar/core';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
-  declarations: [NavigationComponent, HeaderComponent, HidePopupDirective],
+  declarations: [NavigationComponent, HeaderComponent, HidePopupDirective, NotificationsComponent],
   imports: [
     CommonModule,
     NavigationRoutingModule,

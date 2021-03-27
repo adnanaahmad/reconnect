@@ -1,0 +1,23 @@
+.circle-2 {
+  height: .4vw;
+  width: .4vw;
+  border-radius: 1vw;
+  background: var(--green);
+}
+.image{
+  height: 1.5vw;
+  width: 1.5vw;
+  object-fit: cover;
+  border-radius: .3vw;
+  margin-right: .4vw;
+}
+.text{
+  color: var(--darkGray);
+  font-size: .73vw;
+  margin-bottom: .3vw;
+}
+.time{
+  color: var(--lighGray);
+  font-size: .62vw;
+  margin-bottom: 0;
+}

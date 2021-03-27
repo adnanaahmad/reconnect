@@ -16,6 +16,7 @@ export interface UserProfileModel {
   city: string;
   socialMedia: SocialMediaModel;
   loader: boolean;
+  _id: string;
 }
 
 export interface UserProfileEditModel {

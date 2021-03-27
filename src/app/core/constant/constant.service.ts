@@ -44,7 +44,9 @@ export class ConstantService {
      targetProperty: `${environment.apiUrl}/loan/target-property`,
      professionalDashboard: `${environment.apiUrl}/analytics/dashboard`,
      sendInvite: `${environment.apiUrl}/user/send-invite`,
-  };
+     getNotifications: `${environment.apiUrl}/notification/get`,
+     markAsRead: `${environment.apiUrl}/notification/mark-read`
+   };
   apiMethod = {
     get: 'get',
     post: 'post',
@@ -724,5 +726,17 @@ export class ConstantService {
   fixedExpensesType = {
     LENDER_FEE: 'lenderFee',
     TITLE_FEE: 'titleFee'
+  };
+  NOTIFICATION_TYPE = {
+    ALL_LOAN_PROCESS_UPDATED: 'all_loan-process-updated',
+    BUYER_TARGET_PROPERTY_SET: 'buyer_target-property-set',
+    BUYER_LENDER_UPDATED_LOAN: 'buyer_lender-updated-loan',
+    LENDER_BUYER_UPDATED_LOAN: 'lender_buyer-updated-loan',
+    PROFESSIONALS_ADDED_TO_TEAM: 'professionals_added-to-team',
+    PROFESSIONALS_REMOVED_FROM_TEAM: 'professionals_removed-from-team',
+    PROFESSIONALS_NEW_QUOTE_REQUEST: 'professionals_new-quote-request',
+    BUYER_QUOTE_REQUEST_ACCEPTED: 'buyer_quote-request-accepted',
+    BUYER_QUOTE_REQUEST_REJECTED: 'buyer_quote-request-rejected',
+    ALL_NEW_MESSAGE: 'all_new-message'
   };
 }

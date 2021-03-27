@@ -2,6 +2,9 @@ import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {StoreService} from '../../../../core/store/store.service';
 import {ProfileService} from '../../../roles/common/profile/services/profile.service';
 import {Subscription} from 'rxjs';
+import {NavigationService} from '../../service/navigation.service';
+import {take} from 'rxjs/operators';
+import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +18,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   firstName = '';
   lastName = '';
   subscription: Array<Subscription>;
-  constructor(public store: StoreService, public profile: ProfileService) { }
+  constructor(public store: StoreService,
+              public profile: ProfileService,
+              private navigationService: NavigationService,
+              private webSocket: WebSocketService) { }
 
   ngOnInit(): void {
     this.subscription = [];
@@ -32,6 +38,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.lastName = res.lastName;
         })
     );
+    this.getNotifications();
+    this.listenNotifications();
   }
   ngOnDestroy(): void {
     this.subscription.forEach(s => s.unsubscribe());
@@ -40,5 +48,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   notificationToggle(): boolean{
     this.notification.toggle = !this.notification.toggle;
     return this.notification.toggle;
+  }
+  getNotifications(): void{
+    this.navigationService.getNotifications().pipe(take(1)).subscribe(res => {
+      console.log('notification', res);
+      this.notification.list = res.result;
+    }, error => {
+      console.log(error);
+    });
+  }
+  listenNotifications(): void{
+    this.subscription.push(
+      this.webSocket.listen('client-notification-newActivity').subscribe(res => {
+        console.log('socket notification', res);
+        this.notification.list.unshift(res);
+      })
+    );
   }
 }
