@@ -228,14 +228,15 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const page = this.searchHome.pageNumber ? `${data || loanType ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
         if (this.searchHome.savedSearchId) {
+            window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}`);
             this.searchHomeService.updateSearch(this.filtersObject, this.searchHome.savedSearchId).pipe(take(1)).subscribe(res => {
                 this.toaster.success('Updated Save Search');
                 this.searchHome.savedSearchId = null;
-                window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}`);
+                // window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}`);
                 this.router.navigateByUrl('home/savedSearches').then();
             }, error => {
                 this.toaster.error('Failed To Update Save Search');
-                window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}`);
+                // window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}`);
                 this.searchHome.savedSearchId = null;
             });
         } else {

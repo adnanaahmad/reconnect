@@ -22,8 +22,8 @@
                                   <p class="">{{child.value.split(':')[0] + ' - ' }}</p>
                                   <p class="">{{child.value.split(':')[1] }}</p>
                               </ng-container>
-                              <ng-container *ngIf="!checkRangeExist(child.value)">
-                                  <p class="">{{child.value}}</p>
+                              <ng-container *ngIf="child.value !== '>=null' && !checkRangeExist(child.value)">
+                                  <p class="">{{child.value.replace(">=", "") + '+'}}</p>
                               </ng-container>
                           </div>
                           <div style="flex-wrap: wrap"  class="d-flex" *ngIf="child.key === 'propertyType' || child.key === 'status'">
