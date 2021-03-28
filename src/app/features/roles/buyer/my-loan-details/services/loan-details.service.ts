@@ -21,4 +21,7 @@ export class LoanDetailsService {
   setLoanDetails(data): Observable<any>{
     return this.helper.requestCall(this.methods.put, this.api.getLoanDetails, data);
   }
+  saveLoanDetailsByLender(data): Observable<any>{
+    return this.helper.requestCall(this.methods.put, this.api.saveBorrowerLoanDetails, data);
+  }
 }

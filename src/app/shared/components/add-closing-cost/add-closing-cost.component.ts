@@ -1,10 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HelperService} from '../../../../../../core/helper/helper.service';
+import {HelperService} from '../../../core/helper/helper.service';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {ToastrService} from 'ngx-toastr';
 import {take} from 'rxjs/operators';
-import {LoanDetailsService} from '../../services/loan-details.service';
+import {LoanDetailsService} from '../../../features/roles/buyer/my-loan-details/services/loan-details.service';
+import {StoreService} from '../../../core/store/store.service';
+import {ConstantService} from '../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-add-closing-cost',
@@ -14,21 +16,42 @@ import {LoanDetailsService} from '../../services/loan-details.service';
 export class AddClosingCostComponent implements OnInit {
   @Input() fixedExpenses: any;
   @Input() variableExpenses: any;
+  @Input() borrowerId: string;
+  @Input() processStatus: string;
   closingCost: FormGroup;
+  disableAddButton: boolean;
   constructor(private helper: HelperService,
               private fb: FormBuilder,
               public activeModal: NgbActiveModal,
               private toaster: ToastrService,
-              private loanDetailsService: LoanDetailsService) { }
+              private loanDetailsService: LoanDetailsService,
+              private store: StoreService,
+              private constant: ConstantService) { }
 
   ngOnInit(): void {
+    this.disableAddButton = false;
     this.helper.setModalPosition();
     this.initializeForm();
     this.getClosingCost();
+    this.disableForm();
     // this.closingCost.valueChanges.subscribe(res => {
     //   console.log(res);
     // });
     //console.log(this.variableExpenses, this.fixedExpenses);
+  }
+  disableForm(): void{
+    if (this.store.role === this.constant.role.LENDER){
+      console.log('meow', this.processStatus);
+      if (this.constant.homeBuyingProcessStatusIndex[this.processStatus] >= 5){
+        this.closingCost.disable();
+        this.disableAddButton = true;
+      }
+    } else {
+      if (this.constant.homeBuyingProcessStatusIndex[this.processStatus] >= 2){
+        this.closingCost.disable();
+        this.disableAddButton = true;
+      }
+    }
   }
   getClosingCost(): void{
     if (this.variableExpenses){
@@ -77,8 +100,10 @@ export class AddClosingCostComponent implements OnInit {
     });
   }
   addFixedExpense(): void {
-    const fixedExpenses = this.closingCost.get('fixedExpenses') as FormArray;
-    fixedExpenses.push(this.createFixedExpense());
+    if (!this.disableAddButton){
+      const fixedExpenses = this.closingCost.get('fixedExpenses') as FormArray;
+      fixedExpenses.push(this.createFixedExpense());
+    }
   }
   createFixedExpense(): FormGroup {
     return this.fb.group({
@@ -96,14 +121,26 @@ export class AddClosingCostComponent implements OnInit {
   }
   onSubmit(): void{
     if (this.closingCost.valid){
-      this.loanDetailsService.setLoanDetails(this.closingCost.value).pipe(take(1)).subscribe(res => {
-        console.log(res);
-        this.toaster.success('Saved');
-        this.activeModal.close({status: 'yes', data: res.result});
-      }, error => {
-        console.log(error);
-        this.toaster.error('Failed To Save');
-      });
+      if (this.store.role === this.constant.role.BUYER){
+        this.loanDetailsService.setLoanDetails(this.closingCost.value).pipe(take(1)).subscribe(res => {
+          console.log(res);
+          this.toaster.success('Saved');
+          this.activeModal.close({status: 'yes', data: res.result});
+        }, error => {
+          console.log(error);
+          this.toaster.error('Failed To Save');
+        });
+      } else{
+        this.loanDetailsService.saveLoanDetailsByLender({...this.closingCost.value, ...{borrowerId: this.borrowerId}})
+            .pipe(take(1)).subscribe(res => {
+          console.log(res);
+          this.toaster.success('Saved');
+          this.activeModal.close({status: 'yes', data: res.result});
+        }, error => {
+          console.log(error);
+          this.toaster.error('Failed To Save');
+        });
+      }
     } else{
       this.toaster.error('Incomplete form');
     }

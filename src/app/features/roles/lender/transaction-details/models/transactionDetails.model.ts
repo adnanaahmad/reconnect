@@ -9,6 +9,9 @@ export interface TransactionDetailsModel {
   finance: FormGroup;
   id: string;
   loader: boolean;
+  fixedExpenses: any;
+  variableExpenses: any;
+  processStatus: string;
 }
 
 export interface  UserModel {

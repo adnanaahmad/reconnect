@@ -1,18 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoanDetailsModel} from '../../../../buyer/my-loan-details/models/loanDetails.model';
 import {FormBuilder, Validators} from '@angular/forms';
 import {TransactionDetailsModel} from '../../models/transactionDetails.model';
 import {BorrowerLoanDetailsService} from '../../services/borrower-loan-details.service';
 import {take} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
-import {element} from 'protractor';
-import {log} from 'util';
 import {ToastrService} from 'ngx-toastr';
 import {DatePipe, Location} from '@angular/common';
-import {NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateNativeAdapter, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {Subscription} from 'rxjs';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {AddClosingCostComponent} from '../../../../../../shared/components/add-closing-cost/add-closing-cost.component';
 
 @Component({
   selector: 'app-transaction-details',
@@ -29,9 +27,13 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
               public location: Location,
               private dateFormat: NgbDateNativeAdapter,
               private helper: HelperService,
-              private constant: ConstantService) {
+              private constant: ConstantService,
+              private configuration: NgbModalConfig,
+              private modalService: NgbModal) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
+    configuration.centered = true;
+    configuration.container = 'app-transaction-details';
   }
 
   ngOnInit(): void {
@@ -130,6 +132,9 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       if (this.constant.homeBuyingProcessStatusIndex[res.processStatus] >= 5){
         this.disableLoanForm();
       }
+      this.transactionDetails.variableExpenses = res.variableExpenses;
+      this.transactionDetails.fixedExpenses = res.fixedExpenses;
+      this.transactionDetails.processStatus = res.processStatus;
     }, error => {
       console.log(error);
     });
@@ -307,6 +312,21 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
         }),
         reserves: ['', Validators.required],
       })
+    });
+  }
+  addClosingCost(): void{
+    const modalRef = this.modalService.open(AddClosingCostComponent);
+    modalRef.componentInstance.variableExpenses = this.transactionDetails.variableExpenses;
+    modalRef.componentInstance.fixedExpenses = this.transactionDetails.fixedExpenses;
+    modalRef.componentInstance.borrowerId = this.transactionDetails.id;
+    modalRef.componentInstance.processStatus = this.transactionDetails.processStatus;
+    modalRef.result.then((result) => {
+      if (result.status === 'yes') {
+        this.transactionDetails.fixedExpenses = result.data.fixedExpenses;
+        this.transactionDetails.variableExpenses = result.data.variableExpenses;
+      }
+    }, error => {
+      console.log(error);
     });
   }
 }

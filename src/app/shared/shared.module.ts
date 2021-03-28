@@ -26,6 +26,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {AddMemberComponent} from './components/add-member/add-member.component';
 import { NoResultsFoundComponent } from './components/no-results-found/no-results-found.component';
 import {DomChangesDirective} from './directives/dom-changes/dom-changes.directive';
+import {AddClosingCostComponent} from './components/add-closing-cost/add-closing-cost.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -51,8 +52,8 @@ const maskConfig: Partial<IConfig> = {
         SubjectPropertyTemplateComponent,
         ReversePipe,
         NoResultsFoundComponent,
-        DomChangesDirective
-
+        DomChangesDirective,
+        AddClosingCostComponent
     ],
     imports: [
         CommonModule,
@@ -86,7 +87,8 @@ const maskConfig: Partial<IConfig> = {
         Ng2SearchPipeModule,
         AddMemberComponent,
         NoResultsFoundComponent,
-        DomChangesDirective
+        DomChangesDirective,
+        AddClosingCostComponent
     ],
 })
 export class SharedModule {

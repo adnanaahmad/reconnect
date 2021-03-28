@@ -9,7 +9,7 @@ import {Subscription} from 'rxjs';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {AddClosingCostComponent} from '../../popups/add-closing-cost/add-closing-cost.component';
+import {AddClosingCostComponent} from '../../../../../../shared/components/add-closing-cost/add-closing-cost.component';
 
 @Component({
   selector: 'app-my-loan-details',
@@ -126,6 +126,7 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
         this.loanDetails.finance.disable();
         this.loanDetails.disableSave = true;
       }
+      this.loanDetails.processStatus = res.processStatus;
     }, error => {
       console.log(error);
       this.store.updateProgressBarLoading(false);
@@ -270,6 +271,7 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(AddClosingCostComponent);
     modalRef.componentInstance.variableExpenses = this.loanDetails.variableExpenses;
     modalRef.componentInstance.fixedExpenses = this.loanDetails.fixedExpenses;
+    modalRef.componentInstance.processStatus = this.loanDetails.processStatus;
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
         this.loanDetails.fixedExpenses = result.data.fixedExpenses;

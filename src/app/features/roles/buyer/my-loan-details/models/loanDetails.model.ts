@@ -5,4 +5,5 @@ export interface LoanDetailsModel {
   disableSave: boolean;
   fixedExpenses: any;
   variableExpenses: any;
+  processStatus: string;
 }

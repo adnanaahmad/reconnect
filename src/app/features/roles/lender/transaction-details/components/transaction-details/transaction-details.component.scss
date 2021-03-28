@@ -283,3 +283,16 @@ p{
 ::ng-deep .form-control:disabled{
   background: white;
 }
+.closing-cost{
+  padding: .5vw 1.5vw;
+  background: var(--green);
+  color: white;
+  font-size: .8vw;
+  border: none;
+  height: fit-content;
+  cursor: pointer;
+  border-radius: .5vw;
+}
+.closing-cost:focus{
+  outline: none;
+}

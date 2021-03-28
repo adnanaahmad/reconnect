@@ -27,7 +27,7 @@
                                 <span [ngClass]="{'border-left-none': closingCost.get(['fixedExpenses', i, 'type']).value}" class="checkmark"></span>
                             </label>
                         </div>
-                        <img (click)="deleteFixedExpense(i)" class="delete-btn" src="assets/news-feed-icons/delete.svg">
+                        <img (click)="deleteFixedExpense(i)" class="delete-btn" src="../../../../assets/news-feed-icons/delete.svg">
                     </div>
                 </ng-container>
             </div>
@@ -88,6 +88,6 @@
         </div>
     </div>
     <div class="d-flex flex-column">
-        <button (click)="onSubmit()" class="save-btn">Save</button>
+        <button [disabled]="disableAddButton" (click)="onSubmit()" class="save-btn">Save</button>
     </div>
 </form>
