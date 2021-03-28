@@ -27,7 +27,7 @@
                                 <span [ngClass]="{'border-left-none': closingCost.get(['fixedExpenses', i, 'type']).value}" class="checkmark"></span>
                             </label>
                         </div>
-                        <img (click)="deleteFixedExpense(i)" class="delete-btn" src="../../../../assets/news-feed-icons/delete.svg">
+                        <img *ngIf="!disableAddButton" (click)="deleteFixedExpense(i)" class="delete-btn" src="../../../../assets/news-feed-icons/delete.svg">
                     </div>
                 </ng-container>
             </div>
