@@ -7,12 +7,13 @@
             <ul class="list-class">
                 <li routerLinkActive="active-link" [routerLink]="item.route" *ngFor="let item of navigation.menuItems"
                     [ngClass]="{'active': navigation.selectedButton == item}" (click)="listClick(item)">
-                    <div class="row align-self-center ">
+                    <div class="row align-self-center menu-item">
                         <div class='col-2 image-class-div'>
                             <img class="image-class" [src]="iconURL(item.icon)" type=""/>
                         </div>
-                        <div class="align-self-center col-10 menu-item-text">
-                            <p>{{item.name}}</p>
+                        <div class="align-self-center col-10 menu-item-text d-flex">
+                            <p class="menu-item-text-p">{{item.name}}</p>
+                            <p *ngIf="item.route.includes('teamMessageBoard') && (store.newMessage | async) && navigation.showMessageIcon" class="msg">New</p>
                         </div>
                     </div>
                 </li>

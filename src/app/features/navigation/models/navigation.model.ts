@@ -14,6 +14,8 @@ export interface NavigationModel {
   loader: any;
   loaderSubscription: Subscription;
   profileButtonSubscription: Subscription;
+  listenMessageSubscription: Subscription;
+  showMessageIcon: boolean;
 }
 
 export interface NotificationModel{

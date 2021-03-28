@@ -7,6 +7,7 @@ import {StoreService} from '../../../../core/store/store.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
 import {LocationService} from '../../../landing/services/location/location.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
 
 @Component({
   selector: 'app-navigation',
@@ -19,10 +20,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
   constructor(private navigationService: NavigationService,
               private sanitizer: DomSanitizer,
               private router: Router,
-              private store: StoreService,
+              public store: StoreService,
               private constant: ConstantService,
               private location: LocationService,
-              private loadingBar: LoadingBarService) {}
+              private loadingBar: LoadingBarService,
+              private webSocket: WebSocketService) {}
 
   ngOnInit(): void {
     this.navigation.loader = this.loadingBar.useRef();
@@ -33,10 +35,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.showProfileButton();
     this.store.updateUserData(JSON.parse(localStorage.getItem('user')));
     this.location.saveLocationApiToken();
+    this.listenMessages();
+    this.showMessageIcon();
   }
   ngOnDestroy(): void {
     this.navigation.profileButtonSubscription.unsubscribe();
     this.navigation.loaderSubscription.unsubscribe();
+    this.navigation.listenMessageSubscription.unsubscribe();
   }
   setRoleAndMenu(): void{
     const data = JSON.parse(localStorage.getItem('user')).role;
@@ -75,6 +80,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.navigation.profileButtonSubscription = this.router.events.subscribe((val) => {
       this.setMenuButton();
       this.showHeader = !this.router.url.includes('profile');
+      this.showMessageIcon();
     });
   }
   startLoading(): void {
@@ -87,5 +93,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
   setMenuButton(): void{
     const index = this.navigation.menuItems.findIndex(x =>  this.router.url.includes(x.route));
     this.navigation.selectedButton = this.navigation.menuItems[index];
+  }
+  showMessageIcon(): void{
+    this.navigation.showMessageIcon = !this.router.url.includes('teamMessageBoard');
+    if (this.router.url.includes('teamMessageBoard')) {
+      this.store.updateNewMessage(false);
+    }
+  }
+  listenMessages(): void{
+    this.navigation.listenMessageSubscription = this.webSocket.listen('client-conversation-newMessage').subscribe(res => {
+      console.log('socket messages', res);
+      this.store.updateNewMessage(true);
+    });
   }
 }

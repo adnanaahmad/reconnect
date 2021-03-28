@@ -99,7 +99,7 @@ p{
   padding-top: .3vw;
   padding-left: .5vw;
 }
-.menu-item-text p{
+.menu-item-text-p{
   margin: 0;
   font-size: .75vw;
 }
@@ -149,4 +149,15 @@ p{
   margin-right: 1vw;
   cursor: pointer;
   color: var(--lighGray);
+}
+.msg{
+  color: white!important;
+  background: var(--green);
+  font-size: .6vw;
+  padding: .1vw .4vw;
+  border-radius: .3vw;
+  margin-left: .5vw;
+}
+.menu-item{
+  position: relative;
 }
