@@ -79,7 +79,7 @@ export class TransactionDetailsComponent implements OnInit {
         dealCancelled: res.dealCancelled ? res.dealCancelled : false
       });
       this.transactionDetails.transactionDetails = {
-        commissionAmount: res.targetProperty ? res.targetProperty.xf_buyer_broker_comp + '%' : 'N.A.',
+        commissionAmount: res.targetProperty ? res.targetProperty.xf_buyer_broker_comp : 'N.A.',
         listingAgent: res.targetProperty ? res.targetProperty.listingAgent.name : 'N.A.',
         sellerCredit: res.sellerCredit ? '$' + res.sellerCredit : 'N.A.',
         homeInspectionDate: res.homeInspectionDate,

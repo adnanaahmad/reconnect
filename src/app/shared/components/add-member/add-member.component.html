@@ -29,7 +29,7 @@
                         <p>{{ member.phoneNumber }}</p>
 
                     </div>
-                    <div class="question d-flex">
+                    <div (click)="sendEmail(member.email)" class="question d-flex">
                         <img src="/assets/directory-icons/envelope.svg" class="img-fluid">
                         <p>Ask a question</p>
                     </div>

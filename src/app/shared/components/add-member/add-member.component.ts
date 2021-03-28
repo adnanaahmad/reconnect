@@ -67,4 +67,7 @@ export class AddMemberComponent implements OnInit {
             console.log(error);
         });
     }
+    sendEmail(email: string): void{
+        window.open(`mailto:${email}`);
+    }
 }
