@@ -50,7 +50,7 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
     this.listenMessages();
     this.getTeam();
     this.chat.inputForm = this.fb.group({
-      inputText: ['', [Validators.required]],
+      inputText: ['', [Validators.required, Validators.pattern('^$|.*\\S+.*')]],
     });
     this.chat.toggle = false;
     this.activatedRoute.queryParams.pipe(take(1)).subscribe(params => {
