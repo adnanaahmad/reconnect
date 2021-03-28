@@ -1,7 +1,8 @@
 
 <ng-container [ngSwitch]="notification.type">
     <div class="d-flex" *ngSwitchCase="constant.NOTIFICATION_TYPE.ALL_LOAN_PROCESS_UPDATED" (click)="navigateToURL('/home/homeBuyingDashboard')">
-        <img class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="notification.from.profilePictureUrl" class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="!notification.from.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
         <div>
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
                 ' updated your home buying process status from ' + (helper.formatRole(notification.meta.previourProcessStatus) | titlecase) + ' to ' +
@@ -13,7 +14,8 @@
         </div>
     </div>
     <div  class="d-flex" *ngSwitchCase="constant.NOTIFICATION_TYPE.BUYER_TARGET_PROPERTY_SET" (click)="navigateToURL('/home/homeBuyingDashboard')">
-        <img class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="notification.from.profilePictureUrl" class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="!notification.from.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
         <div>
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
             ' has set your target property, MLS ID: ' + notification.meta.listingId}}</p>
@@ -25,7 +27,8 @@
     </div>
     <div  class="d-flex" *ngSwitchCase="constant.NOTIFICATION_TYPE.PROFESSIONALS_ADDED_TO_TEAM"
           (click)="navigateToURL( store.role === constant.role.HOME_INSPECTOR || store.role === constant.role.INSURANCE ? '/home/quoteRequests' : '/home/borrowers')">
-        <img class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="notification.from.profilePictureUrl" class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="!notification.from.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
         <div>
             <p class="text">{{'You have been added to ' + (notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase)
                 + "'s team"}}</p>
@@ -36,7 +39,8 @@
         </div>
     </div>
     <div  class="d-flex" *ngSwitchCase="constant.NOTIFICATION_TYPE.PROFESSIONALS_NEW_QUOTE_REQUEST" (click)="navigateToURL('/home/quoteRequests')">
-        <img class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="notification.from.profilePictureUrl" class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="!notification.from.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
         <div>
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase)
             + " sent you new quote request"}}</p>
@@ -47,7 +51,8 @@
         </div>
     </div>
     <div class="d-flex" *ngSwitchCase="constant.NOTIFICATION_TYPE.BUYER_QUOTE_REQUEST_ACCEPTED" (click)="navigateToURL('/home/teamMessageBoard?professional=' + notification.from._id)">
-        <img class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="notification.from.profilePictureUrl" class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="!notification.from.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
         <div>
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
             ' accepted your quote request '}}</p>
@@ -58,10 +63,35 @@
         </div>
     </div>
     <div class="d-flex" *ngSwitchCase="constant.NOTIFICATION_TYPE.BUYER_QUOTE_REQUEST_REJECTED" (click)="navigateToURL('')">
-        <img class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="notification.from.profilePictureUrl" class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="!notification.from.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
         <div>
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
             ' rejected your quote request '}}</p>
+            <div class="d-flex justify-content-between">
+                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <div class="circle-2" *ngIf="!notification.read"></div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex" *ngSwitchCase="constant.NOTIFICATION_TYPE.BUYER_LENDER_UPDATED_LOAN" (click)="navigateToURL('/home/myLoanDetails')">
+        <img *ngIf="notification.from.profilePictureUrl" class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="!notification.from.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
+        <div>
+            <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
+            ' updated your loan details.'}}</p>
+            <div class="d-flex justify-content-between">
+                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <div class="circle-2" *ngIf="!notification.read"></div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex" *ngSwitchCase="constant.NOTIFICATION_TYPE.LENDER_BUYER_UPDATED_LOAN" (click)="navigateToURL('/home/borrowerTransactionDetails/' + notification.from._id)">
+        <img *ngIf="notification.from.profilePictureUrl" class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="!notification.from.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
+        <div>
+            <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
+            ' updated his loan details.'}}</p>
             <div class="d-flex justify-content-between">
                 <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>

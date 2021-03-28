@@ -32,7 +32,7 @@
   cursor: pointer;
 }
 .header{
-  position: absolute;
+  position: relative;
   padding: 0;
 }
 .wrap-header{
@@ -49,8 +49,8 @@ p{
 }
 .notification{
   background: white;
-  margin-top: 2.7vw;
-  margin-right: 8.2vw;
+  top: 2.7vw;
+  margin-left: -17.8vw;
   position: absolute;
   //z-index: 2;
   border-radius: .5vw;
@@ -94,7 +94,7 @@ p{
   border-left: .5vw solid transparent;
   border-right: .5vw solid transparent;
   border-bottom: 1vw solid white;
-  left: 90%;
+  left: 92%;
   top: -9%
 }
 .circle {
@@ -115,4 +115,10 @@ p{
   width: 2.2vw;
   height: 2.2vw;
   border-radius: .3vw;
+}
+.text{
+  color: var(--darkGray);
+  font-size: .73vw;
+  margin-bottom: 0;
+  padding: 0 1.6vw;
 }
