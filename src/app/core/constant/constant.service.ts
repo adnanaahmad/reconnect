@@ -737,6 +737,7 @@ export class ConstantService {
     PROFESSIONALS_NEW_QUOTE_REQUEST: 'professionals_new-quote-request',
     BUYER_QUOTE_REQUEST_ACCEPTED: 'buyer_quote-request-accepted',
     BUYER_QUOTE_REQUEST_REJECTED: 'buyer_quote-request-rejected',
-    ALL_NEW_MESSAGE: 'all_new-message'
+    ALL_NEW_MESSAGE: 'all_new-message',
+    BUYER_IMPORTANT_DATE_UPDATED: 'buyer_important-date-updated'
   };
 }

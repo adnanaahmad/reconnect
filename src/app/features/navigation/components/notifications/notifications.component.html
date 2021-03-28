@@ -98,6 +98,18 @@
             </div>
         </div>
     </div>
+    <div class="d-flex" *ngSwitchCase="constant.NOTIFICATION_TYPE.BUYER_IMPORTANT_DATE_UPDATED" (click)="navigateToURL('')">
+        <img *ngIf="notification.from.profilePictureUrl" class="image" [src]="notification.from.profilePictureUrl">
+        <img *ngIf="!notification.from.profilePictureUrl" class="image-dummy" src="/assets/profile/profile.svg">
+        <div>
+            <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
+            ' has set ' + (helper.formatRole(notification.meta.dateType) | lowercase) + ' to ' + (notification.meta.date | date) }}</p>
+            <div class="d-flex justify-content-between">
+                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <div class="circle-2" *ngIf="!notification.read"></div>
+            </div>
+        </div>
+    </div>
     <div class="d-flex" *ngSwitchDefault>
         <img class="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkqkWLzMbf_6cUuaxj9rAaJ61f3ntPBoto9g&usqp=CAU">
         <div>
