@@ -21,7 +21,6 @@ import {StoreService} from '../../../../../../core/store/store.service';
 })
 export class TransactionDetailsComponent implements OnInit, OnDestroy {
   transactionDetails: BuyerTransactionDetailsModel = {} as BuyerTransactionDetailsModel;
-  subscription: Subscription;
   constructor( private fb: FormBuilder,
                private transactionService: BorrowerLoanDetailsService,
                private activatedRoute: ActivatedRoute,
@@ -44,9 +43,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
     //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.getLoanDetails();
   }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 
   initializeForm(): void{
     this.transactionDetails.finance = this.fb.group({
