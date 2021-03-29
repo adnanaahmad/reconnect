@@ -78,12 +78,12 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
   }
   updateRecentChat(res): void {
     const index = this.chat.recentChats.findIndex(x => x._id === res.conversation);
+    const recentChat = this.chat.recentChats[index];
+    // new message tag, if not opened chat
+    if (recentChat._id !== this.chat.selectedFriend._id){
+      recentChat.unread.push(this.chat.user._id);
+    }
     if ( index > 0){
-      const recentChat = this.chat.recentChats[index];
-      // new message tag, if not opened chat
-      if (recentChat._id !== this.chat.selectedFriend._id){
-        recentChat.unread.push(this.chat.user._id);
-      }
       this.chat.recentChats.splice(index, 1);
       this.chat.recentChats.unshift(recentChat);
       this.conversationListScroll.nativeElement.scrollTop = 0;
