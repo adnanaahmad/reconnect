@@ -21,7 +21,7 @@ export class HelperService {
   setModalPosition(): void {
     const modal = document.getElementsByClassName('modal-content') as HTMLCollectionOf<HTMLElement>;
     const index = modal.length - 1;
-    modal[index].style.width = 'fit-content';
+    modal[index].style.width = 'max-content';
     modal[index].style.border = 'none';
     modal[index].style.borderRadius = '.7vw';
     modal[index].parentElement.style.left = '8vw';
