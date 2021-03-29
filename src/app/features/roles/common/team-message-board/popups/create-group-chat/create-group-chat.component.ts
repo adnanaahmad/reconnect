@@ -51,7 +51,7 @@ export class CreateGroupChatComponent implements OnInit {
   }
   initializeForm(): void{
     this.teamData.groupForm = this.fb.group({
-      title: [null, [Validators.required, Validators.pattern('^((?![\\^ ]).)((?![\\^]).){0,20}((?![\\^! ]).)$')]],
+      title: [null, [Validators.required, Validators.pattern('^$|.*\\S+.*')]],
     });
     this.teamData.selectedTeam = [];
   }
@@ -64,7 +64,7 @@ export class CreateGroupChatComponent implements OnInit {
       const data = {
         teamId: this.teamData.id,
         members: this.teamData.selectedTeam,
-        title: this.teamData.groupForm.get('title').value
+        title: this.teamData.groupForm.get('title').value.trim()
       };
       if (this.type === 'create') {
         this.chatService.createGroupConversation(data).pipe(take(1)).subscribe(res => {
