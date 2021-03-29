@@ -23,6 +23,8 @@ export class StoreService {
   progressBarLoading = this.progressBarLoadingSubject.asObservable();
   private newMessageSubject = new BehaviorSubject<any>(false);
   newMessage = this.newMessageSubject.asObservable();
+  private unreadNotificationSubject = new BehaviorSubject<any>(false);
+  unreadNotification = this.unreadNotificationSubject.asObservable();
   constructor() { }
 
   updateToggleMoreFilter(data: boolean): void{
@@ -63,5 +65,8 @@ export class StoreService {
   }
   updateNewMessage(data): void{
     this.newMessageSubject.next(data);
+  }
+  updateUnreadNotification(data): void{
+    this.unreadNotificationSubject.next(data);
   }
 }

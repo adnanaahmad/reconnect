@@ -47,12 +47,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   notificationToggle(): boolean{
     this.notification.toggle = !this.notification.toggle;
+    if (this.notification.toggle){
+      this.store.updateUnreadNotification(false);
+    }
     return this.notification.toggle;
   }
   getNotifications(): void{
     this.navigationService.getNotifications().pipe(take(1)).subscribe(res => {
       console.log('notification', res);
       this.notification.list = res.result;
+      this.notification.list.forEach(x => {
+        if (!x.read){
+          this.store.updateUnreadNotification(true);
+        }
+      });
     }, error => {
       console.log(error);
     });
@@ -62,6 +70,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.webSocket.listen('client-notification-newActivity').subscribe(res => {
         console.log('socket notification', res);
         this.notification.list.unshift(res);
+        this.store.updateUnreadNotification(true);
       })
     );
   }
