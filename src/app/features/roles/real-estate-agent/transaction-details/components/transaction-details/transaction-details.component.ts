@@ -43,11 +43,6 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
     this.initializeForm();
     //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.getLoanDetails();
-    this.subscription = this.transactionDetails.finance.get('dealCancelled').valueChanges.subscribe(res => {
-      if (res){
-        this.cancelDeal();
-      }
-    });
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

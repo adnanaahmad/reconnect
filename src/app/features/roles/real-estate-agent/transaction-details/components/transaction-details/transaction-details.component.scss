@@ -342,3 +342,16 @@ p{
   margin-bottom: 0;
   padding: .3vw 0;
 }
+.cancel-deal{
+  color: white;
+  font-family: 'Poppins';
+  font-size: .7vw;
+  padding: .5vw 1.5vw;
+  border: none;
+  border-radius: .3vw;
+  background: var(--green);
+  cursor: pointer;
+}
+.cancel-deal:focus{
+  outline: none;
+}
