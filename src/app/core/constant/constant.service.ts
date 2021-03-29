@@ -47,7 +47,8 @@ export class ConstantService {
      getNotifications: `${environment.apiUrl}/notification/get`,
      markAsRead: `${environment.apiUrl}/notification/mark-read`,
      getUnreadMessages: `${environment.apiUrl}/conversation/get-unread`,
-     markAsReadConversation: `${environment.apiUrl}/conversation/mark-read`
+     markAsReadConversation: `${environment.apiUrl}/conversation/mark-read`,
+     cancelDeal: `${environment.apiUrl}/loan/cancel-deal`
    };
   apiMethod = {
     get: 'get',

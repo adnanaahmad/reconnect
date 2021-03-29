@@ -1,7 +1,5 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {RemoveMemberComponent} from '../../popups/remove-member/remove-member.component';
-import {config, forkJoin, Subscription} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {forkJoin} from 'rxjs';
 import {BuyerDashboardModel} from '../../models/dashboard.model';
 import {BuyerDashboardService} from '../../services/buyer-dashboard.service';
 import {take} from 'rxjs/operators';

@@ -1,18 +1,18 @@
 
 <div class="parent">
   <img class="close-btn" (click)="modal.dismiss()" src="/assets/calendar-icons/close.svg">
-  <p class="heading">Remove Member</p>
+  <p class="heading">{{cancelledDeal ? "Cancel Deal" : "Remove Member"}}</p>
   <div class="d-flex member">
     <img *ngIf="member.profilePictureUrl" class="member-img" [src]="member.profilePictureUrl">
-    <img *ngIf="!member.profilePictureUrl" class="dummy-img" src="/assets/profile/profile.svg">
+    <img *ngIf="!member.profilePictureUrl" class="dummy-img" src="/src/assets/profile/profile.svg">
     <div class="align-self-center">
         <p class="name">{{member.firstName | titlecase}} {{member.lastName | titlecase}}</p>
         <p class="role">{{role}}</p>
     </div>
   </div>
-  <p class="txt">This member will be removed from your team, Are you sure?</p>
+  <p class="txt">{{cancelledDeal ? "This deal will be cancelled" : "This member will be removed from your team"}}, Are you sure?</p>
   <div class="d-flex justify-content-between">
-    <button  (click)="remove()" class="continue button">Continue</button>
+    <button  (click)="cancelledDeal ? cancelDeal() : remove()" class="continue button">Continue</button>
     <button  (click)="modal.dismiss()" class="cancel button">Cancel</button>
   </div>
 </div>

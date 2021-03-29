@@ -20,4 +20,7 @@ export class BuyerTransactionDetailsService {
   getPropertyDetails(data): Observable<any>{
     return this.helper.requestCall(this.methods.get, this.api.getPropertyDetails + data);
   }
+  cancelDeal(data): Observable<any>{
+    return this.helper.requestCall(this.methods.put, this.api.cancelDeal, data);
+  }
 }

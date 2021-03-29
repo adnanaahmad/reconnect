@@ -27,6 +27,7 @@ import {AddMemberComponent} from './components/add-member/add-member.component';
 import { NoResultsFoundComponent } from './components/no-results-found/no-results-found.component';
 import {DomChangesDirective} from './directives/dom-changes/dom-changes.directive';
 import {AddClosingCostComponent} from './components/add-closing-cost/add-closing-cost.component';
+import {RemoveMemberComponent} from './components/remove-member/remove-member.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -53,7 +54,8 @@ const maskConfig: Partial<IConfig> = {
         ReversePipe,
         NoResultsFoundComponent,
         DomChangesDirective,
-        AddClosingCostComponent
+        AddClosingCostComponent,
+        RemoveMemberComponent
     ],
     imports: [
         CommonModule,
@@ -88,7 +90,8 @@ const maskConfig: Partial<IConfig> = {
         AddMemberComponent,
         NoResultsFoundComponent,
         DomChangesDirective,
-        AddClosingCostComponent
+        AddClosingCostComponent,
+        RemoveMemberComponent
     ],
 })
 export class SharedModule {

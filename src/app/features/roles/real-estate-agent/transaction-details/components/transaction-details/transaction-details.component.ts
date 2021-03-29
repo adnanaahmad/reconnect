@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BuyerTransactionDetailsModel} from '../../models/buyerTransactionDetails.model';
 import {FormBuilder, Validators} from '@angular/forms';
 import {take} from 'rxjs/operators';
@@ -10,14 +10,18 @@ import {NgbDateNativeAdapter, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-b
 import {AddPropertyMlsComponent} from '../../popups/add-property-mls/add-property-mls.component';
 import {BuyerTransactionDetailsService} from '../../services/buyer-transaction-details.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {RemoveMemberComponent} from '../../../../../../shared/components/remove-member/remove-member.component';
+import {Subscription} from 'rxjs';
+import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
   selector: 'app-transaction-details',
   templateUrl: './transaction-details.component.html',
   styleUrls: ['./transaction-details.component.scss']
 })
-export class TransactionDetailsComponent implements OnInit {
+export class TransactionDetailsComponent implements OnInit, OnDestroy {
   transactionDetails: BuyerTransactionDetailsModel = {} as BuyerTransactionDetailsModel;
+  subscription: Subscription;
   constructor( private fb: FormBuilder,
                private transactionService: BorrowerLoanDetailsService,
                private activatedRoute: ActivatedRoute,
@@ -26,7 +30,8 @@ export class TransactionDetailsComponent implements OnInit {
                private modalService: NgbModal,
                private configuration: NgbModalConfig,
                private dateFormat: NgbDateNativeAdapter,
-               private constant: ConstantService) {
+               private constant: ConstantService,
+               private store: StoreService) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
     configuration.centered = true;
@@ -38,7 +43,16 @@ export class TransactionDetailsComponent implements OnInit {
     this.initializeForm();
     //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.getLoanDetails();
+    this.subscription = this.transactionDetails.finance.get('dealCancelled').valueChanges.subscribe(res => {
+      if (res){
+        this.cancelDeal();
+      }
+    });
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   initializeForm(): void{
     this.transactionDetails.finance = this.fb.group({
       processStatus: this.fb.group({
@@ -58,6 +72,7 @@ export class TransactionDetailsComponent implements OnInit {
     });
   }
   getLoanDetails(): void{
+    this.store.updateProgressBarLoading(true);
     this.transactionService.getBorrowerLoanDetails(this.transactionDetails.id).pipe(take(1)).subscribe(res => {
       console.log(res);
       res = res.result;
@@ -85,7 +100,9 @@ export class TransactionDetailsComponent implements OnInit {
         homeInspectionDate: res.homeInspectionDate,
       };
       this.transactionDetails.loader = true;
+      this.store.updateProgressBarLoading(false);
     }, error => {
+      this.store.updateProgressBarLoading(false);
       console.log(error);
     });
   }
@@ -121,6 +138,20 @@ export class TransactionDetailsComponent implements OnInit {
       }
     }, error => {
       console.log(error);
+    });
+  }
+  cancelDeal(): void {
+    const modalRef = this.modalService.open(RemoveMemberComponent);
+    modalRef.componentInstance.member = this.transactionDetails.user;
+    modalRef.componentInstance.role = 'buyer';
+    modalRef.componentInstance.cancelledDeal = true;
+    modalRef.result.then((result) => {
+      if (result.status === 'yes') {
+        //console.log(result.data);
+        this.ngOnInit();
+      }
+    }, error => {
+      //console.log(error);
     });
   }
 }

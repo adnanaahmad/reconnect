@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
-import {RemoveMemberComponent} from '../../popups/remove-member/remove-member.component';
+import {RemoveMemberComponent} from '../../../../../../shared/components/remove-member/remove-member.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddMemberComponent} from '../../../../../../shared/components/add-member/add-member.component';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
@@ -41,6 +41,7 @@ export class TeamPersonComponent implements OnInit, OnChanges {
     const modalRef = this.modalService.open(RemoveMemberComponent);
     modalRef.componentInstance.member = this.member;
     modalRef.componentInstance.role = this.role;
+    modalRef.componentInstance.cancelledDeal = false;
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
         //console.log(result.data);
