@@ -36,6 +36,7 @@
 }
 .thumb-red{
   background: var(--red);
+  transform: scaleY(-1);
 }
 .dollar{
   background: var(--green);

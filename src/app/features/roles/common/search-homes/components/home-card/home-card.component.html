@@ -21,7 +21,7 @@
                class="pre-approved text-nowrap">Pre-Approved</p>
             <p *ngIf="(home.financing[store.toggleLoanType | async].housingRatio > loan[store.toggleLoanType | async].housingRatio ||
                 home.financing[store.toggleLoanType | async].debtRatio > loan[store.toggleLoanType | async].debtRatio)||home.financing[store.toggleLoanType | async].fundsNeeded < 0"
-               class="not-approved text-nowrap">No Approved</p>
+               class="not-approved text-nowrap">Not Approved</p>
         </div>
         <img *ngIf="home.images" class="home-img" [src]="home.images[0]"
              (click)="router.navigateByUrl('/home/propertyDetails/'+home.id+'?loanType='+store.toggleLoanTypeSubject.value)">
