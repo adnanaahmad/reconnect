@@ -11,7 +11,9 @@
             <app-buyer-info [transactionDetails]="transactionDetails.user"></app-buyer-info>
             <div class="d-flex flex-column">
                 <button type="submit" class="lineage-button">Save</button>
-                <button type="button" class="lineage-button mt-auto">View Lineage</button>
+                <button type="button" class="lineage-button mt-auto mb-auto">View Lineage</button>
+                <button type="button" (click)="cancelDeal()" class="cancel-deal mb-auto">Cancel Deal</button>
+
             </div>
        </div>
        <div class="transaction">
@@ -68,9 +70,6 @@
                     </div>
                   </div>
                </div>
-              <div>
-                  <button type="button" (click)="cancelDeal()" class="cancel-deal">Cancel Deal</button>
-              </div>
           </div>
        </div>
   </div>
