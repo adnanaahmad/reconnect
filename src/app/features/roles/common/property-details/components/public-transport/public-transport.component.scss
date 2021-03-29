@@ -21,10 +21,10 @@
   height: 7vw !important;
 }
 :host ::ng-deep [class$='even']{
-  transform: translate(14vw, 4vw);
+  transform: translate(15vw, 6.5vw);
 }
 :host ::ng-deep [class$='odd']{
-  transform: translate(5vw, 4vw);
+  transform: translate(5vw, 6.5vw);
 }
 
 :host ::ng-deep [class^='ngx-charts ng-tns-c']{
@@ -37,21 +37,18 @@
 .score p{
   margin-bottom: 0;
   color: var(--darkGray);
-  font-size: .7vw;
+  font-size: .8vw;
   font-weight: 500;
-}
-.score p span{
-  display: block;
 }
 .t-score{
   position: absolute;
-  left: 20%;
-  top: 22%;
+  left: 12%;
+  top: 10%;
 }
 .w-score{
   position: absolute;
-  left: 67%;
-  top: 22%;
+  left: 62%;
+  top: 10%;
 }
 .percent p{
   margin-bottom: 0;
@@ -72,63 +69,37 @@
 
 @media only screen and (max-width: 2560px) {
   :host ::ng-deep [class$='even']{
-    transform: translate(14.8vw, 4vw);
+    transform: translate(15vw, 6.5vw);
   }
   :host ::ng-deep [class$='odd']{
-    transform: translate(5.3vw, 4vw);
+    transform: translate(5.3vw, 6.5vw);
   }
 }
 
 @media only screen and (max-width: 1867px) {
   :host ::ng-deep [class$='even']{
-    transform: translate(14vw, 4.3vw);
+    transform: translate(14.5vw, 6.5vw);
   }
   :host ::ng-deep [class$='odd']{
-    transform: translate(5vw, 4.3vw);
+    transform: translate(5vw, 6.5vw);
   }
 }
 
-//@media only screen and (max-width: 1440px) {
-//  :host ::ng-deep [class$='-1']{
-//    transform: translate(7.1vw, 2.2vw);
-//  }
-//  :host ::ng-deep [class$='-0']{
-//    transform: translate(2.5vw, 2.2vw);
-//  }
-//  .t-score{
-//    left: 20.5%;
-//  }
-//  .w-score{
-//    left: 68.5%;
-//  }
-//  .percent p:first-child{
-//    margin-left: 1vw;
-//  }
-//
   @media only screen and (max-width: 1024px) {
     :host ::ng-deep [class$='even']{
-      transform: translate(12.5vw, 4.3vw)scale(1.2);
+      transform: translate(13vw, 6.5vw)scale(1.2);
     }
     :host ::ng-deep [class$='odd']{
-      transform: translate(4.5vw, 4.3vw)scale(1.2);
+      transform: translate(4.5vw, 6.5vw)scale(1.2);
     }
-    //.t-score{
-    //  left: 20%;
-    //}
-    //.w-score{
-    //  left: 68%;
-    //}
-    //.percent p:last-child{
-    //  margin-right: .5vw;
-    //}
   }
-//}
+
 @media only screen and (max-width: 768px) {
   :host ::ng-deep [class$='even']{
-    transform: translate(12.3vw, 4.3vw)scale(1.5);
+    transform: translate(12.3vw, 6.5vw)scale(1.5);
   }
   :host ::ng-deep [class$='odd']{
-    transform: translate(4.5vw, 4.3vw)scale(1.5);
+    transform: translate(4.5vw, 6.5vw)scale(1.5);
   }
 }
 

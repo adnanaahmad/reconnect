@@ -1,8 +1,8 @@
       <div class="card-6">
 
       <div class="d-flex">
-          <div class="score"><p class="t-score"><span>Transit</span><span>Score</span></p></div>
-          <div class="score"><p class="w-score"><span>Walk</span><span>Score</span></p></div>
+          <div class="score"><p class="t-score">Transit Score</p></div>
+          <div class="score"><p class="w-score">Walk Score</p></div>
           <div>
           <ngx-charts-advanced-pie-chart
             (window:resize)="onResize($event)"
@@ -22,7 +22,7 @@
             >
           </ngx-charts-advanced-pie-chart></div>
       </div>
-          <div class="d-flex percent justify-content-around">
+          <div class="d-flex percent justify-content-around" style="margin-top: 3vw">
               <p>{{publicTransport.notAvailable === null ? 'N.A.' : publicTransport.transitScore[0].value + '%'}}</p>
               <p>{{publicTransport.walkScore[0].value}}%</p>
           </div>
