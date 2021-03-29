@@ -110,7 +110,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   }
   getUnreadMessages(): void{
     this.navigationService.getUnreadMessages().pipe(take(1)).subscribe(res => {
-      if (res.result){
+      if (res.result.length){
         this.store.updateNewMessage(true);
       }
     }, error => {
