@@ -22,7 +22,7 @@
             <div class="row">
               <div class="col-10 d-flex align-items-start flex-column">
                 <p class="name text-nowrap">{{buyer.firstName | titlecase}} {{buyer.lastName | titlecase}}</p>
-                <p class="address mt-auto mb-auto">{{buyer.targetPropertyAddress.deliveryLine + ', ' +
+                <p *ngIf="buyer.targetPropertyAddress" class="address mt-auto mb-auto">{{buyer.targetPropertyAddress.deliveryLine + ', ' +
                 buyer.targetPropertyAddress.city + ', ' + buyer.targetPropertyAddress.state + ', ' + buyer.targetPropertyAddress.zip}}</p>
                 <p class="mt-auto date text-nowrap">{{helper.formatRole(date.key)+' Date: ' | titlecase}}
                   {{ (date.key === 'commitments' ? buyer.commitmentDate :

@@ -101,6 +101,9 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       };
       this.transactionDetails.loader = true;
       this.store.updateProgressBarLoading(false);
+      if (!this.transactionDetails.subjectProperty){
+        this.transactionDetails.finance.controls['targetProperty.listPrice'].disable();
+      }
     }, error => {
       this.store.updateProgressBarLoading(false);
       console.log(error);
@@ -135,6 +138,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
         this.transactionDetails.subjectProperty = result.data;
+        this.transactionDetails.finance.controls['targetProperty.listPrice'].enable();
       }
     }, error => {
       console.log(error);
