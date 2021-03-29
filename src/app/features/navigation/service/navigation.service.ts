@@ -34,4 +34,7 @@ export class NavigationService {
   readNotification(data): Observable<any>{
     return this.helper.requestCall(this.methods.put, this.api.markAsRead, data);
   }
+  getUnreadMessages(): Observable<any>{
+    return this.helper.requestCall(this.methods.get, this.api.getUnreadMessages);
+  }
 }

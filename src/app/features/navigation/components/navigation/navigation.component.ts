@@ -8,6 +8,7 @@ import {ConstantService} from '../../../../core/constant/constant.service';
 import {LocationService} from '../../../landing/services/location/location.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navigation',
@@ -37,6 +38,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.location.saveLocationApiToken();
     this.listenMessages();
     this.showMessageIcon();
+    this.getUnreadMessages();
   }
   ngOnDestroy(): void {
     this.navigation.profileButtonSubscription.unsubscribe();
@@ -104,6 +106,15 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.navigation.listenMessageSubscription = this.webSocket.listen('client-conversation-newMessage').subscribe(res => {
       console.log('socket messages', res);
       this.store.updateNewMessage(true);
+    });
+  }
+  getUnreadMessages(): void{
+    this.navigationService.getUnreadMessages().pipe(take(1)).subscribe(res => {
+      if (res.result){
+        this.store.updateNewMessage(true);
+      }
+    }, error => {
+      console.log(error);
     });
   }
 }

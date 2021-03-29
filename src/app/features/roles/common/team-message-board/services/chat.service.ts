@@ -41,4 +41,7 @@ export class ChatService {
   addTeamMember(data): Observable<any>{
     return  this.helper.requestCall(this.methods.put, this.api.addTeamMember, data);
   }
+  markAsReadConversation(data): Observable<any>{
+    return this.helper.requestCall(this.methods.put, this.api.markAsReadConversation, data);
+  }
 }

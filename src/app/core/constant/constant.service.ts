@@ -45,7 +45,9 @@ export class ConstantService {
      professionalDashboard: `${environment.apiUrl}/analytics/dashboard`,
      sendInvite: `${environment.apiUrl}/user/send-invite`,
      getNotifications: `${environment.apiUrl}/notification/get`,
-     markAsRead: `${environment.apiUrl}/notification/mark-read`
+     markAsRead: `${environment.apiUrl}/notification/mark-read`,
+     getUnreadMessages: `${environment.apiUrl}/conversation/get-unread`,
+     markAsReadConversation: `${environment.apiUrl}/conversation/mark-read`
    };
   apiMethod = {
     get: 'get',

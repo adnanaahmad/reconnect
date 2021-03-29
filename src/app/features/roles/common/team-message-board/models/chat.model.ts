@@ -28,6 +28,7 @@ interface SelectedFriendModel{
   updatedAt: string;
   __v: number;
   _id: string;
+  unread: Array<string>;
 }
 export interface UserModel {
   firstName: string;

@@ -10,7 +10,7 @@ import {StoreService} from '../../../../../../core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {take} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
+import {forkJoin, Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute} from '@angular/router';
 @Component({
@@ -66,7 +66,10 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
   listenMessages(): void{
     this.subscription = this.webSocket.listen('client-conversation-newMessage').subscribe(res => {
       console.log('socket messages', res);
-      this.chat.messages.push(res);
+      // opened chat
+      if (this.chat.selectedFriend._id === res.conversation) {
+        this.chat.messages.push(res);
+      }
       this.updateRecentChat(res);
       setTimeout(() => {
         this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
@@ -77,6 +80,10 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
     const index = this.chat.recentChats.findIndex(x => x._id === res.conversation);
     if ( index > 0){
       const recentChat = this.chat.recentChats[index];
+      // new message tag, if not opened chat
+      if (recentChat._id !== this.chat.selectedFriend._id){
+        recentChat.unread.push(this.chat.user._id);
+      }
       this.chat.recentChats.splice(index, 1);
       this.chat.recentChats.unshift(recentChat);
       this.conversationListScroll.nativeElement.scrollTop = 0;
@@ -107,10 +114,13 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
    // console.log(data);
     this.chat.messageLoader = false;
     this.chat.selectedFriend = data;
-    this.chatService.getMessages(data._id).pipe(take(1)).subscribe(res => {
+    // new msg read
+    this.removeUnread();
+    forkJoin([this.chatService.getMessages(data._id), this.chatService.markAsReadConversation({conversationId: data._id})])
+        .pipe(take(1)).subscribe(res => {
       console.log(res);
       this.chat.messageLoader = true;
-      this.chat.messages = res.result;
+      this.chat.messages = res[0].result;
       setTimeout(() => {
         this.chatBoxScroll.nativeElement.scrollTop = this.chatBoxScroll.nativeElement.scrollHeight;
       }, 0);
@@ -224,5 +234,14 @@ export class TeamMessageBoardComponent implements OnInit, OnDestroy {
         return id !== -1;
       }
     });
+  }
+  unreadMessage(friend): boolean{
+    return friend.unread.findIndex(x => x === this.chat.user._id) !== -1;
+  }
+  removeUnread(): void{
+    const index = this.chat.selectedFriend.unread.findIndex( x => x === this.chat.user._id);
+    if (index !== -1) {
+      this.chat.selectedFriend.unread.splice(index, 1);
+    }
   }
 }

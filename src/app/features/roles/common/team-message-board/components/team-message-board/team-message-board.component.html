@@ -42,18 +42,27 @@
                     </div>
                     <div class="align-self-center friend-text">
                         <div class="d-flex justify-content-start">
-                            <p *ngIf="friend.type === constant.conversationType.GROUP"
-                               class="friend-name">{{ friend.title | titlecase }}</p>
+                            <ng-container *ngIf="friend.type === constant.conversationType.GROUP">
+                                <div class="d-flex width justify-content-between">
+                                    <p class="friend-name">{{ friend.title | titlecase }}</p>
+                                    <p *ngIf="unreadMessage(friend)" class="new-msg align-self-center">New</p>
+                                </div>
+                            </ng-container>
                             <ng-container *ngIf="friend.type === constant.conversationType.PRIVATE">
-                                <p class="friend-name">{{ recentChatMember(friend.allTimeMembers).firstName | titlecase}} {{ recentChatMember(friend.allTimeMembers).lastName | titlecase }}</p>
-                                <span class="circle align-self-center"></span>
+                                <div class="d-flex width justify-content-between">
+                                    <p class="friend-name">{{ recentChatMember(friend.allTimeMembers).firstName | titlecase}} {{ recentChatMember(friend.allTimeMembers).lastName | titlecase }}</p>
+<!--                                    <span class="circle align-self-center"></span>-->
+                                    <p *ngIf="unreadMessage(friend)" class="new-msg align-self-center">New</p>
+                                </div>
                             </ng-container>
                         </div>
                         <p *ngIf="friend.type === constant.conversationType.PRIVATE"
                            class="friend-role">{{ helper.formatRole(recentChatMember(friend.allTimeMembers).role) | titlecase }}</p>
+                        <p *ngIf="friend.type === constant.conversationType.GROUP"
+                           class="friend-role">Group</p>
                     </div>
-                    <img *ngIf="!(chat.selectedFriend == friend)" class="align-self-center envelope img-fluid"
-                         src="/assets/chat/envelope.svg">
+<!--                    <img *ngIf="!(chat.selectedFriend == friend)" class="align-self-center envelope img-fluid"-->
+<!--                         src="/assets/chat/envelope.svg">-->
                 </div>
             </div>
 

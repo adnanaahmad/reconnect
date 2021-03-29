@@ -366,6 +366,18 @@ textarea{
 .add-to-team{
   outline: none;
 }
+.new-msg{
+  color: white!important;
+  background: var(--green);
+  font-size: .6vw;
+  padding: .2vw .4vw;
+  border-radius: .5vw;
+  //margin-left: .5vw;
+  margin-bottom: 0;
+}
+.width{
+  width: 100%;
+}
 ::ng-deep .emoji-mart-preview{
   display: none;
 }
