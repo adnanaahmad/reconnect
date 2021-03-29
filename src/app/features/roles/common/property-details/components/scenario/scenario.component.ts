@@ -33,7 +33,7 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
       this.scenario.loanAmount = Math.round(this.loanScenario.listings[0].financing[loanType].loanAmount);
       this.scenario.financeAmount = Math.round(this.loanScenario.listings[0].financing[loanType].financeAmount);
       this.scenario.downPayment = Math.round(this.loanScenario.listings[0].financing[loanType].downPaymentCalculated);
-      this.scenario.loanRate = Math.round(this.loanScenario.userLoan[loanType].loanRate);
+      this.scenario.loanRate = (this.loanScenario.userLoan[loanType].loanRate);
       this.scenario.loanTerm = Math.round(this.loanScenario.userLoan[loanType].loanTerm);
       this.scenario.monthlyPayment = Math.round(this.loanScenario.listings[0].financing[loanType].totalPayment);
       this.scenario.fundsNeeded = this.scenarioNumber === 1 ? Math.round(this.loanScenario.listings[0].financing[loanType].fundsNeeded) :
