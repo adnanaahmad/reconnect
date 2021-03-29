@@ -44,8 +44,6 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             })
         );
         // TODO: More Filters ?
-        this.searchHome.keyword = new FormControl(null);
-        this.searchHome.keywordList = [];
 
         this.searchHome.toggle = false;
     }
@@ -95,6 +93,9 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                 to: params.baths ? params.baths.includes(':') ? params.baths.split(':')[1] : null : null,
                 value: params.baths ? !params.baths.includes(':') ? params.baths.replace('>=', '') : null : null
             },
+            moreFilters: {
+                value: params.xf_amenities ? params.xf_amenities : null,
+            }
         });
     }
 
@@ -190,11 +191,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                 Reactivated: [null],
             }),
             moreFilters: this.fb.group({
-                keywords: [[]],
-                basement: [null],
-                swimmingPool: [null],
-                attic: [null],
-                waterFront: [null],
+                value: [null]
             }),
             listPrice: this.fb.group({
                 from: [null],
@@ -316,7 +313,8 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                 : `>=${this.searchHome.moreFilters.get(['beds', 'value']).value}`,
             baths: this.searchHome.moreFilters.get(['baths', 'from']).value && this.searchHome.moreFilters.get(['baths', 'to']).value ?
                 `${this.searchHome.moreFilters.get(['baths', 'from']).value}:${this.searchHome.moreFilters.get(['baths', 'to']).value}`
-                : `>=${this.searchHome.moreFilters.get(['baths', 'value']).value}`
+                : `>=${this.searchHome.moreFilters.get(['baths', 'value']).value}`,
+            xf_amenities: this.searchHome.moreFilters.get(['moreFilters', 'value']).value
         };
     }
 

@@ -12,6 +12,7 @@ export class MoreFiltersComponent implements OnInit, OnDestroy {
   @Input() searchHome;
   @Output() applyFilters =  new EventEmitter<any>();
   moreFilters: MoreFiltersModel;
+  moreFiltersArray: Array<string>;
   subscription: Subscription;
   constructor(private store: StoreService) { }
 
@@ -20,12 +21,22 @@ export class MoreFiltersComponent implements OnInit, OnDestroy {
     this.initialisePriceFilter();
     this.initialiseBedFilter();
     this.initialiseBathFilter();
-    this.searchHome.keywordList = this.searchHome.moreFilters.value.moreFilters.keywords;
+    this.initialiseMoreFilter();
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
+  initialiseMoreFilter(): void{
+    this.moreFiltersArray = [
+      'Private School',
+      'Public School',
+      'Shopping',
+      'Swimming Pool',
+      'Walk/Jog Trails',
+      'Medical Facility',
+      'Public Transportation',
+    ];
+  }
   initialiseBathFilter(): void{
     this.helper('minBaths', 'maxBaths', 5, 1, 'baths');
   }
@@ -49,27 +60,6 @@ export class MoreFiltersComponent implements OnInit, OnDestroy {
       this.moreFilters[maxArray] = [...this.moreFilters[minArray]].slice(res / value , length);
     }, error => {
       console.log(error);
-    });
-  }
-  addKeyword(): void {
-    this.searchHome.keywordList.push(this.searchHome.keyword.value);
-    this.searchHome.moreFilters.patchValue({
-      moreFilters: {
-        keywords: this.searchHome.keywordList
-      }
-    });
-    this.searchHome.keyword.setValue('');
-  }
-
-  deleteKeyword(value): void{
-    const index = this.searchHome.keywordList.indexOf(value);
-    if (index > -1) {
-      this.searchHome.keywordList.splice(index, 1);
-    }
-    this.searchHome.moreFilters.patchValue({
-      moreFilters: {
-        keywords: this.searchHome.keywordList
-      }
     });
   }
   clearAll(): void{

@@ -11,7 +11,7 @@
             <div class="col-10 click" (click)="openPropertySearch(search.query)">
               <div *ngFor="let child of search.query | keyvalue">
                  <div class="row">
-                      <p class="col-3 text-nowrap label"> {{child.key | splitCamelCase}}: </p>
+                      <p class="col-3 text-nowrap label"> {{child.key === 'xf_amenities' ? 'More Filters' : (child.key | splitCamelCase)}}: </p>
                       <div class="col-9 d-flex">
                           <div class="d-flex space" *ngIf="child.key === 'listPrice'">
                               <p class="price">{{child.value ? '$' + child.value.split(':')[0] + ' - ' : '' }}</p>
@@ -30,6 +30,9 @@
                             <ng-container *ngFor="let i  of child.value">
                                 <p id="comma" class="text-nowrap">{{i}}</p>
                             </ng-container>
+                          </div>
+                          <div *ngIf="child.key === 'xf_amenities' ">
+                              <p>{{child.value}}</p>
                           </div>
                        </div>
                  </div>

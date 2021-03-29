@@ -204,39 +204,19 @@
             <div class="col-width">
               <p class="heading-sub">More Filters</p>
 
-              <div class="d-flex search-add">
-                 <input [formControl]="searchHome.keyword" type="email" id="search-filter" class="form-control" placeholder="Add your keyword">
-                 <img class="add-btn" src="/assets/calendar-icons/plus.svg" (click)="addKeyword()">
-              </div>
-              <div class="grid">
-                  <div class="chip d-flex" *ngFor="let i of searchHome.moreFilters.value.moreFilters.keywords">
-                    <p class="text-nowrap">{{i}}</p>
-                    <p (click)="deleteKeyword(i)">x</p>
-                  </div>
-              </div>
               <div class="row">
                   <div class="col-6 space">
-                      <label class="container">
-                        <input formControlName="basement" type="checkbox" [checked]="searchHome.moreFilters.value.moreFilters.basement">
+                      <label class="container" *ngFor="let i of moreFiltersArray | slice:0:4">
+                        <input formControlName="value" type="radio" value="{{i}}">
                         <img class="checkmark" src="/assets/loan-details/tick.svg">
-                        <p class="label-txt">Basement</p>
-                      </label>
-                      <label class="container">
-                        <input formControlName="swimmingPool" type="checkbox"  [checked]="searchHome.moreFilters.value.moreFilters.swimmingPool">
-                        <img class="checkmark" src="/assets/loan-details/tick.svg">
-                        <p class="label-txt">Swimming Pool</p>
+                        <p class="label-txt">{{i}}</p>
                       </label>
                   </div>
                   <div class="col-6  space">
-                      <label class="container">
-                        <input formControlName="attic" type="checkbox"  [checked]="searchHome.moreFilters.value.moreFilters.attic">
-                        <img class="checkmark" src="/assets/loan-details/tick.svg">
-                        <p class="label-txt">Attic</p>
-                      </label>
-                      <label class="container">
-                        <input formControlName="waterFront" type="checkbox"  [checked]="searchHome.moreFilters.value.moreFilters.waterFront">
-                        <img class="checkmark" src="/assets/loan-details/tick.svg">
-                        <p class="label-txt">Water Front</p>
+                      <label class="container" *ngFor="let i of moreFiltersArray | slice:4:7">
+                          <input formControlName="value" type="radio" value="{{i}}">
+                          <img class="checkmark" src="/assets/loan-details/tick.svg">
+                          <p class="label-txt">{{i}}</p>
                       </label>
                   </div>
               </div>
