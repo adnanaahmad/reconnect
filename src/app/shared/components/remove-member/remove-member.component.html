@@ -4,7 +4,7 @@
   <p class="heading">{{cancelledDeal ? "Cancel Deal" : "Remove Member"}}</p>
   <div class="d-flex member">
     <img *ngIf="member.profilePictureUrl" class="member-img" [src]="member.profilePictureUrl">
-    <img *ngIf="!member.profilePictureUrl" class="dummy-img" src="/src/assets/profile/profile.svg">
+    <img *ngIf="!member.profilePictureUrl" class="dummy-img" src="/assets/profile/profile.svg">
     <div class="align-self-center">
         <p class="name">{{member.firstName | titlecase}} {{member.lastName | titlecase}}</p>
         <p class="role">{{role}}</p>

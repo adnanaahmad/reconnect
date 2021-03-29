@@ -36,8 +36,8 @@
                 </div>
             </div>
             <div class="d-flex flex-column align-items-end">
-                <button class="add-btn" [disabled]="addButtonDisable">
-                    <img [attr.id]="i" *ngIf="!member.quote" (click)="addMember(member, i)" class="plus-icon" src="/assets/calendar-icons/plus.svg">
+                <button class="add-btn" [disabled]="addButtonDisable" (click)="addMember(member, i)">
+                    <img [attr.id]="i" *ngIf="!member.quote" class="plus-icon" src="/assets/calendar-icons/plus.svg">
                 </button>
                 <p [attr.id]="i+constant.quoteRequestStatus.PENDING" class="quote-status-manually quote-status">Pending</p>
                 <ng-container *ngIf="member.quote">
