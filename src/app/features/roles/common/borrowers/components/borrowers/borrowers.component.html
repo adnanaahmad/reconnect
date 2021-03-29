@@ -29,9 +29,8 @@
           <option>5</option>
         </select>
 </div>
-<ng-container *ngFor="let borrower of borrowers.borrower | filter:searchName.value" >
-    <div *ngIf="constant.borrowersStatusObject[store.borrowersStatus | async].includes(borrower.loan.processStatus) && !borrower.loan.dealCancelled ||
-     (borrower.loan.dealCancelled && (store.borrowersStatus | async) === constant.borrowersStatusObject.Cancelled[0])" class="card-3 d-flex" style="background: transparent">
+<ng-container *ngFor="let borrower of borrowers.render | filter:searchName.value" >
+    <div *ngIf="constant.borrowersStatusObject[store.borrowersStatus | async].includes(borrower.loan ? borrower.loan.processStatus : borrower.dealStatus )" class="card-3 d-flex" style="background: transparent">
         <div class="card-4 " style="background: white">
             <div class="div-1 d-flex">
                 <img *ngIf="borrower.buyer.profilePictureUrl" [src]="borrower.buyer.profilePictureUrl" class="display-img">
@@ -58,7 +57,7 @@
         </div>
 
 
-        <div class="card-5" style="background: white">
+        <div *ngIf="((store.borrowersStatus | async | lowercase) !== this.constant.borrowersStatusObject.Cancelled[0].toLowerCase())" class="card-5" style="background: white">
             <div class="top d-flex">
                 <div class="d-flex address" style="background: transparent">
                     <img src="/assets/borrower/pin.svg" class="pin">
@@ -81,6 +80,33 @@
             <div class="bottom d-flex">
                 <div class="status" *ngFor="let status of constant.loanStatus; let i = index">
                     <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !activeStatus(i, borrower.loan.processStatus)}">
+                    <p>{{status | splitCamelCase}}</p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="((store.borrowersStatus | async | lowercase) === this.constant.borrowersStatusObject.Cancelled[0].toLowerCase())" class="card-5" style="background: white">
+            <div class="top d-flex">
+                <div class="d-flex address" style="background: transparent">
+                    <img src="/assets/borrower/pin.svg" class="pin">
+                    <p *ngIf="borrower.targetProperty" [ngbTooltip]="" >{{borrower.targetProperty.address.deliveryLine + ',' + borrower.targetProperty.address.city + ', ' + borrower.targetProperty.address.state + ', ' + borrower.targetProperty.address.zip}}</p>
+                    <p *ngIf="!borrower.targetProperty">N.A.</p>
+                </div>
+                <div class="date1" style="background: transparent">
+                    <div class="d-flex justify-content-end txt-div">
+                        <p class="txt">Closing Date:</p><p class="txt-date">{{borrower.dealClosingDate ? (borrower.loan.dealClosingDate | date :  "dd-MM-y") : 'N.A.'}}</p>
+                    </div>
+                    <div class="d-flex">
+                        <p class="txt">Commitment Date:</p><p class="txt-date">{{ borrower.commitmentDate ? (borrower.loan.commitmentDate | date :  "dd-MM-y") : 'N.A.'}}</p>
+                    </div>
+                </div>
+                <div class="date-2" style="background-color: transparent;">
+                    <div class="d-flex txt-div"><p class="txt">Home Inspection Date:</p><p class="txt-date">{{ borrower.homeInspectionDate ? (borrower.homeInspectionDate | date :  "dd-MM-y") : 'N.A.'}}</p></div>
+                    <div class="d-flex"><p class="txt">Purchase & Sales Date:</p><p class="txt-date">{{borrower.purchaseAndSalesDate ? (borrower.purchaseAndSalesDate | date :  "dd-MM-y") : 'N.A.'}}</p></div>
+                </div>
+            </div>
+            <div class="bottom d-flex">
+                <div class="status" *ngFor="let status of constant.loanStatus; let i = index">
+                    <img src="/assets/borrower/tick.svg" class="tick" [ngClass]="{'tick-disable': !activeStatus(i, borrower.processStatus)}">
                     <p>{{status | splitCamelCase}}</p>
                 </div>
             </div>

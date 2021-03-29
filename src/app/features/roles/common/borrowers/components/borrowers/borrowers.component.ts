@@ -10,6 +10,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {CreateGroupChatComponent} from '../../../team-message-board/popups/create-group-chat/create-group-chat.component';
 import {AddNewBorrowerComponent} from '../../popups/add-new-borrower/add-new-borrower.component';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-borrowers',
@@ -36,9 +37,11 @@ export class BorrowersComponent implements OnInit {
   }
   getBorrowers(): void{
     this.store.updateProgressBarLoading(true);
-    this.borrowerService.getBorrowers().pipe(take(1)).subscribe(res => {
+    forkJoin([this.borrowerService.getBorrowers(), this.borrowerService.getCancelledDeals()]).pipe(take(1)).subscribe(res => {
       console.log(res);
-      this.borrowers.borrower = res.result;
+      this.borrowers.borrower = res[0].result;
+      this.borrowers.render = res[0].result;
+      this.borrowers.cancelled = res[1].result;
       this.store.updateProgressBarLoading(false);
     }, error => {
       console.log(error);
@@ -47,6 +50,11 @@ export class BorrowersComponent implements OnInit {
   }
   listClick(button): void {
     this.store.updateBorrowersStatus(button);
+    if (button.toLowerCase() === this.constant.borrowersStatusObject.Cancelled[0].toLowerCase()){
+      this.borrowers.render = this.borrowers.cancelled;
+    } else {
+      this.borrowers.render = this.borrowers.borrower;
+    }
   }
   activeStatus(index, value): boolean{
     return index <= this.constant.loanStatus.findIndex(data => data === value);

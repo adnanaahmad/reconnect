@@ -20,4 +20,7 @@ export class BorrowersService {
   sendInvite(data): Observable<any>{
     return this.helper.requestCall(this.methods.post, this.api.sendInvite, data);
   }
+  getCancelledDeals(): Observable<any>{
+    return this.helper.requestCall(this.methods.get, this.api.getCancelledDeals);
+  }
 }

@@ -1,5 +1,7 @@
 export interface BorrowersModel {
   borrower: Array<BorrowerModel>;
+  cancelled: Array<BorrowerModel>;
+  render: Array<BorrowerModel>;
 }
 
 interface StatusModel {

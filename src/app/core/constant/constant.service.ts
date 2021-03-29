@@ -48,7 +48,8 @@ export class ConstantService {
      markAsRead: `${environment.apiUrl}/notification/mark-read`,
      getUnreadMessages: `${environment.apiUrl}/conversation/get-unread`,
      markAsReadConversation: `${environment.apiUrl}/conversation/mark-read`,
-     cancelDeal: `${environment.apiUrl}/loan/cancel-deal`
+     cancelDeal: `${environment.apiUrl}/loan/cancel-deal`,
+     getCancelledDeals: `${environment.apiUrl}/loan/inactive-deals`
    };
   apiMethod = {
     get: 'get',
@@ -702,7 +703,7 @@ export class ConstantService {
       this.loanStatusObject.CLEARED_TO_CLOSE,
     ],
     Closed: [this.loanStatusObject.CLOSED],
-    Cancelled: ['Cancelled']
+    Cancelled: ['cancelled']
   };
   quoteRequestStatus = {
     PENDING: 'pending',
