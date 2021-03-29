@@ -41,7 +41,6 @@ export class AddClosingCostComponent implements OnInit {
   }
   disableForm(): void{
     if (this.store.role === this.constant.role.LENDER){
-      console.log('meow', this.processStatus);
       if (this.constant.homeBuyingProcessStatusIndex[this.processStatus] >= 5){
         this.closingCost.disable();
         this.disableAddButton = true;
