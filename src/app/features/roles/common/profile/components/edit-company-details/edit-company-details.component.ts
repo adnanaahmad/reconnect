@@ -5,6 +5,8 @@ import {CompanyDetailsModel} from '../../models/company-details.model';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {Router} from '@angular/router';
 import {take} from 'rxjs/operators';
+import {StoreService} from '../../../../../../core/store/store.service';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-edit-company-details',
@@ -17,7 +19,9 @@ export class EditCompanyDetailsComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private profile: ProfileService,
               private helper: HelperService,
-              private router: Router) { }
+              private router: Router,
+              public store: StoreService,
+              public constant: ConstantService) { }
 
   ngOnInit(): void {
     this.getLocation();

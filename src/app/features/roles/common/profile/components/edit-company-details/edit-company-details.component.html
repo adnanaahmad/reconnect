@@ -30,8 +30,10 @@
                         <input prefix="+1 " mask="(000) 000 0000" [class.is-invalid]="companyDetails.form.get('phoneNumber').invalid && companyDetails.form.get('phoneNumber').touched" formControlName="phoneNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
                     </div>
                     <div class="c2-col2">
-                        <p [ngClass]="{'danger': companyDetails.form.get('licenseNumber').invalid && companyDetails.form.get('licenseNumber').touched}" class="label">License #</p>
-                        <input [ngClass]="{'is-invalid': companyDetails.form.get('licenseNumber').invalid && companyDetails.form.get('licenseNumber').touched}" formControlName="licenseNumber" type="number" class="form-control f1 mb-custom"  placeholder="">
+                        <ng-container *ngIf="store.role !== constant.role.INSURANCE">
+                            <p [ngClass]="{'danger': companyDetails.form.get('licenseNumber').invalid && companyDetails.form.get('licenseNumber').touched}" class="label">License #</p>
+                            <input [ngClass]="{'is-invalid': companyDetails.form.get('licenseNumber').invalid && companyDetails.form.get('licenseNumber').touched}" formControlName="licenseNumber" type="number" class="form-control f1 mb-custom"  placeholder="">
+                        </ng-container>
                         <p [ngClass]="{'danger': companyDetails.form.get('faxNumber').invalid && companyDetails.form.get('faxNumber').touched}" class="label">Fax Phone #</p>
                         <input [ngClass]="{'is-invalid': companyDetails.form.get('faxNumber').invalid && companyDetails.form.get('faxNumber').touched}" formControlName="faxNumber" type="number" class="form-control f1 mb-custom"  placeholder="">
                     </div>
