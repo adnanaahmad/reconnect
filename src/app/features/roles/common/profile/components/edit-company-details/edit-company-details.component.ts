@@ -26,24 +26,20 @@ export class EditCompanyDetailsComponent implements OnInit {
   }
   onSubmit(): void{
     console.log(this.companyDetails.form.value);
-    if (!this.companyDetails.form.valid){
-      this.companyDetails.form.markAllAsTouched();
-    } else {
-      if (this.companyDetails.fileUpload){
-        this.profile.uploadCompanyPicture(this.companyDetails.fileUpload).pipe(take(1)).subscribe(res => {
-          console.log(res);
-        }, error => {
-          console.log(error);
-        });
-      }
-      this.profile.saveProfile({company: this.companyDetails.form.value}).pipe(take(1)).subscribe(res => {
-        // console.log(res);
-        this.router.navigateByUrl('/home/profile').then();
+    if (this.companyDetails.fileUpload){
+      this.profile.uploadCompanyPicture(this.companyDetails.fileUpload).pipe(take(1)).subscribe(res => {
         console.log(res);
       }, error => {
         console.log(error);
       });
     }
+    this.profile.saveProfile({company: this.companyDetails.form.value}).pipe(take(1)).subscribe(res => {
+      // console.log(res);
+      this.router.navigateByUrl('/home/profile').then();
+      console.log(res);
+    }, error => {
+      console.log(error);
+    });
   }
   initialiseCompanyForm(): void{
     this.companyDetails.form = this.fb.group({
