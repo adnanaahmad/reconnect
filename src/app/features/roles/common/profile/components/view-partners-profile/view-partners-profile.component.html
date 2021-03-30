@@ -82,11 +82,11 @@
                     <div class="d-flex">
                         <div class="label">
                             <p class="text-nowrap">Fax Phone #: </p>
-                            <p *ngIf="store.role !== constant.role.INSURANCE" class="text-nowrap">License #:</p>
+                            <p *ngIf="store.role !== constant.role.INSURANCE && store.role !== constant.role.ATTORNEY" class="text-nowrap">License #:</p>
                         </div>
                         <div class="value">
                             <p>{{partnerProfile.company.faxNumber}}&nbsp;</p>
-                            <p *ngIf="store.role !== constant.role.INSURANCE">{{partnerProfile.company.licenseNumber}}</p>
+                            <p *ngIf="store.role !== constant.role.INSURANCE && store.role !== constant.role.ATTORNEY">{{partnerProfile.company.licenseNumber}}</p>
                         </div>
                     </div>
                 </div>
