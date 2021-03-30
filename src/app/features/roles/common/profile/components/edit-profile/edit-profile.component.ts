@@ -128,7 +128,7 @@ export class EditProfileComponent implements OnInit {
     }
     if (this.userProfile.fileUpload){
       this.profile.uploadProfilePicture(this.userProfile.fileUpload).pipe(take(1)).subscribe(res => {
-        console.log(res);
+        //console.log(res);
         user.profilePictureUrl = res.result.profilePictureUrl;
         localStorage.setItem('user', JSON.stringify(user));
         this.store.updateUserData(user);
