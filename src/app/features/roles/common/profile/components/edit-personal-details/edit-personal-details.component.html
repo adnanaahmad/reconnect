@@ -59,10 +59,12 @@
                     <input formControlName="role" type="text" class="form-control f1 mb-custom"  placeholder="">
                     <p [ngClass]="{'danger': personalDetails.form.get('title').invalid&&personalDetails.form.get('title').touched}" class="label">Title</p>
                     <input [ngClass]="{'is-invalid': personalDetails.form.get('title').invalid&&personalDetails.form.get('title').touched}" formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
-                    <p [ngClass]="{'danger': personalDetails.form.get('realEstateLicenseNumber').invalid&&personalDetails.form.get('realEstateLicenseNumber').touched}" class="label">Real Estate Lic #</p>
-                    <input [ngClass]="{'is-invalid': personalDetails.form.get('realEstateLicenseNumber').invalid&&personalDetails.form.get('realEstateLicenseNumber').touched}" formControlName="realEstateLicenseNumber" type="text" class="form-control f1"  placeholder="">
+                    <ng-container *ngIf="store.role !== constant.role.REAL_ESTATE">
+                        <p [ngClass]="{'danger': personalDetails.form.get('licenseNumber').invalid&&personalDetails.form.get('licenseNumber').touched}" class="label">License #</p>
+                        <input [ngClass]="{'is-invalid': personalDetails.form.get('licenseNumber').invalid&&personalDetails.form.get('licenseNumber').touched}" formControlName="licenseNumber" type="text" class="form-control f1"  placeholder="">
+                    </ng-container>
                 </div>
-                <div class="c2-col2">
+                <div class="c2-col2 d-flex flex-column">
                     <p [ngClass]="{'danger': personalDetails.form.get(['birthday', 'month']).invalid&&personalDetails.form.get(['birthday', 'month']).touched
                     && personalDetails.form.get(['birthday', 'day']).invalid&&personalDetails.form.get(['birthday', 'day']).touched
                     && personalDetails.form.get(['birthday', 'year']).invalid&&personalDetails.form.get(['birthday', 'year']).touched}" class="label">Birthday</p>
@@ -88,10 +90,12 @@
                     </div>
                     <p class="label">Email</p>
                     <input formControlName="email" type="text" class="form-control f1 mb-custom"  placeholder="">
-                    <p [ngClass]="{'danger': personalDetails.form.get('licenseNumber').invalid&&personalDetails.form.get('licenseNumber').touched}" class="label">License #</p>
-                    <input [ngClass]="{'is-invalid': personalDetails.form.get('licenseNumber').invalid&&personalDetails.form.get('licenseNumber').touched}" formControlName="licenseNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
-                    <p [ngClass]="{'danger': personalDetails.form.get('brokerLicense').invalid&&personalDetails.form.get('brokerLicense').touched}" class="label">Broker Lic #</p>
-                    <input [ngClass]="{'is-invalid': personalDetails.form.get('brokerLicense').invalid&&personalDetails.form.get('brokerLicense').touched}" formControlName="brokerLicense" type="text" class="form-control f1"  placeholder="">
+                    <p [ngClass]="{'danger': personalDetails.form.get('realEstateLicenseNumber').invalid&&personalDetails.form.get('realEstateLicenseNumber').touched}" class="label">Real Estate Lic #</p>
+                    <input [ngClass]="{'is-invalid': personalDetails.form.get('realEstateLicenseNumber').invalid&&personalDetails.form.get('realEstateLicenseNumber').touched}" formControlName="realEstateLicenseNumber" type="text" class="form-control f1 mb-custom"  placeholder="">
+                    <ng-container *ngIf="store.role !== constant.role.REAL_ESTATE">
+                        <p [ngClass]="{'danger': personalDetails.form.get('brokerLicense').invalid&&personalDetails.form.get('brokerLicense').touched}" class="label mt-auto">Broker Lic #</p>
+                        <input [ngClass]="{'is-invalid': personalDetails.form.get('brokerLicense').invalid&&personalDetails.form.get('brokerLicense').touched}" formControlName="brokerLicense" type="text" class="form-control f1"  placeholder="">
+                    </ng-container>
                 </div>
             </div>
             <div class="card-3">

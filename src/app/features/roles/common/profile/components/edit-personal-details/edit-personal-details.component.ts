@@ -7,6 +7,7 @@ import {PersonalDetailsModel} from '../../models/personal-details.model';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {Router} from '@angular/router';
 import {take} from 'rxjs/operators';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-edit-personal-details',
@@ -21,7 +22,8 @@ export class EditPersonalDetailsComponent implements OnInit {
               private profile: ProfileService,
               private helper: HelperService,
               private datePipe: DatePipe,
-              private store: StoreService,
+              public store: StoreService,
+              public constant: ConstantService,
               private router: Router,
               private titleCase: TitleCasePipe) { }
 
@@ -103,35 +105,31 @@ export class EditPersonalDetailsComponent implements OnInit {
     });
   }
   onSubmit(): void{
-    if (this.personalDetails.form.valid){
-      const user = this.store.getUserData();
-      if (Object.values(this.personalDetails.form.get('birthday').value).some(element => element === null)){
-        delete this.personalDetails.form.value.birthday;
-      }
-      if (this.personalDetails.fileUpload){
-        this.profile.uploadProfilePicture(this.personalDetails.fileUpload).pipe(take(1)).subscribe(res => {
-          user.profilePictureUrl = res.result.profilePictureUrl;
-          localStorage.setItem('user', JSON.stringify(user));
-          this.store.updateUserData(user);
-        }, error => {
-          console.log(error);
-        });
-      }
-      console.log(this.personalDetails.form.value);
-      this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}}).
-      pipe(take(1)).subscribe(res => {
-        user.firstName = res.result.firstName;
-        user.lastName = res.result.lastName;
+    const user = this.store.getUserData();
+    if (Object.values(this.personalDetails.form.get('birthday').value).some(element => element === null)){
+      delete this.personalDetails.form.value.birthday;
+    }
+    if (this.personalDetails.fileUpload){
+      this.profile.uploadProfilePicture(this.personalDetails.fileUpload).pipe(take(1)).subscribe(res => {
+        user.profilePictureUrl = res.result.profilePictureUrl;
         localStorage.setItem('user', JSON.stringify(user));
         this.store.updateUserData(user);
-        this.router.navigateByUrl('/home/profile').then();
-        console.log(res);
       }, error => {
         console.log(error);
       });
-    } else {
-      this.personalDetails.form.markAllAsTouched();
     }
+    console.log(this.personalDetails.form.value);
+    this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}}).
+    pipe(take(1)).subscribe(res => {
+      user.firstName = res.result.firstName;
+      user.lastName = res.result.lastName;
+      localStorage.setItem('user', JSON.stringify(user));
+      this.store.updateUserData(user);
+      this.router.navigateByUrl('/home/profile').then();
+      console.log(res);
+    }, error => {
+      console.log(error);
+    });
   }
   getMonth(idx): string {
     const objDate = new Date();
