@@ -1,4 +1,5 @@
 import {FormGroup} from '@angular/forms';
+import {SafeValue} from '@angular/platform-browser';
 
 export interface UserProfileModel {
   firstName: string;
@@ -40,7 +41,7 @@ export interface ProfessionalProfileModel {
   profilePictureUrl: string;
   role: string;
   bio: string;
-  profileVideoUrl: string;
+  profileVideoUrl: string | SafeValue;
   phoneNumber: string;
   birthday: Date;
   email: string;

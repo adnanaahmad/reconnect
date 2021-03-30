@@ -18,7 +18,7 @@
             <div *ngIf="partnerProfile.profileVideoUrl">
                 <p class="bio-video">Bio Video:</p>
                 <div class=" video embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" [src]="sanitizer.bypassSecurityTrustResourceUrl(partnerProfile.profileVideoUrl)" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" [src]="partnerProfile.profileVideoUrl" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

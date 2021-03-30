@@ -9,6 +9,7 @@ import {take} from 'rxjs/operators';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {Subscription} from 'rxjs';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -24,7 +25,8 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
               private activatedRoute: ActivatedRoute,
               public location: Location,
               public store: StoreService,
-              public constant: ConstantService) {
+              public constant: ConstantService,
+              private helper: HelperService) {
     this.subscription = [];
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.propertyDetails.id = routeParams.get('id');
@@ -120,7 +122,7 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
       console.log(res);
       this.propertyDetails.propertyAd = res.result.listings[0];
       this.propertyDetails.features = res.result.listings[0].features;
-      this.propertyDetails.tourURL = this.sanitizer.bypassSecurityTrustResourceUrl(this.getVideoId(res.result.listings[0].tourURL));
+      this.propertyDetails.tourURL = this.sanitizer.bypassSecurityTrustResourceUrl(this.helper.getEmbeddedVideoURL(res.result.listings[0].tourURL));
       console.log(this.propertyDetails.tourURL);
       this.propertyDetails.loader = true;
       this.propertyDetails.loanScenarioOne = res.result;
@@ -159,17 +161,6 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error);
     });
-  }
-  getVideoId(url): string {
-    if (!url) {
-      return null;
-    }
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-
-    return (match && match[2].length === 11)
-        ? '//www.youtube.com/embed/' + match[2]
-        : null;
   }
   setDefaultLoanType(data): void{
     if (data){
