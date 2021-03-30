@@ -30,11 +30,6 @@
                 <p [ngClass]="{ 'danger': userProfile.profileForm.get('lastName').invalid&&userProfile.profileForm.get('lastName').touched}" class="title">Last Name</p>
                 <input [class.is-invalid]="userProfile.profileForm.get('lastName').invalid&&userProfile.profileForm.get('lastName').touched" formControlName = "lastName" type="text" class="form-control f1" placeholder="">
             </div>
-            <div class="form-group bio">
-              <p [ngClass]="{ 'danger': userProfile.profileForm.get('bio').invalid&&userProfile.profileForm.get('bio').touched}" class="title">Bio</p>
-              <textarea [class.is-invalid]="userProfile.profileForm.get('bio').invalid&&userProfile.profileForm.get('bio').touched" formControlName = "bio" class="form-control f2" rows="3">
-              </textarea>
-            </div>
             <div class="d-flex justify-content-between div-2 mb-custom">
                 <a (click)="switchSocialMediaLink('facebook')"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
                 <a (click)="switchSocialMediaLink('instagram')"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
@@ -65,29 +60,13 @@
        <div class="card-2 mb-4">
           <h4 class="">Personal Information:</h4>
           <div class="row">
-            <div class="card-2-margin-bottom col-md">
+            <div class="card-2-margin-bottom col-md d-flex flex-column">
               <div class="form-group row">
                 <p [ngClass]="{ 'danger': userProfile.profileForm.get('phoneNumber').invalid&&userProfile.profileForm.get('phoneNumber').touched}" class="col-3 label col-form-label col-form-label">Phone:</p>
                 <div class="col-9">
                   <input prefix="+1 " mask="(000) 000 0000" [class.is-invalid]="userProfile.profileForm.get('phoneNumber').invalid&&userProfile.profileForm.get('phoneNumber').touched" formControlName = "phoneNumber" type="text" class="form-control f1" placeholder="">
                 </div>
               </div>
-              <div class="form-group row website">
-                <p class="col-3 label col-form-label col-form-label">Website:</p>
-                <div class="col-9">
-                  <input formControlName = "website" type="text" class="form-control f1" placeholder="">
-                </div>
-              </div>
-                <div class="form-group row location">
-                    <p [ngClass]="{ 'danger': userProfile.profileForm.get('state').invalid&&userProfile.profileForm.get('state').touched}" class="col-3 label col-form-label col-form-label">
-                        State:</p>
-                    <div class="col-9">
-                        <select [class.is-invalid]="userProfile.profileForm.get('state').invalid&&userProfile.profileForm.get('state').touched" formControlName = "state"  class="form-control form-custom" (change) = "changeState(userProfile.profileForm.get('state').value)">
-                            <option [ngValue]="null" [disabled]="true" >Select State</option>
-                            <option [value]="i.state_name" *ngFor="let i of userProfile.states">{{i.state_name}}</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="form-group row">
                     <label class="col-3 col-form-label col-form-label">Gender:</label>
                     <div class="col-9 d-flex align-self-center">
@@ -103,6 +82,16 @@
                                 <span class="checkmark"></span>
                             </label>
                         </div>
+                    </div>
+                </div>
+                <div class="form-group row location mt-auto">
+                    <p [ngClass]="{ 'danger': userProfile.profileForm.get('state').invalid&&userProfile.profileForm.get('state').touched}" class="col-3 label col-form-label col-form-label">
+                        State:</p>
+                    <div class="col-9">
+                        <select [class.is-invalid]="userProfile.profileForm.get('state').invalid&&userProfile.profileForm.get('state').touched" formControlName = "state"  class="form-control form-custom" (change) = "changeState(userProfile.profileForm.get('state').value)">
+                            <option [ngValue]="null" [disabled]="true" >Select State</option>
+                            <option [value]="i.state_name" *ngFor="let i of userProfile.states">{{i.state_name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
