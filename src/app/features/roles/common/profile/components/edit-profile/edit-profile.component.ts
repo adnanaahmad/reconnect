@@ -121,38 +121,33 @@ export class EditProfileComponent implements OnInit {
 
   onSubmit(): void {
     // TODO: Use EventEmitter with form value
-    if (this.userProfile.profileForm.valid) {
-      const user = this.store.getUserData();
-      console.log(this.userProfile.profileForm.value);
-      if (Object.values(this.userProfile.profileForm.get('birthday').value).some(element => element === null)){
-        delete this.userProfile.profileForm.value.birthday;
-      }
-      if (this.userProfile.fileUpload){
-        this.profile.uploadProfilePicture(this.userProfile.fileUpload).pipe(take(1)).subscribe(res => {
-          console.log(res);
-          user.profilePictureUrl = res.result.profilePictureUrl;
-          localStorage.setItem('user', JSON.stringify(user));
-          this.store.updateUserData(user);
-        }, error => {
-          console.log(error);
-        });
-      }
-      this.profile.saveProfile(this.userProfile.profileForm.value).pipe(take(1)).subscribe(res => {
+    const user = this.store.getUserData();
+    console.log(this.userProfile.profileForm.value);
+    if (Object.values(this.userProfile.profileForm.get('birthday').value).some(element => element === null)){
+      delete this.userProfile.profileForm.value.birthday;
+    }
+    if (this.userProfile.fileUpload){
+      this.profile.uploadProfilePicture(this.userProfile.fileUpload).pipe(take(1)).subscribe(res => {
         console.log(res);
-        user.firstName = res.result.firstName;
-        user.lastName = res.result.lastName;
+        user.profilePictureUrl = res.result.profilePictureUrl;
         localStorage.setItem('user', JSON.stringify(user));
         this.store.updateUserData(user);
-        this.toaster.success('Successfully Saved');
-        this.router.navigateByUrl('/home/profile');
       }, error => {
         console.log(error);
-        this.toaster.error('Failed To Save');
       });
-    } else{
-      this.userProfile.profileForm.markAllAsTouched();
-      this.toaster.error('Failed To Save');
     }
+    this.profile.saveProfile(this.userProfile.profileForm.value).pipe(take(1)).subscribe(res => {
+      console.log(res);
+      user.firstName = res.result.firstName;
+      user.lastName = res.result.lastName;
+      localStorage.setItem('user', JSON.stringify(user));
+      this.store.updateUserData(user);
+      this.toaster.success('Successfully Saved');
+      this.router.navigateByUrl('/home/profile');
+    }, error => {
+      console.log(error);
+      this.toaster.error('Failed To Save');
+    });
   }
 
   get address(): FormArray {
