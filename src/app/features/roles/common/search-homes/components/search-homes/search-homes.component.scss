@@ -311,6 +311,10 @@ button:focus{
   margin-bottom: .8vw;
   cursor: pointer;
 }
+.static-text{
+  font-weight: 500;
+  color: var(--mediumGray)
+}
 ::ng-deep a.page-link{
   padding: 0.5vw 1vw;
   color: var(--darkGray);

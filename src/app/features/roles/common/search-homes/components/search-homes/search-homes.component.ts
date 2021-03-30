@@ -7,7 +7,6 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
 import {SearchHomeService} from '../../services/search-home.service';
 import {debounceTime, distinctUntilChanged, take} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '@angular/common';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 
@@ -377,11 +376,16 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         );
     }
 
-    searchHomeByName(): void {
-        console.log(this.searchHome.polygon);
+    searchHomeByName(searchByMls?: boolean): void {
+        let searchInput: string;
         const data = this.filtersDataToQuery;
         const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
-        const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+        if (searchByMls) {
+            searchInput = this.searchHome.searchKeyword.value ? `&id=${this.searchHome.searchKeyword.value}` : '';
+        } else {
+            searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+        }
+        this.store.updateProgressBarLoading(true);
         this.searchHomeService.getHouses(data + sortBy + searchInput).pipe(take(1)).subscribe(res => {
             res = res.result;
             this.searchHome.homes = res.listings;
@@ -389,8 +393,10 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             this.searchHome.pageNumber = res.paging.number;
             this.searchHome.loan = res.userLoan;
             this.setDefaultLoanType();
+            this.store.updateProgressBarLoading(false);
         }, error => {
             console.log(error);
+            this.store.updateProgressBarLoading(false);
         });
     }
 

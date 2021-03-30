@@ -25,6 +25,7 @@
         <div class="align-self-center search-input">
             <input (input)="searchHome.hideSearch=true" [formControl]="searchHome.searchKeyword" type="text" id="search" class="form-control form-control-lg" placeholder="">
             <div [style.width.px]="searchContainerWidth" id="search-list" *ngIf="searchHome.hideSearch&&(searchHome.autoComplete | async)" class="search-list-container">
+                <p (click)="searchHome.hideSearch = false; searchHomeByName(true);" class="search-list static-text">Search by MLS ID</p>
                 <p (click)="searchHome.searchKeyword.setValue(i.label); searchHome.hideSearch = false;
                  searchHome.polygon = i.id;searchHomeByName();" class="search-list" *ngFor="let i of searchHome.autoComplete | async">
                         {{i.label}}
