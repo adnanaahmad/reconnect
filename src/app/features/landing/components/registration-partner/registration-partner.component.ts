@@ -47,6 +47,7 @@ export class RegistrationPartnerComponent implements OnInit {
         firstName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
         lastName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
         nmlsNumber: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]],
+        realEstateLicenseNumber: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
         phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
         email: [null, [Validators.required, Validators.pattern('^(([^<>()[\\]\\\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\"]+)*)|(\\".+\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]],
       }),
@@ -96,6 +97,45 @@ export class RegistrationPartnerComponent implements OnInit {
     } else {
       this.register.screen['one'] = false;
       this.register.screen['two'] = true;
+      switch (this.register.form.get(['personal', 'role']).value){
+        case this.constant.role.REAL_ESTATE:
+          this.register.form.get(['personal', 'realEstateLicenseNumber']).enable();
+          this.register.form.get(['company', 'licenseNumber']).enable();
+          this.register.form.get(['personal', 'nmlsNumber']).disable();
+          this.register.form.get(['company', 'street']).setValidators([Validators.required, Validators.maxLength(150), Validators.pattern('^((?![\\^ ]).)((?![\\^]).){0,73}((?![\\^ ]).)$')]);
+          this.register.form.get(['company', 'zip']).setValidators([Validators.required, Validators.pattern('^[0-9]{1,5}$')]);
+          break;
+        case this.constant.role.LENDER:
+          this.register.form.get(['personal', 'nmlsNumber']).enable();
+          this.register.form.get(['company', 'licenseNumber']).enable();
+          this.register.form.get(['personal', 'realEstateLicenseNumber']).disable();
+          this.register.form.get(['company', 'street']).setValidators([Validators.required, Validators.maxLength(150), Validators.pattern('^((?![\\^ ]).)((?![\\^]).){0,73}((?![\\^ ]).)$')]);
+          this.register.form.get(['company', 'zip']).setValidators([Validators.required, Validators.pattern('^[0-9]{1,5}$')]);
+          break;
+        case this.constant.role.ATTORNEY:
+          this.register.form.get(['personal', 'nmlsNumber']).disable();
+          this.register.form.get(['personal', 'realEstateLicenseNumber']).disable();
+          this.register.form.get(['company', 'licenseNumber']).disable();
+          this.register.form.get(['company', 'street']).setValidators([Validators.required, Validators.maxLength(150), Validators.pattern('^((?![\\^ ]).)((?![\\^]).){0,73}((?![\\^ ]).)$')]);
+          this.register.form.get(['company', 'zip']).setValidators([Validators.required, Validators.pattern('^[0-9]{1,5}$')]);
+          break;
+        case this.constant.role.HOME_INSPECTOR:
+          this.register.form.get(['personal', 'nmlsNumber']).disable();
+          this.register.form.get(['personal', 'realEstateLicenseNumber']).disable();
+          this.register.form.get(['company', 'licenseNumber']).disable();
+          this.register.form.get(['company', 'street']).clearValidators();
+          this.register.form.get(['company', 'zip']).clearValidators();
+          break;
+        case this.constant.role.INSURANCE:
+          this.register.form.get(['personal', 'nmlsNumber']).disable();
+          this.register.form.get(['personal', 'realEstateLicenseNumber']).disable();
+          this.register.form.get(['company', 'licenseNumber']).disable();
+          this.register.form.get(['company', 'street']).setValidators([Validators.required, Validators.maxLength(150), Validators.pattern('^((?![\\^ ]).)((?![\\^]).){0,73}((?![\\^ ]).)$')]);
+          this.register.form.get(['company', 'zip']).setValidators([Validators.required, Validators.pattern('^[0-9]{1,5}$')]);
+          break;
+        default:
+          break;
+      }
     }
   }
 }
