@@ -24,7 +24,8 @@ export class ViewPartnersProfileComponent implements OnInit {
     this.profile.getUserData().pipe(take(1)).subscribe(res => {
       console.log(res);
       this.partnerProfile = res.result;
-      this.partnerProfile.profileVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.helper.getEmbeddedVideoURL(res.result.profileVideoUrl));
+      this.partnerProfile.profileVideoUrl = res.result.profileVideoUrl ?
+          this.sanitizer.bypassSecurityTrustResourceUrl(this.helper.getEmbeddedVideoURL(res.result.profileVideoUrl)) : null;
       this.loader = true;
     }, error => {
       console.log(error);
