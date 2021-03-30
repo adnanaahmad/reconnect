@@ -4,6 +4,8 @@ import {ProfileService} from '../../services/profile.service';
 import {ProfessionalProfileModel} from '../../models/user-profile.model';
 import {take} from 'rxjs/operators';
 import {HelperService} from '../../../../../../core/helper/helper.service';
+import {StoreService} from '../../../../../../core/store/store.service';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 @Component({
   selector: 'app-view-partners-profile',
   templateUrl: './view-partners-profile.component.html',
@@ -14,7 +16,9 @@ export class ViewPartnersProfileComponent implements OnInit {
   loader = false;
   constructor(public sanitizer: DomSanitizer,
               private profile: ProfileService,
-              public helper: HelperService) { }
+              public helper: HelperService,
+              public store: StoreService,
+              public constant: ConstantService) { }
 
   ngOnInit(): void {
     this.profile.getUserData().pipe(take(1)).subscribe(res => {

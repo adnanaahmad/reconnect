@@ -32,12 +32,12 @@
                         <div class="label">
                             <p>Phone: </p>
                             <p>Email: </p>
-                            <p class="text-nowrap">Real Estate Lic #: </p>
+                            <p *ngIf="store.role !== constant.role.REAL_ESTATE" class="text-nowrap">License #: </p>
                         </div>
                         <div class="value">
                             <p>{{partnerProfile.phoneNumber | mask: '(000) 000 0000'}}&nbsp;</p>
                             <p>{{partnerProfile.email}}&nbsp;</p>
-                            <p>{{partnerProfile.realEstateLicenseNumber}}</p>
+                            <p *ngIf="store.role !== constant.role.REAL_ESTATE">{{partnerProfile.licenseNumber}}&nbsp;</p>
                         </div>
                     </div>
                 </div>
@@ -45,13 +45,13 @@
                     <div class="d-flex">
                         <div class="label">
                             <p>Birthday: </p>
-                            <p class="text-nowrap">License #:</p>
-                            <p class="text-nowrap">Broker Lic #: </p>
+                            <p class="text-nowrap">Real Estate Lic #: </p>
+                            <p *ngIf="store.role !== constant.role.REAL_ESTATE" class="text-nowrap">Broker Lic #: </p>
                         </div>
                         <div class="value">
                             <p>{{partnerProfile.birthday | date}}&nbsp;</p>
-                            <p>{{partnerProfile.licenseNumber}}&nbsp;</p>
-                            <p>{{partnerProfile.brokerLicense}}</p>
+                            <p>{{partnerProfile.realEstateLicenseNumber}}</p>
+                            <p *ngIf="store.role !== constant.role.REAL_ESTATE">{{partnerProfile.brokerLicense}}</p>
                         </div>
                     </div>
                 </div>
