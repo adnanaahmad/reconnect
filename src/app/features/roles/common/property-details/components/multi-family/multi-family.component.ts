@@ -21,6 +21,7 @@ export class MultiFamilyComponent implements OnInit, OnChanges {
     this.setForm();
     this.setMarketRent();
     this.setUnitOccupying();
+    this.setRentalIncome();
     //this.multiFamily.valueChanges.subscribe(res => console.log(res));
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -45,6 +46,12 @@ export class MultiFamilyComponent implements OnInit, OnChanges {
         fourUnit: [null]
       }),
       useMarketRent: this.fb.group({
+        oneUnit: [null],
+        twoUnit: [null],
+        threeUnit: [null],
+        fourUnit: [null]
+      }),
+      useRentalIncome: this.fb.group({
         oneUnit: [null],
         twoUnit: [null],
         threeUnit: [null],
@@ -75,6 +82,7 @@ export class MultiFamilyComponent implements OnInit, OnChanges {
   setMarketRentHelper(unit, value): void{
     this.multiFamily.get(['useMarketRent', unit]).valueChanges.subscribe(res => {
       if (res){
+        this.multiFamily.get(['useRentalIncome', unit]).setValue(false);
         this.multiFamily.get(['rent', unit]).setValue(value);
         this.multiFamily.get(['selectUnitOccupying', unit]).setValue(false);
         this.multiFamily.get(['rent', unit]).disable();
@@ -94,6 +102,25 @@ export class MultiFamilyComponent implements OnInit, OnChanges {
       if (res === true){
         this.multiFamily.get(['rent', unit]).setValue(0);
         this.multiFamily.get(['useMarketRent', unit]).setValue(false);
+        this.multiFamily.get(['useRentalIncome', unit]).setValue(false);
+      }
+    });
+  }
+  setRentalIncome(): void{
+    this.setRentalIncomeHelper('oneUnit', this.multiFamilyUnits.currentRentalIncome.xf_rent1);
+    this.setRentalIncomeHelper('twoUnit', this.multiFamilyUnits.currentRentalIncome.xf_rent2);
+    this.setRentalIncomeHelper('threeUnit', this.multiFamilyUnits.currentRentalIncome.xf_rent3);
+    this.setRentalIncomeHelper('fourUnit', this.multiFamilyUnits.currentRentalIncome.xf_rent4);
+  }
+  setRentalIncomeHelper(unit, value): void{
+    this.multiFamily.get(['useRentalIncome', unit]).valueChanges.subscribe(res => {
+      if (res){
+        this.multiFamily.get(['useMarketRent', unit]).setValue(false);
+        this.multiFamily.get(['rent', unit]).setValue(value);
+        this.multiFamily.get(['selectUnitOccupying', unit]).setValue(false);
+        this.multiFamily.get(['rent', unit]).disable();
+      } else {
+        this.multiFamily.get(['rent', unit]).enable();
       }
     });
   }
