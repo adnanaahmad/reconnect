@@ -38,6 +38,12 @@
             <p (click)="toggle()" class="read-more">Read more</p>
             <p (click)="toggle()" class="read-less">Read less</p>
         </div>
+        <div class="address-parent">
+            <p class="address">
+                {{home.address.deliveryLine}},
+                {{home.address.city+', '+home.address.state}}
+            </p>
+        </div>
         <div class="d-flex">
             <div class="bath d-flex"><img class="" src="/assets/search-home/bathroom.png">
                 <p class="align-self-end">{{home.xf_no_full_baths + home.xf_no_half_baths}}</p></div>

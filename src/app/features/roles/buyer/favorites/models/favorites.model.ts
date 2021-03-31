@@ -16,6 +16,13 @@ export interface HomeModel {
   xf_no_bedrooms: number;
   xf_no_full_baths: number;
   xf_no_half_baths: number;
+  address: {
+    city: string;
+    deliveryLine: string;
+    state: string;
+    street: string;
+    zip: string;
+  };
 }
 export interface HomeDetails {
   _id: number;

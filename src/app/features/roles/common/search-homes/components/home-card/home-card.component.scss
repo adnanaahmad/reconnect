@@ -106,6 +106,8 @@
 }
 .description-div{
   margin-bottom: .5vw;
+  border-bottom: 1px solid var(--extraLightGray);
+  padding-bottom: .5vw;
   //min-height: 7vw;
 }
 .bath{
@@ -167,5 +169,12 @@ p{
   font-size: .7vw;
 ///  margin-bottom: 0;
   cursor: pointer;
+  margin-bottom: .5vw;
+}
+.address{
+  font-size: .6vw;
+  font-weight: 300;
+}
+.address-parent{
   margin-bottom: .5vw;
 }
