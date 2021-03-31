@@ -18,6 +18,7 @@ export interface SearchHomesModel {
   loan: any;
   polygon: string;
   savedSearchId: string;
+  searchByMLS: string;
 }
 interface ApprovedLoanProgramModel {
   fha: boolean;

@@ -31,6 +31,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscription = [];
+        this.searchHome.searchKeyword =  new FormControl(null);
         this.initialiseFilter();
         this.chooseEitherRangeOrMultiSelect();
         this.getHouses();
@@ -39,6 +40,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             this.searchHome.searchKeyword.valueChanges.subscribe(res => {
                 if (res === '') {
                     this.searchHome.polygon = null;
+                    this.searchHome.searchByMLS = null;
                 }
             })
         );
@@ -106,6 +108,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                     this.setDefaultLoanTypeWithQueryParams(params);
                     this.setSavedSearchId(params);
                     this.setPageNumber(params);
+                    this.setSearchBox(params);
                     this.applyFilters();
                 } else {
                     this.store.updateProgressBarLoading(true);
@@ -125,6 +128,15 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                 }
             })
         );
+    }
+    setSearchBox(params): void{
+        if (params.polygon){
+            this.searchHome.polygon = params.polygon.substring(1);
+            this.searchHome.searchKeyword.setValue(params.searchKeyword);
+        } else if (params.id){
+            this.searchHome.searchByMLS = `&id=${params.id}`;
+            this.searchHome.searchKeyword.setValue(params.searchKeyword);
+        }
     }
     setPageNumber(params): void {
         if (params.pageNumber){
@@ -223,8 +235,11 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const data = this.filtersDataToQuery;
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const page = this.searchHome.pageNumber ? `${data || loanType ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
+        const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+        const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
+        const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
         if (this.searchHome.savedSearchId) {
-            window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}`);
+            window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}${searchInput}${searchByMLS}${searchKeyword}`);
             this.searchHomeService.updateSearch(this.filtersObject, this.searchHome.savedSearchId).pipe(take(1)).subscribe(res => {
                 this.toaster.success('Updated Save Search');
                 this.searchHome.savedSearchId = null;
@@ -261,11 +276,13 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
         let page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
-        window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}`);
         const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+        const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
+        const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
+        window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}${searchInput}${searchByMLS}${searchKeyword}`);
         this.store.updateProgressBarLoading(true);
-        this.searchHomeService.getHouses(data + sortBy + searchInput + page).pipe(take(1)).subscribe(res => {
+        this.searchHomeService.getHouses(data + sortBy + searchInput + searchByMLS + page).pipe(take(1)).subscribe(res => {
             res = res.result;
             this.searchHome.homes = res.listings;
             this.searchHome.total = res.total;
@@ -278,7 +295,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             }
             this.store.updateProgressBarLoading(false);
             page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
-            window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}`);
+            window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}${searchInput}${searchByMLS}${searchKeyword}`);
         }, error => {
             console.log(error);
             this.store.updateProgressBarLoading(false);
@@ -320,10 +337,12 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     pageChange(pageNumber): void {
         console.log(pageNumber);
         const data = this.filtersDataToQuery;
+        const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
-        const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+        const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
+        const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
         this.searchHomeService.getHouses(`${data}&pageNumber=${pageNumber}${sortBy}${searchInput}`).pipe(take(1)).subscribe(res => {
             res = res.result;
             this.searchHome.homes = res.listings;
@@ -332,7 +351,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             this.searchHome.loan = res.userLoan;
             this.setDefaultLoanType();
             const page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
-            window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}`);
+            window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}${searchInput}${searchByMLS}${searchKeyword}`);
         }, error => {
             console.log(error);
         });
@@ -355,7 +374,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
 
     autoComplete(): void {
         this.searchHome.hideSearch = true;
-        this.searchHome.searchKeyword = new FormControl(null);
+       // this.searchHome.searchKeyword = new FormControl(null);
         this.searchHome.autoComplete = new BehaviorSubject<any>(null);
         this.subscription.push(
             this.searchHome.searchKeyword.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe(data => {
@@ -379,12 +398,19 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     searchHomeByName(searchByMls?: boolean): void {
         let searchInput: string;
         const data = this.filtersDataToQuery;
+        const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const sortBy = this.searchHome.sortBy.value ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+        const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
+        const page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
+
         if (searchByMls) {
             searchInput = this.searchHome.searchKeyword.value ? `&id=${this.searchHome.searchKeyword.value}` : '';
         } else {
             searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
         }
+        const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
+        window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}${searchInput}${searchKeyword}`);
+
         this.store.updateProgressBarLoading(true);
         this.searchHomeService.getHouses(data + sortBy + searchInput).pipe(take(1)).subscribe(res => {
             res = res.result;
@@ -424,6 +450,9 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const savedSearchId = this.searchHome.savedSearchId ?
             `${data || queryParam ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
         const page = this.searchHome.pageNumber ? `${data || queryParam || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
-        window.history.replaceState({}, '', `/home/searchHomes?${data}${data ? '&' : ''}loanType=${queryParam}${savedSearchId}${page}`);
+        const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
+        const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
+        const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
+        window.history.replaceState({}, '', `/home/searchHomes?${data}${data ? '&' : ''}loanType=${queryParam}${savedSearchId}${page}${searchInput}${searchByMLS}${searchKeyword}`);
     }
 }
