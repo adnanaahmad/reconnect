@@ -61,13 +61,20 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
       console.log(data);
       this.loadDetailsService.setLoanDetails({...this.loanDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
         console.log(res);
+        res = res.result;
+        this.loanDetails.finance.patchValue({
+          income: res.income,
+          monthlyDebt: res.monthlyDebt,
+          funds: res.funds,
+          sellerCredit: res.sellerCredit,
+        });
         this.toaster.success('Saved');
       }, error => {
         console.log(error);
         this.toaster.error('Failed To Save');
       });
     } else{
-      this.toaster.error('Failed To Save');
+      this.toaster.error('Incomplete Form');
     }
 
   }
@@ -81,6 +88,11 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
         }
       }
     });
+    if (this.loanDetails.finance.get('income').invalid || this.loanDetails.finance.get('funds').invalid ||
+        this.loanDetails.finance.get('monthlyDebt').invalid || this.loanDetails.finance.get('sellerCredit').invalid){
+      this.loanDetails.finance.markAllAsTouched();
+      bool = false;
+    }
     return bool;
   }
   resetLoanType(): void{

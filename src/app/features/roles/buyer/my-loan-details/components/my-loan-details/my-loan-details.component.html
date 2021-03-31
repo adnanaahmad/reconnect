@@ -4,23 +4,27 @@
 <form [formGroup]="loanDetails.finance" (ngSubmit)="onSubmit()" *ngIf="loader">
     <div class="d-flex user-finance">
         <div class="form-group">
-            <p class="label">Income</p>
-            <input prefix="$" mask="0*.00" mask="separator.2" thousandSeparator="," formControlName="income" type="text" class="form-control form-control-lg"
+            <p [ngClass]="{'danger': this.loanDetails.finance.get('income').invalid && this.loanDetails.finance.get('income').touched}" class="label">Income</p>
+            <input [class.is-invalid]="this.loanDetails.finance.get('income').invalid && this.loanDetails.finance.get('income').touched" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=","
+                   formControlName="income" type="text" class="form-control form-control-lg"
                    placeholder="Income">
         </div>
         <div class="form-group">
-            <p class="label">Monthly Debt</p>
-            <input prefix="$" mask="0*.00" mask="separator.2" thousandSeparator="," formControlName="monthlyDebt" type="text"
+            <p [ngClass]="{'danger': this.loanDetails.finance.get('monthlyDebt').invalid && this.loanDetails.finance.get('monthlyDebt').touched}" class="label">Monthly Debt</p>
+            <input [class.is-invalid]="this.loanDetails.finance.get('monthlyDebt').invalid && this.loanDetails.finance.get('monthlyDebt').touched" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=","
+                   formControlName="monthlyDebt" type="text"
                    class="form-control form-control-lg" placeholder="Monthly debt">
         </div>
         <div class="form-group">
-            <p class="label">Funds/Assets</p>
-            <input prefix="$" mask="0*.00" mask="separator.2" thousandSeparator="," formControlName="funds" type="text" class="form-control form-control-lg"
+            <p [ngClass]="{'danger': this.loanDetails.finance.get('funds').invalid && this.loanDetails.finance.get('funds').touched}" class="label">Funds/Assets</p>
+            <input [class.is-invalid]="this.loanDetails.finance.get('funds').invalid && this.loanDetails.finance.get('funds').touched" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=","
+                   formControlName="funds" type="text" class="form-control form-control-lg"
                    placeholder="Funds/Assets">
         </div>
         <div class="form-group">
-            <p class="label">Seller Credit</p>
-            <input prefix="$" mask="0*.00" mask="separator.2" thousandSeparator="," formControlName="sellerCredit" type="text"
+            <p [ngClass]="{'danger': this.loanDetails.finance.get('sellerCredit').invalid && this.loanDetails.finance.get('sellerCredit').touched}" class="label">Seller Credit</p>
+            <input [class.is-invalid]="this.loanDetails.finance.get('sellerCredit').invalid && this.loanDetails.finance.get('sellerCredit').touched" prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=","
+                   formControlName="sellerCredit" type="text"
                    class="form-control form-control-lg" placeholder="Seller Credit">
         </div>
         <button (click)="addClosingCost()" type="button" class="closing-cost mt-auto"><p>Add Closing Cost</p></button>

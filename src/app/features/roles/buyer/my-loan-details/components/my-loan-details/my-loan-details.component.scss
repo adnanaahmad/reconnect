@@ -194,3 +194,9 @@ p{
 ::ng-deep .form-control:disabled{
   background: white;
 }
+.danger{
+  color: var(--red);
+}
+.form-control.is-invalid:focus{
+  border-color: var(--red);
+}
