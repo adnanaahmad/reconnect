@@ -7,7 +7,7 @@
                 <select [class.is-invalid]="register.form.get(['personal', 'role']).invalid && register.form.get(['personal', 'role']).touched"
                         [formControl]="register.roleFormControl" #role (change)="register.form.get(['personal', 'role']).setValue(register.role[role.value])" [ngClass]="{'danger-select': register.form.get(['personal', 'role']).invalid && register.form.get(['personal', 'role']).touched}"  class="form-control form-custom">
                     <option [ngValue]="null" [disabled]="true" >Select Role</option>
-                    <option *ngFor="let i of register.role| keyvalue:helper.originalOrder">{{i.key}}</option>
+                    <option [value]="i.key" *ngFor="let i of register.role| keyvalue:helper.originalOrder">{{i.key}}</option>
                 </select>
                 <img src="/assets/landing/drop.svg" class="drop">
             </div>
@@ -40,7 +40,7 @@
                 <div class="select-div">
                     <select [ngClass]="{'danger-select': register.form.get(['company', 'state']).invalid && register.form.get(['company', 'state']).touched}" formControlName="state" (change) = "changeState(register.form.value.company.state)" class="form-control form-custom">
                         <option [ngValue]="null" [disabled]="true" >Select State</option>
-                        <option *ngFor="let i of register.states">{{i.state_name}}</option>
+                        <option [value]="i.state_name" *ngFor="let i of register.states">{{i.state_name}}</option>
                     </select>
                     <img src="/assets/landing/drop.svg" class="drop1">
                 </div>
@@ -50,7 +50,7 @@
                 <div class="select-div">
                     <select [ngClass]="{'danger-select': register.form.get(['company', 'city']).invalid && register.form.get(['company', 'city']).touched}" formControlName="city" class="form-control form-custom" id="">
                         <option [ngValue]="null" [disabled]="true" >Select City</option>
-                        <option *ngFor="let i of register.cities">{{i.city_name}}</option>
+                        <option [value]="i.city_name" *ngFor="let i of register.cities">{{i.city_name}}</option>
                     </select>
                     <img src="/assets/landing/drop.svg" class="drop1">
                 </div>
@@ -67,7 +67,7 @@
             </div>
             <div class="select-flex">
                 <p [ngClass]="{'danger': register.form.get(['company', 'zip']).invalid && register.form.get(['company', 'zip']).touched}" class="label">Zip Code</p>
-                <input [class.is-invalid]="register.form.get(['company', 'zip']).invalid && register.form.get(['company', 'zip']).touched" type="number" formControlName="zip" class="form-control form-custom" placeholder="">
+                <input [class.is-invalid]="register.form.get(['company', 'zip']).invalid && register.form.get(['company', 'zip']).touched" type="text" formControlName="zip" class="form-control form-custom" placeholder="">
             </div>
         </div>
 
