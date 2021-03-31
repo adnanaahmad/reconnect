@@ -11,6 +11,7 @@ import {Subscription} from 'rxjs';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {AddClosingCostComponent} from '../../../../../../shared/components/add-closing-cost/add-closing-cost.component';
+import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
   selector: 'app-transaction-details',
@@ -29,7 +30,8 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
               private helper: HelperService,
               private constant: ConstantService,
               private configuration: NgbModalConfig,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private store: StoreService) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
     configuration.centered = true;
@@ -94,6 +96,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
     });
   }
   getLoanDetails(): void{
+    this.store.updateProgressBarLoading(true);
     this.transactionService.getBorrowerLoanDetails(this.transactionDetails.id).pipe(take(1)).subscribe(res => {
       console.log(res);
       res = res.result;
@@ -125,6 +128,9 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       statusArray.forEach((x, index) => {
          if (index <= statusIndex){
             this.transactionDetails.finance.get(['processStatus', x]).setValue(true);
+            if (statusIndex >= 5 ) {
+              this.transactionDetails.finance.get(['processStatus', x]).disable();
+            }
           }
       });
       this.transactionDetails.subjectProperty = res.targetProperty;
@@ -135,8 +141,10 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       this.transactionDetails.variableExpenses = res.variableExpenses;
       this.transactionDetails.fixedExpenses = res.fixedExpenses;
       this.transactionDetails.processStatus = res.processStatus;
+      this.store.updateProgressBarLoading(false);
     }, error => {
       console.log(error);
+      this.store.updateProgressBarLoading(false);
     });
   }
   disableLoanForm(): void{
