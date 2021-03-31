@@ -30,7 +30,7 @@
     </div>
     <div class="card-info">
         <div class="d-flex justify-content-between price-area">
-            <p class="price">${{home.listPrice}}</p>
+            <p class="price">${{home.listPrice | mask: 'separator.2':','}}</p>
             <p class="area align-self-end">{{home.size}} Sq Ft</p>
         </div>
         <div class="description-div" #homeCard>
