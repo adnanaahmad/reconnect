@@ -63,7 +63,7 @@
                     </div>
                     <div class="selected">
                         <p [ngClass]="{'danger': companyDetails.form.get('zip').invalid && companyDetails.form.get('zip').touched}" class="label">Zip Code</p>
-                        <input [ngClass]="{'is-invalid': companyDetails.form.get('zip').invalid && companyDetails.form.get('zip').touched}" formControlName="zip" type="number" class="form-control f1 mb-custom"  placeholder="">
+                        <input [ngClass]="{'is-invalid': companyDetails.form.get('zip').invalid && companyDetails.form.get('zip').touched}" formControlName="zip" type="text" class="form-control f1 mb-custom"  placeholder="">
                     </div>
                 </div>
             </div>
