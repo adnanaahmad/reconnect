@@ -50,6 +50,7 @@ export interface ProfessionalProfileModel {
   licenseNumber: number;
   brokerLicense: number;
   company: CompanyModal;
+  nmlsNumber: number;
 }
 interface CompanyModal{
   city: string;

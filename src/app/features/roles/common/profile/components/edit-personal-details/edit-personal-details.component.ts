@@ -57,7 +57,8 @@ export class EditPersonalDetailsComponent implements OnInit {
       title: [null, [Validators.required, Validators.maxLength(50), Validators.pattern('^(.|\\s)*[a-zA-Z]+(.|\\s)*$')]],
       licenseNumber: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
       realEstateLicenseNumber: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
-      brokerLicense: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]]
+      brokerLicense: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
+      nmlsNumber : [null]
     });
   }
 
@@ -77,7 +78,8 @@ export class EditPersonalDetailsComponent implements OnInit {
         brokerLicense: res.brokerLicense,
         title: res.title,
         role: this.titleCase.transform(res.role.replace(/([a-z])([A-Z])/g, '$1 $2')),
-        bio: res.bio
+        bio: res.bio,
+        nmlsNumber: res.nmlsNumber
       });
       if (res.birthday){
         const birthday = this.datePipe.transform(res.birthday, 'yyyy-MM-dd');

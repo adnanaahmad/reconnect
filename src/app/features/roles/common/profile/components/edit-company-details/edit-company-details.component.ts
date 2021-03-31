@@ -50,7 +50,7 @@ export class EditCompanyDetailsComponent implements OnInit {
       name: [null, [Validators.required, Validators.pattern('^((?![\\^!@#$*~ <>?]).)((?![\\^!@#$*~<>?]).){0,73}((?![\\^!@#$*~ <>?]).)$'), Validators.minLength(2), Validators.maxLength(50)]],
       licenseNumber: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
       phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
-      faxNumber: [null, [Validators.required, Validators.pattern('^\\d{11}$')]],
+      faxNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],
       street: [null, [Validators.required, Validators.maxLength(150), Validators.pattern('^((?![\\^!@#$*~ <>?]).)((?![\\^!@#$*~<>?]).){0,73}((?![\\^!@#$*~ <>?]).)$')]],
       city: [null, Validators.required],
       state: [null, Validators.required],
