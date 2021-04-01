@@ -10,7 +10,7 @@
     <div class="list">
         <div class="card-sub d-flex justify-content-between" *ngFor="let member of members | filter:searchName.value; let i = index">
             <div  class="d-flex div-1">
-                <div>
+                <div (click)="viewProfile(member._id, member.quote)">
                     <img *ngIf="member.profilePictureUrl" [src] = "member.profilePictureUrl" class="display-img">
                     <img *ngIf="!member.profilePictureUrl" src = "/assets/profile/profile.svg" class="dummy-img">
                 </div>

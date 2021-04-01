@@ -5,11 +5,13 @@ import {EditProfileComponent} from './components/edit-profile/edit-profile.compo
 import {EditPartnersProfileComponent} from './components/edit-partners-profile/edit-partners-profile.component';
 import {EditPersonalDetailsComponent} from './components/edit-personal-details/edit-personal-details.component';
 import {EditCompanyDetailsComponent} from './components/edit-company-details/edit-company-details.component';
+import {ViewProfileComponent} from './components/view-profile/view-profile.component';
 
 
 const routes: Routes = [
     {path: '', component: ProfileComponent },
     {path: 'editDetails', component: EditProfileComponent },
+    {path: 'viewProfile/:id', component: ViewProfileComponent },
     {
       path: 'edit',
       component: EditPartnersProfileComponent,

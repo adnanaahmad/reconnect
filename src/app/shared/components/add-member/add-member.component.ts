@@ -6,6 +6,7 @@ import {ConstantService} from '../../../core/constant/constant.service';
 import {FormControl, Validators} from '@angular/forms';
 import {take} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-add-member',
@@ -22,7 +23,8 @@ export class AddMemberComponent implements OnInit {
                 public modal: NgbActiveModal,
                 private dashboard: BuyerDashboardService,
                 private constant: ConstantService,
-                private toaster: ToastrService) {
+                private toaster: ToastrService,
+                private router: Router) {
     }
 
     ngOnInit(): void {
@@ -69,5 +71,9 @@ export class AddMemberComponent implements OnInit {
     }
     sendEmail(email: string): void{
         window.open(`mailto:${email}`);
+    }
+    viewProfile(id, status?): void{
+        const add = status ? 'false' : 'true';
+        this.router.navigateByUrl('/home/profile/viewProfile/' + id + '?add=' + add).then();
     }
 }

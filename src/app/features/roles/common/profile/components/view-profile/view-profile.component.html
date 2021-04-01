@@ -1,0 +1,83 @@
+<div class="heading d-flex justify-content-between">
+    <div (click)="location.back()"  class="d-flex heading-text">
+        <img class="arrow align-self-center" src="/assets/transaction-details/arrow.png">
+        <p>Back</p>
+    </div>
+</div>
+<div class="d-flex" *ngIf="loader">
+    <div class="column-1">
+
+        <div class="card-1 d-flex flex-column">
+            <img *ngIf="partnerProfile.profilePictureUrl" [src]="partnerProfile.profilePictureUrl"  class="profile-image">
+            <div *ngIf="!partnerProfile.profilePictureUrl" class="profile-div">
+                <img src="/assets/profile/profile.svg" class="profile">
+            </div>
+            <p class="name">{{partnerProfile.firstName | titlecase}} {{partnerProfile.lastName | titlecase}}</p>
+            <p class="role">{{formatRole(partnerProfile.role) | titlecase}}</p>
+            <p *ngIf="partnerProfile.bio" class="bio">{{partnerProfile.bio}}</p>
+            <ng-container *ngIf="hideAddButton">
+                <button (click)="addMember()" class="d-flex add-btn justify-content-center">
+                    <img class="plus-icon" src="/assets/calendar-icons/plus.svg">
+                    <p class="add-txt align-self-center">Add to Team</p>
+                </button>
+            </ng-container>
+            <div class="d-flex justify-content-between div-2" *ngIf="partnerProfile.socialMedia">
+                <a [ngClass]="{'inactiveLink': !partnerProfile.socialMedia.facebook }" target="_blank" [href]="partnerProfile.socialMedia.facebook"><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook"></a>
+                <a [ngClass]="{'inactiveLink': !partnerProfile.socialMedia.instagram }" target="_blank" [href]="partnerProfile.socialMedia.instagram"> <img src="/assets/directory-icons/instagram.svg" class="img-fluid instagram"> </a>
+                <a [ngClass]="{'inactiveLink': !partnerProfile.socialMedia.linkedin }" target="_blank" [href]="partnerProfile.socialMedia.linkedin"> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
+                <a [ngClass]="{'inactiveLink': !partnerProfile.socialMedia.twitter }" target="_blank" [href]="partnerProfile.socialMedia.twitter"><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+            </div>
+            <div *ngIf="partnerProfile.profileVideoUrl">
+                <p class="bio-video">Bio Video:</p>
+                <div class=" video embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" [src]="partnerProfile.profileVideoUrl" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column-2">
+        <div class="card-2">
+            <div class="row">
+                <div class="card-2-margin-bottom col">
+                    <div class="d-flex">
+                        <div class="label">
+                            <p>Company: </p>
+                            <p>Phone: </p>
+                            <p>Email: </p>
+                            <p>Address: </p>
+
+                        </div>
+                        <div class="value">
+                            <p>{{partnerProfile.company.name}}&nbsp;</p>
+                            <p>{{partnerProfile.phoneNumber | mask: '(000) 000 0000'}}&nbsp;</p>
+                            <p>{{partnerProfile.email}}&nbsp;</p>
+                            <p>{{partnerProfile.company.street +', '+ partnerProfile.company.state + ', ' + partnerProfile.company.city}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-2-margin-bottom col">
+                    <div class="d-flex">
+                        <div class="label">
+
+
+                        </div>
+                        <div class="value">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-3">
+            <div class="d-flex justify-content-between mb-custom">
+                <h4 class="align-self-center">Ask a Question</h4>
+                <button (click)="sendEmail(partnerProfile.email)" class="save-btn">Send</button>
+            </div>
+            <div class="">
+                <textarea [formControl]="messageBody" class="form-control textarea f2" rows="5" placeholder="Type your message here">
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>

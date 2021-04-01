@@ -23,6 +23,9 @@ export class ProfileService {
   getUserData(): Observable<any>{
     return this.helper.requestCall(this.method.get, this.api.viewBuyer);
   }
+  getUserDataById(data): Observable<any>{
+    return this.helper.requestCall(this.method.get, `${this.api.viewBuyer}?userId=${data}` );
+  }
   uploadProfilePicture(data): Observable<any>{
     const formData: FormData = new FormData();
     formData.append('picture', data, data.name);

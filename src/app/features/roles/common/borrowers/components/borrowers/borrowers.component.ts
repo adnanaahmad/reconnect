@@ -67,7 +67,7 @@ export class BorrowersComponent implements OnInit {
     }
   }
   sendEmail(email: string): void{
-    window.open(`mailto:${email}`);
+    window.location.href = (`mailto:${email}`);
   }
   addNewBorrower(): void{
     const modalRef = this.modalService.open(AddNewBorrowerComponent);

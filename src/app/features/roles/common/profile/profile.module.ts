@@ -10,10 +10,11 @@ import { EditPersonalDetailsComponent } from './components/edit-personal-details
 import { EditCompanyDetailsComponent } from './components/edit-company-details/edit-company-details.component';
 import { ViewBuyerProfileComponent } from './components/view-buyer-profile/view-buyer-profile.component';
 import { ViewPartnersProfileComponent } from './components/view-partners-profile/view-partners-profile.component';
+import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, EditProfileComponent, EditPartnersProfileComponent, EditPersonalDetailsComponent, EditCompanyDetailsComponent, ViewBuyerProfileComponent, ViewPartnersProfileComponent],
+  declarations: [ProfileComponent, EditProfileComponent, EditPartnersProfileComponent, EditPersonalDetailsComponent, EditCompanyDetailsComponent, ViewBuyerProfileComponent, ViewPartnersProfileComponent, ViewProfileComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

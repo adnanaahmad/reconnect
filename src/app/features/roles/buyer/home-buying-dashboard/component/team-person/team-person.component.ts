@@ -79,6 +79,6 @@ export class TeamPersonComponent implements OnInit, OnChanges {
     this.router.navigateByUrl(`/home/teamMessageBoard?professional=${id}`).then();
   }
   sendEmail(email: string): void{
-    window.open(`mailto:${email}`);
+    window.location.href = (`mailto:${email}`);
   }
 }

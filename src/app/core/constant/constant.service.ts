@@ -742,6 +742,7 @@ export class ConstantService {
     BUYER_QUOTE_REQUEST_ACCEPTED: 'buyer_quote-request-accepted',
     BUYER_QUOTE_REQUEST_REJECTED: 'buyer_quote-request-rejected',
     ALL_NEW_MESSAGE: 'all_new-message',
-    BUYER_IMPORTANT_DATE_UPDATED: 'buyer_important-date-updated'
+    BUYER_IMPORTANT_DATE_UPDATED: 'buyer_important-date-updated',
+    LENDER_TARGET_PROPERTY_SET: 'lender_target-property-set'
   };
 }

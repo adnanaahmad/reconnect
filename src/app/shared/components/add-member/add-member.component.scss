@@ -32,6 +32,7 @@ p{
   object-fit: cover;
   border-radius: .5vw;
   margin-right: 1vw;
+  cursor: pointer;
 }
 .dummy-img{
   width: 4vw;
@@ -40,6 +41,7 @@ p{
   background: var(--extraLightGray);
   border-radius: .5vw;
   margin-right: 1vw;
+  cursor: pointer;
 }
 .member-info{
   display: flex;

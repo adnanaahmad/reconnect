@@ -26,8 +26,9 @@
                 buyer.targetPropertyAddress.city + ', ' + buyer.targetPropertyAddress.state + ', ' + buyer.targetPropertyAddress.zip}}</p>
                 <p class="mt-auto date text-nowrap">{{helper.formatRole(date.key)+' Date: ' | titlecase}}
                   {{ (date.key === 'commitments' ? buyer.commitmentDate :
-                          date.key === 'dealsClosing' ? buyer.dealClosingDate :
-                                  date.key === 'locksExpiring' ? buyer.lockExpiryDate : '')  | date}}</p>
+                      date.key === 'dealsClosing' ? buyer.dealClosingDate :
+                      date.key === 'locksExpiring' ? buyer.lockExpiryDate :
+                      date.key === 'homeInspections' ? buyer.homeInspectionDate : '')  | date }}</p>
               </div>
             </div>
           </div>
