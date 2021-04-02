@@ -11,6 +11,7 @@ export interface BuyerTransactionDetailsModel {
   id: string;
   loader: boolean;
   loanId: string;
+  showCancelDeal: boolean;
 }
 
 interface TransactionDetailsModel {

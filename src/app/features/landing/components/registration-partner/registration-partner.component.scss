@@ -104,6 +104,9 @@ select{
 .input-flex:first-child{
   margin-right: 1vw;
 }
+.input-flex:last-child{
+  margin-right: 0;
+}
 .select-flex{
   flex: 1;
 }

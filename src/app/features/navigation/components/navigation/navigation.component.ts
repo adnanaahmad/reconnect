@@ -5,7 +5,6 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {StoreService} from '../../../../core/store/store.service';
 import {ConstantService} from '../../../../core/constant/constant.service';
-import {LocationService} from '../../../landing/services/location/location.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
 import {take} from 'rxjs/operators';
@@ -23,7 +22,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
               private router: Router,
               public store: StoreService,
               private constant: ConstantService,
-              private location: LocationService,
               private loadingBar: LoadingBarService,
               private webSocket: WebSocketService) {}
 
@@ -35,7 +33,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.setRoleAndMenu();
     this.showProfileButton();
     this.store.updateUserData(JSON.parse(localStorage.getItem('user')));
-    this.location.saveLocationApiToken();
     this.listenMessages();
     this.showMessageIcon();
     this.getUnreadMessages();

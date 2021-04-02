@@ -40,7 +40,7 @@
                 <div class="select-div">
                     <select [ngClass]="{'danger-select': register.form.get(['company', 'state']).invalid && register.form.get(['company', 'state']).touched}" formControlName="state" (change) = "changeState(register.form.value.company.state)" class="form-control form-custom">
                         <option [ngValue]="null" [disabled]="true" >Select State</option>
-                        <option [value]="i.state_name" *ngFor="let i of register.states">{{i.state_name}}</option>
+                        <option [value]="i.iso2" *ngFor="let i of register.states">{{i.name}}</option>
                     </select>
                     <img src="/assets/landing/drop.svg" class="drop1">
                 </div>
@@ -50,7 +50,7 @@
                 <div class="select-div">
                     <select [ngClass]="{'danger-select': register.form.get(['company', 'city']).invalid && register.form.get(['company', 'city']).touched}" formControlName="city" class="form-control form-custom" id="">
                         <option [ngValue]="null" [disabled]="true" >Select City</option>
-                        <option [value]="i.city_name" *ngFor="let i of register.cities">{{i.city_name}}</option>
+                        <option [value]="i.name" *ngFor="let i of register.cities">{{i.name}}</option>
                     </select>
                     <img src="/assets/landing/drop.svg" class="drop1">
                 </div>

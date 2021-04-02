@@ -90,7 +90,7 @@
                     <div class="col-9">
                         <select [class.is-invalid]="userProfile.profileForm.get('state').invalid&&userProfile.profileForm.get('state').touched" formControlName = "state"  class="form-control form-custom" (change) = "changeState(userProfile.profileForm.get('state').value)">
                             <option [ngValue]="null" [disabled]="true" >Select State</option>
-                            <option [value]="i.state_name" *ngFor="let i of userProfile.states">{{i.state_name}}</option>
+                            <option [value]="i.iso2" *ngFor="let i of userProfile.states">{{i.name}}</option>
                         </select>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                     <div class="col-9">
                         <select [class.is-invalid]="userProfile.profileForm.get('city').invalid&&userProfile.profileForm.get('city').touched" formControlName = "city"  class="form-control form-custom">
                             <option [ngValue]="null" [disabled]="true" >Select City</option>
-                            <option [value]="i.city_name" *ngFor="let i of userProfile.cities">{{i.city_name}}</option>
+                            <option [value]="i.name" *ngFor="let i of userProfile.cities">{{i.name}}</option>
                         </select>
                     </div>
                 </div>

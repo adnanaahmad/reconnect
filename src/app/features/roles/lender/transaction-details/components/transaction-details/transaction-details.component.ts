@@ -75,7 +75,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       }, error => {
         //console.log(error);
         if (this.constant.RESPONSE_ERRORS[error.error.result.CODE]){
-          this.toaster.error(error.error.result.details.MESSAGE);
+          this.toaster.error( error.error.result.details ? error.error.result.details.MESSAGE : error.error.result.MESSAGE)
         } else{
           this.toaster.error('Failed to save');
         }

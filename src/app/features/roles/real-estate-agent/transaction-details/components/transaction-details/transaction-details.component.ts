@@ -39,6 +39,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.transactionDetails.loader = false;
+    this.transactionDetails.showCancelDeal = true;
     this.initializeForm();
     //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.getLoanDetails();
@@ -96,6 +97,9 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       if (!this.transactionDetails.subjectProperty){
         this.transactionDetails.finance.controls['targetProperty.listPrice'].disable();
       }
+      if (this.constant.homeBuyingProcessStatusIndex[res.processStatus] === 6){
+        this.transactionDetails.showCancelDeal = false;
+      }
     }, error => {
       this.store.updateProgressBarLoading(false);
       console.log(error);
@@ -117,7 +121,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       this.toaster.success('Saved');
     }, error => {
       if (this.constant.RESPONSE_ERRORS[error.error.result.CODE]){
-        this.toaster.error(error.error.result.details.MESSAGE);
+        this.toaster.error( error.error.result.details ? error.error.result.details.MESSAGE : error.error.result.details.MESSAGE);
       } else{
         this.toaster.error('Failed to save');
       }

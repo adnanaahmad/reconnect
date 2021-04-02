@@ -12,7 +12,7 @@
             <div class="d-flex flex-column">
                 <button type="submit" class="lineage-button">Save</button>
                 <button type="button" class="lineage-button mt-auto mb-auto">View Lineage</button>
-                <button type="button" (click)="cancelDeal()" class="cancel-deal mb-auto">Cancel Deal</button>
+                <button *ngIf="transactionDetails.showCancelDeal" type="button" (click)="cancelDeal()" class="cancel-deal mb-auto">Cancel Deal</button>
 
             </div>
        </div>
