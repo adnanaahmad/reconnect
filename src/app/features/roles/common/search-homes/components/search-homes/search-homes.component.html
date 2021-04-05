@@ -143,6 +143,7 @@
         <p class="sort-by align-self-center text-nowrap">Sort By:</p>
         <select (change)="sortBy()" [formControl]="searchHome.sortBy" class="form-control" id="exampleFormControlSelect1">
           <option [ngValue]="null" [disabled]="true">Choose</option>
+          <option value="null" >None</option>
           <option value="desc" >Price High To Low</option>
           <option value="asc">Price Low To High</option>
         </select>
