@@ -40,29 +40,32 @@
             <div class="row">
                 <div class="card-2-margin-bottom col">
                     <div class="d-flex">
-                        <div class="label">
+                        <div class="label d-flex flex-column">
                             <p>Company: </p>
-                            <p>Phone: </p>
-                            <p>Email: </p>
                             <p>Address: </p>
+                            <p *ngIf="partnerProfile.role === constant.role.REAL_ESTATE || partnerProfile.role === constant.role.LENDER" class="text-nowrap mt-auto">Company License #:</p>
 
                         </div>
                         <div class="value">
                             <p>{{partnerProfile.company.name}}&nbsp;</p>
-                            <p>{{partnerProfile.phoneNumber | mask: '(000) 000 0000'}}&nbsp;</p>
-                            <p>{{partnerProfile.email}}&nbsp;</p>
-                            <p>{{partnerProfile.company.street +', '+ partnerProfile.company.state + ', ' + partnerProfile.company.city}}</p>
+                            <p>{{partnerProfile.company.street +', '+ partnerProfile.company.city + ', ' + partnerProfile.company.state + ', ' + partnerProfile.company.zip}}</p>
+                            <p *ngIf="partnerProfile.role === constant.role.REAL_ESTATE || partnerProfile.role === constant.role.LENDER" class="text-nowrap">{{partnerProfile.company.licenseNumber}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="card-2-margin-bottom col">
                     <div class="d-flex">
                         <div class="label">
-
-
+                            <p>Phone: </p>
+                            <p>Email: </p>
+                            <p *ngIf="partnerProfile.role === constant.role.REAL_ESTATE" class="text-nowrap">Real Estate Lic #: </p>
+                            <p *ngIf="partnerProfile.role === constant.role.LENDER">NMLS #: </p>
                         </div>
                         <div class="value">
-
+                            <p>{{partnerProfile.phoneNumber | mask: '(000) 000 0000'}}&nbsp;</p>
+                            <p>{{partnerProfile.email}}&nbsp;</p>
+                            <p *ngIf="partnerProfile.role === constant.role.REAL_ESTATE">{{partnerProfile.realEstateLicenseNumber}}</p>
+                            <p *ngIf="partnerProfile.role === constant.role.LENDER">{{partnerProfile.nmlsNumber}}</p>
                         </div>
                     </div>
                 </div>
