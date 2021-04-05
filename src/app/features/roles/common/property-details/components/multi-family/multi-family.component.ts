@@ -63,14 +63,14 @@ export class MultiFamilyComponent implements OnInit, OnChanges {
     this.multiFamilyUnits = this.multiFamilyUnits.listings[0];
     this.limit = Number(this.multiFamilyUnits.xf_no_units) > 4 ? 4 : Number(this.multiFamilyUnits.xf_no_units);
     this.units = Array(this.limit).fill(0);
-    this.setFormHelper('oneUnit', this.multiFamilyUnits.defaultMarketRent.xf_rent1);
-    this.setFormHelper('twoUnit', this.multiFamilyUnits.defaultMarketRent.xf_rent2);
-    this.setFormHelper('threeUnit', this.multiFamilyUnits.defaultMarketRent.xf_rent3);
-    this.setFormHelper('fourUnit', this.multiFamilyUnits.defaultMarketRent.xf_rent4);
+    this.setFormHelper('oneUnit', this.multiFamilyUnits.currentRentalIncome.xf_rent1);
+    this.setFormHelper('twoUnit', this.multiFamilyUnits.currentRentalIncome.xf_rent2);
+    this.setFormHelper('threeUnit', this.multiFamilyUnits.currentRentalIncome.xf_rent3);
+    this.setFormHelper('fourUnit', this.multiFamilyUnits.currentRentalIncome.xf_rent4);
   }
   setFormHelper(unit, value): void{
     this.multiFamily.get(['rent', unit]).setValue(value);
-    this.multiFamily.get(['useMarketRent', unit]).setValue(true);
+    this.multiFamily.get(['useRentalIncome', unit]).setValue(true);
     this.multiFamily.get(['rent', unit]).disable();
   }
   setMarketRent(): void{

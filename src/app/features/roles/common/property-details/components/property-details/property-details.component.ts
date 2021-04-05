@@ -10,6 +10,7 @@ import {StoreService} from '../../../../../../core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {Subscription} from 'rxjs';
 import {HelperService} from '../../../../../../core/helper/helper.service';
+import {ToastrService} from 'ngx-toastr';
 @Component({
   selector: 'app-property-details',
   templateUrl: './property-details.component.html',
@@ -26,7 +27,8 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
               public location: Location,
               public store: StoreService,
               public constant: ConstantService,
-              private helper: HelperService) {
+              private helper: HelperService,
+              private toaster: ToastrService) {
     this.subscription = [];
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.propertyDetails.id = routeParams.get('id');
@@ -182,8 +184,10 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
       if (!this.store.toggleLoanTypeSubject.value){
         this.setDefaultLoanType(res.result.userLoan);
       }
+      this.toaster.success('Changes applied');
     }, error => {
       console.log(error);
+      this.toaster.error('Failed to apply changes');
     });
   }
 }
