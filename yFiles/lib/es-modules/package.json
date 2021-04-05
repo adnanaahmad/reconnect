@@ -1,7 +1,7 @@
 {
   "name": "yfiles",
   "description": "yFiles for HTML in ES module format",
-  "version": "23.0.3-eval",
+  "version": "23.0.4-eval",
   "author": "yWorks GmbH <yfileshtml@yworks.com>",
   "homepage": "https://www.yworks.com/products/yfiles-for-html",
   "private": true,

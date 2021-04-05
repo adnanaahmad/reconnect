@@ -9,15 +9,15 @@
         <div class="d-flex card-div">
             <div class="card">
                 <p>Monthly Income</p>
-                <p>${{ dashboard.preApprovalDetails.income }}</p>
+                <p>${{ dashboard.preApprovalDetails.income | mask: 'separator.2':',' }}</p>
             </div>
             <div class="card">
                 <p>Monthly Liabilities</p>
-                <p>${{dashboard.preApprovalDetails.monthlyLiabilities}}</p>
+                <p>${{dashboard.preApprovalDetails.monthlyLiabilities | mask: 'separator.2':','}}</p>
             </div>
             <div class="card">
                 <p>Assets</p>
-                <p>${{dashboard.preApprovalDetails.assets}}</p>
+                <p>${{dashboard.preApprovalDetails.assets | mask: 'separator.2':','}}</p>
             </div>
         </div>
         <p class="team-heading">Home Buying Team</p>

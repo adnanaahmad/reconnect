@@ -5,13 +5,13 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import {License} from 'yfiles';
 License.value = {
-  "comment": "d998159d-069f-434f-bf25-304edc80675b",
-  "date": "12/01/2020",
+  "comment": "0c49103c-818c-4871-a56d-364696990444",
+  "date": "04/05/2021",
   "distribution": false,
   "domains": [
     "*"
   ],
-  "expires": "01/31/2021",
+  "expires": "06/05/2021",
   "fileSystemAllowed": true,
   "licensefileversion": "1.1",
   "localhost": true,
@@ -21,7 +21,7 @@ License.value = {
   "type": "eval",
   "version": "2.3",
   "watermark": "yFiles HTML Evaluation License (expires in ${license-days-remaining} days)",
-  "key": "addd75342c9ca872a6be2299aca86bde6045fc5e"
+  "key": "88860e3a38a73ef9003c6bbfd15164032bba4066"
 };
 
 if (environment.production) {
