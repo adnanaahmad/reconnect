@@ -28,7 +28,7 @@
                 <p class="feature">{{feature.key}}</p>
                 <div class="d-flex detail" *ngFor="let detail of feature.value;let i=index" >
                     <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">
-                    <p>{{detail}}</p>
+                    <p>{{detail.includes('Tax amount') ? 'Tax amount: ' + detail.replace('Tax amount: ', '$') : detail}}</p>
                 </div>
             </div>
 
