@@ -8,6 +8,7 @@ import {StoreService} from '../../../../../../core/store/store.service';
 import {Router} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-edit-personal-details',
@@ -112,26 +113,32 @@ export class EditPersonalDetailsComponent implements OnInit {
       delete this.personalDetails.form.value.birthday;
     }
     if (this.personalDetails.fileUpload){
-      this.profile.uploadProfilePicture(this.personalDetails.fileUpload).pipe(take(1)).subscribe(res => {
-        user.profilePictureUrl = res.result.profilePictureUrl;
+      forkJoin([this.profile.uploadProfilePicture(this.personalDetails.fileUpload),
+        this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}})])
+          .pipe(take(1)).subscribe(res => {
+        user.profilePictureUrl = res[0].result.profilePictureUrl;
+        user.firstName = res[1].result.firstName;
+        user.lastName = res[1].result.lastName;
         localStorage.setItem('user', JSON.stringify(user));
         this.store.updateUserData(user);
+        this.router.navigateByUrl('/home/profile').then();
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      console.log(this.personalDetails.form.value);
+      this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}}).
+      pipe(take(1)).subscribe(res => {
+        user.firstName = res.result.firstName;
+        user.lastName = res.result.lastName;
+        localStorage.setItem('user', JSON.stringify(user));
+        this.store.updateUserData(user);
+        this.router.navigateByUrl('/home/profile').then();
+        console.log(res);
       }, error => {
         console.log(error);
       });
     }
-    console.log(this.personalDetails.form.value);
-    this.profile.saveProfile({...this.personalDetails.form.value, ...{company: this.personalDetails.company}}).
-    pipe(take(1)).subscribe(res => {
-      user.firstName = res.result.firstName;
-      user.lastName = res.result.lastName;
-      localStorage.setItem('user', JSON.stringify(user));
-      this.store.updateUserData(user);
-      this.router.navigateByUrl('/home/profile').then();
-      console.log(res);
-    }, error => {
-      console.log(error);
-    });
   }
   getMonth(idx): string {
     const objDate = new Date();

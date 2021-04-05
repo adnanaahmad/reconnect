@@ -9,6 +9,7 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
 import {DatePipe} from '@angular/common';
 import {take} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
+import {forkJoin} from 'rxjs';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -127,27 +128,33 @@ export class EditProfileComponent implements OnInit {
       delete this.userProfile.profileForm.value.birthday;
     }
     if (this.userProfile.fileUpload){
-      this.profile.uploadProfilePicture(this.userProfile.fileUpload).pipe(take(1)).subscribe(res => {
-        //console.log(res);
-        user.profilePictureUrl = res.result.profilePictureUrl;
+      forkJoin([this.profile.uploadProfilePicture(this.userProfile.fileUpload),
+        this.profile.saveProfile(this.userProfile.profileForm.value)]).pipe(take(1)).subscribe(res => {
+        user.profilePictureUrl = res[0].result.profilePictureUrl;
+        user.firstName = res[1].result.firstName;
+        user.lastName = res[1].result.lastName;
         localStorage.setItem('user', JSON.stringify(user));
         this.store.updateUserData(user);
+        this.toaster.success('Successfully Saved');
+        this.router.navigateByUrl('/home/profile').then();
+
       }, error => {
         console.log(error);
       });
+    } else{
+      this.profile.saveProfile(this.userProfile.profileForm.value).pipe(take(1)).subscribe(res => {
+        console.log(res);
+        user.firstName = res.result.firstName;
+        user.lastName = res.result.lastName;
+        localStorage.setItem('user', JSON.stringify(user));
+        this.store.updateUserData(user);
+        this.toaster.success('Successfully Saved');
+        this.router.navigateByUrl('/home/profile');
+      }, error => {
+        console.log(error);
+        this.toaster.error('Failed To Save');
+      });
     }
-    this.profile.saveProfile(this.userProfile.profileForm.value).pipe(take(1)).subscribe(res => {
-      console.log(res);
-      user.firstName = res.result.firstName;
-      user.lastName = res.result.lastName;
-      localStorage.setItem('user', JSON.stringify(user));
-      this.store.updateUserData(user);
-      this.toaster.success('Successfully Saved');
-      this.router.navigateByUrl('/home/profile');
-    }, error => {
-      console.log(error);
-      this.toaster.error('Failed To Save');
-    });
   }
 
   get address(): FormArray {
