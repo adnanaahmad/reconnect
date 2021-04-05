@@ -117,14 +117,14 @@ select{
   appearance: none;
 }
 .selected{
-  flex: 1;
+  flex-grow: 1;
   position: relative;
 }
 .selected:first-child{
-  margin-right: 2.5vw;
+  //margin-right: 2.5vw;
 }
 .selected:last-child{
-  margin-left: 2.5vw;
+  //margin-left: 2.5vw;
 }
 .save-btn{
   border: none;
@@ -160,5 +160,8 @@ select{
   height: .4vw;
   position: absolute;
   top: 2.7vw;
-  right: .3vw;
+  right: 3.3vw;
+}
+.f1-select{
+  width: 13.5vw;
 }

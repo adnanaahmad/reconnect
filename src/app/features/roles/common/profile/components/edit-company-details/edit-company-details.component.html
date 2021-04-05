@@ -43,8 +43,8 @@
                 <div class="d-flex justify-content-between mb-custom">
                     <div class="selected">
                         <p [ngClass]="{'danger': companyDetails.form.get('state').invalid && companyDetails.form.get('state').touched}" class="label">State</p>
-                        <div class="d-flex justify-content-end">
-                            <select [ngClass]="{'danger-select': companyDetails.form.get('state').invalid && companyDetails.form.get('state').touched}" (change) = "changeState(companyDetails.form.get('state').value)" class="form-control f1" formControlName="state">
+                        <div class="d-flex">
+                            <select [ngClass]="{'danger-select': companyDetails.form.get('state').invalid && companyDetails.form.get('state').touched}" (change) = "changeState(companyDetails.form.get('state').value)" class="form-control f1 f1-select" formControlName="state">
                                 <option [ngValue]="null" [disabled]="true" >Select State</option>
                                 <option [value]="i.iso2" *ngFor="let i of companyDetails.states">{{i.name}}</option>
                             </select>
@@ -53,8 +53,8 @@
                     </div>
                     <div class="selected">
                         <p [ngClass]="{'danger': companyDetails.form.get('city').invalid && companyDetails.form.get('city').touched}" class="label">City</p>
-                        <div class="d-flex justify-content-end">
-                            <select [ngClass]="{'danger-select': companyDetails.form.get('city').invalid && companyDetails.form.get('city').touched}" class="form-control f1" formControlName="city">
+                        <div class="d-flex">
+                            <select [ngClass]="{'danger-select': companyDetails.form.get('city').invalid && companyDetails.form.get('city').touched}" class="form-control f1 f1-select" formControlName="city">
                                 <option [ngValue]="null" [disabled]="true" >Select City</option>
                                 <option [value]="i.name" *ngFor="let i of companyDetails.cities">{{i.name}}</option>
                             </select>
