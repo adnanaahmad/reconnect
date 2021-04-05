@@ -27,6 +27,11 @@ export class RegistrationPartnerComponent implements OnInit {
     this.register.screen = {one: true, two: false, three: false, four: false};
     this.register.role = this.constant.chooseRole;
     this.location.getStates().pipe(take(1)).subscribe(response => {
+      response = response.sort((a, b) => {
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
+        return 0;
+      });
       this.register.states = response;
     });
     this.register.form = this.fb.group({

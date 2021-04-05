@@ -56,6 +56,11 @@ export class ProfileService {
   }
   getLocation(user): void {
     this.location.getStates().pipe(take(1)).subscribe(response => {
+      response = response.sort((a, b) => {
+        if (a.name < b.name) { return -1; }
+        if (a.name > b.name) { return 1; }
+        return 0;
+      });
       user.states = response;
     }, error => {
       console.log(error);
