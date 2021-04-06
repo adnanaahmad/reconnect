@@ -157,16 +157,16 @@ p{
   font-family: 'Poppins';
 }
 .read-more{
-  color: var(--darkGray);
-  font-size: .7vw;
+  color: var(--lighGray)!important;
+  font-size: .65vw;
  // margin-bottom: 0;
   cursor: pointer;
   margin-bottom: .5vw;
 }
 .read-less{
   display: none;
-  color: var(--darkGray);
-  font-size: .7vw;
+  color: var(--lighGray)!important;
+  font-size: .65vw;
 ///  margin-bottom: 0;
   cursor: pointer;
   margin-bottom: .5vw;
@@ -177,4 +177,19 @@ p{
 }
 .address-parent{
   margin-bottom: .5vw;
+}
+.breakdown-parent{
+  margin-top: .5vw;
+}
+.breakdown{
+  color: white !important;
+  background: var(--darkGray);
+  font-size: .7vw;
+  padding: .25vw .6vw;
+  border-radius: .2vw;
+  cursor: pointer;
+}
+.monthlyPayment{
+  font-size: .7vw;
+  font-weight: 500;
 }

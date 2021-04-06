@@ -37,6 +37,10 @@
             <p class="description">{{ home.description }}</p>
             <p (click)="toggle()" class="read-more">Read more</p>
             <p (click)="toggle()" class="read-less">Read less</p>
+            <div class="d-flex justify-content-between breakdown-parent">
+                <p class="monthlyPayment align-self-center">{{'Payment: $' + (monthlyPayment | mask: 'separator.2':',') }}</p>
+                <p (click)="viewPieChart()" class="breakdown">Breakdown</p>
+            </div>
         </div>
         <div class="address-parent">
             <p class="address">

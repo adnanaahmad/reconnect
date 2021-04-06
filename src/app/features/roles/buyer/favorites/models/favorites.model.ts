@@ -23,6 +23,7 @@ export interface HomeModel {
     street: string;
     zip: string;
   };
+  hoa: number;
 }
 export interface HomeDetails {
   _id: number;
