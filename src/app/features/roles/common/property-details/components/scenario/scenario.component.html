@@ -15,7 +15,8 @@
             <div class="d-flex">
                 <p class="text-nowrap mr-custom1">Qualify</p>
                 <p>{{!((loanScenario.listings[0].financing[store.toggleLoanType | async].housingRatio > loanScenario.userLoan[store.toggleLoanType | async].housingRatio ||
-                    loanScenario.listings[0].financing[store.toggleLoanType | async].debtRatio > loanScenario.userLoan[store.toggleLoanType | async].debtRatio) || (loanScenario.listings[0].financing[store.toggleLoanType | async].fundsNeeded < 0)) ? 'Yes' : 'No'}}</p>
+                    loanScenario.listings[0].financing[store.toggleLoanType | async].debtRatio > loanScenario.userLoan[store.toggleLoanType | async].debtRatio) ||
+                    ((scenarioNumber === 1 ? loanScenario.listings[0].financing[store.toggleLoanType | async].fundsNeeded : loanScenario.listings[0].financing[store.toggleLoanType | async].LS2_fundsNeeded) < 0)) ? 'Yes' : 'No'}}</p>
             </div>
 
         </div>
