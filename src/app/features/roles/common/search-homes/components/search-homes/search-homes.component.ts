@@ -244,7 +244,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
         const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
         const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
-        const sortBy = this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+        const sortBy = this.searchHome.sortBy.value && this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         if (this.searchHome.savedSearchId) {
             window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${page}${searchInput}${searchByMLS}${searchKeyword}${sortBy}`);
             this.searchHomeService.updateSearch(this.filtersObject, this.searchHome.savedSearchId).pipe(take(1)).subscribe(res => {
@@ -283,7 +283,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
         let page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
-        const sortBy = this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+        const sortBy = this.searchHome.sortBy.value && this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
         const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
         const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
@@ -344,7 +344,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     pageChange(pageNumber): void {
         console.log(pageNumber);
         const data = this.filtersDataToQuery;
-        const sortBy = this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+        const sortBy = this.searchHome.sortBy.value && this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
@@ -367,7 +367,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     sortBy(): void {
         const data = this.filtersDataToQuery;
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
-        const sortBy = this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+        const sortBy =  this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
         const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
@@ -416,7 +416,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         let searchInput: string;
         const data = this.filtersDataToQuery;
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
-        const sortBy = this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+        const sortBy = this.searchHome.sortBy.value && this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
         const page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
 
@@ -470,7 +470,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
         const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
         const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
-        const sortBy = this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+        const sortBy = this.searchHome.sortBy.value && this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         window.history.replaceState({}, '', `/home/searchHomes?${data}${data ? '&' : ''}loanType=${queryParam}${savedSearchId}${page}${searchInput}${searchByMLS}${searchKeyword}${sortBy}`);
     }
 }
