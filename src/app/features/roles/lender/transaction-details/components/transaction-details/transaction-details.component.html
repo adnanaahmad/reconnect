@@ -14,7 +14,7 @@
 
             <app-buyer-info [transactionDetails]="transactionDetails.user"></app-buyer-info>
             <div class="div-3 d-flex flex-column" style="">
-                <button class="save-button">Save all</button>
+                <button [disabled]="transactionDetails.inactiveDeal" class="save-button">Save all</button>
                 <button class="btn btn-success lineage-button">View Lineage</button>
             </div>
        </div>

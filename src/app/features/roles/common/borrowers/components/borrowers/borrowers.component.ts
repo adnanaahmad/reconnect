@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {BorrowersModel} from '../../models/borrowers.model';
 import {BorrowersService} from '../../services/borrowers.service';
-import {element} from 'protractor';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {take} from 'rxjs/operators';
 import {FormControl, Validators} from '@angular/forms';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {CreateGroupChatComponent} from '../../../team-message-board/popups/create-group-chat/create-group-chat.component';
 import {AddNewBorrowerComponent} from '../../popups/add-new-borrower/add-new-borrower.component';
 import {forkJoin} from 'rxjs';
 
@@ -25,7 +23,8 @@ export class BorrowersComponent implements OnInit {
               private router: Router,
               public store: StoreService,
               private configuration: NgbModalConfig,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private activatedRoute: ActivatedRoute) {
     configuration.centered = true;
     configuration.container = 'app-borrowers';
   }
@@ -43,6 +42,11 @@ export class BorrowersComponent implements OnInit {
       this.borrowers.render = res[0].result;
       this.borrowers.cancelled = res[1].result;
       this.store.updateProgressBarLoading(false);
+      this.activatedRoute.queryParams.pipe(take(1)).subscribe(params => {
+        if (params.dealStatus) {
+          this.listClick(params.dealStatus);
+        }
+      });
     }, error => {
       console.log(error);
       this.store.updateProgressBarLoading(false);
@@ -50,7 +54,9 @@ export class BorrowersComponent implements OnInit {
   }
   listClick(button): void {
     this.store.updateBorrowersStatus(button);
-    if (button.toLowerCase() === this.constant.borrowersStatusObject.Cancelled[0].toLowerCase()){
+    window.history.replaceState({}, '', `/home/borrowers?dealStatus=${button}`);
+    if (button.toLowerCase() === this.constant.borrowersStatusObject.Cancelled[0].toLowerCase() ||
+        button.toLowerCase() === this.constant.borrowersStatusObject.Closed[0].toLowerCase()){
       this.borrowers.render = this.borrowers.cancelled;
     } else {
       this.borrowers.render = this.borrowers.borrower;

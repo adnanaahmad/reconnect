@@ -18,6 +18,7 @@ export class AddClosingCostComponent implements OnInit {
   @Input() variableExpenses: any;
   @Input() borrowerId: string;
   @Input() processStatus: string;
+  @Input() inactiveDeal: string;
   closingCost: FormGroup;
   disableAddButton: boolean;
   constructor(private helper: HelperService,
@@ -41,7 +42,7 @@ export class AddClosingCostComponent implements OnInit {
   }
   disableForm(): void{
     if (this.store.role === this.constant.role.LENDER){
-      if (this.constant.homeBuyingProcessStatusIndex[this.processStatus] >= 5){
+      if (this.constant.homeBuyingProcessStatusIndex[this.processStatus] >= 5 || this.inactiveDeal){
         this.closingCost.disable();
         this.disableAddButton = true;
       }

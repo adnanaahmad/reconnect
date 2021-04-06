@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {TransactionDetailsModel} from '../../models/transactionDetails.model';
 import {BorrowerLoanDetailsService} from '../../services/borrower-loan-details.service';
 import {take} from 'rxjs/operators';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {DatePipe, Location} from '@angular/common';
 import {NgbDateNativeAdapter, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -31,7 +31,8 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
               private constant: ConstantService,
               private configuration: NgbModalConfig,
               private modalService: NgbModal,
-              private store: StoreService) {
+              private store: StoreService,
+              private router: Router) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
     configuration.centered = true;
@@ -42,6 +43,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
     this.subscription = [];
     this.initializeForm();
     this.transactionDetails.loader = false;
+    this.transactionDetails.inactiveDeal = false;
     this.getLoanDetails();
     this.resetLoanType();
     //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
@@ -69,7 +71,9 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       this.transactionService.saveLoanDetails({...this.transactionDetails.finance.value, ...data}).pipe(take(1)).subscribe(res => {
         //console.log(res);
         this.toaster.success('Saved');
-        if (this.constant.homeBuyingProcessStatusIndex[data.processStatus] >= 5){
+        if (this.constant.homeBuyingProcessStatusIndex[data.processStatus] === 6) {
+          this.router.navigateByUrl('/home/borrowers?dealStatus=Closed').then();
+        }else if (this.constant.homeBuyingProcessStatusIndex[data.processStatus] >= 5){
           this.getLoanDetails();
         }
       }, error => {
@@ -141,6 +145,12 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       this.transactionDetails.variableExpenses = res.variableExpenses;
       this.transactionDetails.fixedExpenses = res.fixedExpenses;
       this.transactionDetails.processStatus = res.processStatus;
+      this.activatedRoute.queryParams.pipe(take(1)).subscribe(params => {
+        if (params.dealStatus === 'inactive') {
+          this.transactionDetails.finance.disable();
+          this.transactionDetails.inactiveDeal = true;
+        }
+      });
       this.store.updateProgressBarLoading(false);
     }, error => {
       console.log(error);
@@ -328,6 +338,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.fixedExpenses = this.transactionDetails.fixedExpenses;
     modalRef.componentInstance.borrowerId = this.transactionDetails.id;
     modalRef.componentInstance.processStatus = this.transactionDetails.processStatus;
+    modalRef.componentInstance.inactiveDeal = this.transactionDetails.inactiveDeal;
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
         this.transactionDetails.fixedExpenses = result.data.fixedExpenses;

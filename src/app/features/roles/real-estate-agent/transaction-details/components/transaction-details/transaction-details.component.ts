@@ -3,7 +3,7 @@ import {BuyerTransactionDetailsModel} from '../../models/buyerTransactionDetails
 import {FormBuilder, Validators} from '@angular/forms';
 import {take} from 'rxjs/operators';
 import {BorrowerLoanDetailsService} from '../../../../lender/transaction-details/services/borrower-loan-details.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {DatePipe, Location} from '@angular/common';
 import {NgbDateNativeAdapter, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -30,7 +30,8 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
                private configuration: NgbModalConfig,
                private dateFormat: NgbDateNativeAdapter,
                private constant: ConstantService,
-               private store: StoreService) {
+               private store: StoreService,
+               private router: Router) {
     const routeParams = this.activatedRoute.snapshot.paramMap;
     this.transactionDetails.id = routeParams.get('id');
     configuration.centered = true;
@@ -40,6 +41,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.transactionDetails.loader = false;
     this.transactionDetails.showCancelDeal = true;
+    this.transactionDetails.inactiveDeal = false;
     this.initializeForm();
     //this.transactionDetails.finance.valueChanges.subscribe(newval => console.log(newval));
     this.getLoanDetails();
@@ -100,6 +102,13 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       if (this.constant.homeBuyingProcessStatusIndex[res.processStatus] === 6){
         this.transactionDetails.showCancelDeal = false;
       }
+      this.activatedRoute.queryParams.pipe(take(1)).subscribe(params => {
+        if (params.dealStatus === 'inactive') {
+          this.transactionDetails.finance.disable();
+          this.transactionDetails.showCancelDeal = false;
+          this.transactionDetails.inactiveDeal = true;
+        }
+      });
     }, error => {
       this.store.updateProgressBarLoading(false);
       console.log(error);
@@ -135,6 +144,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       if (result.status === 'yes') {
         this.transactionDetails.subjectProperty = result.data;
         this.transactionDetails.finance.controls['targetProperty.listPrice'].enable();
+        this.transactionDetails.finance.controls['targetProperty.listPrice'].setValue(result.data.listPrice);
       }
     }, error => {
       console.log(error);
@@ -148,7 +158,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
         //console.log(result.data);
-        this.ngOnInit();
+        this.router.navigateByUrl('/home/borrowers?dealStatus=Cancelled').then();
       }
     }, error => {
       //console.log(error);

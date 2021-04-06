@@ -10,7 +10,7 @@
        <div class="child-1 d-flex justify-content-between" style="">
             <app-buyer-info [transactionDetails]="transactionDetails.user"></app-buyer-info>
             <div class="d-flex flex-column">
-                <button type="submit" class="lineage-button">Save</button>
+                <button [disabled]="transactionDetails.inactiveDeal" type="submit" class="lineage-button">Save</button>
                 <button type="button" class="lineage-button mt-auto mb-auto">View Lineage</button>
                 <button *ngIf="transactionDetails.showCancelDeal" type="button" (click)="cancelDeal()" class="cancel-deal mb-auto">Cancel Deal</button>
 
@@ -76,7 +76,7 @@
   <div class="col-5 second-column">
       <div class="d-flex justify-content-between subject">
          <p class="heading-sub align-self-center">Subject Property</p>
-         <button type="button" (click)="addPropertyMls()" class="mls">Add Property MLS#</button>
+         <button [disabled]="transactionDetails.inactiveDeal" type="button" (click)="addPropertyMls()" class="mls">Add Property MLS#</button>
       </div>
       <app-subject-property *ngIf="transactionDetails.subjectProperty" [subjectProperty]="transactionDetails.subjectProperty"></app-subject-property>
       <app-subject-property-template *ngIf="!transactionDetails.subjectProperty"></app-subject-property-template>

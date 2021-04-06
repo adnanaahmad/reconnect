@@ -12,6 +12,7 @@ export interface TransactionDetailsModel {
   fixedExpenses: any;
   variableExpenses: any;
   processStatus: string;
+  inactiveDeal: boolean;
 }
 
 export interface  UserModel {

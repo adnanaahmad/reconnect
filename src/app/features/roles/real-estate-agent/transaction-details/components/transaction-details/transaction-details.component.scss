@@ -355,3 +355,6 @@ p{
 .cancel-deal:focus{
   outline: none;
 }
+::ng-deep .form-control:disabled{
+  background: transparent;
+}

@@ -50,14 +50,18 @@
                 </div>
             </div>
 
-            <div class="div-2" *ngIf="!((store.borrowersStatus | async | lowercase) === this.constant.borrowersStatusObject.Cancelled[0].toLowerCase())">
-                <p (click)="viewBorrower(borrower.buyer['_id'])" class="text-center">View Transaction Details</p>
-
+            <div class="div-2">
+                <p *ngIf="((store.borrowersStatus | async | lowercase) !== this.constant.borrowersStatusObject.Cancelled[0].toLowerCase() &&
+                    (store.borrowersStatus | async | lowercase) !== this.constant.borrowersStatusObject.Closed[0].toLowerCase())"
+                   (click)="viewBorrower(borrower.buyer['_id'])" class="text-center">View Transaction Details</p>
+                <p *ngIf="((store.borrowersStatus | async | lowercase) === this.constant.borrowersStatusObject.Cancelled[0].toLowerCase() ||
+                    (store.borrowersStatus | async | lowercase) === this.constant.borrowersStatusObject.Closed[0].toLowerCase())"
+                   (click)="viewBorrower(borrower.id + '?dealStatus=inactive')" class="text-center">View Transaction Details</p>
             </div>
         </div>
 
-
-        <div *ngIf="((store.borrowersStatus | async | lowercase) !== this.constant.borrowersStatusObject.Cancelled[0].toLowerCase())" class="card-5" style="background: white">
+        <div *ngIf="((store.borrowersStatus | async | lowercase) !== this.constant.borrowersStatusObject.Cancelled[0].toLowerCase() &&
+        (store.borrowersStatus | async | lowercase) !== this.constant.borrowersStatusObject.Closed[0].toLowerCase())" class="card-5" style="background: white">
             <div class="top d-flex">
                 <div class="d-flex address" style="background: transparent">
                     <img src="/assets/borrower/pin.svg" class="pin">
@@ -84,7 +88,8 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="((store.borrowersStatus | async | lowercase) === this.constant.borrowersStatusObject.Cancelled[0].toLowerCase())" class="card-5" style="background: white">
+        <div *ngIf="((store.borrowersStatus | async | lowercase) === this.constant.borrowersStatusObject.Cancelled[0].toLowerCase() ||
+        (store.borrowersStatus | async | lowercase) === this.constant.borrowersStatusObject.Closed[0].toLowerCase())" class="card-5" style="background: white">
             <div class="top d-flex">
                 <div class="d-flex address" style="background: transparent">
                     <img src="/assets/borrower/pin.svg" class="pin">
