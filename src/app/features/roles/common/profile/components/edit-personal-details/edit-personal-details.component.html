@@ -1,7 +1,7 @@
-<form [formGroup]="personalDetails.form" *ngIf="loader">
+<form [formGroup]="personalDetails.form">
     <div class="d-flex parent-pg justify-content-end">
         <button (click)="onSubmit()" class="save-btn">Save</button>
-        <div class="card-1">
+        <div class="card-1" *ngIf="loader">
             <div *ngIf="personalDetails.image" class="img-div">
                 <img [src]="personalDetails.image"  class="profile-image">
                 <input type="file"
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex flex-column column-2">
+        <div class="d-flex flex-column column-2" *ngIf="loader">
             <div class="card-2 d-flex">
                 <div class="c2-col1">
                     <p [ngClass]="{'danger': personalDetails.form.get('phoneNumber').invalid && personalDetails.form.get('phoneNumber').touched}" class="label">Phone Number</p>
