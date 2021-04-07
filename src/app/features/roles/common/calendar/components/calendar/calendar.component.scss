@@ -94,7 +94,7 @@
   justify-content: center;
 }
 .heading{
-  margin-bottom: 2vw;
+  margin-bottom: var(--heading);
 }
 .heading h3{
   color: var(--darkGray);
