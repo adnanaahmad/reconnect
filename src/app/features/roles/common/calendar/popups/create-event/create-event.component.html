@@ -16,7 +16,7 @@
           </div>
          <div>
            <p class="title">Starts at</p>
-           <input formControlName="time" type="text" class="form-control f1 width-custom"  placeholder="">
+           <input formControlName="time" type="text" class="form-control f1 width-custom" mask="00:00" [class.is-invalid]="eventForm.get('time').invalid && eventForm.get('time').touched"  placeholder="00:00">
          </div>
        </div>
        <p class="title">Add a note</p>

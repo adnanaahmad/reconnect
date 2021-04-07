@@ -18,7 +18,7 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
   eventForm = this.fb.group({
     title: [null, Validators.required],
     date: [null, Validators.required],
-    time: [null, Validators.required],
+    time: [null, [Validators.required, Validators.pattern('^([0-1][0-9]|[2][0-3])([0-5][0-9])$')]],
     note: [null, Validators.required],
     customEventCategory: this.fb.group({
       status: [null, Validators.required],

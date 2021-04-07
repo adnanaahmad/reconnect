@@ -15,7 +15,7 @@
       <img class="img" src="/assets/calendar-icons/calendar.svg">
       <p class="date">{{view._instance.range.start | date: 'MMM dd,yyyy'}}</p>
       <img class="img" src="/assets/calendar-icons/alarm-clock.svg">
-      <p class="date">{{view._def.extendedProps.time}}</p>
+      <p class="date">{{view._def.extendedProps.time | mask: '00:00'}}</p>
     </div>
   </div>
 </div>
