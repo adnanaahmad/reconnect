@@ -1,4 +1,3 @@
-import {FormGroup, Validators} from '@angular/forms';
 import {SafeValue} from '@angular/platform-browser';
 
 export interface PropertyDetailsModel {

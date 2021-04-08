@@ -23,7 +23,8 @@
         <div class="d-flex mb2-custom justify-content-between">
             <div class="form-input">
                 <p class="text-nowrap title">Purchase Price</p>
-                <p class="loan-fields">${{scenario.purchasePrice | mask: 'separator.2':','}}</p>
+<!--                <p class="loan-fields">${{scenario.purchasePrice | mask: 'separator.2':','}}</p>-->
+                <input prefix="$" mask="0*.00" mask="separator.2" thousandSeparator=","  [formControl]="purchasePrice" class="form-control f1" type="text" placeholder="">
 
             </div>
             <div class="form-input">

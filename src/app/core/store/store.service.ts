@@ -25,6 +25,8 @@ export class StoreService {
   newMessage = this.newMessageSubject.asObservable();
   private unreadNotificationSubject = new BehaviorSubject<any>(false);
   unreadNotification = this.unreadNotificationSubject.asObservable();
+  private purchasePriceSubject = new BehaviorSubject<any>(null);
+  purchasePrice = this.purchasePriceSubject.asObservable();
   constructor() { }
 
   updateToggleMoreFilter(data: boolean): void{
@@ -68,5 +70,8 @@ export class StoreService {
   }
   updateUnreadNotification(data): void{
     this.unreadNotificationSubject.next(data);
+  }
+  updatePurchasePrice(data): void{
+    this.purchasePriceSubject.next(data);
   }
 }

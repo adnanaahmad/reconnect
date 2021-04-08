@@ -53,6 +53,13 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
           window.history.replaceState({}, '', `/home/propertyDetails/${this.propertyDetails.id}?loanType=${res}`);
         })
     );
+    this.subscription.push(
+        this.store.purchasePrice.subscribe(res => {
+          if (res) {
+            this.calculationFromApi('', `xf_list_price=${res}`);
+          }
+        })
+    );
     this.propertyDetails.rentVsBuying = {
       costOfRent: {
         amount: 20,
@@ -176,7 +183,8 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
 
     }
   }
-  calculationFromApi(queryParam: string): void{
+  calculationFromApi(xfRent: string, listPrice?: string): void{
+    const queryParam = xfRent ? xfRent : listPrice;
     this.propertyDetailService.getPropertyDetails(`${this.propertyDetails.id}&${queryParam}`).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.propertyDetails.loanScenarioOne = res.result;
