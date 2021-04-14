@@ -51,7 +51,7 @@ export interface CreateGroupChatModel{
   selectedGroups: any;
 }
 
-interface TeamDataModel{
+export interface TeamDataModel{
   buyer: TeamMemberModel;
   lender: TeamDataModel;
   homeInspector: TeamDataModel;

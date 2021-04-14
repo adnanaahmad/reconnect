@@ -49,7 +49,11 @@ export class ConstantService {
      getUnreadMessages: `${environment.apiUrl}/conversation/get-unread`,
      markAsReadConversation: `${environment.apiUrl}/conversation/mark-read`,
      cancelDeal: `${environment.apiUrl}/loan/cancel-deal`,
-     getCancelledDeals: `${environment.apiUrl}/loan/inactive-deals`
+     getCancelledDeals: `${environment.apiUrl}/loan/inactive-deals`,
+     getCalendarEvents: `${environment.apiUrl}/calendar/categories-events`,
+     createCalendarEvent: `${environment.apiUrl}/calendar/create-event`,
+     createCalendarEventCategory: `${environment.apiUrl}/calendar/create-category`,
+     editCalendarEvent: `${environment.apiUrl}/calendar/update-event/`
    };
   apiMethod = {
     get: 'get',

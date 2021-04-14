@@ -44,13 +44,20 @@ p{
   border-radius: .5vw;
   border: 1px solid var(--lighGray);
 }
-.team{
+.team, .team-dummy{
   border-radius: .3vw;
   height: 2.8vw;
   width: 2.8vw;
-  object-fit: cover;
   padding: .1vw;
   filter: brightness(90%);
+  cursor: pointer;
+}
+.team{
+  object-fit: cover;
+}
+.team-dummy{
+  background: #e7edf88a;
+  padding: .8vw;
 }
 .team-member{
   margin-right: 1vw;
@@ -144,6 +151,19 @@ p{
 }
 .date-div{
   position: relative;
+}
+.activate-tick{
+  display: block;
+}
+.activate-border{
+  border: 1px solid var(--green);
+}
+.danger{
+  color: var(--red);
+}
+.select-buyer{
+  flex-wrap: wrap;
+  margin-bottom: 1vw;
 }
 
 

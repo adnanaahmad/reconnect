@@ -12,7 +12,7 @@
 ::ng-deep .fc-next-button.fc-button.fc-button-primary:focus{
   background: white !important;
   color: var(--darkGray) !important;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 ::ng-deep .fc-next-button.fc-button.fc-button-primary:enabled:hover{
   background: white;
@@ -21,7 +21,7 @@
 ::ng-deep .fc-prev-button.fc-button.fc-button-primary:focus{
   background: white !important;
   color: var(--darkGray) !important;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 ::ng-deep .fc-prev-button.fc-button.fc-button-primary:enabled:hover{
   background: white;
@@ -40,6 +40,9 @@
   opacity: 1 !important;
   border-radius: .4vw;
   font-weight: 300;
+}
+::ng-deep .fc-today-button.fc-button.fc-button-primary:focus{
+  box-shadow: none !important;
 }
 ::ng-deep .fc-col-header-cell-cushion{
   color: var(--lighGray)!important;
@@ -116,6 +119,9 @@ h6{
   font-size: .9vw;
   //white-space: nowrap;
 }
+.create-button-text{
+  width: 100%;
+}
 .create-button{
   border: 1px solid var(--lighGray);
   padding: .3vw;
@@ -172,7 +178,7 @@ h6{
 }
 .external-events{
   height: 28vw;
-  overflow: scroll;
+  overflow-y: auto;
 }
 ::ng-deep .calendar-card{
   background: white;
@@ -199,48 +205,24 @@ h6{
   ::ng-deep .fc-today-button.fc-button.fc-button-primary{
     margin-right: 28vw;
   }
-  //.create-button-text p{
-  //  font-size: .7vw;
-  //}
-  //.draggable-element-text{
-  //  font-size: small;
-  //}
 }
 @media only screen and (max-width: 1024px) {
-  //::ng-deep .fc-today-button.fc-button.fc-button-primary{
-  //  margin-right: 17vw;
-  //}
   .event-card{
     padding-right: 10px;
   }
-  //.create-button-text p{
-  //  font-size: .8vw;
- // }
 }
 @media only screen and (max-width: 768px) {
-  //create-button-text p{
-  //  font-size: .9em !important;
-  //}
   .column-1{
     padding-right: 15px;
   }
   .column-2{
     padding-left: 15px;
   }
-  //.draggable-element-text{
-  //  font-size: .9em;
-  //}
   .event-card{
     padding-right: 32px;
   }
 }
 @media only screen and (max-width: 425px) {
-  //.create-button-text p{
-  //  font-size: x-small !important;
-  //}
-  //.draggable-element-text{
-  //  font-size: xx-small;
-  //}
   ::ng-deep .fc-toolbar-title{
     font-size: 1.1em !important;
   }
@@ -295,7 +277,6 @@ h6{
   font-size: .8vw;
   color: var(--darkGray);
   padding: 0;
-  width: 120%;
   height: 2vw;
   border: none;
   font-family: 'Poppins';

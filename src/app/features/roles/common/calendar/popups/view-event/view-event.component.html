@@ -1,21 +1,39 @@
 <div class="card-1">
   <div class="first-row d-flex justify-content-between">
-    <p class="heading text-nowrap align-self-center">{{view._def.extendedProps.category}}</p>
+    <p class="heading text-nowrap align-self-center">{{view._def.extendedProps.category.title | titlecase}}</p>
     <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
-    <button (click)="edit()" class="edit">Edit</button>
+    <button *ngIf="store.userId === view._def.extendedProps.createdBy" (click)="edit()" class="edit">Edit</button>
   </div>
-  <p class="title">{{view._def.title}}</p>
+  <p class="title">{{view._def.title | titlecase}}</p>
   <p class="note">{{view._def.extendedProps.note}}</p>
   <p class="join">Joining</p>
   <div class="d-flex justify-content-between">
     <div class="d-flex">
-      <img *ngFor="let member of view._def.extendedProps.team" class="team" [src]="member.image">
+      <ng-container *ngFor="let member of team | keyvalue">
+          <div [ngbTooltip]="member.key !== constant.role.BUYER ? member.value.userId.firstName + ' ' + member.value.userId.lastName : member.value.firstName + ' ' + member.value.lastName"
+               #member [attr.id]="member.value.userId ?  member.value.userId._id : member.value._id" class="d-flex team-member">
+            <ng-container *ngIf="store.role === constant.role.BUYER">
+              <img *ngIf="member.value.userId.profilePictureUrl" class="team" [src]="member.value.userId.profilePictureUrl">
+              <img *ngIf="!member.value.userId.profilePictureUrl"  class="team-dummy" src="/assets/profile/profile.svg">
+            </ng-container>
+            <ng-container *ngIf="store.role !== constant.role.BUYER">
+              <ng-container *ngIf = "member.key === constant.role.BUYER">
+                <img *ngIf="member.value.profilePictureUrl" class="team" [src]="member.value.profilePictureUrl">
+                <img *ngIf="!member.value.profilePictureUrl"  class="team-dummy" src="/assets/profile/profile.svg">
+              </ng-container>
+              <ng-container *ngIf = "member.key !== constant.role.BUYER">
+                <img *ngIf="member.value.userId.profilePictureUrl" class="team" [src]="member.value.userId.profilePictureUrl">
+                <img *ngIf="!member.value.userId.profilePictureUrl"  class="team-dummy" src="/assets/profile/profile.svg">
+              </ng-container>
+            </ng-container>
+          </div>
+      </ng-container>
     </div>
     <div class="d-flex align-self-end">
       <img class="img" src="/assets/calendar-icons/calendar.svg">
-      <p class="date">{{view._instance.range.start | date: 'MMM dd,yyyy'}}</p>
+      <p class="date">{{view._instance.range.start | date: 'MMM dd,yyyy':'+0000'}}</p>
       <img class="img" src="/assets/calendar-icons/alarm-clock.svg">
-      <p class="date">{{view._def.extendedProps.time | mask: '00:00'}}</p>
+      <p class="date">{{view._instance.range.start | date: 'hh:mm a':'+0000'}}</p>
     </div>
   </div>
 </div>

@@ -51,16 +51,23 @@ p{
   font-size: .7vw;
   margin-bottom: .7vw;
 }
-.team{
-  border-radius: .5vw;
+.team, .team-dummy{
+  border-radius: .3vw;
   height: 2.8vw;
   width: 2.8vw;
-  object-fit: cover;
   padding: .1vw;
-  margin-right: .6vw;
+  filter: brightness(90%);
+  cursor: pointer;
 }
-.team:last-child{
-  margin-right: 0;
+.team{
+  object-fit: cover;
+}
+.team-dummy{
+  background: #e7edf88a;
+  padding: .8vw;
+}
+.team-member{
+  margin-right: 1vw;
 }
 .date{
   color: var(--green);

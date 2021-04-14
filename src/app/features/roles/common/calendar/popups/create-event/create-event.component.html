@@ -45,16 +45,48 @@
            <input formControlName="value" type="text" class="form-control f1 width-custom"  placeholder="">
          </div>
        </div>
-       <p class="title">Add a team member</p>
-       <div class="d-flex justify-content-between">
-         <div class="d-flex">
-           <div #member (click)="toggleTeamMember(i,member)" [attr.id]="i" class="d-flex team-member" *ngFor="let member of teamData; let i = index">
-             <img class="active" src="/assets/calendar-icons/tick.svg">
-             <img class="team" [src]="member.image">
+       <ng-container *ngIf="store.role !== constant.role.BUYER && !edit">
+         <p class="title">Select Buyer</p>
+         <div class="d-flex justify-content-between mb-custom1">
+           <div class="select-buyer d-flex">
+             <ng-container *ngFor="let member of teamData.buyers; let i = index">
+               <div [ngbTooltip]="member.buyer.firstName + ' ' + member.buyer.lastName"  #member (click)="getBuyersTeam(member)" class="d-flex team-member">
+                 <img [ngClass]="{'activate-tick': teamData.selectedButton === member}" class="active" src="/assets/calendar-icons/tick.svg">
+                 <img [ngClass]="{'activate-border': teamData.selectedButton === member}" *ngIf="member.buyer.profilePictureUrl" class="team" [src]="member.buyer.profilePictureUrl">
+                 <img [ngClass]="{'activate-border': teamData.selectedButton === member}" *ngIf="!member.buyer.profilePictureUrl"  class="team-dummy" src="/assets/profile/profile.svg">
+               </div>
+             </ng-container>
            </div>
          </div>
-         <button type="submit"  [disabled]="eventForm.invalid" class="launch align-self-end">Launch Event</button>
-       </div>
+       </ng-container>
+       <ng-container>
+         <p class="title">Add a team member</p>
+         <div class="d-flex justify-content-between">
+           <div class="d-flex">
+             <ng-container *ngFor="let member of teamData.team | keyvalue; let i = index">
+               <div [ngbTooltip]="member.key !== constant.role.BUYER ? member.value.userId.firstName + ' ' + member.value.userId.lastName : member.value.firstName + ' ' + member.value.lastName"
+                    #member (click)="toggleTeamMember(member.value)" [attr.id]="member.value.userId ?  member.value.userId._id : member.value._id" class="d-flex team-member">
+                 <img class="active" src="/assets/calendar-icons/tick.svg">
+                 <ng-container *ngIf="store.role === constant.role.BUYER">
+                   <img *ngIf="member.value.userId.profilePictureUrl" class="team" [src]="member.value.userId.profilePictureUrl">
+                   <img *ngIf="!member.value.userId.profilePictureUrl"  class="team-dummy" src="/assets/profile/profile.svg">
+                 </ng-container>
+                 <ng-container *ngIf="store.role !== constant.role.BUYER">
+                   <ng-container *ngIf = "member.key === constant.role.BUYER">
+                     <img *ngIf="member.value.profilePictureUrl" class="team" [src]="member.value.profilePictureUrl">
+                     <img *ngIf="!member.value.profilePictureUrl"  class="team-dummy" src="/assets/profile/profile.svg">
+                   </ng-container>
+                   <ng-container *ngIf = "member.key !== constant.role.BUYER">
+                     <img *ngIf="member.value.userId.profilePictureUrl" class="team" [src]="member.value.userId.profilePictureUrl">
+                     <img *ngIf="!member.value.userId.profilePictureUrl"  class="team-dummy" src="/assets/profile/profile.svg">
+                   </ng-container>
+                 </ng-container>
+               </div>
+             </ng-container>
+           </div>
+           <button type="submit"  [disabled]="eventForm.invalid" class="launch align-self-end">Launch Event</button>
+         </div>
+       </ng-container>
      </div>
   </form>
 </div>
