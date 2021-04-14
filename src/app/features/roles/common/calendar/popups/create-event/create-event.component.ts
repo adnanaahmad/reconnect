@@ -1,4 +1,15 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {NgbActiveModal, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
@@ -8,17 +19,18 @@ import {switchMap, take} from 'rxjs/operators';
 import {ChatService} from '../../../team-message-board/services/chat.service';
 import {CreateGroupChatModel} from '../../../team-message-board/models/chat.model';
 import {DatePipe} from '@angular/common';
-import {forkJoin} from 'rxjs';
+import {forkJoin, Subscription} from 'rxjs';
 import {CalendarService} from '../../services/calendar.service';
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
   styleUrls: ['./create-event.component.scss']
 })
-export class CreateEventComponent implements OnInit, AfterViewInit {
+export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() edit;
   @Input() eventCategories;
   @ViewChildren('member') teamMembers: QueryList<ElementRef>;
+  subscription: Array<Subscription>;
   groupMembers: Array<any>;
   teamData: CreateGroupChatModel = {} as CreateGroupChatModel;
   eventForm = this.fb.group({
@@ -64,6 +76,9 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.editForm();
   }
+  ngOnDestroy(): void {
+    this.subscription.forEach(x => x.unsubscribe());
+  }
 
   editForm(): void{
     if (this.edit){
@@ -94,14 +109,18 @@ export class CreateEventComponent implements OnInit, AfterViewInit {
     this.activeModal.close({status: 'no'});
   }
   chooseEventOrCustomCategory(): void{
-    this.eventForm.get('eventCategory').get('status').valueChanges.subscribe(result => {
-      this.uncheck(result, 'customEventCategory');
-      this.toggleInput(result, 'customEventCategory', 'eventCategory');
-    });
-    this.eventForm.get('customEventCategory').get('status').valueChanges.subscribe(result => {
-      this.uncheck(result, 'eventCategory');
-      this.toggleInput(result, 'eventCategory', 'customEventCategory');
-    });
+    this.subscription.push(
+      this.eventForm.get('eventCategory').get('status').valueChanges.subscribe(result => {
+        this.uncheck(result, 'customEventCategory');
+        this.toggleInput(result, 'customEventCategory', 'eventCategory');
+      })
+    );
+    this.subscription.push(
+      this.eventForm.get('customEventCategory').get('status').valueChanges.subscribe(result => {
+        this.uncheck(result, 'eventCategory');
+        this.toggleInput(result, 'eventCategory', 'customEventCategory');
+      })
+    );
   }
   uncheck(result, key): void{
     if (result){
