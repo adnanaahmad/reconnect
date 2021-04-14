@@ -8,6 +8,7 @@ import {FormControl} from '@angular/forms';
 import {ViewEventComponent} from '../../popups/view-event/view-event.component';
 import {CalendarService} from '../../services/calendar.service';
 import {take} from 'rxjs/operators';
+import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
   selector: 'app-calendar',
@@ -24,7 +25,8 @@ export class CalendarComponent implements OnInit {
               private constant: ConstantService,
               private configuration: NgbModalConfig,
               private dateFormat: NgbDateNativeAdapter,
-              private calendarService: CalendarService) {
+              private calendarService: CalendarService,
+              public store: StoreService) {
     configuration.centered = true;
     configuration.container = 'app-calendar';
     configuration.animation = true;
@@ -36,13 +38,16 @@ export class CalendarComponent implements OnInit {
     this.getCalendarEventsAndCategories();
   }
   getCalendarEventsAndCategories(): void{
+    this.store.updateProgressBarLoading(true);
     this.calendarService.getCalendarEvents().pipe(take(1)).subscribe(res => {
       console.log('calendar events', res);
+      this.store.updateProgressBarLoading(false);
       this.calendar.eventCategories = res.result.categories;
       this.calendar.currentEvents = res.result.events;
       this.initializeCalendar(this.calendar.currentEvents);
     }, error => {
       console.log(error);
+      this.store.updateProgressBarLoading(false);
     });
   }
   initializeCalendar(eventList): void {
