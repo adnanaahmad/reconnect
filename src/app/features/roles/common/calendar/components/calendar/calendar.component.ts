@@ -1,12 +1,10 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {CalendarOptions, EventClickArg, EventApi, FullCalendarComponent} from '@fullcalendar/angular';
-import {Draggable} from '@fullcalendar/interaction';
+import {EventClickArg, FullCalendarComponent} from '@fullcalendar/angular';
 import { CreateEventComponent} from '../../popups/create-event/create-event.component';
 import {NgbModal, NgbModalConfig, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModel} from '../../models/calendar.model';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {FormControl} from '@angular/forms';
-import {DatePipe} from '@angular/common';
 import {ViewEventComponent} from '../../popups/view-event/view-event.component';
 import {CalendarService} from '../../services/calendar.service';
 import {take} from 'rxjs/operators';
@@ -132,36 +130,4 @@ export class CalendarComponent implements OnInit {
     const keys = Object.keys(obj);
     return obj[keys[ keys.length * Math.random() << 0]];
   }
-  // predefinedEventCategories(): void{
-  //   this.calendar.eventCategories.push({
-  //     title: 'Final work through',
-  //     color: this.constant.eventColorDetails.purple.color,
-  //     textColor: this.constant.eventColorDetails.purple.textColor,
-  //     colorIcon: this.constant.eventColorDetails.purple.colorIcon,
-  //   });
-  //   this.calendar.eventCategories.push({
-  //     title: 'Showing',
-  //     color: this.constant.eventColorDetails.blue.color,
-  //     textColor: this.constant.eventColorDetails.blue.textColor,
-  //     colorIcon: this.constant.eventColorDetails.blue.colorIcon,
-  //   });
-  //   this.calendar.eventCategories.push({
-  //     title: 'New buyer appointments',
-  //     color: this.constant.eventColorDetails.orange.color,
-  //     textColor: this.constant.eventColorDetails.orange.textColor,
-  //     colorIcon: this.constant.eventColorDetails.orange.colorIcon,
-  //   });
-  //   this.calendar.eventCategories.push({
-  //     title: 'Office Meeting',
-  //     color: this.constant.eventColorDetails.green.color,
-  //     textColor: this.constant.eventColorDetails.green.textColor,
-  //     colorIcon: this.constant.eventColorDetails.green.colorIcon,
-  //   });
-  //   this.calendar.eventCategories.push({
-  //     title: 'Commitment',
-  //     color: this.constant.eventColorDetails.yellow.color,
-  //     textColor: this.constant.eventColorDetails.yellow.textColor,
-  //     colorIcon: this.constant.eventColorDetails.yellow.colorIcon,
-  //   });
-  // }
 }
