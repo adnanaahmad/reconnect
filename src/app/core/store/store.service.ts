@@ -27,6 +27,8 @@ export class StoreService {
   unreadNotification = this.unreadNotificationSubject.asObservable();
   private purchasePriceSubject = new BehaviorSubject<any>(null);
   purchasePrice = this.purchasePriceSubject.asObservable();
+  private todoFilterSubject = new BehaviorSubject<any>(null);
+  todoFilter = this.todoFilterSubject.asObservable();
   constructor() { }
 
   updateToggleMoreFilter(data: boolean): void{
@@ -73,5 +75,8 @@ export class StoreService {
   }
   updatePurchasePrice(data): void{
     this.purchasePriceSubject.next(data);
+  }
+  updateTodoFilter(data): void{
+    this.todoFilterSubject.next(data);
   }
 }

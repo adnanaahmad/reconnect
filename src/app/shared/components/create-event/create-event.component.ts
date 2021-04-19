@@ -7,26 +7,27 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  ViewChild,
   ViewChildren
 } from '@angular/core';
 import {NgbActiveModal, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, Validators} from '@angular/forms';
-import {ConstantService} from '../../../../../../core/constant/constant.service';
-import {HelperService} from '../../../../../../core/helper/helper.service';
-import {StoreService} from '../../../../../../core/store/store.service';
+import {ConstantService} from '../../../core/constant/constant.service';
+import {HelperService} from '../../../core/helper/helper.service';
+import {StoreService} from '../../../core/store/store.service';
 import {switchMap, take} from 'rxjs/operators';
-import {ChatService} from '../../../team-message-board/services/chat.service';
-import {CreateGroupChatModel} from '../../../team-message-board/models/chat.model';
+import {ChatService} from '../../../features/roles/common/team-message-board/services/chat.service';
+import {CreateGroupChatModel} from '../../../features/roles/common/team-message-board/models/chat.model';
 import {DatePipe} from '@angular/common';
-import {forkJoin, Subscription} from 'rxjs';
-import {CalendarService} from '../../services/calendar.service';
+import {Subscription} from 'rxjs';
+import {CalendarService} from '../../../features/roles/common/calendar/services/calendar.service';
+import {TodoListService} from '../../../features/roles/common/todo-list/services/todo-list.service';
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
   styleUrls: ['./create-event.component.scss']
 })
 export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input() eventBasedTask: boolean;
   @Input() edit;
   @Input() eventCategories;
   @ViewChildren('member') teamMembers: QueryList<ElementRef>;
@@ -56,11 +57,13 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
               public store: StoreService,
               public constant: ConstantService,
               private chatService: ChatService,
-              private calendarService: CalendarService) {}
+              private calendarService: CalendarService,
+              private todoService: TodoListService) {}
 
   ngOnInit(): void {
     this.helper.setModalPosition();
     this.teamData.selectedTeam = [];
+    this.subscription = [];
     this.chooseEventOrCustomCategory();
     if (!this.edit) {
       if (this.store.role === this.constant.role.BUYER){
@@ -82,12 +85,15 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
 
   editForm(): void{
     if (this.edit){
+      let time;
       this.eventForm.reset();
-      const date = this.edit._instance.range.start;
-      const time = new Date(this.edit._instance.range.start).toLocaleTimeString('en-US', { hour12: false, timeZone: 'UTC' });
+      const date = new Date(this.edit._instance.range.start);
+      this.eventBasedTask ? time = new Date(this.edit._instance.range.start).toLocaleTimeString('en-US', { hour12: false}) :
+        time = new Date(this.edit._instance.range.start).toLocaleTimeString('en-US', { hour12: false, timeZone: 'UTC' });
       this.eventForm.patchValue({
         title: this.edit._def.title,
-        date: {year: date.getUTCFullYear(), month: date.getUTCMonth() + 1, day: date.getUTCDate()},
+        date: this.eventBasedTask ? this.dateFormat.fromModel(date) :
+            {year: date.getUTCFullYear(), month: date.getUTCMonth() + 1, day: date.getUTCDate()},
         time: time.substring(0, 2) === '24' ? '00' + time.slice(2) : time,
         note: this.edit._def.extendedProps.note,
       });
@@ -98,7 +104,9 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.store.role === this.constant.role.BUYER){
         this.getTeam();
       } else {
-        this.getTeamProfessional();
+        if (this.edit._def.extendedProps.team) {
+          this.getTeamProfessional();
+        }
       }
     }
   }
@@ -222,7 +230,11 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
       colorIcon: randomColor.colorIcon,
       textColor: randomColor.textColor,
     };
-    this.saveEvent(data, category, result, randomColor, eventCategoryTitle, createCategory);
+    if (this.eventBasedTask) {
+      this.saveEventBasedTask(data, category, result, randomColor, eventCategoryTitle, createCategory);
+    } else {
+      this.saveEvent(data, category, result, randomColor, eventCategoryTitle, createCategory);
+    }
   }
   saveEvent(data, category, result, randomColor, eventCategoryTitle, createCategory): void{
     if (createCategory){
@@ -247,6 +259,29 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
         data['_id'] = res.result._id;
         data['createdBy'] = res.result.createdBy;
         this.activeModal.close({status: 'yes', data: data });
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
+  saveEventBasedTask(data, category, result, randomColor, eventCategoryTitle, createCategory): void{
+    if (createCategory){
+      this.calendarService.createCategory(category).pipe(switchMap(res1 => {
+        category = res1.result;
+        this.eventCategories.push(category);
+        return this.edit ?
+            this.todoService.editTodo({...data, ...{category: res1.result._id}}, this.edit._def.extendedProps._id) :
+            this.todoService.createTodo({...data, ...{category: res1.result._id}, ...{addEvent: true}});
+      })).pipe(take(1)).subscribe(res2 => {
+        this.activeModal.close({status: 'yes', data: {...data, ...res2.result}});
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      (this.edit ?
+          this.todoService.editTodo({...data, ...{category: randomColor._id}}, this.edit._def.extendedProps._id) :
+          this.todoService.createTodo({...data, ...{category: randomColor._id}, ...{addEvent: true}})).pipe(take(1)).subscribe(res => {
+          this.activeModal.close({status: 'yes', data: {...data, ...res.result} });
       }, error => {
         console.log(error);
       });

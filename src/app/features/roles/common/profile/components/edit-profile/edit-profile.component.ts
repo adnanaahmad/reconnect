@@ -87,7 +87,7 @@ export class EditProfileComponent implements OnInit {
   setProfileData(): void {
     this.profile.getUserData().pipe(take(1)).subscribe(res => {
       this.userProfile.loader = true;
-      const birthday = this.datePipe.transform(res.result.birthday, 'yyyy-MM-dd');
+      const birthday = res.result.birthday;
       this.userProfile.image = res.result.profilePictureUrl ? res.result.profilePictureUrl : null;
       this.setCity(res.result.state);
       this.userProfile.profileForm.patchValue({

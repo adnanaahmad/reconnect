@@ -1,0 +1,23 @@
+<div class="form-div d-flex flex-column">
+    <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+    <div [formGroup]="task" class="d-flex flex-column">
+        <div class="card-1 d-flex flex-column">
+            <p class="heading">Select Task Type</p>
+            <div class="d-flex">
+                <div class="mr-custom">
+                    <label class="container"><p class="title">Simple Task</p>
+                        <input formControlName = "type" class="form-check-input" type="radio" value="simple">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="">
+                    <label class="container"><p class="title">Event Based Task</p>
+                        <input formControlName = "type" class="form-check-input" type="radio" value="event">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button (click)="onSubmit()" class="invite">Choose Task</button>
+</div>

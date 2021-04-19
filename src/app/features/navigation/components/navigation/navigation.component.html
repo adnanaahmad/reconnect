@@ -22,7 +22,9 @@
         <div class="col-10 nav-content">
             <ngx-loading-bar [fixed]="false" height=".15vw" [includeSpinner]="false" color="var(--green)"></ngx-loading-bar>
             <div class="router-outlet-class">
-                <app-header *ngIf="showHeader"></app-header>
+                <div class="header-parent">
+                    <app-header class="app-header" *ngIf="showHeader"></app-header>
+                </div>
                 <router-outlet></router-outlet>
             </div>
         </div>

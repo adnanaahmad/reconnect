@@ -49,13 +49,15 @@ export class HomeCardComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
     this.subscription = this.store.toggleLoanType.subscribe(loanType => {
-      this.monthlyPayment = this.home.financing[loanType].totalPayment;
-      this.pieChart.principalAndInterest = Math.round(this.home.financing[loanType].principalAndInterest);
-      this.pieChart.insurance = Math.round(this.home.financing[loanType].insurance);
-      this.pieChart.taxes = Math.round(this.home.financing[loanType].taxes);
-      this.pieChart.mortgageInsurance = Math.round(this.home.financing[loanType].mortgageInsurance);
-      this.pieChart.hoa = Math.round(this.home.hoa);
-      this.pieChart.totalPayment = Math.round(this.home.financing[loanType].totalPayment);
+      if (loanType && loanType !== 'null'){
+        this.monthlyPayment = this.home.financing[loanType].totalPayment;
+        this.pieChart.principalAndInterest = Math.round(this.home.financing[loanType].principalAndInterest);
+        this.pieChart.insurance = Math.round(this.home.financing[loanType].insurance);
+        this.pieChart.taxes = Math.round(this.home.financing[loanType].taxes);
+        this.pieChart.mortgageInsurance = Math.round(this.home.financing[loanType].mortgageInsurance);
+        this.pieChart.hoa = Math.round(this.home.hoa);
+        this.pieChart.totalPayment = Math.round(this.home.financing[loanType].totalPayment);
+      }
     });
   }
   ngOnDestroy(): void {

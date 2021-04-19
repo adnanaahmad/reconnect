@@ -83,7 +83,7 @@ export class EditPersonalDetailsComponent implements OnInit {
         nmlsNumber: res.nmlsNumber
       });
       if (res.birthday){
-        const birthday = this.datePipe.transform(res.birthday, 'yyyy-MM-dd');
+        const birthday = res.birthday;
         this.personalDetails.form.get(['birthday', 'year']).setValue(birthday.split('-')[0]);
         this.personalDetails.form.get(['birthday', 'month']).setValue(Number(birthday.split('-')[1]));
         this.personalDetails.form.get(['birthday', 'day']).setValue(Number(birthday.split('-')[2]));

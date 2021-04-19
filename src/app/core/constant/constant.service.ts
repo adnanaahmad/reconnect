@@ -53,7 +53,12 @@ export class ConstantService {
      getCalendarEvents: `${environment.apiUrl}/calendar/categories-events`,
      createCalendarEvent: `${environment.apiUrl}/calendar/create-event`,
      createCalendarEventCategory: `${environment.apiUrl}/calendar/create-category`,
-     editCalendarEvent: `${environment.apiUrl}/calendar/update-event/`
+     editCalendarEvent: `${environment.apiUrl}/calendar/update-event/`,
+     getCalendarCategories: `${environment.apiUrl}/calendar/my-categories`,
+     getTodo: `${environment.apiUrl}/todo/get`,
+     createTodo: `${environment.apiUrl}/todo/create`,
+     updateTodo: `${environment.apiUrl}/todo/update/`,
+     updateTodoTags: `${environment.apiUrl}/todo/update-tags/`,
    };
   apiMethod = {
     get: 'get',
@@ -748,5 +753,12 @@ export class ConstantService {
     ALL_NEW_MESSAGE: 'all_new-message',
     BUYER_IMPORTANT_DATE_UPDATED: 'buyer_important-date-updated',
     LENDER_TARGET_PROPERTY_SET: 'lender_target-property-set'
+  };
+  TODO_FILTERS = {
+    ALL: 'all',
+    PRIORITY: 'priority',
+    STARRED: 'starred',
+    DONE: 'done',
+    DELETED: 'deleted',
   };
 }

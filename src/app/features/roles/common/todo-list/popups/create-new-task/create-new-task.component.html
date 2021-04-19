@@ -1,0 +1,39 @@
+<div class="form-div d-flex flex-column">
+    <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+    <form [formGroup]="todoTask" class="d-flex flex-column">
+        <div class="card-1 d-flex flex-column">
+            <div class="d-flex mb-custom">
+                <p class="heading align-self-center">Add New Task</p>
+            </div>
+
+            <p [ngClass]="{'danger' : this.todoTask.get('title').invalid && this.todoTask.get('title').touched}"
+               class="title">
+                Task Title
+            </p>
+            <input [ngClass]="{'is-invalid' : this.todoTask.get('title').invalid && this.todoTask.get('title').touched}"
+                   formControlName="title" type="text" class="form-control f1 mb-custom" placeholder="">
+            <p [ngClass]="{'danger' : this.todoTask.get('note').invalid && this.todoTask.get('note').touched}"
+               class="title">
+                Add Description
+            </p>
+            <textarea [ngClass]="{'is-invalid' : this.todoTask.get('note').invalid && this.todoTask.get('note').touched}"
+                   formControlName="note" type="text" class="form-control f2 mb-custom" placeholder="">
+            </textarea>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <p [ngClass]="{'danger' : this.todoTask.get('date').invalid && this.todoTask.get('date').touched}"
+                       class="title">
+                        Date
+                    </p>
+                    <div class="date-div">
+                        <img class="calendar-icon" src="/assets/menu-icons/calendar.svg" (click)="d.toggle()">
+                        <input [ngClass]="{'is-invalid' : this.todoTask.get('date').invalid && this.todoTask.get('date').touched}"
+                                class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
+                               name="dp" formControlName="date"  ngbDatepicker #d="ngbDatepicker">
+                    </div>
+                </div>
+                <button (click)="onSubmit()" class="add-button align-self-end text-nowrap">Add Task</button>
+            </div>
+        </div>
+    </form>
+</div>

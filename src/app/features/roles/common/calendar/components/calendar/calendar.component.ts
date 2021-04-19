@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {EventClickArg, FullCalendarComponent} from '@fullcalendar/angular';
-import { CreateEventComponent} from '../../popups/create-event/create-event.component';
+import { CreateEventComponent} from '../../../../../../shared/components/create-event/create-event.component';
 import {NgbModal, NgbModalConfig, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModel} from '../../models/calendar.model';
 import {ConstantService} from '../../../../../../core/constant/constant.service';

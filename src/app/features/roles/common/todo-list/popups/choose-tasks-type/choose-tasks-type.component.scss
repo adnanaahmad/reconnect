@@ -1,0 +1,95 @@
+p{
+  font-family: 'Poppins';
+}
+.form-div{
+  position: relative;
+  min-width: 27vw;
+}
+.card-1{
+  padding: 2.5vw;
+}
+.heading{
+  font-size: .85vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-bottom: 2vw;
+}
+.close-btn{
+  position: absolute;
+  left: 93%;
+  top: 7%;
+  height: .7vw;
+  width: .7vw;
+  cursor: pointer;
+}
+.title{
+  font-size: .8vw;
+  color: var(--lighGray);
+  margin-bottom: 0.2vw;
+  font-weight: 300;
+}
+.mb-custom{
+  margin-bottom: 1.5vw;
+}
+
+.f1{
+  height: 2.5vw;
+  font-size: .8vw;
+  color: var(--darkGray);
+  border-radius: .5vw;
+  border: 1px solid var(--lighGray);
+}
+.danger{
+  color: var(--red);
+}
+.invite{
+  background: var(--green);
+  color: white;
+  padding: .5vw 0;
+  border: none;
+  font-family: 'Poppins';
+  font-size: .8vw;
+  cursor: pointer;
+  border-bottom-left-radius: .5vw;
+  border-bottom-right-radius: .5vw;
+}
+.invite:focus{
+  outline: none;
+}
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  //margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  border-radius: .3vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.1vw;
+  width: 1.1vw;
+  //background-color: #eee;
+  border: 1px solid var(--lighGray);
+}
+label{
+  margin-bottom: 0;
+}
+.container input:checked ~ .checkmark {
+  background-color: var(--green);
+  border: none;
+}
+.mr-custom{
+  margin-right: 3vw;
+}

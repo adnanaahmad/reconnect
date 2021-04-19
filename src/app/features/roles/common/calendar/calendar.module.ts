@@ -7,7 +7,6 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { CalendarRoutingModule } from './calendar-routing.module';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import { NgbDateNativeAdapter, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { CreateEventComponent } from './popups/create-event/create-event.component';
 import {SharedModule} from '../../../../shared/shared.module';
 import { ViewEventComponent } from './popups/view-event/view-event.component';
 
@@ -19,7 +18,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent, CreateEventComponent, ViewEventComponent],
+  declarations: [CalendarComponent, ViewEventComponent],
   imports: [
     CommonModule,
     CalendarRoutingModule,

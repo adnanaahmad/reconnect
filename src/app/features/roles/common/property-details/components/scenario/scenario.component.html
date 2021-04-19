@@ -5,18 +5,18 @@
     <div class="ls-detail">
         <div class="d-flex justify-content-between lsd-first-row">
             <div class="d-flex">
-                <p class="mr-custom1 text-nowrap">Ratios Housing</p>
+                <p class="mr-custom1 text-nowrap">Housing Ratio:</p>
                 <p>{{scenario.housingRatio + '%'}}</p>
             </div>
+            <div class="separator-custom"></div>
             <div class="d-flex">
-                <p class="mr-custom1">Debts</p>
+                <p class="mr-custom1 text-nowrap">Debt Ratio:</p>
                 <p>{{scenario.debtRatio + '%'}}</p>
             </div>
+            <div class="separator-custom"></div>
             <div class="d-flex">
-                <p class="text-nowrap mr-custom1">Qualify</p>
-                <p>{{!((loanScenario.listings[0].financing[store.toggleLoanType | async].housingRatio > loanScenario.userLoan[store.toggleLoanType | async].housingRatio ||
-                    loanScenario.listings[0].financing[store.toggleLoanType | async].debtRatio > loanScenario.userLoan[store.toggleLoanType | async].debtRatio) ||
-                    ((scenarioNumber === 1 ? loanScenario.listings[0].financing[store.toggleLoanType | async].fundsNeeded : loanScenario.listings[0].financing[store.toggleLoanType | async].LS2_fundsNeeded) < 0)) ? 'Yes' : 'No'}}</p>
+                <p class="text-nowrap mr-custom1">Qualify:</p>
+                <p [style.color]="qualify ? 'var(--green)': 'var(--red)'">{{qualify ? 'Yes' : 'No'}}</p>
             </div>
 
         </div>
@@ -73,7 +73,7 @@
             <div class="form-input">
                 <p class="text-nowrap title">Funds Needed</p>
                 <div class="d-flex justify-content-between" style="flex-grow: 1">
-                    <p [style.color]="scenario.fundsNeeded < 0 ? 'var(--red)' : 'var(--lighGray)'" class="loan-fields funds">${{scenario.fundsNeeded | mask: 'separator.2':','}}</p>
+                    <p [style.color]="scenario.fundsNeeded < 0 ? 'var(--red)' : 'var(--mediumGray)'" class="loan-fields funds">${{scenario.fundsNeeded | mask: 'separator.2':','}}</p>
                     <div (click)="viewCalculator()" class="view d-flex align-items-start flex-column">
                         <img class="mb-auto" src="/assets/property-details/eye.svg">
                         <p>View</p>
@@ -83,7 +83,7 @@
 
         </div>
     </div>
-    <div class="letter">
+    <div class="letter" [style.background]="qualify ? 'var(--green)' : 'var(--red)'">
         <p class="text-nowrap text-center">Pre-Approval Letter</p>
     </div>
 </div>

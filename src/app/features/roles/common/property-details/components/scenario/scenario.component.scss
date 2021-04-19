@@ -18,22 +18,27 @@
 }
 .lsd-first-row p{
   font-size: .6vw;
-  color: var(--lighGray);
+  color: var(--mediumGray);
   margin-bottom: 0;
+  font-weight: 500;
 }
 .lsd-first-row{
   margin-bottom: 1vw;
+  background: var(--extraLightGray);
+  padding: .4vw .7vw;
+  border-radius: .3vw;
 }
 .mr-custom{
   margin-right: 1.5vw;
 }
 .form-input p{
   margin-bottom: 0;
-  color: var(--lighGray);
+  color: var(--mediumGray);
   font-size: .6vw;
 }
 .title{
   margin-bottom: .2vw !important;
+  color: var(--lighGray) !important;
 }
 .mb2-custom{
   margin-bottom: 1.1vw;
@@ -90,7 +95,7 @@ p{
   border-radius: .2vw;
 }
 .mr-custom1{
-  margin-right: .5vw;
+  margin-right: .1vw;
 }
 .funds{
   flex-grow: 1;
@@ -100,9 +105,22 @@ p{
 }
 .f1{
   padding: .25vw .5vw .25vw .5vw;
-  font-size: .7vw;
-  color: var(--lighGray);
+  font-size: .6vw;
+  color: var(--mediumGray);
   height: 1.4vw;
   border: 1px solid var(--lighGray);
   border-radius: .2vw;
+}
+.debt-ratio{
+  border-left: 1px solid var(--lighGray);
+  border-right: 1px solid var(--lighGray);
+  padding: 0 .5vw;
+}
+.mr-custom2{
+  margin-right: .5vw;
+}
+.separator-custom{
+  border-left: 1px solid var(--lighGray);
+  margin-right: .25vw;
+  margin-left: .25vw;
 }

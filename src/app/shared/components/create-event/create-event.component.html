@@ -60,7 +60,7 @@
          </div>
        </ng-container>
        <ng-container>
-         <p class="title">Add a team member</p>
+         <p *ngIf="teamData.team" class="title">Add a team member</p>
          <div class="d-flex justify-content-between">
            <div class="d-flex">
              <ng-container *ngFor="let member of teamData.team | keyvalue; let i = index">

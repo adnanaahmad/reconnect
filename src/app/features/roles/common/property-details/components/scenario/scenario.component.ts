@@ -20,6 +20,7 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
   pieChart: ViewPaymentBreakDownModel = {} as ViewPaymentBreakDownModel;
   subscription: Array<Subscription>;
   purchasePrice: FormControl;
+  qualify: boolean;
   constructor(private modalService: NgbModal, configuration: NgbModalConfig, public store: StoreService) {
     configuration.centered = true;
     configuration.container =  'app-property-details';
@@ -57,6 +58,12 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
           this.pieChart.mortgageInsurance = Math.round(this.loanScenario.listings[0].financing[loanType].mortgageInsurance);
           this.pieChart.hoa = Math.round(this.loanScenario.listings[0].hoa);
           this.pieChart.totalPayment = Math.round(this.loanScenario.listings[0].financing[loanType].totalPayment);
+
+          this.qualify = !((this.loanScenario.listings[0].financing[loanType].housingRatio >
+              this.loanScenario.userLoan[loanType].housingRatio || this.loanScenario.listings[0].financing[loanType].debtRatio >
+              this.loanScenario.userLoan[loanType].debtRatio) ||
+              ((this.scenarioNumber === 1 ? this.loanScenario.listings[0].financing[loanType].fundsNeeded :
+                  this.loanScenario.listings[0].financing[loanType].LS2_fundsNeeded) < 0));
     }));
   }
   ngOnDestroy(): void {

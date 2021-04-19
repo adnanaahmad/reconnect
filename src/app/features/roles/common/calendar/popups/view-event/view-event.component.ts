@@ -24,7 +24,9 @@ export class ViewEventComponent implements OnInit {
 
   ngOnInit(): void {
     this.helper.setModalPosition();
-    this.getTeamProfessional()
+    if (this.view._def.extendedProps.team){
+      this.getTeamProfessional();
+    }
     console.log(this.view);
   }
   close(): void{

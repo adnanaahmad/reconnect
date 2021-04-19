@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {DeleteConfirmationPopupComponent} from './components/delete-confirmation-popup/delete-confirmation-popup.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateNativeAdapter, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FhaComponent} from './components/fha/fha.component';
 import {ConventionalComponent} from './components/conventional/conventional.component';
@@ -28,6 +28,7 @@ import { NoResultsFoundComponent } from './components/no-results-found/no-result
 import {DomChangesDirective} from './directives/dom-changes/dom-changes.directive';
 import {AddClosingCostComponent} from './components/add-closing-cost/add-closing-cost.component';
 import {RemoveMemberComponent} from './components/remove-member/remove-member.component';
+import {CreateEventComponent} from './components/create-event/create-event.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -55,13 +56,15 @@ const maskConfig: Partial<IConfig> = {
         NoResultsFoundComponent,
         DomChangesDirective,
         AddClosingCostComponent,
-        RemoveMemberComponent
+        RemoveMemberComponent,
+        CreateEventComponent
     ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
         NgxMaskModule.forRoot(maskConfig),
         Ng2SearchPipeModule,
+        NgbModule,
     ],
     exports: [
         ReactiveFormsModule,
@@ -91,8 +94,10 @@ const maskConfig: Partial<IConfig> = {
         NoResultsFoundComponent,
         DomChangesDirective,
         AddClosingCostComponent,
-        RemoveMemberComponent
+        RemoveMemberComponent,
+        CreateEventComponent
     ],
+    providers: [NgbDateNativeAdapter]
 })
 export class SharedModule {
 }
