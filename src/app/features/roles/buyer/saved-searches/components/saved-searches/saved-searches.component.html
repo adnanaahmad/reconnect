@@ -13,6 +13,9 @@
                  <div class="row">
                       <p class="col-3 text-nowrap label"> {{child.key === 'xf_amenities' ? 'More Filters' : (child.key | splitCamelCase)}}: </p>
                       <div class="col-9 d-flex">
+                          <div class="d-flex space" *ngIf="child.key === 'sortPayment'">
+                              <p class="">{{child.value === 'desc' ? 'High To Low' : child.value === 'asc' ? 'Low To High' : ''}}</p>
+                          </div>
                           <div class="d-flex space" *ngIf="child.key === 'listPrice'">
                               <p class="price">{{child.value ? '$' + child.value.split(':')[0] + ' - ' : '' }}</p>
                               <p class="price">{{child.value ? '$' + child.value.split(':')[1] : '' }}</p>

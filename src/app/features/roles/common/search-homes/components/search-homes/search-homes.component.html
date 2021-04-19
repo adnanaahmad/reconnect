@@ -33,16 +33,24 @@
             </div>
         </div>
         <div (click)="searchHomeByName()" class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
-<!--        <div class="dropdown">-->
-<!--          <button class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--            Payment <img class="down-arrow" src="/assets/search-home/down-arrow.svg">-->
-<!--          </button>-->
-<!--          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">-->
-<!--            <button class="dropdown-item" type="button">Action</button>-->
-<!--            <button class="dropdown-item" type="button">Another action</button>-->
-<!--            <button class="dropdown-item" type="button">Something else here</button>-->
-<!--          </div>-->
-<!--        </div>-->
+        <div class="dropdown" *ngIf="store.role === constant.role.BUYER && (store.toggleLoanType | async)">
+            <button class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Payment <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
+            </button>
+            <div (click)="keepDropdownOpen($event)" class="dropdown-menu" aria-labelledby="dropdownMenu2" formGroupName="sortPayment">
+                <ng-container *ngFor="let i of constant.SORT_PAYMENT | keyvalue: helper.originalOrder">
+                    <label class="container">
+                        <input formControlName="value" type="radio" value="{{i.value}}">
+                        <img class="checkmark" src="/assets/loan-details/tick.svg">
+                        <p class="label-txt">{{i.key | titlecase}}</p>
+                    </label>
+                </ng-container>
+                <div class="d-flex justify-content-end">
+                    <div (click)="searchHome.moreFilters.get(['sortPayment','value']).setValue(null)" class="cancel-btn" >Clear</div>
+                    <div (click)="applyFilter($event, true)" class="apply-btn" >Apply</div>
+                </div>
+            </div>
+        </div>
         <div class="dropdown">
           <button (click)="hideMoreFilter()" class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Property Type <img class="down-arrow" src="/assets/search-home/down-arrow.svg">

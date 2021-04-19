@@ -761,4 +761,9 @@ export class ConstantService {
     DONE: 'done',
     DELETED: 'deleted',
   };
+  SORT_PAYMENT = {
+    none: null,
+    'high to low': 'desc',
+    'low to high': 'asc'
+  };
 }

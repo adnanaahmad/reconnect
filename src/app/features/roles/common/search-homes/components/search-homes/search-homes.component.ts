@@ -96,6 +96,9 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             },
             moreFilters: {
                 value: params.xf_amenities ? params.xf_amenities : null,
+            },
+            sortPayment: {
+                value: params.sortPayment ? params.sortPayment : null
             }
         });
     }
@@ -224,6 +227,9 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                 to: [{value: null, disabled: true}],
                 value: [null]
             }),
+            sortPayment: this.fb.group({
+                value: [null]
+            })
         });
         this.searchHome.sortBy = new FormControl(null);
     }
@@ -274,7 +280,10 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         event.stopPropagation();
     }
 
-    applyFilter(event): void {
+    applyFilter(event, sortPayment?): void {
+        if (sortPayment){
+            this.searchHome.sortBy.setValue(null);
+        }
         this.applyFilters(event);
     }
     applyFilters(events?): void {
@@ -337,7 +346,8 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             baths: this.searchHome.moreFilters.get(['baths', 'from']).value && this.searchHome.moreFilters.get(['baths', 'to']).value ?
                 `${this.searchHome.moreFilters.get(['baths', 'from']).value}:${this.searchHome.moreFilters.get(['baths', 'to']).value}`
                 : `>=${this.searchHome.moreFilters.get(['baths', 'value']).value}`,
-            xf_amenities: this.searchHome.moreFilters.get(['moreFilters', 'value']).value
+            xf_amenities: this.searchHome.moreFilters.get(['moreFilters', 'value']).value,
+            sortPayment: this.searchHome.moreFilters.get(['sortPayment', 'value']).value ? this.searchHome.moreFilters.get(['sortPayment', 'value']).value : null,
         };
     }
 
@@ -366,6 +376,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
 
     sortBy(): void {
         const data = this.filtersDataToQuery;
+        this.searchHome.moreFilters.get(['sortPayment', 'value']).setValue(null);
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
         const sortBy =  this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
