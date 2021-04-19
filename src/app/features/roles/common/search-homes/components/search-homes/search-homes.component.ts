@@ -298,7 +298,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
         window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}${searchInput}${searchByMLS}${searchKeyword}${sortBy}`);
         this.store.updateProgressBarLoading(true);
-        this.searchHomeService.getHouses(data + sortBy + searchInput + searchByMLS + page).pipe(take(1)).subscribe(res => {
+        this.searchHomeService.getHouses(data + loanType + sortBy + searchInput + searchByMLS + page).pipe(take(1)).subscribe(res => {
             res = res.result;
             this.searchHome.homes = res.listings;
             this.searchHome.total = res.total;
@@ -360,7 +360,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
         const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
         const searchKeyword = this.searchHome.searchKeyword.value ? `&searchKeyword=${this.searchHome.searchKeyword.value}` : '';
-        this.searchHomeService.getHouses(`${data}&pageNumber=${pageNumber}${sortBy}${searchInput}`).pipe(take(1)).subscribe(res => {
+        this.searchHomeService.getHouses(`${data}${loanType}&pageNumber=${pageNumber}${sortBy}${searchInput}`).pipe(take(1)).subscribe(res => {
             res = res.result;
             this.searchHome.homes = res.listings;
             this.searchHome.total = res.total;
@@ -375,10 +375,10 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     }
 
     sortBy(): void {
-        const data = this.filtersDataToQuery;
         this.searchHome.moreFilters.get(['sortPayment', 'value']).setValue(null);
+        const data = this.filtersDataToQuery;
         const searchInput = this.searchHome.polygon ? `&geometry=true&polygon=$${this.searchHome.polygon}` : '';
-        const sortBy =  this.searchHome.sortBy.value !== 'null' ? `&sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
+        const sortBy =  this.searchHome.sortBy.value !== 'null' ? (data ? '&' : '') + `sortField=listPrice&sortOrder=${this.searchHome.sortBy.value}` : '';
         const loanType = this.store.toggleLoanTypeSubject.value ? `${data ? '&' : ''}loanType=${this.store.toggleLoanTypeSubject.value}` : '';
         const savedSearchId = this.searchHome.savedSearchId ? `${data || loanType ? '&' : ''}savedSearchId=${this.searchHome.savedSearchId}` : '';
         const searchByMLS = this.searchHome.searchByMLS ? `&id=${this.searchHome.searchByMLS}` : '';
@@ -440,7 +440,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
         window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}${searchInput}${searchKeyword}${sortBy}`);
 
         this.store.updateProgressBarLoading(true);
-        this.searchHomeService.getHouses(data + sortBy + searchInput).pipe(take(1)).subscribe(res => {
+        this.searchHomeService.getHouses(data + loanType + sortBy + searchInput ).pipe(take(1)).subscribe(res => {
             res = res.result;
             this.searchHome.homes = res.listings;
             this.searchHome.total = res.total;

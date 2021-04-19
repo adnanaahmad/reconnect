@@ -140,6 +140,7 @@ export class TodoListComponent implements OnInit {
         break;
       case this.constant.TODO_FILTERS.DONE:
         this.editTagsHelper({...data, done: !data.done}, task, tag, index);
+        task.done = !task.done;
         break;
       case this.constant.TODO_FILTERS.PRIORITY:
         this.editTagsHelper({...data, priority: !data.priority}, task, tag, index);
@@ -155,22 +156,21 @@ export class TodoListComponent implements OnInit {
   }
   editTagsHelper(data, task, tag, index): void{
     this.todoService.editTags(data, task._id).pipe(take(1)).subscribe(res => {
-      console.log(res);
       this.todo.list = res.result;
       switch (tag) {
         case this.constant.TODO_FILTERS.DELETED:
           this.toaster.success('Task is deleted');
           break;
         case this.constant.TODO_FILTERS.DONE:
-          res.result.done ? this.toaster.success('Task is done') :
+          data.done ? this.toaster.success('Task is done') :
               this.toaster.success('Task is un-done');
           break;
         case this.constant.TODO_FILTERS.PRIORITY:
-          res.result.priority ? this.toaster.success('Priority added to task') :
+          data.priority ? this.toaster.success('Priority added to task') :
               this.toaster.success('Priority removed from task');
           break;
         case this.constant.TODO_FILTERS.STARRED:
-          res.result.starred ? this.toaster.success('Task marked as important') :
+          data.starred ? this.toaster.success('Task marked as important') :
               this.toaster.success('Task is no longer important');
           break;
         default:

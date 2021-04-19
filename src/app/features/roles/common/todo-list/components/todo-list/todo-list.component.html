@@ -17,11 +17,11 @@
            </div>
         </div>
         <ng-container *ngFor="let todo of todo.list; let i = index">
-            <div *ngIf="(store.todoFilter | async) === constant.TODO_FILTERS.ALL ? true :
+            <div *ngIf="(store.todoFilter | async) === constant.TODO_FILTERS.ALL ?  !todo.deleted :
              (store.todoFilter | async) === constant.TODO_FILTERS.DELETED ? todo.deleted : (todo[(store.todoFilter | async)] && !todo.deleted)" class="card-1 d-flex" [ngClass]="{'done-card': todo.done}">
                 <div class="d-flex align-items-start">
                     <label class="container">
-                        <input (click)="editTags(constant.TODO_FILTERS.DONE, todo, i)" type="checkbox"  [checked]="todo.done">
+                        <input (click)="editTags(constant.TODO_FILTERS.DONE, todo, i)" type="checkbox"  [checked]="todo.done" [disabled]="todo.deleted">
                         <img class="checkmark" src="/assets/loan-details/tick.svg">
                     </label>
                 </div>
@@ -33,14 +33,14 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <div (click)="editTags(constant.TODO_FILTERS.PRIORITY, todo, i)" class="filter flag mr-custom" [ngClass]="{'done-filter': todo.done, 'active-filter':todo.priority}"><img src="/assets/todo/flag.svg"></div>
-                        <div (click)="editTags(constant.TODO_FILTERS.STARRED, todo, i)" class="filter star" [ngClass]="{'done-filter': todo.done, 'active-filter':todo.starred}"><img src="/assets/todo/favorites.svg"></div>
+                        <div (click)="!todo.deleted ? editTags(constant.TODO_FILTERS.PRIORITY, todo, i) : ''" class="filter flag mr-custom" [ngClass]="{'done-filter': todo.done, 'active-filter':todo.priority}"><img src="/assets/todo/flag.svg"></div>
+                        <div (click)="!todo.deleted ? editTags(constant.TODO_FILTERS.STARRED, todo, i) : ''" class="filter star" [ngClass]="{'done-filter': todo.done, 'active-filter':todo.starred}"><img src="/assets/todo/favorites.svg"></div>
 
                     </div>
                 </div>
                 <div class="ml-auto">
-                    <p (click)="editTask(todo, i)" class="button1 text-center">Edit</p>
-                    <p (click)="editTags(constant.TODO_FILTERS.DELETED, todo, i)" class="button2" [ngClass]="{'active-delete': todo.done}">Delete</p>
+                    <p (click)="!todo.deleted ? editTask(todo, i) : ''" class="button1 text-center">Edit</p>
+                    <p (click)="!todo.deleted ? editTags(constant.TODO_FILTERS.DELETED, todo, i) : ''" class="button2" [ngClass]="{'active-delete': todo.done}">Delete</p>
                 </div>
             </div>
         </ng-container>
