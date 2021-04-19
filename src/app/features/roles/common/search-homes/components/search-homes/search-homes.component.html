@@ -33,7 +33,7 @@
             </div>
         </div>
         <div (click)="searchHomeByName()" class="align-self-center search-icon-div"> <img src="/assets/chat/search.svg" class="search-icon"> </div>
-        <div class="dropdown" *ngIf="store.role === constant.role.BUYER && (store.toggleLoanType | async)">
+        <div class="dropdown" *ngIf="store.role === constant.role.BUYER">
             <button class="btn payment btn-lg" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Payment <img class="down-arrow" src="/assets/search-home/down-arrow.svg">
             </button>
