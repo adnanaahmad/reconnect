@@ -49,6 +49,7 @@ export interface CreateGroupChatModel{
   groupForm: FormGroup;
   selectedBuyers: any;
   selectedGroups: any;
+  loan: string;
 }
 
 export interface TeamDataModel{

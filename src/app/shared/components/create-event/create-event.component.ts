@@ -165,7 +165,8 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
   getTeamHelper(res): void{
-    this.teamData.team = res.result;
+    this.teamData.loan = res.result.loan;
+    this.teamData.team = {...res.result};
     this.teamData.id  = res.result._id;
     this.filterTeam(this.teamData.team);
     if (this.groupMembers && this.groupMembers.length){
@@ -222,7 +223,8 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
       members: result.data.team,
       color: randomColor.color,
       textColor: randomColor.textColor,
-      team: this.teamData.id
+      team: this.teamData.id,
+      loan: this.teamData.loan
     };
     const category = {
       title: eventCategoryTitle,
@@ -294,7 +296,8 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
   getBuyersTeam(member): void{
     this.teamData.selectedButton = member;
     this.teamData.id =  member._id;
-    this.teamData.team = member;
+    this.teamData.team = {...member};
+    this.teamData.loan = member.loan.id;
     this.filterTeam(this.teamData.team);
   }
 }
