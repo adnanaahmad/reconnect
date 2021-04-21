@@ -59,23 +59,6 @@
   width: 12vw;
   font-family: 'Poppins';
 }
-.draggable-element{
-  color: var(--darkGray);
-  cursor: default;
-  display: inline-flex;
-  background: transparent;
-  width: 100%;
-  margin-bottom: 1.2vw;
-}
-.color-icons{
-  padding: .5vw;
-  border-radius: .5em ;
-  height: 2vw;
-  width: 2vw;
-}
-//::ng-deep .color-icons img{
-//  height: 45%;
-//}
 ::ng-deep full-calendar{
   height: 41vw;
 }
@@ -95,6 +78,27 @@
 }
 :host ::ng-deep .fc-daygrid-day-top{
   justify-content: center;
+}
+::ng-deep .calendar-card{
+  background: white;
+  height: 100%;
+}
+::ng-deep .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+  margin-bottom: 1.5vw !important;
+}
+::ng-deep .fc-daygrid-day-number{
+  font-size: .8vw;
+  //padding: .3vw !important;
+}
+::ng-deep .fc-col-header-cell-cushion{
+  font-size: .9vw;
+}
+
+:host ::ng-deep .fc-highlight{
+  background: white !important;
+}
+:host ::ng-deep .fc-day-today{
+  background: white !important;
 }
 .heading{
   margin-bottom: var(--heading);
@@ -159,7 +163,40 @@ h6{
   margin-right: .7vw;
   cursor: pointer;
 }
-.draggable-element-text{
+.category{
+  color: var(--darkGray);
+  cursor: default;
+  display: inline-flex;
+  background: transparent;
+  width: 100%;
+  margin-bottom: 1.2vw;
+}
+.delete-btn{
+  display: block;
+  filter: invert(27%) sepia(51%) saturate(0%) hue-rotate(346deg) brightness(50%) contrast(97%) opacity(40%);
+  margin-left: 1vw;
+  height: 1vw;
+  width: 1vw;
+  cursor: pointer;
+  padding: .05vw;
+  transition: .4s;
+  opacity: 0;
+}
+.category:hover .category-text-div{
+  background: var(--extraLightGray) !important;
+  transition: .4s;
+}
+.category:hover .delete-btn{
+  opacity: 1;
+  transition: opacity .4s;
+}
+.color-icons{
+  padding: .5vw;
+  border-radius: .4vw ;
+  height: 2vw;
+  width: 2vw;
+}
+.category-text{
   overflow : hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -167,8 +204,14 @@ h6{
   -webkit-box-orient:vertical;
   margin-bottom: 0;
   font-weight: 300;
-  margin-left: 1vw;
   font-size: .8vw;
+}
+.category-text-div{
+  margin-left: .5vw;
+  padding: .5vw 0.5vw;
+  width: 100%;
+  border-radius: .3vw;
+  transition: .4s;
 }
 .card-1{
   background: white;
@@ -181,27 +224,46 @@ h6{
   height: 28vw;
   overflow-y: auto;
 }
-::ng-deep .calendar-card{
-  background: white;
-  height: 100%;
-}
-::ng-deep .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
-  margin-bottom: 1.5vw !important;
-}
-::ng-deep .fc-daygrid-day-number{
-  font-size: .8vw;
-  //padding: .3vw !important;
-}
-::ng-deep .fc-col-header-cell-cushion{
+.ec-heading{
   font-size: .9vw;
+  font-weight: 500;
+  margin-bottom: 2vw;
+  color: var(--darkGray);
+}
+::placeholder{
+  font-size: .7vw;
+  color: var(--lighGray);
+  font-family: 'Poppins';
+}
+.f1{
+  font-weight: 300;
+  font-size: .8vw;
+  color: var(--darkGray);
+  padding: 0;
+  height: 2vw;
+  border: none;
+  font-family: 'Poppins';
+}
+.f1:focus{
+  box-shadow: none;
+}
+p{
+  font-family: 'Poppins';
 }
 
-:host ::ng-deep .fc-highlight{
-  background: white !important;
+ngb-modal-backdrop{
+  position: absolute;
 }
-:host ::ng-deep .fc-day-today{
-  background: white !important;
+.plus-btn{
+  background: transparent;
+  border: none;
+  padding: 0;
+  line-height: revert;
 }
+.plus-btn:focus{
+  outline: none;
+}
+
 @media only screen and (max-width: 1440px) {
   ::ng-deep .fc-today-button.fc-button.fc-button-primary{
     margin-right: 28vw;
@@ -261,43 +323,4 @@ h6{
   ::ng-deep .fc-prev-button.fc-button.fc-button-primary{
     margin-left: 3em;
   }
-}
-.ec-heading{
-  font-size: .9vw;
-  font-weight: 500;
-  margin-bottom: 2vw;
-  color: var(--darkGray);
-}
-::placeholder{
-  font-size: .7vw;
-  color: var(--lighGray);
-  font-family: 'Poppins';
-}
-.f1{
-  font-weight: 300;
-  font-size: .8vw;
-  color: var(--darkGray);
-  padding: 0;
-  height: 2vw;
-  border: none;
-  font-family: 'Poppins';
-}
-.f1:focus{
-  box-shadow: none;
-}
-p{
-  font-family: 'Poppins';
-}
-
-ngb-modal-backdrop{
-  position: absolute;
-}
-.plus-btn{
-  background: transparent;
-  border: none;
-  padding: 0;
-  line-height: revert;
-}
-.plus-btn:focus{
-  outline: none;
 }

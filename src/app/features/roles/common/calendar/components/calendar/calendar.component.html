@@ -18,32 +18,16 @@
          </div>
          <p class="ec-heading">Event Categories</p>
          <div id='external-events' class="external-events">
-            <div *ngFor="let i of calendar.eventCategories" class="draggable-element">
+            <div *ngFor="let i of calendar.eventCategories" class="category">
                <div>
                   <img [style.background]="i.color" [src]="i.colorIcon" class="color-icons">
                </div>
-               <p class="draggable-element-text align-self-center" style="">
-                  {{i.title}}
-               </p>
+                <div class="category-text-div d-flex justify-content-between">
+                    <p class="category-text" style="">{{i.title}}</p>
+                    <img (click)="deleteEventCategory(i._id)" *ngIf="i.type === 'custom'" class="delete-btn align-self-center" src="/assets/news-feed-icons/delete.svg">
+                </div>
             </div>
          </div>
-     <!--    <div class='demo-app-sidebar'>
-            <div class='demo-app-sidebar-section'>
-            </div>
-            <div class='demo-app-sidebar-section'>
-            </div>
-            <div class='demo-app-sidebar-section'>
-               <h2>All Events ({{calendar.currentEvents.length}})</h2>
-               <ul>
-                  <li *ngFor='let event of calendar.currentEvents'>
-                     <b>{{event.startStr}}</b>
-                     <i>{{event.title}}</i>
-                     <i>{{event.backgroundColor}}</i>
-                     <i>{{event.textColor}}</i>
-                  </li>
-               </ul>
-            </div>
-         </div>-->
       </div>
    </div>
    <div class="col-9 column-2" >

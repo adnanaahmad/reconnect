@@ -26,4 +26,7 @@ export class CalendarService {
   editCalendarEvent(data, id): Observable<any>{
     return this.helper.requestCall(this.methods.put, this.api.editCalendarEvent + id, data);
   }
+  removeEventCategory(id): Observable<any>{
+    return this.helper.requestCall(this.methods.delete, this.api.removeEventCategory + id);
+  }
 }

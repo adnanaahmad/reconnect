@@ -9,6 +9,7 @@ import {ViewEventComponent} from '../../popups/view-event/view-event.component';
 import {CalendarService} from '../../services/calendar.service';
 import {take} from 'rxjs/operators';
 import {StoreService} from '../../../../../../core/store/store.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-calendar',
@@ -26,7 +27,8 @@ export class CalendarComponent implements OnInit {
               private configuration: NgbModalConfig,
               private dateFormat: NgbDateNativeAdapter,
               private calendarService: CalendarService,
-              public store: StoreService) {
+              public store: StoreService,
+              private toaster: ToastrService) {
     configuration.centered = true;
     configuration.container = 'app-calendar';
     configuration.animation = true;
@@ -91,8 +93,10 @@ export class CalendarComponent implements OnInit {
     this.calendarService.createCategory(data).pipe(take(1)).subscribe(res => {
       this.calendar.eventCategories.push(res.result);
       this.newEventCategory.reset();
+      this.toaster.success('Category created successfully');
     }, error => {
       console.log(error);
+      this.toaster.error('Failed to add category');
     });
   }
   addNewEvent(): void{
@@ -134,5 +138,17 @@ export class CalendarComponent implements OnInit {
   randomColor(obj) {
     const keys = Object.keys(obj);
     return obj[keys[ keys.length * Math.random() << 0]];
+  }
+
+  deleteEventCategory(id: string): void{
+    this.calendarService.removeEventCategory(id).pipe(take(1)).subscribe(res => {
+      //console.log(res);
+      this.calendar.eventCategories = res.result.categories;
+      this.calendar.currentEvents = res.result.events;
+      this.initializeCalendar(this.calendar.currentEvents);
+      this.toaster.success('Category removed successfully');
+    }, error => {
+      this.toaster.error('Failed to remove category');
+    });
   }
 }
