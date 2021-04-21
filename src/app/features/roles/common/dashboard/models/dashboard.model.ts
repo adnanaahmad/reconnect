@@ -29,6 +29,7 @@ export interface AnalyticsModel{
   personalSales: any;
   personalVolume: any;
   sales: any;
+  quoteRequest: any;
 }
 
 export interface PersonalSalesAnalyticsModel{

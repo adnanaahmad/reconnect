@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-new-quote-requests',
@@ -6,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-quote-requests.component.scss']
 })
 export class NewQuoteRequestsComponent implements OnInit {
-
-  constructor() { }
+  @Input() quoteRequest;
+  constructor(public helper: HelperService) { }
 
   ngOnInit(): void {
   }
-
-  quoteRequest(val): void{
-    console.log('quoteRequest', val);
-  }
+  //
+  // quoteRequest(val): void{
+  //   console.log('quoteRequest', val);
+  // }
 
 }
