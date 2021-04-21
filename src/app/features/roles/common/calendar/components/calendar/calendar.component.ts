@@ -142,7 +142,6 @@ export class CalendarComponent implements OnInit {
 
   deleteEventCategory(id: string): void{
     this.calendarService.removeEventCategory(id).pipe(take(1)).subscribe(res => {
-      //console.log(res);
       this.calendar.eventCategories = res.result.categories;
       this.calendar.currentEvents = res.result.events;
       this.initializeCalendar(this.calendar.currentEvents);
