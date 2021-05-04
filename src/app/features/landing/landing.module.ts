@@ -9,6 +9,11 @@ import {RegistrationPartnerComponent} from './components/registration-partner/re
 import {SharedModule} from '../../shared/shared.module';
 import {SetPasswordComponent} from './components/set-password/set-password.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import { HomeComponent } from './components/home/home.component';
+import { AboutComponent } from './components/about/about.component';
+import { BuyHomeComponent } from './components/buy-home/buy-home.component';
+import { SellHomeComponent } from './components/sell-home/sell-home.component';
+import { BecomeAgentComponent } from './components/become-agent/become-agent.component';
 
 
 @NgModule({
@@ -18,7 +23,12 @@ import {ForgotPasswordComponent} from './components/forgot-password/forgot-passw
         RegistrationPartnerComponent,
         RegistrationBuyerComponent,
         SetPasswordComponent,
-        ForgotPasswordComponent
+        ForgotPasswordComponent,
+        HomeComponent,
+        AboutComponent,
+        BuyHomeComponent,
+        SellHomeComponent,
+        BecomeAgentComponent
     ],
     imports: [
         CommonModule,

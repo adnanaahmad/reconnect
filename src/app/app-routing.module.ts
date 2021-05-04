@@ -4,6 +4,7 @@ import {LandingComponent} from './features/landing/components/landing/landing.co
 import {AuthGuard} from './core/authGuard/auth.guard';
 
 const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     {
         path: 'home',
         loadChildren: () => import('./features/navigation/navigation.module').then(m => m.NavigationModule),

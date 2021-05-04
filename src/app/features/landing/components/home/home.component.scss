@@ -1,0 +1,289 @@
+p{
+  font-family: 'Poppins';
+}
+////////////////////////////// card-1
+.card-1{
+  position: relative;
+  height: 100vh;
+}
+.linear-gradient {
+  background: linear-gradient(.25turn, white, 60%, transparent); /* W3C */
+}
+
+.landing-img{
+  position:relative;
+  z-index:-1;
+  height: 86vh;
+  width: 100%;
+  object-fit: cover;
+}
+.opaque{
+  height: 6vw;
+  background: white;
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  opacity: .8;
+}
+.card-1-txt{
+  position: absolute;
+  top: 30%;
+  left: 8%;
+}
+.c1-txt-1{
+  color: var(--green);
+  font-size: 2.2vw;
+  font-weight: 600;
+  margin-bottom: 1.5vw;
+}
+.c1-txt-2{
+  color: var(--black);
+  font-size: 4.5vw;
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+
+
+////////////////////////////// card-2
+
+.card-2{
+  padding: 0vw 7vw 6vw 7vw;
+  background: white;
+}
+.col-txt{
+  margin-top: 4.5vw;
+  margin-right: 6vw;
+}
+.col-txt-1, .col-txt-2{
+  margin-bottom: 0;
+  font-size: 2.2vw;
+  font-weight: 600;
+}
+.col-txt-1{
+  color: var(--darkGray);
+}
+.col-txt-2{
+  color: var(--green);
+}
+.card-2-col{
+  margin-right: 6vw;
+}
+.card-2-col:last-child{
+  margin-right: 0;
+}
+.card-2-heading{
+  font-size: 1.2vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-bottom:.5vw;
+}
+.card-2-img{
+  height: 5vw;
+  width: 5vw;
+  margin-bottom: 1.5vw;
+}
+.card-2-txt{
+  color: var(--mediumGray);
+  margin-bottom: 0;
+  font-size: .9vw;
+  font-weight: 300;
+}
+.card-2-logo{
+  height: 15vw;
+  margin-right: 2vw;
+}
+
+///////////////////////////////// card-3
+
+.card-3{
+  padding: 7vw 7vw 8vw 7vw;
+  background: var(--lightBlue);
+}
+.card-3-row-1{
+  margin-bottom: 4vw;
+  display: flex;
+}
+.card-3-row-1 p:last-child{
+  margin-left: auto;
+  font-size: 1vw;
+  font-weight: 500;
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
+  align-self: end;
+  margin-bottom: 0;
+}
+.home-card{
+  // margin-right: 1.3vw;
+}
+.home-card:last-child{
+  // margin-right: 0;
+}
+.home-img{
+  height: 17vw;
+  width: 19.2vw;
+  object-fit: cover;
+  border-top-right-radius: .5vw;
+  border-top-left-radius: .5vw;
+}
+.home-info{
+  background: white;
+  padding: 1vw;
+  border-bottom-right-radius: .5vw;
+  border-bottom-left-radius: .5vw;
+}
+.price{
+  color: var(--green);
+  font-weight: 500;
+  font-size: 1vw;
+  margin-bottom: 1vw;
+}
+.address{
+  color: var(--darkGray);
+  font-weight: 300;
+  font-size: .8vw;
+  margin-bottom: 1.5vw;
+  width: 13vw;
+}
+.area{
+  color: var(--darkGray);
+  font-weight: 500;
+  font-size: .8vw;
+  margin-bottom: 0;
+  align-self: center;
+}
+.house-feature img{
+  height: 1.5vw;
+  width: 1.5vw;
+  margin-right: .6vw;
+}
+.house-feature p{
+  color: var(--darkGray);
+  font-weight: 300;
+  font-size: .7vw;
+  margin-bottom: 0;
+  align-self: center;
+}
+.house-feature-parent{
+  justify-content: space-between;
+}
+//////////////////////////////////////////// card-4
+.card-4{
+  padding: 4vw 0 0 0;
+  background: white;
+  position: relative;
+}
+.popular{
+  width: 100%;
+  object-fit: cover;
+  height: 48vw;
+}
+.c4-txt-div{
+  position: absolute;
+  left: 5vw;
+  top: 5vw
+}
+.card-4-txt{
+  color: var(--black);
+  font-size: 4.2vw;
+  font-weight: 600;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+.card-4-content{
+  position: absolute;
+  top: 20%;
+  padding: 0 10vw;
+  width: 100%;
+}
+.popular-places{
+  height: 16.5vw;
+  width: 17vw;
+  border-radius: .5vw;
+}
+.c4-mr-custom{
+  margin-right: 2vw;
+}
+.c4-mb-custom{
+  margin-bottom: 2vw;
+}
+.card-4-img{
+  position: relative;
+}
+.c4-txt{
+  position: absolute;
+  margin-bottom: 0;
+  font-size: 1.5vw;
+  color: white;
+  top: 70%;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}
+
+//////////////////////////// card-5
+.card-5{
+  border: 1px solid black;
+  background: white;
+  // position: relative;
+}
+.sub-card-5{
+  background: var(--black);
+  border: none;
+  height: 24vw;
+  width: 100%;
+  position: relative;
+}
+.card-5-info{
+  margin: auto;
+}
+.form-custom{
+  padding: .5vw 12vw .5vw 1vw;
+  border-radius: .4vw;
+  height: 3.5vw;
+  border: none;
+  font-family: 'Poppins';
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 300;
+}
+::placeholder{
+  font-size: .85vw;
+  color: var(--lighGray);
+  font-family: 'Poppins';
+}
+.p-email{
+  color: var(--green);
+  margin-bottom: 2vw;
+  font-size: 1.1vw;
+  font-weight: 300;
+}
+.card-5-info p:first-child{
+  margin-bottom: 1vw;
+}
+
+.email-btn{
+  position: relative;
+}
+.get-listed{
+  padding: .75vw 1.5vw .75vw 1.5vw;
+  font-family: 'Poppins';
+  font-size: .9vw;
+  color: white;
+  background: var(--green);
+  border: none;
+  border-radius: .4vw;
+  position: absolute;
+  top: 10%;
+  right: .4vw;
+}
+.get-listed:focus{
+  outline: none;
+}
+
+.c5-txt{
+  font-size: 2.2vw;
+  font-weight: 600;
+  color: white;
+}

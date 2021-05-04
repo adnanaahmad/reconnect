@@ -767,4 +767,26 @@ export class ConstantService {
     'high to low': 'desc',
     'low to high': 'asc'
   };
+  LANDING_MENU = [
+    {
+      name: 'Home',
+      route: '/homePage',
+    },
+    {
+      name: 'About',
+      route: '/about',
+    },
+    {
+      name: 'Buy a home',
+      route: '/buyHome',
+    },
+    {
+      name: 'Sell a home',
+      route: '/sellHome',
+    },
+    {
+      name: 'Become an agent',
+      route: '/becomeAgent',
+    }
+  ];
 }
