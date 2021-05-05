@@ -1,0 +1,30 @@
+<div *ngIf="data.type === 1" class="card-2">
+    <div class="row">
+        <div class="col-6">
+            <img [src]="data.image" class="c2-img">
+        </div>
+        <div class="col-6">
+            <div class="c2-col2 d-flex flex-column">
+                <div class="mb-auto mt-auto">
+                    <p class="c2-txt-1">{{data.title}}</p>
+                    <p class="c2-txt-2">{{data.description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="data.type === 2" class="card-3">
+    <div class="row">
+        <div class="col-6">
+            <div class="c3-col1 d-flex flex-column">
+                <div class="mb-auto mt-auto">
+                    <p class="c2-txt-1">{{data.title}}</p>
+                    <p class="c2-txt-2">{{data.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <img [src]="data.image" class="c2-img">
+        </div>
+    </div>
+</div>

@@ -1,1 +1,11 @@
-<p>buy-home works!</p>
+<div class="card-1 d-flex justify-content-between">
+    <div class="card-1-txt">
+        <p class="c1-txt-1">Home Buying</p>
+        <p class="c1-txt-2">Reinvented</p>
+        <p class="c1-txt-3">Home Buying the way it should be</p>
+    </div>
+    <img src="/assets/landing/buy/buy-1.png" class="landing-img" />
+</div>
+<ng-container *ngFor="let card of buyHome">
+    <app-landing-page-card [data]="card"></app-landing-page-card>
+</ng-container>

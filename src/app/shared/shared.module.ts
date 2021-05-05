@@ -29,6 +29,7 @@ import {DomChangesDirective} from './directives/dom-changes/dom-changes.directiv
 import {AddClosingCostComponent} from './components/add-closing-cost/add-closing-cost.component';
 import {RemoveMemberComponent} from './components/remove-member/remove-member.component';
 import {CreateEventComponent} from './components/create-event/create-event.component';
+import { LandingPageCardComponent } from './components/landing-page-card/landing-page-card.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -57,7 +58,8 @@ const maskConfig: Partial<IConfig> = {
         DomChangesDirective,
         AddClosingCostComponent,
         RemoveMemberComponent,
-        CreateEventComponent
+        CreateEventComponent,
+        LandingPageCardComponent,
     ],
     imports: [
         CommonModule,
@@ -95,7 +97,8 @@ const maskConfig: Partial<IConfig> = {
         DomChangesDirective,
         AddClosingCostComponent,
         RemoveMemberComponent,
-        CreateEventComponent
+        CreateEventComponent,
+        LandingPageCardComponent
     ],
     providers: [NgbDateNativeAdapter]
 })
