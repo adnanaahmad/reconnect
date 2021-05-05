@@ -1,1 +1,11 @@
-<p>become-agent works!</p>
+<div class="card-1 d-flex justify-content-between">
+    <div class="card-1-txt">
+        <p class="c1-txt-1">Join Our</p>
+        <p class="c1-txt-2">Winning <br> Team</p>
+        <p class="c1-txt-3">Home is where the heart is</p>
+    </div>
+    <img src="/assets/landing/agent/agent-1.png" class="landing-img" />
+</div>
+<ng-container *ngFor="let card of agent">
+    <app-landing-page-card [data]="card"></app-landing-page-card>
+</ng-container>

@@ -1,1 +1,15 @@
-<p>sell-home works!</p>
+<div class="card-1 d-flex justify-content-between">
+    <div class="card-1-txt">
+        <p class="c1-txt-1">Sold</p>
+        <p class="c1-txt-2">Faster than</p>
+        <div class="d-flex c1-mb">
+            <p class="c1-txt-2">a</p>
+            <img src="/assets/landing/sell/sell-1.png" class="c1-img">
+        </div>
+        <p class="c1-txt-3">Home Buying the way it should be</p>
+    </div>
+    <img src="/assets/landing/sell/sell-2.png" class="landing-img" />
+</div>
+<ng-container *ngFor="let card of sellHome">
+    <app-landing-page-card [data]="card"></app-landing-page-card>
+</ng-container>
