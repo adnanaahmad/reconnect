@@ -76,7 +76,7 @@ p{
   margin: 0 7vw 2vw 7vw;
 }
 .c3-img{
-  height: 16vw;
+  height: 19vw;
   width: 100%;
   object-fit: cover;
   border-radius: .8vw .8vw 0 0;
@@ -139,7 +139,7 @@ p{
   position: absolute;
   z-index: 1;
   width: 100%;
-  top: 25%;
+  top: 20%;
   padding: 0 7vw;
 }
 .c4-img{
@@ -149,22 +149,25 @@ p{
 .c4-txt-1{
   color: white;
   margin-bottom: 0;
-  font-size: 4.5vw;
+  font-size: 4.1vw;
   font-weight: 700;
+  position: absolute;
+  top: 22%;
 }
 
 .c4-txt-2{
   color: white;
-  margin-bottom: 0;
-  font-size: 2vw;
-  font-weight: 700;
+  margin-bottom: 2vw;
+  font-size: 2.2vw;
+  font-weight: 600;
 }
 .c4-txt-3{
   color: var(--mediumGrayLanding);
   margin-bottom: 0;
   font-size: .9vw;
   font-weight: 300;
+  line-height: 1.8;
 }
 .c4-msg{
-  width: 30vw;
+  width: 35vw;
 }

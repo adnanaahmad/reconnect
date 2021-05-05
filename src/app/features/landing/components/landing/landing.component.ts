@@ -44,7 +44,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
       this.changeBackgroundHelper(
           false,
           '0',
-          '0s',
+          '0',
           'var(--darkGray)',
           'transparent',
           'transparent'
@@ -52,7 +52,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     } else if (this.router.url === '/login'){
       this.changeBackgroundHelper(
           true, '1',
-          '0.4s',
+          '0',
           'white',
           'var(--green)',
           'transparent'
@@ -60,7 +60,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     } else if (this.router.url === '/forgotPassword'){
       this.changeBackgroundHelper(
           true, '1',
-          '0.4s',
+          '0',
           'white',
           'transparent',
           'transparent'
@@ -69,7 +69,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
       this.changeBackgroundHelper(
           true,
           '1',
-          '0.4s',
+          '0',
           'white',
           'transparent',
           'var(--green)'
