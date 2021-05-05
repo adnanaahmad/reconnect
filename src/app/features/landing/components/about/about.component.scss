@@ -1,0 +1,170 @@
+p{
+  font-family: 'Poppins';
+}
+////////////////////////////// card-1
+.parent{
+  position: relative;
+  z-index: -1;
+  background: transparent linear-gradient(180deg, #F2F5FB 0%, #F2F5FB00 100%) 0% 0% no-repeat padding-box;
+}
+.card-1{
+  position: relative;
+  height: 100vh;
+  padding: 6vw 0 0 0;
+  margin: 0 7vw;
+}
+.landing-img{
+  position:relative;
+  z-index:-1;
+  height: 80vh;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1vw;
+}
+.card-1-txt{
+  position: absolute;
+  top: 28%;
+  left: 8%;
+}
+.c1-txt-1{
+  color: var(--green);
+  font-size: 4.5vw;
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+.c1-txt-2{
+  color: white;
+  font-size: 4.5vw;
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+.c1-txt-3{
+  color: var(--mediumGrayLanding);
+  font-size: 1.2vw;
+  margin-bottom: .7vw;
+}
+.c1-mb{
+  margin-bottom: 1vw;
+}
+
+/////////////////////////// card-2
+
+.card-2{
+  padding: 6vw 7vw 6vw 7vw;
+  margin: 0 7vw;
+}
+.c2-txt-1{
+  color: var(--black);
+  margin-bottom: 2vw;
+  font-size: 2.2vw;
+  font-weight: 600;
+}
+.c2-txt-2{
+  color: var(--mediumGray);
+  margin-bottom: 0;
+  font-size: .9vw;
+  font-weight: 300;
+}
+
+///////////////////////// card-3
+.card-3{
+  padding: 6vw 6vw 6vw 6vw;
+  background: var(--lightBlue);
+  border-radius: 1vw;
+  margin: 0 7vw 2vw 7vw;
+}
+.c3-img{
+  height: 16vw;
+  width: 100%;
+  object-fit: cover;
+  border-radius: .8vw .8vw 0 0;
+}
+.c3-card{
+  background: white;
+  border-radius: .8vw;
+}
+.c3-name{
+  color: var(--black);
+  margin-bottom: 0.5vw;
+  font-size: 1.1vw;
+  font-weight: 600;
+}
+.c3-role{
+  color: var(--lighGray);
+  margin-bottom: 0;
+  font-size: .9vw;
+  font-weight: 300;
+}
+.c3-user-info{
+  padding: 1vw;
+}
+.c3-txt{
+  color: var(--darkGray);
+  margin-bottom: 0;
+  font-size: .9vw;
+  font-weight: 200;
+  z-index: 1;
+}
+.c3-icon{
+  height: 1.7vw;
+  width: 1.7vw;
+  padding: .4vw;
+  background: var(--lightBlue);
+  border-radius: .3vw;
+}
+.c3-icon:first-child{
+  margin-right: .7vw;
+}
+.c3-txt-parent{
+  margin-left: 2vw;
+  height: 100%;
+  position: relative;
+}
+.quote{
+  height: 7vw;
+  width: 7vw;
+  position: absolute;
+  z-index: 0;
+  right: -4vw;
+  top:13vw;
+}
+//////////////////////////////// card-4
+.card-4{
+  position: relative;
+  margin-top: 5.5vw;
+}
+.c4-content{
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  top: 25%;
+  padding: 0 7vw;
+}
+.c4-img{
+  height: 100vh;
+  width: 100%;
+}
+.c4-txt-1{
+  color: white;
+  margin-bottom: 0;
+  font-size: 4.5vw;
+  font-weight: 700;
+}
+
+.c4-txt-2{
+  color: white;
+  margin-bottom: 0;
+  font-size: 2vw;
+  font-weight: 700;
+}
+.c4-txt-3{
+  color: var(--mediumGrayLanding);
+  margin-bottom: 0;
+  font-size: .9vw;
+  font-weight: 300;
+}
+.c4-msg{
+  width: 30vw;
+}

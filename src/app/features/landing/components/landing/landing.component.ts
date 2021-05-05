@@ -39,9 +39,6 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   register(): void{
     this.router.navigateByUrl('/register').then();
   }
-  landing(): void{
-    this.router.navigateByUrl('/').then();
-  }
   changeBackground(): void{
     if (this.landingRoute){
       this.changeBackgroundHelper(

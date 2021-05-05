@@ -21,15 +21,26 @@
                 <div class="modal-div d-flex">
                     <img src="/assets/landing/home.png" >
                     <div class="page">
-                        <router-outlet></router-outlet>
+                        <router-outlet *ngIf="loginModal"></router-outlet>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div *ngIf="!loginModal">
-        <router-outlet></router-outlet>
+    <router-outlet *ngIf="!loginModal"></router-outlet>
+
+    <div class="card-5" *ngIf="!loginModal" >
+        <div class="d-flex sub-card-5">
+            <div class="card-5-info">
+                <p class="c5-txt">Ready to find out what your home is worth?</p>
+                <p class="p-email text-center">Contact us for your complete and accurate home value report today !</p>
+                <div class="email-btn">
+                    <input type="email" class="form-control form-custom" type="text" placeholder="Email your home's address">
+                    <button class="get-listed">What's it worth?</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="card-7 d-flex" *ngIf="!loginModal" >

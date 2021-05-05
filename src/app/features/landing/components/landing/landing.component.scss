@@ -31,7 +31,7 @@ p{
 .menu{
   z-index: 1000;
   position: absolute;
-  width: 80vw;
+  width: 83vw;
   //background: yellow;
 }
 .menu-div{
@@ -202,7 +202,71 @@ p{
 .active{
   color: var(--green) !important;
 }
+//////////////////////////// card-5
+.card-5{
+  border: 1px solid black;
+  background: white;
+  // position: relative;
+}
+.sub-card-5{
+  background: var(--black);
+  border: none;
+  height: 24vw;
+  width: 100%;
+  position: relative;
+}
+.card-5-info{
+  margin: auto;
+}
+.form-custom{
+  padding: .5vw 12vw .5vw 1vw;
+  border-radius: .4vw;
+  height: 3.5vw;
+  border: none;
+  font-family: 'Poppins';
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 300;
+}
+::placeholder{
+  font-size: .85vw;
+  color: var(--lighGray);
+  font-family: 'Poppins';
+}
+.p-email{
+  color: var(--green);
+  margin-bottom: 2vw;
+  font-size: 1.1vw;
+  font-weight: 300;
+}
+.card-5-info p:first-child{
+  margin-bottom: 1vw;
+}
 
+.email-btn{
+  position: relative;
+}
+.get-listed{
+  padding: .75vw 1.5vw .75vw 1.5vw;
+  font-family: 'Poppins';
+  font-size: .9vw;
+  color: white;
+  background: var(--green);
+  border: none;
+  border-radius: .4vw;
+  position: absolute;
+  top: 10%;
+  right: .4vw;
+}
+.get-listed:focus{
+  outline: none;
+}
+
+.c5-txt{
+  font-size: 2.2vw;
+  font-weight: 600;
+  color: white;
+}
 /////////////////////////////////// card-7
 .card-7{
   padding: 6vw 7vw 10vw 7vw;
@@ -284,3 +348,4 @@ p{
   height: 2vw;
   margin-bottom: 1vw;
 }
+

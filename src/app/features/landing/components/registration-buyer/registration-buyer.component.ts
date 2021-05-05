@@ -43,7 +43,9 @@ export class RegistrationBuyerComponent implements OnInit, OnDestroy {
     this.referralBasedRegistration();
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
   referralBasedRegistration(): void{
     this.activatedRoute.queryParams.pipe(take(1)).subscribe(params => {
