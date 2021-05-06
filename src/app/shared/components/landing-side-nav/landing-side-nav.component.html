@@ -1,0 +1,19 @@
+<div class="card-2">
+    <div class="row">
+        <div class="col-3">
+            <div class="landing-side-nav">
+                <ng-container *ngFor="let route of routes">
+                    <a class="c2-a d-flex" [routerLink]="route.path" (click)="activeButton(route)">
+                        <div [ngClass]="{'active' : button === route.path}" class="c2-border"></div>
+                        <p [ngClass]="{'active' : button === route.path}" class="c2-p c2-mb">{{route.name}}</p>
+                    </a>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="c2-col2">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

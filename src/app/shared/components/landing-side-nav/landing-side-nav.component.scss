@@ -1,0 +1,42 @@
+p{
+  font-family: 'Poppins';
+}
+//////////////////////////// card-2
+.card-2{
+  margin-bottom: 4vw;
+}
+
+
+///////////////////////////// side-nav
+
+.landing-side-nav{
+  background: var(--lightBlue);
+  border-radius: 1vw;
+  padding: 2vw 1vw 1vw 0;
+}
+.c2-a{
+  text-decoration: none;
+}
+.c2-border{
+  border-left: .25vw solid transparent;
+  margin-right: 2vw;
+  height: 1.5vw;
+}
+.c2-p{
+  color: var(--lighGray);
+  font-size: .95vw;
+  font-weight: 300;
+  //padding: .05vw 0 .05vw 0;
+  border: none;
+}
+.active{
+  color: var(--darkGray);
+  border-color:var(--darkGray);
+  font-weight: 500;
+}
+.c2-mb{
+  margin-bottom: .9vw;
+}
+.c2-col2{
+  padding-left: 2vw;
+}

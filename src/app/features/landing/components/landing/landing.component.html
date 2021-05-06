@@ -30,7 +30,7 @@
 
     <router-outlet *ngIf="!loginModal"></router-outlet>
 
-    <div class="card-5" *ngIf="!loginModal" >
+    <div class="card-5" *ngIf="(!loginModal) && router.url.includes('/terms') && router.url.includes('/privacy')" >
         <div class="d-flex sub-card-5">
             <div class="card-5-info">
                 <p class="c5-txt">Ready to find out what your home is worth?</p>
@@ -44,7 +44,7 @@
     </div>
 
     <div class="card-7 d-flex" *ngIf="!loginModal" >
-        <div class="col-c7">
+        <div class="col-c7 c7-mr">
             <img src="/assets/landing/reconnect-logo.png" class="logo-1">
             <p class="reconnect-c7-txt">Re-Connect is a better way to buy real estate that gives consumers a simple, unique method to shop for a home smarter, NOT harder!</p>
             <div class="d-flex social-media div-2-c6 align-self-end">
@@ -55,17 +55,15 @@
         </div>
         <div class="col-c7">
             <p class="heading-c7">Site Map</p>
-            <p class="col-c7-txt">Home</p>
-            <p class="col-c7-txt">About</p>
-            <p class="col-c7-txt">Buy a home</p>
-            <p class="col-c7-txt">Sell a home</p>
-            <p class="col-c7-txt">Become an agent</p>
+            <ng-container *ngFor="let item of constant.LANDING_MENU">
+                <a class="reg-partner" [routerLink]="item.route" ><p class="col-c7-txt mb-col-c7">{{item.name}}</p></a>
+            </ng-container>
             <a class="reg-partner" routerLink="/registerPartner" ><p class="col-c7-txt">Become a partner</p></a>
         </div>
         <div class="col-c7">
             <p class="heading-c7">Terms</p>
-            <p class="col-c7-txt">Terms of use</p>
-            <p class="col-c7-txt">Privacy Notice</p>
+            <a class="reg-partner" routerLink="/terms/interpretation"><p class="col-c7-txt mb-col-c7">Terms of use</p></a>
+            <a class="reg-partner" routerLink="/privacy/interpretation"><p class="col-c7-txt mb-col-c7">Privacy Notice</p></a>
             <p class="col-c7-txt">DMCA</p>
             <p class="col-c7-txt">Support</p>
         </div>

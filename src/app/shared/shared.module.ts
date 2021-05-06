@@ -30,6 +30,8 @@ import {AddClosingCostComponent} from './components/add-closing-cost/add-closing
 import {RemoveMemberComponent} from './components/remove-member/remove-member.component';
 import {CreateEventComponent} from './components/create-event/create-event.component';
 import { LandingPageCardComponent } from './components/landing-page-card/landing-page-card.component';
+import { LandingSideNavComponent } from './components/landing-side-nav/landing-side-nav.component';
+import {RouterModule} from '@angular/router';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -60,6 +62,7 @@ const maskConfig: Partial<IConfig> = {
         RemoveMemberComponent,
         CreateEventComponent,
         LandingPageCardComponent,
+        LandingSideNavComponent,
     ],
     imports: [
         CommonModule,
@@ -67,6 +70,7 @@ const maskConfig: Partial<IConfig> = {
         NgxMaskModule.forRoot(maskConfig),
         Ng2SearchPipeModule,
         NgbModule,
+        RouterModule
     ],
     exports: [
         ReactiveFormsModule,
@@ -98,7 +102,9 @@ const maskConfig: Partial<IConfig> = {
         AddClosingCostComponent,
         RemoveMemberComponent,
         CreateEventComponent,
-        LandingPageCardComponent
+        LandingPageCardComponent,
+        LandingSideNavComponent,
+        LandingSideNavComponent,
     ],
     providers: [NgbDateNativeAdapter]
 })

@@ -58,8 +58,16 @@ const routes: Routes = [
                 path: 'becomeAgent',
                 component: BecomeAgentComponent
             },
-      ],
-    }
+            {
+                path: 'terms',
+                loadChildren: () => import('../miscellaneous/terms/terms.module').then(m => m.TermsModule)
+            },
+            {
+                path: 'privacy',
+                loadChildren: () => import('../miscellaneous/privacy/privacy.module').then(m => m.PrivacyModule)
+            },
+        ],
+    },
 ];
 
 @NgModule({

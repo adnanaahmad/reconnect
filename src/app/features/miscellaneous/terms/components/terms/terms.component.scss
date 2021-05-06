@@ -1,0 +1,41 @@
+p{
+  font-family: 'Poppins';
+}
+///////////////////////// card-1
+.card-1{
+  position: relative;
+  padding: 0;
+  margin: 6vw 7vw 9vw 7vw;
+  //border-radius: 1vw;
+}
+.card-1-txt{
+  position: absolute;
+  top: 40%;
+  //left: 5%
+  width: 100%;
+}
+.c1-txt-2{
+  color: white;
+  font-size: 4.1vw;
+  font-weight: 700;
+  margin-bottom: 2vw;
+  line-height: 1.2;
+}
+.c1-txt-3{
+  color: white;
+  font-size: .9vw;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+.landing-img{
+  height: 32vw;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1vw;
+}
+///////////////////////// card-2
+.card-2{
+  margin: 0 7vw;
+}
+
+

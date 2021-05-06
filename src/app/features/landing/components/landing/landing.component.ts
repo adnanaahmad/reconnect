@@ -15,7 +15,7 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   loginModal: boolean;
   subscription: Subscription;
   button: any;
-  constructor(private router: Router,
+  constructor(public router: Router,
               public constant: ConstantService,
               public helper: HelperService,) { }
 
@@ -93,9 +93,11 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   get landingRoute(): boolean{
     return (this.router.url === '/homePage' || this.router.url === '/about' || this.router.url === '/buyHome' ||
-        this.router.url === '/sellHome' || this.router.url === '/becomeAgent');
+        this.router.url === '/sellHome' || this.router.url === '/becomeAgent' || this.router.url.includes('/privacy') ||
+        this.router.url.includes('/terms'));
   }
   highlightActiveTab(): void{
-    !this.landingRoute ? this.button = null : this.button = (this.constant.LANDING_MENU.find( x => x.route === this.router.url)).name;
+    !this.landingRoute ? this.button = null : this.button = (this.constant.LANDING_MENU.find( x => x.route === this.router.url)) ?
+        (this.constant.LANDING_MENU.find( x => x.route === this.router.url)).name : null;
   }
 }

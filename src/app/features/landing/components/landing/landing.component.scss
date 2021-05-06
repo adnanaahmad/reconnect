@@ -267,7 +267,7 @@ p{
 }
 /////////////////////////////////// card-7
 .card-7{
-  padding: 6vw 7vw 10vw 7vw;
+  padding: 6vw 7vw 4vw 7vw;
   background: white;
 }
 .col-c7{
@@ -309,15 +309,21 @@ p{
 .social-media a{
   margin-right: 2vw;
 }
-.col-c7-txt{
+.col-c7-txt, .col-c7-txt{
   font-size: .95vw;
   color: var(--mediumGray);
   margin-bottom: 1vw;
   width: 15vw;
   font-weight: 300;
 }
+.mb-col-c7{
+  margin-bottom: 1vw !important;
+}
 .col-c7-txt:last-child{
   margin-bottom: 0;
+}
+.c7-mr{
+  margin-right: 20vw;
 }
 //////////////////////////////////////// card-8
 .card-8{
@@ -335,6 +341,10 @@ p{
 }
 .reg-partner{
   text-decoration: none;
+  margin-bottom: 1vw;
+}
+.reg-partner:last-child{
+  margin-bottom: 0;
 }
 .linkedin{
   background: var(--lightBlue);
