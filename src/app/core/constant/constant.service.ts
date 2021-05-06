@@ -60,6 +60,7 @@ export class ConstantService {
      createTodo: `${environment.apiUrl}/todo/create`,
      updateTodo: `${environment.apiUrl}/todo/update/`,
      updateTodoTags: `${environment.apiUrl}/todo/update-tags/`,
+     getFeaturedHomes: `${environment.apiUrl}/listing/featured`
    };
   apiMethod = {
     get: 'get',

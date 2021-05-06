@@ -30,7 +30,7 @@
 
     <router-outlet *ngIf="!loginModal"></router-outlet>
 
-    <div class="card-5" *ngIf="(!loginModal) && router.url.includes('/terms') && router.url.includes('/privacy')" >
+    <div class="card-5" *ngIf="(!loginModal) && !router.url.includes('/terms') && !router.url.includes('/privacy')" >
         <div class="d-flex sub-card-5">
             <div class="card-5-info">
                 <p class="c5-txt">Ready to find out what your home is worth?</p>
@@ -49,21 +49,21 @@
             <p class="reconnect-c7-txt">Re-Connect is a better way to buy real estate that gives consumers a simple, unique method to shop for a home smarter, NOT harder!</p>
             <div class="d-flex social-media div-2-c6 align-self-end">
                 <a class="facebook-a" [href] = ""><img src="/assets/directory-icons/facebook.svg" class="img-fluid facebook-c7"></a>
-                <a [href] = ""><img src="/assets/directory-icons/twitter.svg" class="img-fluid twitter"> </a>
+                <a [href] = ""><img src="/assets/directory-icons/instagram.svg" class="img-fluid twitter"> </a>
                 <a [href] = ""> <img src="/assets/directory-icons/linkedin.svg" class="img-fluid linkedin"> </a>
             </div>
         </div>
         <div class="col-c7">
             <p class="heading-c7">Site Map</p>
             <ng-container *ngFor="let item of constant.LANDING_MENU">
-                <a class="reg-partner" [routerLink]="item.route" ><p class="col-c7-txt mb-col-c7">{{item.name}}</p></a>
+                <a (click)="topFunction()" class="reg-partner" [routerLink]="item.route" ><p class="col-c7-txt mb-col-c7">{{item.name}}</p></a>
             </ng-container>
             <a class="reg-partner" routerLink="/registerPartner" ><p class="col-c7-txt">Become a partner</p></a>
         </div>
         <div class="col-c7">
             <p class="heading-c7">Terms</p>
-            <a class="reg-partner" routerLink="/terms/interpretation"><p class="col-c7-txt mb-col-c7">Terms of use</p></a>
-            <a class="reg-partner" routerLink="/privacy/interpretation"><p class="col-c7-txt mb-col-c7">Privacy Notice</p></a>
+            <a class="reg-partner" (click)="topFunction()" routerLink="/terms/interpretation"><p class="col-c7-txt mb-col-c7">Terms of use</p></a>
+            <a class="reg-partner" (click)="topFunction()" routerLink="/privacy/interpretation"><p class="col-c7-txt mb-col-c7">Privacy Notice</p></a>
             <p class="col-c7-txt">DMCA</p>
             <p class="col-c7-txt">Support</p>
         </div>

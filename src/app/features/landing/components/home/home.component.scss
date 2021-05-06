@@ -40,8 +40,17 @@ p{
   line-height: 1.2;
 }
 
-
-
+.c1-video{
+  position: absolute;
+  top: 25%;
+  left: 53%;
+}
+.c1-iframe{
+  height: 22vw;
+  width: 38vw;
+  object-fit: cover;
+  border-radius: 1vw;
+}
 ////////////////////////////// card-2
 
 .card-2{
@@ -133,7 +142,7 @@ p{
   color: var(--green);
   font-weight: 500;
   font-size: 1vw;
-  margin-bottom: 1vw;
+  margin-bottom: 0;
 }
 .address{
   color: var(--darkGray);

@@ -36,6 +36,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.listenMessages();
     this.showMessageIcon();
     this.getUnreadMessages();
+    if (this.router.url === '/home') {
+        this.store.role === this.constant.role.BUYER ? this.router.navigateByUrl('/home/homeBuyingDashboard') :
+            this.router.navigateByUrl('/home/dashboard');
+    }
   }
   ngOnDestroy(): void {
     this.navigation.profileButtonSubscription.unsubscribe();

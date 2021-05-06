@@ -47,5 +47,7 @@ export class AuthService {
   resetPassword(data): Observable<any>{
     return  this.helper.requestCall(this.method.post, this.apiRoutes.resetPassword, data);
   }
-
+  getFeaturedHomes(): Observable<any>{
+    return  this.helper.requestCall(this.method.get, this.apiRoutes.getFeaturedHomes);
+  }
 }

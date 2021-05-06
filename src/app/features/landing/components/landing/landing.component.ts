@@ -100,4 +100,8 @@ export class LandingComponent implements OnInit, AfterViewInit, OnDestroy {
     !this.landingRoute ? this.button = null : this.button = (this.constant.LANDING_MENU.find( x => x.route === this.router.url)) ?
         (this.constant.LANDING_MENU.find( x => x.route === this.router.url)).name : null;
   }
+  topFunction(): void {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
 }
