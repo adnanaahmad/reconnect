@@ -49,7 +49,7 @@ p{
   height: 22vw;
   width: 38vw;
   object-fit: cover;
-  border-radius: 1vw;
+  //border-radius: 1vw;
 }
 ////////////////////////////// card-2
 
@@ -210,11 +210,15 @@ p{
 .c4-mr-custom{
   margin-right: 2vw;
 }
+.c4-mr-custom:last-child{
+  margin-right: 0;
+}
 .c4-mb-custom{
   margin-bottom: 2vw;
 }
 .card-4-img{
   position: relative;
+  cursor: pointer;
 }
 .c4-txt{
   position: absolute;
