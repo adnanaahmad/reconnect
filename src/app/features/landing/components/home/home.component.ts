@@ -31,5 +31,27 @@ export class HomeComponent implements OnInit {
       console.log(error);
     });
   }
+  previous(array): void{
+    this.leftShift(array);
+  }
+  next(array): void{
+    this.rightShift(array);
+  }
+
+  leftShift(arr): Array<any>{
+    for (let i = 0; i < 4; i++) {
+      const last = arr.pop();
+      arr.unshift(last);
+    }
+    return arr;
+  }
+  rightShift(arr): Array<any>{
+    for (let i = 0; i < 4; i++) {
+      const first = arr[0];
+      arr.shift();
+      arr.push(first);
+    }
+    return arr;
+  }
 
 }

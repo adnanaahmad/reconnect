@@ -101,7 +101,9 @@ p{
 }
 
 ///////////////////////////////// card-3
-
+.card-3-parent{
+  position: relative;
+}
 .card-3{
   padding: 7vw 7vw 8vw 7vw;
   background: var(--lightBlue);
@@ -110,20 +112,34 @@ p{
   margin-bottom: 4vw;
   display: flex;
 }
-.card-3-row-1 p:last-child{
-  margin-left: auto;
-  font-size: 1vw;
-  font-weight: 500;
-  color: var(--green);
-  border-bottom: 1px solid var(--green);
-  align-self: end;
-  margin-bottom: 0;
-}
+//.card-3-row-1 p:last-child{
+//  margin-left: auto;
+//  font-size: 1vw;
+//  font-weight: 500;
+//  color: var(--green);
+//  border-bottom: 1px solid var(--green);
+//  align-self: end;
+//  margin-bottom: 0;
+//}
 .home-card{
   // margin-right: 1.3vw;
 }
 .home-card:last-child{
   // margin-right: 0;
+}
+.carousel-icon-landing{
+  background: var(--darkGray);
+  height: 3vw;
+  width: 3vw;
+  padding: .7vw;
+  border-radius: .5vw;
+  cursor: pointer;
+}
+.ci-parent{
+  padding: 0 2vw;
+  position: absolute;
+  width: 100%;
+  top: 50%;
 }
 .home-img{
   height: 17vw;
