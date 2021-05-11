@@ -46,8 +46,8 @@
 </div>
 <div class="card-3-parent">
     <div *ngIf="homes" class="ci-parent d-flex justify-content-between">
-        <img (click)="previous(homes)" src="assets/landing/prev.svg" class="carousel-icon-landing">
-        <img (click)="next(homes)" src="assets/landing/next.svg" class="carousel-icon-landing">
+        <img (click)="previous(homes)" src="/assets/landing/prev.svg" class="carousel-icon-landing">
+        <img (click)="next(homes)" src="/assets/landing/next.svg" class="carousel-icon-landing">
     </div>
     <div class="card-3">
         <div class="card-3-row-1">
@@ -67,15 +67,15 @@
                     </p>
                     <div class="d-flex house-feature-parent">
                         <div class="house-feature d-flex">
-                            <img src="assets/landing/bath.svg">
+                            <img src="/assets/landing/bath.svg">
                             <p class="text-nowrap">{{home.xf_no_full_baths + home.xf_no_half_baths}} Baths</p>
                         </div>
                         <div class="house-feature d-flex">
-                            <img src="assets/landing/bed.svg">
+                            <img src="/assets/landing/bed.svg">
                             <p class="text-nowrap">{{home.xf_no_bedrooms}} Beds</p>
                         </div>
                         <div class="house-feature d-flex">
-                            <img src="assets/landing/garage.svg">
+                            <img src="/assets/landing/garage.svg">
                             <p class="text-nowrap">{{home.xf_garage_spaces}} Garage</p>
                         </div>
                     </div>

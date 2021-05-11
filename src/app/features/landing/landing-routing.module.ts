@@ -6,11 +6,11 @@ import {RegistrationBuyerComponent} from './components/registration-buyer/regist
 import {RegistrationPartnerComponent} from './components/registration-partner/registration-partner.component';
 import {SetPasswordComponent} from './components/set-password/set-password.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
-import {HomeComponent} from './components/home/home.component';
-import {AboutComponent} from './components/about/about.component';
-import {BuyHomeComponent} from './components/buy-home/buy-home.component';
-import {SellHomeComponent} from './components/sell-home/sell-home.component';
-import {BecomeAgentComponent} from './components/become-agent/become-agent.component';
+import {HomeComponent} from '../miscellaneous/home/home.component';
+import {AboutComponent} from '../miscellaneous/about/about.component';
+import {BuyHomeComponent} from '../miscellaneous/buy-home/buy-home.component';
+import {SellHomeComponent} from '../miscellaneous/sell-home/sell-home.component';
+import {BecomeAgentComponent} from '../miscellaneous/become-agent/become-agent.component';
 
 
 const routes: Routes = [

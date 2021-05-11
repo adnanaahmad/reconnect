@@ -3,8 +3,8 @@
         <img *ngIf="loginModal" #card  src="/assets/landing/opaque.png" class="opaque">
         <div class="card-1">
             <div class="menu d-flex justify-content-between">
-                <img *ngIf="!loginModal" src="/assets/landing/reconnect-logo.png" class="logo">
-                <p *ngIf="loginModal" #reconnect class="reconnect align-self-end">Re-C<span class="green-char">o</span>nnect</p>
+                <img *ngIf="!loginModal" (click)="router.navigateByUrl('/homePage')" src="/assets/landing/reconnect-logo.png" class="logo">
+                <p *ngIf="loginModal" (click)="router.navigateByUrl('/homePage')" #reconnect class="reconnect align-self-end">Re-C<span class="green-char">o</span>nnect</p>
                 <div class="d-flex">
                     <div class="d-flex menu-div align-self-center">
                         <ng-container *ngFor="let item of constant.LANDING_MENU">
