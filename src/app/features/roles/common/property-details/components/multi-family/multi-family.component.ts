@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, EventEmitter, Output, OnChanges, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HelperService} from '../../../../../../core/helper/helper.service';
+import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
   selector: 'app-multi-family',
@@ -9,12 +10,12 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
 })
 export class MultiFamilyComponent implements OnInit, OnChanges {
   @Input() multiFamilyUnits;
-  @Output() marketRentValues = new EventEmitter<any>();
   multiFamily: FormGroup;
   limit: number;
   units: Array<number>;
   constructor(private fb: FormBuilder,
-              public helper: HelperService) { }
+              public helper: HelperService,
+              private store: StoreService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -129,8 +130,8 @@ export class MultiFamilyComponent implements OnInit, OnChanges {
    Object.values(this.multiFamily.getRawValue().rent).slice(0, this.limit).forEach((element, index) => {
      data['xf_rent' + (index + 1)] = element;
    });
-   this.marketRentValues.emit(Object.keys(data).map(key => key + '=' + data[key]).join('&'));
-   console.log(Object.keys(data).map(key => key + '=' + data[key]).join('&'));
+   this.store.updateMarketRentValues(Object.keys(data).map(key => key + '=' + data[key]).join('&'));
+   //console.log(Object.keys(data).map(key => key + '=' + data[key]).join('&'));
   }
   trackByFn(index, item) {
     return index;  }

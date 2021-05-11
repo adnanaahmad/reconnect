@@ -29,6 +29,8 @@ export class StoreService {
   purchasePrice = this.purchasePriceSubject.asObservable();
   private todoFilterSubject = new BehaviorSubject<any>(null);
   todoFilter = this.todoFilterSubject.asObservable();
+  private marketRentValuesSubject = new BehaviorSubject<any>(null);
+  marketRentValues = this.marketRentValuesSubject.asObservable();
   constructor() { }
 
   updateToggleMoreFilter(data: boolean): void{
@@ -78,5 +80,8 @@ export class StoreService {
   }
   updateTodoFilter(data): void{
     this.todoFilterSubject.next(data);
+  }
+  updateMarketRentValues(data): void{
+    this.marketRentValuesSubject.next(data);
   }
 }

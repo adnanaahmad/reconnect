@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 import {take} from 'rxjs/operators';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
-import {Subscription} from 'rxjs';
+import {combineLatest, forkJoin, Subscription} from 'rxjs';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {ToastrService} from 'ngx-toastr';
 @Component({
@@ -54,11 +54,16 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
         })
     );
     this.subscription.push(
-        this.store.purchasePrice.subscribe(res => {
-          if (res) {
-            this.calculationFromApi('', `xf_list_price=${res}`);
-          }
-        })
+        combineLatest(this.store.purchasePrice, this.store.marketRentValues, (price, rent) => ({price, rent}))
+            .subscribe(pair => {
+              if (pair.price && pair.rent){
+                this.calculationFromApi(`${pair.rent}&` + `xf_list_price=${pair.price}`);
+              } else if (pair.price){
+                this.calculationFromApi( `xf_list_price=${pair.price}`);
+              } else if (pair.rent){
+                this.calculationFromApi(`${pair.rent}`);
+              }
+            })
     );
     this.propertyDetails.rentVsBuying = {
       costOfRent: {
@@ -183,8 +188,7 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
 
     }
   }
-  calculationFromApi(xfRent: string, listPrice?: string): void{
-    const queryParam = xfRent ? xfRent : listPrice;
+  calculationFromApi(queryParam: string): void{
     this.propertyDetailService.getPropertyDetails(`${this.propertyDetails.id}&${queryParam}`).pipe(take(1)).subscribe(res => {
       console.log(res);
       this.propertyDetails.loanScenarioOne = res.result;
