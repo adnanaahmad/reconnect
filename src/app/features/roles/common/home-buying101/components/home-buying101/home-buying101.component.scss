@@ -41,6 +41,7 @@
   border-radius: .5vw;
 }
 .video-title{
+  margin-top: .5vw;
   margin-bottom: 0;
   font-size: .75vw;
   text-align: center;
@@ -81,4 +82,26 @@
 }
 .resource-column{
   margin-bottom: 1vw;
+}
+.media-files img, .media-files video, .iframe-video{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.2857vw 0 0 0.2857vw;
+}
+.media-files{
+  height: 15vw;
+  position: relative;
+  margin-left: 2vw;
+}
+.media-files-videos{
+  height: 10vw;
+  position: relative;
+}
+
+.media-files-videos img, .media-files-videos video, .iframe-video{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 0.2857vw 0 0 0.2857vw;
 }

@@ -1,48 +1,60 @@
 <div class="d-flex justify-content-between heading">
   <h3>Home Buying 101</h3>
 </div>
-<div class="card-1">
-  <div class="row">
-      <div class="col-7">
-            <p class="title">{{ home.article.title }}</p>
-            <p class="description">{{ home.article.content }}</p>
-      </div>
-      <div class="col-5">
-          <img [src]="home.article.imageUrl">
-      </div>
-  </div>
-
-</div>
-<div class="heading">
-    <h3>Video Library</h3>
-</div>
-<div class="card-2">
-
-  <div class="row">
-      <div *ngFor="let video of home.videoLibrary" class="col-3 video-column">
-        <div class="video-card">
-          <div class="embed-responsive embed-responsive-16by9 video">
-            <iframe class="embed-responsive-item" [src]="safeUrl(video.videoUrl)" allowfullscreen></iframe>
-          </div>
-          <p class="video-title">{{ video.title }}</p>
+<ng-container *ngIf="!(store.progressBarLoading|async)">
+    <div class="card-1" *ngIf="home.blog">
+        <div class="row">
+            <div class="col-7">
+                <p class="title">{{ home.blog.title | titlecase}}</p>
+                <p class="description">{{ home.blog.description }}</p>
+            </div>
+            <div class="col-5">
+                <div class="media-files" *ngIf="home.blog.media[0]">
+                    <img *ngIf="home.blog.media[0].type === constant.mediaType.IMAGE" [src]="home.blog.media[0].url">
+                    <video *ngIf="home.blog.media[0].type === constant.mediaType.VIDEO" [src]="home.blog.media[0].url" controls></video>
+                    <div *ngIf="home.blog.media[0].type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-video">
+                        <iframe class="embed-responsive-item" [src]="home.blog.media[0].url | safeUrl" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
 
-</div>
+    </div>
+    <div class="heading">
+        <h3>Video Library</h3>
+    </div>
+    <div class="card-2">
 
-<div class="heading">
-  <h3>Resources</h3>
-</div>
-<div class="card-3">
+        <div class="row">
+            <div *ngFor="let post of home.videos" class="col-3 video-column">
+                <div class="video-card">
+                    <div class="media-files-videos" *ngIf="post.media && post.media.length > 0">
+                        <img *ngIf="post.media[0].type === constant.mediaType.IMAGE" [src]="post.media[0].url">
+                        <video *ngIf="post.media[0].type === constant.mediaType.VIDEO" [src]="post.media[0].url" controls></video>
+                        <div *ngIf="post.media[0].type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-video">
+                            <iframe class="embed-responsive-item" [src]="post.media[0].url | safeUrl" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <p class="video-title">{{ post.title | titlecase}}</p>
+                </div>
+            </div>
+        </div>
 
-  <div class="row">
-      <div class="col-3 resource-column" *ngFor="let resource of home.resources">
-          <div class="d-flex">
+    </div>
 
-              <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">
-              <div class="resource-link align-self-center"><a [href]="resource.resourceUrl" target="_blank"><p>{{ resource.title }}</p></a></div>
-          </div>
-      </div>
-  </div>
-</div>
+    <div class="heading">
+        <h3>Resources</h3>
+    </div>
+    <div class="card-3">
+
+        <div class="row">
+            <div class="col-3 resource-column" *ngFor="let resource of home.resources">
+                <div class="d-flex">
+
+                    <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">
+                    <div class="resource-link align-self-center"><a [href]="resource.resourceUrl" target="_blank"><p>{{ resource.title }}</p></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

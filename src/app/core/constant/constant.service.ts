@@ -60,7 +60,8 @@ export class ConstantService {
      createTodo: `${environment.apiUrl}/todo/create`,
      updateTodo: `${environment.apiUrl}/todo/update/`,
      updateTodoTags: `${environment.apiUrl}/todo/update-tags/`,
-     getFeaturedHomes: `${environment.apiUrl}/listing/featured`
+     getFeaturedHomes: `${environment.apiUrl}/listing/featured`,
+     getHomeBuyingFeed: `${environment.apiUrl}/feed/home-buying`
    };
   apiMethod = {
     get: 'get',
@@ -790,4 +791,9 @@ export class ConstantService {
       route: '/becomeAgent',
     }
   ];
+  mediaType = {
+    IMAGE: 'image',
+    VIDEO: 'video',
+    IFRAME: 'iframe'
+  }
 }

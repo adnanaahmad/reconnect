@@ -137,4 +137,11 @@ export class HelperService {
         ? '//www.youtube.com/embed/' + match[2]
         : null;
   }
+  handleApiError(error, msg): void {
+    if (this.constants.RESPONSE_ERRORS[error.error.result.CODE]){
+      this.toaster.error((error.error.result.details ? error.error.result.details.MESSAGE : error.error.result.MESSAGE));
+    } else{
+      this.toaster.error(`${msg}`);
+    }
+  }
 }

@@ -1,8 +1,9 @@
 export interface HomeBuyingModel{
-  article: ArticleModel;
-  videoLibrary: Array<VideoLibraryModel>;
-  resources: Array<ResourcesModel>;
+  blog: any;
+  videos: Array<VideoLibraryModel>;
+  resources: Array<any>;
 }
+
 
 interface ArticleModel{
   imageUrl: string;
@@ -11,7 +12,7 @@ interface ArticleModel{
 }
 interface VideoLibraryModel {
   title: string;
-  videoUrl: string;
+  media: Array<any>;
 }
 interface ResourcesModel {
   title: string;

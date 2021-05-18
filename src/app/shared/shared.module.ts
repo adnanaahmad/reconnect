@@ -32,6 +32,7 @@ import {CreateEventComponent} from './components/create-event/create-event.compo
 import { LandingPageCardComponent } from './components/landing-page-card/landing-page-card.component';
 import { LandingSideNavComponent } from './components/landing-side-nav/landing-side-nav.component';
 import {RouterModule} from '@angular/router';
+import { SafeUrlPipe } from './pipes/safeUrl/safe-url.pipe';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -63,6 +64,7 @@ const maskConfig: Partial<IConfig> = {
         CreateEventComponent,
         LandingPageCardComponent,
         LandingSideNavComponent,
+        SafeUrlPipe,
     ],
     imports: [
         CommonModule,
@@ -105,6 +107,7 @@ const maskConfig: Partial<IConfig> = {
         LandingPageCardComponent,
         LandingSideNavComponent,
         LandingSideNavComponent,
+        SafeUrlPipe
     ],
     providers: [NgbDateNativeAdapter]
 })
