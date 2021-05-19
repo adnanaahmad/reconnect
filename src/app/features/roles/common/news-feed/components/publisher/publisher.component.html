@@ -11,7 +11,7 @@
     </div>
     <div *ngIf="store.role !== constant.role.BUYER" class="ml-auto align-self-end d-flex" style="">
         <img class="share-icon" src="/assets/news-feed-icons/share.svg">
-        <img (click)="removePost()" class="delete-icon" src="/assets/news-feed-icons/delete.svg">
-        <img (click)="editPost()" class="edit" src="/assets/saved-search/edit.svg">
+        <img [ngStyle]="{'margin-right': post.contentType === constant.feedContentType.CUSTOM ? '1vw' : '0'}" (click)="removePost()" class="delete-icon" src="/assets/news-feed-icons/delete.svg">
+        <img *ngIf="post.contentType === constant.feedContentType.CUSTOM" (click)="editPost()" class="edit" src="/assets/saved-search/edit.svg">
     </div>
 </div>

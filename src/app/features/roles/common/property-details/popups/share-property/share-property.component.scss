@@ -25,6 +25,9 @@ p{
   width: .7vw;
   cursor: pointer;
 }
+.screen-two{
+  top: 10%;
+}
 .title{
   font-size: .7vw;
   color: var(--lighGray);
@@ -114,4 +117,41 @@ p{
 .select-member{
   flex-wrap: wrap;
   margin-bottom: 1vw;
+}
+
+//////
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  //margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  border-radius: .3vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.1vw;
+  width: 1.1vw;
+  //background-color: #eee;
+  border: 1px solid var(--lighGray);
+}
+label{
+  margin-bottom: 0;
+}
+.container input:checked ~ .checkmark {
+  background-color: var(--green);
+  border: none;
 }

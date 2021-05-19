@@ -799,5 +799,9 @@ export class ConstantService {
     IMAGE: 'image',
     VIDEO: 'video',
     IFRAME: 'iframe'
-  }
+  };
+  feedContentType = {
+    CUSTOM: 'custom-post',
+    PROPERTY: 'property-post'
+  };
 }

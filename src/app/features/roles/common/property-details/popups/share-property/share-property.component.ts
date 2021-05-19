@@ -18,6 +18,7 @@ import {PropertyDetailsService} from '../../services/property-details.service';
   styleUrls: ['./share-property.component.scss']
 })
 export class SharePropertyComponent implements OnInit {
+  @Input() market: string;
   @Input() mlsId: string;
   @ViewChildren('member') teamMembers: QueryList<ElementRef>;
   teamData: CreateGroupChatModel = {} as CreateGroupChatModel;
@@ -34,17 +35,21 @@ export class SharePropertyComponent implements OnInit {
   ngOnInit(): void {
     this.helper.setModalPosition();
     this.initializeForm();
-    if (this.store.role === this.constant.role.BUYER){
-      this.getTeam();
-    } else {
-      this.getBuyersAndGroups();
-    }
+    this.store.role === this.constant.role.BUYER ? this.getTeam() : this.getBuyersAndGroups();
   }
   initializeForm(): void{
     this.teamData.groupForm = this.fb.group({
       message: [null, Validators.required],
     });
+    this.teamData.postForm = this.fb.group({
+      contentType: [this.constant.feedContentType.PROPERTY],
+      type: ['news-article'],
+      mlsId: this.mlsId,
+      market: this.market,
+    });
     this.teamData.selectedTeam = [];
+    this.teamData.shareType = new FormControl(null);
+    this.store.role === this.constant.role.REAL_ESTATE ? this.teamData.screenOne = false : this.teamData.screenOne = true;
   }
   onSubmit(): void {
     if (!this.teamData.selectedTeam.length) {
@@ -150,6 +155,17 @@ export class SharePropertyComponent implements OnInit {
       if (!this.constant.roleArray.includes(element) || element === this.store.role || !data[element]){
         delete data[element];
       }
+    });
+  }
+  proceed(): void{
+    this.teamData.shareType.value === 'msg' ? this.teamData.screenOne = true : this.createPropertyPost();
+  }
+  createPropertyPost(): void{
+    this.propertyDetailsService.createPropertyPost(this.teamData.postForm.value).pipe(take(1)).subscribe(res => {
+      this.toaster.success('post shared in news feed');
+      this.close();
+    }, error => {
+      this.helper.handleApiError(error, 'failed to share post');
     });
   }
 }

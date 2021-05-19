@@ -25,4 +25,7 @@ export class PropertyDetailsService {
   sharePropertyProfessionals(data): Observable<any>{
     return this.helper.requestCall(this.methods.post, this.api.sharePropertyProfessional, data);
   }
+  createPropertyPost(data): Observable<any>{
+    return this.helper.requestCall(this.methods.post, this.api.createPost, data);
+  }
 }

@@ -9,7 +9,7 @@
           </button>
       </div>
       <div *ngFor="let post of newsFeed.newsFeed; let i = index">
-          <app-variant-one (edit)="editPost(post, i)" (remove)="removePost(post, i)" *ngIf="post.description && post.media.length >= 1" [post] = "post"></app-variant-one>
+          <app-variant-one (edit)="editPost(post, i)" (remove)="removePost(post, i)" *ngIf="(post.description && post.media.length >= 1) || post.propertyDetails" [post] = "post"></app-variant-one>
           <app-variant-two (edit)="editPost(post, i)" (remove)="removePost(post, i)" *ngIf="!post.description && post.media.length > 1" [post] = "post"></app-variant-two>
           <app-variant-three (edit)="editPost(post, i)" (remove)="removePost(post, i)"(remove)="removePost(post, i)" *ngIf="!post.description && post.media.length === 1" [post] = "post"></app-variant-three>
           <app-variant-four (edit)="editPost(post, i)" (remove)="removePost(post, i)" *ngIf="post.description && post.media.length === 0" [post]="post"></app-variant-four>

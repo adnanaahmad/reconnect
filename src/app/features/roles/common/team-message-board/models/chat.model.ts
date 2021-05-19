@@ -1,4 +1,4 @@
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 export interface ChatModel {
   user: UserModel;
@@ -47,9 +47,12 @@ export interface CreateGroupChatModel{
   selectedButton: any;
   selectedTeam: Array<any>;
   groupForm: FormGroup;
+  postForm: FormGroup;
+  shareType: FormControl;
   selectedBuyers: any;
   selectedGroups: any;
   loan: string;
+  screenOne: boolean;
 }
 
 export interface TeamDataModel{

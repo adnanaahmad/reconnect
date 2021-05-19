@@ -2,16 +2,19 @@
     <div class="row">
         <div class="col-md">
             <div class="media-col">
-                <div class="media-files">
+                <div *ngIf="!post.propertyDetails" class="media-files">
                     <img *ngIf="post.media[0].type === constant.mediaType.IMAGE" [src]="post.media[0].url">
                     <video *ngIf="post.media[0].type === constant.mediaType.VIDEO" [src]="post.media[0].url" controls></video>
                     <div *ngIf="post.media[0].type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-video">
                         <iframe class="embed-responsive-item" [src]="post.media[0].url | safeUrl" allowfullscreen></iframe>
                     </div>
                 </div>
-                <div *ngIf="post.media.length > 1">
-                    <img (click)="next(post.media)" class="right-arrow" src="/assets/news-feed-icons/arrow.svg">
-                    <img (click)="previous(post.media)" class="left-arrow" src="/assets/news-feed-icons/arrow.svg">
+                <div *ngIf="post.propertyDetails" class="media-files">
+                    <img [src]="post.propertyDetails.images[0]">
+                </div>
+                <div *ngIf="post.media.length > 1 || (post.propertyDetails ? post.propertyDetails.images.length > 1 : false)">
+                    <img (click)="next(post.propertyDetails ? post.propertyDetails.images : post.media)" class="right-arrow" src="/assets/news-feed-icons/arrow.svg">
+                    <img (click)="previous(post.propertyDetails ? post.propertyDetails.images : post.media)" class="left-arrow" src="/assets/news-feed-icons/arrow.svg">
                 </div>
             </div>
         </div>
@@ -19,12 +22,14 @@
 
             <div class="div-3">
                 <div class="">
-                    <div> <p class="post-username" style="">{{ post.title | titlecase}} </p>
+                    <div> <p class="post-username" style="">{{ (post.propertyDetails ? post.propertyDetails.address.deliveryLine + ', '
+                        + post.propertyDetails.address.city+', '+post.propertyDetails.address.state+', '+post.propertyDetails.address.zip
+                        : post.title) | titlecase}} </p>
                     </div>
                 </div>
             </div>
             <div #postContent class="post-parent">
-                <p class="post-text">{{post.description}} </p>
+                <p class="post-text">{{post.propertyDetails ? post.propertyDetails.description : post.description}} </p>
                 <p (click)="toggle($event)" class="read-more">Read more</p>
                 <p (click)="toggle($event)" class="read-less">Read less</p>
             </div>

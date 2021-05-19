@@ -60,7 +60,7 @@ export class AddNewsFeedComponent implements OnInit, AfterViewInit, OnDestroy {
       title: [null, Validators.required],
       description: [null],
       media: [null],
-      contentType: ['custom-post'],
+      contentType: [this.constant.feedContentType.CUSTOM],
       type: ['news-article']
     });
   }
