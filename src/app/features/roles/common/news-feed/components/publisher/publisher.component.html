@@ -1,0 +1,17 @@
+<div class="mt-auto d-flex justify-content-between div-1">
+    <div class="d-flex profile" (click)="navigateToProfile()">
+        <div class="" style="">
+            <img *ngIf="post.createdBy.profilePictureUrl" class="img-fluid post-profile-icon" [src]="post.createdBy.profilePictureUrl">
+            <img *ngIf="!post.createdBy.profilePictureUrl" class="img-fluid post-profile-svg" src="/assets/profile/profile.svg">
+        </div>
+        <div class="align-self-end">
+            <p class="post-username">{{ (post.createdBy.firstName + ' ' + post.createdBy.lastName) | titlecase}}</p>
+            <p class="post-date" style="">Published on {{ post.createdAt | date}}</p>
+        </div>
+    </div>
+    <div *ngIf="store.role !== constant.role.BUYER" class="ml-auto align-self-end d-flex" style="">
+        <img class="share-icon" src="/assets/news-feed-icons/share.svg">
+        <img (click)="removePost()" class="delete-icon" src="/assets/news-feed-icons/delete.svg">
+        <img (click)="editPost()" class="edit" src="/assets/saved-search/edit.svg">
+    </div>
+</div>

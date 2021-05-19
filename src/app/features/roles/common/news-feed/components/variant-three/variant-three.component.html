@@ -1,20 +1,14 @@
 <div class="card-2">
-    <div class="gradient">
-
+    <div class="gradient"></div>
+    <p class="post-title">{{post.title | titlecase}}</p>
+    <div class="media-files">
+        <img *ngIf="post.media[0].type === constant.mediaType.IMAGE" [src]="post.media[0].url">
+        <video *ngIf="post.media[0].type === constant.mediaType.VIDEO" [src]="post.media[0].url" controls></video>
+        <div *ngIf="post.media[0].type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-video">
+            <iframe class="embed-responsive-item" [src]="post.media[0].url | safeUrl" allowfullscreen></iframe>
+        </div>
     </div>
-    <p class="post-title">{{post.title}}</p>
-    <img class="post-image" [src]="post.mediaArray[0].media">
-    <div class="mt-auto d-flex div-1">
-        <div class="" style=""><img class="img-fluid post-profile-icon" [src]="post.userImage">
-
-        </div>
-        <div class="align-self-end">
-            <p class="post-username">{{ post.userName }}</p>
-            <p class="post-date" style="">Published on {{ post.date | date}}</p>
-        </div>
-        <div class="ml-auto align-self-end d-flex" style="">
-            <img class="share-icon" src="/assets/news-feed-icons/share.svg">
-            <img class="delete-icon" src="/assets/news-feed-icons/delete.svg">
-        </div>
+    <div class="mt-custom div-1">
+         <app-publisher class="width-100" [post]="post" (edit)="editPost()" (remove)="removePost()"></app-publisher>
     </div>
 </div>

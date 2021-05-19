@@ -8,7 +8,7 @@
                 ' updated your home buying process status from ' + (helper.formatRole(notification.meta.previourProcessStatus) | titlecase) + ' to ' +
             (helper.formatRole(notification.meta.newProcessStatus) | titlecase)}}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
             ' has set your target property, MLS ID: ' + notification.meta.listingId}}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -33,7 +33,7 @@
             <p class="text">{{'You have been added to ' + (notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase)
                 + "'s team"}}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -45,7 +45,7 @@
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase)
             + " sent you new quote request"}}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -57,7 +57,7 @@
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
             ' accepted your quote request '}}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -69,7 +69,7 @@
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
             ' rejected your quote request '}}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -81,7 +81,7 @@
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
             ' updated your loan details.'}}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -93,7 +93,7 @@
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
             ' updated his loan details.'}}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -105,7 +105,7 @@
             <p class="text">{{(notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase) +
             ' has set ' + (helper.formatRole(notification.meta.dateType) | lowercase) + ' to ' + (notification.meta.date | date) }}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -116,7 +116,7 @@
         <div>
             <p class="text">{{ 'Finalize single loan for ' + (notification.from.firstName | titlecase) + ' ' + (notification.from.lastName | titlecase)}}</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>
@@ -126,7 +126,7 @@
         <div>
             <p class="text">But while teams face new hurdles, their success still</p>
             <div class="d-flex justify-content-between">
-                <p class="time">{{getMinimalisticRelativeTime(notification.createdAt)}}</p>
+                <p class="time">{{helper.getMinimalisticRelativeTime(notification.createdAt)}}</p>
                 <div class="circle-2" *ngIf="!notification.read"></div>
             </div>
         </div>

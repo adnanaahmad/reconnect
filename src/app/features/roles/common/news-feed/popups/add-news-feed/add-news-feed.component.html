@@ -1,16 +1,45 @@
+<ng-container *ngIf="!post.nextScreen">
+    <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+    <div class="card-1" [formGroup]="post.form">
+        <div class="d-flex justify-content-between mb-custom">
+            <p class="heading align-self-center">Event</p>
+            <button [disabled]="post.form.invalid" (click)="onSubmit()" class="launch">Post</button>
+        </div>
+        <p class="title">Event title</p>
+        <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
+        <p class="title">Add a note</p>
+        <textarea formControlName="description"  class="form-control f2 mb-custom" rows="10"></textarea>
+        <div class="media-files" *ngIf="post.media && post.media.length > 0">
+            <ng-container *ngFor="let media of post.media; let i = index">
+                <div class="file">
+                    <img class="media-img" *ngIf="media.type === constant.mediaType.IMAGE" [src]="media.url">
+                    <video *ngIf="media.type === constant.mediaType.VIDEO" [src]="media.url" disablepictureinpicture controlsList="nofullscreen nodownload noremoteplayback" controls></video>
+                    <div *ngIf="media.type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-video">
+                        <iframe class="embed-responsive-item" [src]="media.url | safeUrl" allowfullscreen></iframe>
+                    </div>
+                    <img (click)="removeMediaFile(i)" class="remove-btn" src="/assets/calendar-icons/close.svg">
+                </div>
+            </ng-container>
+        </div>
+        <p class="title">Media</p>
+        <div class="add-media d-flex justify-content-between">
+            <p class="mb-0 add-post align-self-center">Add to your post</p>
+            <div class="d-flex justify-content-between media-icons">
+                <input accept="image/*" [disabled]="store.progressBarLoading|async" id="media-img" type="file" (change)="uploadImageFile($event)" class="media-input" #fileInput1>
+                <button class="media-btn" (click)="fileInput1.click()">
+                    <img class="attachment" src="/assets/news-feed-icons/attachment.svg">
+                </button>
+                <input accept="video/*" [disabled]="store.progressBarLoading|async" id="media-vid" type="file" (change)="uploadVideoFile($event)" class="media-input" #fileInput2>
+                <button class="media-btn" (click)="fileInput2.click()">
+                    <img class="attachment" src="/assets/news-feed-icons/attachment.svg">
+                </button>
+                <button class="media-btn" (click)="goToAddExternalLink()">
+                    <img class="attachment" src="/assets/news-feed-icons/attachment.svg">
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-container>
 
-<img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
-<div class="card-1">
-    <div class="d-flex justify-content-between mb-custom">
-        <p class="heading align-self-center">Event</p>
-        <button class="launch">Post</button>
-    </div>
-    <p class="title">Event title</p>
-    <input type="text" class="form-control f1 mb-custom"  placeholder="">
-    <p class="title">Add a note</p>
-    <textarea  class="form-control f2 mb-custom" rows="10"></textarea>
-    <div class="d-flex justify-content-between">
-        <img *ngFor="let i of [1,2,3,4,5,6]" class="attachment" src="/assets/news-feed-icons/attachment.svg">
-    </div>
-</div>
+<app-add-external-link *ngIf="post.nextScreen" (url)="addUrl($event)" (goBack)="goToCreatePost()"></app-add-external-link>
 

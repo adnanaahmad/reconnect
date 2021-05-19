@@ -1,0 +1,63 @@
+.card-1{
+  padding: 2vw;
+}
+p{
+  font-family: 'Poppins';
+}
+.form-div{
+  position: relative;
+}
+.card-1{
+  padding: 2.5vw;
+}
+.heading{
+  font-size: .85vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-bottom: 0;
+  margin-right: 30vw;
+}
+.close-btn{
+  position: absolute;
+  left: 96.5%;
+  top: 8%;
+  height: .7vw;
+  width: .7vw;
+  cursor: pointer;
+}
+.title{
+  font-size: .7vw;
+  color: var(--lighGray);
+  margin-bottom: 0.2vw;
+  font-weight: 300;
+}
+.mb-custom{
+  margin-bottom: 1.5vw;
+}
+.f1{
+  height: 2.5vw;
+  font-size: .8vw;
+  color: var(--darkGray);
+  border-radius: .5vw;
+  border: 1px solid var(--lighGray);
+}
+.launch{
+  color: white;
+  background: var(--green);
+  border-radius: .3vw;
+  font-size: .7vw;
+  margin-bottom: 0;
+  height: fit-content;
+  padding: .5vw 1.9vw .5vw 1.9vw;
+  cursor: pointer;
+  border: none;
+  font-family: 'Poppins';
+}
+.launch:focus{
+  outline: none;
+}
+::placeholder {
+  font-size: .8vw;
+  color: var(--lighGray);
+  font-weight: 300;
+}

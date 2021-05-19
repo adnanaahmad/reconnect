@@ -1,0 +1,58 @@
+.post-profile-icon, .post-profile-svg{
+  width: 3vw;
+  height: 3vw;
+  border-radius: .5vw;
+  margin-right: .8vw;
+}
+.post-profile-icon{
+  object-fit: cover;
+}
+.post-profile-svg{
+  background: var(--extraLightGray);
+  padding: .9vw;
+}
+.post-date{
+  margin-top: .3vw;
+  margin-bottom: 0;
+  color: var(--darkGray);
+  font-weight: 300;
+  font-size: .75vw;
+}
+.post-username{
+  font-size: .85vw;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.share-icon{
+  padding: .4vw;
+  border-radius: .5vw;
+  background: var(--green);
+  height: 1.8vw;
+  width: 1.8vw;
+  margin-right: 1vw;
+}
+.delete-icon{
+  width: 1.8vw;
+  height: 1.8vw;
+  padding: .4vw;
+  border-radius: .5vw;
+  background:var(--red);
+  float: right;
+  cursor: pointer;
+  margin-right: 1vw;
+}
+.edit{
+  width: 1.8vw;
+  height: 1.8vw;
+  padding: .4vw;
+  border-radius: .5vw;
+  background:var(--extraLightGray);
+  float: right;
+  cursor: pointer;
+}
+.div-1{
+  width: 100%;
+}
+.profile{
+  cursor: pointer;
+}

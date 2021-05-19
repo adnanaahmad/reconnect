@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import {KeyValue} from '@angular/common';
 import {ConstantService} from '../constant/constant.service';
 import {Observable, throwError} from 'rxjs';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {catchError} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
 import {NgxImageCompressService} from 'ngx-image-compress';
 import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
 import {AbstractControl} from '@angular/forms';
+import * as moment from 'moment';
+import * as S3 from 'aws-sdk/clients/s3';
+import {environment} from '../../../environments/environment';
+import {StoreService} from '../store/store.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +19,8 @@ export class HelperService {
   constructor(private constants: ConstantService,
               private http: HttpClient,
               private toaster: ToastrService,
-              private imageCompress: NgxImageCompressService) { }
+              private imageCompress: NgxImageCompressService,
+              private store: StoreService) { }
 
   setModalPosition(): void {
     const modal = document.getElementsByClassName('modal-content') as HTMLCollectionOf<HTMLElement>;
@@ -143,5 +147,81 @@ export class HelperService {
     } else{
       this.toaster.error(`${msg}`);
     }
+  }
+  getMinimalisticRelativeTime(dateTime): string {
+    if (!dateTime) {
+      return null;
+    }
+
+    const today = moment();
+
+    const time = moment(dateTime);
+
+    const diff = today.diff(time);
+
+    const duration = moment.duration(diff);
+    if (duration.years() > 0) {
+      return duration.years() + 'y';
+    } else if (duration.weeks() > 0) {
+      return duration.weeks() + 'w';
+    } else if (duration.days() > 0) {
+      return duration.days() + 'd';
+    } else if (duration.hours() > 0) {
+      return duration.hours() + 'h';
+    } else if (duration.minutes() > 0) {
+      return duration.minutes() + 'm';
+    } else if (duration.minutes() < 1) {
+      return '1s';
+    }
+  }
+  uploadFile(file, format): void {
+    const contentType = file.type;
+    const bucket = new S3(environment.s3Bucket);
+    const params = {
+      Bucket: environment.s3BucketName,
+      Key: file.name,
+      Body: file,
+      ACL: 'public-read',
+      ContentType: contentType
+    };
+    this.store.updateProgressBarLoading(true);
+    bucket.upload(params, (err, data) => {
+      if (err) {
+        this.toaster.error(`There was an error uploading your file: ${err}`);
+        this.store.updateProgressBarLoading(false);
+        (document.getElementById('media-img') as HTMLInputElement).value = null;
+        (document.getElementById('media-vid') as HTMLInputElement).value = null;
+        return false;
+      }
+      this.store.updateUploadFile({
+        type: format,
+        url:  data.Location
+      });
+      this.store.updateProgressBarLoading(false);
+      console.log('Successfully uploaded file.', data);
+      (document.getElementById('media-img') as HTMLInputElement).value = null;
+      (document.getElementById('media-vid') as HTMLInputElement).value = null;
+      return true;
+    });
+  }
+  mediaUrlValidator(): ValidateFn<any> {
+    return (control: AbstractControl): any => {
+      if (!control.value){
+        return null;
+      }
+      const validImageUrl = ((control.value).match(/\.(jpeg|jpg|gif|png)$/) != null);
+      const validVideoUrl = ((control.value).match(/\.(mp4|ogg|webm)$/) != null);
+      const validYoutubeUrl = !!(control.value).includes('youtube.com/watch');
+      return !(validImageUrl || validVideoUrl || validYoutubeUrl) ? {validUrl: {value: control.value}} : null;
+    };
+  }
+  validImageUrl(mediaUrl): boolean{
+    return(mediaUrl.match(/\.(jpeg|jpg|gif|png)$/) != null);
+  }
+  validVideoUrl(mediaUrl): boolean{
+    return(mediaUrl.match(/\.(mp4|ogg|webm)$/) != null);
+  }
+  validYoutubeUrl(mediaUrl): boolean{
+    return !!mediaUrl.includes('youtube.com/watch');
   }
 }

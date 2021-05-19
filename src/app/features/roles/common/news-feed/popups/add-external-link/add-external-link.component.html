@@ -1,0 +1,20 @@
+<img (click)="goBackToCreatePost()" class="close-btn" src="/assets/calendar-icons/close.svg">
+<div class="card-1">
+    <div class="d-flex justify-content-between mb-custom">
+        <p class="heading align-self-center text-nowrap">External Link</p>
+        <button [disabled]="urlForm.invalid" (click)="addUrl()" class="launch">Add</button>
+    </div>
+    <div>
+        <form [formGroup]="urlForm">
+            <div class=" form-group">
+                <p class="title">Add Url</p>
+                <input
+                        formControlName="url"
+                        placeholder="https://www.youtube.com/watch?v=yre5kBxyAOo"
+                        type="text"
+                        class="form-control f1 mb-custom"
+                />
+            </div>
+        </form>
+    </div>
+</div>

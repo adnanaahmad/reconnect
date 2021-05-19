@@ -1,22 +1,13 @@
 
 
 <div class="card-2">
-    <div> <p class="post-username mb-custom" style="">{{ post.title }} </p>
+    <div>
+        <p class="post-username mb-custom" style="">{{ post.title | titlecase }} </p>
     </div>
     <div class="newspaper post-text">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+        {{post.description}}
     </div>
-    <div class="mt-auto d-flex div-1">
-        <div class="" style=""><img class="img-fluid post-profile-icon" [src]="post.userImage">
-
-        </div>
-        <div class="align-self-end">
-            <p class="post-username">{{ post.userName }}</p>
-            <p class="post-date" style="">Published on {{ post.date | date}}</p>
-        </div>
-        <div class="ml-auto align-self-end d-flex" style="">
-            <img class="share-icon" src="/assets/news-feed-icons/share.svg">
-            <img class="delete-icon" src="/assets/news-feed-icons/delete.svg">
-        </div>
+    <div class="mt-custom d-flex div-1">
+        <app-publisher class="width-100" (edit)="editPost()" (remove)="removePost()" [post]="post"></app-publisher>
     </div>
 </div>

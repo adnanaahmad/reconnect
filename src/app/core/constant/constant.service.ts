@@ -61,7 +61,11 @@ export class ConstantService {
      updateTodo: `${environment.apiUrl}/todo/update/`,
      updateTodoTags: `${environment.apiUrl}/todo/update-tags/`,
      getFeaturedHomes: `${environment.apiUrl}/listing/featured`,
-     getHomeBuyingFeed: `${environment.apiUrl}/feed/home-buying`
+     getHomeBuyingFeed: `${environment.apiUrl}/feed/home-buying`,
+     getNewsFeed: `${environment.apiUrl}/feed/news-feed`,
+     createPost: `${environment.apiUrl}/feed/create`,
+     updatePost: `${environment.apiUrl}/feed/update/`,
+     deletePost: `${environment.apiUrl}/feed/delete/`,
    };
   apiMethod = {
     get: 'get',

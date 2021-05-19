@@ -3,26 +3,32 @@
   <div class="col-9 feed-column">
       <div class="heading d-flex justify-content-between">
           <h3 class="align-self-center">Your Network News Feed</h3>
-          <button (click)="addNewsFeed()" class="d-flex plus-btn">
+          <button *ngIf="store.role !== constant.role.BUYER" (click)="addNewsFeed()" class="d-flex plus-btn">
               <img class="plus-icon" src="/assets/calendar-icons/plus.svg">
               <p>Add News Feed</p>
           </button>
       </div>
-      <div *ngFor="let post of newsFeed.posts;">
-          <app-variant-one [post] = "post"></app-variant-one>
-          <app-variant-two [post] = "post"></app-variant-two>
-          <app-variant-three [post] = "post"></app-variant-three>
-          <app-variant-four [post]="post"></app-variant-four>
+      <div *ngFor="let post of newsFeed.newsFeed; let i = index">
+          <app-variant-one (edit)="editPost(post, i)" (remove)="removePost(post, i)" *ngIf="post.description && post.media.length >= 1" [post] = "post"></app-variant-one>
+          <app-variant-two (edit)="editPost(post, i)" (remove)="removePost(post, i)" *ngIf="!post.description && post.media.length > 1" [post] = "post"></app-variant-two>
+          <app-variant-three (edit)="editPost(post, i)" (remove)="removePost(post, i)"(remove)="removePost(post, i)" *ngIf="!post.description && post.media.length === 1" [post] = "post"></app-variant-three>
+          <app-variant-four (edit)="editPost(post, i)" (remove)="removePost(post, i)" *ngIf="post.description && post.media.length === 0" [post]="post"></app-variant-four>
 
       </div>
   </div>
   <div class="col-3 news-column">
     <h3 class="top-news" style="">Top News</h3>
-    <div *ngFor="let i of newsFeed.topNews" class="mb-3 d-flex flex-row card-3">
-       <img class="news-img" [src]="i.media">
+    <div *ngFor="let post of newsFeed.adminPosts" class="mb-3 d-flex flex-row card-3">
+        <div class="media-files" *ngIf="post.media[0]">
+            <img *ngIf="post.media[0].type === constant.mediaType.IMAGE" [src]="post.media[0].url">
+            <video *ngIf="post.media[0].type === constant.mediaType.VIDEO" [src]="post.media[0].url" controls></video>
+            <div *ngIf="post.media[0].type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-video">
+                <iframe class="embed-responsive-item" [src]="post.media[0].url | safeUrl" allowfullscreen></iframe>
+            </div>
+        </div>
        <div class="d-flex align-items-start flex-column news-title" style="">
-        <h6 class="mb-2 news-text mb-auto" style="">{{ i.title }} </h6>
-        <p   class="">{{i.time}} mins ago</p>
+        <h6 class="mb-2 news-text mb-auto" style="">{{ post.title }} </h6>
+        <p   class="">{{helper.getMinimalisticRelativeTime(post.createdAt)}} ago</p>
        </div>
     </div>
 

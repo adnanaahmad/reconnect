@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-variant-three',
@@ -7,9 +8,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class VariantThreeComponent implements OnInit {
   @Input() post;
-  constructor() { }
+  @Output() remove = new EventEmitter<any>();
+  @Output() edit = new EventEmitter<any>();
+  constructor(public constant: ConstantService) { }
 
   ngOnInit(): void {
   }
-
+  removePost(): void{
+    this.remove.emit();
+  }
+  editPost(): void{
+    this.edit.emit();
+  }
 }

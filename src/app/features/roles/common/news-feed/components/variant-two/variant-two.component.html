@@ -3,34 +3,30 @@
         <div class="col-md">
             <div class="media-col">
                 <div class="gradient"></div>
-                <p class="post-title">{{post.title}}</p>
-                <img *ngIf = "post.mediaArray[0].type == 'image'" id="media_" class="post-image" [src]="post.mediaArray[0].media" >
-                <img (click)="nextMedia(post.mediaArray, $event)" class="right-arrow" src="/assets/news-feed-icons/arrow.svg">
-                <img (click)="previousMedia(post.mediaArray, $event)" class="left-arrow" src="/assets/news-feed-icons/arrow.svg">
+                <p class="post-title">{{post.title | titlecase}}</p>
+                <div class="media-file">
+                    <img *ngIf="post.media[0].type === constant.mediaType.IMAGE" [src]="post.media[0].url">
+                    <video *ngIf="post.media[0].type === constant.mediaType.VIDEO" [src]="post.media[0].url" controls></video>
+                    <div *ngIf="post.media[0].type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-vid">
+                        <iframe class="embed-responsive-item" [src]="post.media[0].url | safeUrl" allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="d-flex align-items-start flex-column col-md">
-<!--            <div class="div-3">-->
-<!--                <div class="">-->
-<!--                    <div> <p class="post-username" style="">{{ post.title }} </p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-            <div class="multi-media">
-                <img style="" *ngFor="let i of post.mediaArray" [src]="i.media">
+            <div class="media-files d-flex">
+                <ng-container *ngFor="let media of post.media | slice: 1:post.media.length">
+                    <div class="file">
+                        <img class="media-img" *ngIf="media.type === constant.mediaType.IMAGE" [src]="media.url">
+                        <video *ngIf="media.type === constant.mediaType.VIDEO" [src]="media.url" controls></video>
+                        <div *ngIf="media.type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-video">
+                            <iframe class="embed-responsive-item" [src]="media.url | safeUrl" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </ng-container>
             </div>
             <div class="mt-auto d-flex div-1">
-                <div class="" style=""><img class="img-fluid post-profile-icon" [src]="post.userImage">
-
-                </div>
-                <div class="align-self-end">
-                    <p class="post-username">{{ post.userName }}</p>
-                    <p class="post-date" style="">Published on {{ post.date | date}}</p>
-                </div>
-                <div class="ml-auto align-self-end d-flex" style="">
-                    <img class="share-icon" src="/assets/news-feed-icons/share.svg">
-                    <img class="delete-icon" src="/assets/news-feed-icons/delete.svg">
-                </div>
+                <app-publisher class="width-100" (edit)="editPost()" [post]="post" (remove)="removePost()"></app-publisher>
             </div>
         </div>
     </div>

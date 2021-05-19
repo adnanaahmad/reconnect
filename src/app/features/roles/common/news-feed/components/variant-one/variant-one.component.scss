@@ -8,25 +8,6 @@ div.card-2 div.row div.col-md{
   padding-left: 1.2vw;
   padding-right: 1.2vw;
 }
-.post-profile-icon{
-  width: 3vw;
-  height: 3vw;
-  border-radius: .5vw;
-  object-fit: cover;
-  margin-right: .8vw;
-}
-.post-date{
-  margin-top: .3vw;
-  margin-bottom: 0;
-  color: var(--darkGray);
-  font-weight: 300;
-  font-size: .75vw;
-}
-.post-username{
-  font-size: .85vw;
-  font-weight: 500;
-  margin-bottom: 0;
-}
 .div-1{
   padding-top: 1vw;
   border-top: 1px solid var(--extraLightGray);
@@ -39,12 +20,21 @@ div.card-2 div.row div.col-md{
 iframe{
   border-radius: .5vw;
 }
-.post-image{
+.media-files img, .media-files video, .iframe-video{
+  height: 100%;
+  width: 100%;
   object-fit: cover;
-  width: 25vw ;
-  //height: 100%;
+  border-radius: .5vw;
+}
+.media-files{
   height: 18vw;
-  border-radius: .5vw
+  width: 25vw ;
+  position: relative;
+}
+.post-username{
+  font-size: .85vw;
+  font-weight: 500;
+  margin-bottom: 0;
 }
 
 .post-text{
@@ -74,23 +64,6 @@ iframe{
 h6{
   color: var(--darkGray);
 }
-.share-icon{
-  padding: .4vw;
-  border-radius: .5vw;
-  background: var(--green);
-  height: 1.8vw;
-  width: 1.8vw;
-  margin-right: 1vw;
-}
-.delete-icon{
-  width: 1.8vw;
-  height: 1.8vw;
-  padding: .4vw;
-  border-radius: .5vw;
-  background:var(--red);
-  float: right;
-  cursor: pointer;
-}
 .media-col{
   position: relative;
 }
@@ -114,4 +87,7 @@ h6{
 }
 p{
   font-family: 'Poppins';
+}
+.width-100{
+  width: 100%;
 }

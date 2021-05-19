@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-variant-one',
@@ -8,7 +9,9 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChil
 export class VariantOneComponent implements OnInit, AfterViewInit {
   @ViewChildren('postContent') postContent: QueryList<ElementRef>;
   @Input() post;
-  constructor() { }
+  @Output() remove = new EventEmitter<any>();
+  @Output() edit = new EventEmitter<any>();
+  constructor(public constant: ConstantService) { }
 
   ngOnInit(): void {
   }
@@ -38,17 +41,28 @@ export class VariantOneComponent implements OnInit, AfterViewInit {
       element.children[2].style.display = 'none';
     }
   }
-  previousMedia(mediaArray, event): void{
-    const imageElement = (event.target as HTMLImageElement).closest('div.media-col').children[0] as HTMLImageElement;
-    const index = mediaArray.findIndex(x => x.media === imageElement.src);
-    if (index > 0) {
-      imageElement.src = mediaArray[index - 1].media;
-    }
+  previous(array): void{
+    this.leftShift(array);
   }
-  nextMedia(mediaArray, event): void{
-    const imageElement = (event.target as HTMLImageElement).closest('div.media-col').children[0] as HTMLImageElement;
-    const index = mediaArray.findIndex(x => x.media === imageElement.src);    if (index >= 0 && index < mediaArray.length - 1) {
-      imageElement.src = mediaArray[index + 1].media;
-    }
+  next(array): void{
+    this.rightShift(array);
+  }
+
+  leftShift(arr): Array<any>{
+    const last = arr.pop();
+    arr.unshift(last);
+    return arr;
+  }
+  rightShift(arr): Array<any>{
+    const first = arr[0];
+    arr.shift();
+    arr.push(first);
+    return arr;
+  }
+  removePost(): void{
+    this.remove.emit();
+  }
+  editPost(): void{
+    this.edit.emit();
   }
 }

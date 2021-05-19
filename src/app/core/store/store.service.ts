@@ -31,6 +31,8 @@ export class StoreService {
   todoFilter = this.todoFilterSubject.asObservable();
   private marketRentValuesSubject = new BehaviorSubject<any>(null);
   marketRentValues = this.marketRentValuesSubject.asObservable();
+  private uploadFileSubject = new BehaviorSubject<any>(null);
+  uploadFile = this.uploadFileSubject.asObservable();
   constructor() { }
 
   updateToggleMoreFilter(data: boolean): void{
@@ -83,5 +85,8 @@ export class StoreService {
   }
   updateMarketRentValues(data): void{
     this.marketRentValuesSubject.next(data);
+  }
+  updateUploadFile(data): void{
+    this.uploadFileSubject.next(data);
   }
 }

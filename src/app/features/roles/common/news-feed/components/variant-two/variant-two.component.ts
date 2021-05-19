@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ConstantService} from '../../../../../../core/constant/constant.service';
 
 @Component({
   selector: 'app-variant-two',
@@ -7,23 +8,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class VariantTwoComponent implements OnInit {
   @Input() post;
-  constructor() { }
+  @Output() remove = new EventEmitter<any>();
+  @Output() edit = new EventEmitter<any>();
+  constructor(public constant: ConstantService) { }
 
   ngOnInit(): void {
   }
-
-  previousMedia(mediaArray, event): void{
-    const imageElement = (event.target as HTMLImageElement).closest('div.media-col').children[2] as HTMLImageElement;
-    const index = mediaArray.findIndex(x => x.media === imageElement.src);
-    if (index > 0) {
-      imageElement.src = mediaArray[index - 1].media;
-    }
+  removePost(): void{
+    this.remove.emit();
   }
-  nextMedia(mediaArray, event): void{
-    const imageElement = (event.target as HTMLImageElement).closest('div.media-col').children[2] as HTMLImageElement;
-    const index = mediaArray.findIndex(x => x.media === imageElement.src);    if (index >= 0 && index < mediaArray.length - 1) {
-      imageElement.src = mediaArray[index + 1].media;
-    }
+  editPost(): void{
+    this.edit.emit();
   }
-
 }

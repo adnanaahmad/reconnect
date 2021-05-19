@@ -25,6 +25,17 @@ p{
   width: .7vw;
   cursor: pointer;
 }
+.remove-btn{
+  position: absolute;
+  right: 5%;
+  top: 5%;
+  height: 2vw;
+  width: 2vw;
+  cursor: pointer;
+  padding: .5vw;
+  background: #e7edf8;
+  border-radius: 1vw;
+}
 .title{
   font-size: .7vw;
   color: var(--lighGray);
@@ -97,14 +108,67 @@ p{
   position: relative;
 }
 .attachment{
-  width: 5.7vw;
-  height: 4vw;
-  padding: 1.3vw;
+  width: 2vw;
+  height: 2vw;
+  padding: .5vw;
   background: var(--extraLightGray);
-  border-radius: .5vw;
-  //margin-right: .5vw;
+  border-radius: .3vw;
   cursor: pointer;
 }
-.attachment:last-child{
-  //margin-right: 0;
+.add-media{
+  border: 1px solid var(--lighGray);
+  border-radius: .5vw;
+  padding: 0.5vw 1vw;
+}
+.add-post{
+  color: var(--lighGray);
+  font-size: .85vw;
+  font-weight: 400;
+}
+.media-icons{
+  width: 10vw;
+}
+.media-btn{
+  background: transparent;
+  border: none;
+}
+.media-btn:focus{
+  outline: none;
+}
+.media-input{
+  width: 0;
+  height: 0;
+}
+.media-files{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1vw;
+  //  padding: 0 5px;
+}
+.media-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.2857vw;
+}
+.media-files video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.2857vw;
+}
+.iframe-video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.2857vw;
+}
+.media-files div.file{
+  margin-right: .4vw;
+  height: 5.9vw;
+  width: 5.9vw;
+  position: relative;
+}
+.media-files div.file:last-child{
+  margin-right: 0;
 }

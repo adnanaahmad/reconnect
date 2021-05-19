@@ -8,13 +8,17 @@ import { VariantTwoComponent } from './components/variant-two/variant-two.compon
 import { VariantThreeComponent } from './components/variant-three/variant-three.component';
 import { VariantFourComponent } from './components/variant-four/variant-four.component';
 import { AddNewsFeedComponent } from './popups/add-news-feed/add-news-feed.component';
+import {SharedModule} from '../../../../shared/shared.module';
+import { AddExternalLinkComponent } from './popups/add-external-link/add-external-link.component';
+import { PublisherComponent } from './components/publisher/publisher.component';
 
 
 @NgModule({
-  declarations: [NewsFeedComponent, VariantOneComponent, VariantTwoComponent, VariantThreeComponent, VariantFourComponent, AddNewsFeedComponent],
-  imports: [
-    CommonModule,
-    NewsFeedRoutingModule,
-  ]
+  declarations: [NewsFeedComponent, VariantOneComponent, VariantTwoComponent, VariantThreeComponent, VariantFourComponent, AddNewsFeedComponent, AddExternalLinkComponent, PublisherComponent],
+    imports: [
+        CommonModule,
+        NewsFeedRoutingModule,
+        SharedModule,
+    ]
 })
 export class NewsFeedModule { }

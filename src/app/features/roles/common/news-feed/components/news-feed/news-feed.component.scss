@@ -12,6 +12,7 @@
 }
 .heading{
   margin-bottom: 4vw;
+  position: relative;
 }
 .card-1 {
   background: white;
@@ -24,25 +25,27 @@
   //padding: .5vw;
   border-radius: .5vw;
   background: var(--green);
-  height: 1vw;
-  width: 1vw ;
+  height: .8vw;
+  width: .8vw ;
   object-fit: cover;
   align-self: center;
   margin-right: .5vw;
 }
 .plus-btn p{
   margin-bottom: 0;
-  font-size: .9vw;
-  font-weight: 500;
+  font-size: .8vw;
+  font-weight: 400;
   color: white;
   align-self: center;
 }
 .plus-btn{
+  top: 120%;
+  position: absolute;
   border: none;
-  border-radius: .5vw;
+  border-radius: .3vw;
   cursor: pointer;
   background: var(--green);
-  padding: .7vw 2vw .7vw 1.5vw;
+  padding: .5vw 1.5vw .5vw 1vw;
 }
 .plus-btn:focus{
   outline: none;
@@ -86,4 +89,16 @@
 }
 p{
   font-family: 'Poppins';
+}
+.media-files img, .media-files video, .iframe-video{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: .5vw
+}
+.media-files{
+  position: relative;
+  width: 4.3vw;
+  height: 4.3vw;
+  margin-right: 1vw;
 }
