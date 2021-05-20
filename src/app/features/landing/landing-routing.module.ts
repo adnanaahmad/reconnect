@@ -11,6 +11,7 @@ import {AboutComponent} from '../miscellaneous/about/about.component';
 import {BuyHomeComponent} from '../miscellaneous/buy-home/buy-home.component';
 import {SellHomeComponent} from '../miscellaneous/sell-home/sell-home.component';
 import {BecomeAgentComponent} from '../miscellaneous/become-agent/become-agent.component';
+import {EmailConfirmationComponent} from './components/email-confirmation/email-confirmation.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,10 @@ const routes: Routes = [
             {
                 path: 'becomeAgent',
                 component: BecomeAgentComponent
+            },
+            {
+                path: 'changeEmail',
+                component: EmailConfirmationComponent
             },
             {
                 path: 'terms',

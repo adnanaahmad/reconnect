@@ -50,4 +50,7 @@ export class AuthService {
   getFeaturedHomes(): Observable<any>{
     return  this.helper.requestCall(this.method.get, this.apiRoutes.getFeaturedHomes);
   }
+  editEmail(): Observable<any>{
+    return this.helper.requestCall(this.method.put, this.apiRoutes.changeEmailConfirm);
+  }
 }

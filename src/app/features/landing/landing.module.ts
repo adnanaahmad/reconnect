@@ -14,6 +14,7 @@ import { AboutComponent } from '../miscellaneous/about/about.component';
 import { BuyHomeComponent } from '../miscellaneous/buy-home/buy-home.component';
 import { SellHomeComponent } from '../miscellaneous/sell-home/sell-home.component';
 import { BecomeAgentComponent } from '../miscellaneous/become-agent/become-agent.component';
+import { EmailConfirmationComponent } from './components/email-confirmation/email-confirmation.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { BecomeAgentComponent } from '../miscellaneous/become-agent/become-agent
         AboutComponent,
         BuyHomeComponent,
         SellHomeComponent,
-        BecomeAgentComponent
+        BecomeAgentComponent,
+        EmailConfirmationComponent
     ],
     imports: [
         CommonModule,

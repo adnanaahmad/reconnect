@@ -66,6 +66,8 @@ export class ConstantService {
      createPost: `${environment.apiUrl}/feed/create`,
      updatePost: `${environment.apiUrl}/feed/update/`,
      deletePost: `${environment.apiUrl}/feed/delete/`,
+     changeEmailRequest: `${environment.apiUrl}/user/change-email-request`,
+     changeEmailConfirm: `${environment.apiUrl}/user/change-email-confirm`
    };
   apiMethod = {
     get: 'get',

@@ -66,4 +66,7 @@ export class ProfileService {
       console.log(error);
     });
   }
+  editEmail(data): Observable<any>{
+     return this.helper.requestCall(this.method.put, this.api.changeEmailRequest, data);
+  }
 }

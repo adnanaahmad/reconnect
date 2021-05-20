@@ -1,0 +1,58 @@
+p{
+  font-family: 'Poppins';
+}
+.heading{
+  font-size: 1.8vw;
+  font-weight: 600;
+  margin-bottom: .5vw;
+  color: var(--darkGray);
+}
+
+.label{
+  color: var(--lighGray);
+  font-size: .7vw;
+  margin-bottom: 0.4vw;
+  margin-left: .5vw;
+}
+.label1{
+  color: var(--lighGray);
+  font-size: .9vw;
+}
+.form-custom{
+  border-radius: .6vw;
+  height: 2.5vw;
+  border: 1px solid var(--lighGray);
+  font-family: 'Poppins';
+  font-size: .9vw;
+  color: var(--darkGray);
+  font-weight: 300;
+}
+.mb-custom{
+  margin-bottom: 1.5vw;
+}
+.send{
+  background: var(--green);
+  border: none;
+  font-family: 'Poppins';
+  font-size: .8vw;
+  border-radius: .5vw;
+  padding: .6vw 2.3vw .6vw 2.3vw;
+  color: white;
+  cursor: pointer;
+}
+.send:focus{
+  outline: none;
+}
+.parent{
+  height: 100%;
+}
+.danger{
+  color: var(--red);
+}
+.sub-heading{
+  font-size: .9vw;
+  font-weight: 300;
+  margin-bottom: 0;
+  color: var(--darkGray);
+  margin-top: .5vw;
+}

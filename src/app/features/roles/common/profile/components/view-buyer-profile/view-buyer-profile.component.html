@@ -61,7 +61,10 @@
                             <p>Email:</p>
                         </div>
                         <div class="col-9">
-                            <p>{{userProfile.email}}</p>
+                            <div class="d-flex">
+                                <p class="mr-custom">{{userProfile.email}}</p>
+                                <img (click)="editEmail()" class="edit" src="/assets/saved-search/edit.svg">
+                            </div>
                         </div>
                     </div>
                     <div class="row">

@@ -140,3 +140,14 @@ p{
 .mb-custom{
   margin-bottom: 1vw;
 }
+.mr-custom{
+  margin-right: 2vw!important;
+}
+.edit{
+  width: 1.6vw;
+  height: 1.6vw;
+  padding: .35vw;
+  background: var(--extraLightGray);
+  border-radius: .3vw;
+  cursor: pointer;
+}

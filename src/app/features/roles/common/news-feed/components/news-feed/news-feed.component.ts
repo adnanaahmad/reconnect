@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
 import {NewsFeedModel, PostModel} from '../../models/news-feed.model';
-import {DeleteConfirmationPopupComponent} from '../../../../../../shared/components/delete-confirmation-popup/delete-confirmation-popup.component';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddNewsFeedComponent} from '../../popups/add-news-feed/add-news-feed.component';
 import {StoreService} from '../../../../../../core/store/store.service';
@@ -19,15 +17,13 @@ import {ToastrService} from 'ngx-toastr';
 export class NewsFeedComponent implements OnInit {
     newsFeed: NewsFeedModel = {} as NewsFeedModel;
 
-    constructor(private sanitizer: DomSanitizer,
-                private modalService: NgbModal,
+    constructor(private modalService: NgbModal,
                 private config: NgbModalConfig,
                 public store: StoreService,
                 public constant: ConstantService,
                 private feed: FeedService,
                 public helper: HelperService,
                 private toaster: ToastrService) {
-        //config.animation = true;
         config.container = 'app-news-feed';
         config.centered = true;
     }

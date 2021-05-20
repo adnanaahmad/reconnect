@@ -14,7 +14,7 @@ import {StoreService} from '../../../../../../core/store/store.service';
   styleUrls: ['./add-new-borrower.component.scss']
 })
 export class AddNewBorrowerComponent implements OnInit {
-  borrower: FormGroup
+  borrower: FormGroup;
   constructor( private toaster: ToastrService,
                private activeModal: NgbActiveModal,
                private helper: HelperService,
