@@ -33,6 +33,7 @@ import { LandingPageCardComponent } from './components/landing-page-card/landing
 import { LandingSideNavComponent } from './components/landing-side-nav/landing-side-nav.component';
 import {RouterModule} from '@angular/router';
 import { SafeUrlPipe } from './pipes/safeUrl/safe-url.pipe';
+import {DatePickerComponent} from './components/date-picker/date-picker.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -65,6 +66,7 @@ const maskConfig: Partial<IConfig> = {
         LandingPageCardComponent,
         LandingSideNavComponent,
         SafeUrlPipe,
+        DatePickerComponent
     ],
     imports: [
         CommonModule,
@@ -107,7 +109,8 @@ const maskConfig: Partial<IConfig> = {
         LandingPageCardComponent,
         LandingSideNavComponent,
         LandingSideNavComponent,
-        SafeUrlPipe
+        SafeUrlPipe,
+        DatePickerComponent
     ],
     providers: [NgbDateNativeAdapter]
 })

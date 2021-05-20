@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TodoModel} from '../../models/todo-model';
-import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {NgbCalendar, NgbDateNativeAdapter, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {CreateNewTaskComponent} from '../../popups/create-new-task/create-new-task.component';
 import {TodoListService} from '../../services/todo-list.service';
 import {take} from 'rxjs/operators';
@@ -10,30 +10,46 @@ import {forkJoin} from 'rxjs';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {ToastrService} from 'ngx-toastr';
 import {StoreService} from '../../../../../../core/store/store.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnDestroy {
   todo: TodoModel = {} as TodoModel;
   constructor(private configuration: NgbModalConfig,
               private modalService: NgbModal,
               private todoService: TodoListService,
               public constant: ConstantService,
               private toaster: ToastrService,
-              public store: StoreService) {
+              public store: StoreService,
+              private dateFormat: NgbDateNativeAdapter,
+              private calendar: NgbCalendar) {
     configuration.centered = true;
     configuration.container = 'app-todo-list';
   }
 
   ngOnInit(): void {
+    this.todo.subscription = [];
+    this.initializeDefaultDateRange();
     this.getTodoList();
+    this.getTodoDataBasedOnDates();
+  }
+  ngOnDestroy(): void {
+    this.store.updateDashboardDate(null);
+    this.todo.subscription.forEach(x => x.unsubscribe());
+  }
+  initializeDefaultDateRange(): void{
+    this.todo.dates = {
+      todoStartDate : this.dateConversion(this.calendar.getNext(this.calendar.getToday(), 'd', -15)),
+      todoEndDate: this.dateConversion(this.calendar.getNext(this.calendar.getToday(), 'd', +15))
+    };
   }
   getTodoList(): void{
     this.store.updateProgressBarLoading(true);
-    forkJoin([this.todoService.getCalendarCategories(), this.todoService.getTodoList()]).pipe(take(1)).subscribe(res => {
+    forkJoin([this.todoService.getCalendarCategories(), this.todoService.getTodoList(this.objectToQueryParam(this.todo.dates))]).pipe(take(1)).subscribe(res => {
       this.todo.eventCategories = res[0].result;
       this.todo.list = res[1].result;
       this.filterSelected(this.constant.TODO_FILTERS.ALL);
@@ -183,5 +199,30 @@ export class TodoListComponent implements OnInit {
   }
   filterSelected(data): void{
     this.store.updateTodoFilter(data);
+  }
+  getTodoDataBasedOnDates(): void{
+    this.todo.subscription.push(
+        this.store.dashboardDate.subscribe(res => {
+          if (res) {
+            this.setDateRange(res);
+            this.getTodoList();
+          }
+        })
+    );
+  }
+  dateConversion(date): string{
+    return new DatePipe('en-US').transform(this.dateFormat.toModel(date), 'yyyy-MM-dd');
+  }
+  setDateRange(dates): void{
+    switch (Object.keys(dates)[0]) {
+      case 'todo':
+        this.todo.dates.todoStartDate =  this.dateConversion(dates.todo[0]);
+        this.todo.dates.todoEndDate =  this.dateConversion(dates.todo[1]);
+        break;
+      default:
+    }
+  }
+  objectToQueryParam(data): string{
+    return Object.keys(data).map(key => key + '=' + data[key]).join('&');
   }
 }

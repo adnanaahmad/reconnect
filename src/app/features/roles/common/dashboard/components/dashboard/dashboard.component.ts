@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.getDashboardDataBasedOnDates();
   }
   ngOnDestroy(): void {
+    this.store.updateDashboardDate(null);
     this.subscription.unsubscribe();
   }
   initializeData(): void {

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {NgbCalendar, NgbDate, NgbDateParserFormatter, NgbDatepickerConfig} from '@ng-bootstrap/ng-bootstrap';
-import {StoreService} from '../../../../../../core/store/store.service';
+import {StoreService} from '../../../core/store/store.service';
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
@@ -49,6 +49,10 @@ export class DatePickerComponent implements OnInit {
         this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 0);
         break;
       case 'commission':
+        this.fromDate = this.calendar.getNext(this.calendar.getToday(), 'd', -15);
+        this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', +15);
+        break;
+      case 'todo':
         this.fromDate = this.calendar.getNext(this.calendar.getToday(), 'd', -15);
         this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', +15);
         break;

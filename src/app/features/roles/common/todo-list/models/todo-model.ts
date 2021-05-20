@@ -1,7 +1,11 @@
+import {Subscription} from 'rxjs';
+
 export interface TodoModel {
     list: Array<TaskModel>;
     eventCategories: Array<any>;
     filter: string;
+    subscription: Array<Subscription>;
+    dates: DatesModel;
 }
 
 interface TaskModel{
@@ -31,4 +35,8 @@ export interface EditTaskModel{
     note: string;
     date: Date;
     _id: string;
+}
+interface DatesModel{
+    todoStartDate: string;
+    todoEndDate: string;
 }
