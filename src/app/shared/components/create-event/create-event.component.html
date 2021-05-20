@@ -1,36 +1,40 @@
 <div class="form-div">
   <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
-  <form [formGroup] = "eventForm" (ngSubmit)="onSubmit()">
+  <form [formGroup] = "eventForm">
      <div class="card-1">
        <p class="heading">{{edit ? 'Edit' : 'Create'}} Event</p>
-       <p class="title">Event title</p>
-       <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
+       <p [ngClass]="{'danger': eventForm.get('title').invalid && eventForm.get('title').touched}" class="title">Event title</p>
+       <input [class.is-invalid]="eventForm.get('title').invalid && eventForm.get('title').touched" formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
        <div class="d-flex justify-content-between mb-custom">
           <div class="mr-custom">
-            <p class="title">Date</p>
+            <p [ngClass]="{'danger': eventForm.get('date').invalid && eventForm.get('date').touched}" class="title" class="title">Date</p>
             <div class="date-div">
               <img class="calendar-icon" src="/assets/menu-icons/calendar.svg" (click)="d.toggle()">
-              <input class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
+              <input [class.is-invalid]="eventForm.get('date').invalid && eventForm.get('date').touched"
+                      class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
                      name="dp" formControlName="date"  ngbDatepicker #d="ngbDatepicker">
             </div>
           </div>
          <div>
-           <p class="title">Starts at</p>
-           <input formControlName="time" type="text" class="form-control f1 width-custom" mask="00:00" [class.is-invalid]="eventForm.get('time').invalid && eventForm.get('time').touched"  placeholder="00:00">
+           <p [ngClass]="{'danger': eventForm.get('time').invalid && eventForm.get('time').touched}" class="title" class="title">Starts at</p>
+           <input formControlName="time" type="text" class="form-control f1 width-custom" mask="00:00"
+                  [class.is-invalid]="eventForm.get('time').invalid && eventForm.get('time').touched"  placeholder="24 hours format">
          </div>
        </div>
-       <p class="title">Add a note</p>
-       <textarea formControlName="note" class="form-control f2 mb-custom" id="exampleFormControlTextarea1" rows="3"></textarea>
+       <p [ngClass]="{'danger': eventForm.get('note').invalid && eventForm.get('note').touched}" class="title">Add a note</p>
+       <textarea [class.is-invalid]="eventForm.get('note').invalid && eventForm.get('note').touched" formControlName="note" class="form-control f2 mb-custom" id="exampleFormControlTextarea1" rows="3"></textarea>
        <div class="d-flex justify-content-between mb-custom">
          <div formGroupName="eventCategory">
            <div>
              <label class="container">
                <input formControlName="status" id="myCheck" type="checkbox">
                <img class="checkmark" src="/assets/loan-details/tick.svg">
-               <p class="title">Event Category</p>
+               <p [ngClass]="{'danger': (eventForm.get(['eventCategory', 'value']).invalid && eventForm.get(['eventCategory', 'value']).touched) || (eventForm.get(['eventCategory', 'status']).invalid && eventForm.get(['eventCategory', 'status']).touched)}" class="title">
+                 Event Category
+               </p>
              </label>
            </div>
-           <select formControlName="value" class="form-control f1 width-custom">
+           <select formControlName="value" class="form-control f1 width-custom" [class.is-invalid]="eventForm.get(['eventCategory', 'value']).invalid && eventForm.get(['eventCategory', 'value']).touched" >
              <option [ngValue]="null" [disabled]="true">Choose</option>
              <option *ngFor="let i of eventCategories">{{i.title}}</option>
            </select>
@@ -40,9 +44,9 @@
            <label class="container">
              <input formControlName="status" type="checkbox">
              <img class="checkmark" src="/assets/loan-details/tick.svg">
-             <p class="title text-nowrap">Add Custom Category</p>
+             <p [ngClass]="{'danger': (eventForm.get(['customEventCategory', 'value']).invalid && eventForm.get(['customEventCategory', 'value']).touched) || (eventForm.get(['customEventCategory', 'status']).invalid && eventForm.get(['customEventCategory', 'status']).touched)}" class="title text-nowrap">Add Custom Category</p>
            </label>
-           <input formControlName="value" type="text" class="form-control f1 width-custom"  placeholder="">
+           <input [class.is-invalid]="eventForm.get(['customEventCategory', 'value']).invalid && eventForm.get(['customEventCategory', 'value']).touched" formControlName="value" type="text" class="form-control f1 width-custom"  placeholder="">
          </div>
        </div>
        <ng-container *ngIf="store.role !== constant.role.BUYER && !edit">
@@ -84,7 +88,7 @@
                </div>
              </ng-container>
            </div>
-           <button type="submit"  [disabled]="eventForm.invalid" class="launch align-self-end">Launch Event</button>
+           <button type="button" (click)="onSubmit()" class="launch align-self-end">Launch Event</button>
          </div>
        </ng-container>
      </div>

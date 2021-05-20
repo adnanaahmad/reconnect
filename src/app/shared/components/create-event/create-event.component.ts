@@ -111,7 +111,11 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   onSubmit(): void {
-    this.addEvent({data: Object.assign(this.eventForm.value, {team: this.teamData.selectedTeam})});
+    if (this.eventForm.invalid) {
+      this.eventForm.markAllAsTouched();
+    } else {
+      this.addEvent({data: Object.assign(this.eventForm.value, {team: this.teamData.selectedTeam})});
+    }
   }
   close(): void{
     this.activeModal.close({status: 'no'});
