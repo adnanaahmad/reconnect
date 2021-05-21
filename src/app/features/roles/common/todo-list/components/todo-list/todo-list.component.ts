@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {TodoModel} from '../../models/todo-model';
 import {NgbCalendar, NgbDateNativeAdapter, NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {CreateNewTaskComponent} from '../../popups/create-new-task/create-new-task.component';
@@ -15,7 +15,8 @@ import {DatePipe} from '@angular/common';
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss']
+  styleUrls: ['./todo-list.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class TodoListComponent implements OnInit, OnDestroy {
   todo: TodoModel = {} as TodoModel;
