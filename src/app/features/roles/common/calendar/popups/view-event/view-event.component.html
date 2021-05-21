@@ -2,7 +2,10 @@
   <div class="first-row d-flex justify-content-between">
     <p class="heading text-nowrap align-self-center">{{view._def.extendedProps.category.title | titlecase}}</p>
     <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
-    <button *ngIf="store.userId === view._def.extendedProps.createdBy" (click)="edit()" class="edit">Edit</button>
+    <div class="d-flex" *ngIf="store.userId === view._def.extendedProps.createdBy">
+      <button  (click)="edit()" class="edit">Edit</button>
+      <button  (click)="remove()" class="remove">Delete</button>
+    </div>
   </div>
   <p class="title">{{view._def.title | titlecase}}</p>
   <p class="note">{{view._def.extendedProps.note}}</p>

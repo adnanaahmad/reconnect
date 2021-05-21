@@ -29,4 +29,7 @@ export class CalendarService {
   removeEventCategory(id): Observable<any>{
     return this.helper.requestCall(this.methods.delete, this.api.removeEventCategory + id);
   }
+  removeEvent(id): Observable<any>{
+    return this.helper.requestCall(this.methods.delete, this.api.removeEvent + id);
+  }
 }

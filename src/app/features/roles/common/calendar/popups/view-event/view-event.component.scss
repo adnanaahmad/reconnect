@@ -8,7 +8,7 @@ p{
   color: var(--green);
   font-size:0.85vw;
   margin-bottom: 0;
-  margin-right: 25vw;
+  margin-right: 22vw;
 }
 .first-row{
   margin-bottom: 1vw;
@@ -21,9 +21,8 @@ p{
   width: .7vw;
   cursor: pointer;
 }
-.edit{
+.edit, .remove{
   margin-bottom: 0;
-  background: var(--darkBlueOne);
   color: white;
   padding: .4vw 1.5vw .4vw 1.5vw;
   border-radius: .3vw;
@@ -31,7 +30,14 @@ p{
   border: none;
   cursor: pointer;
 }
-.edit:focus{
+.edit{
+  background: var(--darkBlueOne);
+  margin-right: 1vw;
+}
+.remove{
+  background: var(--red);
+}
+.edit:focus, .remove:focus{
   outline: none;
 }
 .title{

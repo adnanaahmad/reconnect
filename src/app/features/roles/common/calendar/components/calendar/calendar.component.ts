@@ -115,8 +115,10 @@ export class CalendarComponent implements OnInit {
     const modalRef = this.modalService.open(ViewEventComponent);
     modalRef.componentInstance.view = clickInfo.event;
     modalRef.result.then((res) => {
-      if (res.status === 'yes') {
+      if (res.status === 'edit') {
         this.editEvent(clickInfo);
+      } else if (res.status === 'remove'){
+        clickInfo.event.remove();
       }
     }, error => {
       console.log(error);

@@ -56,6 +56,7 @@ export class ConstantService {
      editCalendarEvent: `${environment.apiUrl}/calendar/update-event/`,
      getCalendarCategories: `${environment.apiUrl}/calendar/my-categories`,
      removeEventCategory: `${environment.apiUrl}/calendar/delete-category/`,
+     removeEvent: `${environment.apiUrl}/calendar/delete-event/`,
      getTodo: `${environment.apiUrl}/todo/get`,
      createTodo: `${environment.apiUrl}/todo/create`,
      updateTodo: `${environment.apiUrl}/todo/update/`,

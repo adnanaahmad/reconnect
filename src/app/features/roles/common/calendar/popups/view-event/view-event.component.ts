@@ -6,7 +6,8 @@ import {ChatService} from '../../../team-message-board/services/chat.service';
 import {TeamDataModel} from '../../../team-message-board/models/chat.model';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {StoreService} from '../../../../../../core/store/store.service';
-import {data} from '../../../../../../../../yFiles/demos-ts/complete/processmining/ProcessGraphData';
+import {CalendarService} from '../../services/calendar.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-view-event',
@@ -20,7 +21,9 @@ export class ViewEventComponent implements OnInit {
               public activeModal: NgbActiveModal,
               private chatService: ChatService,
               public constant: ConstantService,
-              public store: StoreService) { }
+              public store: StoreService,
+              private calendarService: CalendarService,
+              private toaster: ToastrService) { }
 
   ngOnInit(): void {
     this.helper.setModalPosition();
@@ -33,7 +36,15 @@ export class ViewEventComponent implements OnInit {
     this.activeModal.close({status: 'no'});
   }
   edit(): void{
-    this.activeModal.close({status: 'yes'});
+    this.activeModal.close({status: 'edit'});
+  }
+  remove(): void {
+    this.calendarService.removeEvent(this.view._def.extendedProps._id).pipe(take(1)).subscribe(res => {
+      this.toaster.success('Event deleted');
+      this.activeModal.close({status: 'remove'});
+    }, error => {
+      this.helper.handleApiError(error, 'Failed to delete event');
+    });
   }
   getTeamProfessional(): void{
     this.chatService.getTeamById(this.view._def.extendedProps.team).pipe(take(1)).subscribe(res => {
