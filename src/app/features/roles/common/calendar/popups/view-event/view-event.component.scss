@@ -3,12 +3,12 @@ p{
 }
 .card-1{
   padding: 3vw 3.5vw 2.5vw 2.5vw;
+  min-width: 40vw !important;
 }
 .heading{
   color: var(--green);
   font-size:0.85vw;
   margin-bottom: 0;
-  margin-right: 22vw;
 }
 .first-row{
   margin-bottom: 1vw;
@@ -29,6 +29,7 @@ p{
   font-size: .75vw;
   border: none;
   cursor: pointer;
+  height: min-content;
 }
 .edit{
   background: var(--darkBlueOne);

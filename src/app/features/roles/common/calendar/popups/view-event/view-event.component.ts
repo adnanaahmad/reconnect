@@ -17,6 +17,7 @@ import {ToastrService} from 'ngx-toastr';
 export class ViewEventComponent implements OnInit {
   @Input() view;
   team: TeamDataModel = {} as TeamDataModel;
+  createdBy: string;
   constructor(private helper: HelperService,
               public activeModal: NgbActiveModal,
               private chatService: ChatService,
@@ -30,6 +31,7 @@ export class ViewEventComponent implements OnInit {
     if (this.view._def.extendedProps.team){
       this.getTeamProfessional();
     }
+    this.getEventPublisher();
     console.log(this.view);
   }
   close(): void{
@@ -61,6 +63,13 @@ export class ViewEventComponent implements OnInit {
       !this.view._def.extendedProps.members.includes(data[element]._id))){
         delete data[element];
       }
+    });
+  }
+  getEventPublisher(): void{
+    this.calendarService.getUserDataById(this.view._def.extendedProps.createdBy).pipe(take(1)).subscribe(res => {
+      this.createdBy = res.result.firstName + ' ' + res.result.lastName;
+    }, error => {
+      this.helper.handleApiError(error, 'Failed to fetch event publisher');
     });
   }
 }

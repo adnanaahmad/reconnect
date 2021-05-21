@@ -32,4 +32,7 @@ export class CalendarService {
   removeEvent(id): Observable<any>{
     return this.helper.requestCall(this.methods.delete, this.api.removeEvent + id);
   }
+  getUserDataById(data): Observable<any>{
+    return this.helper.requestCall(this.methods.get, `${this.api.viewBuyer}?userId=${data}` );
+  }
 }
