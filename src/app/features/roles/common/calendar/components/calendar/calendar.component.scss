@@ -95,10 +95,10 @@
 }
 
 :host ::ng-deep .fc-highlight{
-  background: white !important;
+  background-color: var(--fc-today-bg-color,rgba(255, 220, 40, 0)) !important;
 }
 :host ::ng-deep .fc-day-today{
-  background: white !important;
+  background-color: var(--fc-today-bg-color,rgba(255, 220, 40, 0)) !important;
 }
 .heading{
   margin-bottom: var(--heading);
