@@ -16,8 +16,7 @@ export class PublisherComponent implements OnInit {
               public store: StoreService,
               private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   removePost(): void{
     this.remove.emit();
   }
@@ -28,5 +27,10 @@ export class PublisherComponent implements OnInit {
     if (this.store.role === this.constant.role.BUYER){
       this.router.navigateByUrl('/home/profile/viewProfile/' + this.post.createdBy._id).then();
     }
+  }
+  toggleShare(id): void{
+    const element = document.getElementById(id);
+    window.getComputedStyle(element, null).getPropertyValue('display') === 'none' ?
+        element.style.display = 'block' : element.style.display = 'none';
   }
 }

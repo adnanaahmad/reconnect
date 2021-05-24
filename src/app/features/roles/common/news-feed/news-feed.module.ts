@@ -11,14 +11,31 @@ import { AddNewsFeedComponent } from './popups/add-news-feed/add-news-feed.compo
 import {SharedModule} from '../../../../shared/shared.module';
 import { AddExternalLinkComponent } from './popups/add-external-link/add-external-link.component';
 import { PublisherComponent } from './components/publisher/publisher.component';
+import {ShareButtonsModule} from 'ngx-sharebuttons/buttons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {ShareIconsModule} from 'ngx-sharebuttons/icons';
 
 
 @NgModule({
-  declarations: [NewsFeedComponent, VariantOneComponent, VariantTwoComponent, VariantThreeComponent, VariantFourComponent, AddNewsFeedComponent, AddExternalLinkComponent, PublisherComponent],
+  declarations: [
+      NewsFeedComponent,
+      VariantOneComponent,
+      VariantTwoComponent,
+      VariantThreeComponent,
+      VariantFourComponent,
+      AddNewsFeedComponent,
+      AddExternalLinkComponent,
+      PublisherComponent
+  ],
     imports: [
         CommonModule,
         NewsFeedRoutingModule,
         SharedModule,
+        ShareButtonsModule.withConfig({
+            debug: true
+        }),
+        ShareIconsModule,
+        FontAwesomeModule,
     ]
 })
 export class NewsFeedModule { }

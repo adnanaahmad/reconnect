@@ -30,6 +30,7 @@
   height: 1.8vw;
   width: 1.8vw;
   margin-right: 1vw;
+  cursor: pointer;
 }
 .delete-icon{
   width: 1.8vw;
@@ -54,4 +55,27 @@
 }
 .profile{
   cursor: pointer;
+}
+.share-social-icons{
+  width: 10.5vw;
+  padding: .5vw;
+  //border: 1px black solid;
+  position: absolute;
+  top: -4vw;
+  //left: -2vw;
+  z-index: 1;
+  background: white;
+  box-shadow: 0px 6px 49px #424d6326;
+  border-radius: .5vw;
+  display: none;
+}
+::ng-deep .sb-wrapper.sb-show-icon{
+  font-size: .75vw !important;
+  min-width: 1.1vw;
+}
+::ng-deep .sb-group {
+  flex-wrap: nowrap;
+}
+::ng-deep .sb-button{
+  margin: .3vw;
 }
