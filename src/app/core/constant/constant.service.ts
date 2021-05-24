@@ -57,6 +57,7 @@ export class ConstantService {
      getCalendarCategories: `${environment.apiUrl}/calendar/my-categories`,
      removeEventCategory: `${environment.apiUrl}/calendar/delete-category/`,
      removeEvent: `${environment.apiUrl}/calendar/delete-event/`,
+     getEvent: `${environment.apiUrl}/calendar/event-details/`,
      getTodo: `${environment.apiUrl}/todo/get`,
      createTodo: `${environment.apiUrl}/todo/create`,
      updateTodo: `${environment.apiUrl}/todo/update/`,
@@ -477,7 +478,7 @@ export class ConstantService {
       colorIcon: '/assets/calendar-icons/blue.svg', color: '#CBFFF9', textColor: '#37DFCC'
     },
     pink: {
-      colorIcon: '/assets/calendar-icons/blue.svg', color: '#FFC7FA', textColor: '#f756e8', title: 'Invited Events'
+      colorIcon: '/assets/calendar-icons/pink.svg', color: '#FFC7FA', textColor: '#f756e8', title: 'Invited Events'
     }
   };
   searchFilters = {
@@ -765,7 +766,8 @@ export class ConstantService {
     BUYER_QUOTE_REQUEST_REJECTED: 'buyer_quote-request-rejected',
     ALL_NEW_MESSAGE: 'all_new-message',
     BUYER_IMPORTANT_DATE_UPDATED: 'buyer_important-date-updated',
-    LENDER_TARGET_PROPERTY_SET: 'lender_target-property-set'
+    LENDER_TARGET_PROPERTY_SET: 'lender_target-property-set',
+    ALL_CALENDAR_EVENT_CREATED: 'all_calendar-event-created'
   };
   TODO_FILTERS = {
     ALL: 'all',

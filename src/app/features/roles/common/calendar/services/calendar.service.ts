@@ -17,6 +17,9 @@ export class CalendarService {
   getCalendarEvents(data): Observable<any>{
     return this.helper.requestCall(this.methods.get, `${this.api.getCalendarEvents}?${data}` );
   }
+  getCalendarEventById(data): Observable<any>{
+    return this.helper.requestCall(this.methods.get, `${this.api.getEvent}${data}` );
+  }
   createEvent(data): Observable<any>{
     return this.helper.requestCall(this.methods.post, this.api.createCalendarEvent, data);
   }

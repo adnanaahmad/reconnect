@@ -30,3 +30,7 @@ export interface NotificationModel{
   __v: number;
   _id: string;
 }
+export interface NotificationComponentModel{
+  route: string;
+  text: string;
+}

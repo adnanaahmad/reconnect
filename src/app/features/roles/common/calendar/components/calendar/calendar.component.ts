@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {EventClickArg, FullCalendarComponent} from '@fullcalendar/angular';
 import { CreateEventComponent} from '../../../../../../shared/components/create-event/create-event.component';
 import {NgbModal, NgbModalConfig, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +11,7 @@ import {take} from 'rxjs/operators';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {ToastrService} from 'ngx-toastr';
 import {HelperService} from '../../../../../../core/helper/helper.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
@@ -18,7 +19,7 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
   styleUrls: ['./calendar.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
   calendar: CalendarModel = {} as CalendarModel;
   newEventCategory = new FormControl(null);
   @ViewChild('cal') calendarComponent: FullCalendarComponent;
@@ -30,17 +31,36 @@ export class CalendarComponent implements OnInit {
               private calendarService: CalendarService,
               public store: StoreService,
               private toaster: ToastrService,
-              private helper: HelperService) {
+              private helper: HelperService,
+              private activatedRoute: ActivatedRoute) {
     configuration.centered = true;
     configuration.container = 'app-calendar';
     configuration.animation = true;
   }
 
   ngOnInit(): void {
+    this.calendar.subscription = [];
     this.calendar.eventCategories = [];
     this.calendar.currentEvents = [];
     this.calendar.dates = this.setDateRange(new Date());
     this.getCalendarEventsAndCategories();
+    this.calendar.subscription.push(
+        this.activatedRoute.queryParams.subscribe(params => {
+          if (params.viewEvent){
+            this.getEventById(params.viewEvent);
+          }
+        })
+    );
+  }
+  ngOnDestroy(): void {
+    this.calendar.subscription.forEach(x => x.unsubscribe());
+  }
+  getEventById(id): void{
+    this.calendarService.getCalendarEventById(id).pipe(take(1)).subscribe(res => {
+      this.viewInvitedEventFromNotification(this.eventDataStructure(res.result[0]));
+    }, error => {
+      this.helper.handleApiError(error, 'Failed to retrieve event');
+    });
   }
   getCalendarEventsAndCategories(): void{
     this.store.updateProgressBarLoading(true);
@@ -120,7 +140,7 @@ export class CalendarComponent implements OnInit {
     modalRef.componentInstance.eventCategories = this.calendar.eventCategories;
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
-        //console.log(result.data);
+        // console.log(result.data);
         this.calendarComponent.getApi().addEvent(result.data);
       }
     }, error => {
@@ -138,6 +158,17 @@ export class CalendarComponent implements OnInit {
       }
     }, error => {
       console.log(error);
+    });
+  }
+  viewInvitedEventFromNotification(data): void {
+    const modalRef = this.modalService.open(ViewEventComponent);
+    modalRef.componentInstance.view = data;
+    modalRef.result.then((res) => {
+      if (res.status === 'no'){
+        window.history.replaceState({}, '', `/home/calendar`);
+      }
+    }, error => {
+      window.history.replaceState({}, '', `/home/calendar`);
     });
   }
   editEvent(clickInfo: EventClickArg): void{
@@ -201,5 +232,25 @@ export class CalendarComponent implements OnInit {
       element.textColor = this.constant.eventColorDetails.pink.textColor;
     }
     return element;
+  }
+  eventDataStructure(data): {_instance: any; _def: any; } {
+    return {
+      _instance: {
+        range: {
+          start: data.date
+        }
+      },
+      _def: {
+        title: data.title,
+        extendedProps: {
+          team: data.team,
+          members: data.members,
+          category: data.category,
+          note: data.note,
+          _id: data._id,
+          createdBy: data.createdBy
+        }
+      }
+    };
   }
 }
