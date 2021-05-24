@@ -18,7 +18,7 @@
          </div>
          <p class="ec-heading">Event Categories</p>
          <div id='external-events' class="external-events">
-            <div *ngFor="let i of calendar.eventCategories" class="category">
+            <div *ngFor="let i of [constant.eventColorDetails.pink].concat(calendar.eventCategories)" class="category">
                <div>
                   <img [style.background]="i.color" [src]="i.colorIcon" class="color-icons">
                </div>
@@ -32,6 +32,14 @@
    </div>
    <div class="col-9 column-2" >
       <div class="calendar-card" style="">
+          <div class="d-flex action-btn-parent">
+              <button class="action-btn">
+                  <img (click)="previous()" src="/assets/landing/prev.svg" class="action-btn-icon">
+              </button>
+              <button class="action-btn">
+                  <img (click)="next()" src="/assets/landing/next.svg" class="action-btn-icon">
+              </button>
+          </div>
          <full-calendar #cal [options]="calendar.calendarOptions"></full-calendar>
       </div>
    </div>

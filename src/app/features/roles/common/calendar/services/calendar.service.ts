@@ -14,8 +14,8 @@ export class CalendarService {
     this.api = this.constant.apiRoutes;
     this.methods = this.constant.apiMethod;
   }
-  getCalendarEvents(): Observable<any>{
-    return this.helper.requestCall(this.methods.get, this.api.getCalendarEvents);
+  getCalendarEvents(data): Observable<any>{
+    return this.helper.requestCall(this.methods.get, `${this.api.getCalendarEvents}?${data}` );
   }
   createEvent(data): Observable<any>{
     return this.helper.requestCall(this.methods.post, this.api.createCalendarEvent, data);
@@ -26,8 +26,8 @@ export class CalendarService {
   editCalendarEvent(data, id): Observable<any>{
     return this.helper.requestCall(this.methods.put, this.api.editCalendarEvent + id, data);
   }
-  removeEventCategory(id): Observable<any>{
-    return this.helper.requestCall(this.methods.delete, this.api.removeEventCategory + id);
+  removeEventCategory(id, data): Observable<any>{
+    return this.helper.requestCall(this.methods.delete, this.api.removeEventCategory + id + `?${data}`);
   }
   removeEvent(id): Observable<any>{
     return this.helper.requestCall(this.methods.delete, this.api.removeEvent + id);

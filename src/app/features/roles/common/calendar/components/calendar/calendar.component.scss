@@ -82,6 +82,7 @@
 ::ng-deep .calendar-card{
   background: white;
   height: 100%;
+  position: relative;
 }
 ::ng-deep .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
   margin-bottom: 1.5vw !important;
@@ -116,6 +117,7 @@ h6{
 }
 .column-2{
   padding-left: 0;
+  position: relative;
 }
 .create-button-text p{
   margin-bottom: 0;
@@ -273,6 +275,9 @@ ngb-modal-backdrop{
   .event-card{
     padding-right: 10px;
   }
+  ::ng-deep .fc-toolbar-title{
+    margin-top: .7vw !important;
+  }
 }
 @media only screen and (max-width: 768px) {
   .column-1{
@@ -323,4 +328,27 @@ ngb-modal-backdrop{
   ::ng-deep .fc-prev-button.fc-button.fc-button-primary{
     margin-left: 3em;
   }
+}
+.action-btn-icon{
+  height: 1vw;
+  width: 1vw;
+  border-radius: .5vw;
+  cursor: pointer;
+  filter: invert(27%) sepia(51%) saturate(0%) hue-rotate(346deg) brightness(50%) contrast(97%);
+}
+.action-btn{
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+.action-btn:focus{
+  outline: none;
+}
+.action-btn-parent{
+  position: absolute;
+  left: 13vw;
+  top: 2.15vw;
+}
+.action-btn:first-child{
+  margin-right: 1.7vw;
 }

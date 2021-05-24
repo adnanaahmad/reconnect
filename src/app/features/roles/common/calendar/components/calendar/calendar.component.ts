@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {EventClickArg, FullCalendarComponent} from '@fullcalendar/angular';
 import { CreateEventComponent} from '../../../../../../shared/components/create-event/create-event.component';
 import {NgbModal, NgbModalConfig, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
-import { CalendarModel} from '../../models/calendar.model';
+import {CalendarModel, EventDatesModel} from '../../models/calendar.model';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {FormControl} from '@angular/forms';
 import {ViewEventComponent} from '../../popups/view-event/view-event.component';
@@ -10,6 +10,7 @@ import {CalendarService} from '../../services/calendar.service';
 import {take} from 'rxjs/operators';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {ToastrService} from 'ngx-toastr';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-calendar',
@@ -28,7 +29,8 @@ export class CalendarComponent implements OnInit {
               private dateFormat: NgbDateNativeAdapter,
               private calendarService: CalendarService,
               public store: StoreService,
-              private toaster: ToastrService) {
+              private toaster: ToastrService,
+              private helper: HelperService) {
     configuration.centered = true;
     configuration.container = 'app-calendar';
     configuration.animation = true;
@@ -37,26 +39,40 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.calendar.eventCategories = [];
     this.calendar.currentEvents = [];
+    this.calendar.dates = this.setDateRange(new Date());
     this.getCalendarEventsAndCategories();
   }
   getCalendarEventsAndCategories(): void{
     this.store.updateProgressBarLoading(true);
-    this.calendarService.getCalendarEvents().pipe(take(1)).subscribe(res => {
+    this.calendarService.getCalendarEvents(this.objectToQueryParam(this.calendar.dates)).pipe(take(1)).subscribe(res => {
       console.log('calendar events', res);
       this.store.updateProgressBarLoading(false);
       this.calendar.eventCategories = res.result.categories;
-      this.calendar.currentEvents = res.result.events;
+      res.result.events.forEach(element => {
+           element = this.setInviteEventColor(element);
+           this.calendar.currentEvents.push(element);
+      });
       this.initializeCalendar(this.calendar.currentEvents);
     }, error => {
-      console.log(error);
+      this.helper.handleApiError(error, 'Failed to retrieve events');
       this.store.updateProgressBarLoading(false);
+    });
+  }
+  getCalendarEvents(): void{
+    this.calendarService.getCalendarEvents(this.objectToQueryParam(this.calendar.dates)).pipe(take(1)).subscribe(res => {
+      this.calendarComponent.getApi().removeAllEvents();
+      res.result.events.forEach(element => {
+        element = this.setInviteEventColor(element);
+        this.calendarComponent.getApi().addEvent(element);
+      });
+    }, error => {
+      this.helper.handleApiError(error, 'Failed to retrieve events');
     });
   }
   initializeCalendar(eventList): void {
     this.calendar.calendarOptions = {
       headerToolbar: {
         left: 'title',
-        center: 'prev,next',
         right: 'today'
       },
       initialView: 'dayGridMonth',
@@ -143,13 +159,47 @@ export class CalendarComponent implements OnInit {
   }
 
   deleteEventCategory(id: string): void{
-    this.calendarService.removeEventCategory(id).pipe(take(1)).subscribe(res => {
+    this.calendarService.removeEventCategory(id, this.objectToQueryParam(this.calendar.dates)).pipe(take(1)).subscribe(res => {
       this.calendar.eventCategories = res.result.categories;
-      this.calendar.currentEvents = res.result.events;
-      this.initializeCalendar(this.calendar.currentEvents);
+      this.calendarComponent.getApi().removeAllEvents();
+      res.result.events.forEach(element => {
+        element = this.setInviteEventColor(element);
+        this.calendarComponent.getApi().addEvent(element);
+      });
       this.toaster.success('Category removed successfully');
     }, error => {
       this.toaster.error('Failed to remove category');
     });
+  }
+  previous(): void{
+    this.calendarComponent.getApi().prev();
+    this.calendar.dates = this.setDateRange(this.calendarComponent.getApi().getDate());
+    this.getCalendarEvents();
+   // console.log(this.calendar.dates);
+  }
+  next(): void{
+    this.calendarComponent.getApi().next();
+    this.calendar.dates = this.setDateRange(this.calendarComponent.getApi().getDate());
+    this.getCalendarEvents();
+    // console.log(this.calendar.dates);
+  }
+  setDateRange(date: Date): EventDatesModel {
+    const y = date.getFullYear();
+    const m = date.getMonth();
+    return {
+      startDate: new Date(y, m, 1),
+      endDate: new Date(y, m + 1, 0)
+    };
+  }
+  objectToQueryParam(data): string{
+    return Object.keys(data).map(key => key + '=' + data[key]).join('&');
+  }
+  setInviteEventColor(element) {
+    if (element.createdBy !== this.store.userId){
+      element.color = this.constant.eventColorDetails.pink.color;
+      element.colorIcon = this.constant.eventColorDetails.pink.colorIcon;
+      element.textColor = this.constant.eventColorDetails.pink.textColor;
+    }
+    return element;
   }
 }

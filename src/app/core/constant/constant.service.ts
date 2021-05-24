@@ -475,6 +475,9 @@ export class ConstantService {
     },
     blue: {
       colorIcon: '/assets/calendar-icons/blue.svg', color: '#CBFFF9', textColor: '#37DFCC'
+    },
+    pink: {
+      colorIcon: '/assets/calendar-icons/blue.svg', color: '#FFC7FA', textColor: '#f756e8', title: 'Invited Events'
     }
   };
   searchFilters = {
