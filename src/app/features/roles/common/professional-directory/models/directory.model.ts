@@ -1,19 +1,9 @@
+import {UserProfileModel} from '../../profile/models/user-profile.model';
+import {FormControl} from '@angular/forms';
+
 export interface ProfessionalDirectoryModel {
   selectedButton: string;
   buttons: Array<string>;
-  professionalDirectory: Array<DirectoryModel>;
-}
-
-interface DirectoryModel{
-  name: string;
-  image: string;
-  role: string;
-  number: string;
-  socialMedia: {
-    facebook: string;
-    instagram: string;
-    linkedin: string;
-    twitter: string;
-    world: string;
-  };
+  professionalDirectory: Array<UserProfileModel>;
+  searchName: FormControl;
 }
