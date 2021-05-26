@@ -32,7 +32,9 @@
               "yFiles/lib/es-modules/yfiles.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": []
+            "scripts": [
+              "yFiles/lib/es-modules/impl/view-layout-bridge.js"
+            ]
           },
           "configurations": {
             "production": {

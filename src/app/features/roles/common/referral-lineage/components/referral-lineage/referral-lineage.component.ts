@@ -16,13 +16,13 @@ import {
   Size,
   TreeLayout,
   TreeReductionStage,
-  INode, NodeStylePortStyleAdapter, Point, ShapeNodeStyle, GraphTransformer, DefaultNodePlacer
+  INode, NodeStylePortStyleAdapter, Point, ShapeNodeStyle, GraphTransformer, DefaultNodePlacer, Class, LayoutExecutor
 } from 'yfiles';
 import {EDGE_DATA, NODE_DATA} from '../../../../../../../../yFiles/demos-js/toolkit/angular/src/app/data';
 import {GraphComponentComponent} from '../graph-component/graph-component.component';
 import {NodeComponentStyle} from '../../nodeComponentStyle';
 import { BuyerModel } from '../../models/referral-lineage.model';
-
+Class.ensure(LayoutExecutor)
 @Component({
   selector: 'app-referral-lineage',
   templateUrl: './referral-lineage.component.html',
