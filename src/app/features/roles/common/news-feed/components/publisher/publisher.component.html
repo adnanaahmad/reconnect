@@ -11,14 +11,15 @@
     </div>
     <div *ngIf="store.role !== constant.role.BUYER" class="ml-auto align-self-end d-flex" style="position: relative">
         <img (click)="toggleShare('news-feed' + post._id)" class="share-icon share-via-social" src="/assets/news-feed-icons/share.svg">
-        <img [ngStyle]="{'margin-right': post.contentType === constant.feedContentType.CUSTOM ? '1vw' : '0'}" (click)="removePost()" class="delete-icon" src="/assets/news-feed-icons/delete.svg">
-        <img *ngIf="post.contentType === constant.feedContentType.CUSTOM" (click)="editPost()" class="edit" src="/assets/saved-search/edit.svg">
-
+        <ng-container *ngIf="store.userId === post.createdBy._id">
+            <img [ngStyle]="{'margin-right': post.contentType === constant.feedContentType.CUSTOM ? '1vw' : '0'}" (click)="removePost()" class="delete-icon" src="/assets/news-feed-icons/delete.svg">
+            <img *ngIf="post.contentType === constant.feedContentType.CUSTOM" (click)="editPost()" class="edit" src="/assets/saved-search/edit.svg">
+        </ng-container>
         <div [id]="'news-feed' + post._id" class="share-social-icons">
            <share-buttons [theme]="'default'"
                           [include]="['facebook','twitter','linkedin','copy']"
                           [show]="5"
-                          [url]="'https://twitter.com/'"
+                          [url]="url"
            ></share-buttons>
        </div>
     </div>

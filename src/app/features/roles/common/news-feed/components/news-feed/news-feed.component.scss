@@ -59,7 +59,8 @@
 .card-3{
   background: white;
   border-radius: .5em;
-  padding: 1vw
+  padding: 1vw;
+  cursor: pointer;
 }
 .news-img{
   width: 4.3vw;
@@ -92,7 +93,7 @@ p{
 }
 .media-files img, .media-files video, .iframe-video{
   height: 100%;
-  width: 100%;
+  width: 4.3vw;
   object-fit: cover;
   border-radius: .5vw
 }
@@ -101,4 +102,20 @@ p{
   width: 4.3vw;
   height: 4.3vw;
   margin-right: 1vw;
+}
+///////
+.arrow{
+  width: 1vw;
+  height: 1vw;
+  margin-right: .5vw;
+}
+.heading-text p{
+  color: Var(--green);
+  font-size: 1vw;
+  margin-bottom: 0;
+}
+.heading-text{
+  position: absolute;
+  top: 130%;
+  cursor: pointer;
 }

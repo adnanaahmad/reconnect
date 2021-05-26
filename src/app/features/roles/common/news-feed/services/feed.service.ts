@@ -16,6 +16,9 @@ export class FeedService {
   getNewsFeed(): Observable<any> {
     return this.helper.requestCall(this.method.get, this.apiRoutes.getNewsFeed);
   }
+  getPostById(data): Observable<any> {
+    return this.helper.requestCall(this.method.get, this.apiRoutes.getPostById + data);
+  }
   createPost(data): Observable<any>{
     return this.helper.requestCall(this.method.post, this.apiRoutes.createPost, data);
   }

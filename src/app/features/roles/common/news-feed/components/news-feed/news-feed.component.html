@@ -1,5 +1,4 @@
-
-<div class="row d-flex">
+<div *ngIf="newsFeed.screenOne" class="row d-flex">
   <div class="col-9 feed-column">
       <div class="heading d-flex justify-content-between">
           <h3 class="align-self-center">Your Network News Feed</h3>
@@ -18,7 +17,7 @@
   </div>
   <div class="col-3 news-column">
     <h3 class="top-news" style="">Top News</h3>
-    <div *ngFor="let post of newsFeed.adminPosts" class="mb-3 d-flex flex-row card-3">
+    <div *ngFor="let post of newsFeed.adminPosts" class="mb-3 d-flex flex-row card-3" (click)="navigateToPost(post._id)">
         <div class="media-files" *ngIf="post.media[0]">
             <img *ngIf="post.media[0].type === constant.mediaType.IMAGE" [src]="post.media[0].url">
             <video *ngIf="post.media[0].type === constant.mediaType.VIDEO" [src]="post.media[0].url" controls></video>
@@ -33,4 +32,25 @@
     </div>
 
   </div>
+</div>
+
+
+<div *ngIf="!newsFeed.screenOne" class="row d-flex">
+    <div class="col-9 feed-column">
+        <div class="heading d-flex justify-content-between">
+            <h3 class="align-self-center">News Feed Post</h3>
+            <div (click)="location.back(); newsFeed.screenOne = true" class="heading-text d-flex">
+                <img class="arrow align-self-center" src="/assets/transaction-details/arrow.png">
+                <p>Back</p>
+            </div>
+        </div>
+        <div *ngIf="!(store.progressBarLoading | async) && newsFeed.post">
+            <app-variant-one (edit)="editPost(newsFeed.post, -1)" (remove)="removePost(newsFeed.post, -1)" *ngIf="(newsFeed.post.description && newsFeed.post.media.length >= 1) || newsFeed.post.propertyDetails" [post] = "newsFeed.post"></app-variant-one>
+            <app-variant-two (edit)="editPost(newsFeed.post, -1)" (remove)="removePost(newsFeed.post, -1)" *ngIf="!newsFeed.post.description && newsFeed.post.media.length > 1" [post] = "newsFeed.post"></app-variant-two>
+            <app-variant-three (edit)="editPost(newsFeed.post, -1)" (remove)="removePost(newsFeed.post, -1)" *ngIf="!newsFeed.post.description && newsFeed.post.media.length === 1" [post] = "newsFeed.post"></app-variant-three>
+            <app-variant-four (edit)="editPost(newsFeed.post, -1)" (remove)="removePost(newsFeed.post, -1)"  *ngIf="newsFeed.post.description && newsFeed.post.media.length === 0" [post]="newsFeed.post"></app-variant-four>
+        </div>
+    </div>
+    <div class="col-3 news-column">
+    </div>
 </div>

@@ -4,6 +4,9 @@ import {Subscription} from 'rxjs';
 export interface NewsFeedModel{
   adminPosts: Array<any>;
   newsFeed: Array<any>;
+  subscription: Array<Subscription>;
+  screenOne: boolean;
+  post: any;
 }
 export interface CreatePostModel{
   form: FormGroup;

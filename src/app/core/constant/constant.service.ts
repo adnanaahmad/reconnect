@@ -65,6 +65,7 @@ export class ConstantService {
      getFeaturedHomes: `${environment.apiUrl}/listing/featured`,
      getHomeBuyingFeed: `${environment.apiUrl}/feed/home-buying`,
      getNewsFeed: `${environment.apiUrl}/feed/news-feed`,
+     getPostById: `${environment.apiUrl}/feed/get/`,
      createPost: `${environment.apiUrl}/feed/create`,
      updatePost: `${environment.apiUrl}/feed/update/`,
      deletePost: `${environment.apiUrl}/feed/delete/`,
