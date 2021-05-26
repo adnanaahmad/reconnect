@@ -16,4 +16,7 @@ export class HomeBuyingService {
   getHomeBuyingFeed(): Observable<any> {
     return this.helper.requestCall(this.method.get, this.apiRoutes.getHomeBuyingFeed);
   }
+  getPostById(data): Observable<any> {
+    return this.helper.requestCall(this.method.get, this.apiRoutes.getPostById + data);
+  }
 }

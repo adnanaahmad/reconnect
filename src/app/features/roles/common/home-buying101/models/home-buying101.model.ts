@@ -1,7 +1,12 @@
+import {Subscription} from 'rxjs';
+
 export interface HomeBuyingModel{
   blog: any;
   videos: Array<VideoLibraryModel>;
   resources: Array<any>;
+  subscription: Array<Subscription>;
+  screenOne: boolean;
+  post: any;
 }
 
 
