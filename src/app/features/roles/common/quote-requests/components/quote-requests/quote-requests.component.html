@@ -30,7 +30,7 @@
                 <p id="{{i}}" *ngIf="request.loan.homeInspectionDate" class="date align-self-end">{{request.loan.homeInspectionDate | date:'d MMM y'}}</p>
                 <p id="{{i+'1'}}" *ngIf="!request.loan.homeInspectionDate" class="date align-self-end">Choose date</p>
                 <input #date (dateSelect)="onDateSelect($event, request.buyer._id, request.loan.homeInspectionDate ? i : (i+'1'))" class="form-control f1" placeholder=""
-                       name="dp"  ngbDatepicker #d="ngbDatepicker">
+                       name="dp"  ngbDatepicker #d="ngbDatepicker" placement="bottom">
                 <div class="calendar-div d-flex align-self-center" (click)="d.toggle()">
                     <img src="/assets/dashboard/Calendar.svg" class="calendar">
                 </div>

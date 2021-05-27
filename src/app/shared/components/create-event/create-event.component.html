@@ -11,8 +11,8 @@
             <div class="date-div">
               <img class="calendar-icon" src="/assets/menu-icons/calendar.svg" (click)="d.toggle()">
               <input [class.is-invalid]="eventForm.get('date').invalid && eventForm.get('date').touched"
-                      class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
-                     name="dp" formControlName="date"  ngbDatepicker #d="ngbDatepicker">
+                      class="form-control f1 width-custom" placeholder="yyyy-mm-dd" [minDate]="minDate"
+                     name="dp" formControlName="date"  ngbDatepicker #d="ngbDatepicker" placement="bottom">
             </div>
           </div>
          <div>

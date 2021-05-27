@@ -31,6 +31,7 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() edit;
   @Input() eventCategories;
   @ViewChildren('member') teamMembers: QueryList<ElementRef>;
+  minDate: any;
   subscription: Array<Subscription>;
   groupMembers: Array<any>;
   teamData: CreateGroupChatModel = {} as CreateGroupChatModel;
@@ -61,6 +62,12 @@ export class CreateEventComponent implements OnInit, AfterViewInit, OnDestroy {
               private todoService: TodoListService) {}
 
   ngOnInit(): void {
+    const current = new Date();
+    this.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate()
+    };
     this.helper.setModalPosition();
     this.teamData.selectedTeam = [];
     this.subscription = [];

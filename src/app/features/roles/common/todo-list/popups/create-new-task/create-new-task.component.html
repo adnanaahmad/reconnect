@@ -28,8 +28,8 @@
                     <div class="date-div">
                         <img class="calendar-icon" src="/assets/menu-icons/calendar.svg" (click)="d.toggle()">
                         <input [ngClass]="{'is-invalid' : this.todoTask.get('date').invalid && this.todoTask.get('date').touched}"
-                                class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
-                               name="dp" formControlName="date"  ngbDatepicker #d="ngbDatepicker">
+                                class="form-control f1 width-custom" placeholder="yyyy-mm-dd" [minDate]="minDate"
+                               name="dp" formControlName="date"  ngbDatepicker #d="ngbDatepicker" placement="bottom">
                     </div>
                 </div>
                 <button (click)="onSubmit()" class="add-button align-self-end text-nowrap">Add Task</button>

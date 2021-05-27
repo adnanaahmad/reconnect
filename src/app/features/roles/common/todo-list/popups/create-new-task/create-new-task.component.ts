@@ -16,6 +16,7 @@ import {DatePipe} from '@angular/common';
 export class CreateNewTaskComponent implements OnInit, AfterViewInit {
   @Input() edit: EditTaskModel;
   todoTask: FormGroup;
+  minDate: any;
   constructor(private helper: HelperService,
               private fb: FormBuilder,
               private toaster: ToastrService,
@@ -27,6 +28,12 @@ export class CreateNewTaskComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    const current = new Date();
+    this.minDate = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate()
+    };
     this.helper.setModalPosition();
     this.todoTask = this.fb.group({
       title: [null, Validators.required],

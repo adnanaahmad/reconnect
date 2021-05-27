@@ -220,13 +220,11 @@ p{
   width: 13.05vw;
   min-width: 1vw;
   top: 0vw !important;
-  left: -.6vw !important;
+  left: .5vw !important;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
- // transition: 0.4s;
 }
 ::ng-deep .dropdown-menu.show:hover{
   box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.2);
- // transition: 0.4s;
 }
 
 :host ::ng-deep .bg-primary{
@@ -236,8 +234,8 @@ p{
   outline: none;
 }
 :host ::ng-deep .btn-light{
-  width: 2vw;
-  height: 2vw;
+  width: 1.9vw;
+  height: 1.7vw;
   line-height: 2vw;
 }
 :host ::ng-deep .ngb-dp-navigation-select{

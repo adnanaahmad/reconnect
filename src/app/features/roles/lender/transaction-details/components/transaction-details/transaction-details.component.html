@@ -28,8 +28,8 @@
               <div class="d-flex ml-auto date-parent">
                   <p class="date align-self-center text-nowrap">Lock Expiry Date:</p>
                   <input class="form-control f1 width-custom" placeholder="yyyy-mm-dd"
-                         name="dp" formControlName="lockExpiryDate"  ngbDatepicker #d1="ngbDatepicker">
-                  <img class="calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="d1.toggle()">
+                         name="dp" formControlName="lockExpiryDate"  ngbDatepicker #dp="ngbDatepicker" placement="bottom">
+                  <img class="calendar-icon" src="/assets/dashboard/Calendar.svg" (click)="dp.toggle()">
               </div>
           </div>
           <app-transaction-process [transaction]="transactionDetails"></app-transaction-process>
