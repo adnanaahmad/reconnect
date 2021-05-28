@@ -68,7 +68,7 @@
     </ng-container>
 </ng-container>
 
-<ng-container *ngIf="!home.screenOne">
+<ng-container *ngIf="!home.screenOne && !(store.progressBarLoading | async)">
     <div class="card-4" *ngIf="home.post">
         <p class="c4-title">{{home.post.title | titlecase}}</p>
         <p class="c4-description">{{home.post.description}}</p>
