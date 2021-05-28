@@ -57,18 +57,19 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
     get searchContainerWidth(): number {
         return document.getElementById('search').offsetWidth;
     }
-
     setFilters(params): void {
         this.searchHome.moreFilters.patchValue({
             propertyType: {
                 Apartment: params.propertyType ? params.propertyType.includes('Apartment') : null,
-                'Attached (Townhouse/Rowhouse/Duplex)': params.propertyType ? params.propertyType.includes('Attached (Townhouse/Rowhouse/Duplex)') : null,
-                Condominium: params.propertyType ? params.propertyType.includes('Condominium') : null,
+                Attached: params.propertyType ? params.propertyType.includes('Attached') : null,
+                Condex: params.propertyType ? params.propertyType.includes('Condex') : null,
+                Condo: params.propertyType ? params.propertyType.includes('Condo') : null,
+                'Co-op': params.propertyType ? params.propertyType.includes('Co-op') : null,
+                Detached: params.propertyType ? params.propertyType.includes('Detached') : null,
+                Equestrian: params.propertyType ? params.propertyType.includes('Equestrian') : null,
                 Farm: params.propertyType ? params.propertyType.includes('Farm') : null,
-                'Mobile Home': params.propertyType ? params.propertyType.includes('Mobile Home') : null,
-                'Single Family': params.propertyType ? params.propertyType.includes('Single Family') : null,
-                'Condominium/Co-Op': params.propertyType ? params.propertyType.includes('Condominium/Co-Op') : null,
                 Land: params.propertyType ? params.propertyType.includes('Land') : null,
+                'Mobile Home': params.propertyType ? params.propertyType.includes('Mobile Home') : null,
                 'Multi-family': params.propertyType ? params.propertyType.includes('Multi-family') : null,
             },
             status: {
@@ -187,18 +188,19 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             })
         );
     }
-
     initialiseFilter(): void {
         this.searchHome.moreFilters = this.fb.group({
             propertyType: this.fb.group({
                 Apartment: [null],
-                'Attached (Townhouse/Rowhouse/Duplex)': [null],
-                Condominium: [null],
+                Attached: [null],
+                Condex: [null],
+                Condo: [null],
+                'Co-op': null,
+                Detached: [null] ,
+                Equestrian: [null],
                 Farm: [null],
-                'Mobile Home': [null],
-                'Single Family': [null],
-                'Condominium/Co-Op': [null],
                 Land: [null],
+                'Mobile Home': [null],
                 'Multi-family': [null]
             }),
             status: this.fb.group({

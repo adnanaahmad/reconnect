@@ -92,52 +92,17 @@
               <p class="heading-sub">Property Type</p>
                 <div class="row">
                     <div class="col-6 space">
-                        <label class="container">
-                          <input formControlName="Single Family" type="checkbox">
+                        <label class="container" *ngFor="let i of searchHome.moreFilters.get('propertyType').value | keyvalue | slice:0:6">
+                          <input formControlName="{{i.key}}" type="checkbox">
                           <img class="checkmark" src="/assets/loan-details/tick.svg">
-                          <p class="label-txt text-nowrap">Single Family</p>
-                        </label>
-                        <label class="container">
-                          <input formControlName="Multi-family" type="checkbox">
-                          <img class="checkmark" src="/assets/loan-details/tick.svg">
-                          <p class="label-txt text-nowrap">Multi Family</p>
-                        </label>
-                        <label class="container">
-                          <input formControlName="Farm" type="checkbox">
-                          <img class="checkmark" src="/assets/loan-details/tick.svg">
-                          <p class="label-txt">Farm</p>
-                        </label>
-                        <label class="container">
-                            <input formControlName="Condominium/Co-Op" type="checkbox">
-                            <img class="checkmark" src="/assets/loan-details/tick.svg">
-                            <p class="label-txt text-nowrap">Condominium/Co-Op</p>
-                        </label>
-                        <label class="container">
-                            <input formControlName="Attached (Townhouse/Rowhouse/Duplex)" type="checkbox">
-                            <img class="checkmark" src="/assets/loan-details/tick.svg">
-                            <p class="label-txt">Attached (Townhouse/Rowhouse/Duplex)</p>
+                          <p class="label-txt text-nowrap">{{i.key}}</p>
                         </label>
                     </div>
                     <div class="col-6  space">
-                        <label class="container">
-                          <input formControlName="Land" type="checkbox">
+                        <label class="container" *ngFor="let i of searchHome.moreFilters.get('propertyType').value | keyvalue | slice: 6:11">
+                          <input formControlName="{{i.key}}" type="checkbox">
                           <img class="checkmark" src="/assets/loan-details/tick.svg">
-                          <p class="label-txt">Land</p>
-                        </label>
-                        <label class="container">
-                          <input formControlName="Condominium" type="checkbox">
-                          <img class="checkmark" src="/assets/loan-details/tick.svg">
-                          <p class="label-txt">Condominium</p>
-                        </label>
-                        <label class="container">
-                            <input formControlName="Mobile Home" type="checkbox">
-                            <img class="checkmark" src="/assets/loan-details/tick.svg">
-                            <p class="label-txt">Mobile</p>
-                        </label>
-                        <label class="container">
-                            <input formControlName="Apartment" type="checkbox">
-                            <img class="checkmark" src="/assets/loan-details/tick.svg">
-                            <p class="label-txt">Apartment</p>
+                          <p class="label-txt">{{i.key}}</p>
                         </label>
                     </div>
                 </div>
