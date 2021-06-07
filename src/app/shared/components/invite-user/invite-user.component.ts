@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {HelperService} from '../../../../../../core/helper/helper.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {BorrowersService} from '../../services/borrowers.service';
+import {HelperService} from '../../../core/helper/helper.service';
+import {BorrowersService} from '../../../features/roles/common/borrowers/services/borrowers.service';
+import {ConstantService} from '../../../core/constant/constant.service';
+import {StoreService} from '../../../core/store/store.service';
 import {take} from 'rxjs/operators';
-import {ConstantService} from '../../../../../../core/constant/constant.service';
-import {StoreService} from '../../../../../../core/store/store.service';
 
 @Component({
-  selector: 'app-add-new-borrower',
-  templateUrl: './add-new-borrower.component.html',
-  styleUrls: ['./add-new-borrower.component.scss']
+  selector: 'app-invite-user',
+  templateUrl: './invite-user.component.html',
+  styleUrls: ['./invite-user.component.scss']
 })
-export class AddNewBorrowerComponent implements OnInit {
+export class InviteUserComponent implements OnInit {
+  @Input() role: string;
   borrower: FormGroup;
   constructor( private toaster: ToastrService,
                private activeModal: NgbActiveModal,
@@ -27,7 +28,8 @@ export class AddNewBorrowerComponent implements OnInit {
     this.helper.setModalPosition();
     this.borrower = this.fb.group({
       email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      name: [null, Validators.required]
+      name: [null, Validators.required],
+      role: [this.role]
     });
   }
 

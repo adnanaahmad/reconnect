@@ -43,6 +43,8 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.forEach(s => s.unsubscribe());
     this.store.updateToggleLoanType(null);
+    this.store.updatePurchasePrice(null);
+    this.store.updateMarketRentValues(null);
   }
 
   ngOnInit(): void {

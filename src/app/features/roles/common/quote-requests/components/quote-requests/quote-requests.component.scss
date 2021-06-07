@@ -71,11 +71,16 @@ h3{
   outline: none;
 }
 .accept{
-  background: var(--green);
+  background: var(--mediumGrayLanding);
   margin-right: .8vw;
 }
+.chat{
+  filter: brightness(0) invert(1);
+  height: 1.1vw;
+  width: 1.1vw;
+}
 .reject{
-  background: var(--red);
+  background: var(--green);
 }
 .respond-btn p{
   margin-bottom: 0;

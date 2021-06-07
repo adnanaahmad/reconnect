@@ -39,7 +39,7 @@ export class ConstantService {
      resetPassword: `${environment.apiUrl}/user/reset-password`,
      getConversation: `${environment.apiUrl}/conversation`,
      getMessages: `${environment.apiUrl}/message`,
-     shareProperty: `${environment.apiUrl}/message/send-private-message`,
+     sendPrivateMessage: `${environment.apiUrl}/message/send-private-message`,
      sharePropertyProfessional: `${environment.apiUrl}/message/send-multiple-messages`,
      targetProperty: `${environment.apiUrl}/loan/target-property`,
      professionalDashboard: `${environment.apiUrl}/analytics/dashboard`,
@@ -70,7 +70,10 @@ export class ConstantService {
      updatePost: `${environment.apiUrl}/feed/update/`,
      deletePost: `${environment.apiUrl}/feed/delete/`,
      changeEmailRequest: `${environment.apiUrl}/user/change-email-request`,
-     changeEmailConfirm: `${environment.apiUrl}/user/change-email-confirm`
+     changeEmailConfirm: `${environment.apiUrl}/user/change-email-confirm`,
+     getComplianceInfo: `${environment.apiUrl}/listing/compliance`,
+     startPrivateChat: `${environment.apiUrl}/conversation/start-private`,
+     quoteResponse: `${environment.apiUrl}/message/quote-response`
    };
   apiMethod = {
     get: 'get',
@@ -665,6 +668,7 @@ export class ConstantService {
     MESSAGE_TYPE_SHARE_PROPERTY: 'shareProperty',
     MESSAGE_TYPE_BOOK_PROPERTY: 'bookProperty',
     MESSAGE_TYPE_LOG_PROFESSIONAL_ACCEPT_QUOTE_REQUEST: 'logProfessionalAcceptQuoteRequest',
+    MESSAGE_TYPE_QUOTE: 'quote',
   };
   conversationType = {
     PRIVATE: 'private',

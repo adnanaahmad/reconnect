@@ -74,3 +74,13 @@ interface TeamMemberModel{
   socialMedia: {facebook: string, instagram: string, twitter: string};
   _id: string;
 }
+
+export interface QuoteModel{
+  date: any;
+  fee: string;
+  image: string;
+  time: string;
+  description: string;
+  price: string;
+  status: string;
+}

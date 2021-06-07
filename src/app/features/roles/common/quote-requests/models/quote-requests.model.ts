@@ -8,6 +8,7 @@ export interface QuoteRequestsModel{
   teams: Array<any>;
   renderArray: Array<any>;
   selectedButton: string;
+  buttons: any;
 }
 interface QuoteReqModel {
   subjectProperty: PropertyAdModel;

@@ -1,0 +1,7 @@
+
+<ng-container  *ngIf="(store.complianceInfo | async) && !(store.progressBarLoading | async)">
+<!--    <img class="logo" [src]="(store.complianceInfo | async).assets.logo.url">-->
+    <p class="compliance-info"
+       [innerHTML]="((store.complianceInfo | async).lexicon.en_US.copyright).replace('{current_date_year}', year) + ' ' +
+       (store.complianceInfo | async).lexicon.en_US.disclaimer"></p>
+</ng-container>

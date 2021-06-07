@@ -20,7 +20,7 @@ export class PropertyDetailsService {
     return this.helper.requestCall(this.methods.get, this.api.getTeam);
   }
   shareOrBookProperty(data): Observable<any>{
-    return this.helper.requestCall(this.methods.post, this.api.shareProperty, data);
+    return this.helper.requestCall(this.methods.post, this.api.sendPrivateMessage, data);
   }
   sharePropertyProfessionals(data): Observable<any>{
     return this.helper.requestCall(this.methods.post, this.api.sharePropertyProfessional, data);

@@ -46,8 +46,8 @@ export class RegistrationPartnerComponent implements OnInit {
       }),
       personal: this.fb.group({
         role: [null, Validators.required],
-        firstName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
-        lastName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('([a-zA-Z]*)')]],
+        firstName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('^(?! )[A-Za-z ]*(?<! )$')]],
+        lastName: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(30), Validators.pattern('^(?! )[A-Za-z ]*(?<! )$')]],
         nmlsNumber: [null, [Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]],
         realEstateLicenseNumber: [null, [Validators.required, Validators.maxLength(16), Validators.pattern('^[a-zA-Z0-9]+$')]],
         phoneNumber: [null, [Validators.required, Validators.pattern('^\\d{10}$')]],

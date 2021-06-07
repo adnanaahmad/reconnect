@@ -8,7 +8,7 @@ import {ConstantService} from '../../../../../../core/constant/constant.service'
 import {take} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 import {Location} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BuyerDashboardService} from '../../../../buyer/home-buying-dashboard/services/buyer-dashboard.service';
 import {ToastrService} from 'ngx-toastr';
 
@@ -31,7 +31,8 @@ export class ViewProfileComponent implements OnInit {
               public location: Location,
               private activatedRoute: ActivatedRoute,
               private dashboard: BuyerDashboardService,
-              private toaster: ToastrService) {}
+              private toaster: ToastrService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.messageBody = new FormControl([null]);
@@ -70,10 +71,10 @@ export class ViewProfileComponent implements OnInit {
   addMember(): void {
     if (this.partnerProfile.role === this.constant.role.HOME_INSPECTOR ||
         this.partnerProfile.role === this.constant.role.INSURANCE) {
-      this.dashboard.buyerRequestQuote({professionalId: this.partnerProfile._id}).pipe(take(1)).subscribe(res => {
-        this.toaster.success('Request Sent');
+      this.dashboard.startPrivateChat({professionalId: this.partnerProfile._id}).pipe(take(1)).subscribe(res => {
         this.hideAddButton = false;
         window.history.replaceState({}, '', `/home/profile/viewProfile/${this.partnerProfile._id}?add=false`);
+        this.chatWithProfessional(this.partnerProfile._id);
       }, error => {
         console.log(error);
         this.toaster.error('Failed to send request');
@@ -88,5 +89,8 @@ export class ViewProfileComponent implements OnInit {
         this.toaster.error('Failed to add professional');
       });
     }
+  }
+  chatWithProfessional(id: string): void{
+    this.router.navigateByUrl(`/home/teamMessageBoard?professional=${id}`).then();
   }
 }

@@ -15,6 +15,7 @@ import {Router} from '@angular/router';
 })
 export class AddMemberComponent implements OnInit {
     @Input() role;
+    @Input() teamId;
     public members: any;
     searchName: FormControl;
     addButtonDisable: boolean;
@@ -39,14 +40,11 @@ export class AddMemberComponent implements OnInit {
         console.log(member);
         if (this.constant.chooseRole[this.role] === this.constant.role.HOME_INSPECTOR ||
             this.constant.chooseRole[this.role] === this.constant.role.INSURANCE) {
-            this.dashboard.buyerRequestQuote({professionalId: member._id}).pipe(take(1)).subscribe(res => {
-                this.toaster.success('Request Sent');
-                document.getElementById(id).style.display = 'none';
-                document.getElementById(id + this.constant.quoteRequestStatus.PENDING).style.display = 'block';
-                //this.modal.close({status: 'yes', data: res.result});
+            this.dashboard.startPrivateChat({professionalId: member._id}).pipe(take(1)).subscribe(res => {
+                this.chatWithProfessional(member._id);
             }, error => {
                 console.log(error);
-                this.toaster.error('Failed to send request');
+                this.toaster.error('Failed to start chat');
             });
         } else {
             this.addButtonDisable = true;
@@ -72,8 +70,11 @@ export class AddMemberComponent implements OnInit {
     sendEmail(email: string): void{
         window.open(`mailto:${email}`);
     }
-    viewProfile(id, status?): void{
-        const add = status ? 'false' : 'true';
+    viewProfile(id): void{
+        const add = 'true';
         this.router.navigateByUrl('/home/profile/viewProfile/' + id + '?add=' + add).then();
+    }
+    chatWithProfessional(id: string): void{
+        this.router.navigateByUrl(`/home/teamMessageBoard?professional=${id}`).then();
     }
 }

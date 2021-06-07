@@ -1,0 +1,40 @@
+<div class="card-1 d-flex">
+    <img class="house" [src]="data.image">
+   <div class="d-flex flex-column">
+       <div #description class="mb-custom">
+           <p class="description">
+               {{data.description}}
+           </p>
+           <p (click)="toggle()" class="read-more">Read more</p>
+           <p (click)="toggle()" class="read-less">Read less</p>
+       </div>
+       <div class="d-flex mb-auto mt-auto mb-custom">
+           <div class="d-flex mr-custom">
+               <p class="title">Price:&nbsp;</p>
+               <p class="title price">${{data.price | mask: 'separator.2':','}}</p>
+           </div>
+           <div class="d-flex">
+               <p class="title">Inspection fee:&nbsp;</p>
+               <p class="title">${{data.fee | mask: 'separator.2':',' }}</p>
+           </div>
+       </div>
+       <div class="mt-auto d-flex justify-content-between">
+           <div class="d-flex">
+               <img class="calendar-icon" src="/assets/menu-icons/calendar.svg">
+               <p class="description align-self-center">{{data.date | date}}</p>
+           </div>
+           <div class="d-flex">
+               <img class="calendar-icon" src="/assets/chat/clock.svg">
+               <p class="description align-self-center">{{data.time | mask:'00:00'}}</p>
+           </div>
+           <div class="d-flex" *ngIf="(store.role === constant.role.BUYER) && (data.status === constant.quoteRequestStatus.PENDING)">
+               <button (click)="quoteResponse(constant.quoteRequestStatus.REJECTED)" class="decline">Decline</button>
+               <button (click)="quoteResponse(constant.quoteRequestStatus.ACCEPTED)" class="accept">Accept</button>
+           </div>
+           <div class="d-flex" *ngIf="store.role !== constant.role.BUYER || data.status !== constant.quoteRequestStatus.PENDING">
+               <p class="status-title">Status: &nbsp;</p>
+               <p class="status-value">{{data.status | titlecase}}</p>
+           </div>
+       </div>
+   </div>
+</div>

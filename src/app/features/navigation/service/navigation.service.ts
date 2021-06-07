@@ -37,4 +37,7 @@ export class NavigationService {
   getUnreadMessages(): Observable<any>{
     return this.helper.requestCall(this.methods.get, this.api.getUnreadMessages);
   }
+  getComplianceInfo(): Observable<any>{
+    return this.helper.requestCall(this.methods.get, this.api.getComplianceInfo);
+  }
 }

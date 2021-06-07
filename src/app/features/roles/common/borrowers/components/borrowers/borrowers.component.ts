@@ -7,8 +7,8 @@ import {StoreService} from '../../../../../../core/store/store.service';
 import {take} from 'rxjs/operators';
 import {FormControl, Validators} from '@angular/forms';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {AddNewBorrowerComponent} from '../../popups/add-new-borrower/add-new-borrower.component';
 import {forkJoin} from 'rxjs';
+import {InviteUserComponent} from '../../../../../../shared/components/invite-user/invite-user.component';
 
 @Component({
   selector: 'app-borrowers',
@@ -76,7 +76,8 @@ export class BorrowersComponent implements OnInit {
     window.location.href = (`mailto:${email}`);
   }
   addNewBorrower(): void{
-    const modalRef = this.modalService.open(AddNewBorrowerComponent);
+    const modalRef = this.modalService.open(InviteUserComponent);
+    modalRef.componentInstance.role = 'buyer';
     modalRef.result.then((result) => {
       if (result.status === 'yes') {
       }

@@ -8,6 +8,7 @@ import {ConstantService} from '../../../../core/constant/constant.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
 import {take} from 'rxjs/operators';
+import {HelperService} from '../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-navigation',
@@ -23,7 +24,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
               public store: StoreService,
               private constant: ConstantService,
               private loadingBar: LoadingBarService,
-              private webSocket: WebSocketService) {}
+              private webSocket: WebSocketService,
+              private helper: HelperService) {}
 
   ngOnInit(): void {
     this.navigation.loader = this.loadingBar.useRef();
@@ -40,6 +42,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
         this.store.role === this.constant.role.BUYER ? this.router.navigateByUrl('/home/homeBuyingDashboard') :
             this.router.navigateByUrl('/home/dashboard');
     }
+    this.getComplianceInfo();
   }
   ngOnDestroy(): void {
     this.navigation.profileButtonSubscription.unsubscribe();
@@ -116,6 +119,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
       }
     }, error => {
       console.log(error);
+    });
+  }
+  getComplianceInfo(): void{
+    this.navigationService.getComplianceInfo().pipe(take(1)).subscribe(res => {
+      this.store.updateComplianceInfo(res.result.markets[0]);
+    }, error => {
+      this.helper.handleApiError(error, 'Failed to fetch compliance info');
     });
   }
 }

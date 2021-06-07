@@ -1,0 +1,92 @@
+p{
+  font-family: 'Poppins';
+}
+.card-1{
+  background: var(--extraLightGrayOne);
+  padding: .5vw;
+  max-width: 35vw;
+}
+.house{
+  height: 7vw;
+  width: 8vw;
+  object-fit: cover;
+  margin-right: 1vw;
+  border-radius: .5vw;
+}
+.description{
+  font-size: .8vw;
+  color: var(--darkGray);
+  font-weight: 300;
+  margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.title{
+  font-size: .85vw;
+  color: var(--darkGray);
+  font-weight: 300;
+  margin-bottom: 0;
+}
+.mr-custom{
+  margin-right: 2vw;
+}
+.price{
+  color: var(--green);
+}
+.calendar-icon{
+  height: 1.2vw;
+  width: 1.2vw;
+  margin-right: .5vw;
+}
+.decline, .accept{
+  padding: .3vw 1vw;
+  border: none;
+  border-radius: .4vw;
+  color: white;
+  font-size: .7vw;
+  font-family: 'Poppins';
+  cursor: pointer;
+}
+.decline{
+  background: var(--red);
+  margin-right: .5vw;
+}
+.accept{
+  background: var(--green);
+}
+.decline:focus, .accept:focus{
+  outline: none;
+}
+.mb-custom{
+  margin-bottom: .5vw !important;
+}
+.read-more{
+  color: var(--lighGray)!important;
+  font-size: .65vw;
+  // margin-bottom: 0;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+.read-less{
+  display: none;
+  color: var(--lighGray)!important;
+  font-size: .65vw;
+  ///  margin-bottom: 0;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+.hide{
+  opacity: 0;
+}
+.status-title, .status-value{
+  font-size: .8vw;
+  margin-bottom: 0;
+  font-weight: 300;
+}
+.status-value{
+  color: var(--darkGray);
+}
+.status-title{
+  color: var(--lighGray);
+}

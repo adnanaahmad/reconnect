@@ -49,6 +49,9 @@ export interface PropertyAdModel {
     id: string,
     name: string
   };
+  listingOffice: {
+    name: string;
+  }
   images: string[];
   image: string;
   listPrice: number;

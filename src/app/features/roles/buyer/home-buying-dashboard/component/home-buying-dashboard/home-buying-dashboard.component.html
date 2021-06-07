@@ -25,15 +25,15 @@
         <p class="team-text bottom">fundamentals for group collaboration</p>
         <div class="d-flex team justify-content-between" *ngIf="dashboard.team">
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
-                             [member]="dashboard.team.realEstateAgent" [role]="'Real Estate Agent'"></app-team-person>
+                             [teamId]="dashboard.team._id" [member]="dashboard.team.realEstateAgent" [role]="'Real Estate Agent'"></app-team-person>
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
-                             [member]="dashboard.team.lender" [role]="'Lender'"></app-team-person>
+                             [teamId]="dashboard.team._id" [member]="dashboard.team.lender" [role]="'Lender'"></app-team-person>
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
-                             [member]="dashboard.team.attorney" [role]="'Attorney'"></app-team-person>
+                             [teamId]="dashboard.team._id" [member]="dashboard.team.attorney" [role]="'Attorney'"></app-team-person>
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
-                             [member]="dashboard.team.homeInspector" [targetProperty]="dashboard.subjectProperty" [role]="'Home Inspector'"></app-team-person>
+                             [teamId]="dashboard.team._id" [member]="dashboard.team.homeInspector" [targetProperty]="dashboard.subjectProperty" [role]="'Home Inspector'"></app-team-person>
             <app-team-person (addMemberEvent)="addMember($event)" (removeMemberEvent)="removeMember($event)"
-                             [member]="dashboard.team.insuranceAgent" [targetProperty]="dashboard.subjectProperty" [role]="'Insurance Agent'"></app-team-person>
+                             [teamId]="dashboard.team._id" [member]="dashboard.team.insuranceAgent" [targetProperty]="dashboard.subjectProperty" [role]="'Insurance Agent'"></app-team-person>
 
         </div>
         <div class="mt-auto">
@@ -87,3 +87,4 @@
         <app-subject-property-template *ngIf="!dashboard.subjectProperty"></app-subject-property-template>
     </div>
 </div>
+<app-compliance-info *ngIf="dashboard.subjectProperty"></app-compliance-info>

@@ -28,6 +28,7 @@ interface TeamObjectModel{
   attorney: TeamModel;
   homeInspector: TeamModel;
   insuranceAgent: TeamModel;
+  _id: string;
 }
 interface HomeBuyingProcessModel {
   application: boolean;

@@ -33,6 +33,8 @@ export class StoreService {
   marketRentValues = this.marketRentValuesSubject.asObservable();
   private uploadFileSubject = new BehaviorSubject<any>(null);
   uploadFile = this.uploadFileSubject.asObservable();
+  private complianceInfoSubject = new BehaviorSubject<any>(null);
+  complianceInfo = this.complianceInfoSubject.asObservable();
   constructor() { }
 
   updateToggleMoreFilter(data: boolean): void{
@@ -88,5 +90,8 @@ export class StoreService {
   }
   updateUploadFile(data): void{
     this.uploadFileSubject.next(data);
+  }
+  updateComplianceInfo(data): void{
+    this.complianceInfoSubject.next(data);
   }
 }

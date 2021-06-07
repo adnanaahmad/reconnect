@@ -37,8 +37,8 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
   initialisePersonalForm(): void{
     this.personalDetails.form = this.fb.group({
-      firstName:  [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
-      lastName: [null, [Validators.required, Validators.pattern('([a-zA-Z]*)')]],
+      firstName:  [null, [Validators.required, Validators.pattern('^(?! )[A-Za-z ]*(?<! )$')]],
+      lastName: [null, [Validators.required, Validators.pattern('^(?! )[A-Za-z ]*(?<! )$')]],
       socialMedia: this.fb.group({
         facebook: [null],
         linkedin: [null],

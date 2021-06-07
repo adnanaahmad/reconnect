@@ -5,7 +5,7 @@
   </div>
 </div>
 <form [formGroup]="transactionDetails.finance" (ngSubmit)="onSubmit()">
-<div class="row" *ngIf="transactionDetails.loader">
+<div class="row mb-custom" *ngIf="transactionDetails.loader">
   <div class="col-7 first-column d-flex flex-column">
        <div class="child-1 d-flex justify-content-between" style="">
             <app-buyer-info [transactionDetails]="transactionDetails.user"></app-buyer-info>
@@ -83,3 +83,4 @@
   </div>
 </div>
 </form>
+<app-compliance-info *ngIf="transactionDetails.subjectProperty"></app-compliance-info>

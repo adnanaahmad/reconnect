@@ -95,17 +95,9 @@
                     </div>
                 </ng-container>
                 <div class="ml-auto d-flex">
-                    <button class="add-to-team d-flex" (click)="addProfessionalToTeam(recentChatMember(chat.selectedFriend.allTimeMembers)._id, recentChatMember(chat.selectedFriend.allTimeMembers).role)"
-                            *ngIf="chat.selectedFriend.type === constant.conversationType.PRIVATE &&
-                             (recentChatMember(chat.selectedFriend.allTimeMembers).role === constant.role.HOME_INSPECTOR || recentChatMember(chat.selectedFriend.allTimeMembers).role === constant.role.INSURANCE)
-                      && professionalExistsInTeam(recentChatMember(chat.selectedFriend.allTimeMembers).role) && showHideSendMessage()">
-                        <img class="plus-icon" src="/assets/calendar-icons/plus.svg">
-                        <p class="align-self-center">Add To Team</p>
-                    </button>
                     <img class="search-icon img-fluid" src="/assets/chat/search.svg">
                     <img (click)="deleteChat()" class="delete-icon img-fluid" src="/assets/news-feed-icons/delete.svg">
                     <img (click)="editGroup()" *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP" class="edit-group" src="/assets/chat/edit.svg">
-
                 </div>
 
             </div>
@@ -149,7 +141,7 @@
                         </ng-container>
                         <ng-container
                                 *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT || message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY
-                                || message.type === constant.chatMessageType.MESSAGE_TYPE_SHARE_PROPERTY">
+                                || message.type === constant.chatMessageType.MESSAGE_TYPE_SHARE_PROPERTY || message.type === constant.chatMessageType.MESSAGE_TYPE_QUOTE">
                             <div *ngIf="message.createdBy !== store.userId" class="d-flex justify-content-start">
                                 <img [ngClass]="{'group-member': groupMembersProfileImage(message.createdBy), 'dummy-member': !groupMembersProfileImage(message.createdBy)}"
                                      *ngIf="chat.selectedFriend.type === constant.conversationType.GROUP"
@@ -161,8 +153,10 @@
                                     <p class="receive"
                                        [innerHTML]="message.text + ': ' + message.shareMeta.propertyUrl | highlight: searchTerm"></p>
                                 </a>
+                                <app-quote-request-message class="mb-3" [messageId]="message._id" [showActionButton]="professionalExistsInTeam(recentChatMember(chat.selectedFriend.allTimeMembers).role) && showHideSendMessage()" [data]="message.quoteMeta" *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_QUOTE"></app-quote-request-message>
                             </div>
                             <div *ngIf="message.createdBy === store.userId" class="d-flex justify-content-end">
+                                <app-quote-request-message class="mb-3" [messageId]="message._id" [showActionButton]="professionalExistsInTeam(recentChatMember(chat.selectedFriend.allTimeMembers).role) && showHideSendMessage()" [data]="message.quoteMeta" *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_QUOTE"></app-quote-request-message>
                                 <p *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_TEXT"
                                    class="send">{{ message.text }}</p>
                                 <a *ngIf="message.type === constant.chatMessageType.MESSAGE_TYPE_BOOK_PROPERTY || message.type === constant.chatMessageType.MESSAGE_TYPE_SHARE_PROPERTY"
@@ -204,16 +198,3 @@
         </div>
     </div>
 </div>
-
-
-<!--                        <div class="d-flex justify-content-start">-->
-<!--                            <div *ngFor="let file of message.file">-->
-<!--                                <a [href]="file.media" download><img *ngIf="file.type == 'image'" class="img-fluid mr-2"-->
-<!--                                                                     style="border-radius: .5em; width: 7vw; height: 7vw; object-fit: cover"-->
-<!--                                                                     [src]="file.media"></a>-->
-<!--                                <video controls *ngIf="file.type == 'video'"-->
-<!--                                       style="border-radius: .5em; width: 7vw; height: 7vw; object-fit: cover">-->
-<!--                                    <source [src]="file.media">-->
-<!--                                </video>-->
-<!--                            </div>-->
-<!--                        </div>-->

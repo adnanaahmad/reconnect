@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddNewBorrowerComponent } from './add-new-borrower.component';
+import { ComplianceInfoComponent } from './compliance-info.component';
 
-describe('AddNewBorrowerComponent', () => {
-  let component: AddNewBorrowerComponent;
-  let fixture: ComponentFixture<AddNewBorrowerComponent>;
+describe('ComplianceInfoComponent', () => {
+  let component: ComplianceInfoComponent;
+  let fixture: ComponentFixture<ComplianceInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddNewBorrowerComponent ]
+      declarations: [ ComplianceInfoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddNewBorrowerComponent);
+    fixture = TestBed.createComponent(ComplianceInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

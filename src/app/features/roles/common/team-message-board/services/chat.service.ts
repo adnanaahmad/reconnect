@@ -44,4 +44,7 @@ export class ChatService {
   markAsReadConversation(data): Observable<any>{
     return this.helper.requestCall(this.methods.put, this.api.markAsReadConversation, data);
   }
+  quoteResponse(data): Observable<any>{
+    return this.helper.requestCall(this.methods.put, this.api.quoteResponse, data);
+  }
 }

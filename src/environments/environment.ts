@@ -1,4 +1,5 @@
 const serverUrl = 'https://narsunprojects.com:5000';
+//const  serverUrl = 'http://192.168.0.25:5000';
 const clientUrl = 'https://reconnect-stagging.web.app';
 
 export const environment = {

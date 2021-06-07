@@ -7,6 +7,8 @@ import {HelperService} from '../../../../../../core/helper/helper.service';
 import {StoreService} from '../../../../../../core/store/store.service';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
+import {InviteUserComponent} from '../../../../../../shared/components/invite-user/invite-user.component';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-professional-directory',
   templateUrl: './professional-directory.component.html',
@@ -18,7 +20,12 @@ export class ProfessionalDirectoryComponent implements OnInit {
               private professionalDirectory: ProfessionalDirectoryService,
               public helper: HelperService,
               public store: StoreService,
-              private router: Router) { }
+              private router: Router,
+              private modalService: NgbModal,
+              private configuration: NgbModalConfig) {
+    configuration.centered = true;
+    configuration.container = 'app-professional-directory';
+  }
 
   ngOnInit(): void {
     this.directory.searchName = new FormControl(null);
@@ -47,5 +54,15 @@ export class ProfessionalDirectoryComponent implements OnInit {
   }
   viewProfile(id): void{
     this.router.navigateByUrl('/home/profile/viewProfile/' + id).then();
+  }
+  addNewProfessional(): void{
+    const modalRef = this.modalService.open(InviteUserComponent);
+    modalRef.componentInstance.role = 'professional';
+    modalRef.result.then((result) => {
+      if (result.status === 'yes') {
+      }
+    }, error => {
+      console.log(error);
+    });
   }
 }

@@ -1,7 +1,7 @@
       <div class="card-1">
         <div class="card-1st-half">
               <div class="d-flex listed-by">
-                   <p>Listed by:</p><p>{{propertyAd.listingAgent.name}}</p>
+                   <p>Courtesy of </p><p>{{propertyAd.listingOffice.name + ", " + propertyAd.listingAgent.name}}</p>
               </div>
               <div>
                 <img class="main-img" [src]="propertyAd.image">
