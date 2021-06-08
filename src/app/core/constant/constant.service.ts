@@ -817,4 +817,16 @@ export class ConstantService {
     CUSTOM: 'custom-post',
     PROPERTY: 'property-post'
   };
+  multiUnitInfo = {
+    xf_levels_ : '# of Levels' ,
+    xf_flrs_: '# of Floors' ,
+    xf_rms_: '# of Rooms' ,
+    xf_bedrms_: '# of Bedrooms',
+    xf_f_bths_: '# of Full Baths' ,
+    xf_h_bths_: '# of Half Baths',
+    'defaultMarketRent.xf_rent': 'Rent',
+    xf_app_dscrp_: 'Appliances',
+    xf_hea_dscrp_: 'Heating' ,
+    xf_lease_ : 'Lease',
+  };
 }

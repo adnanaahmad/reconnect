@@ -14,10 +14,11 @@ import { PieChartComponent } from './popups/pie-chart/pie-chart.component';
 import { SharePropertyComponent } from './popups/share-property/share-property.component';
 import { MultiFamilyComponent } from './components/multi-family/multi-family.component';
 import { CalculatorComponent } from './popups/calculator/calculator.component';
+import { MultiUnitInfoComponent } from './components/multi-unit-info/multi-unit-info.component';
 
 
 @NgModule({
-  declarations: [PropertyDetailsComponent, PropertyAdComponent, RealEstateAgentComponent, ScenarioComponent, RentVsBuyingComponent, PublicTransportComponent, FeaturesComponent, PieChartComponent, SharePropertyComponent, MultiFamilyComponent, CalculatorComponent],
+  declarations: [PropertyDetailsComponent, PropertyAdComponent, RealEstateAgentComponent, ScenarioComponent, RentVsBuyingComponent, PublicTransportComponent, FeaturesComponent, PieChartComponent, SharePropertyComponent, MultiFamilyComponent, CalculatorComponent, MultiUnitInfoComponent],
   imports: [
     CommonModule,
     PropertyDetailsRoutingModule,
