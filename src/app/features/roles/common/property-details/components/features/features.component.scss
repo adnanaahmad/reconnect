@@ -61,3 +61,13 @@ p{
 .feature-parent:last-child{
   margin-bottom: 0;
 }
+ul li::marker {
+  color: var(--green);
+  font-size: 1vw;
+}
+.item{
+  font-size: .8vw;
+  font-weight: 300;
+  color: var(--darkGray);
+  margin-bottom: 0;
+}

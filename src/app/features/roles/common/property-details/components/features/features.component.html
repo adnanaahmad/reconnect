@@ -4,21 +4,26 @@
         <div class="col-6 col-mb">
             <div class="feature-parent" *ngFor="let feature of propertyDetails | keyvalue | slice:0:halfLength">
                 <p class="feature">{{feature.key}}</p>
-                <div class="d-flex detail" *ngFor="let detail of feature.value;let i=index" >
-                    <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">
-                    <p>{{detail}}</p>
-                </div>
+                <ul>
+                    <ng-container *ngFor="let detail of feature.value;let i=index" >
+                        <li>
+                            <p class="item align-self-center">{{detail}}</p>
+                        </li>
+                    </ng-container>
+                </ul>
             </div>
         </div>
         <div class="col-6 col-mb" >
             <div class="feature-parent" *ngFor="let feature of propertyDetails | keyvalue |  slice:otherHalfLength:length;">
                 <p class="feature">{{feature.key}}</p>
-                <div class="d-flex detail" *ngFor="let detail of feature.value;let i=index" >
-                    <img class="img-fluid right-arrow" src="/assets/home-buying-101/right-arrow.svg">
-                    <p>{{detail.includes('Tax amount') ? 'Tax amount: ' + detail.replace('Tax amount: ', '$') : detail}}</p>
-                </div>
+                <ul>
+                    <ng-container *ngFor="let detail of feature.value;let i=index" >
+                        <li>
+                            <p class="item align-self-center">{{detail.includes('Tax amount') ? 'Tax amount: ' + detail.replace('Tax amount: ', '$') : detail}}</p>
+                        </li>
+                    </ng-container>
+                </ul>
             </div>
-
         </div>
     </div>
 </div>
