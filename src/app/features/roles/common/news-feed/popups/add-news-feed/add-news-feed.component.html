@@ -5,8 +5,8 @@
             <p class="heading align-self-center">Post</p>
             <button [disabled]="post.form.invalid" (click)="onSubmit()" class="launch">Post</button>
         </div>
-        <p class="title">Title</p>
-        <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
+        <p [ngClass]="{'danger': post.form.get('title').invalid && post.form.get('title').touched}" class="title">Title</p>
+        <input [class.is-invalid]="post.form.get('title').invalid && post.form.get('title').touched" formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
         <p class="title">Add a note</p>
         <textarea formControlName="description"  class="form-control f2 mb-custom" rows="10"></textarea>
         <div class="media-files" *ngIf="post.media && post.media.length > 0">

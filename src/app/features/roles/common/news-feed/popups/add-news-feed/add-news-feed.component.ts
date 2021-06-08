@@ -88,6 +88,7 @@ export class AddNewsFeedComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   errorHandling(): void{
+        this.post.form.markAllAsTouched();
         this.toaster.error(`No description or media attached`);
   }
   get customValidation(): boolean{
