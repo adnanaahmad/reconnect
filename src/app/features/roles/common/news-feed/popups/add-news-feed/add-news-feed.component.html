@@ -2,10 +2,10 @@
     <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
     <div class="card-1" [formGroup]="post.form">
         <div class="d-flex justify-content-between mb-custom">
-            <p class="heading align-self-center">Event</p>
+            <p class="heading align-self-center">Post</p>
             <button [disabled]="post.form.invalid" (click)="onSubmit()" class="launch">Post</button>
         </div>
-        <p class="title">Event title</p>
+        <p class="title">Title</p>
         <input formControlName="title" type="text" class="form-control f1 mb-custom"  placeholder="">
         <p class="title">Add a note</p>
         <textarea formControlName="description"  class="form-control f2 mb-custom" rows="10"></textarea>
