@@ -12,25 +12,31 @@
           <app-variant-two (edit)="editPost(post, i)" (remove)="removePost(post, i)" *ngIf="!post.description && post.media.length > 1" [post] = "post"></app-variant-two>
           <app-variant-three (edit)="editPost(post, i)" (remove)="removePost(post, i)"(remove)="removePost(post, i)" *ngIf="!post.description && post.media.length === 1" [post] = "post"></app-variant-three>
           <app-variant-four (edit)="editPost(post, i)" (remove)="removePost(post, i)" *ngIf="post.description && post.media.length === 0" [post]="post"></app-variant-four>
-
+      </div>
+      <div *ngIf="!(store.progressBarLoading|async) && !(newsFeed.newsFeed.length < 10) && !(newsFeed.newsFeed.length === newsFeed.newsFeedCount)" class="d-flex justify-content-center">
+          <button (click)="loadMore(true)" class="show-more">Show more</button>
       </div>
   </div>
   <div class="col-3 news-column">
-    <h3 class="top-news" style="">Top News</h3>
-    <div *ngFor="let post of newsFeed.adminPosts" class="mb-3 d-flex flex-row card-3" (click)="navigateToPost(post._id)">
-        <div class="media-files" *ngIf="post.media[0]">
-            <img *ngIf="post.media[0].type === constant.mediaType.IMAGE" [src]="post.media[0].url">
-            <video *ngIf="post.media[0].type === constant.mediaType.VIDEO" [src]="post.media[0].url" controls></video>
-            <div *ngIf="post.media[0].type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-video">
-                <iframe class="embed-responsive-item" [src]="post.media[0].url | safeUrl" allowfullscreen></iframe>
-            </div>
-        </div>
-       <div class="d-flex align-items-start flex-column news-title" style="">
-        <h6 class="mb-2 news-text mb-auto" style="">{{ post.title }} </h6>
-        <p   class="">{{helper.getMinimalisticRelativeTime(post.createdAt)}} ago</p>
-       </div>
-    </div>
-
+      <div class="mb-c">
+          <h3 class="top-news" style="">Top News</h3>
+          <div *ngFor="let post of newsFeed.adminPosts" class="mb-3 d-flex flex-row card-3" (click)="navigateToPost(post._id)">
+              <div class="media-files" *ngIf="post.media[0]">
+                  <img *ngIf="post.media[0].type === constant.mediaType.IMAGE" [src]="post.media[0].url">
+                  <video *ngIf="post.media[0].type === constant.mediaType.VIDEO" [src]="post.media[0].url" controls></video>
+                  <div *ngIf="post.media[0].type === constant.mediaType.IFRAME" class="embed-responsive embed-responsive-16by9 iframe-video">
+                      <iframe class="embed-responsive-item" [src]="post.media[0].url | safeUrl" allowfullscreen></iframe>
+                  </div>
+              </div>
+              <div class="d-flex align-items-start flex-column news-title" style="">
+                  <h6 class="mb-2 news-text mb-auto" style="">{{ post.title }} </h6>
+                  <p   class="">{{helper.getMinimalisticRelativeTime(post.createdAt)}} ago</p>
+              </div>
+          </div>
+      </div>
+      <div *ngIf="!(store.progressBarLoading|async) && !(newsFeed.adminPosts.length < 5) && !(newsFeed.adminPosts.length === newsFeed.adminPostsCount)" class="d-flex justify-content-center">
+          <button (click)="loadMore(false)" class="show-more">Show more</button>
+      </div>
   </div>
 </div>
 

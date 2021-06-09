@@ -7,6 +7,10 @@ export interface NewsFeedModel{
   subscription: Array<Subscription>;
   screenOne: boolean;
   post: any;
+  newsFeedPageNumber: number;
+  topNewsPageNumber: number;
+  adminPostsCount: number;
+  newsFeedCount: number;
 }
 export interface CreatePostModel{
   form: FormGroup;

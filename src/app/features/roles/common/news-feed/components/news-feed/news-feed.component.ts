@@ -35,6 +35,8 @@ export class NewsFeedComponent implements OnInit {
 
     ngOnInit(): void {
         this.newsFeed.screenOne = true;
+        this.newsFeed.newsFeedPageNumber = 1;
+        this.newsFeed.topNewsPageNumber = 1;
         this.newsFeed.subscription = [];
         this.newsFeed.subscription.push(
             this.activatedRoute.queryParams.subscribe(params => {
@@ -51,10 +53,13 @@ export class NewsFeedComponent implements OnInit {
 
     getNewsFeed(): void {
         this.store.updateProgressBarLoading(true);
-        this.feed.getNewsFeed().pipe(take(1)).subscribe(res => {
+        this.feed.getNewsFeed(`?newsFeedPageNumber=${this.newsFeed.newsFeedPageNumber}&topNewsPageNumber=
+        ${this.newsFeed.topNewsPageNumber}`).pipe(take(1)).subscribe(res => {
             this.newsFeed.newsFeed = res.result.newsFeed;
             this.newsFeed.adminPosts = res.result.adminPosts;
-            console.log('news feed', res);
+            this.newsFeed.newsFeedCount = res.result.newsFeedCount;
+            this.newsFeed.adminPostsCount = res.result.adminPostsCount;
+            //console.log('news feed', res);
             this.store.updateProgressBarLoading(false);
         }, error => {
             this.helper.handleApiError(error, 'Failed to fetch news feed');
@@ -65,7 +70,7 @@ export class NewsFeedComponent implements OnInit {
         this.store.updateProgressBarLoading(true);
         this.feed.getPostById(id).pipe(take(1)).subscribe(res => {
             this.newsFeed.post = res.result;
-            console.log('post', res);
+            //console.log('post', res);
             this.store.updateProgressBarLoading(false);
         }, error => {
             this.helper.handleApiError(error, 'Failed to fetch news feed');
@@ -77,6 +82,7 @@ export class NewsFeedComponent implements OnInit {
         this.feed.removePost(post._id).pipe(take(1)).subscribe(res => {
             index !== -1 ? this.newsFeed.newsFeed.splice(index, 1) : this.newsFeed.post = null;
             this.toaster.success(`Post Deleted`);
+            this.newsFeed.newsFeedCount = this.newsFeed.newsFeedCount - 1;
         }, error => {
             this.helper.handleApiError(error, 'Failed to delete post');
         });
@@ -87,6 +93,7 @@ export class NewsFeedComponent implements OnInit {
         modalRef.result.then((result) => {
             if (result.status === 'yes') {
                 this.newsFeed.newsFeed.unshift(result.data);
+                this.newsFeed.newsFeedCount = this.newsFeed.newsFeedCount + 1;
             }
         }, error => {
             //console.log(error);
@@ -107,5 +114,23 @@ export class NewsFeedComponent implements OnInit {
     }
     navigateToPost(id): void{
         this.router.navigateByUrl('home/newsFeed?viewPost=' + id);
+    }
+    loadMore(bool): void{
+        const data = bool ? `?newsFeedPageNumber=${this.newsFeed.newsFeedPageNumber + 1}` : `?topNewsPageNumber=
+        ${this.newsFeed.topNewsPageNumber + 1}`;
+        this.feed.getNewsFeed(data).pipe(take(1)).subscribe(res => {
+            if (bool){
+                this.newsFeed.newsFeed = [...this.newsFeed.newsFeed, ...res.result.newsFeed];
+                this.newsFeed.newsFeedPageNumber = this.newsFeed.newsFeedPageNumber + 1;
+                this.newsFeed.newsFeedCount = res.result.newsFeedCount;
+
+            } else {
+                this.newsFeed.adminPosts = [...this.newsFeed.adminPosts, ...res.result.adminPosts];
+                this.newsFeed.topNewsPageNumber = this.newsFeed.topNewsPageNumber + 1;
+                this.newsFeed.adminPostsCount = res.result.adminPostsCount;
+            }
+        }, error => {
+            this.helper.handleApiError(error, 'Failed to fetch news feed');
+        });
     }
 }

@@ -119,3 +119,19 @@ p{
   top: 130%;
   cursor: pointer;
 }
+.show-more{
+  background: var(--green);
+  border-radius: .3vw;
+  border: none;
+  margin-bottom: 2vw;
+  font-size: .8vw;
+  padding: .5vw 1.5vw;
+  color: white;
+  cursor: pointer;
+}
+.show-more:focus{
+  outline: none
+}
+.mb-c{
+  margin-bottom: 2vw;
+}
