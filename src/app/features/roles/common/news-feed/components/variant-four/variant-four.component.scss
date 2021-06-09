@@ -48,6 +48,8 @@ p{
   color: var(--darkGray);
   font-weight: 300;
   margin-bottom: 1vw;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 .mb-custom{
   margin-bottom: 1vw;

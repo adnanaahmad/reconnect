@@ -22,14 +22,16 @@
 .title{
   margin-bottom: 1vw;
   color: var(--darkGray);
-  font-size: .8vw;
+  font-size: .9vw;
   font-weight: 400;
 }
 .description{
   color: var(--darkGray);
-  font-size: .66vw;
+  font-size: .75vw;
   margin: 0;
   font-weight: 300;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 .video{
   border-radius: .5vw;
@@ -139,4 +141,6 @@
   font-size: .9vw;
   margin-bottom: 0;
   color: var(--mediumGrayLanding);
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }

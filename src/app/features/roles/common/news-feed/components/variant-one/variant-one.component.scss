@@ -45,6 +45,8 @@ iframe{
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin-bottom: 0;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 .read-more{
   color: var(--darkGray);
