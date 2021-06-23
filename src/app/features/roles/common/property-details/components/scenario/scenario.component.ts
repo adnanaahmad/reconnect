@@ -6,11 +6,12 @@ import {StoreService} from '../../../../../../core/store/store.service';
 import {Subscription} from 'rxjs';
 import {CalculatorComponent} from '../../popups/calculator/calculator.component';
 import {FormControl} from '@angular/forms';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
+import {debounceTime, distinctUntilChanged, take} from 'rxjs/operators';
 import {HelperService} from '../../../../../../core/helper/helper.service';
 import {DatePipe, TitleCasePipe} from '@angular/common';
+import {PropertyDetailsService} from '../../services/property-details.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -32,7 +33,8 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
               public store: StoreService,
               private helper: HelperService,
               private titleCase: TitleCasePipe,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private listingService: PropertyDetailsService) {
     configuration.centered = true;
     configuration.container =  'app-property-details';
     this.subscription = [];
@@ -114,38 +116,61 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
      }
      return rent;
   }
-  getBase64ImageFromURL(url): Promise<any> {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.setAttribute('crossOrigin', 'anonymous');
-        img.onload = () => {
-            // tslint:disable-next-line:prefer-const
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
 
-            // tslint:disable-next-line:prefer-const
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-
-            // tslint:disable-next-line:prefer-const
-            const dataURL = canvas.toDataURL('image/png');
-            resolve(dataURL);
-        };
-
-        img.onerror = error => {
-            reject(error);
-        };
-
-        img.src = url;
-    });
+  generateLetter(): void {
+      const data = {
+          loanType: this.loanScenario.loanType,
+          lenderId: this.loanScenario.team.lender.userId._id,
+          loanId: this.loanScenario.userLoan._id,
+          licensedLenderAndBroker: {
+              preApprovalDate : this.loanScenario.userLoan.preApprovalDate,
+              expirationDate : this.loanScenario.userLoan.lockExpiryDate ? this.loanScenario.userLoan.lockExpiryDate : null,
+              borrowerName: this.loanScenario.buyerDetails.firstName + ' ' + this.loanScenario.buyerDetails.lastName,
+              coBorrowerName: this.loanScenario.userLoan.coBorrowerName ? this.loanScenario.userLoan.coBorrowerName : null,
+          },
+          preApprovalTerms: {
+              purchasePrice: this.scenario.purchasePrice,
+              downPayment: this.scenario.downPayment,
+              sellerCredit: this.loanScenario.userLoan.sellerCredit,
+              propertyTaxes: this.loanScenario.listings[0].xf_taxes ||
+              this.loanScenario.listings[0].xf_taxes === 0 ? (this.loanScenario.listings[0].xf_taxes) : null,
+              loanAmount: this.scenario.loanAmount,
+              loanType: this.loanScenario.loanType,
+              propertyType: this.loanScenario.listings[0].propertyType,
+              rentalIncome: (this.loanScenario.listings[0].propertyType === 'Multi-family') ? (this.loanScenario.rent) : null
+          },
+          body:  this.loanScenario.template.body,
+          conditions:  this.loanScenario.template.conditions,
+          closing:  this.loanScenario.template.closing,
+          lenderDetails: this.loanScenario.team.lender.userId,
+          mlsId: this.loanScenario.listings[0].id,
+          listingDetails: {
+              id: this.loanScenario.listings[0].id,
+              listPrice: this.loanScenario.listings[0].listPrice,
+              address: this.loanScenario.listings[0].address,
+              listingOffice: {name: this.loanScenario.listings[0].listingOffice.name},
+              listingAgent: {name: this.loanScenario.listings[0].listingAgent.name},
+              xf_square_feet: this.loanScenario.listings[0].xf_square_feet ? this.loanScenario.listings[0].xf_square_feet : null,
+              xf_no_bedrooms: this.loanScenario.listings[0].xf_no_bedrooms,
+              xf_no_half_baths: this.loanScenario.listings[0].xf_no_half_baths,
+              xf_no_full_baths: this.loanScenario.listings[0].xf_no_full_baths,
+              xf_garage_spaces: this.loanScenario.listings[0].xf_garage_spaces ? this.loanScenario.listings[0].xf_garage_spaces : null,
+              images: this.loanScenario.listings[0].images,
+              description: this.loanScenario.listings[0].description
+          }
+      };
+      // console.log(data);
+      this.listingService.generateLetter(data).pipe(take(1)).subscribe(res => {
+          console.log(res);
+      }, error => {
+         this.helper.handleApiError(error, 'Failed to save letter');
+      });
   }
-
   async generatePDF() {
       const data = {
           content: [
               {
-                  image: await this.getBase64ImageFromURL(this.loanScenario.team.lender.userId.company.companyLogoUrl ? this.loanScenario.team.lender.userId.company.companyLogoUrl : 'https://static.wikia.nocookie.net/nopixel/images/b/b4/Not-found-image-15383864787lu.jpg/revision/latest?cb=20200910062142'),
+                  image: await this.helper.getBase64ImageFromURL(this.loanScenario.team.lender.userId.company.companyLogoUrl ? this.loanScenario.team.lender.userId.company.companyLogoUrl : 'https://static.wikia.nocookie.net/nopixel/images/b/b4/Not-found-image-15383864787lu.jpg/revision/latest?cb=20200910062142'),
                   width: 120,
                   height: 100,
                   alignment: 'center',
@@ -246,7 +271,7 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
                   style: 'signature'
               },
               {
-                  image: await this.getBase64ImageFromURL(this.loanScenario.team.lender.userId.profilePictureUrl),
+                  image: await this.helper.getBase64ImageFromURL(this.loanScenario.team.lender.userId.profilePictureUrl),
                   width: 120,
                   height: 100,
                   style: 'mb-1'
@@ -295,6 +320,7 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
 
       };
       try {
+          this.generateLetter();
           pdfMake.createPdf(data).open();
       } catch (err) {
           alert(err);

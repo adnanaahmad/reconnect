@@ -1,0 +1,27 @@
+.heading h3{
+  font-family: 'Poppins';
+  font-size: var(--heading);
+  color: var(--darkGray);
+}
+.heading{
+  margin-bottom: 2vw;
+}
+.showing{
+  margin-bottom: 1.5vw;
+}
+.showing p{
+  margin-bottom: 0;
+  color: var(--darkGray);
+  font-size: .8vw;
+}
+#exampleFormControlSelect1.form-control{
+  width: 8%;
+  margin-left: 1vw;
+  background: var(--lightBlue);
+  font-size: .75vw;
+  border-radius: .5em;
+  padding: .2vw 0vw .2vw .2vw;
+  height: 2.3vw;
+  font-weight: 300;
+  border: 1px solid var(--lighGray);
+}

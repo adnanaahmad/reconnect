@@ -146,3 +146,18 @@
 p{
   font-family: 'Poppins';
 }
+.letter{
+  border-radius: 0;
+}
+.view-letter{
+  background: var(--green);
+  padding: .7vw;
+  cursor: pointer;
+  border-bottom-left-radius: .5vw;
+  border-bottom-right-radius: .5vw;
+}
+.view-letter p{
+  margin-bottom: 0;
+  color: white;
+  font-size: .82vw;
+}

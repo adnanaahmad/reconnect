@@ -1,1 +1,13 @@
-<p>pre-approval-history works!</p>
+<div class="heading d-flex justify-content-between">
+    <h3>Pre-Approval History</h3>
+</div>
+<ng-container *ngIf="!(store.progressBarLoading|async)">
+    <div class="home">
+        <div class="row">
+            <div class="col-4 home-margin" *ngFor="let home of preApprovalHistoryList">
+                <app-home-card [letter]="home" [homeDetails]="{details: home.listingDetails}"></app-home-card>
+            </div>
+        </div>
+    </div>
+    <app-compliance-info *ngIf="preApprovalHistoryList.length"></app-compliance-info>
+</ng-container>

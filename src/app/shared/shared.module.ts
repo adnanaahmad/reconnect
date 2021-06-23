@@ -38,6 +38,7 @@ import { ComplianceInfoComponent } from './components/compliance-info/compliance
 import { InviteUserComponent } from './components/invite-user/invite-user.component';
 import { ChangePreApprovalLetterComponent } from './components/change-pre-approval-letter/change-pre-approval-letter.component';
 import { ChangeLetterButtonComponent } from './components/change-letter-button/change-letter-button.component';
+import {HomeCardComponent} from './components/home-card/home-card.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -74,7 +75,8 @@ const maskConfig: Partial<IConfig> = {
         ComplianceInfoComponent,
         InviteUserComponent,
         ChangePreApprovalLetterComponent,
-        ChangeLetterButtonComponent
+        ChangeLetterButtonComponent,
+        HomeCardComponent
     ],
     imports: [
         CommonModule,
@@ -120,7 +122,8 @@ const maskConfig: Partial<IConfig> = {
         SafeUrlPipe,
         DatePickerComponent,
         ComplianceInfoComponent,
-        InviteUserComponent
+        InviteUserComponent,
+        HomeCardComponent
     ],
     providers: [NgbDateNativeAdapter]
 })

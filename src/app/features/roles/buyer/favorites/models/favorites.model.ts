@@ -26,8 +26,9 @@ export interface HomeModel {
   hoa: number;
   listingOffice: {name: string; id: string};
   listingAgent: {name: string; id: string};
+  xf_square_feet: number;
 }
-export interface HomeDetails {
-  _id: number;
+export interface  HomeDetails {
+  _id?: number;
   details: HomeModel;
 }

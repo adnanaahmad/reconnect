@@ -80,7 +80,9 @@ export class ConstantService {
      getPreApprovalTemplates: `${environment.apiUrl}/preapproval-template/get`,
      getTemplatesList: `${environment.apiUrl}/preapproval-template/get`,
      generateLetter: `${environment.apiUrl}/preapproval-letter/create`,
-     updateTemplateId: `${environment.apiUrl}/loan/update-preapproval-template/`
+     updateTemplateId: `${environment.apiUrl}/loan/update-preapproval-template/`,
+     createPreApprovalLetter: `${environment.apiUrl}/preapproval-letter/create`,
+     getPreApprovalHistory: `${environment.apiUrl}/preapproval-letter/get`,
    };
   apiMethod = {
     get: 'get',
@@ -142,13 +144,13 @@ export class ConstantService {
         route: '/home/savedSearches',
         order: 1
       },
-      // {
-      //   name: 'Pre Approval History',
-      //   tooltip: 'My Home Buying Platform',
-      //   icon: '/assets/menu-icons/wall-clock.svg',
-      //   route: '/home/preApprovalHistory',
-      //   order: 1
-      // },
+      {
+        name: 'Pre Approval History',
+        tooltip: 'My Home Buying Platform',
+        icon: '/assets/menu-icons/wall-clock.svg',
+        route: '/home/preApprovalHistory',
+        order: 1
+      },
       {
         name: 'Home Buying 101',
         tooltip: 'My Home Buying Platform',
@@ -545,7 +547,7 @@ export class ConstantService {
       teamMessageBoard: true,
       myLoanDetails: true,
       newsFeed: true,
-      preApprovalHistory: false,
+      preApprovalHistory: true,
       savedSearches: true,
       favorites: true,
       homeBuyingDashboard: true,

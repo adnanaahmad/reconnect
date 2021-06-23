@@ -28,4 +28,7 @@ export class PropertyDetailsService {
   createPropertyPost(data): Observable<any>{
     return this.helper.requestCall(this.methods.post, this.api.createPost, data);
   }
+  generateLetter(data): Observable<any>{
+    return this.helper.requestCall(this.methods.post, this.api.createPreApprovalLetter, data);
+  }
 }

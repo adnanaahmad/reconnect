@@ -1,0 +1,27 @@
+<div class="card-1">
+    <div class="img-div">
+        <ng-container *ngIf="!letter">
+            <div class="status"><p>{{homeDetails.details.status}}</p></div>
+            <div class="card-icons d-flex">
+                <img class="heart" (click)="removeFromFavorites()" src="/assets/search-home/heart.svg">
+            </div>
+        </ng-container>
+        <img *ngIf="homeDetails.details.images" (click)="propertyDetails()" class="home-img" [src]="homeDetails.details.images[0]">
+        <img *ngIf="!homeDetails.details.images" src="/assets/search-home/no-img.jpg" class="home-img" (click)="propertyDetails()">
+    </div>
+    <div class="card-info" [ngClass]="{'letter' : this.letter}">
+       <div class="d-flex justify-content-between price-area">
+          <p class="price">${{homeDetails.details.listPrice}}</p>
+          <p class="area align-self-end">{{homeDetails.details.xf_square_feet}} Sq Ft</p>
+       </div>
+       <div class="description-div"><p class="description">{{ homeDetails.details.description }}</p></div>
+       <div class="d-flex">
+          <div class="bath d-flex"><img class="" src="/assets/search-home/bathroom.png"><p class="align-self-end">{{homeDetails.details.xf_no_half_baths + homeDetails.details.xf_no_full_baths}}</p></div>
+          <div class="bed d-flex"><img class="" src="/assets/search-home/bedroom.png"><p class="align-self-end">{{homeDetails.details.xf_no_bedrooms}}</p></div>
+          <div class="garage d-flex"><img class="" src="/assets/search-home/garage.png"><p class="align-self-end">{{homeDetails.details.xf_garage_spaces}}</p></div>
+       </div>
+    </div>
+    <div *ngIf="letter" class="view-letter" (click)="generatePDF()">
+        <p class="text-center">View Pre-Approval</p>
+    </div>
+</div>

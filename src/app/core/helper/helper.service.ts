@@ -224,4 +224,30 @@ export class HelperService {
   validYoutubeUrl(mediaUrl): boolean{
     return !!mediaUrl.includes('youtube.com/watch');
   }
+  getBase64ImageFromURL(url): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.setAttribute('crossOrigin', 'anonymous');
+      img.onload = () => {
+        // tslint:disable-next-line:prefer-const
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        // tslint:disable-next-line:prefer-const
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+
+        // tslint:disable-next-line:prefer-const
+        const dataURL = canvas.toDataURL('image/png');
+        resolve(dataURL);
+      };
+
+      img.onerror = error => {
+        reject(error);
+      };
+
+      img.src = url;
+    });
+  }
 }

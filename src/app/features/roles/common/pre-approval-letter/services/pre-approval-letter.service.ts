@@ -12,9 +12,7 @@ export class PreApprovalLetterService {
   method: any;
   api: any;
   constructor(private constant: ConstantService,
-              private helper: HelperService,
-              private location: LocationService,
-              private store: StoreService) {
+              private helper: HelperService) {
     this.method = this.constant.apiMethod;
     this.api = this.constant.apiRoutes;
   }
