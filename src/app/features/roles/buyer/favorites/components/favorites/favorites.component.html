@@ -4,7 +4,7 @@
 <div class="home">
   <div class="row">
       <div class="col-4 home-margin" *ngFor="let home of favorite.home">
-            <app-home-card (removeFavorite)="updatedFavorites($event)" [homeDetails]="home"></app-home-card>
+            <app-home-card-1 (removeFavorite)="updatedFavorites($event)" [homeDetails]="home"></app-home-card-1>
       </div>
   </div>
 </div>

@@ -10,7 +10,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {DatePipe, TitleCasePipe} from '@angular/common';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
-  selector: 'app-home-card',
+  selector: 'app-home-card-1',
   templateUrl: './home-card.component.html',
   styleUrls: ['./home-card.component.scss'],
   providers: [TitleCasePipe, DatePipe]
