@@ -36,6 +36,8 @@ import { SafeUrlPipe } from './pipes/safeUrl/safe-url.pipe';
 import {DatePickerComponent} from './components/date-picker/date-picker.component';
 import { ComplianceInfoComponent } from './components/compliance-info/compliance-info.component';
 import { InviteUserComponent } from './components/invite-user/invite-user.component';
+import { ChangePreApprovalLetterComponent } from './components/change-pre-approval-letter/change-pre-approval-letter.component';
+import { ChangeLetterButtonComponent } from './components/change-letter-button/change-letter-button.component';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -70,7 +72,9 @@ const maskConfig: Partial<IConfig> = {
         SafeUrlPipe,
         DatePickerComponent,
         ComplianceInfoComponent,
-        InviteUserComponent
+        InviteUserComponent,
+        ChangePreApprovalLetterComponent,
+        ChangeLetterButtonComponent
     ],
     imports: [
         CommonModule,

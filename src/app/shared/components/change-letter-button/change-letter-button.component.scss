@@ -1,0 +1,13 @@
+.change{
+  padding: .5vw 1.5vw;
+  border: none;
+  border-radius: .4vw;
+  font-family: 'Poppins';
+  font-size: .8vw;
+  color: white;
+  background: var(--green);
+  cursor: pointer;
+}
+.change:focus{
+  outline: none;
+}

@@ -58,6 +58,21 @@
       <app-subject-property-template *ngIf="!transactionDetails.subjectProperty"></app-subject-property-template>
   </div>
 </div>
+    <div class="mb-custom">
+        <div class="d-flex justify-content-between mb-custom">
+            <p class="heading align-self-center"> Co-Borrower Details</p>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <div class="details">
+                    <div class="d-flex">
+                        <p class="align-self-center co-borrower-name">Name: </p>
+                        <input formControlName="coBorrowerName" type="text" class="form-control f-cbn" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="d-flex justify-content-between mb-custom">
     <p class="heading align-self-center"> Pre-Approval Details</p>
     <button (click)="addClosingCost()" type="button" class="closing-cost mt-auto">Add Closing Cost</button>
@@ -85,23 +100,22 @@
 <app-loan-checkbox [loanDetails]="transactionDetails"></app-loan-checkbox>
 <div class="row second-row">
     <div *ngIf="transactionDetails.finance.getRawValue().toggle.fha" class="col-6" style="">
-        <app-fha [finance]="transactionDetails.finance"></app-fha>
+        <app-fha [mlsId] = "transactionDetails.subjectProperty ? transactionDetails.subjectProperty.id : null" [borrowerId]="transactionDetails.id" [finance]="transactionDetails.finance"></app-fha>
     </div>
-
     <div *ngIf="transactionDetails.finance.getRawValue().toggle.conventional" class="col-6" style="">
-        <app-conventional [finance]="transactionDetails.finance"></app-conventional>
+        <app-conventional [mlsId] = "transactionDetails.subjectProperty ? transactionDetails.subjectProperty.id : null" [borrowerId]="transactionDetails.id" [finance]="transactionDetails.finance"></app-conventional>
     </div>
     <div *ngIf="transactionDetails.finance.getRawValue().toggle.homePossible" class="col-6" style="">
-        <app-home-possible [finance]="transactionDetails.finance"></app-home-possible>
+        <app-home-possible [mlsId] = "transactionDetails.subjectProperty ? transactionDetails.subjectProperty.id : null" [borrowerId]="transactionDetails.id" [finance]="transactionDetails.finance"></app-home-possible>
     </div>
     <div *ngIf="transactionDetails.finance.getRawValue().toggle.homeReady" class="col-6" style="">
-        <app-home-ready [finance]="transactionDetails.finance"></app-home-ready>
+        <app-home-ready [mlsId] = "transactionDetails.subjectProperty ? transactionDetails.subjectProperty.id : null" [borrowerId]="transactionDetails.id" [finance]="transactionDetails.finance"></app-home-ready>
     </div>
     <div *ngIf="transactionDetails.finance.getRawValue().toggle.va" class="col-6" style="">
-        <app-va [finance]="transactionDetails.finance"></app-va>
+        <app-va [mlsId] = "transactionDetails.subjectProperty ? transactionDetails.subjectProperty.id : null" [borrowerId]="transactionDetails.id" [finance]="transactionDetails.finance"></app-va>
     </div>
      <div *ngIf="transactionDetails.finance.getRawValue().toggle.usda" class="col-6" style="">
-        <app-usda [finance]="transactionDetails.finance"></app-usda>
+        <app-usda [mlsId] = "transactionDetails.subjectProperty ? transactionDetails.subjectProperty.id : null" [borrowerId]="transactionDetails.id" [finance]="transactionDetails.finance"></app-usda>
     </div>
 </div>
 </form>

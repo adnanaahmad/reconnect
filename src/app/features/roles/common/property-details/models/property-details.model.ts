@@ -33,7 +33,9 @@ export interface LoanScenarioModel{
   fundsNeeded: number;
   housingRatio: number;
   debtRatio: number;
-
+  loanType: string;
+  template: string;
+  rent: number;
 }
 export interface ViewPaymentBreakDownModel{
   principalAndInterest: number;
@@ -86,6 +88,7 @@ export interface PropertyAdModel {
   xf_no_full_baths: number;
   xf_no_half_baths: number;
   xf_county: string;
+  description: string;
 }
 
 interface RealEstateAgentUserModel {

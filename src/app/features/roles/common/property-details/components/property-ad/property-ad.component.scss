@@ -57,9 +57,15 @@
   color: var(--darkGray);
 }
 .address{
-  margin-bottom: 2vw;
+  margin-bottom: 1.5vw;
   font-weight: 300;
   font-size: 1vw;
+  color: var(--darkGray);
+}
+.description{
+  margin-bottom: 2vw;
+  font-weight: 200;
+  font-size: .8vw;
   color: var(--darkGray);
 }
 .activity p:first-child{

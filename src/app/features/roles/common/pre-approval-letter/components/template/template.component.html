@@ -1,0 +1,130 @@
+<form [formGroup]="template">
+    <div class="d-flex justify-content-between heading-div">
+        <p class="heading align-self-center">{{data.title | titlecase}}</p>
+        <button *ngIf="showJustTemplate" (click)="onSubmit()" class="apply">Save</button>
+    </div>
+    <div *ngIf="!showJustTemplate" class="card-1">
+        <p class="title mb-c">Licensed Lender And Broker</p>
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-4">
+                        <p class="text-nowrap key">Pre Approval Date</p>
+                    </div>
+                    <div class="col-8">
+                        <p class="value">{{otherDetails.userLoan.preApprovalDate | date}}</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-nowrap key">Expiration Date</p>
+                    </div>
+                    <div class="col-8">
+                        <p class="value">{{otherDetails.userLoan.lockExpiryDate ? (otherDetails.userLoan.lockExpiryDate | date) : 'N.A'}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-5">
+                        <p class="text-nowrap key">Borrower Name</p>
+                    </div>
+                    <div class="col-7">
+                        <p class="value">{{(otherDetails.buyerDetails.firstName + " " + otherDetails.buyerDetails.lastName) | titlecase }}</p>
+                    </div>
+                    <div class="col-5">
+                        <p class="text-nowrap key">Co-Borrower Name</p>
+                    </div>
+                    <div class="col-7">
+                        <p class="value">{{otherDetails.userLoan.coBorrowerName ? otherDetails.userLoan.coBorrowerName : 'N.A'}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!showJustTemplate" class="card-2">
+        <p class="title mb-c">Pre-Approval Terms</p>
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-4">
+                        <p class="text-nowrap key">Purchase Price</p>
+                    </div>
+                    <div class="col-8">
+                        <p class="value">{{'$' + (otherDetails.listings[0].listPrice)}}</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-nowrap key">Down Payment</p>
+                    </div>
+                    <div class="col-8">
+                        <p class="value">{{ '$' + otherDetails.listings[0].financing[loanType].downPaymentCalculated}}</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-nowrap key">Seller Credit</p>
+                    </div>
+                    <div class="col-8">
+                        <p class="value">{{'$' + otherDetails.userLoan.sellerCredit}}</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-nowrap key">Property Taxes</p>
+                    </div>
+                    <div class="col-8">
+                        <p class="value">{{otherDetails.listings[0].xf_taxes || otherDetails.listings[0].xf_taxes === 0 ? '$' + otherDetails.listings[0].xf_taxes : 'N.A' }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-5">
+                        <p class="text-nowrap key">Loan Amount</p>
+                    </div>
+                    <div class="col-7">
+                        <p class="value">{{'$' + otherDetails.listings[0].financing[loanType].loanAmount}}</p>
+                    </div>
+                    <div class="col-5">
+                        <p class="text-nowrap key">Loan Type</p>
+                    </div>
+                    <div class="col-7">
+                        <p class="value">{{helper.formatRole(loanType) | titlecase}}</p>
+                    </div>
+                    <div class="col-5">
+                        <p class="text-nowrap key">Property Type</p>
+                    </div>
+                    <div class="col-7">
+                        <p class="value">{{otherDetails.listings[0].propertyType}}</p>
+                    </div>
+                    <ng-container *ngIf="otherDetails.listings[0].propertyType === 'Multi-family'">
+                        <div class="col-5">
+                            <p class="text-nowrap key">Required Rental Income</p>
+                        </div>
+                        <div class="col-7">
+                            <p class="value">{{'$' + calculateRent}}</p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-3">
+        <textarea formControlName="body" class="form-control textarea f2 mb-c2" rows="5" placeholder="Description"></textarea>
+        <div class="mb-c2">
+            <div class="d-flex justify-content-between mb-c">
+                <p class="title align-self-center">Standard Approval Conditions</p>
+                <button (click)="addConditions()" class="apply">Add Conditions</button>
+            </div>
+            <div formArrayName="conditions">
+                <ng-container *ngFor="let a of conditions.controls; let i = index">
+                    <div class="row condition-tile">
+                        <div class="col-9">
+                            <input [formControlName]="i" type="text" class="form-control f1" placeholder="Condition 1">
+                        </div>
+                        <div class="col-3">
+                            <button (click)="deleteCondition(i)" class="delete-btn">
+                                <img class="delete" src="/assets/news-feed-icons/delete.svg">
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <textarea formControlName="closing" class="form-control textarea f2" rows="5" placeholder="Closing text"></textarea>
+    </div>
+</form>

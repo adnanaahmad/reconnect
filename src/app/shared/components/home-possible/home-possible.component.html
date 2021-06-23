@@ -2,7 +2,10 @@
 
 <div class="parent" [formGroup]="finance">
 <div formGroupName="homePossible">
- <div class="loan-type"><p>Home Possible</p></div>
+ <div class="loan-type d-flex justify-content-between">
+     <p class="align-self-center">Home Possible</p>
+     <app-change-letter-button *ngIf="store.role === constant.role.LENDER" (openPopup)="changeLetter()"></app-change-letter-button>
+ </div>
     <div class="loan-form">
       <div class="loan-detail row-space">
           <div class="loan-heading"><p>Loan Details</p></div>

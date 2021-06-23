@@ -193,3 +193,19 @@ p{
   font-size: .7vw;
   font-weight: 500;
 }
+.mb-custom{
+  margin-bottom: .5vw;
+}
+.description-agent{
+  font-size: .6vw;
+  font-weight: 500;
+  word-break: break-word;
+  color: var(--green) !important;
+  margin-bottom: 0;
+}
+.ml-c-0{
+  padding-left: 0;
+}
+.mr-c-0{
+  padding-right: 0;
+}

@@ -30,6 +30,7 @@ import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 export class HomeCardComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
   @Input() home: HomeModel = {} as HomeModel;
   @Input() loan: any;
+  @Input() listingData: any;
   @Output() toggleEvent = new EventEmitter<any>();
   @ViewChild('homeCard') homeCard: ElementRef;
   pieChart: ViewPaymentBreakDownModel = {} as ViewPaymentBreakDownModel;

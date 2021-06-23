@@ -110,8 +110,10 @@ const routes: Routes = [{
       loadChildren: () => import('../roles/common/quote-requests/quote-requests.module').then(m => m.QuoteRequestsModule),
       canLoad: [RoleGuard]
     },
-
-
+    {
+      path: 'preApprovalLetter',
+      loadChildren: () => import('../roles/common/pre-approval-letter/pre-approval-letter.module').then(m => m.PreApprovalLetterModule)
+    },
   ] },
    ];
 

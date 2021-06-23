@@ -73,7 +73,14 @@ export class ConstantService {
      changeEmailConfirm: `${environment.apiUrl}/user/change-email-confirm`,
      getComplianceInfo: `${environment.apiUrl}/listing/compliance`,
      startPrivateChat: `${environment.apiUrl}/conversation/start-private`,
-     quoteResponse: `${environment.apiUrl}/message/quote-response`
+     quoteResponse: `${environment.apiUrl}/message/quote-response`,
+     createPreApprovalTemplate: `${environment.apiUrl}/preapproval-template/create`,
+     updatePreApprovalTemplate: `${environment.apiUrl}/preapproval-template/update/`,
+     removePreApprovalTemplate: `${environment.apiUrl}/preapproval-template/delete/`,
+     getPreApprovalTemplates: `${environment.apiUrl}/preapproval-template/get`,
+     getTemplatesList: `${environment.apiUrl}/preapproval-template/get`,
+     generateLetter: `${environment.apiUrl}/preapproval-letter/create`,
+     updateTemplateId: `${environment.apiUrl}/loan/update-preapproval-template/`
    };
   apiMethod = {
     get: 'get',
@@ -201,6 +208,13 @@ export class ConstantService {
       route: '/home/borrowers',
       order: 1
     },
+     {
+       name: 'Pre Approval Letter',
+       tooltip: 'My Home Buying Platform',
+       icon: '/assets/menu-icons/approval.svg',
+       route: '/home/preApprovalLetter',
+       order: 1
+     },
      {
        name: 'News Feed',
        tooltip: 'My Home Buying Platform',
@@ -828,5 +842,13 @@ export class ConstantService {
     xf_app_dscrp_: 'Appliances',
     xf_hea_dscrp_: 'Heating' ,
     xf_lease_ : 'Lease',
+  };
+  loanType = {
+    FHA: 'fha' ,
+    CONVENTIONAL: 'conventional',
+    HOME_POSSIBLE: 'homePossible',
+    HOME_READY: 'homeReady',
+    VA: 'va',
+    USDA: 'usda',
   };
 }

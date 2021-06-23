@@ -1,0 +1,13 @@
+<div class="form-div d-flex flex-column">
+    <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+    <form class="d-flex flex-column" [formGroup]="template">
+        <div class="card-1 d-flex flex-column">
+            <p class="heading">Create Pre-Approval Letter Template</p>
+            <p class="title">Template Name</p>
+            <input formControlName="title" type="text" class="form-control f1 mb-custom" placeholder="">
+            <p class="title">Description</p>
+            <textarea formControlName="description" class="form-control textarea f2" rows="5" placeholder=""></textarea>
+        </div>
+    </form>
+    <button (click)="onSubmit()" class="invite">Save</button>
+</div>

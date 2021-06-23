@@ -106,6 +106,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
       res = res.result;
       this.transactionDetails.user = res.buyer;
       this.transactionDetails.finance.patchValue({
+        coBorrowerName: res.coBorrowerName ? res.coBorrowerName : null,
         lockExpiryDate: res.lockExpiryDate ? this.dateFormat.fromModel(new Date(res.lockExpiryDate)) : null,
         lenderCommissionPercentage: res.lenderCommissionPercentage,
         income: res.income,
@@ -191,6 +192,7 @@ export class TransactionDetailsComponent implements OnInit, OnDestroy {
   initializeForm(): void{
     this.transactionDetails.finance  = this.fb.group({
       lockExpiryDate: [null],
+      coBorrowerName: [null],
       lenderCommissionPercentage: [null],
       income: [null, Validators.required],
       monthlyDebt: [null, Validators.required],

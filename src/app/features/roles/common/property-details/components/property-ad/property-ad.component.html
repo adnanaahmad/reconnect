@@ -1,7 +1,7 @@
       <div class="card-1">
         <div class="card-1st-half">
-              <div class="d-flex listed-by">
-                   <p>Courtesy of </p><p>{{propertyAd.listingOffice.name + ", " + propertyAd.listingAgent.name}}</p>
+              <div class="d-flex listed-by" *ngIf="propertyAd.listingOffice.name || propertyAd.listingAgent.name">
+                   <p>Courtesy of </p><p>{{propertyAd.listingOffice.name + (propertyAd.listingOffice.name ? ", " : "") + propertyAd.listingAgent.name}}</p>
               </div>
               <div>
                 <img class="main-img" [src]="propertyAd.image">
@@ -18,7 +18,7 @@
             </div>
             <p class="address">{{propertyAd.address.deliveryLine}},
                 {{propertyAd.address.city+', '+propertyAd.address.state+', '+propertyAd.address.zip}}</p>
-
+            <p class="description">{{propertyAd.description}}</p>
             <div class="d-flex">
                 <div class="d-flex activity activity-pr">
                     <p>Status:</p>

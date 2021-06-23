@@ -1,0 +1,20 @@
+<div class="form-div d-flex flex-column">
+    <div class="close-parent">
+        <img (click)="close()" class="close-btn" src="/assets/calendar-icons/close.svg">
+    </div>
+    <div class="d-flex flex-column">
+        <div class="card-1 d-flex flex-column">
+            <p class="heading">Select Pre-Approval Letter Template</p>
+            <ng-container *ngFor="let temp of template.list; let i = index">
+                <div class="d-flex justify-content-between template-tile">
+                    <div>
+                        <p class="template-name align-self-center">{{temp.title}}</p>
+                        <p class="template-description align-self-center">{{temp.description}}</p>
+                    </div>
+                    <button (click)="select(temp._id)" [ngClass]="{'active' : template.letter ? temp._id === template.letter : false}" class="select">Select</button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <button type="button" (click)="onSubmit()" class="save">Save</button>
+</div>

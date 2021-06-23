@@ -48,13 +48,22 @@
                 {{home.address.city+', '+home.address.state}}
             </p>
         </div>
-        <div class="d-flex">
+        <div class="d-flex mb-custom">
             <div class="bath d-flex"><img class="" src="/assets/search-home/bathroom.png">
                 <p class="align-self-end">{{home.xf_no_full_baths + home.xf_no_half_baths}}</p></div>
             <div class="bed d-flex"><img class="" src="/assets/search-home/bedroom.png">
                 <p class="align-self-end">{{home.xf_no_bedrooms}}</p></div>
             <div class="garage d-flex"><img class="" src="/assets/search-home/garage.png">
                 <p class="align-self-end">{{home.xf_garage_spaces}}</p></div>
+        </div>
+        <div class="row">
+            <div class="col-3 mr-c-0">
+                <p class="description text-nowrap des-width">Listed by:</p>
+            </div>
+            <div class="col-9 ml-c-0">
+                <p class="description-agent">{{(home.listingOffice.name ? home.listingOffice.name : listingData.offices[ home.listingOffice.id].name)
+                + ", " + (home.listingAgent.name ? home.listingAgent.name : listingData.agents[home.listingAgent.id].name)}}</p>
+            </div>
         </div>
     </div>
 </div>

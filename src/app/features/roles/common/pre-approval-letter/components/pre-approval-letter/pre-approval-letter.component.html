@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-between heading">
+    <h3>Pre Approval Letter</h3>
+</div>
+<div class="row" *ngIf="!(store.progressBarLoading|async)">
+    <div class="col-3">
+        <app-template-list [templateList]="template.list" (createNewTemplate)="createTemplate()" (remove)="removeTemplate($event)" (edit)="editTemplate($event)"></app-template-list>
+    </div>
+    <div class="col-9">
+        <app-template (update)="update($event)" [loanType]="template.loanType" [otherDetails]="template.otherDetails" [justTemplate]="template.justTemplate" [data]="template.currentTemplate" *ngIf="template.currentTemplate"></app-template>
+    </div>
+</div>

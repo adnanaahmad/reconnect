@@ -7,11 +7,17 @@ import {Subscription} from 'rxjs';
 import {CalculatorComponent} from '../../popups/calculator/calculator.component';
 import {FormControl} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import {HelperService} from '../../../../../../core/helper/helper.service';
+import {DatePipe, TitleCasePipe} from '@angular/common';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-scenario',
   templateUrl: './scenario.component.html',
-  styleUrls: ['./scenario.component.scss']
+  styleUrls: ['./scenario.component.scss'],
+  providers: [TitleCasePipe, DatePipe]
 })
 export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
   @Input() loanScenario;
@@ -21,7 +27,12 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
   subscription: Array<Subscription>;
   purchasePrice: FormControl;
   qualify: boolean;
-  constructor(private modalService: NgbModal, configuration: NgbModalConfig, public store: StoreService) {
+  constructor(private modalService: NgbModal,
+              configuration: NgbModalConfig,
+              public store: StoreService,
+              private helper: HelperService,
+              private titleCase: TitleCasePipe,
+              private datePipe: DatePipe) {
     configuration.centered = true;
     configuration.container =  'app-property-details';
     this.subscription = [];
@@ -38,6 +49,9 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     this.subscription.push(
         this.store.toggleLoanType.subscribe(loanType => {
+          this.loanScenario.loanType = loanType;
+          this.loanScenario.template = this.loanScenario.userLoan.preapprovalTemplates[loanType];
+          this.loanScenario.rent = this.calculateRent;
           this.scenario.housingRatio = Number(this.loanScenario.listings[0].financing[loanType].housingRatio ?
               this.loanScenario.listings[0].financing[loanType].housingRatio.toFixed(2) : null);
           this.scenario.debtRatio = Number(this.loanScenario.listings[0].financing[loanType].debtRatio ?
@@ -92,5 +106,198 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
     }, error => {
       console.log(error);
     });
+  }
+  get calculateRent(): number{
+     let rent = 0;
+     for (let i = 0; i < this.loanScenario.listings[0].xf_no_units; i++) {
+        rent = rent + this.loanScenario.listings[0]['xf_rent' + (i + 1)];
+     }
+     return rent;
+  }
+  getBase64ImageFromURL(url): Promise<any> {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.setAttribute('crossOrigin', 'anonymous');
+        img.onload = () => {
+            // tslint:disable-next-line:prefer-const
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // tslint:disable-next-line:prefer-const
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+
+            // tslint:disable-next-line:prefer-const
+            const dataURL = canvas.toDataURL('image/png');
+            resolve(dataURL);
+        };
+
+        img.onerror = error => {
+            reject(error);
+        };
+
+        img.src = url;
+    });
+  }
+
+  async generatePDF() {
+      const data = {
+          content: [
+              {
+                  image: await this.getBase64ImageFromURL(this.loanScenario.team.lender.userId.company.companyLogoUrl ? this.loanScenario.team.lender.userId.company.companyLogoUrl : 'https://static.wikia.nocookie.net/nopixel/images/b/b4/Not-found-image-15383864787lu.jpg/revision/latest?cb=20200910062142'),
+                  width: 120,
+                  height: 100,
+                  alignment: 'center',
+                  style: 'mb-1'
+              },
+              {
+                  text: ['LICENSED LENDER AND BROKER'],
+                  alignment: 'center',
+                  fontSize: 15,
+                  bold: true,
+                  style: 'mb-1'
+              },
+              {
+                  alignment: 'justify',
+                  columns: [
+                      {
+                          columns: [
+                              ['Pre-Approval Date:', 'Expiration Date:'],
+                              [
+                                  this.datePipe.transform(this.loanScenario.userLoan.preApprovalDate, 'yyyy-MM-dd'),
+                                  this.loanScenario.userLoan.lockExpiryDate ?
+                                      this.datePipe.transform(this.loanScenario.userLoan.lockExpiryDate, 'yyyy-MM-dd') : 'N.A',
+                              ]
+                          ]
+                      },
+                      {
+                          columns: [
+                              ['Borrower Name:', 'Co-Borrower Name:'],
+                              [
+                                  this.titleCase.transform(this.loanScenario.buyerDetails.firstName +
+                                      ' ' + this.loanScenario.buyerDetails.lastName),
+                                  this.loanScenario.userLoan.coBorrowerName ?
+                                      this.titleCase.transform(this.loanScenario.userLoan.coBorrowerName) : 'N.A'
+                              ]
+                          ]
+                      }
+                  ],
+                  style: 'mb-1'
+              },
+              {
+                  text: ['PRE-APPROVAL TERMS'],
+                  alignment: 'center',
+                  fontSize: 12,
+                  bold: true,
+                  style: 'mb-1'
+              },
+              {
+                  alignment: 'justify',
+                  columns: [
+                      {
+                          columns: [
+                              ['Purchase Price:', 'Down Payment:', 'Seller Credit:', 'Property Taxes:'],
+                              [
+                                  '$' + this.scenario.purchasePrice,
+                                  '$' + this.scenario.downPayment,
+                                  '$' + this.loanScenario.userLoan.sellerCredit,
+                                  '$' + this.loanScenario.listings[0].xf_taxes ||
+                                  this.loanScenario.listings[0].xf_taxes === 0 ? ('$' + this.loanScenario.listings[0].xf_taxes) : 'N.A'
+                              ]
+                          ]
+                      },
+                      {
+                          columns: [
+                              ['Loan Amount:', 'Loan Type:', 'Property Type:', 'Rental Income:'],
+                              [
+                                  '$' + this.scenario.loanAmount,
+                                  this.titleCase.transform(this.helper.formatRole(this.loanScenario.loanType)),
+                                  this.loanScenario.listings[0].propertyType,
+                                  (this.loanScenario.listings[0].propertyType === 'Multi-family') ? ('$' + this.loanScenario.rent) : 'N.A'
+                              ],
+                          ]
+                      }
+                  ],
+                  style: 'mb-2'
+              },
+              {
+                  text: this.loanScenario.template.body,
+                  style: 'mb-2'
+              },
+              {
+                  text: 'STANDARD APPROVAL CONDITIONS:',
+                  style: 'ml-1'
+              },
+              {
+                  ol: this.loanScenario.template.conditions,
+                  margin: [40, 0, 0, 10]
+              },
+              {
+                  text: this.loanScenario.template.closing,
+                  style: 'mb-1'
+              },
+              {
+                  text: 'Respectfully,',
+              },
+              {
+                  text: this.titleCase.transform(this.loanScenario.team.lender.userId.firstName +
+                      ' ' + this.loanScenario.team.lender.userId.lastName),
+                  style: 'signature'
+              },
+              {
+                  image: await this.getBase64ImageFromURL(this.loanScenario.team.lender.userId.profilePictureUrl),
+                  width: 120,
+                  height: 100,
+                  style: 'mb-1'
+              },
+              this.titleCase.transform(this.loanScenario.team.lender.userId.firstName +
+                  ' ' + this.loanScenario.team.lender.userId.lastName),
+              this.titleCase.transform(this.loanScenario.team.lender.userId.company.name),
+              {
+                  text: `${this.loanScenario.team.lender.userId.company.street} ${this.loanScenario.team.lender.userId.company.city}, ${this.loanScenario.team.lender.userId.company.state}, ${this.loanScenario.team.lender.userId.company.zip} PHONE: ${this.loanScenario.team.lender.userId.company.phoneNumber} FAX: ${this.loanScenario.team.lender.userId.company.faxNumber}`,
+                  style: 'footer',
+                  alignment: 'center',
+              }
+          ],
+          styles: {
+              header: {
+                  fontSize: 18,
+                  bold: true
+              },
+              bigger: {
+                  fontSize: 15,
+                  italics: true
+              },
+              'mb-1': {
+                  margin: [0, 0, 0, 10],
+              },
+              'mb-2': {
+                  margin: [0, 0, 0, 20],
+              },
+              'ml-1': {
+                  margin: [40, 0, 0, 0]
+              },
+              footer: {
+                  margin: [0, 15, 0, 0],
+                  bold: true,
+                  fontWeight: 800
+              },
+              signature: {
+                  margin: [0, 0, 0, 10],
+                  fontSize: 18,
+              }
+          },
+          defaultStyle: {
+              columnGap: 10,
+              fontSize: 11,
+          }
+
+      };
+      try {
+          pdfMake.createPdf(data).open();
+      } catch (err) {
+          alert(err);
+      }
   }
 }

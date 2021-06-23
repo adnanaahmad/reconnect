@@ -124,6 +124,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
                         this.searchHome.total = res.total;
                         this.searchHome.pageNumber = res.paging.number;
                         this.searchHome.loan = res.userLoan;
+                        this.searchHome.listingInfo = {offices: res.offices, agents: res.agents};
                         this.setDefaultLoanType();
                         this.store.updateProgressBarLoading(false);
                     }, error => {
@@ -306,6 +307,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             this.searchHome.total = res.total;
             this.searchHome.pageNumber = res.paging.number;
             this.searchHome.loan = res.userLoan;
+            this.searchHome.listingInfo = {offices: res.offices, agents: res.agents};
             this.setDefaultLoanType();
             this.store.updateToggleMoreFilter(false);
             if (events) {
@@ -368,6 +370,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             this.searchHome.total = res.total;
             this.searchHome.pageNumber = res.paging.number;
             this.searchHome.loan = res.userLoan;
+            this.searchHome.listingInfo = {offices: res.offices, agents: res.agents};
             this.setDefaultLoanType();
             const page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
             window.history.replaceState({}, '', `/home/searchHomes?${data}${loanType}${savedSearchId}${page}${searchInput}${searchByMLS}${searchKeyword}${sortBy}`);
@@ -392,6 +395,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             this.searchHome.total = res.total;
             this.searchHome.pageNumber = res.paging.number;
             this.searchHome.loan = res.userLoan;
+            this.searchHome.listingInfo = {offices: res.offices, agents: res.agents};
             this.setDefaultLoanType();
             this.store.updateProgressBarLoading(false);
             const page = this.searchHome.pageNumber ? `${data || loanType || savedSearchId ? '&' : ''}pageNumber=${this.searchHome.pageNumber}` : '';
@@ -448,6 +452,7 @@ export class SearchHomesComponent implements OnInit, OnDestroy {
             this.searchHome.total = res.total;
             this.searchHome.pageNumber = res.paging.number;
             this.searchHome.loan = res.userLoan;
+            this.searchHome.listingInfo = {offices: res.offices, agents: res.agents};
             this.setDefaultLoanType();
             this.store.updateProgressBarLoading(false);
         }, error => {

@@ -1,0 +1,86 @@
+p{
+  font-family: 'Poppins';
+}
+.form-div{
+  position: relative;
+  min-width: 35vw;
+}
+.card-1{
+  padding: 2vw 2vw 2vw 2vw;
+}
+.heading{
+  font-size: .85vw;
+  font-weight: 500;
+  color: var(--darkGray);
+  margin-bottom: 2vw;
+}
+.close-btn{
+  position: absolute;
+  right: 1.5vw;
+  top: 1.5vw;
+  height: .7vw;
+  width: .7vw;
+  cursor: pointer;
+}
+.title{
+  font-size: .7vw;
+  color: var(--lighGray);
+  margin-bottom: 0.2vw;
+  font-weight: 300;
+}
+.mb-custom{
+  margin-bottom: 1.5vw;
+}
+.danger{
+  color: var(--red);
+}
+.select{
+  background: var(--lighGray);
+  color: white;
+  padding: .3vw 1vw;
+  border: none;
+  font-family: 'Poppins';
+  font-size: .68vw;
+  cursor: pointer;
+  border-radius: .5vw;
+  height: min-content;
+}
+.select:focus{
+  outline: none;
+}
+.template-name{
+  margin-bottom: 0;
+  font-weight: 300;
+  font-size: .8vw;
+  color: var(--darkGray);
+}
+.template-tile{
+  margin-bottom: 1vw;
+}
+.template-tile:last-child{
+  margin-bottom: 0;
+}
+.template-description{
+  margin-bottom: 0;
+  font-weight: 200;
+  font-size: .68vw;
+  color: var(--darkGray);
+}
+.close-parent{
+  position: relative;
+}
+.active{
+  background: var(--green);
+}
+.save{
+  border: none;
+  background: var(--green);
+  color: white;
+  font-family: 'Poppins';
+  font-size: .8vw;
+  padding: .5vw 1vw;
+  cursor: pointer;
+}
+.save:focus{
+  outline: none;
+}

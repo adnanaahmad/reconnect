@@ -24,6 +24,8 @@ export interface HomeModel {
     zip: string;
   };
   hoa: number;
+  listingOffice: {name: string; id: string};
+  listingAgent: {name: string; id: string};
 }
 export interface HomeDetails {
   _id: number;

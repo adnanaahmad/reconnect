@@ -1,0 +1,25 @@
+<div class="card-1">
+    <button (click)="createNewTemplate.emit()" class="d-flex justify-content-center plus-btn mb-c">
+        <img class="plus-icon" src="/assets/calendar-icons/plus.svg">
+        <p class="text-nowrap">Create New Template</p>
+    </button>
+    <div class="mb-c">
+        <p class="title">Templates</p>
+    </div>
+    <ng-container *ngFor="let template of templateList; let i = index">
+        <div class="d-flex justify-content-between template-tile">
+                <div>
+                    <p class="template-name align-self-center">{{template.title}}</p>
+                    <p class="template-description align-self-center">{{template.description}}</p>
+                </div>
+                <div class="d-flex">
+                    <button (click)="edit.emit({data: template}); activeButton = template._id" [ngClass]="{'active': activeButton === template._id}" class="edit-btn">
+                        <img class="edit" src="/assets/saved-search/edit.svg">
+                    </button>
+                    <button (click)="remove.emit({id: template._id, index: i})" class="delete-btn">
+                        <img class="delete" src="/assets/news-feed-icons/delete.svg">
+                    </button>
+                </div>
+        </div>
+    </ng-container>
+</div>

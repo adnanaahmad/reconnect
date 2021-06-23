@@ -28,7 +28,7 @@
           <p class="details-heading pd-heading">Multi-Unit Information</p>
           <app-multi-unit-info [data]="propertyDetails.multiFamilyUnits.listings[0]"></app-multi-unit-info>
       </ng-container>
-      <ng-container *ngIf="propertyDetails.loanScenarioOne.listings[0].propertyType === 'Multi-family'">
+      <ng-container *ngIf="propertyDetails.loanScenarioOne.listings[0].propertyType === 'Multi-family' && store.role === constant.role.BUYER">
           <p class="details-heading pd-heading">Multi Family</p>
           <app-multi-family [multiFamilyUnits]="propertyDetails.multiFamilyUnits"></app-multi-family>
       </ng-container>

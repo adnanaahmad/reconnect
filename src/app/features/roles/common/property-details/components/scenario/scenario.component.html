@@ -83,7 +83,8 @@
 
         </div>
     </div>
-    <div class="letter" [style.background]="qualify ? 'var(--green)' : 'var(--red)'">
+    <div class="letter d-flex justify-content-center" [style.background]="qualify ? 'var(--green)' : 'var(--red)'">
         <p class="text-nowrap text-center">Pre-Approval Letter</p>
+        <img  (click)="generatePDF()"  *ngIf="qualify && loanScenario.template" class="download" src="assets/property-details/download.svg">
     </div>
 </div>
