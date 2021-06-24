@@ -95,7 +95,7 @@
                         <label class="container" *ngFor="let i of searchHome.moreFilters.get('propertyType').value | keyvalue | slice:0:6">
                           <input formControlName="{{i.key}}" type="checkbox">
                           <img class="checkmark" src="/assets/loan-details/tick.svg">
-                          <p class="label-txt text-nowrap">{{i.key}}</p>
+                          <p class="label-txt text-nowrap">{{i.key.replace('Detached', 'Single Family')}}</p>
                         </label>
                     </div>
                     <div class="col-6  space">

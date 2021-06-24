@@ -1,3 +1,24 @@
 <div class="heading d-flex justify-content-between">
   <h3>Referral Lineage</h3>
 </div>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<div class="org-chart">
+  <p-organizationChart [value]="data1" selectionMode="single">
+    <ng-template let-node pTemplate="default">
+      <div class="d-flex">
+          <img class="image" [src]="node.photo">
+          <div class="d-flex flex-column">
+            <p class="role text-nowrap">{{node.dealStatus}}</p>
+            <p class="name text-nowrap">{{node.name}}</p>
+            <div class="d-flex justify-content-between">
+              <img class="phone-icon" src="/assets/directory-icons/call.svg">
+              <img class="chat-icon" src="assets/referral-lineage/chat.svg">
+              <img class="email-icon" src="assets/referral-lineage/email.svg">
+              <img class="menu-icon" src="assets/referral-lineage/menu.svg">
+            </div>
+          </div>
+      </div>
+    </ng-template>
+  </p-organizationChart>
+</div>

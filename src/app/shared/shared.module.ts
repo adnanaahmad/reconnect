@@ -39,6 +39,9 @@ import { InviteUserComponent } from './components/invite-user/invite-user.compon
 import { ChangePreApprovalLetterComponent } from './components/change-pre-approval-letter/change-pre-approval-letter.component';
 import { ChangeLetterButtonComponent } from './components/change-letter-button/change-letter-button.component';
 import {HomeCardComponent} from './components/home-card/home-card.component';
+import {OrganizationChartModule} from 'primeng/organizationchart';
+import {PanelModule} from 'primeng/panel';
+import {ToastModule} from 'primeng/toast';
 
 const maskConfig: Partial<IConfig> = {
     validation: false,
@@ -123,7 +126,10 @@ const maskConfig: Partial<IConfig> = {
         DatePickerComponent,
         ComplianceInfoComponent,
         InviteUserComponent,
-        HomeCardComponent
+        HomeCardComponent,
+        OrganizationChartModule,
+        ToastModule,
+        PanelModule,
     ],
     providers: [NgbDateNativeAdapter]
 })

@@ -11,23 +11,7 @@
   overflow-y: auto;
   //height: 70vw;
 }
-::ng-deep div [class^='ng-tns-c107'].p-organizationchart-node-content{
-  padding: .5vw;
-  border-radius: .5vw;
-  border: none;
-  width: 11.5vw;
-  //position: static;
-}
 
-::ng-deep .p-node-toggler{
-  display: none;
-}
-::ng-deep td[class^='p-organizationchart-line'][class^='p-organizationchart-line'].ng-star-inserted{
-  border-color: var(--lighGray);
-}
-::ng-deep td[class^='ng-tns-c107'] div.p-organizationchart-line-down{
-  background: var(--lighGray);
-}
 .image{
   height: 3.3vw;
   width: 3.3vw;
@@ -52,11 +36,13 @@
 .phone-icon{
   height: .59vw;
   width: .59vw;
+  margin-right: .5vw;
 }
 
 .chat-icon{
   height: .75vw;
   width: .75vw;
+  margin-right: .5vw;
 }
 .menu-icon{
   height: .59vw;
@@ -66,6 +52,7 @@
 .email-icon{
   height: .75vw;
   width: .75vw;
+  margin-right: .5vw;
 }
 .zoom{
   //zoom: 60%;
@@ -91,12 +78,19 @@
   margin-left: -.25vw;
 }
 
-
-::ng-deep .p-organizationchart-line-right{
- // background: #F34949;
-
+::ng-deep .p-organizationchart-line-down[class*='ng-tns-'] {
+  background: #b3b7c0;
 }
-//ng-tns-c107-1 ng-star-inserted
-//::ng-deep .p-organizationchart-line-top{
-//  border-color: yellow !important;
-//}
+::ng-deep .p-node-toggler{
+  display: none;
+}
+::ng-deep td[class^='p-organizationchart-line'][class^='p-organizationchart-line'].ng-star-inserted{
+  border-color: var(--lighGray);
+}
+.org-chart{
+  overflow: auto;
+}
+
+::ng-deep [class*='ng-tns-'].p-organizationchart-node-content.p-organizationchart-selectable-node{
+  padding: .5vw;
+}
