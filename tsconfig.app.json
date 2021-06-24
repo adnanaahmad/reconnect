@@ -8,7 +8,6 @@
   "files": [
     "src/main.ts",
     "src/polyfills.ts",
-    "yFiles/lib/es-modules/typings/yfiles-api-npm.d.ts"
   ],
   "include": [
     "src/**/*.d.ts"
