@@ -123,6 +123,7 @@ p{
 //}
 .home-card{
   // margin-right: 1.3vw;
+  width: 19.2vw;
 }
 .home-card:last-child{
   // margin-right: 0;
@@ -143,7 +144,7 @@ p{
 }
 .home-img{
   height: 17vw;
-  width: 19.2vw;
+  width: 100%;
   object-fit: cover;
   border-top-right-radius: .5vw;
   border-top-left-radius: .5vw;
@@ -188,6 +189,30 @@ p{
 }
 .house-feature-parent{
   justify-content: space-between;
+}
+.description{
+  font-size: .6vw;
+  font-weight: 300;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.description-agent{
+  font-size: .6vw;
+  font-weight: 500;
+  word-break: break-word;
+  color: var(--green) !important;
+  margin-bottom: 0;
+}
+.ml-c-0{
+  padding-left: 0;
+}
+.mr-c-0{
+  padding-right: 0;
+}
+.c3-mb{
+  margin-bottom: 1vw;
 }
 //////////////////////////////////////////// card-4
 .card-4{

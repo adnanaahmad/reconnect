@@ -65,7 +65,7 @@
                         {{home.address.deliveryLine}},
                         {{home.address.city+', '+home.address.state}}
                     </p>
-                    <div class="d-flex house-feature-parent">
+                    <div class="d-flex house-feature-parent c3-mb">
                         <div class="house-feature d-flex">
                             <img src="/assets/landing/bath.svg">
                             <p class="text-nowrap">{{home.xf_no_full_baths + home.xf_no_half_baths}} Baths</p>
@@ -77,6 +77,14 @@
                         <div class="house-feature d-flex">
                             <img src="/assets/landing/garage.svg">
                             <p class="text-nowrap">{{home.xf_garage_spaces}} Garage</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 mr-c-0">
+                            <p class="description text-nowrap des-width">Listed by:</p>
+                        </div>
+                        <div class="col-9 ml-c-0">
+                            <p class="description-agent">{{ home.listingOffice.name + ", " +  home.listingAgent.name}}</p>
                         </div>
                     </div>
                 </div>
