@@ -1,11 +1,3 @@
-import {GraphComponentComponent} from '../components/graph-component/graph-component.component';
-
-// export interface ReferralLineageModel {
-//   buyer: BuyerModel;
-//   currentPerson: BuyerModel;
-//   gcComponent: GraphComponentComponent;
-// }
-
 export class BuyerModel {
   id: number;
   dealStatus: string;
