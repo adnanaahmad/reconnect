@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../landing/services/auth/auth.service';
 import {take} from 'rxjs/operators';
+import {StoreService} from '../../../core/store/store.service';
+import {HelperService} from '../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +12,9 @@ import {take} from 'rxjs/operators';
 export class HomeComponent implements OnInit {
   homes: Array<any>;
   popularPlaces: Array<any>;
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private store: StoreService,
+              private helper: HelperService) { }
 
   ngOnInit(): void {
     this.popularPlaces = [
@@ -22,6 +26,7 @@ export class HomeComponent implements OnInit {
       {url: '/assets/landing/springfield.png', name: 'Springfield, MA'},
     ];
     this.getFeaturedHomes();
+    this.getComplianceInfo();
   }
   getFeaturedHomes(): void{
     this.auth.getFeaturedHomes().pipe(take(1)).subscribe(res => {
@@ -29,6 +34,13 @@ export class HomeComponent implements OnInit {
       this.homes = res.result.listings;
     }, error => {
       console.log(error);
+    });
+  }
+  getComplianceInfo(): void{
+    this.auth.getComplianceInfo().pipe(take(1)).subscribe(res => {
+      this.store.updateComplianceInfo(res.result.markets[0]);
+    }, error => {
+      this.helper.handleApiError(error, 'Failed to fetch compliance info');
     });
   }
   previous(array): void{

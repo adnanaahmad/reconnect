@@ -53,4 +53,7 @@ export class AuthService {
   editEmail(): Observable<any>{
     return this.helper.requestCall(this.method.put, this.apiRoutes.changeEmailConfirm);
   }
+  getComplianceInfo(): Observable<any>{
+    return this.helper.requestCall(this.method.get, this.apiRoutes.getComplianceInfo);
+  }
 }
