@@ -280,7 +280,11 @@ export class MyLoanDetailsComponent implements OnInit, OnDestroy {
   }
 
   addClosingCost(): void{
-    const modalRef = this.modalService.open(AddClosingCostComponent);
+    const modalRef = this.modalService.open(AddClosingCostComponent,
+        {
+          container: 'app-my-loan-details',
+          ariaLabelledBy: 'modal-basic-title'
+        });
     modalRef.componentInstance.variableExpenses = this.loanDetails.variableExpenses;
     modalRef.componentInstance.fixedExpenses = this.loanDetails.fixedExpenses;
     modalRef.componentInstance.processStatus = this.loanDetails.processStatus;
