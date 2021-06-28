@@ -52,7 +52,9 @@ export class ScenarioComponent implements OnInit, OnChanges, OnDestroy {
     this.subscription.push(
         this.store.toggleLoanType.subscribe(loanType => {
           this.loanScenario.loanType = loanType;
-          this.loanScenario.template = this.loanScenario.userLoan.preapprovalTemplates[loanType];
+          if (this.loanScenario.userLoan.preapprovalTemplates){
+              this.loanScenario.template = this.loanScenario.userLoan.preapprovalTemplates[loanType];
+          }
           this.loanScenario.rent = this.calculateRent;
           this.scenario.housingRatio = Number(this.loanScenario.listings[0].financing[loanType].housingRatio ?
               this.loanScenario.listings[0].financing[loanType].housingRatio.toFixed(2) : null);
