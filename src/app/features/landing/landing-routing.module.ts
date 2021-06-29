@@ -12,6 +12,7 @@ import {BuyHomeComponent} from '../miscellaneous/buy-home/buy-home.component';
 import {SellHomeComponent} from '../miscellaneous/sell-home/sell-home.component';
 import {BecomeAgentComponent} from '../miscellaneous/become-agent/become-agent.component';
 import {EmailConfirmationComponent} from './components/email-confirmation/email-confirmation.component';
+import {ResendEmailVerificationComponent} from './components/resend-email-verification/resend-email-verification.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,10 @@ const routes: Routes = [
             {
                 path: 'registerPartner',
                 component: RegistrationPartnerComponent
+            },
+            {
+                path: 'resendEmailVerification',
+                component: ResendEmailVerificationComponent
             },
             {
                 path: 'setPassword',

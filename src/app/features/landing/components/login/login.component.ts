@@ -10,6 +10,7 @@ import {take} from 'rxjs/operators';
 import {WebSocketService} from '../../../../core/webSockets/web-socket.service';
 import {environment} from '../../../../../environments/environment';
 import * as io from 'socket.io-client';
+import {HelperService} from '../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-login',
@@ -24,9 +25,11 @@ export class LoginComponent implements OnInit {
               private constant: ConstantService,
               private location: LocationService,
               private toaster: ToastrService,
-              private webSocket: WebSocketService) { }
+              private webSocket: WebSocketService,
+              private helper: HelperService) { }
 
   ngOnInit(): void {
+    this.login.resendEmail = false;
     localStorage.clear();
     this.webSocket.socket.disconnect();
     this.login.form = this.fb.group({
@@ -49,10 +52,10 @@ export class LoginComponent implements OnInit {
         }
       }
     }, error => {
-      if (error.error.result.CODE === 'BAD_REQUEST'){
-        this.toaster.error(error.error.result.details.MESSAGE);
-      } else {
-        this.toaster.error(error.error.result.MESSAGE);
+      this.helper.handleApiError(error, 'Failed to login');
+      if ((error.error.result.CODE === this.constant.RESPONSE_ERRORS.BAD_REQUEST) &&
+          error.error.result.details.CODE === this.constant.RESPONSE_ERRORS.USER_REGISTRATION_NOT_COMPLETE){
+       this.login.resendEmail = true;
       }
     });
   }

@@ -56,4 +56,7 @@ export class AuthService {
   getComplianceInfo(): Observable<any>{
     return this.helper.requestCall(this.method.get, this.apiRoutes.getComplianceInfo);
   }
+  resendEmailVerification(data): Observable<any>{
+    return this.helper.requestCall(this.method.post, this.apiRoutes.resendEmailVerification, data);
+  }
 }

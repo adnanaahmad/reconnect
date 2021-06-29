@@ -83,6 +83,7 @@ export class ConstantService {
      updateTemplateId: `${environment.apiUrl}/loan/update-preapproval-template/`,
      createPreApprovalLetter: `${environment.apiUrl}/preapproval-letter/create`,
      getPreApprovalHistory: `${environment.apiUrl}/preapproval-letter/get`,
+     resendEmailVerification: `${environment.apiUrl}/user/resend-complete-registration-email`
    };
   apiMethod = {
     get: 'get',
@@ -770,6 +771,7 @@ export class ConstantService {
     INVALID_USER_REFERRER_ID: 'INVALID_USER_REFERRER_ID',
     INVALID_NAME: 'INVALID_NAME',
     MINIMUM_SEARCH_NAME_QUERY_LENGTH: 'MINIMUM_SEARCH_NAME_QUERY_LENGTH',
+    USER_REGISTRATION_NOT_COMPLETE: 'USER_REGISTRATION_NOT_COMPLETE'
   };
   fixedExpensesType = {
     LENDER_FEE: 'lenderFee',

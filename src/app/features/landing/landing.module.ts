@@ -15,6 +15,7 @@ import { BuyHomeComponent } from '../miscellaneous/buy-home/buy-home.component';
 import { SellHomeComponent } from '../miscellaneous/sell-home/sell-home.component';
 import { BecomeAgentComponent } from '../miscellaneous/become-agent/become-agent.component';
 import { EmailConfirmationComponent } from './components/email-confirmation/email-confirmation.component';
+import { ResendEmailVerificationComponent } from './components/resend-email-verification/resend-email-verification.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { EmailConfirmationComponent } from './components/email-confirmation/emai
         BuyHomeComponent,
         SellHomeComponent,
         BecomeAgentComponent,
-        EmailConfirmationComponent
+        EmailConfirmationComponent,
+        ResendEmailVerificationComponent
     ],
     imports: [
         CommonModule,
