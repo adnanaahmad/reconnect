@@ -36,6 +36,14 @@
             </ng-container>
           </div>
       </ng-container>
+      <div class="d-flex" *ngIf="view._def.extendedProps.removedMembers">
+        <ng-container  *ngFor="let member of view._def.extendedProps.removedMembers">
+          <div [ngbTooltip]="member.firstName + ' ' + member.lastName" class="d-flex team-member">
+            <img *ngIf="member.profilePictureUrl" class="team grey-out" [src]="member.profilePictureUrl">
+            <img *ngIf="!member.profilePictureUrl"  class="team-dummy grey-out" src="/assets/profile/profile.svg">
+          </div>
+        </ng-container>
+      </div>
     </div>
     <div class="d-flex align-self-end">
       <img class="img" src="/assets/calendar-icons/calendar.svg">

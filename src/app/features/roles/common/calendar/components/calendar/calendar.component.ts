@@ -218,8 +218,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
     const y = date.getFullYear();
     const m = date.getMonth();
     return {
-      startDate: new Date(y, m, 1),
-      endDate: new Date(y, m + 1, 0)
+      endDate: new Date(y, m + 1, 1),
+      startDate: new Date(y, m, 0)
     };
   }
   objectToQueryParam(data): string{
