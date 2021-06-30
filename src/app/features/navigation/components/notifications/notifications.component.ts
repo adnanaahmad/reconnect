@@ -89,6 +89,17 @@ export class NotificationsComponent implements OnInit {
         this.notificationInfo.text = `${this.titleCase.transform(this.notification.from.firstName) + ' ' +
         this.titleCase.transform(this.notification.from.lastName )} added an event to your calendar`;
         break;
+      case this.constant.NOTIFICATION_TYPE.LENDER_PREAPPROVAL_LETTER_GENERATED:
+        this.notificationInfo.route = ``;
+        this.notificationInfo.text = `${this.titleCase.transform(this.notification.from.firstName) + ' ' +
+        this.titleCase.transform(this.notification.from.lastName )} generated pre-approval letter`;
+        break;
+      case this.constant.NOTIFICATION_TYPE.BUYER_PREAPPROVAL_TEMPLATE_ASSIGNED:
+        this.notificationInfo.route = ``;
+        this.notificationInfo.text = `${this.titleCase.transform(this.notification.from.firstName) + ' ' +
+        this.titleCase.transform(this.notification.from.lastName )} assigned pre-approval template against ` +
+            this.titleCase.transform(this.helper.formatRole(this.notification.meta.loanType));
+        break;
       default:
         break;
     }

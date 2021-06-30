@@ -790,7 +790,9 @@ export class ConstantService {
     ALL_NEW_MESSAGE: 'all_new-message',
     BUYER_IMPORTANT_DATE_UPDATED: 'buyer_important-date-updated',
     LENDER_TARGET_PROPERTY_SET: 'lender_target-property-set',
-    ALL_CALENDAR_EVENT_CREATED: 'all_calendar-event-created'
+    ALL_CALENDAR_EVENT_CREATED: 'all_calendar-event-created',
+    LENDER_PREAPPROVAL_LETTER_GENERATED: 'lender_preapproval-letter-generated',
+    BUYER_PREAPPROVAL_TEMPLATE_ASSIGNED: 'buyer_preapproval-tempalte-assigned'
   };
   TODO_FILTERS = {
     ALL: 'all',
