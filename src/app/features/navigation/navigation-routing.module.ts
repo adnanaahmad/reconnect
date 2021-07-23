@@ -114,6 +114,10 @@ const routes: Routes = [{
       path: 'preApprovalLetter',
       loadChildren: () => import('../roles/common/pre-approval-letter/pre-approval-letter.module').then(m => m.PreApprovalLetterModule)
     },
+    {
+      path: 'teamDynasty',
+      loadChildren: () => import('../roles/real-estate-agent/team-dynasty/team-dynasty.module').then(m => m.TeamDynastyModule)
+    },
   ] },
    ];
 

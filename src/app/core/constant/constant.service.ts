@@ -83,7 +83,8 @@ export class ConstantService {
      updateTemplateId: `${environment.apiUrl}/loan/update-preapproval-template/`,
      createPreApprovalLetter: `${environment.apiUrl}/preapproval-letter/create`,
      getPreApprovalHistory: `${environment.apiUrl}/preapproval-letter/get`,
-     resendEmailVerification: `${environment.apiUrl}/user/resend-complete-registration-email`
+     resendEmailVerification: `${environment.apiUrl}/user/resend-complete-registration-email`,
+     getTeamDynasty: `${environment.apiUrl}/user/team-dynasty`
    };
   apiMethod = {
     get: 'get',
@@ -117,13 +118,13 @@ export class ConstantService {
       route: '/home/myLoanDetails',
       order: 1
       },
-      // {
-      //   name: 'News Feed',
-      //   tooltip: 'My Home Buying Platform',
-      //   icon: '/assets/menu-icons/newspaper.svg',
-      //   route: '/home/newsFeed',
-      //   order: 1
-      // },
+      {
+        name: 'News Feed',
+        tooltip: 'My Home Buying Platform',
+        icon: '/assets/menu-icons/newspaper.svg',
+        route: '/home/newsFeed',
+        order: 1
+      },
       {
         name: 'Search Homes',
         tooltip: 'My Home Buying Platform',
@@ -145,20 +146,20 @@ export class ConstantService {
         route: '/home/savedSearches',
         order: 1
       },
-      // {
-      //   name: 'Pre Approval History',
-      //   tooltip: 'My Home Buying Platform',
-      //   icon: '/assets/menu-icons/wall-clock.svg',
-      //   route: '/home/preApprovalHistory',
-      //   order: 1
-      // },
-      // {
-      //   name: 'Home Buying 101',
-      //   tooltip: 'My Home Buying Platform',
-      //   icon: '/assets/menu-icons/buy.svg',
-      //   route: '/home/homeBuying101',
-      //   order: 1
-      // },
+      {
+        name: 'Pre Approval History',
+        tooltip: 'My Home Buying Platform',
+        icon: '/assets/menu-icons/wall-clock.svg',
+        route: '/home/preApprovalHistory',
+        order: 1
+      },
+      {
+        name: 'Home Buying 101',
+        tooltip: 'My Home Buying Platform',
+        icon: '/assets/menu-icons/buy.svg',
+        route: '/home/homeBuying101',
+        order: 1
+      },
       {
         name: 'Calendar',
         tooltip: 'My Home Buying Platform',
@@ -166,13 +167,13 @@ export class ConstantService {
         route: '/home/calendar',
         order: 1
       },
-      // {
-      //   name: 'Calculators',
-      //   tooltip: 'My Home Buying Platform',
-      //   icon: '/assets/menu-icons/calculator.svg',
-      //   route: '/home/calculator',
-      //   order: 1
-      // },
+      {
+        name: 'Calculators',
+        tooltip: 'My Home Buying Platform',
+        icon: '/assets/menu-icons/calculator.svg',
+        route: '/home/calculator',
+        order: 1
+      },
       {
         name: 'Team Message Board',
         tooltip: 'My Home Buying Platform',
@@ -211,27 +212,27 @@ export class ConstantService {
       route: '/home/borrowers',
       order: 1
     },
-    //  {
-    //    name: 'Pre Approval Letter',
-    //    tooltip: 'My Home Buying Platform',
-    //    icon: '/assets/menu-icons/approval.svg',
-    //    route: '/home/preApprovalLetter',
-    //    order: 1
-    //  },
-    //  {
-    //    name: 'News Feed',
-    //    tooltip: 'My Home Buying Platform',
-    //    icon: '/assets/menu-icons/newspaper.svg',
-    //    route: '/home/newsFeed',
-    //    order: 1
-    // },
-    // {
-    //   name: 'Professional Directory',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/directory.svg',
-    //   route: '/home/professionalDirectory',
-    //   order: 1
-    // },
+     {
+       name: 'Pre Approval Letter',
+       tooltip: 'My Home Buying Platform',
+       icon: '/assets/menu-icons/approval.svg',
+       route: '/home/preApprovalLetter',
+       order: 1
+     },
+     {
+       name: 'News Feed',
+       tooltip: 'My Home Buying Platform',
+       icon: '/assets/menu-icons/newspaper.svg',
+       route: '/home/newsFeed',
+       order: 1
+    },
+    {
+      name: 'Professional Directory',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/directory.svg',
+      route: '/home/professionalDirectory',
+      order: 1
+    },
     {
       name: 'Calendar',
       tooltip: 'My Home Buying Platform',
@@ -246,13 +247,13 @@ export class ConstantService {
        route: '/home/todoList',
        order: 1
      },
-    // {
-    //   name: 'Calculators',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/calculator.svg',
-    //   route: '/home/calculator',
-    //   order: 1
-    // },
+    {
+      name: 'Calculators',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/calculator.svg',
+      route: '/home/calculator',
+      order: 1
+    },
     {
       name: 'Team Message Board',
       tooltip: 'My Home Buying Platform',
@@ -288,16 +289,16 @@ export class ConstantService {
       name: 'Team Dynasty',
       tooltip: 'My Home Buying Platform',
       icon: '/assets/menu-icons/team.svg',
-      route: '/home/lineage',
+      route: '/home/teamDynasty',
       order: 1
     },
-    // {
-    //   name: 'News Feed',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/newspaper.svg',
-    //   route: '/home/newsFeed',
-    //   order: 1
-    // },
+    {
+      name: 'News Feed',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/newspaper.svg',
+      route: '/home/newsFeed',
+      order: 1
+    },
     {
       name: 'Search Homes',
       tooltip: 'My Home Buying Platform',
@@ -305,20 +306,20 @@ export class ConstantService {
       route: '/home/searchHomes',
       order: 1
     },
-    // {
-    //   name: 'Reconnect University',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/university-reconnect.svg',
-    //   route: '/home/homeBuying101',
-    //   order: 1
-    // },
-    // {
-    //   name: 'Professional Directory',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/directory.svg',
-    //   route: '/home/professionalDirectory',
-    //   order: 1
-    // },
+    {
+      name: 'Reconnect University',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/university-reconnect.svg',
+      route: '/home/homeBuying101',
+      order: 1
+    },
+    {
+      name: 'Professional Directory',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/directory.svg',
+      route: '/home/professionalDirectory',
+      order: 1
+    },
     {
       name: 'Calendar',
       tooltip: 'My Home Buying Platform',
@@ -340,13 +341,13 @@ export class ConstantService {
       route: '/home/borrowers',
       order: 1
     },
-    // {
-    //   name: 'Calculators',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/calculator.svg',
-    //   route: '/home/calculator',
-    //   order: 1
-    // },
+    {
+      name: 'Calculators',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/calculator.svg',
+      route: '/home/calculator',
+      order: 1
+    },
     {
       name: 'Team Message Board',
       tooltip: 'My Home Buying Platform',
@@ -385,20 +386,20 @@ export class ConstantService {
       route: '/home/borrowers',
       order: 1
     },
-    // {
-    //   name: 'News Feed',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/newspaper.svg',
-    //   route: '/home/newsFeed',
-    //   order: 1
-    // },
-    // {
-    //   name: 'Professional Directory',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/directory.svg',
-    //   route: '/home/professionalDirectory',
-    //   order: 1
-    // },
+    {
+      name: 'News Feed',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/newspaper.svg',
+      route: '/home/newsFeed',
+      order: 1
+    },
+    {
+      name: 'Professional Directory',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/directory.svg',
+      route: '/home/professionalDirectory',
+      order: 1
+    },
     {
       name: 'Calendar',
       tooltip: 'My Home Buying Platform',
@@ -444,20 +445,20 @@ export class ConstantService {
       route: '/home/quoteRequests',
       order: 1
     },
-    // {
-    //   name: 'News Feed',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/newspaper.svg',
-    //   route: '/home/newsFeed',
-    //   order: 1
-    // },
-    // {
-    //   name: 'Professional Directory',
-    //   tooltip: 'My Home Buying Platform',
-    //   icon: '/assets/menu-icons/directory.svg',
-    //   route: '/home/professionalDirectory',
-    //   order: 1
-    // },
+    {
+      name: 'News Feed',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/newspaper.svg',
+      route: '/home/newsFeed',
+      order: 1
+    },
+    {
+      name: 'Professional Directory',
+      tooltip: 'My Home Buying Platform',
+      icon: '/assets/menu-icons/directory.svg',
+      route: '/home/professionalDirectory',
+      order: 1
+    },
     {
       name: 'Calendar',
       tooltip: 'My Home Buying Platform',

@@ -1,0 +1,24 @@
+<div class="heading d-flex justify-content-between">
+    <h3>Team Dynasty</h3>
+</div>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<div class="org-chart">
+    <p-organizationChart [value]="data" selectionMode="single">
+        <ng-template let-node pTemplate="default">
+            <div class="d-flex">
+                <img *ngIf="node.profilePictureUrl" class="image" [src]="node.profilePictureUrl">
+                <img *ngIf="!node.profilePictureUrl" class="dummy-img" src = "assets/profile/profile.svg">
+                <div class="d-flex flex-column">
+                    <p class="role text-nowrap">Real Estate Agent</p>
+                    <p class="name text-nowrap">{{(node.firstName + ' ' + node.lastName) | titlecase}}</p>
+                    <div class="d-flex justify-content-between">
+                        <img [ngbTooltip]="node.phoneNumber ? node.phoneNumber[0] : node.phoneNumber" class="phone-icon" src="/assets/directory-icons/call.svg">
+                        <img (click)="routeToChat(node.user)" class="chat-icon" src="assets/referral-lineage/chat.svg">
+                        <img (click)="sendEmail(node.email)" class="email-icon" src="assets/referral-lineage/email.svg">
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-organizationChart>
+</div>
