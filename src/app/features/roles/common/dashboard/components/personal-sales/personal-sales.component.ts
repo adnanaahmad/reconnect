@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {PersonalSalesAnalyticsModel, SalesModel} from '../../models/dashboard.model';
 import {ConstantService} from '../../../../../../core/constant/constant.service';
 import {StoreService} from '../../../../../../core/store/store.service';
+import {HelperService} from '../../../../../../core/helper/helper.service';
 
 @Component({
   selector: 'app-personal-sales',
@@ -27,7 +28,9 @@ export class PersonalSalesComponent implements OnInit, OnChanges {
     domain: ['#FCF37E', '#A0F68B', '#F5B887', '#AF9CF9']
   };
 
-  constructor(public constant: ConstantService, public store: StoreService) {}
+  constructor(public constant: ConstantService,
+              public store: StoreService,
+              public helper: HelperService) {}
   ngOnInit(): void {
     this.view = [innerWidth / 5, innerWidth / 7.8];
     // console.log('check 123' , this.salesType);

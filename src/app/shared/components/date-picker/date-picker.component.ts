@@ -48,6 +48,10 @@ export class DatePickerComponent implements OnInit {
         this.fromDate = this.calendar.getNext(this.calendar.getToday(), 'd', -30);
         this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 0);
         break;
+      case 'teamDynasty':
+        this.fromDate = this.calendar.getNext(this.calendar.getToday(), 'd', -30);
+        this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', 0);
+        break;
       case 'commission':
         this.fromDate = this.calendar.getNext(this.calendar.getToday(), 'd', -15);
         this.toDate = this.calendar.getNext(this.calendar.getToday(), 'd', +15);

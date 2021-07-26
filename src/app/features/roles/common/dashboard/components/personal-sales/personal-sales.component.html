@@ -1,8 +1,8 @@
 <div class="row date-space">
   <div class="col-9">
       <div class="d-flex justify-content-between personal-sales-heading">
-          <p style="">{{salesType}} Sales</p>
-          <app-date-picker [section]="'personal'"></app-date-picker>
+          <p style="">{{(helper.formatRole(salesType)) | titlecase}} Sales</p>
+          <app-date-picker [section]="salesType"></app-date-picker>
       </div>
       <div class="personal-sales d-flex">
           <div class="ps-left">

@@ -42,6 +42,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.dashboard.dates.buyerAnalyticsDateEnd = this.dateConversion(this.calendar.getNext(this.calendar.getToday(), 'd', 30));
     this.dashboard.dates.personalSalesAnalyticsDateStart = this.dateConversion(this.calendar.getNext(this.calendar.getToday(), 'd', -30));
     this.dashboard.dates.personalSalesAnalyticsDateEnd = this.dateConversion(this.calendar.getNext(this.calendar.getToday(), 'd', 0));
+    this.dashboard.dates.teamDynastyAnalyticsDateStart = this.dateConversion(this.calendar.getNext(this.calendar.getToday(), 'd', -30));
+    this.dashboard.dates.teamDynastyAnalyticsDateEnd = this.dateConversion(this.calendar.getNext(this.calendar.getToday(), 'd', 0));
     this.dashboard.dates.commissionsAnalyticsDateStart = this.dateConversion(this.calendar.getNext(this.calendar.getToday(), 'd', -15));
     this.dashboard.dates.commissionsAnalyticsDateEnd = this.dateConversion(this.calendar.getNext(this.calendar.getToday(), 'd', +15));
     this.getDashboardData();
@@ -79,6 +81,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       case 'personal':
         this.dashboard.dates.personalSalesAnalyticsDateStart =  this.dateConversion(dates.personal[0]);
         this.dashboard.dates.personalSalesAnalyticsDateEnd =  this.dateConversion(dates.personal[1]);
+        break;
+      case 'teamDynasty':
+        this.dashboard.dates.teamDynastyAnalyticsDateStart =  this.dateConversion(dates.teamDynasty[0]);
+        this.dashboard.dates.teamDynastyAnalyticsDateEnd =  this.dateConversion(dates.teamDynasty[1]);
         break;
       case 'commission':
         this.dashboard.dates.commissionsAnalyticsDateStart =  this.dateConversion(dates.commission[0]);

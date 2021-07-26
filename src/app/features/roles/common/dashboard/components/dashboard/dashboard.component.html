@@ -3,8 +3,8 @@
 </div>
 <div class="" style="background: transparent" *ngIf="dashboard.loader">
     <app-borrowers-dates [buyerAnalytics]="dashboard.analytics.buyerAnalytics"></app-borrowers-dates>
-    <app-personal-sales [sales]="dashboard.analytics.sales" [personalSalesAnalytics]="dashboard.analytics.personalSales" [salesType]="'Personal'" *ngIf="store.role !== constant.role.HOME_INSPECTOR && store.role !== constant.role.INSURANCE "></app-personal-sales>
-    <app-personal-sales *ngIf="false" [salesType]="'Team Dynasty'"></app-personal-sales>
+    <app-personal-sales [sales]="dashboard.analytics.sales" [personalSalesAnalytics]="dashboard.analytics.personalSales" [salesType]="'personal'" *ngIf="store.role !== constant.role.HOME_INSPECTOR && store.role !== constant.role.INSURANCE "></app-personal-sales>
+    <app-personal-sales [sales]="dashboard.analytics.DynastySales" [personalSalesAnalytics]="dashboard.analytics.teamDynasty" *ngIf="store.role === constant.role.REAL_ESTATE " [salesType]="'teamDynasty'"></app-personal-sales>
     <app-new-quote-requests [quoteRequest]="dashboard.analytics.quoteRequest"  *ngIf="store.role === constant.role.HOME_INSPECTOR || store.role === constant.role.INSURANCE " ></app-new-quote-requests>
     <app-commissions-earned [personalVolume]="dashboard.analytics.personalVolume" [commissionAnalytics]="dashboard.analytics.commission" *ngIf="store.role === constant.role.LENDER || store.role === constant.role.REAL_ESTATE "></app-commissions-earned>
 </div>

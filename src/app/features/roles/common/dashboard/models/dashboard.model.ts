@@ -21,6 +21,8 @@ export interface DatesModel{
   personalSalesAnalyticsDateEnd: string;
   commissionsAnalyticsDateStart: string;
   commissionsAnalyticsDateEnd: string;
+  teamDynastyAnalyticsDateStart: string;
+  teamDynastyAnalyticsDateEnd: string;
 }
 
 export interface AnalyticsModel{
@@ -30,6 +32,8 @@ export interface AnalyticsModel{
   personalVolume: any;
   sales: any;
   quoteRequest: any;
+  teamDynasty: any;
+  DynastySales: any;
 }
 
 export interface PersonalSalesAnalyticsModel{
